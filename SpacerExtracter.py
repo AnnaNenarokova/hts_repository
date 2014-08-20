@@ -1,5 +1,6 @@
 import os
 from subprocess import call
+import ntpath
 from string import maketrans
 # from Bio.Seq import Seq
 from Bio import SeqIO
@@ -7,13 +8,36 @@ import rpy2.robjects as robjects
 import rpy2.robjects.packages
 from rpy2.robjects.packages import importr
 
+
 biostrings = importr("Biostrings")
 iranges = importr("IRanges")
+
+def file_from_path(path):
+    head, tail = ntpath.split(path)
+    dir_path = [head, tail]
+    return tail
 
 def reverse(seq):
  	complement = maketrans('ATGC', 'TACG')
 	reverse = seq.translate(complement)[::-1]
 	return reverse
+
+def merge_by_flash(flash, file_fw, file_rv, output_dir):
+	
+	name_reads = file_from_path(file_fw)[0:-6]
+
+	flash_output = output_dir + 'FlashOutput/'
+	print flash_output
+
+	if not os.path.exists(flash_output):
+	    os.makedirs(flash_output)
+
+	options_flash = ['-d', flash_output, '-o', name_reads, '-O', '-M 250', '-x 0.25']
+	merge_by_flash = [flash] + options_flash + [file_fw, file_rv]
+	# print merge_by_flash
+	print ' '.join(merge_by_flash)
+	call(merge_by_flash)
+	return 0
 
 def find_spacers(repeat_fw, seq, maxmismatch, spacers_array):
 	repeat_rv = reverse(repeat_fw)
@@ -30,28 +54,28 @@ def find_spacers(repeat_fw, seq, maxmismatch, spacers_array):
 	print matrix
 	return 0
 
+
+# file_fw = '/home/anna/HTS_programming/HTS_spacers/CTG_CCGTCC_L001_1.fastq'
+# file_rv = '/home/anna/HTS_programming/HTS_spacers/CTG_CCGTCC_L001_2.fastq'
+
+file_fw = '/home/anna/BISS2014/EcoliProject/Stuff/1.fastq'
+file_rv = '/home/anna/BISS2014/EcoliProject/Stuff/2.fastq'
+
 work_dir = '/home/anna/HTS_programming/HTS_spacers/'
 
-name_fw = 'CTG_CCGTCC_L001_1.fastq'
-name_rv = 'CTG_CCGTCC_L001_2.fastq'
-
-file_fw = work_dir + name_fw
-file_rv = work_dir + name_rv
+name_fw = file_from_path(file_fw)
+name_rv = file_from_path(file_rv)
 
 name_reads = name_fw[0:-6]
 
-output_dir = work_dir + name_reads
+output_dir = work_dir + name_reads + '/'
 
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
-options_flash = ['-d' + output_dir, '-o' + name_reads, '-O', '-M 250', '-x 0.25']
-merge_by_flash = ['./flash'] + options_flash + [file_fw, file_rv]
+flash = work_dir + './flash'
 
-print
-# call('cd '+ work_dir, shell = True)
-# call(merge_by_flash)
-
+merge_by_flash(flash, file_fw, file_rv, output_dir)
 # for output_flash in ('.extendedFrags.fastq', '.notCombined_1.fastq', '.notCombined_2.fastq'):
 #     file_fastq = output_dir + '/' + name_reads + output_flash
 #     file_fasta = file_fastq[0:-1] + 'a'
@@ -76,6 +100,12 @@ print
 
 # adapters_fw_file = output_dir  + name_reads + '-adapters_fw.fastq'
 # adapters_rv_file = output_dir  + name_reads + '-adapters_rv.fastq'
+
+# file_fasta = output_dir + '/' + name_reads + '.notCombined_2.fasta'
+# rev_comp = file_fasta[0:-6] + 'revcomp' + '.fasta' 
+# records = (rec.reverse_complement(id = "rc_"+rec.id, description = "reverse complement") \
+# 			for rec in SeqIO.parse(file_fasta, "fasta") )
+# SeqIO.write(records, rev_comp, "fasta")
 
 # cutadapt_conf = ' -m 100 -a ACACTCTTTCCCTACACGACGCTCTTCCGATCT -a GATCGGAAGAGCGGTTCAGCAGGAATGCCGAG -a AATGATACGGCGACCACCGAGATCTACACTCTTTCCCTACACGACGCTCTTCCGATCT -a CAAGCAGAAGACGGCATACGAGATCGGTCTCGGCATTCCTGCTGAACCGCTCTTCCGATCT -a ACACTCTTTCCCTACACGACGCTCTTCCGATCT -a CGGTCTCGGCATTCCTGCTGAACCGCTCTTCCGATCT -a AGATCGGAAGAG '
 
