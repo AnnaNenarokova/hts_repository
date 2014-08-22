@@ -35,7 +35,7 @@ def trimmomate (trimc_dir, file_fw, file_rv, output_dir):
 	trimmomatic = ['java', '-jar', trimc_dir + 'trimmomatic-0.32.jar']
 	trim_options = ['PE', '-phred33', '-trimlog', trimlog, file_fw, 
 	file_rv, paired_output_fw, unpaired_output_fw, paired_output_rv, unpaired_output_rv,
-	'LEADING:3', 'TRAILING:20', 'SLIDINGWINDOW:4:15', 'MAXINFO:40:0.8', 'MINLEN:36'] #, #'ILLUMINACLIP:'+ adapters_file + ':2:30:10',
+	'ILLUMINACLIP:'+ adapters_file + ':2:30:10', 'LEADING:20', 'TRAILING:20', 'SLIDINGWINDOW:4:20',  'MAXINFO:40:0.8', 'MINLEN:20' ] 
 	# trim_extra_options = [input_fw, input_rv, ]
 	trim = trimmomatic + trim_options
 	# print trim
@@ -48,7 +48,7 @@ def assemble_by_spades (spades_dir, file_fw, file_rv, output_dir, memory):
 	spades = spades_dir + './spades.py'
 	print spades
 	spades_output = output_dir + 'SpadesOutput'
-	options_spades = ['-o', spades_output, '-m '+ str(memory), '--only-assembler']
+	options_spades = ['-o', spades_output, '-m '+ str(memory), '--careful']
 	assemble_by_spades = [spades, '-1', file_fw, '-2', file_rv] + options_spades
 	# assemble_by_spades = [spades, '--test'] # Test SPAdes
 	print assemble_by_spades
@@ -62,21 +62,24 @@ def assemble_by_spades (spades_dir, file_fw, file_rv, output_dir, memory):
 def use_quast (contigs, reference, output_dir):
 	return 0
 
+work_dir = '/home/anna/HTS-all/HTS-programming/'
+trimc_dir = '/home/anna/Trimmomatic-0.32/'
+spades_dir = '/home/anna/SPAdes-3.1.0-Linux/bin/'
+
 # file_fw = '/home/anna/HTS-all/HTS-programming/0sec_ACAGTG_L001_R1_001.fastq'
 # file_rv = '/home/anna/HTS-all/HTS-programming/0sec_ACAGTG_L001_R2_001.fastq'
 # file_fw = '/home/anna/BISS2014/EcoliProject/Stuff/1.fastq'
 # file_rv = '/home/anna/BISS2014/EcoliProject/Stuff/2.fastq'
-
-file_fw = '/home/anna/HTS-all/HTSes/Katya/0sec_ACAGTG_L001_R1_001.fastq'
-file_rv = '/home/anna/HTS-all/HTSes/Katya/0sec_ACAGTG_L001_R2_001.fastq'
-
-work_dir = '/home/anna/HTS-all/HTS-programming/'
-trimc_dir = '/home/anna/Trimmomatic-0.32/'
+# file_fw = '/home/anna/HTS-all/HTSes/Katya/0sec_ACAGTG_L001_R1_001.fastq'
+# file_rv = '/home/anna/HTS-all/HTSes/Katya/0sec_ACAGTG_L001_R2_001.fastq'
+file_fw = '/home/anna/HTS-all/HTS-programming/1000_CTG_CCGTCC_L001_1.fastq'
+file_rv = '/home/anna/HTS-all/HTS-programming/1000_CTG_CCGTCC_L001_2.fastq'
 
 name_fw = file_from_path(file_fw)
 name_rv = file_from_path(file_rv)
 name_reads = name_fw[0:-6]
 output_dir = work_dir + name_reads + '/'
+trimmomate (trimc_dir, file_fw, file_rv, output_dir)
 
 # input_dir = '/home/anna/HTS-all/HTSes/'
 # HTSes = [('CTG_CCGTCC_L001_1.fastq', 'CTG_CCGTCC_L001_2.fastq'), ('Kan-frag_ATGTCA_L001_1.fastq', 'Kan-frag_ATGTCA_L001_2.fastq'),  
@@ -91,6 +94,5 @@ output_dir = work_dir + name_reads + '/'
 # 	print output_dir
 # 	trimmomate (trimc_dir, file_fw, file_rv, output_dir)
 
-spades_dir = '/home/anna/SPAdes-3.1.0-Linux/bin/'
 memory = 5 #Gb free memory for SPAdes
 assemble_by_spades(spades_dir, file_fw, file_rv, output_dir, memory)
