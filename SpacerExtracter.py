@@ -54,14 +54,13 @@ def find_spacers(repeat_fw, seq, maxmismatch, spacers_array):
 	print matrix
 	return 0
 
-
-# file_fw = '/home/anna/HTS_programming/HTS_spacers/CTG_CCGTCC_L001_1.fastq'
-# file_rv = '/home/anna/HTS_programming/HTS_spacers/CTG_CCGTCC_L001_2.fastq'
+# file_fw = '/home/anna/HTS-all/HTS-programming/CTG_CCGTCC_L001_1.fastq'
+# file_rv = '/home/anna/HTS-all/HTS-programming/CTG_CCGTCC_L001_2.fastq'
 
 file_fw = '/home/anna/BISS2014/EcoliProject/Stuff/1.fastq'
 file_rv = '/home/anna/BISS2014/EcoliProject/Stuff/2.fastq'
 
-work_dir = '/home/anna/HTS_programming/HTS_spacers/'
+work_dir = '/home/anna/HTS-all/HTS-programming/'
 
 name_fw = file_from_path(file_fw)
 name_rv = file_from_path(file_rv)
@@ -70,12 +69,26 @@ name_reads = name_fw[0:-6]
 
 output_dir = work_dir + name_reads + '/'
 
-if not os.path.exists(output_dir):
-    os.makedirs(output_dir)
+input_dir = '/home/anna/HTS-all/HTSes/'
+HTSes = [('CTG_CCGTCC_L001_1.fastq', 'CTG_CCGTCC_L001_2.fastq'), ('Kan-frag_ATGTCA_L001_1.fastq', 'Kan-frag_ATGTCA_L001_2.fastq'),  
+('T4ai_AGTTCC_L001_1.fastq', 'T4ai_AGTTCC_L001_2.fastq'), ('T4bi_1.fastq', 'T4bi_2.fastq'), ('T4C1T_TAGCTT_L001_1.fastq', 'T4C1T_TAGCTT_L001_2.fastq')]
 
-flash = work_dir + './flash'
+for fw, rv in HTSes:
+	file_fw = input_dir + fw
+	file_rv = input_dir + rv
+	name_fw = file_from_path(file_fw)
+	name_rv = file_from_path(file_rv)
+	name_reads = name_fw[0:-6]
+	output_dir = work_dir + name_reads + '/'
+	print output_dir
+	if not os.path.exists(output_dir):
+		os.makedirs(output_dir)
 
-merge_by_flash(flash, file_fw, file_rv, output_dir)
+	flash = work_dir + './flash'
+
+	merge_by_flash(flash, file_fw, file_rv, output_dir)
+	#trimmomate (trimc_dir, file_fw, file_rv, output_dir)
+
 # for output_flash in ('.extendedFrags.fastq', '.notCombined_1.fastq', '.notCombined_2.fastq'):
 #     file_fastq = output_dir + '/' + name_reads + output_flash
 #     file_fasta = file_fastq[0:-1] + 'a'
