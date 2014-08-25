@@ -119,11 +119,3 @@ for fw, rv in HTSes:
 # records = (rec.reverse_complement(id = "rc_"+rec.id, description = "reverse complement") \
 # 			for rec in SeqIO.parse(file_fasta, "fasta") )
 # SeqIO.write(records, rev_comp, "fasta")
-
-# cutadapt_conf = ' -m 100 -a ACACTCTTTCCCTACACGACGCTCTTCCGATCT -a GATCGGAAGAGCGGTTCAGCAGGAATGCCGAG -a AATGATACGGCGACCACCGAGATCTACACTCTTTCCCTACACGACGCTCTTCCGATCT -a CAAGCAGAAGACGGCATACGAGATCGGTCTCGGCATTCCTGCTGAACCGCTCTTCCGATCT -a ACACTCTTTCCCTACACGACGCTCTTCCGATCT -a CGGTCTCGGCATTCCTGCTGAACCGCTCTTCCGATCT -a AGATCGGAAGAG '
-
-# cutadapt_cmd_fw = 'cutadapt' +  cutadapt_conf + work_dir + name_fw + ' > ' + adapters_fw_file
-# cutadapt_cmd_rv = 'cutadapt' +  cutadapt_conf + work_dir + name_rv + ' > ' + adapters_rv_file
-
-# os.system(cutadapt_cmd_fw)
-# os.system(cutadapt_cmd_rv)

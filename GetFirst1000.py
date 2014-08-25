@@ -1,5 +1,6 @@
 from Bio import SeqIO
-for f in ('CTG_CCGTCC_L001_1.fastq', 'CTG_CCGTCC_L001_2.fastq'):
+# for f in ('CTG_CCGTCC_L001_1.fastq', 'CTG_CCGTCC_L001_2.fastq'):
+for f in ('Kan-frag_ATGTCA_L001_1.fastq', 'Kan-frag_ATGTCA_L001_2.fastq'):
 	input_dir = '/home/anna/HTS-all/HTSes/'
 	seq_file = input_dir + f
 	handle = open(seq_file, "rU")

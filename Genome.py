@@ -20,7 +20,7 @@ def trimmomate (trimc_dir, file_fw, file_rv, output_dir):
 	name_reads = file_from_path(file_fw)[0:-6]
 
 	trimc_output = output_dir + 'TrimcOutput/'
-	print trimc_output
+	# print trimc_output
 	if not os.path.exists(trimc_output):
 	    os.makedirs(trimc_output)
 
@@ -43,7 +43,7 @@ def trimmomate (trimc_dir, file_fw, file_rv, output_dir):
 	call(trim)
 	return 0
 
-def assemble_by_spades (spades_dir, file_fw, file_rv, output_dir, memory):
+def assemble_by_spades1 (spades_dir, file_fw, file_rv, output_dir, memory):
 
 	spades = spades_dir + './spades.py'
 	print spades
@@ -53,6 +53,31 @@ def assemble_by_spades (spades_dir, file_fw, file_rv, output_dir, memory):
 	# assemble_by_spades = [spades, '--test'] # Test SPAdes
 	print assemble_by_spades
 	print ', '.join(assemble_by_spades)
+	if not os.path.exists(spades_output):
+	    os.makedirs(spades_output)
+
+	call(assemble_by_spades)
+	return 0
+
+def assemble_by_spades (spades_dir, output_dir, name_reads, memory):
+
+	spades = spades_dir + './spades.py'
+	trimc_output = output_dir + 'TrimcOutput/'
+	spades_output = output_dir + 'SpadesOutput'
+	files = {'PEfw' : 'paired_output_fw.fastq', 'PErv' : 'paired_output_rv.fastq', 
+	'UPfw': 'unpaired_output_fw.fastq', 'UPrv': 'unpaired_output_rv.fastq'}
+
+	for key in files:
+		files[key] = trimc_output + name_reads + files[key]
+	# print files
+
+	options_spades = ['-1', files['PEfw'], '-2', files['PErv'], '-s', files['UPfw'], '-s', files['UPrv'], 
+	'-o', spades_output, '-m '+ str(memory), '--careful']
+	# print options_spades
+
+	assemble_by_spades = [spades] + options_spades
+	# print assemble_by_spades
+	# print ', '.join(assemble_by_spades)
 	if not os.path.exists(spades_output):
 	    os.makedirs(spades_output)
 
@@ -72,8 +97,12 @@ spades_dir = '/home/anna/SPAdes-3.1.0-Linux/bin/'
 # file_rv = '/home/anna/BISS2014/EcoliProject/Stuff/2.fastq'
 # file_fw = '/home/anna/HTS-all/HTSes/Katya/0sec_ACAGTG_L001_R1_001.fastq'
 # file_rv = '/home/anna/HTS-all/HTSes/Katya/0sec_ACAGTG_L001_R2_001.fastq'
-file_fw = '/home/anna/HTS-all/HTS-programming/1000_CTG_CCGTCC_L001_1.fastq'
-file_rv = '/home/anna/HTS-all/HTS-programming/1000_CTG_CCGTCC_L001_2.fastq'
+# file_fw = '/home/anna/HTS-all/HTS-programming/1000_CTG_CCGTCC_L001_1.fastq'
+# file_rv = '/home/anna/HTS-all/HTS-programming/1000_CTG_CCGTCC_L001_2.fastq'
+file_fw = '/home/anna/HTS-all/HTS-programming/1000_Kan-frag_ATGTCA_L001_1.fastq'
+file_rv = '/home/anna/HTS-all/HTS-programming/1000_Kan-frag_ATGTCA_L001_2.fastq'
+# file_fw = '/home/anna/HTS-all/HTS-programming/10_CTG_CCGTCC_L001_1.fastq'
+# file_rv = '/home/anna/HTS-all/HTS-programming/10_CTG_CCGTCC_L001_2.fastq'
 
 name_fw = file_from_path(file_fw)
 name_rv = file_from_path(file_rv)
@@ -95,4 +124,5 @@ trimmomate (trimc_dir, file_fw, file_rv, output_dir)
 # 	trimmomate (trimc_dir, file_fw, file_rv, output_dir)
 
 memory = 5 #Gb free memory for SPAdes
-assemble_by_spades(spades_dir, file_fw, file_rv, output_dir, memory)
+assemble_by_spades(spades_dir, output_dir, name_reads, memory)
+# assemble_by_spades1 (spades_dir, file_fw, file_rv, output_dir, memory)
