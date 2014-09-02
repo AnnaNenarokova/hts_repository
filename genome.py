@@ -74,7 +74,7 @@ def assemble_by_spades (spades_dir, trimc_output, output_dir, name_reads, memory
 def use_quast (contigs, reference, output_dir):
 
 	quast_output = output_dir + 'QuastOutput/'
-	quast = abacas_dir + './quast'
+	quast = quast_dir + './quast'
 	quast_options = []
 	use_quast = quast + quast_options
 	return quast_output
@@ -87,11 +87,11 @@ def scaffold_by_abacas (abacas_dir, contigs, reference, output_dir, name_reads):
 	scaffold_by_abacas = abacas + abacas_options
 	return abacas_output
 
-def annotate_by_prokka (prokka_dir, contigs, output_dir, name_reads):
+def annotate_by_prokka (prokka_dir, sequence, output_dir, name_reads):
 
 	prokka_output = output_dir + 'ProkkaOutput/'
 	prokka = prokka_dir + './prokka'
-	prokka_options = ['--centre', 'XXX', '--kingdom', 'Bacteria', '--genus', 'Escherichia', '--species', 'coli', '--outdir', prokka_output, '--force', contigs]
+	prokka_options = ['--centre', 'XXX', '--kingdom', 'Bacteria', '--genus', 'Escherichia', '--species', 'coli', '--outdir', prokka_output, '--force', sequence]
 	annotate_by_prokka = [prokka] + prokka_options
 	call(annotate_by_prokka)
 	return prokka_output
@@ -102,6 +102,7 @@ trimc_dir = '/home/anna/Trimmomatic-0.32/'
 spades_dir = '/home/anna/SPAdes-3.1.0-Linux/bin/'
 abacas_dir = '/home/anna/Abacas/abacas.pl'
 prokka_dir = '/home/anna/prokka-1.10/bin/' 
+quast_dir = '/home/anna/quast-2.3/quast.py'
 
 file_fw = '/home/anna/BISS2014/EcoliProject/Stuff/1.fastq'
 file_rv = '/home/anna/BISS2014/EcoliProject/Stuff/2.fastq'
@@ -118,15 +119,18 @@ name_rv = file_from_path(file_rv)
 name_reads = name_fw[0:-6]
 output_dir = work_dir + name_reads + '/'
 
-trimc_output = trim_by_trimmomatic(trimc_dir, file_fw, file_rv, output_dir)
+#trimc_output = trim_by_trimmomatic(trimc_dir, file_fw, file_rv, output_dir)
+trimc_output = output_dir + 'TrimcOutput/'
 
 memory = 5 #Gb free memory for SPAdes
-spades_output = assemble_by_spades(spades_dir, trimc_output, output_dir, name_reads, memory)
-#spades_output = output_dir + 'SpadesOutput/'
+#spades_output = assemble_by_spades(spades_dir, trimc_output, output_dir, name_reads, memory)
+spades_output = output_dir + 'SpadesOutput/'
 
 contigs = spades_output + 'contigs.fasta'
-annotate_by_prokka (prokka_dir, contigs, output_dir, name_reads)
-scaffold_by_abacas (abacas_dir, contigs, reference, output_dir, name_reads)
+use_quast (contigs, reference, output_dir)
+#scaffold_by_abacas (abacas_dir, contigs, reference, output_dir, name_reads)
+#annotate_by_prokka (prokka_dir, contigs, output_dir, name_reads)
+
 
 # input_dir = '/home/anna/HTS-all/HTSes/'
 # HTSes = [('CTG_CCGTCC_L001_1.fastq', 'CTG_CCGTCC_L001_2.fastq'), ('Kan-frag_ATGTCA_L001_1.fastq', 'Kan-frag_ATGTCA_L001_2.fastq'),  
@@ -141,3 +145,6 @@ scaffold_by_abacas (abacas_dir, contigs, reference, output_dir, name_reads)
 # 	print output_dir
 # 	trimmomate (trimc_dir, file_fw, file_rv, output_dir)
 # assemble_by_spades1 (spades_dir, file_fw, file_rv, output_dir, memory)
+
+
+# java -jar /home/anna/BRIG-0.95-dist/BRIG.jar #open BRIG
