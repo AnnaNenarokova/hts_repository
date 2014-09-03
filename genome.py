@@ -147,4 +147,4 @@ use_quast (contigs, reference, output_dir)
 # assemble_by_spades1 (spades_dir, file_fw, file_rv, output_dir, memory)
 
 
-# java -jar /home/anna/BRIG-0.95-dist/BRIG.jar #open BRIG
+# cd ~/BRIG-0.95-dist && java -jar /home/anna/BRIG-0.95-dist/BRIG.jar #open BRIG

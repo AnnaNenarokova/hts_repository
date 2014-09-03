@@ -1,5 +1,5 @@
 import os
-from subprocess import call
+from subprocess32 import call
 import ntpath
 from string import maketrans
 # from Bio.Seq import Seq
@@ -37,26 +37,24 @@ def merge_by_flash(flash_dir, file_fw, file_rv, output_dir):
 def find_spacers(repeat_fw, seq, max_distance, spacers_array):
 	spacers = []
 	repeat_rv = reverse(repeat_fw)
-	matches_fw = find_near_matches(repeat_fw, seq, max_l_dist = max_distance)
-	matches_rv = find_near_matches(repeat_rv, seq, max_l_dist = max_distance)
-	# print "FORWARD", matches_fw, "REVERSE", matches_rv
-	if not (len(matches_fw) <= 0 and len(matches_rv) <= 0): 
-		if len(matches_fw) >= len(matches_rv):
-			for i in range(len(matches_fw)-1):
-				spacer_start = matches_fw[i].end + 1
-				spacer_end = matches_fw[i+1].start
+	repeat_matches_fw = find_near_matches(repeat_fw, seq, max_l_dist = max_distance)
+	repeat_matches_rv = find_near_matches(repeat_rv, seq, max_l_dist = max_distance)
+	if not (len(repeat_matches_fw) <= 0 and len(repeat_matches_rv) <= 0): 
+		if len(repeat_matches_fw) >= len(repeat_matches_rv):
+			for i in range(len(repeat_matches_fw)-1):
+				spacer_start = repeat_matches_fw[i].end + 1
+				spacer_end = repeat_matches_fw[i+1].start
 				spacer = seq[spacer_start : spacer_end]
 		 		if len(spacer) in range (28, 31): 
 		 			spacers.append(spacer)
 		else:
 			seq = reverse(seq)
-			for i in range(len(matches_rv)-1):
-				spacer_start = matches_rv[i].end + 1
-				spacer_end = matches_rv[i+1].start
+			for i in range(len(repeat_matches_rv)-1):
+				spacer_start = repeat_matches_rv[i].end + 1
+				spacer_end = repeat_matches_rv[i+1].start
 				spacer = seq[spacer_start : spacer_end]
 		 		if len(spacer) in range (29, 31): 
 		 			spacers.append(spacer)
-		print len(spacers),
 		if len(spacers)>0 : spacers_array.append(spacers)
 	return 0
 
@@ -64,8 +62,8 @@ work_dir = '/home/anna/HTS-all/HTS-programming/'
 # file_fw = '/home/anna/HTS-all/HTSes/CTG_CCGTCC_L001_1.fastq'
 # file_rv = '/home/anna/HTS-all/HTSes/CTG_CCGTCC_L001_2.fastq'
 
-file_fw = '/home/anna/HTS-all/HTS-programming/100_CTG_CCGTCC_L001_1.fastq'
-file_rv = '/home/anna/HTS-all/HTS-programming/100_CTG_CCGTCC_L001_2.fastq'
+file_fw = '/home/anna/HTS-all/HTS-programming/CTG_CCGTCC_L001_1.fastq'
+file_rv = '/home/anna/HTS-all/HTS-programming/CTG_CCGTCC_L001_2.fastq'
 # file_fw = '/home/anna/HTS-all/HTS-programming/1000_Kan-frag_ATGTCA_L001_1.fastq'
 # file_rv = '/home/anna/HTS-all/HTS-programming/1000_Kan-frag_ATGTCA_L001_2.fastq'
 
@@ -79,7 +77,7 @@ HTSes = [('CTG_CCGTCC_L001_1.fastq', 'CTG_CCGTCC_L001_2.fastq'), ('Kan-frag_ATGT
 ('T4ai_AGTTCC_L001_1.fastq', 'T4ai_AGTTCC_L001_2.fastq'), ('T4bi_1.fastq', 'T4bi_2.fastq'), ('T4C1T_TAGCTT_L001_1.fastq', 'T4C1T_TAGCTT_L001_2.fastq')]
 
 # flash_output = merge_by_flash(work_dir, file_fw, file_rv, output_dir)
-flash_output = '/home/anna/HTS-all/HTS-programming/100_CTG_CCGTCC_L001_1/FlashOutput/'
+flash_output = '/home/anna/HTS-all/HTS-programming/CTG_CCGTCC_L001_1/FlashOutput/'
 # print flash_output
 combined_reads = flash_output + name_reads + '.extendedFrags.fastq'
 
@@ -93,7 +91,7 @@ for read in reads:
 	find_spacers(repeat_fw, seq, max_distance, spacers_array)
 
 print len(spacers_array)
-print spacers_array
+# print spacers_array
 # for fw, rv in HTSes:
 # 	file_fw = input_dir + fw
 # 	file_rv = input_dir + rv
