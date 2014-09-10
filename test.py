@@ -1,2 +1,7 @@
-a = "0123456789"
-print a[2:6]
+def sum(a, b, c=False):
+	if c:
+		print a + b + c
+	else:
+		print a + b
+
+sum(1,2,3)

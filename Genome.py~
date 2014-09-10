@@ -86,6 +86,11 @@ def assemble_by_spades (spades_dir, output_dir, name_reads, memory):
 
 def use_quast (contigs, reference, output_dir):
 	return 0
+def annotate_by_prokka (contigs, output_dir, name_reads, memory):
+cd /home/anna/prokka-1.10/bin 
+./prokka --centre XXX --kingdom Bacteria --genus Escherichia --species coli --outdir /home/anna/HTS-all/HTS-programming/1/ProkkaOutput --force /home/anna/BISS2014/EcoliProject/Stuff/scaffold.fasta
+
+
 
 work_dir = '/home/anna/HTS-all/HTS-programming/'
 trimc_dir = '/home/anna/Trimmomatic-0.32/'
@@ -110,6 +115,9 @@ name_reads = name_fw[0:-6]
 output_dir = work_dir + name_reads + '/'
 trimmomate (trimc_dir, file_fw, file_rv, output_dir)
 
+memory = 5 #Gb free memory for SPAdes
+assemble_by_spades(spades_dir, output_dir, name_reads, memory)
+
 # input_dir = '/home/anna/HTS-all/HTSes/'
 # HTSes = [('CTG_CCGTCC_L001_1.fastq', 'CTG_CCGTCC_L001_2.fastq'), ('Kan-frag_ATGTCA_L001_1.fastq', 'Kan-frag_ATGTCA_L001_2.fastq'),  
 # ('T4ai_AGTTCC_L001_1.fastq', 'T4ai_AGTTCC_L001_2.fastq'), ('T4bi_1.fastq', 'T4bi_2.fastq'), ('T4C1T_TAGCTT_L001_1.fastq', 'T4C1T_TAGCTT_L001_2.fastq')]
@@ -122,7 +130,4 @@ trimmomate (trimc_dir, file_fw, file_rv, output_dir)
 # 	output_dir = work_dir + name_reads + '/'
 # 	print output_dir
 # 	trimmomate (trimc_dir, file_fw, file_rv, output_dir)
-
-memory = 5 #Gb free memory for SPAdes
-assemble_by_spades(spades_dir, output_dir, name_reads, memory)
 # assemble_by_spades1 (spades_dir, file_fw, file_rv, output_dir, memory)
