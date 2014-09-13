@@ -1,7 +1,8 @@
-def sum(a, b, c=False):
-	if c:
-		print a + b + c
-	else:
-		print a + b
+import csv
+f = open('/home/anna/bioinformatics/HTS-all/HTS-programming/CTG_CCGTCC_L001_1/fuzznuc_report')
+csv_f = csv.reader(f, delimiter='\t')
 
-sum(1,2,3)
+for row in csv_f:
+	print row
+
+f.close()
