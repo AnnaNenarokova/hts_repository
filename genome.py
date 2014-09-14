@@ -94,7 +94,7 @@ def abacas_scaffold (contigs, reference, outdir, abacas_dir=False):
 	return abacas_out
 
 def prokka_annotate (sequence, outdir, prokka_dir=False):
-	prokka_dir = '/home/anna/bioinformatics/bioprograms/prokka-1.10/bin/'
+	if not prokka_dir: prokka_dir = '/home/anna/bioinformatics/bioprograms/prokka-1.10/bin/'
 	prokka_out = outdir + 'prokka_out/'
 	prokka = prokka_dir + './prokka'
 	prokka_options = ['--centre', 'XXX', '--kingdom', 'Bacteria', '--genus', 'Escherichia', '--species', 
@@ -110,9 +110,9 @@ def handle_HTS (file_fw, file_rv, outdir, only_trim=False, only_assemble=False, 
 		trimc_out = outdir + 'bbduk_out/'
 
 	if not only_trim:
-		spades_out = spades_assemble(outdir, trimc_out=trimc_out)
+		spades_out = spades_assemble(outdir, trimc_out)
 		contigs = spades_out + 'contigs.fasta'
-		prokka_annotate (prokka_dir, contigs, outdir)
+		prokka_annotate (contigs, outdir)
 		# use_quast (contigs, reference, outdir)
 		# scaffold_abacas (abacas_dir, contigs, reference, outdir)
 		

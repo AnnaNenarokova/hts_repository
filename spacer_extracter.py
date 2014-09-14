@@ -3,7 +3,13 @@ from ntpath import split
 from subprocess32 import call
 from string import maketrans
 from Bio import SeqIO
-# from fuzzysearch import find_near_matches
+import csv
+import time
+
+global ONLY_FIND; ONLY_FIND = True
+global MAX_MISMATCH; MAX_MISMATCH = 1
+global REPEAT; REPEAT = 'GAGTTCCCCGCGCCAGCGGGGATAAACCGC'
+# repeat = 'GAGTTCCCCGCGCCAGCGGGGATAAACCGC'
 
 def file_from_path(path):
     head, tail = split(path)
@@ -26,47 +32,29 @@ def flash_merge(file_fw, file_rv, outdir, flash_dir = False):
 	call(flash_merge)
 	return flash_output
 
-def find_spacers_fuzzysearch(repeat_fw, seq, max_distance, spacers_array):
-	spacers = []
-	repeat_rv = reverse(repeat_fw)
-	repeat_matches_fw = find_near_matches(repeat_fw, seq, max_l_dist = max_distance)
-	repeat_matches_rv = find_near_matches(repeat_rv, seq, max_l_dist = max_distance)
-	if not (len(repeat_matches_fw) <= 0 and len(repeat_matches_rv) <= 0): 
-		if len(repeat_matches_fw) >= len(repeat_matches_rv):
-			for i in range(len(repeat_matches_fw)-1):
-				spacer_start = repeat_matches_fw[i].end + 1
-				spacer_end = repeat_matches_fw[i+1].start
-				spacer = seq[spacer_start : spacer_end]
-		 		if len(spacer) in range (28, 31): 
-		 			spacers.append(spacer)
-		else:
-			seq = reverse(seq)
-			for i in range(len(repeat_matches_rv)-1):
-				spacer_start = repeat_matches_rv[i].end + 1
-				spacer_end = repeat_matches_rv[i+1].start
-				spacer = seq[spacer_start : spacer_end]
-		 		if len(spacer) in range (29, 31): 
-		 			spacers.append(spacer)
-		if len(spacers)>0 : spacers_array.append(spacers)
-	return 0
-
-def use_fuzznuc (reads, pattern, outdir, max_mismatch = 5, indels = False):
-	fuzznuc_file = outdir + 'fuzznuc_report'
+def use_fuzznuc (reads, pattern, outdir, max_mismatch, indels = False, name = ''):
+	fuzznuc_file = outdir + 'fuzznuc_report' + name
 	fuzznuc = ['fuzznuc', '-sequence', reads, '-pattern', pattern, '-outfile', fuzznuc_file]
-	fuzznuc_options = ['-pmismatch', str(max_mismatch), '-complement', '-snucleotide1', '-squick1', 
+	fuzznuc_options = ['-pmismatch', str(MAX_MISMATCH), '-complement', '-snucleotide1', '-squick1', 
 					   '-rformat2', 'excel']
 	fuzznuc = fuzznuc + fuzznuc_options
 	call(fuzznuc)
 	return fuzznuc_file
 
-def find_spacers_fuzznuc(reads, outdir, repeat = 'GAGTTCCCCGCGCCAGCGGGGATAAACCGC'):
+def find_spacers_fuzznuc(reads, outdir):
 	spacers = []
-	fuzznuc_file = use_fuzznuc(reads, repeat, outdir)
+	repeat_matches = []
+	fuzznuc_file = use_fuzznuc(reads, REPEAT, outdir, MAX_MISMATCH, name = '_first')
+	fuzznuc_file = open(fuzznuc_file)
+	fuzznuc_csv = csv.reader(fuzznuc_file, delimiter='\t')
+	# for row in fuzznuc_csv:
+	# 	if row[0] != 'SeqName':
+	# 		repeat_matches.append({ 'SeqName': row[0], 'Start': row[1], 'End': row[2], 'Strand': row[4], 'Mismatch': row[6] })
 	return spacers
 
-def handle_HTS (file_fw, file_rv, outdir, only_find = False):
+def handle_HTS (file_fw, file_rv, outdir):
 
-	if only_find == True: 
+	if ONLY_FIND == True: 
 		flash_output = outdir + 'flash_out/'
 	else: 
 		flash_output = flash_merge(file_fw, file_rv, outdir)
@@ -75,15 +63,15 @@ def handle_HTS (file_fw, file_rv, outdir, only_find = False):
 	find_spacers_fuzznuc(combined_reads, outdir)
 	return 0
 
-def handle_files (workdir, file_fw = False, file_rv = False, HTS_dir = False, HTSes = False, only_find = False):
+def handle_files (workdir, file_fw = False, file_rv = False, HTS_dir = False, HTSes = False, multiproc = False):
 	if file_fw and file_rv:
 		name_reads = file_from_path(file_fw)[0:-6]
 		outdir = workdir + name_reads + '/'
 
-		if not only_find: 
+		if not ONLY_FIND: 
 			handle_HTS (file_fw, file_rv, outdir)
 		else: 
-			handle_HTS (file_fw, file_rv, outdir, only_find = True)
+			handle_HTS (file_fw, file_rv, outdir)
 
 	elif HTS_dir and HTSes:
 		for fw, rv in HTSes:
@@ -93,13 +81,25 @@ def handle_files (workdir, file_fw = False, file_rv = False, HTS_dir = False, HT
 			name_rv = file_from_path(file_rv)
 			name_reads = name_fw[0:-6]
 			outdir = workdir + name_reads + '/'
-			print outdir
 			if not os.path.exists(outdir): os.makedirs(outdir)
-			if not only_find: 
-				handle_HTS (file_fw, file_rv, outdir)
-			else: 
-				handle_HTS (file_fw, file_rv, outdir, only_find = True)
-
+			if not multiproc:
+				if not ONLY_FIND: handle_HTS (file_fw, file_rv, outdir)
+				else: handle_HTS (file_fw, file_rv, outdir)
+			else:
+				pid = os.fork()
+				time.sleep(0.1)
+				max_processes = 10
+				process_count = 0
+				if pid == 0:
+					if not ONLY_FIND: handle_HTS (file_fw, file_rv, outdir)
+					else: handle_HTS (file_fw, file_rv, outdir)
+					os.abort()
+				else:
+					process_count += 1
+					if process_count >= max_processes:
+						os.wait()
+						process_count -= 1
+			
 	else: print "Error: handle_HTSes haven't get needed values"
 
 	return 0
@@ -108,12 +108,12 @@ def handle_files (workdir, file_fw = False, file_rv = False, HTS_dir = False, HT
 
 workdir = '/home/anna/bioinformatics/HTS-all/HTS-programming/'
 
-# file_fw = '/home/anna/bioinformatics/HTS-all/HTSes/CTG_CCGTCC_L001_1.fastq'
-# file_rv = '/home/anna/bioinformatics/HTS-all/HTSes/CTG_CCGTCC_L001_2.fastq'
+file_fw = '/home/anna/bioinformatics/HTS-all/HTSes/CTG_CCGTCC_L001_1.fastq'
+file_rv = '/home/anna/bioinformatics/HTS-all/HTSes/CTG_CCGTCC_L001_2.fastq'
 
-# handle_files(workdir, file_fw, file_rv, only_find = False)
+handle_files(workdir, file_fw, file_rv)
 
-HTS_dir = '/home/anna/bioinformatics/HTS-all/HTSes/'
-HTSes = [('CTG_CCGTCC_L001_1.fastq', 'CTG_CCGTCC_L001_2.fastq'), ('Kan-frag_ATGTCA_L001_1.fastq', 'Kan-frag_ATGTCA_L001_2.fastq'),  
-('T4ai_AGTTCC_L001_1.fastq', 'T4ai_AGTTCC_L001_2.fastq'), ('T4bi_1.fastq', 'T4bi_2.fastq'), ('T4C1T_TAGCTT_L001_1.fastq', 'T4C1T_TAGCTT_L001_2.fastq')]
-handle_files(workdir, HTS_dir = HTS_dir, HTSes = HTSes)
+# HTS_dir = '/home/anna/bioinformatics/HTS-all/HTSes/'
+# HTSes = [('CTG_CCGTCC_L001_1.fastq', 'CTG_CCGTCC_L001_2.fastq'), ('Kan-frag_ATGTCA_L001_1.fastq', 'Kan-frag_ATGTCA_L001_2.fastq'),  
+# ('T4ai_AGTTCC_L001_1.fastq', 'T4ai_AGTTCC_L001_2.fastq'), ('T4bi_1.fastq', 'T4bi_2.fastq'), ('T4C1T_TAGCTT_L001_1.fastq', 'T4C1T_TAGCTT_L001_2.fastq')]
+# handle_files(workdir, HTS_dir = HTS_dir, HTSes = HTSes, multiproc = True)
