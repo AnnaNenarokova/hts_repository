@@ -1,13 +1,13 @@
-import csv
-f = open('/home/anna/bioinformatics/HTS-all/HTS-programming/CTG_CCGTCC_L001_1/fuzznuc_report')
-csv_f = csv.reader(f, delimiter='\t')
-repeat_matches = []
-
-for row in csv_f:
-	if row[0] != 'SeqName':
-		repeat_matches.append({ 'SeqName': row[0], 'Start': row[1], 'End': row[2], 'Strand': row[4], 'Mismatch': row[6] })
-		# repeat_matches.append([row[0], row[1], row[2], row[4], row[6]])
-
-# print repeat_matches 
-
+def get_length(inputStr):
+        return len(inputStr)
+f = open("/home/anna/bioinformatics/HTS-all/HTS-programming/CTG_CCGTCC_L001_1/statistics_file.txt", "r+")
+f_sort = open("/home/anna/bioinformatics/HTS-all/HTS-programming/CTG_CCGTCC_L001_1/statistics_sort.txt", 'w')
+lines = []
+for line in f.readline():
+	lines.append(lines)
+print lines
+lines.sort(key=get_length)
+for line in lines:
+	f_sort.write(lines)
 f.close()
+f_sort.close()
