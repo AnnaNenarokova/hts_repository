@@ -61,9 +61,21 @@ def find_spacers_fuzzysearch(repeat_fw, seq, max_distance, spacers_array):
 # # 	file_fasta = outdir + '/' + f[0:-1] + 'a'
 # # 	SeqIO.convert (file_fastq, "fastq", file_fasta, "fasta")
 # file_fastq = '/home/anna/bioinformatics/HTS-all/HTS-programming/CTG_CCGTCC_L001_1/flash_out/out.extendedFrags.fastq'
-# file_fasta = file_fastq[0:-1] + 'a'
-# SeqIO.convert (file_fastq, "fastq", file_fasta, "fasta")
+# # file_fasta = file_fastq[0:-1] + 'a'
+# # SeqIO.convert (file_fastq, "fastq", file_fasta, "fasta")
 
-f = open("/home/anna/bioinformatics/HTS-all/HTS-programming/CTG_CCGTCC_L001_1/statistics_file.txt", "r")
-lines = f.readlines()
-print lines
+# def get_length(inputStr):
+#         return len(inputStr)
+# f = open("/home/anna/bioinformatics/HTS-all/HTS-programming/CTG_CCGTCC_L001_1/statistics_file.txt", "r+")
+# f_sort = open("/home/anna/bioinformatics/HTS-all/HTS-programming/CTG_CCGTCC_L001_1/statistics_sort.txt", 'w')
+# lines = f.readlines()
+# print lines
+# # lines.sort()
+# # print lines
+# # f_sort.write(lines)
+# # f.close()
+# # f_sort.close()
+
+# f = open("/home/anna/bioinformatics/HTS-all/HTS-programming/CTG_CCGTCC_L001_1/statistics_file.txt", "r")
+# lines = f.readlines()
+# print lines
