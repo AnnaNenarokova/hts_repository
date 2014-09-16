@@ -136,10 +136,10 @@ def handle_files (workdir, file_fw = False, file_rv = False, HTS_dir = False, HT
 	else: print "Error: handle_HTSes haven't get needed values"
 	return 0
 
-workdir = '/home/anna/bioinformatics/HTS-all/HTS-programming/'
+workdir = '/home/anna/bioinformatics/HTS/outdirs/'
 
-file_fw = '/home/anna/bioinformatics/HTS-all/HTSes/CTG_CCGTCC_L001_1.fastq'
-file_rv = '/home/anna/bioinformatics/HTS-all/HTSes/CTG_CCGTCC_L001_2.fastq'
+file_fw = '/home/anna/bioinformatics/HTS/HTSes/CTG_CCGTCC_L001_1.fastq'
+file_rv = '/home/anna/bioinformatics/HTS/HTSes/CTG_CCGTCC_L001_2.fastq'
 
 # process_count = 0
 # global statistics; statistics = []
@@ -170,7 +170,7 @@ for MAX_MISMATCH in range(0, 13):
 			os.wait()
 			process_count -= 1
 
-# HTS_dir = '/home/anna/bioinformatics/HTS-all/HTSes/'
+# HTS_dir = '/home/anna/bioinformatics/HTS/HTSes/'
 # HTSes = [('CTG_CCGTCC_L001_1.fastq', 'CTG_CCGTCC_L001_2.fastq'), ('Kan-frag_ATGTCA_L001_1.fastq', 'Kan-frag_ATGTCA_L001_2.fastq'),  
 # ('T4ai_AGTTCC_L001_1.fastq', 'T4ai_AGTTCC_L001_2.fastq'), ('T4bi_1.fastq', 'T4bi_2.fastq'), ('T4C1T_TAGCTT_L001_1.fastq', 'T4C1T_TAGCTT_L001_2.fastq')]
 # handle_files(workdir, HTS_dir = HTS_dir, HTSes = HTSes, multiproc = True)

@@ -79,3 +79,4 @@ def find_spacers_fuzzysearch(repeat_fw, seq, max_distance, spacers_array):
 # f = open("/home/anna/bioinformatics/HTS-all/HTS-programming/CTG_CCGTCC_L001_1/statistics_file.txt", "r")
 # lines = f.readlines()
 # print lines
+

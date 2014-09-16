@@ -1,10 +1,12 @@
 import os
+import csv
+import time
 from ntpath import split
 from subprocess32 import call
 from string import maketrans
 from Bio import SeqIO
-import csv
-import time
+from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
 
 global ONLY_FIND; ONLY_FIND = True
 global MAX_PROCESSES; MAX_PROCESSES = 8
@@ -21,15 +23,15 @@ def reverse(seq):
 
 def flash_merge(file_fw, file_rv, outdir, flash_dir = False):
 	if not flash_dir: flash_dir = '/home/anna/bioinformatics/bioprograms/FLASH/'
-	flash_output = outdir + 'flash_out/'
-	if not os.path.exists(flash_output):
-	    os.makedirs(flash_output)
+	flash_out = outdir + 'flash_out/'
+	if not os.path.exists(flash_out):
+	    os.makedirs(flash_out)
 
-	options_flash = ['-d', flash_output, '-O', '-M 250', '-x 0.25']
+	options_flash = ['-d', flash_out, '-O', '-M 250', '-x 0.25']
 	flash = flash_dir + './flash'
 	flash_merge = [flash] + options_flash + [file_fw, file_rv]
 	call(flash_merge)
-	return flash_output
+	return flash_out
 
 def use_fuzznuc (reads, pattern, outdir, max_mismatch = 5, indels = False, name = ''):
 	fuzznuc_file = outdir + 'fuzznuc_report' + name
@@ -85,17 +87,18 @@ def find_spacers_fuzznuc(reads, outdir):
 def handle_HTS (file_fw, file_rv, outdir):
 
 	if ONLY_FIND == True: 
-		flash_output = outdir + 'flash_out/'
+		flash_out = outdir + 'flash_out/'
 	else: 
-		flash_output = flash_merge(file_fw, file_rv, outdir)
+		flash_out = flash_merge(file_fw, file_rv, outdir)
 
-	combined_reads = flash_output + 'out.extendedFrags.fastq'
-	not_combined_reads = flash_output + 'out.notCombined_1.fastq'
+	combined_reads = flash_out + 'out.extendedFrags.fastq'
+	not_combined_reads = flash_out + 'out.notCombined_1.fastq'
 	spacers1 = find_spacers_fuzznuc(combined_reads, outdir)
 	spacers2 = find_spacers_fuzznuc(not_combined_reads, outdir)
 	spacers = spacers1 + spacers2
-	
+
 	spacers_file = outdir + 'spacers'
+	spacers_fasta = outdir + 'spacers.fasta'
 	spacers_out = []
 	for line in spacers:
 		if len(line)>0 : spacers_out.append(' '.join(line))
@@ -103,7 +106,9 @@ def handle_HTS (file_fw, file_rv, outdir):
 	with open(spacers_file, 'w') as sp_file:
 	   sp_file.write(spacers_out)
 	sp_file.closed
-
+	for line in spacers:
+		for spacer in line: spacer = SeqRecord(Seq(spacer))
+	SeqIO.write(spacers, spacers_fasta, "fasta")
 	return 0
 
 def handle_files (workdir, file_fw = False, file_rv = False, HTS_dir = False, HTSes = False, multiproc = False):
@@ -141,14 +146,32 @@ def handle_files (workdir, file_fw = False, file_rv = False, HTS_dir = False, HT
 	else: print "Error: handle_HTSes haven't get needed values"
 	return 0
 
-workdir = '/home/anna/bioinformatics/HTS-all/HTS-programming/'
+def use_bowtie2 (spacers_fasta, reference, outdir, bowtie2_dir=False):
+	if not bowtie2_dir: bowtie2_dir = '/home/anna/bioinformatics/bioprograms/bowtie2-2.2.3/'
+	bowtie2_out = outdir + 'bowtie2_out/'
+	if not os.path.exists(bowtie2_out):
+	    os.makedirs(bowtie2_out)
+	bt2_base = bowtie2_out + 'bt2_base'
+	bowtie2_build = [bowtie2_dir + './bowtie2-build', '-q', reference, bt2_base]
+	call(bowtie2_build)
+	sam_file = bowtie2_out + 'alignment.sam'
+	bowtie2 = [bowtie2_dir + './bowtie2', '-x', bt2_base, '-f', '-U', spacers_fasta, '-S', sam_file]
+	call(bowtie2)
+	return bowtie2_out
 
-# file_fw = '/home/anna/bioinformatics/HTS-all/HTSes/CTG_CCGTCC_L001_1.fastq'
-# file_rv = '/home/anna/bioinformatics/HTS-all/HTSes/CTG_CCGTCC_L001_2.fastq'
+workdir = '/home/anna/bioinformatics/HTS/outdirs/'
 
-# handle_files (workdir, file_fw, file_rv)
+file_fw = '/home/anna/bioinformatics/HTS/HTSes/CTG_CCGTCC_L001_1.fastq'
+file_rv = '/home/anna/bioinformatics/HTS/HTSes/CTG_CCGTCC_L001_2.fastq'
 
-HTS_dir = '/home/anna/bioinformatics/HTS-all/HTSes/'
-HTSes = [('CTG_CCGTCC_L001_1.fastq', 'CTG_CCGTCC_L001_2.fastq'), ('Kan-frag_ATGTCA_L001_1.fastq', 'Kan-frag_ATGTCA_L001_2.fastq'),  
-('T4ai_AGTTCC_L001_1.fastq', 'T4ai_AGTTCC_L001_2.fastq'), ('T4bi_1.fastq', 'T4bi_2.fastq'), ('T4C1T_TAGCTT_L001_1.fastq', 'T4C1T_TAGCTT_L001_2.fastq')]
-handle_files(workdir, HTS_dir = HTS_dir, HTSes = HTSes, multiproc = True)
+handle_files (workdir, file_fw, file_rv)
+
+# HTS_dir = '/home/anna/bioinformatics/HTS/HTSes/'
+# HTSes = [('CTG_CCGTCC_L001_1.fastq', 'CTG_CCGTCC_L001_2.fastq'), ('Kan-frag_ATGTCA_L001_1.fastq', 'Kan-frag_ATGTCA_L001_2.fastq'),  
+# ('T4ai_AGTTCC_L001_1.fastq', 'T4ai_AGTTCC_L001_2.fastq'), ('T4bi_1.fastq', 'T4bi_2.fastq'), ('T4C1T_TAGCTT_L001_1.fastq', 'T4C1T_TAGCTT_L001_2.fastq')]
+# handle_files(workdir, HTS_dir = HTS_dir, HTSes = HTSes, multiproc = True)
+
+# outdir = '/home/anna/bioinformatics/HTS/outdirs/T4ai_AGTTCC_L001_1/'
+# reference = '/home/anna/bioinformatics/HTS/stuff/pt7blue-T4.fasta'
+# spacers = outdir + 'spacers'
+# use_bowtie2 (spacers, reference, outdir)

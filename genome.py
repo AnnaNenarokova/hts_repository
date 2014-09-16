@@ -149,22 +149,22 @@ def handle_files (workdir, file_fw=False, file_rv=False, HTS_dir=False, HTSes=Fa
 
 	return 0
 
-workdir = '/home/anna/bioinformatics/HTS-all/HTS-programming/'
+workdir = '/home/anna/bioinformatics/HTS/outdirs/'
 
 # file_fw = '/home/anna/bioinformatics/BISS2014/EcoliProject/Stuff/1.fastq'
 # file_rv = '/home/anna/bioinformatics/BISS2014/EcoliProject/Stuff/2.fastq'
-file_fw = '/home/anna/bioinformatics/HTS-all/HTSes/Katya/0sec_ACAGTG_L001_R1_001.fastq'
-file_rv = '/home/anna/bioinformatics/HTS-all/HTSes/Katya/0sec_ACAGTG_L001_R2_001.fastq'
-# file_fw = '/home/anna/bioinformatics/HTS-all/HTSes/CTG_CCGTCC_L001_1.fastq'
-# file_rv = '/home/anna/bioinformatics/HTS-all/HTSes/CTG_CCGTCC_L001_2.fastq'
-# file_fw = '/home/anna/bioinformatics/HTS-all/HTSes/ERR015599_1.fastq'
-# file_rv = '/home/anna/bioinformatics/HTS-all/HTSes/ERR015599_1.fastq'
+file_fw = '/home/anna/bioinformatics/HTS/HTSes/Katya/0sec_ACAGTG_L001_R1_001.fastq'
+file_rv = '/home/anna/bioinformatics/HTS/HTSes/Katya/0sec_ACAGTG_L001_R2_001.fastq'
+# file_fw = '/home/anna/bioinformatics/HTS/HTSes/CTG_CCGTCC_L001_1.fastq'
+# file_rv = '/home/anna/bioinformatics/HTS/HTSes/CTG_CCGTCC_L001_2.fastq'
+# file_fw = '/home/anna/bioinformatics/HTS/HTSes/ERR015599_1.fastq'
+# file_rv = '/home/anna/bioinformatics/HTS/HTSes/ERR015599_1.fastq'
 
 # handle_files(workdir, file_fw, file_rv, only_trim = True)
 
 HTSes =[('CTG_CCGTCC_L001_1.fastq', 'CTG_CCGTCC_L001_2.fastq'), ('Kan-frag_ATGTCA_L001_1.fastq', 'Kan-frag_ATGTCA_L001_2.fastq'),  
 ('T4ai_AGTTCC_L001_1.fastq', 'T4ai_AGTTCC_L001_2.fastq'), ('T4bi_1.fastq', 'T4bi_2.fastq'), ('T4C1T_TAGCTT_L001_1.fastq', 'T4C1T_TAGCTT_L001_2.fastq')]
 
-HTS_dir = '/home/anna/bioinformatics/HTS-all/HTSes/'
+HTS_dir = '/home/anna/bioinformatics/HTS/HTSes/'
 
 handle_files(workdir, HTS_dir = HTS_dir, HTSes = HTSes)
