@@ -14,6 +14,7 @@ global ONLY_SPACERS; ONLY_SPACERS = False
 global MAX_PROCESSES; MAX_PROCESSES = 8
 global REPEAT; REPEAT = 'GAGTTCCCCGCGCCAGCGGGGATAAACCGC'
 global USE_BOWTIE2; USE_BOWTIE2 = True
+global MULTIPROC; MULTIPROC = False 
 
 def file_from_path(path):
     head, tail = split(path)
@@ -47,31 +48,31 @@ def use_fuzznuc (reads, pattern, outdir, max_mismatch = 0, indels = False, name 
 	call(fuzznuc)
 	return fuzznuc_file
 
-# def find_spacers_fuzznuc(reads, outdir):
-# 	if not ONLY_SPACERS: fuzznuc_file = use_fuzznuc(reads, REPEAT, outdir)
-# 	else: fuzznuc_file = outdir + 'fuzznuc_report'
+def find_spacers_fuzznuc(reads, outdir):
+	if not ONLY_SPACERS: fuzznuc_file = use_fuzznuc(reads, REPEAT, outdir)
+	else: fuzznuc_file = outdir + 'fuzznuc_report'
 
-# 	fuzznuc_file = open(fuzznuc_file)
-# 	fuzznuc_csv = csv.reader(fuzznuc_file, delimiter='\t')
-# 	repeat_matches = []
-# 	i = 0
-# 	for row in fuzznuc_csv:
-# 		if row[0] != 'SeqName': 
-# 			repeat_matches.append({ 'SeqName': row[0], 'Start': row[1], 'End': row[2], 'Strand': row[4], 'Mismatch': row[6] })
-# 				if len(spacer.seq) in range (29, 31): 
-# 					spacers[-1].append(spacer)
-# 					sp_fasta_out.append(spacer)
-# 					spacers_number +=1
-# 					sp_in = True
-# 				else: cur_sp_n-=1
-# 				spacer_start = int(repeat_matches[i]['End'])
-# 				i+=1
-# 		if not sp_in: spacers.pop()
-# 		k+=1
+	fuzznuc_file = open(fuzznuc_file)
+	fuzznuc_csv = csv.reader(fuzznuc_file, delimiter='\t')
+	repeat_matches = []
+	i = 0
+	for row in fuzznuc_csv:
+		if row[0] != 'SeqName': 
+			repeat_matches.append({ 'SeqName': row[0], 'Start': row[1], 'End': row[2], 'Strand': row[4], 'Mismatch': row[6] })
+			if len(spacer.seq) in range (29, 31): 
+				spacers[-1].append(spacer)
+				sp_fasta_out.append(spacer)
+				spacers_number +=1
+				sp_in = True
+			else: cur_sp_n-=1
+			spacer_start = int(repeat_matches[i]['End'])
+			i+=1
+		if not sp_in: spacers.pop()
+		k+=1
 
-# 	sp_fasta_out = [f for f in sorted(sp_fasta_out, key=lambda x : str(x.seq))]
-# 	SeqIO.write(sp_fasta_out, spacers_fasta, "fasta")
-# 	return spacers
+	sp_fasta_out = [f for f in sorted(sp_fasta_out, key=lambda x : str(x.seq))]
+	SeqIO.write(sp_fasta_out, spacers_fasta, "fasta")
+	return spacers
 
 def use_bowtie2 (spacers_fasta, reference, outdir, bowtie2_dir=False):
 	if not bowtie2_dir: bowtie2_dir = '/home/anna/bioinformatics/bioprograms/bowtie2-2.2.3/'
@@ -205,7 +206,7 @@ def handle_hts (file_fw, file_rv, outdir, reference = False):
 		use_bowtie2 (spacers_fasta, reference, outdir)
 	return 0
 
-def handle_files (workdir, file_fw = False, file_rv = False, hts_dir = False, htses = False, multiproc = False, reference = False):
+def handle_files (workdir, file_fw = False, file_rv = False, hts_dir = False, htses = False, reference = False):
 	if file_fw and file_rv:
 		name_reads = file_from_path(file_fw)[0:-6]
 		outdir = workdir + name_reads + '/'
@@ -221,7 +222,7 @@ def handle_files (workdir, file_fw = False, file_rv = False, hts_dir = False, ht
 			name_reads = name_fw[0:-6]
 			outdir = workdir + name_reads + '/'
 			if not os.path.exists(outdir): os.makedirs(outdir)
-			if not multiproc:
+			if not MULTIPROC:
 				if not ONLY_FIND: handle_hts (file_fw, file_rv, outdir)
 				else: handle_hts (file_fw, file_rv, outdir)
 			else:
@@ -240,28 +241,23 @@ def handle_files (workdir, file_fw = False, file_rv = False, hts_dir = False, ht
 	else: print "Error: handle_htses haven't get needed values"
 	return 0
 
-workdir = '/home/anna/bioinformatics/hts/outdirs/'
+file_fw = '/home/anna/bioinformatics/htses/T4bi_1.fastq'
+file_rv = '/home/anna/bioinformatics/htses/T4bi_2.fastq'
 
-# file_fw = '/home/anna/bioinformatics/hts/htses/T4ai_AGTTCC_L001_1.fastq'
-# file_rv = '/home/anna/bioinformatics/hts/htses/T4ai_AGTTCC_L001_2.fastq'
-
-file_fw = '/home/anna/bioinformatics/hts/htses/dasha/Ecoli-mut6_trimmed_paired_R1.fastq'
-file_rv = '/home/anna/bioinformatics/hts/htses/dasha/Ecoli-mut6_trimmed_paired_R2.fastq'
+workdir = '/home/anna/bioinformatics/outdirs/'
 
 name_reads = file_from_path(file_fw)[0:-6]
 outdir = workdir + name_reads + '/'
 
-# file_fw = '/home/anna/bioinformatics/hts/htses/T4bi_1.fastq'
-# file_rv = '/home/anna/bioinformatics/hts/htses/T4bi_2.fastq'
 
-# reference = '/home/anna/bioinformatics/hts/stuff/pt7blue-T4.fasta'
+reference = '/media/anna/biodata/stuff/pt7blue-T4.fasta'
 # # reference = '/home/anna/bioinformatics/hts/stuff/T4_genome.fasta'
 
-# handle_files (workdir, file_fw, file_rv, reference = reference)
+handle_files (workdir, file_fw, file_rv, reference = reference)
 
 # hts_dir = '/home/anna/bioinformatics/hts/htses/'
 # htses = [('CTG_CCGTCC_L001_1.fastq', 'CTG_CCGTCC_L001_2.fastq'), ('Kan-frag_ATGTCA_L001_1.fastq', 'Kan-frag_ATGTCA_L001_2.fastq'),  
 # ('T4ai_AGTTCC_L001_1.fastq', 'T4ai_AGTTCC_L001_2.fastq'), ('T4bi_1.fastq', 'T4bi_2.fastq'), ('T4C1T_TAGCTT_L001_1.fastq', 'T4C1T_TAGCTT_L001_2.fastq')]
 # handle_files(workdir, hts_dir = hts_dir, htses = htses, multiproc = True)
 
-flash_merge(file_fw, file_rv, outdir)
+# flash_merge(file_fw, file_rv, outdir)

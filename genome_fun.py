@@ -2,11 +2,12 @@ from subprocess32 import call
 global THREADS; THREADS = 8
 global RAM; RAM = 8
 
-def use_quast (contigs, reference, outdir, quast_dir=False):
+def use_quast (contigs, outdir, reference = False, quast_dir=False):
 	if not quast_dir: quast_dir = '/home/anna/bioinformatics/bioprograms/quast-2.3/'
 	quast_out = outdir + 'quast_out/'
 	quast = quast_dir + './quast.py'
-	quast_options = ['-o', quast_out, '-R', reference]
+	quast_options = ['-o', quast_out]
+	if reference: quast_options = quast_options + ['-R', reference]
 	use_quast = [quast] + quast_options + [contigs]
 	call(use_quast)
 	return quast_out
@@ -24,7 +25,7 @@ def prokka_annotate (sequence, outdir, prokka_dir=False):
 	prokka_out = outdir + 'prokka_out/'
 	prokka = prokka_dir + './prokka'
 	prokka_options = ['--centre', 'XXX', '--kingdom', 'Bacteria', '--genus', 'Escherichia', '--species', 
-					  'coli', '--gram', 'neg', '--rfam', '--addgenes',  '--outdir', prokka_out, '--force', sequence]
+					  'coli', '--gram', 'neg', '--addgenes',  '--outdir', prokka_out, '--force', sequence]
 	prokka_annotate = [prokka] + prokka_options
 	call(prokka_annotate)
 	return prokka_out

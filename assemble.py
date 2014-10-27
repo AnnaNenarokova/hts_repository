@@ -1,8 +1,9 @@
+import os
 from subprocess32 import call
 global THREADS; THREADS = 8
-global RAM; RAM = 8
+global RAM; RAM = 7
 
-def spades_assemble(outdir, test=False, spades_dir=False, file_fw=False, file_rv=False, bbduk_out = False, trim_out=False, RAM=7):
+def spades_assemble(outdir, test=False, spades_dir=False, file_fw=False, file_rv=False, bbduk_out = False, trim_out=False, RAM=RAM):
 	if not spades_dir: spades_dir = '/home/anna/bioinformatics/bioprograms/SPAdes-3.1.1-Linux/bin/'
 
 	spades_out = outdir + 'spades_out/'

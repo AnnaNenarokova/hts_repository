@@ -10,6 +10,7 @@ global RAM; RAM = 8
 import trim
 import assemble
 from genome_fun import use_quast
+from genome_fun import prokka_annotate
 
 def file_from_path (path):
     head, tail = split(path)
@@ -22,15 +23,17 @@ def cr_outdir(file_fw, workdir):
 	if not os.path.exists(outdir): os.makedirs(outdir)
 	return outdir
 
-workdir = '/home/anna/bioinformatics/outdirs'
-contigs = '/home/anna/bioinformatics/outdirs/contigs_mut6.fasta'
+workdir = '/home/anna/bioinformatics/outdirs/'
+# scaffold = '/home/anna/bioinformatics/outdirs/TB1_ex-wt/scaffolds.fasta'
+scaffold = '/home/anna/bioinformatics/outdirs/mut9/contigs_mut9.fasta_BL21.fasta.fasta'
+contigs = '/home/anna/bioinformatics/outdirs/contigs_mut9.fasta'
 reference = '/home/anna/bioinformatics/outdirs/BL21.fasta'
-outdir = cr_outdir(contigs, workdir)
-use_quast (contigs, reference, outdir)
+outdir = cr_outdir(scaffold, workdir)
+# use_quast (contigs, reference, outdir)
 
 # # reference = '/home/anna/bioinformatics/hts/stuff/pt7blue-T4.fasta'
 # reference = '/home/anna/bioinformatics/output_from_server/contigs.fasta'
 
 # outdir = '/home/anna/bioinformatics/hts/outdirs/'
-# prokka_annotate (reference, outdir)
+prokka_annotate (scaffold, outdir)
 

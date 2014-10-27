@@ -2,11 +2,14 @@
 import os
 from subprocess32 import call
 from ntpath import split
-global ONLY_TRIM; ONLY_TRIM = False
-global ONLY_ASSEMBLE; ONLY_ASSEMBLE = True
+global ONLY_TRIM; ONLY_TRIM = True
+global ONLY_ASSEMBLE; ONLY_ASSEMBLE = False
 global ONLY_ANNOTATE; ONLY_ANNOTATE = False
 global THREADS; THREADS = 8
 global RAM; RAM = 8
+from trim import trimc_trim
+from assemble import spades_assemble
+from genome_fun import use_quast
 
 def file_from_path (path):
     head, tail = split(path)
@@ -21,12 +24,12 @@ def cr_outdir(file_fw, file_rv, workdir):
 
 def handle_hts (file_fw, file_rv, outdir):
 	if not ONLY_ASSEMBLE: 
-		trim_out = bbduk_trim(file_fw, file_rv, outdir)
+		trim_out = trimc_trim(file_fw, file_rv, outdir)
 		if not ONLY_TRIM:
-			spades_out = spades_assemble(outdir, trim_out)
+			spades_out = spades_assemble(outdir, trim_out = trim_out)
 			contigs = spades_out + 'contigs.fasta'
-			prokka_annotate (contigs, outdir)
-			# use_quast (contigs, reference, outdir)
+			# prokka_annotate (contigs, outdir)
+			use_quast (contigs, outdir)
 			# scaffold_abacas (abacas_dir, contigs, reference, outdir)
 	else: 
 		# trim_out = outdir + 'bbduk_out/'
@@ -51,8 +54,8 @@ def handle_files (workdir, file_fw=False, file_rv=False, hts_dir=False, htses=Fa
 	return 0
 
 workdir = '/home/anna/bioinformatics/outdirs/'
-file_fw = '/home/anna/bioinformatics/hts/htses/dasha/Ecoli-B_trimmed_paired_R1.fastq'
-file_rv = '/home/anna/bioinformatics/hts/htses/dasha/Ecoli-B_trimmed_paired_R2.fastq'
+file_fw = '/home/anna/bioinformatics/htses/plasmid70_TGACCA_L001_R1_001.fastq'
+file_rv = '/home/anna/bioinformatics/htses/plasmid70_TGACCA_L001_R2_001.fastq'
 handle_files(workdir, file_fw, file_rv)
 
 # htses =[('CTG_CCGTCC_L001_1.fastq', 'CTG_CCGTCC_L001_2.fastq'), ('Kan-frag_ATGTCA_L001_1.fastq', 'Kan-frag_ATGTCA_L001_2.fastq'),  
