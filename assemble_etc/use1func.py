@@ -26,15 +26,16 @@ def cr_outdir(file_fw, workdir):
 workdir = '/home/anna/bioinformatics/outdirs/'
 # scaffold = '/home/anna/bioinformatics/outdirs/TB1_ex-wt/scaffolds.fasta'
 # scaffold = '/home/anna/bioinformatics/outdirs/mut9/contigs_mut9.fasta_BL21.fasta.fasta'
-contigs = '/home/anna/bioinformatics/outdirs/plasmid70_TGACCA_L001_R1_001/pUM146.fasta'
+# contigs = '/home/anna/bioinformatics/outdirs/plasmid70_TGACCA_L001_R1_001/pUM146.fasta'
 # reference = '/home/anna/bioinformatics/outdirs/BL21.fasta'
-outdir = cr_outdir(contigs, workdir)
-outdir = '/home/anna/bioinformatics/outdirs/plasmid70_TGACCA_L001_R1_001/pUM146/'
+f = '/home/anna/bioinformatics/htses/pt7blue-T4.fasta'
+
+outdir = cr_outdir(f, workdir)
 # use_quast (contigs, reference, outdir)
 
 # # reference = '/home/anna/bioinformatics/hts/stuff/pt7blue-T4.fasta'
 # reference = '/home/anna/bioinformatics/output_from_server/contigs.fasta'
 
 # outdir = '/home/anna/bioinformatics/hts/outdirs/'
-prokka_annotate (contigs, outdir)
+prokka_annotate (f, outdir)
 
