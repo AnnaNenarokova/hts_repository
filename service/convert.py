@@ -9,8 +9,8 @@ from Bio import SeqIO
 # 	file_fastq = work_dir + '/' + f
 # 	file_fasta = outdir + '/' + f[0:-1] + 'a'
 # 	SeqIO.convert (file_fastq, "fastq", file_fasta, "fasta")
-work_dir = '/media/anna/biodata/htses/dasha/'
-f = 'Ecoli-mut6_trimmed_paired_R1.fastq'
+work_dir = '/media/anna/biodata/htses/'
+f = 'T4bi_1.fastq'
 file_fastq = work_dir +  f
 file_fasta = work_dir +  f[0:-1] + 'a'
 SeqIO.convert (file_fastq, "fastq", file_fasta, "fasta")

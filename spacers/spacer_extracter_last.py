@@ -7,6 +7,7 @@ from string import maketrans
 from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
+from natsort import natsorted
 
 global ONLY_FIND; ONLY_FIND = False
 global ONLY_SPACERS; ONLY_SPACERS = False
@@ -36,44 +37,59 @@ def flash_merge(file_fw, file_rv, outdir, flash_dir = False):
 	call(flash_merge)
 	return flash_output
 
-def use_fuzznuc (reads, pattern, max_mismatch = 0, indels = False, name = ''):
-	fuzznuc = ['fuzznuc', '-sequence', reads, '-pattern', pattern]
-	fuzznuc_options = ['-pmismatch', str(max_mismatch), '-complement', '-snucleotide1', '-squick1', 
-					   '-rformat2', 'excel', '-stdout', '-auto']
-	fuzznuc = fuzznuc + fuzznuc_options
-	fuzznuc_out = subprocess32.Popen((fuzznuc), stdout=subprocess32.PIPE, bufsize=100)
+def use_fuzznuc (reads, pattern, outdir = False, max_mismatch = 5, stdout = False, indels = False, name = ''):
+	if stdout:
+		fuzznuc = ['fuzznuc', '-sequence', reads, '-pattern', pattern]
+		fuzznuc_options = ['-pmismatch', str(max_mismatch), '-complement', '-snucleotide1', '-squick1', 
+						   '-rformat2', 'excel', '-stdout', '-auto']
+		fuzznuc = fuzznuc + fuzznuc_options
+		fuzznuc_out = subprocess32.Popen((fuzznuc), stdout=subprocess32.PIPE, bufsize=100)
+	else:
+		fuzznuc_out = outdir + 'fuzznuc_report' + name
+		fuzznuc = ['fuzznuc', '-sequence', reads, '-pattern', pattern, '-outfile', fuzznuc_out]
+		fuzznuc_options = ['-pmismatch', str(max_mismatch), '-complement', '-snucleotide1', '-squick1', 
+						   '-rformat2', 'excel']
+		fuzznuc = fuzznuc + fuzznuc_options
+		subprocess32.call(fuzznuc)
+
 	return fuzznuc_out
 
 def find_spacers_fuzznuc(reads, outdir):
-	output_pipe = use_fuzznuc(reads, REPEAT).stdout
+	output_pipe = use_fuzznuc(reads, REPEAT, stdout = True).stdout
+	spacers = []
+	spacers_number = 0
+	reads_iter = SeqIO.parse(reads, "fastq")
+	read = next(reads_iter)
+	last_repeat = None
 	for line in iter(output_pipe.readline, ''):
 		row = line.split('\t')
-		repeat_matches = []
-		i = 0
 		if row[0] != 'SeqName':
-			repeat_matches.append({ 'SeqName': row[0], 'Start': row[1], 'End': row[2], 'Strand': row[4], 'Mismatch': row[6] })
-			i+=1
-		if (repeat_matches[i]['SeqName'] == seq_record.id):
-			if repeat_matches[i]['Strand'] == '+':
-				seq = SeqRecord(seq_record.seq[spacer_start:spacer_end], id = repeat_matches[i]['SeqName']+' '+str(cur_sp_n), description = '')
-			elif repeat_matches[i]['Strand'] == '-':
-				seq = SeqRecord(seq_record.seq.reverse_complement()[spacer_start:spacer_end], id = repeat_matches[i]['SeqName']+' '+str(cur_sp_n), description = '')
-			else: print("Error in find_spacers_fuzznuc")
-			if len(spacer.seq) in range (29, 31): 
-				spacers[-1].append(spacer)
-				sp_fasta_out.append(spacer)
-				spacers_number +=1
-				sp_in = True
-			else: cur_sp_n-=1
-			spacer_start = int(repeat_matches[i]['End'])
-			i+=1
-		if not sp_in: spacers.pop()
-		k+=1
-
-	# sp_fasta_out = [f for f in sorted(sp_fasta_out, key=lambda x : str(x.seq))]
-	# SeqIO.write(sp_fasta_out, spacers_fasta, "fasta")
-	# return spacers
+			repeat = {'seq_id': row[0], 'start': row[1], 'end': row[2], 'strand': row[4]}
+			if last_repeat:
+				if repeat['seq_id'] == last_repeat['seq_id']:
+					spacer_start = int(last_repeat['end'])
+					spacer_end = int(repeat['start'])-1	
+					while repeat['seq_id'] != read.id: 
+						read = next(reads_iter)
+					if repeat['strand'] == '+':
+						spacer_seq = read.seq[spacer_start:spacer_end]
+					elif repeat['strand'] == '-':
+						spacer_seq = read.seq.reverse_complement()[spacer_start:spacer_end]
+					else: print("Error in find_spacers_fuzznuc")
+					if len(spacer_seq) in range (28, 33): 
+						spacers_number +=1
+						cur_spacer_n += 1
+						description = 'CRISPR cassette ' + read.id[-11: len(read.id)]
+						spacer = SeqRecord(spacer_seq, id = read.id + ' spacer ' + str(cur_spacer_n), description = description)
+						spacers.append(spacer)
+			last_repeat = repeat
+		else: cur_spacer_n = 0
+	print str(spacers_number) + ' spacers founded'
+	spacers_file = outdir + 'spacers.fasta'
+	SeqIO.write(spacers, spacers_file, "fasta")
+	return spacers_file
 
 reads = '/home/anna/bioinformatics/htses/T4bi_1.fastq'
-outdir = '/home/anna/bioinformatics/outdirs'
+outdir = '/home/anna/bioinformatics/outdirs/T4bi_1/'
 find_spacers_fuzznuc(reads, outdir)
+# use_fuzznuc (reads, REPEAT, outdir = outdir)
