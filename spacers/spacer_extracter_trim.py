@@ -1,6 +1,4 @@
 #!/usr/bin/python
-import sys
-sys.path.append('/home/anna/bioinformatics/hts_repository')
 import os
 import csv
 from ntpath import split
@@ -16,7 +14,7 @@ global ONLY_SPACERS; ONLY_SPACERS = False
 global MAX_PROCESSES; MAX_PROCESSES = 8
 global REPEAT; REPEAT = 'GAGTTCCCCGCGCCAGCGGGGATAAACCGC'
 global USE_BOWTIE2; USE_BOWTIE2 = True
-global MULTIPROC; MULTIPROC = False
+global MULTIPROC; MULTIPROC = False 
 global THREADS; THREADS = 8
 
 def file_from_path(path):
@@ -34,11 +32,33 @@ def flash_merge(file_fw, file_rv, outdir, flash_dir = None):
 	if not os.path.exists(flash_output):
 	    os.makedirs(flash_output)
 
-	options_flash = ['-d', flash_output, '-O', '-M 300', '-x 0.25']
+	options_flash = ['-d', flash_output, '-O', '-M 300', '-x 0.10']
 	flash = flash_dir + './flash'
 	flash_merge = [flash] + options_flash + [file_fw, file_rv]
 	subprocess32.call(flash_merge)
 	return flash_output
+
+def trimc_trim (file_fw, file_rv, outdir, trimc_dir=None):
+	if not trimc_dir: trimc_dir = '/home/anna/bioinformatics/bioprograms/Trimmomatic-0.32/'
+	trim_out = outdir + 'trim_out/'
+	if not os.path.exists(trim_out):
+	    os.makedirs(trim_out)
+
+	trimlog = trim_out +'trimlog'
+	paired_out_fw = trim_out + 'paired_out_fw' + '.fastq'
+	unpaired_out_fw = trim_out + 'unpaired_out_fw' + '.fastq'
+	paired_out_rv = trim_out + 'paired_out_rv' + '.fastq'
+	unpaired_out_rv = trim_out + 'unpaired_out_rv' + '.fastq'
+
+	adapters_file = trimc_dir + 'adapters/'+ "illumina.fasta"
+
+	trimmomatic = ['java', '-jar', trimc_dir + 'trimmomatic-0.32.jar']
+	trim_options = ['PE', '-threads', str(THREADS), '-phred33', '-trimlog', trimlog, file_fw, file_rv, 
+					paired_out_fw, unpaired_out_fw, paired_out_rv, unpaired_out_rv,
+					'ILLUMINACLIP:'+ adapters_file + ':2:30:10'] 
+	trim = trimmomatic + trim_options
+	subprocess32.call(trim)
+	return trim_out
 
 def use_fuzznuc (reads, pattern, outdir = None, max_mismatch = 5, stdout = None, indels = None, name = ''):
 	if stdout:
@@ -70,7 +90,7 @@ def find_spacers_fuzznuc(reads):
 			repeat = {'seq_id': row[0], 'start': row[1], 'end': row[2], 'strand': row[4]}
 			if last_repeat:
 				if repeat['seq_id'] == last_repeat['seq_id']:
-					spacer_start = int(last_repeat['end'])
+					spacer_start = int(last_repeat['end'])-1
 					spacer_end = int(repeat['start'])-1	
 					while repeat['seq_id'] != read.id: 
 						read = next(reads_iter)
@@ -92,7 +112,7 @@ def find_spacers_fuzznuc(reads):
 
 def use_bowtie2 (reference, outdir, unpaired=None, reads1=None, reads2=None, keep_unaligned=None, bowtie2_dir=None):
 	if not bowtie2_dir: bowtie2_dir = '/home/anna/bioinformatics/bioprograms/bowtie2-2.2.3/'
-	bowtie2_out = outdir + file_from_path(reference)[0:-6]
+	bowtie2_out = outdir + file_from_path(reference)[0:-6] + '/'
 	if not os.path.exists(bowtie2_out): os.makedirs(bowtie2_out)
 	bt2_base = bowtie2_out + 'bt2_base'
 	bowtie2_build = [bowtie2_dir + './bowtie2-build', '-q', reference, bt2_base]
@@ -100,33 +120,57 @@ def use_bowtie2 (reference, outdir, unpaired=None, reads1=None, reads2=None, kee
 	sam_file = bowtie2_out + 'alignment.sam'
 	bowtie2 = [bowtie2_dir + './bowtie2']
 	if reads1 and reads2:
-		options = ['-p', str(THREADS), '--reorder', '-x', bt2_base, '-1', reads1, '-2', reads2, '-S', sam_file]
+		options = ['-p', str(THREADS), '--reorder', '--local', '-x', bt2_base, '-1', reads1, '-2', reads2, '-S', sam_file]
 	elif unpaired:
-		options = ['-p', str(THREADS), '--reorder', '-x', bt2_base, '-f', '-U', unpaired, '-S', sam_file]
+		options = ['-p', str(THREADS), '--reorder', '--local','-x', bt2_base, '-f', '-U', unpaired, '-S', sam_file]
 	else: print "Error. Function use_bowtie2: wrong set of arguments"
 	if keep_unaligned: 
 		unaligned = bowtie2_out + 'unaligned.fasta'
-		# , '--no-mixed', '--no-discordant'
 		options = ['--un', unaligned] + options
-	call_bowtie2 = bowtie2 + options
-	subprocess32.call(call_bowtie2)
-	return bowtie2_out
+		call_bowtie2 = bowtie2 + options
+		subprocess32.call(call_bowtie2)
+		return bowtie2_out, unaligned
+	else:
+		call_bowtie2 = bowtie2 + options
+		subprocess32.call(call_bowtie2)	
+		return bowtie2_out
 
 def handle_hts (file_fw, file_rv, outdir, reference = None):
-	spacers1 = find_spacers_fuzznuc(file_fw)
-	spacers2 = find_spacers_fuzznuc(file_rv)
-	spacers = spacers1 + spacers2
+	trim_out = trimc_trim(file_fw, file_rv, outdir)
+	trimmed_fw = trim_out + 'paired_out_fw.fastq'
+	trimmed_rv = trim_out + 'paired_out_rv.fastq'
+	flash_out = flash_merge(file_fw, file_rv, outdir)
+	files_trim = ['unpaired_out_fw.fastq', 'unpaired_out_rv.fastq']
+	files_flash = ['out.extendedFrags.fastq', 'out.notCombined_1.fastq', 'out.notCombined_2.fastq']
+	files = []
+	for f in files_trim:
+		files.append(trim_out + f)
+	for f in files_flash:
+		files.append(flash_out + f)
+	spacers = []
+	for f in files:
+		spacers.extend(find_spacers_fuzznuc(f))
 	spacers_file = outdir + 'spacers.fasta'
 	SeqIO.write(spacers, spacers_file, "fasta")
+
 	if USE_BOWTIE2 and reference:
-		use_bowtie2 (reference, outdir, unpaired=spacers_file, keep_unaligned=True)
+		bowtie2_out, unaligned = use_bowtie2 (reference, outdir, unpaired=spacers_file, keep_unaligned=True)
+		return bowtie2_out, unaligned
 	return 0
 
-def handle_files (workdir, file_fw = None, file_rv = None, hts_dir = None, htses = None, reference = None):
+def handle_files (workdir, file_fw = None, file_rv = None, hts_dir = None, htses = None, 
+				  ref_dir = None, reference = None, references=None):
 	if file_fw and file_rv:
-		name_reads = file_from_path(file_fw)[0:-6]
-		outdir = workdir + name_reads + '/'
-		handle_hts (file_fw, file_rv, outdir, reference = reference)
+		if references:
+			name_reads = file_from_path(file_fw)[0:-6]
+			outdir = workdir + name_reads + '/'
+			i = 0
+			for ref in references:
+				reference = ref_dir + ref
+				if i == 0: align_dir, unaligned = handle_hts (file_fw, file_rv, outdir, reference)
+				else: align_dir, unaligned = use_bowtie2 (reference, align_dir, unpaired=unaligned, keep_unaligned=True)
+				i = i+1
+
 
 	elif hts_dir and htses:
 		process_count = 0
@@ -159,44 +203,9 @@ def handle_files (workdir, file_fw = None, file_rv = None, hts_dir = None, htses
 
 file_fw = '/home/anna/bioinformatics/htses/T5adapt_ACTTGA_L001_R1_001.fastq'
 file_rv = '/home/anna/bioinformatics/htses/T5adapt_ACTTGA_L001_R2_001.fastq'
-# file_fw = '/home/anna/bioinformatics/htses/T4bi_1.fastq'
-# file_rv = '/home/anna/bioinformatics/htses/T4bi_2.fastq'
-# file_fw = '/home/anna/bioinformatics/htses/T4ai_AGTTCC_L001_1.fastq'
-# file_rv = '/home/anna/bioinformatics/htses/T4ai_AGTTCC_L001_2.fastq'
 workdir = '/home/anna/bioinformatics/outdirs/'
-# reference = '/home/anna/bioinformatics/references/pt7blue-T4.fasta'
-# reference = '/home/anna/bioinformatics/htses/pT7blue-G8esc_rev.fasta'
-# reference = '/home/anna/bioinformatics/references/t5.fasta
-# reference = '/home/anna/bioinformatics/references/first_10_kb_t5.fasta'
-# reference = '/home/anna/bioinformatics/references/CRISPR_repeat.fasta'
-reference = '/home/anna/bioinformatics/references/sasha/SS_39_CRISPR.fasta'
+ref_dir = '/home/anna/bioinformatics/references/'
+references = ['SS_39_CRISPR.fasta', 'first_10_kb_t5.fasta', 't5.fasta', 'pT7blue-G8esc_rev.fasta', 'KD263_CRISPR_region.fasta', 
+			  'pt7blue-T4.fasta', 'T4_genome.fasta', 'BW25113.fasta', 'BL21.fasta', 'pBad.fasta']
 
-handle_files (workdir, file_fw=file_fw, file_rv=file_rv, reference=reference)
-# use_fuzznuc (file_fw, pattern, outdir)
-
-
-# reference = '/home/anna/bioinformatics/references/CRISPR_repeat.fasta'
-# reference = '/home/anna/bioinformatics/outdirs/pBad.fasta'
-# reference = '/home/anna/bioinformatics/outdirs/BL21.fasta'
-# reference = '/home/anna/bioinformatics/references/BW25113.fasta'
-
-# reference = '/home/anna/bioinformatics/pt7blue-T4.fasta'
-# reference = '/home/anna/bioinformatics/references/sasha/SS_39_CRISPR.fasta'
-# reference = '/home/anna/bioinformatics/references/t5.fasta'
-reference = '/home/anna/bioinformatics/references/first_10_kb_t5.fasta'
-# reference = '/home/anna/bioinformatics/htses/pT7blue-G8esc_rev.fasta'
-# reference = '/home/anna/bioinformatics/outdirs/plasmid70_TGACCA_L001_R1_001/contigs_plasmid70.fasta'
-# reference = '/home/anna/bioinformatics/outdirs/plasmid70_TGACCA_L001_R1_001/contig_87kb.fasta'
-# unpaired = '/home/anna/bioinformatics/outdirs/T5adapt_ACTTGA_L001_R1_001/spacers.fasta'
-# unpaired = '/home/anna/bioinformatics/outdirs/T5adapt_ACTTGA_L001_R1_001/bowtie2_out_t5/unaligned_on_t5.fasta'
-unpaired = '/home/anna/bioinformatics/outdirs/T5adapt_ACTTGA_L001_R1_001/bowtie2_out_SS_39_CRISPR/unaligned.fasta'
-
-outdir = '/home/anna/bioinformatics/outdirs/T5adapt_ACTTGA_L001_R1_001/'
-# reads1 = '/home/anna/bioinformatics/htses/plasmid70_TGACCA_L001_R1_001.fastq'
-# reads2 = '/home/anna/bioinformatics/htses/plasmid70_TGACCA_L001_R2_001.fastq'
-
-# outdir = cr_outdir(reads1, reference, workdir)
-# outdir = cr_outdir(unpaired, reference, workdir)
-
-# use_bowtie2 (reference, outdir, reads1=reads1, reads2=reads2, keep_unaligned=True, bowtie2_dir=None)
-use_bowtie2 (reference, outdir, unpaired=unpaired, keep_unaligned=None)
+handle_files (workdir, file_fw=file_fw, file_rv=file_rv, ref_dir = ref_dir, references=references)

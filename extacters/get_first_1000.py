@@ -16,4 +16,4 @@ for f in ('CTG_CCGTCC_L001_1.fastq', 'CTG_CCGTCC_L001_2.fastq'):
 	SeqIO.write(records, output, "fastq")
 	handle.close()
 # print records[0].id  #first record
-# print records[-1].id #last record
+# # print records[-1].id #last record

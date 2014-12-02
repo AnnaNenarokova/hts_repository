@@ -3,7 +3,7 @@ from subprocess32 import call
 global THREADS; THREADS = 8
 global RAM; RAM = 8
 
-def trimc_trim (file_fw, file_rv, outdir, trimc_dir=False):
+def trimc_trim (file_fw, file_rv, outdir, trimc_dir=None):
 	if not trimc_dir: trimc_dir = '/home/anna/bioinformatics/bioprograms/Trimmomatic-0.32/'
 	trim_out = outdir + 'trim_out/'
 	if not os.path.exists(trim_out):
@@ -18,16 +18,19 @@ def trimc_trim (file_fw, file_rv, outdir, trimc_dir=False):
 	adapters_file = trimc_dir + 'adapters/'+ "illumina.fasta"
 
 	trimmomatic = ['java', '-jar', trimc_dir + 'trimmomatic-0.32.jar']
+	# trim_options = ['PE', '-threads', str(THREADS), '-phred33', '-trimlog', trimlog, file_fw, file_rv, 
+	# 				paired_out_fw, unpaired_out_fw, paired_out_rv, unpaired_out_rv,
+	# 				'ILLUMINACLIP:'+ adapters_file + ':2:15:15:8:true', 'LEADING:3', 'TRAILING:3', 'SLIDINGWINDOW:4:5',  
+	# 				'MAXINFO:200:0.2', 'MINLEN:5' ] 
 	trim_options = ['PE', '-threads', str(THREADS), '-phred33', '-trimlog', trimlog, file_fw, file_rv, 
-					paired_out_fw, unpaired_out_fw, paired_out_rv, unpaired_out_rv,
-					'ILLUMINACLIP:'+ adapters_file + ':2:15:15:8:true', 'LEADING:3', 'TRAILING:3', 'SLIDINGWINDOW:4:5',  
-					'MAXINFO:200:0.2', 'MINLEN:5' ] 
+				paired_out_fw, unpaired_out_fw, paired_out_rv, unpaired_out_rv, 'TRAILING:3', 'SLIDINGWINDOW:4:25', 'MINLEN:100' ] 
+
 	trim = trimmomatic + trim_options
 	print ' '.join(trim)
 	call(trim)
 	return trim_out
 
-def bbduk_trim (file_fw, file_rv, outdir, bbduk_dir=False):
+def bbduk_trim (file_fw, file_rv, outdir, bbduk_dir=None):
 	if not bbduk_dir: bbduk_dir = '/home/anna/bioinformatics/bioprograms/bbmap/'
 	bbduk_out = outdir + 'bbduk_out/'
 	print bbduk_out

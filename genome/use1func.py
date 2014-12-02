@@ -7,10 +7,10 @@ global ONLY_ASSEMBLE; ONLY_ASSEMBLE = True
 global ONLY_ANNOTATE; ONLY_ANNOTATE = False
 global THREADS; THREADS = 8
 global RAM; RAM = 8
-import trim
+from trim import trimc_trim
 import assemble
-from genome_fun import use_quast
-from genome_fun import prokka_annotate
+import use_quast
+from prokka_annotate import prokka_annotate
 
 def file_from_path (path):
     head, tail = split(path)
@@ -24,18 +24,14 @@ def cr_outdir(file_fw, workdir):
 	return outdir
 
 workdir = '/home/anna/bioinformatics/outdirs/'
-# scaffold = '/home/anna/bioinformatics/outdirs/TB1_ex-wt/scaffolds.fasta'
-# scaffold = '/home/anna/bioinformatics/outdirs/mut9/contigs_mut9.fasta_BL21.fasta.fasta'
-# contigs = '/home/anna/bioinformatics/outdirs/plasmid70_TGACCA_L001_R1_001/pUM146.fasta'
-# reference = '/home/anna/bioinformatics/outdirs/BL21.fasta'
-f = '/home/anna/bioinformatics/htses/pt7blue-T4.fasta'
-
-outdir = cr_outdir(f, workdir)
+file_fw = '/home/anna/bioinformatics/htses/dasha/Ecoli-mut6_trimmed_paired_R1.fastq'
+file_rv = '/home/anna/bioinformatics/htses/dasha/Ecoli-mut6_trimmed_paired_R2.fastq'
+outdir = cr_outdir(file_fw, workdir)
 # use_quast (contigs, reference, outdir)
 
 # # reference = '/home/anna/bioinformatics/hts/stuff/pt7blue-T4.fasta'
 # reference = '/home/anna/bioinformatics/output_from_server/contigs.fasta'
 
 # outdir = '/home/anna/bioinformatics/hts/outdirs/'
-prokka_annotate (f, outdir)
-
+# prokka_annotate (f, outdir)
+trimc_trim (file_fw, file_rv, outdir)

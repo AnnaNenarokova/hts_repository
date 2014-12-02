@@ -3,7 +3,7 @@ from subprocess32 import call
 global THREADS; THREADS = 8
 global RAM; RAM = 7
 
-def spades_assemble(outdir, test=False, spades_dir=False, file_fw=False, file_rv=False, bbduk_out = False, trim_out=False, RAM=RAM):
+def spades_assemble(outdir, test=None, spades_dir=None, file_fw=None, file_rv=None, bbduk_out = None, trim_out=None, RAM=RAM):
 	if not spades_dir: spades_dir = '/home/anna/bioinformatics/bioprograms/SPAdes-3.1.1-Linux/bin/'
 
 	spades_out = outdir + 'spades_out/'
@@ -34,7 +34,7 @@ def spades_assemble(outdir, test=False, spades_dir=False, file_fw=False, file_rv
 	print(' '.join(spades_assemble))
 	return spades_out
 
-def velvet_assemble(outdir, test=False, velvet_dir=False, file_fw=False, file_rv=False, bbduk_out = False, trim_out=False, RAM=7):
+def velvet_assemble(outdir, test=None, velvet_dir=None, file_fw=None, file_rv=None, bbduk_out = None, trim_out=None, RAM=7):
 	if not velvet_dir: velvet_dir = '/home/anna/bioinformatics/bioprograms/velvet_1.2.10/'
 
 	velvet_out = outdir + 'velvet_out/'	

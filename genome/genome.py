@@ -37,7 +37,7 @@ def handle_hts (file_fw, file_rv, outdir):
 		
 	return 0
 
-def handle_files (workdir, file_fw=False, file_rv=False, hts_dir=False, htses=False):
+def handle_files (workdir, file_fw=None, file_rv=None, hts_dir=None, htses=None):
 	if file_fw and file_rv:
 		outdir = cr_outdir(file_fw, file_rv, workdir)
 		handle_hts (file_fw, file_rv, outdir)

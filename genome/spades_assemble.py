@@ -1,6 +1,6 @@
 import os
 from subprocess32 import call
-def spades_assemble(outdir, test=False, reads = False, file_fw=False, file_rv=False, spades_dir=False, bbduk_out = False, trimc_out=False, RAM=6):
+def spades_assemble(outdir, test=None, reads = None, file_fw=None, file_rv=None, spades_dir=None, bbduk_out = None, trimc_out=None, RAM=6):
 	if not spades_dir: spades_dir = '/home/anna/bioinformatics/bioprograms/SPAdes-3.1.1-Linux/bin/'
 
 	spades_out = outdir + 'spades_out/'

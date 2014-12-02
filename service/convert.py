@@ -10,7 +10,10 @@ from Bio import SeqIO
 # 	file_fasta = outdir + '/' + f[0:-1] + 'a'
 # 	SeqIO.convert (file_fastq, "fastq", file_fasta, "fasta")
 work_dir = '/media/anna/biodata/htses/'
-f = 'T4bi_1.fastq'
-file_fastq = work_dir +  f
-file_fasta = work_dir +  f[0:-1] + 'a'
-SeqIO.convert (file_fastq, "fastq", file_fasta, "fasta")
+f = '/home/anna/bioinformatics/HCURV_Genome.txt'
+f2 = '/home/anna/bioinformatics/HCURV_Genome.fasta'
+# f = 'T4bi_1.fastq'
+# file_fastq = work_dir +  f
+# file_fasta = work_dir +  f[0:-1] + 'a'
+# SeqIO.convert (file_fastq, "fastq", file_fasta, "fasta")
+SeqIO.convert(f, "genbank", f2, "fasta")
