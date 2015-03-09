@@ -4,7 +4,7 @@ import os
 from collections import Counter
 from collections import OrderedDict
 
-folder = '/home/anna/bioinformatics/htses/katya/'
+folder = '/home/anna/bioinformatics/htses/katya/indexes/'
 files = os.listdir(folder) 
 indexes_count_files = filter(lambda x: x.endswith('_indexes'), files) 
 indexes_counts = Counter({})

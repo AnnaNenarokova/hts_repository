@@ -12,10 +12,10 @@ def index (fastq_file):
 	for seq_record in SeqIO.parse(fastq_file, "fastq"):
 		indexes.append(str(seq_record.seq[0:INDEX_LENGTH]))
 	counts = Counter(indexes)
-	json.dump(counts, open(out_file,'w'))
+	json.dump(counts.most_common(), open(out_file,'w'))
 	return 0
 
-folder = '/home/anna/bioinformatics/htses/katya/'
+folder = '/home/anna/bioinformatics/htses/katya/2/'
 files = os.listdir(folder) 
 fastq_files = filter(lambda x: x.endswith('.fastq'), files) 
 
@@ -49,7 +49,9 @@ indexes_counts = Counter({})
 for f in indexes_count_files:
 	json_file = folder + f
 	json_data = open(json_file, 'r')
-	indexes_counts += Counter(json.load(json_data))
+
+	indexes_counts += Counter(dict(json.load(json_data)))
+	
 	json_data.close
 
 

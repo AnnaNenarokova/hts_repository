@@ -1,13 +1,12 @@
 #!/bin/bash
 dir='/home/anna/bioinformatics/htses/katya/'
-cd $dir
-mkdir fastqc_reports
 
-for f in *.fastq
+for f in $dir*.fastq
 do 
 	fastqc $f &
 done
 wait
 
-mv *.zip fastqc_reports
-tar -cvf fastqc_reports.tar fastqc_reports
+# mv *.zip fastqc_reports
+# rm -r *_fastqc/
+# tar -cvf fastqc_reports.tar fastqc_reports

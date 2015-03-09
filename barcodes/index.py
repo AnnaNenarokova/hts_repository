@@ -17,4 +17,5 @@ def index (fastq_file):
 
 # fastq_file = '/home/nenarokova/wheat/L00000210.BC1D3RACXX.5_1.fastq'
 fastq_file = '/home/anna/bioinformatics/htses/katya/0sec_ACAGTG_L001_R1_001.fastq'
+# fastq_file = '/home/anna/bioinformatics/htses/ERR015599_1.fastq'
 index (fastq_file)

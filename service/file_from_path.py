@@ -1,9 +1,12 @@
 from ntpath import split
-def file_from_path(path):
+def file_from_path(path, folder=False):
     head, tail = split(path)
-    return tail
-def cr_outdir(f, workdir):
+    if folder: return head
+    else: return tail
+
+def cr_outdir(f, workdir=False):
 	name = file_from_path(f)[0:-6]
-	outdir = workdir + name + '/'
+	if workdir: outdir = workdir + name + '/'
+	else: outdir = file_from_path(f, folder=True) + name + '/'
 	if not os.path.exists(outdir): os.makedirs(outdir)
 	return outdir
