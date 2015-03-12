@@ -8,6 +8,7 @@ from Bio import SeqIO
 from ntpath import split
 from itertools import izip
 from Bio.SeqRecord import SeqRecord
+global adapter; adapter = 'AATGATACGGCGACCACCGAGATCTACACTCTTTCCCTACACGACGCTCTTCCGATCT'
 
 def file_from_path(path, folder=False):
     head, tail = split(path)
@@ -47,8 +48,9 @@ def dump(sorted_fastq, not_bsc1, not_bsc2, outdir):
 	out_miss_f2 = outdir + 'not_bsc' + '_2' + '.fastq'
 	with open(out_miss_f2, "a") as handle:
 		SeqIO.write(not_bsc2, handle, "fastq")
+	return 0
 
-def sort_fastq(fastq_file1, fastq_file2, right_bcs_file, dist=0):
+def sort_records(fastq_file1, fastq_file2, right_bcs_file, dist=0, test=False, first_n=0):
 	outdir = cr_outdir(fastq_file1)
 	right_bcs = read_csv(right_bcs_file)
 
@@ -62,13 +64,13 @@ def sort_fastq(fastq_file1, fastq_file2, right_bcs_file, dist=0):
 		in_bcs = False
 		for right_bc in right_bcs:
 			bc_len = len(right_bc[1])
-			cur_bc = str(seq_record1.seq[0:bc_len])
+			cur_bc = str(seq_record1.seq[first_n : first_n+bc_len])
 			if (right_bc[1] == cur_bc):
 				in_bcs = True
 				if not (right_bc[0] in sorted_fastq):
 					sorted_fastq[right_bc[0]] = [[],[]]
-				sorted_fastq[right_bc[0]][0].append(seq_record1[(bc_len):len(seq_record1)])
-				# sorted_fastq[right_bc[0]][0].append(seq_record1)
+				if test: sorted_fastq[right_bc[0]][0].append(seq_record1)]
+				else sorted_fastq[right_bc[0]][0].append(seq_record1[(bc_len):len(seq_record1)])
 				sorted_fastq[right_bc[0]][1].append(seq_record2)
 				break
 		if not in_bcs:
@@ -86,44 +88,55 @@ def sort_fastq(fastq_file1, fastq_file2, right_bcs_file, dist=0):
 			i += 1
 
 	dump(sorted_fastq, not_bsc1, not_bsc2, outdir)
+	return 0
+
+def sort_fastq():
+	right_bcs_file = '/home/anna/bioinformatics/wheat/indexes/right_barcodes.csv'
+
+	many_files = False
+	shift = True
+
+	if not many_files:
+		fastq_file1 = '/home/anna/bioinformatics/htses/katya/0sec_ACAGTG_L001_R1_001.fastq'
+		fastq_file2 = '/home/anna/bioinformatics/htses/katya/0sec_ACAGTG_L001_R2_001.fastq'
+
+		if not shift:
+			sort_records(fastq_file1, fastq_file2, right_bcs_file)
+
+		if shift:
+			sort_records(fastq_file1, fastq_file2, right_bcs_file, first_n=1)
+
+	if many_files:
+		folder1 = '/home/anna/bioinformatics/htses/katya/1/'
+		folder2 = '/home/anna/bioinformatics/htses/katya/2/'
+		files1 = os.listdir(folder1) 
+		files2 = os.listdir(folder2) 
+		fastq_files1 = filter(lambda x: x.endswith('.fastq'), files1) 
+		fastq_files2 = filter(lambda x: x.endswith('.fastq'), files2) 
+
+		process_count = 0
+		max_processes = 24
+
+		for (f1, f2) in zip(fastq_files1, fastq_files2):
+			fastq_file1 = folder1 + f1
+			fastq_file2 = folder2 + f2
+			pid = os.fork()
+			time.sleep(0.1)
+			if pid == 0:
+				print "Process started"
+				sort_records(fastq_file1, fastq_file2, right_bcs_file)
+				print "Process ended"
+				os._exit(0)
+
+			else:
+				process_count += 1
+				if process_count >= max_processes:
+					os.wait()
+					process_count -= 1
+
+		for i in range(process_count):
+			os.wait()
+	return 0
 
 
-right_bcs_file = '/home/anna/bioinformatics/wheat/indexes/right_barcodes.csv'
-
-fastq_file1 = '/home/anna/bioinformatics/htses/ERR015599_1/not_bsc_1.fastq'
-fastq_file2 = '/home/anna/bioinformatics/htses/ERR015599_1/not_bsc_2.fastq'
-# fastq_file1 = '/home/anna/bioinformatics/htses/katya/0sec_ACAGTG_L001_R1_001.fastq'
-# fastq_file2 = '/home/anna/bioinformatics/htses/katya/0sec_ACAGTG_L001_R2_001.fastq'
-sort_fastq(fastq_file1, fastq_file2, right_bcs_file)
-
-
-# folder1 = '/home/anna/bioinformatics/htses/katya/1/'
-# folder2 = '/home/anna/bioinformatics/htses/katya/2/'
-# files1 = os.listdir(folder1) 
-# files2 = os.listdir(folder2) 
-# fastq_files1 = filter(lambda x: x.endswith('.fastq'), files1) 
-# fastq_files2 = filter(lambda x: x.endswith('.fastq'), files2) 
-
-# process_count = 0
-# max_processes = 24
-
-# for (f1, f2) in zip(fastq_files1, fastq_files2):
-# 	fastq_file1 = folder1 + f1
-# 	fastq_file2 = folder2 + f2
-# 	pid = os.fork()
-# 	time.sleep(0.1)
-# 	if pid == 0:
-# 		print "Process started"
-# 		sort_fastq(fastq_file1, fastq_file2, right_bcs_file)
-# 		print "Process ended"
-# 		os._exit(0)
-
-# 	else:
-# 		process_count += 1
-# 		if process_count >= max_processes:
-# 			os.wait()
-# 			process_count -= 1
-
-# for i in range(process_count):
-# 	os.wait()
 
