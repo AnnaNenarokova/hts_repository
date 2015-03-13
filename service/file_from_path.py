@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from ntpath import split
 def file_from_path(path, folder=False):
     head, tail = split(path)
