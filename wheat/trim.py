@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import os
 import time
-from subprocess32 import call
+from subprocess import call
 from ntpath import split
 global THREADS; THREADS = 24
 global cluster; cluster = True
