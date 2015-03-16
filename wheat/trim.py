@@ -81,6 +81,6 @@ if MANY_FILES:
 		os.wait()
 
 else:
-fastq_file1 = ''
-fastq_file2 = ''
-trim (fastq_file1, fastq_file2)
+	fastq_file1 = ''
+	fastq_file2 = ''
+	trim (fastq_file1, fastq_file2)
