@@ -41,7 +41,7 @@ def trim(file_fw, file_rv, outdir=False, trimc_dir=None):
 	trimmomatic = ['java', '-jar', trimc_dir + 'trimmomatic-0.33.jar']
 	trim_options = ['PE', '-phred33', '-threads', str(THREADS), '-trimlog', trimlog, file_fw, file_rv, 
 					paired_out_fw, unpaired_out_fw, paired_out_rv, unpaired_out_rv,
-					'ILLUMINACLIP:'+ adapters_file + ':2:20:10', 'LEADING:3', 'TRAILING:3', 'SLIDINGWINDOW:4:30',
+					'ILLUMINACLIP:'+ adapters_file + ':3:30:10', 'LEADING:3', 'TRAILING:3', 'SLIDINGWINDOW:4:30',
 					'MINLEN:30' ] 
 	trim = trimmomatic + trim_options
 	print ' '.join(trim)
