@@ -49,7 +49,7 @@ def dump(sorted_fastq, not_bsc1, not_bsc2, outdir):
 	with open(out_miss_f2, "a") as handle:
 		SeqIO.write(not_bsc2, handle, "fastq")
 
-def sort_fastq(fastq_file1, fastq_file2, right_bcs_file, dist=0, test=False, first_n=0):
+def sort_nbcs(fastq_file1, fastq_file2, right_bcs_file, dist=0, test=False, first_n=0):
 	outdir = cr_outdir(fastq_file1)
 	right_bcs = read_csv(right_bcs_file)
 
