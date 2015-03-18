@@ -1,4 +1,3 @@
-#!/usr/bin/python
 from subprocess32 import call
 from file_from_path import file_from_path
 file1 = '/home/anna/bioinformatics/outdirs/BL21.fasta'

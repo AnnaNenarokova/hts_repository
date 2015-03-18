@@ -10,8 +10,8 @@ from Bio import SeqIO
 # 	file_fasta = outdir + '/' + f[0:-1] + 'a'
 # 	SeqIO.convert (file_fastq, "fastq", file_fasta, "fasta")
 work_dir = '/media/anna/biodata/htses/'
-f = '/home/anna/bioinformatics/htses/ERR015599_1.fastq'
-f2 = '/home/anna/bioinformatics/htses/ERR015599_1.fasta'
+f = '/home/anna/bioinformatics/wheat/H7_1.fastq'
+f2 = '/home/anna/bioinformatics/wheat/H7_1.fasta'
 # f = 'T4bi_1.fastq'
 # file_fastq = work_dir +  f
 # file_fasta = work_dir +  f[0:-1] + 'a'
