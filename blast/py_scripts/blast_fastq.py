@@ -4,8 +4,10 @@ import time
 from subprocess import call
 from Bio import SeqIO
 from ntpath import split
-global THREADS; THREADS = 8
+global THREADS
 global CLUSTER; CLUSTER = True
+if CLUSTER: THREADS = 24
+else: THREADS = 8
 
 def file_from_path(path, folder=False):
     head, tail = split(path)
@@ -44,7 +46,7 @@ def blast_fastq(query, fastq_file, outdir=False):
 	name1 = file_from_path(query)[0:-6]
 	name2 = file_from_path(fastq_file)[0:-6]
 	outfile = outdir + str(name1 + '_' +  name2) 
-	blastn = ['blastn', '-query', query, '-db', blast_db, '-out', outfile, '-outfmt', '10', '-task', 'blastn-short']
+	blastn = ['blastn', '-query', query, '-db', blast_db, '-out', outfile, '-outfmt', '10', '-task', 'blastn-short', 'num_threads', THREADS]
 	call(blastn)
 	return 0
 
