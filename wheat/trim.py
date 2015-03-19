@@ -25,7 +25,6 @@ def trim(file_fw, file_rv, outdir=False, trimc_dir=None):
 		else: trimc_dir = '/home/anna/bioinformatics/bioprograms/Trimmomatic-0.33/'
 	if not outdir:
 		outdir = cr_outdir(file_fw)
-		print outdir
 	trim_out = outdir + 'trim_out/'
 	if not os.path.exists(trim_out):
 	    os.makedirs(trim_out)
@@ -37,11 +36,12 @@ def trim(file_fw, file_rv, outdir=False, trimc_dir=None):
 	unpaired_out_rv = trim_out + 'unpaired_out_rv' + '.fastq'
 
 	adapters_file = trimc_dir + 'adapters/adapters.fa'
+	# adapters_file = trimc_dir + 'adapters/adapter.fasta'
 
 	trimmomatic = ['java', '-jar', trimc_dir + 'trimmomatic-0.33.jar']
 	trim_options = ['PE', '-phred33', '-threads', str(THREADS), '-trimlog', trimlog, file_fw, file_rv, 
 					paired_out_fw, unpaired_out_fw, paired_out_rv, unpaired_out_rv,
-					'ILLUMINACLIP:'+ adapters_file + ':2:20:10', 'LEADING:3', 'TRAILING:3', 'SLIDINGWINDOW:4:30',
+					'ILLUMINACLIP:'+ adapters_file + ':2:30:10', 'LEADING:3', 'TRAILING:3', 'SLIDINGWINDOW:4:30',
 					'MINLEN:30' ] 
 	trim = trimmomatic + trim_options
 	print ' '.join(trim)
@@ -57,7 +57,6 @@ if MANY_FILES:
 	fastq_files2 = filter(lambda x: x.endswith('2.fastq'), files) 
 
 	process_count = 0
-	max_processes = 24
 
 	for (f1, f2) in zip(fastq_files1, fastq_files2):
 		fastq_file1 = folder + f1
@@ -73,7 +72,7 @@ if MANY_FILES:
 
 		else:
 			process_count += 1
-			if process_count >= max_processes:
+			if process_count >= THREADS:
 				os.wait()
 				process_count -= 1
 
@@ -81,6 +80,32 @@ if MANY_FILES:
 		os.wait()
 
 else:
-	fastq_file1 = '/home/anna/bioinformatics/wheat/A10_1.fastq'
-	fastq_file2 = '/home/anna/bioinformatics/wheat/A10_2.fastq'
-	trim (fastq_file1, fastq_file2)
+	fastq_file1 = '/home/anna/bioinformatics/wheat/H7_1.fastq'
+	fastq_file2 = '/home/anna/bioinformatics/wheat/H7_2.fastq'
+	trim_out = trim(fastq_file1, fastq_file2)
+	if not CLUSTER:
+		fastqc_dir = '/home/anna/bioinformatics/bioprograms/FastQC/'
+	# call([fastqc_dir + './fastqc', fastq_file1])
+	# call([fastqc_dir + './fastqc', fastq_file2])
+	files = os.listdir(trim_out)
+	files = filter(lambda x: x.endswith('.fastq'), files) 
+	process_count = 0
+	for f in files:
+		pid = os.fork()
+		time.sleep(0.1)
+		if pid == 0:
+			print "Process started"
+			fastq_file = trim_out + '/' + f
+			call([fastqc_dir + './fastqc', fastq_file])
+			print "Process ended"
+			os._exit(0)
+
+		else:
+			process_count += 1
+			if process_count >= THREADS:
+				os.wait()
+				process_count -= 1
+
+	for i in range(process_count):
+		os.wait()
+
