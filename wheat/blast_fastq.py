@@ -37,11 +37,10 @@ def makeblastdb(fasta_file, outdir=False):
 	call(makeblastdb)
 	return blast_db
 
-def blast_fastq(query, fastq_file, outdir=False):
+def blast_fastq(query, f, fasta=False, outdir=False):
 	if not outdir:
 		outdir = cr_outdir(fastq_file)
-	fasta_file = convert(fastq_file)
-	print fasta_file
+	if not fasta: fasta_file = convert(fastq_file)
 	blast_db = makeblastdb(fasta_file, outdir)
 	name1 = file_from_path(query)[0:-6]
 	name2 = file_from_path(fastq_file)[0:-6]
