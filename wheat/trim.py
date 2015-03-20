@@ -4,8 +4,9 @@ import time
 from subprocess import call
 from ntpath import split
 global THREADS; THREADS = 8
-global CLUSTER; CLUSTER = False
-global MANY_FILES; MANY_FILES = False
+global CLUSTER; CLUSTER = True
+global MANY_FILES; MANY_FILES = True
+global FASTQC; FASTQC = False
 
 def file_from_path(path, folder=False):
     head, tail = split(path)
@@ -35,13 +36,12 @@ def trim(file_fw, file_rv, outdir=False, trimc_dir=None):
 	paired_out_rv = trim_out + 'paired_out_rv' + '.fastq'
 	unpaired_out_rv = trim_out + 'unpaired_out_rv' + '.fastq'
 
-	adapters_file = trimc_dir + 'adapters/adapters.fa'
-	# adapters_file = trimc_dir + 'adapters/adapter.fasta'
+	adapters_file = trimc_dir + 'adapters/all_trim.fa'
 
 	trimmomatic = ['java', '-jar', trimc_dir + 'trimmomatic-0.33.jar']
 	trim_options = ['PE', '-phred33', '-threads', str(THREADS), '-trimlog', trimlog, file_fw, file_rv, 
 					paired_out_fw, unpaired_out_fw, paired_out_rv, unpaired_out_rv,
-					'ILLUMINACLIP:'+ adapters_file + ':2:30:10', 'LEADING:3', 'TRAILING:3', 'SLIDINGWINDOW:4:30',
+					'ILLUMINACLIP:'+ adapters_file + ':2:30:10', 'LEADING:3', 'TRAILING:3', 'SLIDINGWINDOW:4:20',
 					'MINLEN:30' ] 
 	trim = trimmomatic + trim_options
 	print ' '.join(trim)
@@ -49,8 +49,8 @@ def trim(file_fw, file_rv, outdir=False, trimc_dir=None):
 	return trim_out
 
 if MANY_FILES:
-	if CLUSTER: folder = '/home/nenarokova/wheat/R1/sum_fastq1/'
-	else: folder = '/home/anna/bioinformatics/htses/ERR015599_1/'
+	if CLUSTER: folder = '/home/nenarokova/wheat/R1/sum_fastq/'
+	else: folder = '/home/anna/bioinformatics/htses/ERR015599/'
 
 	files = os.listdir(folder) 
 	fastq_files1 = filter(lambda x: x.endswith('1.fastq'), files) 
@@ -80,32 +80,36 @@ if MANY_FILES:
 		os.wait()
 
 else:
-	fastq_file1 = '/home/anna/bioinformatics/wheat/H7_1.fastq'
-	fastq_file2 = '/home/anna/bioinformatics/wheat/H7_2.fastq'
+	# fastq_file1 = '/home/anna/bioinformatics/wheat/H7_1.fastq'
+	# fastq_file1 = '/home/anna/bioinformatics/wheat/H7_1.fastq'
+	fastq_file1 = '/home/anna/bioinformatics/htses/ERR015599/not_bsc_1/not_bsc_1.fastq'
+	fastq_file2 = '/home/anna/bioinformatics/htses/ERR015599/not_bsc_1/not_bsc_2.fastq'
+
 	trim_out = trim(fastq_file1, fastq_file2)
-	if not CLUSTER:
-		fastqc_dir = '/home/anna/bioinformatics/bioprograms/FastQC/'
-	# call([fastqc_dir + './fastqc', fastq_file1])
-	# call([fastqc_dir + './fastqc', fastq_file2])
-	files = os.listdir(trim_out)
-	files = filter(lambda x: x.endswith('.fastq'), files) 
-	process_count = 0
-	for f in files:
-		pid = os.fork()
-		time.sleep(0.1)
-		if pid == 0:
-			print "Process started"
-			fastq_file = trim_out + '/' + f
-			call([fastqc_dir + './fastqc', fastq_file])
-			print "Process ended"
-			os._exit(0)
+	if FASTQC:
+		if not CLUSTER:
+			fastqc_dir = '/home/anna/bioinformatics/bioprograms/FastQC/'
+		# call([fastqc_dir + './fastqc', fastq_file1])
+		# call([fastqc_dir + './fastqc', fastq_file2])
+		files = os.listdir(trim_out)
+		files = filter(lambda x: x.endswith('.fastq'), files) 
+		process_count = 0
+		for f in files:
+			pid = os.fork()
+			time.sleep(0.1)
+			if pid == 0:
+				print "Process started"
+				fastq_file = trim_out + '/' + f
+				call([fastqc_dir + './fastqc', fastq_file])
+				print "Process ended"
+				os._exit(0)
 
-		else:
-			process_count += 1
-			if process_count >= THREADS:
-				os.wait()
-				process_count -= 1
+			else:
+				process_count += 1
+				if process_count >= THREADS:
+					os.wait()
+					process_count -= 1
 
-	for i in range(process_count):
-		os.wait()
+		for i in range(process_count):
+			os.wait()
 
