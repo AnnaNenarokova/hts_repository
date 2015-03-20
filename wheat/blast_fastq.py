@@ -54,7 +54,7 @@ if not CLUSTER:
 	adapters = '/home/anna/bioinformatics/wheat/adapters.fa'
 	trim_out = '/home/anna/bioinformatics/wheat/H7_1/trim_out/'
 else:
-	fastq_file = '/mnt/lustre/nenarokova/wheat/R1.fasta'
+	fastq_file = '/mnt/lustre/nenarokova/wheat/R1/sum_fastq/not_bsc/not_bsc_1.fastq'
 	adapters = '/mnt/lustre/nenarokova/wheat/universal_adapter.fasta'
 
 blast_fastq(adapters, fastq_file)
