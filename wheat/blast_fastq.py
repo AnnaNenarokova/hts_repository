@@ -56,11 +56,11 @@ if not CLUSTER:
 else:
 	# fastq_file = '/mnt/lustre/nenarokova/wheat/R1/sum_fastq/not_bsc/not_bsc_1.fastq'
 	fastq_file = '/mnt/lustre/nenarokova/wheat/L00000210.BC1D3RACXX.5/L00000210.BC1D3RACXX.5_1/not_bsc/not_bsc_1.fastq'
-	adapters = '/mnt/lustre/nenarokova/wheat/universal_adapter.fasta'
+	adapters = '/mnt/lustre/nenarokova/wheat/wheat_adapter.fasta'
 
 blast_fastq(adapters, fastq_file)
 
-many_files = True
+many_files = False
 if many_files:
 	files = os.listdir(trim_out)
 	files = filter(lambda x: x.endswith('.fastq'), files) 
