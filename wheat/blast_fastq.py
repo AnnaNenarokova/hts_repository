@@ -5,7 +5,7 @@ from subprocess import call
 from Bio import SeqIO
 from ntpath import split
 global THREADS
-global CLUSTER; CLUSTER = True
+global CLUSTER; CLUSTER = False
 if CLUSTER: THREADS = 24
 else: THREADS = 8
 
@@ -16,7 +16,7 @@ def file_from_path(path, folder=False):
 
 def cr_outdir(f, workdir=False):
 	name = file_from_path(f)[0:-6]
-	if workdir: outdir = workdir + name + '/'
+	if workdir: outdir = workdir + name
 	else: outdir = file_from_path(f, folder=True) + '/' + name + '/'
 	if not os.path.exists(outdir): os.makedirs(outdir)
 	return outdir
@@ -44,23 +44,23 @@ def blast_fastq(query, f, fasta=False, outdir=False):
 	blast_db = makeblastdb(fasta_file, outdir)
 	name1 = file_from_path(query)[0:-6]
 	name2 = file_from_path(fastq_file)[0:-6]
-	outfile = outdir + str(name1 + '_' +  name2) 
-	blastn = ['blastn', '-query', query, '-db', blast_db, '-out', outfile, '-outfmt', '10', '-task', 'blastn-short', 'num_threads', THREADS]
+	outfile = outdir + str(name1 + '_' + name2 + '.csv') 
+	blastn = ['blastn', '-query', query, '-db', blast_db, '-out', outfile, '-outfmt', '10', '-task', 'blastn-short', '-num_threads', str(THREADS)]
 	call(blastn)
 	return 0
 
 if not CLUSTER:
 	fastq_file = '/home/anna/bioinformatics/wheat/H7_1.fastq'
-	adapters = '/home/anna/bioinformatics/wheat/adapters.fa'
+	adapters = '/home/anna/bioinformatics/wheat/adapter.fasta'
 	trim_out = '/home/anna/bioinformatics/wheat/H7_1/trim_out/'
 else:
-	# fastq_file = '/mnt/lustre/nenarokova/wheat/R1/sum_fastq/not_bsc/not_bsc_1.fastq'
-	fastq_file = '/mnt/lustre/nenarokova/wheat/L00000210.BC1D3RACXX.5/L00000210.BC1D3RACXX.5_1/not_bsc/not_bsc_1.fastq'
+	fastq_file = '/mnt/lustre/nenarokova/wheat/R1/sum_fastq/not_bsc/not_bsc_1.fastq'
+	# fastq_file = '/mnt/lustre/nenarokova/wheat/L00000210.BC1D3RACXX.5/L00000210.BC1D3RACXX.5_1/not_bsc/not_bsc_1.fastq'
 	adapters = '/mnt/lustre/nenarokova/wheat/universal_adapter.fasta'
 
 blast_fastq(adapters, fastq_file)
 
-many_files = False
+many_files = True
 if many_files:
 	files = os.listdir(trim_out)
 	files = filter(lambda x: x.endswith('.fastq'), files) 
