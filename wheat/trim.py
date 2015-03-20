@@ -49,7 +49,9 @@ def trim(file_fw, file_rv, outdir=False, trimc_dir=None):
 	return trim_out
 
 if MANY_FILES:
-	if CLUSTER: folder = '/home/nenarokova/wheat/R1/sum_fastq/'
+	if CLUSTER: 
+		# folder = '/home/nenarokova/wheat/R1/sum_fastq/'
+		folder = '/home/nenarokova/wheat/L00000210.BC1D3RACXX.5/L00000210.BC1D3RACXX.5_1/'
 	else: folder = '/home/anna/bioinformatics/htses/ERR015599/'
 
 	files = os.listdir(folder) 
