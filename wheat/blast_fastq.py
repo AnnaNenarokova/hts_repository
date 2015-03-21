@@ -5,7 +5,7 @@ from subprocess import call
 from Bio import SeqIO
 from ntpath import split
 global THREADS
-global CLUSTER; CLUSTER = True
+global CLUSTER; CLUSTER = False
 if CLUSTER: THREADS = 24
 else: THREADS = 8
 
@@ -50,12 +50,13 @@ def blast_fastq(query, f, fasta=False, outdir=False):
 	return 0
 
 if not CLUSTER:
-	fastq_file = '/home/anna/bioinformatics/wheat/H7_1.fastq'
+	# fastq_file = '/home/anna/bioinformatics/wheat/H7_1.fastq'
+	fastq_file = '/home/anna/bioinformatics/htses/ERR015599/not_bsc_1/not_bsc_1.fastq'
 	adapters = '/home/anna/bioinformatics/wheat/adapter.fasta'
-	trim_out = '/home/anna/bioinformatics/wheat/H7_1/trim_out/'
+	# trim_out = '/home/anna/bioinformatics/wheat/H7_1/trim_out/'
 else:
-	# fastq_file = '/mnt/lustre/nenarokova/wheat/R1/sum_fastq/not_bsc/not_bsc_1.fastq'
-	fastq_file = '/mnt/lustre/nenarokova/wheat/L00000210.BC1D3RACXX.5/L00000210.BC1D3RACXX.5_1/not_bsc/not_bsc_1.fastq'
+	fastq_file = '/mnt/lustre/nenarokova/wheat/R1/sum_fastq/not_bsc/not_bsc_1.fastq'
+	# fastq_file = '/mnt/lustre/nenarokova/wheat/L00000210.BC1D3RACXX.5/L00000210.BC1D3RACXX.5_1/not_bsc/not_bsc_1.fastq'
 	adapters = '/mnt/lustre/nenarokova/wheat/wheat_adapter.fasta'
 
 blast_fastq(adapters, fastq_file)
