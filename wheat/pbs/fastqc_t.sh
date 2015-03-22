@@ -11,7 +11,7 @@ fastq_dir='/home/nenarokova/wheat/L00000210.BC1D3RACXX.5/L00000210.BC1D3RACXX.5_
 
 for folder in $fastq_dir*/
 do 
-	for f in $folder*.fastq
+	for f in $folder/trim_out/*.fastq
 		do
 			./fastqc $f &
 		done
