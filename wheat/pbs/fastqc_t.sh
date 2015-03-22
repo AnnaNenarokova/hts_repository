@@ -10,7 +10,6 @@ fastq_dir='/home/nenarokova/wheat/R1/sum_fastq/'
 
 for folder in $fastq_dir*/
 do 
-	cd folder
 	for f in $fastq_dir$folder*.fastq
 		do
 			./fastqc $f &
