@@ -49,7 +49,7 @@ def trim(file_fw, file_rv, outdir=False, trimc_dir=None):
 	call(trim)
 
 	if FASTQC:
-		if CLUSTER:  fastqc_dir = ''
+		if CLUSTER:  fastqc_dir = '/home/nenarokova/FastQC'
 		else: fastqc_dir = '/home/anna/bioinformatics/bioprograms/FastQC/'
 		fastqc = fastqc_dir + './fastqc'
 		call([fastqc, fastq_file1])
