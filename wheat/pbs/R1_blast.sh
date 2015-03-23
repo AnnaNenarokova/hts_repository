@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -l nodes=1:ppn=24
+#PBS -l nodes=1:ppn=5
 #PBS -l walltime=100:00:00
 #PBS -l mem=10gb
 adapter='/mnt/lustre/nenarokova/ngs/wheat/right_barcodes.fasta'
