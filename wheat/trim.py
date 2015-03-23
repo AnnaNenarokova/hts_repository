@@ -37,7 +37,9 @@ def trim(file_fw, file_rv, outdir=False, trimc_dir=None):
 	paired_out_rv = trim_out + 'paired_out_rv' + '.fastq'
 	unpaired_out_rv = trim_out + 'unpaired_out_rv' + '.fastq'
 
-	adapters_file = trimc_dir + 'adapters/TruSeq2-PE.fa'
+	# adapters_file = trimc_dir + 'adapters/TruSeq2-PE.fa'
+	adapters_file = trimc_dir + 'adapters/all_trim.fa'
+
 
 	trimmomatic = ['java', '-jar', trimc_dir + 'trimmomatic-0.33.jar']
 	trim_options = ['PE', '-phred33', '-threads', str(THREADS), '-trimlog', trimlog, file_fw, file_rv, 
@@ -49,7 +51,7 @@ def trim(file_fw, file_rv, outdir=False, trimc_dir=None):
 	call(trim)
 
 	if FASTQC:
-		if CLUSTER:  fastqc_dir = '/home/nenarokova/FastQC'
+		if CLUSTER:  fastqc_dir = '/home/nenarokova/FastQC/'
 		else: fastqc_dir = '/home/anna/bioinformatics/bioprograms/FastQC/'
 		fastqc = fastqc_dir + './fastqc'
 		call([fastqc, fastq_file1])
@@ -64,8 +66,8 @@ def trim(file_fw, file_rv, outdir=False, trimc_dir=None):
 
 if MANY_FILES:
 	if CLUSTER: 
-		folder = '/home/nenarokova/wheat/R1/sum_fastq/'
-		# folder = '/home/nenarokova/wheat/L00000210.BC1D3RACXX.5/L00000210.BC1D3RACXX.5_1/'
+		# folder = '/home/nenarokova/wheat/R1/sum_fastq/'
+		folder = '/home/nenarokova/wheat/L00000210.BC1D3RACXX.5/L00000210.BC1D3RACXX.5_1/'
 	else:
 		# folder = '/home/anna/bioinformatics/htses/ERR015599/'
 		folder = '/home/anna/bioinformatics/htses/katya/'	
@@ -95,8 +97,8 @@ if MANY_FILES:
 		os.wait()
 
 else:
-	fastq_file1 = '/home/anna/bioinformatics/wheat/A10_1.fastq'
-	fastq_file2 = '/home/anna/bioinformatics/wheat/A10_2.fastq'
+	fastq_file1 = '/home/anna/bioinformatics/wheat/L_H8_1.fastq'
+	fastq_file2 = '/home/anna/bioinformatics/wheat/L_H8_2.fastq'
 	# fastq_file1 = '/home/anna/bioinformatics/htses/ERR015599/not_bsc_1/not_bsc_1.fastq'
 	# fastq_file2 = '/home/anna/bioinformatics/htses/ERR015599/not_bsc_1/not_bsc_2.fastq'
 	trim(fastq_file1, fastq_file2)
