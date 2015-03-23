@@ -1,7 +1,7 @@
 #!/bin/bash
 #PBS -l nodes=1:ppn=24
 #PBS -l walltime=100:00:00
-#PBS -l mem=48gb
+#PBS -l mem=10gb
 adapter='/mnt/lustre/nenarokova/ngs/wheat/right_barcodes.fasta'
 outfile='/mnt/lustre/nenarokova/wheat/R1_not_bc_right_bsc.csv'
 blast_db='/mnt/lustre/nenarokova/wheat/R1_not_bsc_bl_db/R1_not_bsc_1.db'
