@@ -6,8 +6,8 @@
 dir_fastqc='/mnt/lustre/nenarokova/FastQC/'
 cd $dir_fastqc
 
-fastq_dir='/home/nenarokova/wheat/R1/sum_fastq/'
-# fastq_dir='/home/nenarokova/wheat/L00000210.BC1D3RACXX.5/L00000210.BC1D3RACXX.5_1/'
+# fastq_dir='/home/nenarokova/wheat/R1/sum_fastq/'
+fastq_dir='/home/nenarokova/wheat/L00000210.BC1D3RACXX.5/L00000210.BC1D3RACXX.5_1/'
 
 for folder in $fastq_dir*/
 do 

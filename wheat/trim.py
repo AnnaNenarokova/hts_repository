@@ -31,7 +31,7 @@ def trim(file_fw, file_rv, outdir=False, trimc_dir=None):
 	if not os.path.exists(trim_out):
 	    os.makedirs(trim_out)
 
-	trimlog = trim_out +'trimlog'
+	# trimlog = trim_out +'trimlog'
 	paired_out_fw = trim_out + 'paired_out_fw' + '.fastq'
 	unpaired_out_fw = trim_out + 'unpaired_out_fw' + '.fastq'
 	paired_out_rv = trim_out + 'paired_out_rv' + '.fastq'
@@ -42,7 +42,7 @@ def trim(file_fw, file_rv, outdir=False, trimc_dir=None):
 
 
 	trimmomatic = ['java', '-jar', trimc_dir + 'trimmomatic-0.33.jar']
-	trim_options = ['PE', '-phred33', '-threads', str(THREADS), '-trimlog', trimlog, file_fw, file_rv, 
+	trim_options = ['PE', '-phred33', '-threads', str(THREADS), file_fw, file_rv, 
 					paired_out_fw, unpaired_out_fw, paired_out_rv, unpaired_out_rv,
 					'ILLUMINACLIP:'+ adapters_file + ':2:30:10', 'LEADING:3', 'TRAILING:3', 'SLIDINGWINDOW:4:20',
 					'MINLEN:30' ] 
