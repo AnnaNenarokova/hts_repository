@@ -3,13 +3,13 @@ import os
 import time
 from subprocess import call
 from ntpath import split
-global CLUSTER; CLUSTER = False
+global CLUSTER; CLUSTER = True
 if CLUSTER: 
 	THREADS = 24
 	global R1_2; R1_2 = True
 else: 
 	THREADS = 8
-global MANY_FILES; MANY_FILES = True
+	global MANY_FILES; MANY_FILES = True
 global FASTQC; FASTQC = True
 
 def file_from_path(path, folder=False):
