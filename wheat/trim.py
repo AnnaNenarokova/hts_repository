@@ -73,7 +73,7 @@ if MANY_FILES:
 	else:
 		# folder = '/home/anna/bioinformatics/htses/ERR015599/'
 		folder = '/home/anna/bioinformatics/htses/katya/'	
-	# files = os.listdir(folder) 
+	files = os.listdir(folder) 
 	fastq_files1 = filter(lambda x: x.endswith('1.fastq'), files) 
 	fastq_files2 = filter(lambda x: x.endswith('2.fastq'), files) 
 
