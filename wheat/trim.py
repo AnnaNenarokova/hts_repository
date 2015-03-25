@@ -3,9 +3,12 @@ import os
 import time
 from subprocess import call
 from ntpath import split
-global CLUSTER; CLUSTER = True
-if CLUSTER: THREADS = 24
-else: THREADS = 8
+global CLUSTER; CLUSTER = False
+if CLUSTER: 
+	THREADS = 24
+	global R1_2; R1_2 = True
+else: 
+	THREADS = 8
 global MANY_FILES; MANY_FILES = True
 global FASTQC; FASTQC = True
 
@@ -31,14 +34,13 @@ def trim(file_fw, file_rv, outdir=False, trimc_dir=None):
 	if not os.path.exists(trim_out):
 	    os.makedirs(trim_out)
 
-	# trimlog = trim_out +'trimlog'
 	paired_out_fw = trim_out + 'paired_out_fw' + '.fastq'
 	unpaired_out_fw = trim_out + 'unpaired_out_fw' + '.fastq'
 	paired_out_rv = trim_out + 'paired_out_rv' + '.fastq'
 	unpaired_out_rv = trim_out + 'unpaired_out_rv' + '.fastq'
 
-	# adapters_file = trimc_dir + 'adapters/TruSeq2-PE.fa'
-	adapters_file = trimc_dir + 'adapters/all_trim.fa'
+	if R1_2: adapters_file = trimc_dir + 'adapters/TruSeq2-PE.fa'
+	else: adapters_file = trimc_dir + 'adapters/all_trim.fa'
 
 
 	trimmomatic = ['java', '-jar', trimc_dir + 'trimmomatic-0.33.jar']
@@ -66,8 +68,8 @@ def trim(file_fw, file_rv, outdir=False, trimc_dir=None):
 
 if MANY_FILES:
 	if CLUSTER: 
-		# folder = '/home/nenarokova/wheat/R1/sum_fastq/'
-		folder = '/home/nenarokova/wheat/L00000210.BC1D3RACXX.5/L00000210.BC1D3RACXX.5_1/'
+		if R1_2: folder = '/home/nenarokova/wheat/R1/sum_fastq/'
+		else: folder = '/home/nenarokova/wheat/L00000210.BC1D3RACXX.5/L00000210.BC1D3RACXX.5_1/'
 	else:
 		# folder = '/home/anna/bioinformatics/htses/ERR015599/'
 		folder = '/home/anna/bioinformatics/htses/katya/'	
