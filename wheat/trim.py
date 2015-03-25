@@ -6,7 +6,8 @@ from ntpath import split
 global CLUSTER; CLUSTER = True
 if CLUSTER: 
 	THREADS = 24
-	global R1_2; R1_2 = True
+	THREADS = 5
+	global R1_2; R1_2 = False
 else: 
 	THREADS = 8
 	global MANY_FILES; MANY_FILES = True
@@ -73,9 +74,11 @@ if MANY_FILES:
 	else:
 		# folder = '/home/anna/bioinformatics/htses/ERR015599/'
 		folder = '/home/anna/bioinformatics/htses/katya/'	
-	files = os.listdir(folder) 
-	fastq_files1 = filter(lambda x: x.endswith('1.fastq'), files) 
-	fastq_files2 = filter(lambda x: x.endswith('2.fastq'), files) 
+	# files = os.listdir(folder) 
+	# fastq_files1 = filter(lambda x: x.endswith('1.fastq'), files) 
+	# fastq_files2 = filter(lambda x: x.endswith('2.fastq'), files) 
+	fastq_files1 = ['B5_1.fastq', 'D1_1.fastq', 'D2_1.fastq', 'F8_1.fastq', 'H9_1.fastq']
+	fastq_files2 = ['B5_2.fastq', 'D1_2.fastq', 'D2_2.fastq', 'F8_2.fastq', 'H9_2.fastq']
 
 	process_count = 0
 
