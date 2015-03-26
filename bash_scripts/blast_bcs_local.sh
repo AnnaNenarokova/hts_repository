@@ -1,7 +1,7 @@
-adapter='/home/anna/bioinformatics/ngs/wheat/right_barcodes_adaptered.fasta'
+# adapter='/home/anna/bioinformatics/ngs/wheat/not_code/NBS_primers.fasta'
 # adapter='/home/anna/bioinformatics/wheat/adapter.fasta'
 # adapter='/home/anna/bioinformatics/wheat/wheat_adapter.fasta'
-# adapter='/home/anna/bioinformatics/htses/pT7blue-G8esc_rev.fasta'
+adapter='/home/anna/bioinformatics/htses/pT7blue-G8esc_rev.fasta'
 # adapter='/home/anna/bioinformatics/bioprograms/Trimmomatic-0.33/adapters/TruSeq2-PE.fa'
 
 outfile='/home/anna/bioinformatics/htses/ERR015599/not_bsc_1/not_bcs_right_bcs.csv'
