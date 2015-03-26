@@ -15,6 +15,5 @@ def find_ambiguos(pattern, seq):
 	'I': ['A', 'C', 'G', 'T']
 	}	
 	
-	while:
-		for s in patter
+	while end < len(seq)
 
