@@ -10,6 +10,7 @@ do
 	cd $d
 	for f in *.fastq
 	do
+		touch ../sum_fastq_re/$f
 		cat $f >> ../sum_fastq_re/$f
 	done
 	cd ../
