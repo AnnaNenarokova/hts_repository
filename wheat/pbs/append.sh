@@ -10,7 +10,7 @@ do
 	cd $d
 	for f in *.fastq
 	do
-		cat $f >> ../sum_fastq/$f
+		cat $f >> ../sum_fastq_re/$f
 	done
 	cd ../
 done
