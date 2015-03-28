@@ -11,6 +11,7 @@ else:
 	THREADS = 8
 global MANY_FILES; MANY_FILES = True
 global FASTQC; FASTQC = True
+global R1_2; R1_2 = True
 
 def file_from_path(path, folder=False):
     head, tail = split(path)
@@ -68,7 +69,7 @@ def trim(file_fw, file_rv, outdir=False, trimc_dir=None):
 
 if MANY_FILES:
 	if CLUSTER: 
-		if R1_2: folder = '/home/nenarokova/wheat/R1_2/R1/sum_fastq/'
+		if R1_2: folder = '/home/nenarokova/wheat/R1_2/R1/sum_fastq_re/'
 		else: folder = '/home/nenarokova/wheat/L00000210.BC1D3RACXX.5/L00000210.BC1D3RACXX.5_1/'
 	else:
 		# folder = '/home/anna/bioinformatics/htses/ERR015599/'
