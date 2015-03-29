@@ -89,7 +89,7 @@ def sort_fastq(fastq_file1, fastq_file2, right_bcs_file):
 
 right_bcs_file = '/home/nenarokova/wheat/right_barcodes.csv'
 
-fastq_file1 = '/mnt/lustre/nenarokova/wheat/L00000210.BC1D3RACXX.5/L00000210.BC1D3RACXX.5_1.fastq'
-fastq_file2 = '/mnt/lustre/nenarokova/wheat/L00000210.BC1D3RACXX.5/L00000210.BC1D3RACXX.5_2.fastq'
+fastq_file1 = '/mnt/results/nenarokova/wheat/L/L00000210.BC1D3RACXX.5_1.fastq'
+fastq_file2 = '/mnt/results/nenarokova/wheat/L/L00000210.BC1D3RACXX.5_2.fastq'
 
 sort_fastq(fastq_file1, fastq_file2, right_bcs_file)
