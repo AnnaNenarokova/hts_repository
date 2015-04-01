@@ -3,7 +3,7 @@
 fastq_dir='/home/nenarokova/wheat/R1_2/sum_fastq_re/sorted/'
 cd $fastq_dir
 folder=`ls -1 | tail -n $PBS_ARRAYID | head -1`
-cd folder
+cd $folder
 mkdir trim_out
 trimc_dir='/home/nenarokova/Trimmomatic-0.33'
 trimc='trimmomatic-0.33.jar'
