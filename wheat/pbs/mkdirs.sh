@@ -5,12 +5,12 @@
 dir='/home/nenarokova/wheat/R1_2/sum_fastq_re/'
 cd $dir
 
-for f in *1.fastq
+for f in *_1.fastq
 do 
-	cur_dir=${f::-7}
+	cur_dir=${f%%_[12].fastq}
 	mkdir $cur_dir
 	mv $f $cur_dir
 	f2=$cur_dir
-	f2+='2.fastq'
+	f2+='_2.fastq'
 	mv $f2 $cur_dir
 done
