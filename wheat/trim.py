@@ -71,7 +71,6 @@ if MANY_FILES:
 		if R1_2: folder = '/home/nenarokova/wheat/R1_2/R1/sum_fastq/fastq/not_trimmed/'
 		else: folder = '/home/nenarokova/wheat/L00000210.BC1D3RACXX.5/L00000210.BC1D3RACXX.5_1/'
 	else:
-		# folder = '/home/anna/bioinformatics/htses/ERR015599/'
 		folder = '/home/anna/bioinformatics/htses/katya/'	
 	files = os.listdir(folder) 
 
@@ -102,7 +101,5 @@ if MANY_FILES:
 else:
 	fastq_file1 = '/mnt/results/nenarokova/wheat/L/L00000210.BC1D3RACXX.5_1/G4/G4_1.fastq'
 	fastq_file2 = '/mnt/results/nenarokova/wheat/L/L00000210.BC1D3RACXX.5_1/G4/G4_2.fastq'
-	# fastq_file1 = '/home/anna/bioinformatics/htses/ERR015599/not_bsc_1/not_bsc_1.fastq'
-	# fastq_file2 = '/home/anna/bioinformatics/htses/ERR015599/not_bsc_1/not_bsc_2.fastq'
 	trim(fastq_file1, fastq_file2)
 	
