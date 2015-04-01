@@ -4,19 +4,18 @@ trimc_dir='/home/nenarokova/Trimmomatic-0.33'
 cd /home/anna/bioinformatics/htses/katya/
 mkdir trim_out
 
-fastq_dir='/home/nenarokova/wheat/R1_2/R1/sum_fastq_re/R1/'
+fastq_dir='/home/nenarokova/wheat/R1_2/sum_fastq_re/sorted/'
 cd $fastq_dir
-file_fw=`ls -1 | tail -n $PBS_ARRAYID | head -1`
+folder=`ls -1 | tail -n $PBS_ARRAYID | head -1`
+cd folder
 mkdir trim_out
 trimc_dir='/home/nenarokova/Trimmomatic-0.33'
 trimc='trimmomatic-0.33.jar'
-
-
 adapters_folder='adapters/TruSeq2-PE.fa'
 # adapters_folder='adapters/all_trim.fa'
 adapters=$trimc_dir$adapters_folder
-file_fw='0sec_ACAGTG_L001_R1.fastq'
-file_rv='0sec_ACAGTG_L001_R2.fastq'
+file_fw=$folder'_1.fastq'
+file_rv=$folder'_2.fastq'
 trim='java -jar ' 
 trim+=$trimc_dir$trimc
 illumina_clip='ILLUMINACLIP:'
