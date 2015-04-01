@@ -6,10 +6,10 @@ from ntpath import split
 global CLUSTER; CLUSTER = True
 if CLUSTER: 
 	THREADS = 24
-	global R1_2; R1_2 = True
+	global R1_2; R1_2 = False
 else: 
 	THREADS = 8
-global MANY_FILES; MANY_FILES = True
+global MANY_FILES; MANY_FILES = False
 global FASTQC; FASTQC = True
 
 def file_from_path(path, folder=False):
@@ -100,8 +100,8 @@ if MANY_FILES:
 		os.wait()
 
 else:
-	fastq_file1 = '/mnt/results/nenarokova/wheat/L/L00000210.BC1D3RACXX.5_1/E6/E6_1.fastq'
-	fastq_file2 = '/mnt/results/nenarokova/wheat/L/L00000210.BC1D3RACXX.5_1/E6/E6_2.fastq'
+	fastq_file1 = '/mnt/results/nenarokova/wheat/L/L00000210.BC1D3RACXX.5_1/G4/G4_1.fastq'
+	fastq_file2 = '/mnt/results/nenarokova/wheat/L/L00000210.BC1D3RACXX.5_1/G4/G4_2.fastq'
 	# fastq_file1 = '/home/anna/bioinformatics/htses/ERR015599/not_bsc_1/not_bsc_1.fastq'
 	# fastq_file2 = '/home/anna/bioinformatics/htses/ERR015599/not_bsc_1/not_bsc_2.fastq'
 	trim(fastq_file1, fastq_file2)
