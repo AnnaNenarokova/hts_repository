@@ -1,9 +1,5 @@
 #!/bin/bash
 #PBS -l walltime=100:00:00
-trimc_dir='/home/nenarokova/Trimmomatic-0.33'
-cd /home/anna/bioinformatics/htses/katya/
-mkdir trim_out
-
 fastq_dir='/home/nenarokova/wheat/R1_2/sum_fastq_re/sorted/'
 cd $fastq_dir
 folder=`ls -1 | tail -n $PBS_ARRAYID | head -1`
