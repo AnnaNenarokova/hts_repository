@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -l select=1:ncpus=1:mem=5gb
+#PBS -l select=1:ncpus=1:mem=15gb
 #PBS -l walltime=1000:00:00
 head_folder='/home/nenarokova/wheat/L00000210.BC1D3RACXX.5/L00000210.BC1D3RACXX.5_1/sorted/'
 bt2_base='/mnt/lustre/nenarokova/wheat/wheat_bowtie2_index/wheat'
