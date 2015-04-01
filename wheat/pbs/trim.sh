@@ -5,7 +5,7 @@ cd $fastq_dir
 folder=`ls -1 | tail -n $PBS_ARRAYID | head -1`
 cd $folder
 mkdir trim_out
-trimc_dir='/home/nenarokova/Trimmomatic-0.33'
+trimc_dir='/home/nenarokova/Trimmomatic-0.33/'
 trimc='trimmomatic-0.33.jar'
 adapters_folder='adapters/TruSeq2-PE.fa'
 # adapters_folder='adapters/all_trim.fa'
