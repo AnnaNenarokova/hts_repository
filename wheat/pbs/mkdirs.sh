@@ -2,7 +2,7 @@
 #PBS -l nodes=1:ppn=1
 #PBS -l walltime=100:00:00
 
-dir='/home/anna/bioinformatics/htses/dasha/'
+dir='/home/nenarokova/wheat/R1_2/sum_fastq_re/'
 cd $dir
 
 for f in *1.fastq
