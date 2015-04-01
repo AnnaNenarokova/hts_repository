@@ -69,12 +69,13 @@ def trim(file_fw, file_rv, outdir=False, trimc_dir=None):
 
 if MANY_FILES:
 	if CLUSTER: 
-		if R1_2: folder = '/home/nenarokova/wheat/R1_2/R1/sum_fastq_re/'
+		if R1_2: folder = '/home/nenarokova/wheat/R1_2/R1/sum_fastq/fastq/not_trimmed/'
 		else: folder = '/home/nenarokova/wheat/L00000210.BC1D3RACXX.5/L00000210.BC1D3RACXX.5_1/'
 	else:
 		# folder = '/home/anna/bioinformatics/htses/ERR015599/'
 		folder = '/home/anna/bioinformatics/htses/katya/'	
 	files = os.listdir(folder) 
+
 	fastq_files1 = filter(lambda x: x.endswith('1.fastq'), files) 
 	fastq_files2 = filter(lambda x: x.endswith('2.fastq'), files) 
 
