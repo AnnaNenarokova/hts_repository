@@ -11,7 +11,6 @@ else:
 	THREADS = 8
 global MANY_FILES; MANY_FILES = True
 global FASTQC; FASTQC = True
-global R1_2; R1_2 = True
 
 def file_from_path(path, folder=False):
     head, tail = split(path)
