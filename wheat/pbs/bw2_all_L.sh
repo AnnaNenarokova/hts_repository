@@ -8,4 +8,4 @@ folder=`ls -1 | tail -n $PBS_ARRAYID | head -1`
 cd $folder
 cd trim_out
 pwd
-bowtie2 --local --very-fast-local -p 1 --reorder -a -x $bt2_base -1 paired_out_fw.fastq -2 paired_out_rv.fastq -U unpaired_out_fw.fastq,unpaired_out_rv.fastq -S ../wheat_alignment.sam
+bowtie2 --local --very-sensitive-local -p 1 --reorder -a -x $bt2_base -1 paired_out_fw.fastq -2 paired_out_rv.fastq -U unpaired_out_fw.fastq,unpaired_out_rv.fastq -S ../wheat_alignment.sam
