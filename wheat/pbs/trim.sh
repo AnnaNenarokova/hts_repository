@@ -1,7 +1,8 @@
 #!/bin/bash
 #PBS -l walltime=100:00:00
 
-fastq_dir='/home/nenarokova/wheat/R1_2/sum_fastq_re/sorted/'
+# fastq_dir='/home/nenarokova/wheat/R1_2/sum_fastq_re/sorted/'
+fastq_dir='/home/nenarokova/wheat/R1_2/sum_fastq_re/sorted/not_trimmed/'
 # fastq_dir='/mnt/results/nenarokova/wheat/L/L00000210.BC1D3RACXX.5_1/sorted/'
 adapters=$trimc_dir'adapters/TruSeq2-PE.fa'
 # adapters=$trimc_dir'adapters/all_trim.fa'
