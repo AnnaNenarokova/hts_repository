@@ -12,6 +12,8 @@ fastqc='/mnt/lustre/nenarokova/FastQC/fastqc'
 cd $folder
 $fastqc $folder'_1.fastq'
 $fastqc $folder'_2.fastq'
+rm -r fastqc_reports
+rm fastqc_reports.tar
 mkdir fastqc_reports
 mv *.zip fastqc_reports
 mv *.html fastqc_reports
