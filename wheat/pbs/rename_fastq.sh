@@ -7,10 +7,10 @@ cd $dir
 for folder in */
 do 
 	cd $folder'trim_out/'
-	for f in *aired_out*
+	for f in *paired_out*
 	do
-		echo $f
-		# mv $f $f'.fastq'
+		# echo $f
+		mv $f $f'.fastq'
 	done
 	cd ../../
 done
