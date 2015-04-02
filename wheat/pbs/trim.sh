@@ -2,7 +2,8 @@
 #PBS -l walltime=100:00:00
 
 # fastq_dir='/home/nenarokova/wheat/R1_2/sum_fastq_re/sorted/'
-fastq_dir='/home/nenarokova/wheat/R1_2/sum_fastq_re/sorted/not_trimmed/'
+# fastq_dir='/home/nenarokova/wheat/R1_2/sum_fastq_re/sorted/not_trimmed/'
+fastq_dir='/mnt/results/nenarokova/wheat/L/L00000210.BC1D3RACXX.5_1/sorted/not_trimmed/'
 # fastq_dir='/mnt/results/nenarokova/wheat/L/L00000210.BC1D3RACXX.5_1/sorted/'
 
 trimc_dir='/home/nenarokova/Trimmomatic-0.33/'
