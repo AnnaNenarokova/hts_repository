@@ -18,7 +18,7 @@ tar -cvf fastqc_reports.tar fastqc_reports
 cd trim_out
 for f in *paired_out*
 do
-    ./fastqc $f &
+    $fastqc $f &
 done
 wait
 
