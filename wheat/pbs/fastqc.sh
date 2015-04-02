@@ -19,7 +19,7 @@ mv *.zip fastqc_reports
 mv *.html fastqc_reports
 tar -cvf fastqc_reports.tar fastqc_reports
 cd trim_out
-for f in *paired_out*
+for f in *paired_out*.fastq
 do
     $fastqc $f &
 done
