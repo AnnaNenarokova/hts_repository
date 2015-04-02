@@ -1,6 +1,7 @@
 #!/bin/bash
-#PBS -l select=1:ncpus=1:mem=15gb
 #PBS -l walltime=1000:00:00
+#PBS -l mem=24Gb
+#PBS -l nodes=1:ppn=12
 head_folder='/home/nenarokova/wheat/R1_2/sum_fastq_re/sorted/'
 bt2_base='/mnt/lustre/nenarokova/wheat/wheat_bowtie2_index/wheat'
 cd $head_folder
