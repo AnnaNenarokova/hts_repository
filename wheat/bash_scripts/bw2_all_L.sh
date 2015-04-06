@@ -2,6 +2,7 @@
 #PBS -l walltime=1000:00:00
 #PBS -l mem=24Gb
 #PBS -l nodes=1:ppn=12
+
 head_folder='/mnt/results/nenarokova/wheat/L/L00000210.BC1D3RACXX.5_1/sorted/'
 bt2_base='/mnt/lustre/nenarokova/wheat/wheat_bowtie2_index/wheat'
 cd $head_folder
