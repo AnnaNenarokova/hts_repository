@@ -27,8 +27,8 @@ def find_barcodes(seq, barcodes):
 	return right_barcode
 
 if CLUSTER: 
-	# fastq_file = '/mnt/results/nenarokova/wheat/L/L00000210.BC1D3RACXX.5_1/not_bcs/not_bcs_1.fastq'
-	fastq_file = '/mnt/lustre/nenarokova/wheat/R1_2/sum_fastq_re/not_bsc/not_bsc_1.fastq'
+	fastq_file = '/mnt/results/nenarokova/wheat/L/L00000210.BC1D3RACXX.5_1/not_bcs/not_bcs_1.fastq'
+	# fastq_file = '/mnt/lustre/nenarokova/wheat/R1_2/sum_fastq_re/not_bsc/not_bsc_1.fastq'
 	barcodes_file = '/mnt/lustre/nenarokova/wheat/right_barcodes.csv'
 else: 
 	fastq_file = '/home/anna/bioinformatics/wheat/L_H8_1/trim_out/unpaired_out_rv.fastq'
