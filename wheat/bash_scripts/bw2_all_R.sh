@@ -4,7 +4,7 @@
 #PBS -l nodes=1:ppn=24
 
 head_folder='/home/nenarokova/wheat/R1_2/sum_fastq_re/sorted/'
-bt2_base='/mnt/lustre/nenarokova/wheat/wheat_bowtie2_index/wheat'
+bt2_base='/home/nenarokova/wheat/wheat_bw2_base_v2.2/wheat'
 cd $head_folder
 folder=`ls -1 | tail -n $PBS_ARRAYID | head -1`
 cd $folder
