@@ -1,5 +1,5 @@
 #!/bin/bash
 #PBS -l nodes=1:ppn=1
 #PBS -l walltime=100:00:00
-cd /home/nenarokova/wheat/wheat_bowtie2_index/
-bowtie2-build /mnt/lustre/nenarokova/wheat/wheat_scaffolds.fasta wheat
+cd /home/nenarokova/wheat/wheat_bw2_base_v2.2/
+bowtie2-build /mnt/lustre/nenarokova/wheat/Taestivum_296_v2.2.protein_primaryTranscriptOnly.fa wheat
