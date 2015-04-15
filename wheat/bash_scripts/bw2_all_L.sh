@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -l walltime=100:00:00
-#PBS -l mem=15Gb
+#PBS -l mem=2Gb
 #PBS -l nodes=1:ppn=1
 
 head_folder='/mnt/results/nenarokova/wheat/L/L00000210.BC1D3RACXX.5_1/sorted/1/'
