@@ -3,7 +3,7 @@
 #PBS -l mem=2Gb
 #PBS -l nodes=1:ppn=1
 
-head_folder='/home/nenarokova/wheat/R1_2/sum_fastq_re/sorted/1/'
+head_folder='/home/nenarokova/wheat/R1_2/sum_fastq_re/sorted/'
 bt2_base='/home/nenarokova/wheat/bw2_base_v2.2_transcripts/wheat'
 cd $head_folder
 folder=`ls -1 | tail -n $PBS_ARRAYID | head -1`
