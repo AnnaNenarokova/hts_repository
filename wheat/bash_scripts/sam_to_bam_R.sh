@@ -1,6 +1,5 @@
 #!/bin/bash
 #PBS -l walltime=100:00:00
-#PBS -l mem=15Gb
 #PBS -l nodes=1:ppn=1
 
 head_folder='/home/nenarokova/wheat/R1_2/sum_fastq_re/sorted/'
@@ -12,7 +11,7 @@ for f in *.sam
 		echo $f
 		bamfile=$f'.bam'
 		samtools view -bS $f > $bamfile
-		samtools sort $bamfile $f_sorted
+		samtools sort $bamfile $f'_sorted'
 		sorted_bam=$f'_sorted.bam'
-		samtools index $sorted_bam $f_sorted.bam.bai
+		samtools index $sorted_bam $f'_sorted.bam.bai'
 	done
