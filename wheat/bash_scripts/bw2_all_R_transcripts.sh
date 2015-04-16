@@ -9,4 +9,4 @@ cd $head_folder
 folder=`ls -1 | tail -n $PBS_ARRAYID | head -1`
 cd $folder
 cd trim_out
-bowtie2 --very-sensitive-local -p 1  --ma 1 --mp 0,0 --rdg 0,0 --rfg 0,0 --score-min L,0,0.85 --reorder -x $bt2_base -1 paired_out_fw.fastq -2 paired_out_rv.fastq -U unpaired_out_fw.fastq,unpaired_out_rv.fastq -S ../wheat_alignment_transcripts_strict.sam
+bowtie2 --very-sensitive-local -p 12  --ma 1 --mp 0,0 --rdg 0,0 --rfg 0,0 --score-min L,0,0.85 --reorder -x $bt2_base -1 paired_out_fw.fastq -2 paired_out_rv.fastq -U unpaired_out_fw.fastq,unpaired_out_rv.fastq -S ../wheat_alignment_transcripts_strict.sam
