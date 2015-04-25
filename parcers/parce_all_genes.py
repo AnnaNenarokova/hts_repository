@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from Bio import SeqIO
 def find_genes(record, outdir):
 	seq = record.seq
