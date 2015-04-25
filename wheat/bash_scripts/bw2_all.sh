@@ -3,8 +3,8 @@
 #PBS -l mem=2Gb
 #PBS -l nodes=1:ppn=1
 
-head_folder='/mnt/results/nenarokova/wheat/R/sum_fastq_re/sorted/'
-bt2_base='/home/nenarokova/wheat/NBS_LRR_wheat_genes/NBS_LRR_wheat_genes'
+head_folder='/mnt/results/nenarokova/wheat/L/sum_fastq_re/sorted/'
+bt2_base='/home/nenarokova/wheat/bw2_bases/NBS_LRR_wheat_genes/NBS_LRR_wheat_genes'
 cd $head_folder
 folder=`ls -1 | tail -n $PBS_ARRAYID | head -1`
 cd $folder
