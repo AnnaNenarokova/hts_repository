@@ -18,7 +18,10 @@ if ONLY_ONE_HIT:
 			cur_seq = row[0]
 			results.append(row)
 	handle_file.close()
-else: results = handle_csv
+else: 
+	results = []
+	for row in handle_csv:
+		results.append(row)
 
 fasta_file = '/home/anna/bioinformatics/wheat/wheat_scaffolds.fasta'
 result_seqs = []
