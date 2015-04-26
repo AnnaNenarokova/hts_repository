@@ -5,6 +5,6 @@
 blast_db='/mnt/lustre/nenarokova/wheat/new_assembly_blastdb/wheat_scaffolds.db'
 fasta='/mnt/lustre/nenarokova/wheat/NBS_LRR_all_plants.fasta'
 # fasta='/home/anna/bioinformatics/ngs/wheat/Cocos_nucifera_RGA.fasta'
-outfile='/home/nenarokova/wheat/NBS_LRR_new_assembly_blreport2'
+outfile='/home/anna/bioinformatics/wheat/NBS_LRR_new_assembly_blreport.csv'
 blastn -query $fasta -db $blast_db -out $outfile -outfmt 10 -num_threads 24
 	
