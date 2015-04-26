@@ -3,8 +3,9 @@ import csv
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 global ONLY_ONE_HIT; ONLY_ONE_HIT = False
+import sys
 
-handle_file = '/home/anna/bioinformatics/wheat/NBS_LRR_new_assembly_blreport.csv'
+handle_file = sys.argv[1]
 handle_file = open(handle_file)
 handle_csv = csv.reader(handle_file, delimiter=',')
 
@@ -33,7 +34,7 @@ for seq_record in SeqIO.parse(fasta_file, "fasta"):
 			if start > end: start, end = end, start
 			seq = seq_record.seq[start:end]
 			result_seqs.append(SeqRecord(seq=seq, id=seq_record.id + ' ' + row[0], description=''))
-			if ONLY_ONE_HIT: results.remove(row)
+			results.remove(row)
 
 out_file = '/home/anna/bioinformatics/wheat/nbs_lrr_new_assembly.fasta'	
 SeqIO.write(result_seqs, out_file, "fasta")
