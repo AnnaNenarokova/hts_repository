@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import csv
 from Bio import SeqIO
+from Bio.SeqRecord import SeqRecord
 
 handle_file = '/home/anna/bioinformatics/wheat/NBS_LRR_new_assembly_blreport.csv'
 handle_file = open(handle_file)
@@ -25,7 +26,8 @@ for seq_record in SeqIO.parse(fasta_file, "fasta"):
 			end = int(row[9])
 			if start > end: start, end = end, start
 			seq = seq_record.seq[start:end]
-			result_seqs.append(seq)
+			result_seqs.append(SeqRecord(seq=seq, id=seq_record.id + ' ' + row[0], description=''))
 			results.remove(row)
+
 out_file = '/home/anna/bioinformatics/wheat/nbs_lrr_new_assembly.fasta'	
-SeqIO.write(out_file, result_seqs, "fasta")
+SeqIO.write(result_seqs, out_file, "fasta")
