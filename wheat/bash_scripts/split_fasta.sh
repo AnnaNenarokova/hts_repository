@@ -1,3 +1,3 @@
 #!/bin/bash
-cd /home/nenarokova/ngs/wheat
-./split_fasta.py /mnt/lustre/nenarokova/wheat/new_assembly/wheat_scaffolds.fasta 1000
+cd /mnt/lustre/nenarokova/wheat/new_assembly/
+/home/nenarokova/ngs/wheat/split_fasta.py wheat_scaffolds.fasta 1000
