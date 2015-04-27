@@ -43,5 +43,6 @@ for seq_record in SeqIO.parse(fasta_file, "fasta"):
 			result_seqs.append(SeqRecord(seq=seq, id=seq_record.id + ' ' + row[0], description=''))
 			results.remove(row)
 
-out_file = fasta_file[0:-6] + '_nbs_lrr.fasta'
+out_folder = '/home/nenarokova/wheat/new_assembly/nbs_lrr_genes/'
+out_file = out_folder + file_from_path(fasta_file) + '_nbs_lrr.fasta'
 SeqIO.write(result_seqs, out_file, "fasta")
