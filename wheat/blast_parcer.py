@@ -30,7 +30,7 @@ else:
 	results = []
 	for row in handle_csv:
 		results.append(row)
-
+k=0
 fasta_file = sys.argv[1]
 result_seqs = []
 for seq_record in SeqIO.parse(fasta_file, "fasta"):
@@ -40,8 +40,9 @@ for seq_record in SeqIO.parse(fasta_file, "fasta"):
 			end = int(row[9])
 			if start > end: start, end = end, start
 			seq = seq_record.seq[start:end]
-			result_seqs.append(SeqRecord(seq=seq, id=seq_record.id + ' ' + row[0], description=''))
+			result_seqs.append(SeqRecord(seq=seq, id=seq_record.id + ' ' + row[0] + str(k), description=''))
 			results.remove(row)
+			k+=1
 
 out_folder = '/home/nenarokova/wheat/new_assembly/nbs_lrr_genes/'
 out_file = out_folder + file_from_path(fasta_file) + '_nbs_lrr.fasta'
