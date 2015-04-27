@@ -3,7 +3,7 @@
 #PBS -l mem=2Gb
 #PBS -l nodes=1:ppn=1
 
-head_folder='/mnt/results/nenarokova/wheat/L/sum_fastq_re/sorted/'
+head_folder='/mnt/results/nenarokova/wheat/R/sum_fastq_re/sorted/'
 bt2_base='/mnt/lustre/nenarokova/wheat/bw2_bases/nbs_lrr_new_assembly/sum_nbs_lrr'
 cd $head_folder
 folder=`ls -1 | tail -n $PBS_ARRAYID | head -1`
