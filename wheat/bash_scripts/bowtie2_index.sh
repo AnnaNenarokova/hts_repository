@@ -1,7 +1,7 @@
 #!/bin/bash
 #PBS -l walltime=100:00:00
 cd /home/nenarokova/wheat/bw2_bases/
-dir='old_assembly_transcripts'
+dir='sum_new_assembly_nbs_lrr'
 mkdir $dir
 cd $dir
-bowtie2-build /mnt/lustre/nenarokova/wheat/Taestivum_296_v2.2.transcript.fa transcripts2
+bowtie2-build /mnt/lustre/nenarokova/wheat/new_assembly/nbs_lrr_genes/sum_new_assembly_nbs_lrr.fasta sum_new_assembly_nbs_lrr
