@@ -4,6 +4,6 @@ f=`ls -1 | tail -n $PBS_ARRAYID | head -1`
 q_alignment='../mapq_5_alignments/'$f
 # samtools view -b -q 5 $f > $q_alignment
 echo $q_alignment
-sorted=''${q_alignment%%.*}
+sorted=${q_alignment%%.bam}
 echo $sorted
-# samtools sort $q_alignment $sorted
+samtools sort $q_alignment $sorted
