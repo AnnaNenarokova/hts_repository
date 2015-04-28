@@ -2,7 +2,7 @@
 cd /mnt/results/nenarokova/wheat/R/sum_fastq_re/sorted
 mkdir merged_alignments
 letters=( A B C D E F G H )
-for l in letters
+for l in $letters
 do
 	for n in {1..11}
 	do 
