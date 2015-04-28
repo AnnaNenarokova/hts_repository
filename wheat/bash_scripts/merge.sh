@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /mnt/results/nenarokova/wheat/L/sum_fastq_re/sorted
+cd /mnt/results/nenarokova/wheat/R/sum_fastq_re/sorted
 mkdir merged_alignments
 for l in A B C D E F G H
 do
