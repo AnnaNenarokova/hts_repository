@@ -40,7 +40,7 @@ for seq_record in SeqIO.parse(fasta_file, "fasta"):
 			end = int(row[9])
 			if start > end: start, end = end, start
 			seq = seq_record.seq[start:end]
-			result_seqs.append(SeqRecord(seq=seq, id=seq_record.id + ' ' + row[0] + str(k), description=''))
+			result_seqs.append(SeqRecord(seq=seq, id=seq_record.id.strip() + row[0].strip() + str(k), description=''))
 			results.remove(row)
 			k+=1
 
