@@ -7,5 +7,5 @@ var_vcf='../vcf/'${f%%.*}'.flt.bcf'
 echo $f
 echo $var_bcf
 echo $var_vcf
-samtools mpileup -uf $ref $f | bcftools view -bvcg - > $var_bcf  
-# bcftools view $var_bcf | vcfutils.pl varFilter -D1000000 > $var_vcf 
+samtools mpileup -u -d 1000000 -D 1000000 -f $ref $f | bcftools view -bvcg - > $var_bcf  
+bcftools view $var_bcf | vcfutils.pl varFilter -D 1000000 > $var_vcf 
