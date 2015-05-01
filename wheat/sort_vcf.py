@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import re
+import sys
 from ntpath import split
 
 def file_from_path(path, folder=False):
@@ -8,7 +9,7 @@ def file_from_path(path, folder=False):
     if folder: return head
     else: return tail
 
-f = sys.argv[1]
+f_name = sys.argv[1]
 f = open(f_name, 'r')
 
 f_out_name = f_name[0:-8] + '_filtered.vcf'
