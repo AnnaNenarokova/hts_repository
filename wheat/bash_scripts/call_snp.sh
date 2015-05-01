@@ -12,5 +12,5 @@ echo $var_vcf
 # samtools mpileup -uf $ref $f -d 1000000 > $var_bcf
 # bcftools view -bvcg $var_bcf > $var_bcf2  
 # bcftools view $var_bcf2 | vcfutils.pl varFilter -D 1000000 > $var_vcf 
-samtools mpileup -uf $ref $f -d 1000000 | bcftools view -bvcg - > $var_bcf 
-bcftools view $var_bcf | vcfutils.pl varFilter -D 1000000 > $var_vcf 
+samtools mpileup  -d 10000000 -uf $ref $f| bcftools view -bvcg - > $var_bcf 
+bcftools view $var_bcf | vcfutils.pl varFilter -d 50 -D 10000000 > $var_vcf 
