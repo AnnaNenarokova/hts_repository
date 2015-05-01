@@ -9,7 +9,8 @@ def file_from_path(path, folder=False):
 f = sys.argv[1]
 f = open(f_name, 'r')
 
-f_out_name = '../' + f_name[0:-8] + '_filtered.vcf'
+f_out_name = f_name[0:-8] + '_filtered.vcf'
+
 out = []
 for line in f.readlines():
 	match = re.match('.*DP4=((\d+),(\d+),(\d+),(\d+)).*', line)
