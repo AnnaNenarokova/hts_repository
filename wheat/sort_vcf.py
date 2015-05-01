@@ -24,4 +24,5 @@ for line in f.readlines():
 
 f_out = open(f_out_name, 'w')
 
-out_file.write(out)
+for out_line in out:
+	f_out.write(out_line)
