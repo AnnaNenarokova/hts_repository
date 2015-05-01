@@ -15,3 +15,6 @@ for line in f.readlines():
 	fw_rv_ratio = (a + c)/(b + d)
 	if fw_rv_ratio < 5 and fw_rv_ratio > 0.2:
 		out.append(line)
+
+f_out = open(f_out_name, 'w')
+out_file.write(out)
