@@ -1,9 +1,15 @@
 import re
+from ntpath import split
+
+def file_from_path(path, folder=False):
+    head, tail = split(path)
+    if folder: return head
+    else: return tail
 
 f = sys.argv[1]
 f = open(f_name, 'r')
 
-f_out_name = f_name[0:-8] + '_filtered.vcf'
+f_out_name = '../' + f_name[0:-8] + '_filtered.vcf'
 out = []
 for line in f.readlines():
 	match = re.match('.*DP4=((\d+),(\d+),(\d+),(\d+)).*', line)
@@ -17,4 +23,5 @@ for line in f.readlines():
 		out.append(line)
 
 f_out = open(f_out_name, 'w')
+
 out_file.write(out)
