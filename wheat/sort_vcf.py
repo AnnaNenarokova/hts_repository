@@ -20,8 +20,8 @@ for line in f.readlines():
 		out.append(line)
 	else:
 		s_line = line.split('\t')
-		qual = s_line[-3]
-		info = s_line[-1]
+		qual = s_line[5]
+		info = s_line[7]
 		match = re.match('.*DP4=((\d+),(\d+),(\d+),(\d+)).*', info)
 		if match:
 			a = float(match.group(2))
