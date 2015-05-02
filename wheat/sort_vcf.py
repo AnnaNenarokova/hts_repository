@@ -19,13 +19,16 @@ for line in f.readlines():
 	if line[0] == '#':
 		out.append(line)
 	else:
-		match = re.match('.*DP4=((\d+),(\d+),(\d+),(\d+)).*', line)
+		s_line = line.split('\t')
+		qual = s_line[-3]
+		info = s_line[-1]
+		match = re.match('.*DP4=((\d+),(\d+),(\d+),(\d+)).*', info)
 		if match:
 			a = float(match.group(2))
 			b = float(match.group(3))
 			c = float(match.group(4))
 			d = float(match.group(5))
-			if (b + d) > 0 and (a + c) > 0:
+			if (b + d) > 0 and (a + c) > 0 and float(qual) >= 10.0:
 				fw_rv_ratio = (a + c)/(b + d)
 				if fw_rv_ratio < 5 and fw_rv_ratio > 0.2:
 					out.append(line)
