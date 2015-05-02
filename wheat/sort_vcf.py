@@ -28,7 +28,7 @@ for line in f.readlines():
 			b = float(match.group(3))
 			c = float(match.group(4))
 			d = float(match.group(5))
-			if (b + d) > 0 and (a + c) > 0 and float(qual) >= 10.0:
+			if (a + b + c + d) > 50 and (b + d) > 0 and (a + c) > 0 and float(qual) >= 10.0:
 				fw_rv_ratio = (a + c)/(b + d)
 				if fw_rv_ratio < 5 and fw_rv_ratio > 0.2:
 					out.append(line)
