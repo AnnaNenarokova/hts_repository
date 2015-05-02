@@ -20,6 +20,7 @@ for line in f.readlines():
 		out.append(line)
 	else:
 		s_line = line.split('\t')
+		alt = s_line[4].split(',')
 		qual = s_line[5]
 		info = s_line[7]
 		match = re.match('.*DP4=((\d+),(\d+),(\d+),(\d+)).*', info)
@@ -28,7 +29,7 @@ for line in f.readlines():
 			b = float(match.group(3))
 			c = float(match.group(4))
 			d = float(match.group(5))
-			if (a + b + c + d) > 50 and (b + d) > 0 and (a + c) > 0 and float(qual) >= 10.0:
+			if len(alt)<3 and (b + d) > 0 and (a + c) > 0 and float(qual) >= 10.0:
 				fw_rv_ratio = (a + c)/(b + d)
 				if fw_rv_ratio < 5 and fw_rv_ratio > 0.2:
 					out.append(line)
