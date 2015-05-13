@@ -3,6 +3,7 @@ import re
 from ntpath import split
 import csv
 import glob
+from natsort import natsorted
 
 def get_positions(filename):
 	f = open(filename, 'r')
@@ -54,9 +55,9 @@ for position, ref in all_positions.iteritems():
 
 ## OUTPUT ##
 
-outfilename = 'result.csv'
+outfilename = '/home/anna/bioinformatics/wheat.result.csv'
 with open(outfilename , 'w') as outfile:
-	keys = result.keys()
+	keys = natsorted(result.keys())
 	keys.remove('ref')
 	dict_writer = csv.DictWriter(outfile, ['pos'] + keys + ['ref'])
 	dict_writer.writeheader()
