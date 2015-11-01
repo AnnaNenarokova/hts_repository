@@ -5,7 +5,7 @@ from subprocess import call
 from Bio import SeqIO
 from ntpath import split
 global THREADS
-global CLUSTER; CLUSTER = True
+global CLUSTER; CLUSTER = False
 if CLUSTER: THREADS = 24
 else: THREADS = 8
 
