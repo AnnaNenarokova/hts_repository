@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # db_types: 'nucl', 'prot'
-# bl_types: 'blastn', 'blastp', 'psiblast'
+# bl_types: 'blastn', 'blastp', 'psiblast', 'blastx', 'tblastn', 'tblastx'
 from subprocess import call
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
-from common_helpers.make_outdir import file_from_path, name_outdir, make_outdir
+from common_helpers.make_outdir import file_from_path, make_outdir
 from seq_helpers.convert import fastq_fasta
 
 class Blast(object):
@@ -31,18 +31,18 @@ class Blast(object):
 		return db_path
 
 	formats = { 
-	'pairwise': {'':'0', 'ext':''}, 
-	'query_anchored_identities': {'#':'1', 'ext':''},
-	'query_anchored_no_identities': {'#':'2', 'ext':''},
-	'flat_query_anchored_identities': {'#':'3', 'ext':''},
-	'flat_query_anchored_no_identities': {'#':'4', 'ext':''},
+	'pairwise': {'#':'0', 'ext':'.txt'}, 
+	'query_anchored_identities': {'#':'1', 'ext':'.txt'},
+	'query_anchored_no_identities': {'#':'2', 'ext':'.txt'},
+	'flat_query_anchored_identities': {'#':'3', 'ext':'.txt'},
+	'flat_query_anchored_no_identities': {'#':'4', 'ext':'.txt'},
 	'xml': {'#':'5', 'ext':'.xml'}, 
-	'tabular': {'#':'6', 'ext':'.csv'},
+	'tabular': {'#':'6', 'ext':'.txt'},
 	'tabular_comment_lines': {'#':'7', 'ext':'.txt'},
-	'text_asn': {'#':'8', 'ext':''},
-	'binary_asn': {'#':'9', 'ext':''},
+	'text_asn': {'#':'8', 'ext':'.txt'},
+	'binary_asn': {'#':'9', 'ext':'.txt'},
 	'comma_values': {'#':'10', 'ext':'.csv'},
-	'blast_archive': {'#':'11', 'ext':''}
+	'blast_archive': {'#':'11', 'ext':'.txt'}
 	}
 
 	def blast(self, bl_type='blastn', outfmt='comma_values', blastn_short=False, evalue=10, threads=8, outfile=False):
@@ -50,15 +50,16 @@ class Blast(object):
 			print "Error: No query"
 			return 'Error'
 		if not self.db_path: self.db_path = self.makeblastdb()
-		else:
-			if not outfile: self.outdir = make_outdir(self.ref_path)
 
-		query_name = file_from_path(self.query_path, endcut=6)
-		if not outfile: outfile = self.outdir + str(query_name + "_bl_report" + self.formats[outfmt]['ext'])
+		if not outfile: 
+			if not self.outdir: self.outdir = make_outdir(self.db_path, subfolder='/bl_reports/',)
+			query_name = file_from_path(self.query_path, endcut=6)
+			outfile = self.outdir + str(query_name + "_bl_report" + self.formats[outfmt]['ext'])
 
 		blast_call = [bl_type, '-query', self.query_path, '-db', self.db_path, '-out', outfile, '-outfmt', self.formats[outfmt]['#'], '-num_threads', str(threads), '-evalue', str(evalue)]
 		
-		if not ((bl_type=='blastn' and self.db_type=='nucl') or ((bl_type!='blastp' or bl_type!='psiblast') and self.db_type=='prot')): 
+		is_prot_bl_type = (bl_type =='blastp' or bl_type =='psiblast' or bl_type == 'blastx')
+		if not ((bl_type=='blastn' and self.db_type=='nucl') or (is_prot_bl_type and self.db_type=='prot')): 
 			print 'Error: Incompatible options'
 			return 'Error'
 
@@ -68,12 +69,7 @@ class Blast(object):
 				return 'Error'
 			else: blast_call.extend ['-task', 'blastn-short']
 
+		print 'Blast is running'
 		print blast_call
 		call(blast_call)
 		return outfile
-
-
-ref_path = '/home/anna/bioinformatics/euglena/Tripanosoma_Verner/Tr_proteins.fasta'
-query_path ='/home/anna/bioinformatics/euglena/223_mitogenes/223_mitogenes_b2go.fasta'
-new_blast = Blast(ref_path=ref_path, query_path=query_path, db_type='prot')
-new_blast.blast(bl_type='psiblast', evalue=1, outfmt='tabular')
