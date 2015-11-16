@@ -1,8 +1,13 @@
 #!/usr/bin/python
+from BCBio import GFF
+from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
+from Bio.SeqFeature import SeqFeature, FeatureLocation
 import csv
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
 from common_helpers.make_outdir import file_from_path, make_outdir
+from parsers.parse_csv import parse_csv
 
 class BlastParser(object):
 	def parse_blast_csv(self):
@@ -34,7 +39,6 @@ class BlastParser(object):
 		return None
 
 	def sort_blast_csv(self):
-		hits = self.parse_blast_csv()
 		sorted_hits = sorted( hits, key = lambda hit: ( hit['query_id'], -hit['alignment_length'], hit['e-value']) ) 
 		self.hits = sorted_hits
 		return self.hits
@@ -44,20 +48,34 @@ class BlastParser(object):
 		for hit in self.hits: queries.append(hit['query_id'])
 		return [len(queries), len(set(queries))]
 
-	def write_blast_csv(self, outfile_path, hits=False, header=False):
+	def write_blast_csv(self, outfile_path, functions='False', hits=False, header=False):
 		with open(outfile_path, 'wb') as outfile:
 			csv_writer = csv.writer(outfile, delimiter=',')
 			if header:
-				csv_writer.writerow(['query id', 'subject id', '% identity', 'alignment length', 
-				 	'mismatches','gap opens', 'q start','q end','s start', 's end', 'e-value', 'bit score'])
-			
+				if functions:
+					header_row = ['query id', 'q. function', 'subject id', 's. function', 's. GO terms', '% identity', 'alignment length', 
+				 		'mismatches','gap opens', 'q. start','q. end','s start', 's. end', 'e-value', 'bit score']
+				else:
+				 	header_row = ['query id', 'subject id', '% identity', 'alignment length', 
+				 		'mismatches','gap opens', 'q. start','q. end','s. start', 's. end', 'e-value', 'bit score']
+				csv_writer.writerow(header_row)
+
 			if not hits: hits = self.hits
 			for hit in hits:
-				row = [
-					hit['query_id'], hit['subject_id'], hit['%_identity'], hit['alignment_length'],
-					hit['mismatches'], hit['gap_opens'], hit['q_start'], hit['q_end'], 
-					hit['s_start'], hit['s_end'], hit['e-value'], hit['bit_score']
-					  ]
+				if functions:
+					if not 'q_function' in hit.keys(): hit['q_function']=''
+					row = [
+						hit['query_id'], hit['q_function'], hit['subject_id'], hit['s_function'], hit['s_go_terms'], hit['%_identity'], hit['alignment_length'],
+						hit['mismatches'], hit['gap_opens'], hit['q_start'], hit['q_end'], 
+						hit['s_start'], hit['s_end'], hit['e-value'], hit['bit_score']
+						  ]
+				else:
+					row = [
+						hit['query_id'], hit['subject_id'], hit['%_identity'], hit['alignment_length'],
+						hit['mismatches'], hit['gap_opens'], hit['q_start'], hit['q_end'], 
+						hit['s_start'], hit['s_end'], hit['e-value'], hit['bit_score']
+						  ]
+
 				csv_writer.writerow(row)
 			outfile.close()
 		return outfile_path
@@ -86,7 +104,6 @@ class BlastParser(object):
 		return outfile_path
 
 	def extract_unique_hits(self):
-		self.sort_blast_csv()
 		print self.count_hits()
 		query = False
 		results = []
@@ -106,5 +123,23 @@ class BlastParser(object):
 
 		outfile_path = file_from_path(self.bl_report_path, folder=True) + 'unique_hits.csv'
 		print len(results), 'unique hits'
-		self.write_blast_csv(outfile_path=outfile_path, hits=results, header=True)
-		return outfile_path
+		return results
+
+	def add_functions(self, q_path,  q_delimiter, s_path, s_delimiter, hits=False):
+		q_info = parse_csv(q_path, delimiter=q_delimiter)
+		s_info = parse_csv(s_path, delimiter=s_delimiter)
+		if not hits: hits = self.hits
+		for hit in hits:
+			for row in q_info:
+				if hit['query_id'] == row[0]:
+					hit['q_function'] = row[1]
+			for row in s_info:
+				if hit['subject_id'] == row[0]:
+					hit['s_function'] = row[1]
+					hit['s_go_terms'] = row[2]
+		outfile_path = file_from_path(self.bl_report_path, folder=True) + 'hits_functions.csv'
+		self.write_blast_csv(outfile_path=outfile_path, hits=hits, functions='True', header=True)
+		return hits
+
+	def convert_gff(self, outfile_path=False):
+		pass

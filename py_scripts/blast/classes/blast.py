@@ -4,8 +4,10 @@
 from subprocess import call
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
-from common_helpers.make_outdir import file_from_path, make_outdir
+from common_helpers.make_outdir import file_from_path, make_outdir, dir_from_path
 from seq_helpers.convert import fastq_fasta
+from os.path import exists
+from os import makedirs
 
 class Blast(object):
 	def __init__(self, ref_path=False, ref_type='fasta', db_type=False, db_path=False, query_path=False, outdir=False, threads=8):
@@ -16,6 +18,7 @@ class Blast(object):
 		self.db_path = db_path
 		self.query_path = query_path
 		self.outdir = outdir
+		if (not self.outdir and db_path): self.outdir = dir_from_path(db_path, lift=1)
 		return None
 
 	def makeblastdb(self):
@@ -45,19 +48,23 @@ class Blast(object):
 	'blast_archive': {'#':'11', 'ext':'.txt'}
 	}
 
-	def blast(self, bl_type='blastn', outfmt='comma_values', blastn_short=False, evalue=10, threads=8, outfile=False):
+	def blast(self, bl_type='blastn', outfmt='comma_values', word_size=False, blastn_short=False, evalue=10, threads=8, outfile=False):
 		if not self.query_path:
 			print "Error: No query"
 			return 'Error'
+
 		if not self.db_path: self.db_path = self.makeblastdb()
 
-		if not outfile: 
-			if not self.outdir: self.outdir = make_outdir(self.db_path, subfolder='/bl_reports/',)
-			query_name = file_from_path(self.query_path, endcut=6)
-			outfile = self.outdir + str(query_name + "_bl_report" + self.formats[outfmt]['ext'])
+		query_name = file_from_path(self.query_path, endcut=6)
+
+		blreports_dir = self.outdir + "blast_reports/"
+		if not exists(blreports_dir): makedirs(blreports_dir)
+		outfile = blreports_dir + str(query_name + "_bl_report" + self.formats[outfmt]['ext'])
 
 		blast_call = [bl_type, '-query', self.query_path, '-db', self.db_path, '-out', outfile, '-outfmt', self.formats[outfmt]['#'], '-num_threads', str(threads), '-evalue', str(evalue)]
 		
+		if word_size:
+			blast_call.extend(['-word_size', str(word_size)])
 		is_prot_bl_type = (bl_type =='blastp' or bl_type =='psiblast' or bl_type == 'blastx')
 		if not ((bl_type=='blastn' and self.db_type=='nucl') or (is_prot_bl_type and self.db_type=='prot')): 
 			print 'Error: Incompatible options'
