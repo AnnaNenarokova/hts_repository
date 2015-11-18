@@ -1,12 +1,12 @@
 #!/bin/bash
 trimc_dir='/home/anna_nenarokova/Trimmomatic-0.35/'
-fastq_dir='/home/anna_nenarokova/euglena/1_ELIS_reads/Sample_1-light/'
+fastq_dir='/home/anna_nenarokova/euglena/1_ELIS_reads/Sample_2-dark/'
 trimc='trimmomatic-0.35.jar'
 cd $fastq_dir
 mkdir trim_out
 adapters=$trimc_dir'adapters/TruSeq3-PE.fa'
-file_fw='L004_light_Elis_R1.fq'
-file_rv='L004_light_Elis_R2.fq'
+file_fw='L004_dark_Elis_R1.fq'
+file_rv='L004_dark_Elis_R2.fq'
 trim='java -jar ' 
 trim+=$trimc_dir$trimc
 illumina_clip='ILLUMINACLIP:'
