@@ -4,7 +4,7 @@ fastq_dir='/home/anna_nenarokova/euglena/1_ELIS_reads/Sample_1-light/'
 trimc='trimmomatic-0.35.jar'
 cd $fastq_dir
 mkdir trim_out
-adapters='adapters/TruSeq3-PE.fa'
+adapters=$trimc_dir'adapters/TruSeq3-PE.fa'
 file_fw='L004_light_Elis_R1.fq'
 file_rv='L004_light_Elis_R2.fq'
 trim='java -jar ' 
