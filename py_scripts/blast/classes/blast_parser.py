@@ -140,6 +140,3 @@ class BlastParser(object):
 		outfile_path = file_from_path(self.bl_report_path, folder=True) + 'hits_functions.csv'
 		self.write_blast_csv(outfile_path=outfile_path, hits=hits, functions='True', header=True)
 		return hits
-
-	def convert_gff(self, outfile_path=False):
-		pass
