@@ -15,4 +15,4 @@ trim+=$trimc_dir$trimc
 illumina_clip='ILLUMINACLIP:'
 illumina_clip+=$adapters
 illumina_clip+=':2:30:10'
-$trim PE -phred64 $file_fw $file_rv trim_out/paired_out_fw trim_out/unpaired_out_fw trim_out/paired_out_rv trim_out/unpaired_out_rv $illumina_clip LEADING:3 TRAILING:3 SLIDINGWINDOW:5:15 MINLEN:30 > trimming.log
+$trim PE -phred64 $file_fw $file_rv trim_out/paired_out_fw.fastq trim_out/unpaired_out_fw.fastq trim_out/paired_out_rv.fastq trim_out/unpaired_out_rv.fastq $illumina_clip LEADING:3 TRAILING:3 SLIDINGWINDOW:5:15 MINLEN:30 > trimming.log

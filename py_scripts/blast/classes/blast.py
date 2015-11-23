@@ -66,7 +66,8 @@ class Blast(object):
 		if word_size:
 			blast_call.extend(['-word_size', str(word_size)])
 		is_prot_bl_type = (bl_type =='blastp' or bl_type =='psiblast' or bl_type == 'blastx')
-		if not ((bl_type=='blastn' and self.db_type=='nucl') or (is_prot_bl_type and self.db_type=='prot')): 
+		is_nucl_bl_type = (bl_type =='blastn' or bl_type =='tblastn')
+		if not ((is_nucl_bl_type and self.db_type=='nucl') or (is_prot_bl_type and self.db_type=='prot')): 
 			print 'Error: Incompatible options'
 			return 'Error'
 
