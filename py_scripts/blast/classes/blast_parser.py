@@ -6,7 +6,7 @@ from Bio.SeqFeature import SeqFeature, FeatureLocation
 import csv
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
-from common_helpers.make_outdir import file_from_path, make_outdir
+from common_helpers.make_outdir import file_from_path, make_outdir, new_file_same_dir
 from parsers.parse_csv import parse_csv
 
 class BlastParser(object):
@@ -64,6 +64,8 @@ class BlastParser(object):
 			for hit in hits:
 				if functions:
 					if not 'q_function' in hit.keys(): hit['q_function']=''
+					if not 's_function' in hit.keys(): hit['s_function']=''
+					if not 's_go_terms' in hit.keys(): hit['s_go_terms']=''
 					row = [
 						hit['query_id'], hit['q_function'], hit['subject_id'], hit['s_function'], hit['s_go_terms'], hit['%_identity'], hit['alignment_length'],
 						hit['mismatches'], hit['gap_opens'], hit['q_start'], hit['q_end'], 
@@ -137,6 +139,6 @@ class BlastParser(object):
 				if hit['subject_id'] == row[0]:
 					hit['s_function'] = row[1]
 					hit['s_go_terms'] = row[2]
-		outfile_path = file_from_path(self.bl_report_path, folder=True) + 'hits_functions.csv'
+		outfile_path = new_file_same_dir(self.bl_report_path, new_ext='_with_functions.csv')
 		self.write_blast_csv(outfile_path=outfile_path, hits=hits, functions='True', header=True)
 		return hits
