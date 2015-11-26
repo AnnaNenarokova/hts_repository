@@ -174,8 +174,15 @@ class BlastParser(object):
 			for row in s_info:
 				if hit['sseqid'] == row[0]:
 					hit['s_function'] = row[1]
-					hit['s_go_terms'] = row[2]
-		self.features.extend(['q_function', 's_function', 's_go_terms'])
+					hit['s_GO_terms'] = row[2]
+
+		qseqid_index = self.features.index('qseqid')						
+		self.features.insert(qseqid_index+1, 'q_function')
+		sseqid_index = self.features.index('sseqid')
+		self.features.insert(sseqid_index+1, 's_GO_terms')
+		self.features.insert(sseqid_index+1, 's_function')
+		print self.features
+
 		outfile_path = new_file_same_dir(self.bl_report_path, new_ext='_with_functions.csv')
 		self.write_blast_csv(outfile_path=outfile_path, hits=hits, header=True)
 		return hits
