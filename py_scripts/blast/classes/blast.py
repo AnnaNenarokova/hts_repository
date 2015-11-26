@@ -40,18 +40,20 @@ class Blast(object):
 	'flat_query_anchored_identities': {'#':'3', 'ext':'.txt'},
 	'flat_query_anchored_no_identities': {'#':'4', 'ext':'.txt'},
 	'xml': {'#':'5', 'ext':'.xml'}, 
-	'tabular': {'#':'6', 'ext':'.txt'},
+	'tabular': {'#':'6', 'ext':'.csv'},
 	'tabular_comment_lines': {'#':'7', 'ext':'.txt'},
 	'text_asn': {'#':'8', 'ext':'.txt'},
 	'binary_asn': {'#':'9', 'ext':'.txt'},
 	'comma_values': {'#':'10', 'ext':'.csv'},
-	'blast_archive': {'#':'11', 'ext':'.txt'}
+	'blast_archive': {'#':'11', 'ext':'.txt'},
 	}
 
-	def blast(self, bl_type='blastn', outfmt='comma_values', word_size=False, blastn_short=False, evalue=10, threads=8, outfile=False):
+	def blast(self, bl_type='blastn', outfmt='comma_values', custom_outfmt='False', word_size=False, blastn_short=False, evalue=10, threads=8, outfile=False):
 		if not self.query_path:
 			print "Error: No query"
 			return 'Error'
+
+		self.custom_outfmt = custom_outfmt
 
 		if not self.db_path: self.db_path = self.makeblastdb()
 
@@ -61,12 +63,18 @@ class Blast(object):
 		if not exists(blreports_dir): makedirs(blreports_dir)
 		outfile = blreports_dir + str(query_name + "_bl_report" + self.formats[outfmt]['ext'])
 
-		blast_call = [bl_type, '-query', self.query_path, '-db', self.db_path, '-out', outfile, '-outfmt', self.formats[outfmt]['#'], '-num_threads', str(threads), '-evalue', str(evalue)]
+		outfmt = self.formats[outfmt]['#']
+		if custom_outfmt: 
+			outfmt = outfmt + " '" + custom_outfmt + "'"
+			
+		blast_call = [bl_type, '-query', self.query_path, '-db', self.db_path, '-out', outfile, '-outfmt', outfmt, '-num_threads', str(threads), '-evalue', str(evalue)]
 		
 		if word_size:
 			blast_call.extend(['-word_size', str(word_size)])
+
 		is_prot_bl_type = (bl_type =='blastp' or bl_type =='psiblast' or bl_type == 'blastx')
 		is_nucl_bl_type = (bl_type =='blastn' or bl_type =='tblastn')
+
 		if not ((is_nucl_bl_type and self.db_type=='nucl') or (is_prot_bl_type and self.db_type=='prot')): 
 			print 'Error: Incompatible options'
 			return 'Error'
@@ -80,4 +88,5 @@ class Blast(object):
 		print 'Blast is running'
 		print blast_call
 		call(blast_call)
+		self.bl_report = outfile
 		return outfile
