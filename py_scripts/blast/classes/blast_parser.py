@@ -100,10 +100,10 @@ class BlastParser(object):
 
 	def count_hits(self):
 		queries = []
-		for hit in self.hits: queries.append(hit['qseqid'])
+		for hit in self.hits: queries.append(hit['sseqid'])
 		return [len(queries), len(set(queries))]
 
-	def write_blast_csv(self, outfile_path, functions='False', hits=False, header=False):
+	def write_blast_csv(self, outfile_path, hits=False, header=False):
 		if not hits: hits = self.hits
 		with open(outfile_path, 'wb') as outfile:
 			csv_writer = csv.writer(outfile, delimiter=self.delimiter)
@@ -119,7 +119,8 @@ class BlastParser(object):
 
 		return outfile_path
 
-	def extract_best(self):
+	def extract_best(self, mindif_evalue=10, maxdif_length=1):
+		print 'All hits', self.count_hits()[0]
 		is_first = True
 		subj_hits = {}
 		for hit, is_last in lookahead(self.hits):
@@ -142,7 +143,9 @@ class BlastParser(object):
 				else:
 					if hit['evalue']== 0:
 						best_hits.append(hit)
-					elif ((cur_hit['evalue'] == 0 or hit['evalue']/cur_hit['evalue'] >= 10) and (hit['length'] < cur_hit['length'])):
+					elif (cur_hit['evalue'] == 0 or hit['evalue']/cur_hit['evalue'] >= mindif_evalue) \
+							and \
+						 (hit['length'] / cur_hit['length']) <= maxdif_length:
 						break
 					else:
 						best_hits.append(hit)
@@ -150,11 +153,12 @@ class BlastParser(object):
 
 		print 'Best hits', len(best_hits)
 		outfile_path = new_file_same_dir(self.bl_report_path, new_end='_best_hits.csv')
+		self.bl_report_path = outfile_path
 		self.write_blast_csv(outfile_path=outfile_path, hits=best_hits, header=True)
 		self.hits = best_hits
 		return outfile_path
 
-	def add_functions(self, q_path,  q_delimiter, s_path, s_delimiter, hits=False):
+	def add_functions(self, q_path,  q_delimiter, s_path, s_delimiter, hits=False, add_alen_qlen=True):
 		q_info = parse_csv(q_path, delimiter=q_delimiter)
 		s_info = parse_csv(s_path, delimiter=s_delimiter)
 		if not hits: hits = self.hits
@@ -166,12 +170,17 @@ class BlastParser(object):
 				if hit['sseqid'] == row[0]:
 					hit['s_function'] = row[1]
 					hit['s_GO_terms'] = row[2]
+			if add_alen_qlen: hit['allen/qlen'] = hit['length']/float(hit['qlen'])
 
 		qseqid_index = self.features.index('qseqid')						
 		self.features.insert(qseqid_index+1, 'q_function')
 		sseqid_index = self.features.index('sseqid')
 		self.features.insert(sseqid_index+1, 's_GO_terms')
 		self.features.insert(sseqid_index+1, 's_function')
+
+		if add_alen_qlen:
+			allen_index = self.features.index('length')
+			self.features.insert(allen_index+1, 'allen/qlen')
 
 		outfile_path = new_file_same_dir(self.bl_report_path, new_end='_with_functions.csv')
 		self.write_blast_csv(outfile_path=outfile_path, hits=hits, header=True)
