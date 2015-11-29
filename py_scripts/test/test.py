@@ -1,5 +1,6 @@
 #!/usr/bin/python
-import sys
+class Test:
+	def __init__():
+		return None
 
-a =  sys.stdin.read()
-print a
+print 'included!'

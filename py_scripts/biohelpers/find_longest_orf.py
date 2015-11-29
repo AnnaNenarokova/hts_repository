@@ -3,14 +3,7 @@ from Bio import SeqIO
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
 from common_helpers.make_outdir import file_from_path, make_outdir, new_file_same_dir
-
-def lookahead(iterable):
-    it = iter(iterable)
-    last = it.next() # next(it) in Python 3
-    for val in it:
-        yield last, False
-        last = val
-    yield last, True
+from common_helpers.lookahead import lookahead
 
 def find_longest_orf(orfs_path, f_out):
 	out = []
@@ -38,10 +31,3 @@ def find_longest_orf(orfs_path, f_out):
 				max_orf = record
 				max_len = cur_len
 	return out
-
-orfs_path = '/home/anna/bioinformatics/euglenozoa/euglena/sequences/euglena_tr_final_ORFs_min50.fasta'
-f_out = new_file_same_dir(orfs_path, new_ext='_longest.fasta')
-
-out = find_longest_orf(orfs_path, f_out)
-
-SeqIO.write(out, f_out, "fasta")

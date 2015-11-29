@@ -5,7 +5,7 @@ from subprocess import call
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
 from common_helpers.make_outdir import file_from_path, make_outdir, dir_from_path
-from seq_helpers.convert import fastq_fasta
+from biohelpers.convert import fastq_fasta
 from os.path import exists
 from os import makedirs
 

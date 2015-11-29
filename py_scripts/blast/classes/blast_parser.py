@@ -7,7 +7,8 @@ import csv
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
 from common_helpers.make_outdir import file_from_path, make_outdir, new_file_same_dir
-from parsers.parse_csv import parse_csv
+from common_helpers.lookahead import lookahead
+from common_helpers.parse_csv import parse_csv
 global bl_features;
 all_features = {
 'qseqid': {'description': 'Query Seq-id', 'type': 'str'},
@@ -118,50 +119,32 @@ class BlastParser(object):
 
 		return outfile_path
 
-	def extract_credible_hits(self, max_hits=2):
-		self.sort_blast_csv()
-		print self.count_hits()
-		query = False
-		results = []
-		for hit in self.hits:
-			if not query: 
-				query = hit['qseqid']
-				results.append(hit)
-				i = 1
+	def extract_best(self):
+		is_first = True
+		subj_hits = {}
+		for hit, is_last in lookahead(self.hits):
+			if hit['sseqid'] in subj_hits.keys():
+				subj_hits[hit['sseqid']].append(hit)
 			else:
-				if hit['qseqid'] == query:
-					i += 1
-					if i <= max_hits:
-						results.append(hit)
+				subj_hits[hit['sseqid']] = []
+				subj_hits[hit['sseqid']].append(hit)
+
+		print 'Unique subjects:', len(subj_hits)
+
+		best_hits = []
+		for subj in subj_hits:
+			sorted_hits = sorted(subj_hits[subj], key = lambda hit: -hit['e-value'])
+
+			is_first = True
+			for hit in sorted_hits:
+				if is_first: 
+					best_hits.append(hit)
+					cur_hit = hit
 				else:
-					i = 1
-					query = hit['qseqid']
-					results.append(hit)
-		outfile_path = file_from_path(self.bl_report_path, folder=True) + 'credible_hits.csv'
-		self.write_blast_csv(outfile_path=outfile_path, hits=results, header=True)
+					if hit['evalue'] > cur_hit
+		outfile_path = new_file_same_dir(self.bl_report_path, new_end='credible_hits.csv')
+		# self.write_blast_csv(outfile_path=outfile_path, hits=best_hits, header=True)
 		return outfile_path
-
-	def extract_unique_hits(self):
-		print self.count_hits()
-		query = False
-		results = []
-		for hit in self.hits:
-			if not query: 
-				query = hit['qseqid']
-				result = hit
-				i = 1
-			else:
-				if hit['qseqid'] == query:
-					i += 1
-				else:
-					if i == 1: results.append(result)
-					i = 1
-					query = hit['qseqid']
-					result = hit
-
-		outfile_path = file_from_path(self.bl_report_path, folder=True) + 'unique_hits.csv'
-		print len(results), 'unique hits'
-		return results
 
 	def add_functions(self, q_path,  q_delimiter, s_path, s_delimiter, hits=False):
 		q_info = parse_csv(q_path, delimiter=q_delimiter)
@@ -181,8 +164,7 @@ class BlastParser(object):
 		sseqid_index = self.features.index('sseqid')
 		self.features.insert(sseqid_index+1, 's_GO_terms')
 		self.features.insert(sseqid_index+1, 's_function')
-		print self.features
 
-		outfile_path = new_file_same_dir(self.bl_report_path, new_ext='_with_functions.csv')
+		outfile_path = new_file_same_dir(self.bl_report_path, new_end='_with_functions.csv')
 		self.write_blast_csv(outfile_path=outfile_path, hits=hits, header=True)
 		return hits

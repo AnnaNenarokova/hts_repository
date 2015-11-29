@@ -1,16 +1,11 @@
 #!/bin/bash
-#PBS -l nodes=1:ppn=1
-#PBS -l walltime=100:00:00
-# cd /home/nenarokova/wheat/R1/sum_fastq/
-cd /home/anna/bioinformatics/htses/ERR015599_1
-letters=( A B C D E F G H )
-n=0
-for l in "${letters[@]}"
+cd /mnt/results/nenarokova/wheat/L/sum_fastq_re/sorted
+mkdir merged_alignments
+for l in A B C D E F G H
 do
-	for f in $l$n*.fastq
-	do 
-		f2=$l${f:2}
-		cat $f >> $f2
-		rm $f
-	done
+	out_bam='./merged_alignments/new_assembly_nbs_lrr_ids_'$l$PBS_ARRAYID'.bam'
+	in_bam1='./'$l$PBS_ARRAYID'/new_assembly_nbs_lrr_ids.bam'
+	in_bam2='./'$l'0'$PBS_ARRAYID'/new_assembly_nbs_lrr_ids.bam'
+	echo $out_bam
+	samtools merge $out_bam $in_bam1 $in_bam2
 done
