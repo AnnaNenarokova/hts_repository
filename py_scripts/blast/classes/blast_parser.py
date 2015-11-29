@@ -133,17 +133,25 @@ class BlastParser(object):
 
 		best_hits = []
 		for subj in subj_hits:
-			sorted_hits = sorted(subj_hits[subj], key = lambda hit: -hit['e-value'])
-
+			sorted_hits = sorted(subj_hits[subj], key = lambda hit: hit['evalue'])
 			is_first = True
 			for hit in sorted_hits:
 				if is_first: 
 					best_hits.append(hit)
-					cur_hit = hit
+					is_first = False
 				else:
-					if hit['evalue'] > cur_hit
-		outfile_path = new_file_same_dir(self.bl_report_path, new_end='credible_hits.csv')
-		# self.write_blast_csv(outfile_path=outfile_path, hits=best_hits, header=True)
+					if hit['evalue']== 0:
+						best_hits.append(hit)
+					elif ((cur_hit['evalue'] == 0 or hit['evalue']/cur_hit['evalue'] >= 10) and (hit['length'] < cur_hit['length'])):
+						break
+					else:
+						best_hits.append(hit)
+				cur_hit = hit
+
+		print 'Best hits', len(best_hits)
+		outfile_path = new_file_same_dir(self.bl_report_path, new_end='_best_hits.csv')
+		self.write_blast_csv(outfile_path=outfile_path, hits=best_hits, header=True)
+		self.hits = best_hits
 		return outfile_path
 
 	def add_functions(self, q_path,  q_delimiter, s_path, s_delimiter, hits=False):
