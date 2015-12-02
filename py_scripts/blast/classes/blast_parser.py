@@ -9,7 +9,6 @@ sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
 from common_helpers.make_outdir import file_from_path, make_outdir, new_file_same_dir
 from common_helpers.lookahead import lookahead
 from common_helpers.parse_csv import parse_csv
-global bl_features;
 all_features = {
 'qseqid': {'description': 'Query Seq-id', 'type': 'str'},
 'qgi': {'description': 'Query GI', 'type': 'str'},
@@ -100,7 +99,7 @@ class BlastParser(object):
 
 	def count_hits(self):
 		queries = []
-		for hit in self.hits: queries.append(hit['sseqid'])
+		for hit in self.hits: queries.append(hit['qseqid'])
 		return [len(queries), len(set(queries))]
 
 	def write_blast_csv(self, outfile_path, hits=False, header=False):
@@ -120,42 +119,54 @@ class BlastParser(object):
 		return outfile_path
 
 	def extract_best(self, mindif_evalue=10, maxdif_length=1):
-		print 'All hits', self.count_hits()[0]
-		is_first = True
-		subj_hits = {}
-		for hit, is_last in lookahead(self.hits):
-			if hit['sseqid'] in subj_hits.keys():
-				subj_hits[hit['sseqid']].append(hit)
-			else:
-				subj_hits[hit['sseqid']] = []
-				subj_hits[hit['sseqid']].append(hit)
-
-		print 'Unique subjects:', len(subj_hits)
-
-		best_hits = []
-		for subj in subj_hits:
-			sorted_hits = sorted(subj_hits[subj], key = lambda hit: hit['evalue'])
+		for subject in ['sseqid', 'qseqid']:
+			print 'All hits,','set of queries:', self.count_hits()
 			is_first = True
-			for hit in sorted_hits:
-				if is_first: 
-					best_hits.append(hit)
-					is_first = False
+			subj_hits = {}
+			for hit, is_last in lookahead(self.hits):
+				if hit[subject] in subj_hits.keys():
+					subj_hits[hit[subject]].append(hit)
 				else:
-					if hit['evalue']== 0:
-						best_hits.append(hit)
-					elif (cur_hit['evalue'] == 0 or hit['evalue']/cur_hit['evalue'] >= mindif_evalue) \
-							and \
-						 (hit['length'] / cur_hit['length']) <= maxdif_length:
-						break
-					else:
-						best_hits.append(hit)
-				cur_hit = hit
+					subj_hits[hit[subject]] = []
+					subj_hits[hit[subject]].append(hit)
 
-		print 'Best hits', len(best_hits)
+			print 'Set of ', subject, len(subj_hits)
+
+			best_hits = []
+			for subj in subj_hits:
+				sorted_hits = sorted(subj_hits[subj], key = lambda hit: hit['evalue'])
+				is_first = True
+				for hit in sorted_hits:
+					if is_first: 
+						best_hits.append(hit)
+						is_first = False
+					else:
+						if hit['evalue']== 0:
+							best_hits.append(hit)
+						elif (cur_hit['evalue'] == 0 or hit['evalue']/cur_hit['evalue'] >= mindif_evalue) \
+								and \
+							 (hit['length'] / cur_hit['length']) <= maxdif_length:
+							break
+						else:
+							best_hits.append(hit)
+					cur_hit = hit
+			print 'Best hits', len(best_hits)
+			self.hits = best_hits
+
 		outfile_path = new_file_same_dir(self.bl_report_path, new_end='_best_hits.csv')
 		self.bl_report_path = outfile_path
 		self.write_blast_csv(outfile_path=outfile_path, hits=best_hits, header=True)
-		self.hits = best_hits
+		
+		return outfile_path
+
+	def change_ids(self, ids_csv_path, delimiter=','):
+		ids_csv = parse_csv(ids_csv_path, delimiter=delimiter)
+		for hit in self.hits:
+			for row in ids_csv:
+				if hit['qseqid'] == row[0]: hit['qseqid'] = row[1]
+		outfile_path = new_file_same_dir(self.bl_report_path, new_end='_new_ids.csv')
+		self.bl_report_path = outfile_path
+		self.write_blast_csv(outfile_path=outfile_path, hits=self.hits, header=True)
 		return outfile_path
 
 	def add_functions(self, q_path,  q_delimiter, s_path, s_delimiter, hits=False, add_alen_qlen=True):
@@ -185,3 +196,4 @@ class BlastParser(object):
 		outfile_path = new_file_same_dir(self.bl_report_path, new_end='_with_functions.csv')
 		self.write_blast_csv(outfile_path=outfile_path, hits=hits, header=True)
 		return hits
+
