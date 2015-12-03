@@ -100,7 +100,23 @@ class BlastParser(object):
 	def count_hits(self):
 		queries = []
 		for hit in self.hits: queries.append(hit['qseqid'])
-		return [len(queries), len(set(queries))]
+		len_queries = len(queries)
+		len_q_set = len(set(queries))
+		print 'All hits,', len_queries 
+		print 'Set of queries:', len_q_set
+		return [len_queries, len_q_set]
+
+	def count_hits_if(self, evalue=False, length=False, alen_qlen=False):
+		hit_set= []
+		for hit in self.hits: queries.append(hit['qseqid'])
+			if alen_qlen:
+				hit['allen/qlen'] = hit['length']/float(hit['qlen']):
+				allen_index = self.features.index('length')
+				self.features.insert(allen_index+1, 'allen/qlen')
+
+		print 'All hits,', len_queries 
+		print 'Set of queries:', len_q_set
+		return [len_queries, len_q_set]
 
 	def write_blast_csv(self, outfile_path, hits=False, header=False):
 		if not hits: hits = self.hits
@@ -118,9 +134,47 @@ class BlastParser(object):
 
 		return outfile_path
 
-	def extract_best(self, mindif_evalue=10, maxdif_length=1):
-		for subject in ['sseqid', 'qseqid']:
-			print 'All hits,','set of queries:', self.count_hits()
+	def extract_unique(self, hits=False, each_query=False, each_subject=False):
+		is_first = True
+			subj_hits = {}
+			for hit, is_last in lookahead(self.hits):
+				if hit[subject] in subj_hits.keys():
+					subj_hits[hit[subject]].append(hit)
+				else:
+					subj_hits[hit[subject]] = []
+					subj_hits[hit[subject]].append(hit)
+
+		if not hits: hits = self.hits
+		sorted_hits = sorted(hits, key = lambda hit: hit['evalue'])
+			for hit in sorted_hits:
+				if is_first: 
+					best_hits.append(hit)
+					is_first = False
+				else:
+					if hit['evalue']== 0:
+						best_hits.append(hit)
+					elif (cur_hit['evalue'] == 0 or hit['evalue']/cur_hit['evalue'] >= mindif_evalue) \
+							and \
+						 (hit['length'] / cur_hit['length']) <= maxdif_length:
+						break
+					else:
+						best_hits.append(hit)
+				cur_hit = hit
+			self.hits = best_hits
+
+		outfile_path = new_file_same_dir(self.bl_report_path, new_end='_unique.csv')
+		self.bl_report_path = outfile_path
+		self.write_blast_csv(outfile_path=outfile_path, hits=best_hits, header=True)
+		
+		return outfile_path
+
+	def extract_best(self, mindif_evalue=10, maxdif_length=1, sort_qseid=False, sort_sseid=False):
+		subjects = []
+		if sort_qseid: subjects.append('qseqid')
+		if sort_sseid: subjects.append('sseqid')
+
+		for subject in subjects:
+			self.count_hits()
 			is_first = True
 			subj_hits = {}
 			for hit, is_last in lookahead(self.hits):
@@ -134,6 +188,30 @@ class BlastParser(object):
 
 			best_hits = []
 			for subj in subj_hits:
+				sorted_hits = sorted(subj_hits[subj], key = lambda hit: hit['evalue'])
+				is_first = True
+				for hit in sorted_hits:
+					if is_first: 
+						best_hits.append(hit)
+						is_first = False
+					else:
+						if hit['evalue']== 0:
+							best_hits.append(hit)
+						elif (cur_hit['evalue'] == 0 or hit['evalue']/cur_hit['evalue'] >= mindif_evalue) \
+								and \
+							 (hit['length'] / cur_hit['length']) <= maxdif_length:
+							break
+						else:
+							best_hits.append(hit)
+					cur_hit = hit
+			print 'Best hits', len(best_hits)
+			self.hits = best_hits
+
+		outfile_path = new_file_same_dir(self.bl_report_path, new_end='_best_hits.csv')
+		self.bl_report_path = outfile_path
+		self.write_blast_csv(outfile_path=outfile_path, hits=best_hits, header=True)
+		
+		return outfile_path
 				sorted_hits = sorted(subj_hits[subj], key = lambda hit: hit['evalue'])
 				is_first = True
 				for hit in sorted_hits:
