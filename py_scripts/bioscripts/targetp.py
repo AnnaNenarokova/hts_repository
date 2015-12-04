@@ -3,7 +3,7 @@ from Bio.SeqRecord import SeqRecord
 from subprocess32 import call
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
-from common_helpers.make_outdir import file_from_path, make_outdir, new_file_same_dir
+from common_helpers.make_outdir import file_from_path, make_outdir, new_file
 from common_helpers.lookahead import lookahead
 from subprocess import Popen, PIPE, STDOUT
 import csv
@@ -31,7 +31,7 @@ def use_targetp(f_path, outf_path=False, is_plant=False, txt_out=False):
 			i = 0
 
 	if txt_out:
-		if not outf_path: outf_path = new_file_same_dir(f_path, new_end='_targetp_out.txt')
+		if not outf_path: outf_path = new_file(f_path, new_end='_targetp_out.txt')
 		with open(outf_path, 'w') as outf:
 			outf.writelines(out_data)
 			outf.closed
@@ -43,7 +43,7 @@ def use_targetp(f_path, outf_path=False, is_plant=False, txt_out=False):
 			line = line.split()
 			if line: csv_out.append(line)
 
-		if not outf_path: outf_path = new_file_same_dir(f_path, new_end='_targetp_out.csv')
+		if not outf_path: outf_path = new_file(f_path, new_end='_targetp_out.csv')
 		with open(outf_path, 'w') as outf:
 		    csv_writer = csv.writer(outf)
 		    csv_writer.writerows(csv_out)

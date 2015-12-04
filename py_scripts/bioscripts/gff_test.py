@@ -8,12 +8,12 @@ import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
 
 from blast.classes.blast_parser import BlastParser
-from common_helpers.make_outdir import new_file_same_dir
+from common_helpers.make_outdir import new_file
 
 def blast_to_gff(blresult_path, reference, outfile_path=False):
 	blparser = BlastParser(blresult_path, 'csv')
 	hits = blparser.hits
-	if not outfile_path: outfile_path = new_file_same_dir(blresult_path, new_ext='.gff')
+	if not outfile_path: outfile_path = new_file(blresult_path, new_ext='.gff')
 	print hits
 	pass
 

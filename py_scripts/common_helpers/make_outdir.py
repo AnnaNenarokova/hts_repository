@@ -25,15 +25,15 @@ def make_outdir(f_path, workdir=False, subfolder='', endcut=6):
 	if not exists(outdir): makedirs(outdir)
 	return outdir
 
-def new_file_same_dir(oldfile_path, newfile_name=False, new_end=False):
-	cur_dir = dir_from_path(oldfile_path)
-	if (newfile_name and not new_end): 
-		newfile_path = cur_dir + newfile_name
-	elif (new_end and not newfile_name):
+def new_file(oldfile_path, outdir=False, new_name=False, new_end=False):
+	if not outdir: outdir = dir_from_path(oldfile_path)
+	if (new_name and not new_end): 
+		file_path = cur_dir + new_name
+	elif (new_end and not new_name):
 		f_name = file_from_path(oldfile_path)
-		without_ext = f_name.split('.')[0]
-		newfile_path = cur_dir + without_ext + new_end
+		without_ext = f_name.split('.')[:-1]
+		file_path = cur_dir + without_ext + new_end
 	else:
 		print "Error: Incomparible options"
 		return "Error"
-	return newfile_path
+	return file_path

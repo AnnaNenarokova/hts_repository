@@ -6,7 +6,7 @@ from Bio.SeqFeature import SeqFeature, FeatureLocation
 import csv
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
-from common_helpers.make_outdir import file_from_path, make_outdir, new_file_same_dir
+from common_helpers.make_outdir import file_from_path, make_outdir, new_file
 from common_helpers.lookahead import lookahead
 from common_helpers.parse_csv import parse_csv
 all_features = {
@@ -66,10 +66,8 @@ class BlastParser(object):
 		self.features = filter(None, features.split(' '))
 
 		self.hits = []
-
 		for row in handle_csv:
 			hit = {}
-			i = 0
 			for feature in self.features:
 				if all_features[feature]['type'] == 'float':
 					hit[feature] = float(row[i])
@@ -77,10 +75,7 @@ class BlastParser(object):
 					hit[feature] = int(row[i])
 				else:
 					hit[feature] = row[i]
-				i+=1
-
-			self.hits.append(hit)
-			
+			self.hits.append(hit)		
 		return self.hits
 
 	def __init__(self, bl_report_path, custom_features=False, delimiter=','):
@@ -92,21 +87,7 @@ class BlastParser(object):
 		self.parse_blast_csv()
 		return None
 
-	def sort_blast_csv(self):
-		sorted_hits = sorted( hits, key = lambda hit: ( hit['qseqid'], -hit['alignment_length'], hit['e-value']) ) 
-		self.hits = sorted_hits
-		return self.hits
-
-	def count_hits(self):
-		queries = []
-		for hit in self.hits: queries.append(hit['qseqid'])
-		len_queries = len(queries)
-		len_q_set = len(set(queries))
-		print 'All hits,', len_queries 
-		print 'Set of queries:', len_q_set
-		return [len_queries, len_q_set]
-
-	def count_hits_if(self, evalue=False, length=False, alen_qlen=False):
+	def count_hits(self, evalue=False, length=False, alen_qlen=False):
 		hit_set= []
 		for hit in self.hits: queries.append(hit['qseqid'])
 			if alen_qlen:
@@ -118,74 +99,57 @@ class BlastParser(object):
 		print 'Set of queries:', len_q_set
 		return [len_queries, len_q_set]
 
+	def change_ids(self, hits=False, ids_csv_path, ids_csv_delimiter=','):
+		if not hits: hits = self.hits
+		ids_csv = parse_csv(ids_csv_path, delimiter=ids_csv_delimiter)
+		for hit in self.hits:
+			for row in ids_csv:
+				if hit['qseqid'] == row[0]: hit['qseqid'] = row[1]
+		outfile_path = new_file(self.bl_report_path, new_end='_new_ids.csv')
+		self.bl_report_path = outfile_path
+		self.write_blast_csv(outfile_path=outfile_path, hits=self.hits, header=True)
+		return outfile_path
+
 	def write_blast_csv(self, outfile_path, hits=False, header=False):
 		if not hits: hits = self.hits
 		with open(outfile_path, 'wb') as outfile:
 			csv_writer = csv.writer(outfile, delimiter=self.delimiter)
 			if header:
 				csv_writer.writerow(self.features)
-
 			for hit in hits:
 				row = []
 				for feature in self.features:
 					row.append(hit[feature])
 				csv_writer.writerow(row)
 			outfile.close()
-
 		return outfile_path
 
-	def extract_unique(self, hits=False, each_query=False, each_subject=False):
-		is_first = True
-			subj_hits = {}
-			for hit, is_last in lookahead(self.hits):
-				if hit[subject] in subj_hits.keys():
-					subj_hits[hit[subject]].append(hit)
-				else:
-					subj_hits[hit[subject]] = []
-					subj_hits[hit[subject]].append(hit)
-
+	def divide_hits_by_feature(self, feature, hits=False, verbose=True):
 		if not hits: hits = self.hits
-		sorted_hits = sorted(hits, key = lambda hit: hit['evalue'])
-			for hit in sorted_hits:
-				if is_first: 
-					best_hits.append(hit)
-					is_first = False
-				else:
-					if hit['evalue']== 0:
-						best_hits.append(hit)
-					elif (cur_hit['evalue'] == 0 or hit['evalue']/cur_hit['evalue'] >= mindif_evalue) \
-							and \
-						 (hit['length'] / cur_hit['length']) <= maxdif_length:
-						break
-					else:
-						best_hits.append(hit)
-				cur_hit = hit
-			self.hits = best_hits
-
-		outfile_path = new_file_same_dir(self.bl_report_path, new_end='_unique.csv')
-		self.bl_report_path = outfile_path
-		self.write_blast_csv(outfile_path=outfile_path, hits=best_hits, header=True)
 		
+		divided_hits = {}
+		for hit, is_last in lookahead(hits):
+			if hit[feature] in divided_hits.keys():
+				divided_hits[hit[feature]].append(hit)
+			else:
+				divided_hits[hit[feature]] = []
+				divided_hits[hit[feature]].append(hit)
+
+		if verbose: print 'Set of ', feature, len(divided_hits)
+
+		return divided_hits
+
+	def extract_unique(self, hits=False, query=False, subject=False):
+		if not hits: hits = self.hits
 		return outfile_path
 
 	def extract_best(self, mindif_evalue=10, maxdif_length=1, sort_qseid=False, sort_sseid=False):
-		subjects = []
-		if sort_qseid: subjects.append('qseqid')
-		if sort_sseid: subjects.append('sseqid')
+		features = []
+		if sort_qseid: features.append('qseqid')
+		if sort_sseid: features.append('sseqid')
 
-		for subject in subjects:
-			self.count_hits()
-			is_first = True
-			subj_hits = {}
-			for hit, is_last in lookahead(self.hits):
-				if hit[subject] in subj_hits.keys():
-					subj_hits[hit[subject]].append(hit)
-				else:
-					subj_hits[hit[subject]] = []
-					subj_hits[hit[subject]].append(hit)
-
-			print 'Set of ', subject, len(subj_hits)
-
+		for feature in features:
+			divided_hits = self.divide_hits_by_feature(feature, hits=hits)
 			best_hits = []
 			for subj in subj_hits:
 				sorted_hits = sorted(subj_hits[subj], key = lambda hit: hit['evalue'])
@@ -207,7 +171,7 @@ class BlastParser(object):
 			print 'Best hits', len(best_hits)
 			self.hits = best_hits
 
-		outfile_path = new_file_same_dir(self.bl_report_path, new_end='_best_hits.csv')
+		outfile_path = new_file(self.bl_report_path, new_end='_best_hits.csv')
 		self.bl_report_path = outfile_path
 		self.write_blast_csv(outfile_path=outfile_path, hits=best_hits, header=True)
 		
@@ -231,20 +195,10 @@ class BlastParser(object):
 			print 'Best hits', len(best_hits)
 			self.hits = best_hits
 
-		outfile_path = new_file_same_dir(self.bl_report_path, new_end='_best_hits.csv')
+		outfile_path = new_file(self.bl_report_path, new_end='_best_hits.csv')
 		self.bl_report_path = outfile_path
 		self.write_blast_csv(outfile_path=outfile_path, hits=best_hits, header=True)
 		
-		return outfile_path
-
-	def change_ids(self, ids_csv_path, delimiter=','):
-		ids_csv = parse_csv(ids_csv_path, delimiter=delimiter)
-		for hit in self.hits:
-			for row in ids_csv:
-				if hit['qseqid'] == row[0]: hit['qseqid'] = row[1]
-		outfile_path = new_file_same_dir(self.bl_report_path, new_end='_new_ids.csv')
-		self.bl_report_path = outfile_path
-		self.write_blast_csv(outfile_path=outfile_path, hits=self.hits, header=True)
 		return outfile_path
 
 	def add_functions(self, q_path,  q_delimiter, s_path, s_delimiter, hits=False, add_alen_qlen=True):
@@ -271,7 +225,7 @@ class BlastParser(object):
 			allen_index = self.features.index('length')
 			self.features.insert(allen_index+1, 'allen/qlen')
 
-		outfile_path = new_file_same_dir(self.bl_report_path, new_end='_with_functions.csv')
+		outfile_path = new_file(self.bl_report_path, new_end='_with_functions.csv')
 		self.write_blast_csv(outfile_path=outfile_path, hits=hits, header=True)
 		return hits
 
