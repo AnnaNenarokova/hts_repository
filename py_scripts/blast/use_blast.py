@@ -2,7 +2,7 @@
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
 from blast.classes.blast import Blast
-from blast.classes.blast_parser import BlastParser
+from blast.classes.blast_parser import HitsCollection
 
 # query_path = '/home/anna/bioinformatics/euglenozoa/tripanosoma/tr_proteins.fasta'
 ref_path = '/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta2.0.fasta'
@@ -22,7 +22,7 @@ bl_report = new_blast.blast(bl_type='blastp', evalue=0.00001, outfmt='comma_valu
 
 # bl_report = '/home/anna/bioinformatics/euglenozoa/euglena/sequences/E_gracilis_transcriptome_final.PROTEINS/blast_reports/tr_proteins_bl_report.csv'
 bl_report = '/home/anna/bioinformatics/euglenozoa/euglena/sequences/E_gracilis_transcriptome_final.PROTEINS/blast_reports/Human_best_hits.csv'
-blparser = BlastParser(bl_report, custom_outfmt)
+blparser = HitsCollection(bl_report, custom_outfmt)
 
 q_path='/home/anna/bioinformatics/euglenozoa/tripanosoma/mitoproteome.csv'
 q_path='/home/anna/bioinformatics/euglenozoa/mitocarta/mitocarta_human_functions.csv'

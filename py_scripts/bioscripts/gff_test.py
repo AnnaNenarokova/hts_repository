@@ -7,11 +7,11 @@ from Bio.SeqFeature import SeqFeature, FeatureLocation
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
 
-from blast.classes.blast_parser import BlastParser
+from blast.classes.blast_parser import HitsCollection
 from common_helpers.make_outdir import new_file
 
 def blast_to_gff(blresult_path, reference, outfile_path=False):
-	blparser = BlastParser(blresult_path, 'csv')
+	blparser = HitsCollection(blresult_path, 'csv')
 	hits = blparser.hits
 	if not outfile_path: outfile_path = new_file(blresult_path, new_ext='.gff')
 	print hits

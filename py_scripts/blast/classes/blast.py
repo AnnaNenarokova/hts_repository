@@ -10,7 +10,7 @@ from os.path import exists
 from os import makedirs
 
 class Blast(object):
-	def __init__(self, ref_path=False, ref_type='fasta', db_type=False, db_path=False, query_path=False, outdir=False, threads=8):
+	def __init__(self, query_path=False, ref_path=False, ref_type='fasta', db_type=False, db_path=False, outdir=False, threads=8):
 		self.ref_path = ref_path
 		self.ref_type = ref_type
 		if self.ref_type=='fastq': self.ref_path = fastq_fasta(self.ref_path)
@@ -24,13 +24,13 @@ class Blast(object):
 	def makeblastdb(self):
 		if not self.ref_path: 
 			print "Error: No reference"
-			return 1
+			return False
 		if not self.outdir:
 			self.outdir = make_outdir(self.ref_path)
 		db_folder = self.outdir + 'blast_db/'
 		db_path = db_folder + file_from_path(self.ref_path, endcut=6) + '.db'
-		makeblastdb = ['makeblastdb', '-in', self.ref_path, '-parse_seqids', '-dbtype', self.db_type, '-out', db_path]
-		call(makeblastdb)
+		make_blast_db = ['makeblastdb', '-in', self.ref_path, '-parse_seqids', '-dbtype', self.db_type, '-out', db_path]
+		call(make_blast_db)
 		return db_path
 
 	formats = { 
@@ -77,12 +77,12 @@ class Blast(object):
 
 		if not ((is_nucl_bl_type and self.db_type=='nucl') or (is_prot_bl_type and self.db_type=='prot')): 
 			print 'Error: Incompatible options'
-			return 'Error'
+			return False
 
 		if blastn_short:
 			if not (bl_type=='blastn' and self.db_type=='nucl'): 
 				print 'Error: Incompatible options'
-				return 'Error'
+				return False
 			else: blast_call.extend ['-task', 'blastn-short']
 
 		print 'Blast is running'
