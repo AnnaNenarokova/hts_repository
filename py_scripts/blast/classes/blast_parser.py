@@ -56,7 +56,7 @@ all_features = {
 'qcovhsp': {'description': 'Query Coverage Per HSP', 'type': 'float'},
 }
 
-class HitsCollection(object):
+class BlastParser(object):
 	def __init__(self, hits=False, blreport_path=False, features_string=False, features=False, delimiter=','):
 		if not features:
 			if features_str: self.features = filter(None, features.split(' '))
@@ -97,7 +97,7 @@ class HitsCollection(object):
 		return [len_queries, len_q_set]
 
 	def add_len_ratio(self):
-		hits_with_ratio = HitsCollection(hits=self.hits, features=self.features)
+		hits_with_ratio = BlastParser(hits=self.hits, features=self.features)
 		allen_index = hits_with_ratio.features.index('length')
 		hits_with_ratio.features.insert(allen_index+1, 'allen/qlen')
 		for hit in hits_with_ratio.hits:
@@ -108,7 +108,7 @@ class HitsCollection(object):
 		ids_csv = parse_csv(ids_csv_path, delimiter=ids_csv_delimiter)
 		ids_substitutes = {}
 		for row in ids_csv: ids_substitute[row[0]] = row[1]
-		new_ids_hits = HitsCollection(hits=self.hits, features=self.features)
+		new_ids_hits = BlastParser(hits=self.hits, features=self.features)
 		for hit in new_ids_hits.hits:
 			hit['qseqid'] = ids_substitutes[hit['qseqid']]
 		return new_ids_hits
