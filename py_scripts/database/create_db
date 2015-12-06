@@ -12,10 +12,10 @@ class BaseModel(Model):
     class Meta:
         database = db
 
-class Proteins(BaseModel):
+class Sequences(BaseModel):
     seq_id = CharField()
     description = TextField(null=True)
-    fasta = TextField()
+    sequence = TextField()
     organism = CharField()
     source = CharField()
 
@@ -24,12 +24,16 @@ class BlastHits(BaseModel):
 	query_id = CharField()
 
 
-
-
-
+csv_data = parse_csv(csv_path, delimiter=delimiter)
 
 db_path = '/home/anna/bioinformatics/euglenozoa/mitoproteome.db'
 
 db = SqliteDatabase(db_path)
 
-csv_data = parse_csv(csv_path, delimiter=delimiter)
+Protein.drop_table()
+BlastHit.drop_table()
+ 
+db.create_tables([Protein, BlastHit])
+
+
+
