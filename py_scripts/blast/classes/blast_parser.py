@@ -4,41 +4,7 @@ import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
 from common_helpers.parse_csv import parse_csv
 
-class BlastParser(object):
-	def __init__(self, blreport_path, features=False, has_header=False, delimiter=','):
-		self.blreport_path = blreport_path
-		self.features = features
-		self.has_header = has_header
-		self.delimiter = delimiter
-		if type(self.features) == str: self.features = filter(None, self.features.split(' '))
-		default_features = ['qseqid', 'sseqid', 'pident', 'length', 'mismatch', 'gapopen', 'qstart', 'qend', 'sstart', 'send', 'evalue', 'bitscore']
-		if not self.features and not self.has_header: self.features = default_features
-		return None
-
-	def read_hits(self, db_path=False):
-		handle_file = open(self.blreport_path)
-		handle_csv = csv.reader(handle_file, delimiter)
-		first = True
-		hits = []
-		for row in handle_csv:
-			if first and self.has_header:
-				self.features = row
-			elif first and (row[0] in self.features): pass
-			else:
-				hit = {}
-				for feature in self.features:
-					if all_features[feature]['type'] == 'float':
-						hit[feature] = float(row[i])
-					elif all_features[feature]['type'] == 'int':
-						hit[feature] = int(row[i])
-					else:
-						hit[feature] = row[i]
-			if db_path: pass
-			else: self.hits.append(hit)
-		if db_path: pass
-		else: return self.hits
-
-	all_features = {
+all_features = {
 	'qseqid': {'description': 'Query Seq-id', 'type': 'str'},
 	'qgi': {'description': 'Query GI', 'type': 'str'},
 	'qacc': {'description': 'Query accesion', 'type': 'str'},
@@ -84,3 +50,38 @@ class BlastParser(object):
 	'qcovs': {'description': 'Query Coverage Per Subject', 'type': 'float'},
 	'qcovhsp': {'description': 'Query Coverage Per HSP', 'type': 'float'},
 	}
+
+class BlastParser(object):
+	def __init__(self, blreport_path, features=False, has_header=False, delimiter=','):
+		self.blreport_path = blreport_path
+		self.features = features
+		self.has_header = has_header
+		self.delimiter = delimiter
+		if type(self.features) == str: self.features = filter(None, self.features.split(' '))
+		default_features = ['qseqid', 'sseqid', 'pident', 'length', 'mismatch', 'gapopen', 'qstart', 'qend', 'sstart', 'send', 'evalue', 'bitscore']
+		if not self.features and not self.has_header: self.features = default_features
+		return None
+
+	def read_hits(self):
+		handle_file = open(self.blreport_path)
+		handle_csv = csv.reader(handle_file, delimiter=self.delimiter)
+		first = True
+		hits = []
+		for row in handle_csv:
+			if first and self.has_header:
+				self.features = row
+			elif first and (row[0] in self.features): pass
+			else:
+				hit = {}
+				i = 0
+				for feature in self.features:
+					if all_features[feature]['type'] == 'float':
+						hit[feature] = float(row[i])
+					elif all_features[feature]['type'] == 'int':
+						hit[feature] = int(row[i])
+					else:
+						hit[feature] = row[i]
+					i+=1
+			hits.append(hit)
+		return hits
+
