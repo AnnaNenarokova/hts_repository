@@ -12,14 +12,14 @@ class BaseModel(Model):
     class Meta:
         database = db
 
-class Protein(BaseModel):
+class Proteins(BaseModel):
     seq_id = CharField()
     description = TextField(null=True)
     fasta = TextField()
     organism = CharField()
     source = CharField()
 
-class BlastHit(BaseModel):
+class BlastHits(BaseModel):
 	subject_id = CharField()
 	query_id = CharField()
 
