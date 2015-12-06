@@ -8,26 +8,21 @@ from common_helpers.make_outdir import file_from_path, make_outdir, new_file
 from common_helpers.parse_csv import parse_csv
 from blast.classes.blast_parser import BlastParser
 
-class Protein(Model):
-    protein_id = CharField()
+class BaseModel(Model):
+    class Meta:
+        database = db
+
+class Protein(BaseModel):
+    seq_id = CharField()
     description = TextField(null=True)
     fasta = TextField()
     organism = CharField()
     source = CharField()
 
-    class Meta:
-    	database = db
-
-class BlastHit(Model):
+class BlastHit(BaseModel):
 	subject_id = CharField()
 	query_id = CharField()
-	
-	class Meta:
-		database = db
 
-class BaseModel(Model):
-    class Meta:
-        database = db
 
 
 
