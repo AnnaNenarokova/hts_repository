@@ -49,7 +49,3 @@ def use_targetp(f_path, outf_path=False, is_plant=False, txt_out=False):
 		    csv_writer.writerows(csv_out)
 
 	return outf_path
-
-f_path = '/home/anna/bioinformatics/euglenozoa/euglena/sequences/E_gracilis_transcriptome_final.PROTEINS.fasta'
-
-use_targetp(f_path)

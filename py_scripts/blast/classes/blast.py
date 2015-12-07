@@ -10,10 +10,10 @@ from os.path import exists
 from os import makedirs
 
 class Blast(object):
-	def __init__(self, query_path=False, ref_path=False, ref_type='fasta', db_type=False, db_path=False, outdir=False, threads=8):
-		self.ref_path = ref_path
+	def __init__(self, query_path=False, subject_path=False, ref_type='fasta', db_type=False, db_path=False, outdir=False, threads=8):
+		self.subject_path = subject_path
 		self.ref_type = ref_type
-		if self.ref_type=='fastq': self.ref_path = fastq_fasta(self.ref_path)
+		if self.ref_type=='fastq': self.subject_path = fastq_fasta(self.subject_path)
 		self.db_type = db_type
 		self.db_path = db_path
 		self.query_path = query_path
@@ -22,14 +22,11 @@ class Blast(object):
 		return None
 
 	def makeblastdb(self):
-		if not self.ref_path:
-			print "Error: No reference"
-			return False
 		if not self.outdir:
-			self.outdir = make_outdir(self.ref_path)
+			self.outdir = make_outdir(self.subject_path)
 		db_folder = self.outdir + 'blast_db/'
-		db_path = db_folder + file_from_path(self.ref_path, endcut=6) + '.db'
-		make_blast_db = ['makeblastdb', '-in', self.ref_path, '-parse_seqids', '-dbtype', self.db_type, '-out', db_path]
+		db_path = db_folder + file_from_path(self.subject_path, endcut=6) + '.db'
+		make_blast_db = ['makeblastdb', '-in', self.subject_path, '-parse_seqids', '-dbtype', self.db_type, '-out', db_path]
 		call(make_blast_db)
 		return db_path
 
@@ -50,12 +47,13 @@ class Blast(object):
 
 	def blast(self, bl_type='blastn', outfmt='comma_values', custom_outfmt='False', word_size=False, blastn_short=False, evalue=10, threads=8, outfile=False):
 		if not self.query_path:
-			print "Error: No query"
-			return 'Error'
+			sys.exit("Error: No query")
 
 		self.custom_outfmt = custom_outfmt
 
-		if not self.db_path: self.db_path = self.makeblastdb()
+		if not self.db_path:
+			if not self.subject_path: sys.exit("Error: No subject")
+			else: self.db_path = self.makeblastdb()
 
 		query_name = file_from_path(self.query_path, endcut=6)
 

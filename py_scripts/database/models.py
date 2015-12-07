@@ -30,6 +30,7 @@ class Sequence(BaseModel):
     sequence = TextField()
     organism = CharField()
     source = CharField(index=True)
+    localisation = CharField(null=True)
 
     @staticmethod
     def read_from_fasta(fasta_path, seq_type, organism='unknown organism', source='unknown source'):
