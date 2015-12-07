@@ -26,18 +26,20 @@ class BaseModel(Model):
 class Sequence(BaseModel):
     seq_id = CharField(index=True)
     seq_type = CharField()
-    description = TextField(null=True)
-    sequence = TextField()
     organism = CharField()
-    source = CharField(index=True)
+    source = CharField()
     localisation = CharField(null=True)
+    function = TextField(null=True, index=True)
 
     @staticmethod
     def read_from_fasta(fasta_path, seq_type, organism='unknown organism', source='unknown source'):
         with db.atomic():
             for record in SeqIO.parse(fasta_path, "fasta"):
-                Sequence.create(seq_id=record.id, seq_type=seq_type, description=record.description,
-                                sequence=record.seq, organism=organism, source=source)
+                other_data = {}
+                other_data['sequence'] = str(record.seq)
+                other_data['description'] = str(record.description)
+                Sequence.create(seq_id=record.id, seq_type=seq_type, organism=organism, source=source,
+                                extra_data=other_data)
 
     def to_seqrecord(self):
         if self.seq_type =='dna': alphabet = 'generic_dna'
@@ -45,7 +47,7 @@ class Sequence(BaseModel):
         else:
             print 'Error: Unsupported sequence type'
             return False
-        seqrecord = SeqRecord(Seq(self.sequence, alphabet), id = seq_id, description = description)
+        seqrecord = SeqRecord(Seq(self.extra_data['sequence'], alphabet), id = seq_id, description = description)
         return seqrecord
 
 class BlastHit(BaseModel):

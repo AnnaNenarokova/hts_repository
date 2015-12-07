@@ -13,9 +13,9 @@ BlastHit.drop_table()
 db.create_table(Sequence)
 db.create_table(BlastHit)
 
-fasta_path = '/home/anna/bioinformatics/euglenozoa/euglena/sequences/E_gracilis_transcriptome_final.PROTEINS.fasta'
-seq_type = 'protein'
-Sequence.read_from_fasta(fasta_path, seq_type, organism='Euglena gracilis', source='E_gracilis_transcriptome_final.PROTEINS')
+# fasta_path = '/home/anna/bioinformatics/euglenozoa/euglena/sequences/E_gracilis_transcriptome_final.PROTEINS.fasta'
+# seq_type = 'protein'
+# Sequence.read_from_fasta(fasta_path, seq_type, organism='Euglena gracilis', source='E_gracilis_transcriptome_final.PROTEINS')
 
 fasta_path = '/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta2.0.fasta'
 seq_type = 'protein'
