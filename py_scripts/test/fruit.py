@@ -6,8 +6,8 @@ class Fruit(object):
 def make_sweet(fruit_class):
     setattr(fruit_class, 'taste', 'sweet')
 
-kaki = Fruit()
-make_sweet(kaki)
+orange = Fruit()
+make_sweet(orange)
 
-print kaki.taste
-print kaki.edible
+print orange.taste
+print orange.edible
