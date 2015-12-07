@@ -19,11 +19,11 @@ db.create_table(BlastHit)
 
 fasta_path = '/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta2.0.fasta'
 seq_type = 'protein'
-Sequence.read_from_fasta(fasta_path, seq_type, organism='Homo sapiens', source='Human.MitoCarta2.0')
+Sequence.read_from_f(fasta_path, seq_type, organism='Homo sapiens', source='Human.MitoCarta2.0')
 
 fasta_path = '/home/anna/bioinformatics/euglenozoa/tripanosoma/tr_proteins.fasta'
 seq_type = 'protein'
-Sequence.read_from_fasta(fasta_path, seq_type, organism='Tripanosoma brucei', source='T. brucei table')
+Sequence.read_from_f(fasta_path, seq_type, organism='Tripanosoma brucei', source='T. brucei table')
 
 blast_csv_path = '/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta2.0/blast_reports/tr_proteins_bl_report.csv'
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'

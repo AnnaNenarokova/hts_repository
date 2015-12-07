@@ -32,14 +32,25 @@ class Sequence(BaseModel):
     function = TextField(null=True, index=True)
 
     @staticmethod
-    def read_from_fasta(fasta_path, seq_type, organism='unknown organism', source='unknown source'):
+    def read_from_f(fasta_path, seq_type, organism='unknown organism', source='unknown source', info_dict=False):
         with db.atomic():
             for record in SeqIO.parse(fasta_path, "fasta"):
+                seq_id = record.id
                 other_data = {}
                 other_data['sequence'] = str(record.seq)
                 other_data['description'] = str(record.description)
-                Sequence.create(seq_id=record.id, seq_type=seq_type, organism=organism, source=source,
-                                extra_data=other_data)
+                if info_dict:
+                    localisation = info_dict[seq_id]['localisation']
+                    function = info_dict[seq_id]['function']
+                    for feature in blast_dict:
+                        if feature not in ['localisation', 'function']:
+                            other_features[feature] = blast_dict[feature]
+                    Sequence.create(seq_id=seq_id, seq_type=seq_type, organism=organism, source=source,
+                                    extra_data=other_data, localisation=localisation, function=function)
+                else:
+                    Sequence.create(seq_id=seq_id, seq_type=seq_type, organism=organism, source=source,
+                                    extra_data=other_data)
+
 
     def to_seqrecord(self):
         if self.seq_type =='dna': alphabet = 'generic_dna'
