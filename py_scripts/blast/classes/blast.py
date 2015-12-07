@@ -22,7 +22,7 @@ class Blast(object):
 		return None
 
 	def makeblastdb(self):
-		if not self.ref_path: 
+		if not self.ref_path:
 			print "Error: No reference"
 			return False
 		if not self.outdir:
@@ -33,13 +33,13 @@ class Blast(object):
 		call(make_blast_db)
 		return db_path
 
-	formats = { 
-	'pairwise': {'#':'0', 'ext':'.txt'}, 
+	formats = {
+	'pairwise': {'#':'0', 'ext':'.txt'},
 	'query_anchored_identities': {'#':'1', 'ext':'.txt'},
 	'query_anchored_no_identities': {'#':'2', 'ext':'.txt'},
 	'flat_query_anchored_identities': {'#':'3', 'ext':'.txt'},
 	'flat_query_anchored_no_identities': {'#':'4', 'ext':'.txt'},
-	'xml': {'#':'5', 'ext':'.xml'}, 
+	'xml': {'#':'5', 'ext':'.xml'},
 	'tabular': {'#':'6', 'ext':'.csv'},
 	'tabular_comment_lines': {'#':'7', 'ext':'.txt'},
 	'text_asn': {'#':'8', 'ext':'.txt'},
@@ -64,24 +64,24 @@ class Blast(object):
 		outfile = blreports_dir + str(query_name + "_bl_report" + self.formats[outfmt]['ext'])
 
 		outfmt = self.formats[outfmt]['#']
-		if custom_outfmt: 
+		if custom_outfmt:
 			outfmt = outfmt + " '" + custom_outfmt + "'"
-			
+
 		blast_call = [bl_type, '-query', self.query_path, '-db', self.db_path, '-out', outfile, '-outfmt', outfmt, '-num_threads', str(threads), '-evalue', str(evalue)]
-		
+
 		if word_size:
 			blast_call.extend(['-word_size', str(word_size)])
 
 		is_prot_bl_type = (bl_type =='blastp' or bl_type =='psiblast' or bl_type == 'blastx')
 		is_nucl_bl_type = (bl_type =='blastn' or bl_type =='tblastn')
 
-		if not ((is_nucl_bl_type and self.db_type=='nucl') or (is_prot_bl_type and self.db_type=='prot')): 
-			print 'Error: Incompatible options'
+		if not ((is_nucl_bl_type and self.db_type=='nucl') or (is_prot_bl_type and self.db_type=='prot')):
+			sys.exit('Error: Incompatible options')
 			return False
 
 		if blastn_short:
-			if not (bl_type=='blastn' and self.db_type=='nucl'): 
-				print 'Error: Incompatible options'
+			if not (bl_type=='blastn' and self.db_type=='nucl'):
+				sys.exit('Error: Incompatible options')
 				return False
 			else: blast_call.extend ['-task', 'blastn-short']
 
