@@ -5,6 +5,10 @@ from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.Alphabet import *
 import simplejson as json
+import sys
+sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
+from common_helpers.parse_csv import *
+
 
 db_path = '/home/anna/bioinformatics/euglenozoa/mitoproteome.db'
 db = SqliteDatabase(db_path)
@@ -28,29 +32,47 @@ class Sequence(BaseModel):
     seq_type = CharField()
     organism = CharField()
     source = CharField()
+    mitoscore = FloatField(null=True)
     localisation = CharField(null=True)
+    loc_rate = IntegerField(null=True)
     function = TextField(null=True, index=True)
 
     @staticmethod
-    def read_from_f(fasta_path, seq_type, organism='unknown organism', source='unknown source', info_dict=False):
+    def read_from_f(fasta_path, seq_type, organism='unknown organism', source='unknown source', loc_dict=False, function_dict=False):
         with db.atomic():
             for record in SeqIO.parse(fasta_path, "fasta"):
                 seq_id = record.id
                 other_data = {}
                 other_data['sequence'] = str(record.seq)
                 other_data['description'] = str(record.description)
-                if info_dict:
-                    localisation = info_dict[seq_id]['localisation']
-                    function = info_dict[seq_id]['function']
-                    for feature in blast_dict:
-                        if feature not in ['localisation', 'function']:
-                            other_features[feature] = blast_dict[feature]
-                    Sequence.create(seq_id=seq_id, seq_type=seq_type, organism=organism, source=source,
-                                    extra_data=other_data, localisation=localisation, function=function)
+                if loc_dict:
+                    if 'localisation' in loc_dict[seq_id].keys():
+                        localisation = loc_dict[seq_id]['localisation']
+                    else: localisation = None
+                    if 'loc_rate' in loc_dict[seq_id].keys():
+                        loc_rate = int(loc_dict[seq_id]['loc_rate'])
+                    else: loc_rate = None
+                    for key in loc_dict[seq_id]:
+                        if key not in ['localisation', 'loc_rate']:
+                            other_data[key] = loc_dict[seq_id][key]
                 else:
-                    Sequence.create(seq_id=seq_id, seq_type=seq_type, organism=organism, source=source,
-                                    extra_data=other_data)
+                    localisation, loc_rate = None, None
 
+                if function_dict:
+                    if 'function' in function_dict[seq_id].keys():
+                        function = function_dict[seq_id]['function']
+                    else: function = None
+                    if 'mitoscore' in function_dict[seq_id].keys():
+                        mitoscore = float(function_dict[seq_id]['mitoscore'])
+                    else: mitoscore = None
+                    for key in function_dict[seq_id]:
+                        if key not in ['function', 'mitoscore']:
+                            other_data[key] = function_dict[seq_id][key]
+                else:
+                    function, mitoscore = None, None
+
+                Sequence.create(seq_id=seq_id, seq_type=seq_type, organism=organism, source=source, extra_data=other_data,
+                                localisation=localisation, loc_rate=loc_rate, function=function, mitoscore=mitoscore)
 
     def to_seqrecord(self):
         if self.seq_type =='dna': alphabet = 'generic_dna'

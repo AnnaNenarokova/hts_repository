@@ -1,8 +1,6 @@
 #!/usr/bin/python
 import csv
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
-from common_helpers.parse_csv import parse_csv
 
 all_features = {
 	'qseqid': {'description': 'Query Seq-id', 'type': 'str'},
