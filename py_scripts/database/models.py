@@ -33,7 +33,7 @@ class Sequence(BaseModel):
     organism = CharField()
     source = CharField()
     mitoscore = FloatField(null=True)
-    localisation = CharField(null=True)
+    loc = CharField(null=True)
     loc_rate = IntegerField(null=True)
     function = TextField(null=True, index=True)
 
@@ -46,17 +46,17 @@ class Sequence(BaseModel):
                 other_data['sequence'] = str(record.seq)
                 other_data['description'] = str(record.description)
                 if loc_dict:
-                    if 'localisation' in loc_dict[seq_id].keys():
-                        localisation = loc_dict[seq_id]['localisation']
-                    else: localisation = None
+                    if 'loc' in loc_dict[seq_id].keys():
+                        loc = loc_dict[seq_id]['loc']
+                    else: loc = None
                     if 'loc_rate' in loc_dict[seq_id].keys():
                         loc_rate = int(loc_dict[seq_id]['loc_rate'])
                     else: loc_rate = None
                     for key in loc_dict[seq_id]:
-                        if key not in ['localisation', 'loc_rate']:
+                        if key not in ['loc', 'loc_rate']:
                             other_data[key] = loc_dict[seq_id][key]
                 else:
-                    localisation, loc_rate = None, None
+                    loc, loc_rate = None, None
 
                 if function_dict:
                     if 'function' in function_dict[seq_id].keys():
@@ -72,7 +72,7 @@ class Sequence(BaseModel):
                     function, mitoscore = None, None
 
                 Sequence.create(seq_id=seq_id, seq_type=seq_type, organism=organism, source=source, extra_data=other_data,
-                                localisation=localisation, loc_rate=loc_rate, function=function, mitoscore=mitoscore)
+                                loc=loc, loc_rate=loc_rate, function=function, mitoscore=mitoscore)
 
     def to_seqrecord(self):
         if self.seq_type =='dna': alphabet = 'generic_dna'

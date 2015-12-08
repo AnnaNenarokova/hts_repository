@@ -21,8 +21,6 @@ function_dict = seq_info_to_dict(function_csv)
 
 Sequence.read_from_f(fasta_path, seq_type, organism='Tripanosoma brucei', source='T. brucei table', loc_dict=loc_dict, function_dict=function_dict)
 
-
-
 # fasta_path = '/home/anna/bioinformatics/euglenozoa/yeast/yeast_orf_trans_all.fasta'
 # Sequence.read_from_f(fasta_path, seq_type, organism='Saccharomyces cerevisiae', source='yeast_orf_trans_all')
 
