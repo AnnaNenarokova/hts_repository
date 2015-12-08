@@ -14,7 +14,7 @@ global ONLY_SPACERS; ONLY_SPACERS = False
 global MAX_PROCESSES; MAX_PROCESSES = 8
 global REPEAT; REPEAT = 'GAGTTCCCCGCGCCAGCGGGGATAAACCGC'
 global USE_BOWTIE2; USE_BOWTIE2 = True
-global MULTIPROC; MULTIPROC = False 
+global MULTIPROC; MULTIPROC = False
 global THREADS; THREADS = 8
 
 def file_from_path(path):
@@ -53,9 +53,9 @@ def trimc_trim (file_fw, file_rv, outdir, trimc_dir=None):
 	adapters_file = trimc_dir + 'adapters/'+ "illumina.fasta"
 
 	trimmomatic = ['java', '-jar', trimc_dir + 'trimmomatic-0.32.jar']
-	trim_options = ['PE', '-threads', str(THREADS), '-phred33', '-trimlog', trimlog, file_fw, file_rv, 
+	trim_options = ['PE', '-threads', str(THREADS), '-phred33', '-trimlog', trimlog, file_fw, file_rv,
 					paired_out_fw, unpaired_out_fw, paired_out_rv, unpaired_out_rv,
-					'ILLUMINACLIP:'+ adapters_file + ':2:30:10'] 
+					'ILLUMINACLIP:'+ adapters_file + ':2:30:10']
 	trim = trimmomatic + trim_options
 	subprocess32.call(trim)
 	return trim_out
@@ -63,14 +63,14 @@ def trimc_trim (file_fw, file_rv, outdir, trimc_dir=None):
 def use_fuzznuc (reads, pattern, outdir = None, max_mismatch = 5, stdout = None, indels = None, name = ''):
 	if stdout:
 		fuzznuc = ['fuzznuc', '-sequence', reads, '-pattern', pattern]
-		fuzznuc_options = ['-pmismatch', str(max_mismatch), '-complement', '-snucleotide1', '-squick1', 
+		fuzznuc_options = ['-pmismatch', str(max_mismatch), '-complement', '-snucleotide1', '-squick1',
 						   '-rformat2', 'excel', '-stdout', '-auto']
 		fuzznuc = fuzznuc + fuzznuc_options
 		fuzznuc_out = subprocess32.Popen((fuzznuc), stdout=subprocess32.PIPE, bufsize=100)
 	else:
 		fuzznuc_out = outdir + 'fuzznuc_report' + name
 		fuzznuc = ['fuzznuc', '-sequence', reads, '-pattern', pattern, '-outfile', fuzznuc_out]
-		fuzznuc_options = ['-pmismatch', str(max_mismatch), '-complement', '-snucleotide1', '-squick1', 
+		fuzznuc_options = ['-pmismatch', str(max_mismatch), '-complement', '-snucleotide1', '-squick1',
 						   '-rformat2', 'excel']
 		fuzznuc = fuzznuc + fuzznuc_options
 		subprocess32.call(fuzznuc)
@@ -87,19 +87,19 @@ def find_spacers_fuzznuc(reads):
 	for line in iter(output_pipe.readline, ''):
 		row = line.split('\t')
 		if row[0] != 'SeqName':
-			repeat = {'seq_id': row[0], 'start': row[1], 'end': row[2], 'strand': row[4]}
+			repeat = {'seqid': row[0], 'start': row[1], 'end': row[2], 'strand': row[4]}
 			if last_repeat:
-				if repeat['seq_id'] == last_repeat['seq_id']:
+				if repeat['seqid'] == last_repeat['seqid']:
 					spacer_start = int(last_repeat['end'])-1
-					spacer_end = int(repeat['start'])-1	
-					while repeat['seq_id'] != read.id: 
+					spacer_end = int(repeat['start'])-1
+					while repeat['seqid'] != read.id:
 						read = next(reads_iter)
 					if repeat['strand'] == '+':
 						spacer_seq = read.seq[spacer_start:spacer_end]
 					elif repeat['strand'] == '-':
 						spacer_seq = read.seq.reverse_complement()[spacer_start:spacer_end]
 					else: print("Error in find_spacers_fuzznuc")
-					if len(spacer_seq) in range (28, 33): 
+					if len(spacer_seq) in range (28, 33):
 						spacers_number +=1
 						cur_spacer_n += 1
 						description = 'CRISPR cassette ' + read.id[-11: len(read.id)]
@@ -124,7 +124,7 @@ def use_bowtie2 (reference, outdir, unpaired=None, reads1=None, reads2=None, kee
 	elif unpaired:
 		options = ['-p', str(THREADS), '--reorder', '--local','-x', bt2_base, '-f', '-U', unpaired, '-S', sam_file]
 	else: print "Error. Function use_bowtie2: wrong set of arguments"
-	if keep_unaligned: 
+	if keep_unaligned:
 		unaligned = bowtie2_out + 'unaligned.fasta'
 		options = ['--un', unaligned] + options
 		call_bowtie2 = bowtie2 + options
@@ -132,7 +132,7 @@ def use_bowtie2 (reference, outdir, unpaired=None, reads1=None, reads2=None, kee
 		return bowtie2_out, unaligned
 	else:
 		call_bowtie2 = bowtie2 + options
-		subprocess32.call(call_bowtie2)	
+		subprocess32.call(call_bowtie2)
 		return bowtie2_out
 
 def handle_hts (file_fw, file_rv, outdir, reference = None):
@@ -158,7 +158,7 @@ def handle_hts (file_fw, file_rv, outdir, reference = None):
 		return bowtie2_out, unaligned
 	return 0
 
-def handle_files (workdir, file_fw = None, file_rv = None, hts_dir = None, htses = None, 
+def handle_files (workdir, file_fw = None, file_rv = None, hts_dir = None, htses = None,
 				  ref_dir = None, reference = None, references=None):
 	if file_fw and file_rv:
 		if references:
@@ -197,7 +197,7 @@ def handle_files (workdir, file_fw = None, file_rv = None, hts_dir = None, htses
 					if process_count >= MAX_PROCESSES:
 						os.wait()
 						process_count -= 1
-			
+
 	else: print "Error: handle_htses haven't get needed values"
 	return 0
 
@@ -205,7 +205,7 @@ file_fw = '/home/anna/bioinformatics/htses/T5adapt_ACTTGA_L001_R1_001.fastq'
 file_rv = '/home/anna/bioinformatics/htses/T5adapt_ACTTGA_L001_R2_001.fastq'
 workdir = '/home/anna/bioinformatics/outdirs/'
 ref_dir = '/home/anna/bioinformatics/references/'
-references = ['SS_39_CRISPR.fasta', 'first_10_kb_t5.fasta', 't5.fasta', 'pT7blue-G8esc_rev.fasta', 'KD263_CRISPR_region.fasta', 
+references = ['SS_39_CRISPR.fasta', 'first_10_kb_t5.fasta', 't5.fasta', 'pT7blue-G8esc_rev.fasta', 'KD263_CRISPR_region.fasta',
 			  'pt7blue-T4.fasta', 'T4_genome.fasta', 'BW25113.fasta', 'BL21.fasta', 'pBad.fasta']
 
 handle_files (workdir, file_fw=file_fw, file_rv=file_rv, ref_dir = ref_dir, references=references)

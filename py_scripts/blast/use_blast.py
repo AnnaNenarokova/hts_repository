@@ -6,16 +6,16 @@ from blast.classes.blast_parser import BlastParser
 
 query_pathes = {
 'human' : '/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta2.0.fasta',
-'yeast' : '/home/anna/bioinformatics/euglenozoa/yeast/orf_trans_all_yeast.fasta',
+# 'yeast' : '/home/anna/bioinformatics/euglenozoa/yeast/yeast_orf_trans_all.fasta',
 'tripanosoma' : '/home/anna/bioinformatics/euglenozoa/tripanosoma/tr_proteins.fasta',
-'euglena' : '/home/anna/bioinformatics/euglenozoa/euglena/sequences/E_gracilis_transcriptome_final.PROTEINS.fasta',
+
 }
 
 db_pathes = {
-'human' : '/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta2.0/blast_db/Human.MitoCarta2.0.db',
-'yeast' : '/home/anna/bioinformatics/euglenozoa/yeast/orf_trans_all_yeast/blast_db/orf_trans_all_yeast.db',
-'tripanosoma' : '/home/anna/bioinformatics/euglenozoa/tripanosoma/tr_proteins/blast_db/tr_proteins.db',
-'euglena' : '/home/anna/bioinformatics/euglenozoa/euglena/sequences/E_gracilis_transcriptome_final.PROTEINS/blast_db/E_gracilis_transcriptome_final.PROTEINS.db'
+# 'human' : '/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta2.0/blast_db/Human.MitoCarta2.0.db',
+# 'yeast' : '/home/anna/bioinformatics/euglenozoa/yeast/orf_trans_all_yeast/blast_db/orf_trans_all_yeast.db',
+# 'tripanosoma' : '/home/anna/bioinformatics/euglenozoa/tripanosoma/tr_proteins/blast_db/tr_proteins.db',
+'euglena' : '/home/anna/bioinformatics/euglenozoa/euglena/all_euglena_proteins/E_gracilis_transcriptome_final.PROTEINS/blast_db/E_gracilis_transcriptome_final.PROTEINS.db'
 }
 
 blast_csv_pathes = []

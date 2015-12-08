@@ -9,7 +9,6 @@ import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
 from common_helpers.parse_csv import *
 
-
 db_path = '/home/anna/bioinformatics/euglenozoa/mitoproteome.db'
 db = SqliteDatabase(db_path)
 
@@ -28,59 +27,59 @@ class BaseModel(Model):
     extra_data = SerializedDictField(null=True)
 
 class Sequence(BaseModel):
-    seq_id = CharField(index=True)
-    seq_type = CharField()
+    seqid = CharField(index=True)
+    seqtype = CharField()
     organism = CharField()
     source = CharField()
     mitoscore = FloatField(null=True)
     loc = CharField(null=True)
-    loc_rate = IntegerField(null=True)
+    locrate = IntegerField(null=True)
     function = TextField(null=True, index=True)
 
     @staticmethod
-    def read_from_f(fasta_path, seq_type, organism='unknown organism', source='unknown source', loc_dict=False, function_dict=False):
+    def read_from_f(fasta_path, seqtype, organism='unknown organism', source='unknown source', loc_dict=False, function_dict=False):
         with db.atomic():
             for record in SeqIO.parse(fasta_path, "fasta"):
-                seq_id = record.id
+                seqid = record.id
                 other_data = {}
                 other_data['sequence'] = str(record.seq)
                 other_data['description'] = str(record.description)
                 if loc_dict:
-                    if 'loc' in loc_dict[seq_id].keys():
-                        loc = loc_dict[seq_id]['loc']
+                    if 'loc' in loc_dict[seqid].keys():
+                        loc = loc_dict[seqid]['loc']
                     else: loc = None
-                    if 'loc_rate' in loc_dict[seq_id].keys():
-                        loc_rate = int(loc_dict[seq_id]['loc_rate'])
-                    else: loc_rate = None
-                    for key in loc_dict[seq_id]:
-                        if key not in ['loc', 'loc_rate']:
-                            other_data[key] = loc_dict[seq_id][key]
+                    if 'locrate' in loc_dict[seqid].keys():
+                        locrate = int(loc_dict[seqid]['locrate'])
+                    else: locrate = None
+                    for key in loc_dict[seqid]:
+                        if key not in ['loc', 'locrate']:
+                            other_data[key] = loc_dict[seqid][key]
                 else:
-                    loc, loc_rate = None, None
+                    loc, locrate = None, None
 
                 if function_dict:
-                    if 'function' in function_dict[seq_id].keys():
-                        function = function_dict[seq_id]['function']
+                    if 'function' in function_dict[seqid].keys():
+                        function = function_dict[seqid]['function']
                     else: function = None
-                    if 'mitoscore' in function_dict[seq_id].keys():
-                        mitoscore = float(function_dict[seq_id]['mitoscore'])
+                    if 'mitoscore' in function_dict[seqid].keys():
+                        mitoscore = float(function_dict[seqid]['mitoscore'])
                     else: mitoscore = None
-                    for key in function_dict[seq_id]:
+                    for key in function_dict[seqid]:
                         if key not in ['function', 'mitoscore']:
-                            other_data[key] = function_dict[seq_id][key]
+                            other_data[key] = function_dict[seqid][key]
                 else:
                     function, mitoscore = None, None
 
-                Sequence.create(seq_id=seq_id, seq_type=seq_type, organism=organism, source=source, extra_data=other_data,
-                                loc=loc, loc_rate=loc_rate, function=function, mitoscore=mitoscore)
+                Sequence.create(seqid=seqid, seqtype=seqtype, organism=organism, source=source, extra_data=other_data,
+                                loc=loc, locrate=locrate, function=function, mitoscore=mitoscore)
 
     def to_seqrecord(self):
-        if self.seq_type =='dna': alphabet = 'generic_dna'
-        elif self.seq_type == 'protein': alphabet = 'generic_protein'
+        if self.seqtype =='dna': alphabet = 'generic_dna'
+        elif self.seqtype == 'protein': alphabet = 'generic_protein'
         else:
             print 'Error: Unsupported sequence type'
             return False
-        seqrecord = SeqRecord(Seq(self.extra_data['sequence'], alphabet), id = seq_id, description = description)
+        seqrecord = SeqRecord(Seq(self.extra_data['sequence'], alphabet), id = seqid, description = description)
         return seqrecord
 
 class BlastHit(BaseModel):
@@ -104,8 +103,8 @@ class BlastHit(BaseModel):
                     if feature not in ['qseqid', 'sseqid', 'evalue', 'length']:
                         other_features[feature] = blast_dict[feature]
 
-                query = Sequence.select().where(Sequence.seq_id == query_id).get()
-                subject = Sequence.select().where(Sequence.seq_id == subject_id).get()
+                query = Sequence.select().where(Sequence.seqid == query_id).get()
+                subject = Sequence.select().where(Sequence.seqid == subject_id).get()
                 BlastHit.create(query=query, subject=subject, evalue=evalue, length=length,
                                 qlen=qlen, slen=slen, alen_qlen=alen_slen, alen_slen=alen_slen,
                                 extra_data=other_features)

@@ -52,9 +52,9 @@ def use_targetp(f_path, outf_path=False, is_plant=False, cleavage_sites=False, t
 		with open(outf_path, 'w') as outf:
 		    csv_writer = csv.writer(outf)
 		    if is_plant:
-		    	header = ['seqid', 'length', 'chloro_score', 'mito_score', 'secret_score', 'other_score', 'loc', 'loc_rate']
+		    	header = ['seqid', 'length', 'chloro_score', 'mito_score', 'secret_score', 'other_score', 'loc', 'locrate']
 		    else:
-		    	header = ['seqid', 'length', 'mito_score', 'secret_score', 'other_score', 'loc', 'loc_rate']
+		    	header = ['seqid', 'length', 'mito_score', 'secret_score', 'other_score', 'loc', 'locrate']
 		    if cleavage_sites: header.append(['cleavage_site'])
 		    csv_writer.writerow(header)
 		    csv_writer.writerows(csv_out)

@@ -13,7 +13,7 @@ class BaseModel(Model):
         database = db
 
 class Sequences(BaseModel):
-    seq_id = CharField()
+    seqid = CharField()
     description = TextField(null=True)
     sequence = TextField()
     organism = CharField()
@@ -32,7 +32,7 @@ db = SqliteDatabase(db_path)
 
 Protein.drop_table()
 BlastHit.drop_table()
- 
+
 db.create_tables([Protein, BlastHit])
 
 
