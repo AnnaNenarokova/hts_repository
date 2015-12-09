@@ -16,7 +16,7 @@ Sequence.read_from_f(fasta_path, seqtype='protein', organism='Tripanosoma brucei
 fasta_path = '/home/anna/bioinformatics/euglenozoa/yeast/yeast_orf_trans_all.fasta'
 info_csv = '/home/anna/bioinformatics/euglenozoa/yeast/yeast_all.csv'
 info_dict = seq_info_to_dict(info_csv)
-Sequence.read_from_f(fasta_path, seqtype='protein', organism='Saccharomyces cerevisiae', source='yeast_orf_trans_all', info_dict=info_dict)
+Sequence.read_from_f(fasta_path, seqtype='protein', organism='Saccharomyces cerevisiaeя', source='yeast_orf_trans_all', info_dict=info_dict)
 
 fasta_path = '/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta2.0.fasta'
 # info_csv = '/home/anna/bioinformatics/euglenozoa/tripanosoma/triponasoma_info.csv'
