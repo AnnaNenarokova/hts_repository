@@ -28,11 +28,11 @@ class BaseModel(Model):
     extra_data = SerializedDictField(null=True)
 
 class Sequence(BaseModel):
-    seqid = CharField(index=True)
+    seqid = CharField()
     seqtype = CharField()
     organism = CharField()
     source = CharField()
-    function = TextField(null=True, index=True)
+    function = TextField(null=True)
     mitoscore = FloatField(null=True)
     loc = CharField(null=True)
     locrate = IntegerField(null=True)
@@ -47,7 +47,7 @@ class Sequence(BaseModel):
                                 loc=None, locrate=None, function=None, mitoscore=None)
                 new_seq.extra_data['sequence'] = str(record.seq)
                 new_seq.extra_data['description'] = str(record.description)
-                if info_dict:
+                if info_dict and (seqid in info_dict.keys()):
                     new_seq.function = info_dict[seqid]['function']
                     new_seq.mitoscore = float(info_dict[seqid]['mitoscore'])
                     new_seq.loc = info_dict[seqid]['loc']
@@ -77,12 +77,7 @@ class BlastHit(BaseModel):
     @staticmethod
     def create_from_dicts(blast_dicts):
         with db.atomic():
-            i = 0
             for blast_dict in blast_dicts:
-                i += 1
-                if i==100:
-                    print '100'
-                    break
                 query_id, subject_id = blast_dict['qseqid'], blast_dict['sseqid']
                 evalue, length = blast_dict['evalue'], blast_dict['length']
                 qlen, slen = blast_dict['slen'], blast_dict['qlen']
