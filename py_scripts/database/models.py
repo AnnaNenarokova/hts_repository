@@ -77,7 +77,12 @@ class BlastHit(BaseModel):
     @staticmethod
     def create_from_dicts(blast_dicts):
         with db.atomic():
+            i = 0
             for blast_dict in blast_dicts:
+                i += 1
+                if i==100:
+                    print '100'
+                    break
                 query_id, subject_id = blast_dict['qseqid'], blast_dict['sseqid']
                 evalue, length = blast_dict['evalue'], blast_dict['length']
                 qlen, slen = blast_dict['slen'], blast_dict['qlen']
