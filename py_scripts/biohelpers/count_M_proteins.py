@@ -7,7 +7,3 @@ def count_right_prot(fasta_path):
 		if record.seq[0] == 'M': m_starts += 1
 		else: other_starts += 1
 	return m_starts, other_starts
-
-fasta_path = '/home/anna/bioinformatics/euglenozoa/euglena/sequences/E_gracilis_transcriptome_final.PROTEINS.fasta'
-
-print count_right_prot(fasta_path)
