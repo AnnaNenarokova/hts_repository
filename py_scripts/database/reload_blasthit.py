@@ -5,15 +5,18 @@ from blast.classes.blast_parser import BlastParser
 from database.models import *
 from biohelpers.seq_info_to_dict import *
 
-BlastHit.drop_table()
-db.create_table(BlastHit)
+# BlastHit.drop_table()
+# db.create_table(BlastHit)
 blast_csv_pathes = [
-'/home/anna/bioinformatics/euglenozoa/euglena/all_euglena_proteins/E_gracilis_transcriptome_final.PROTEINS/blast_reports/tr_proteins_bl_report.csv',
-'/home/anna/bioinformatics/euglenozoa/euglena/all_euglena_proteins/E_gracilis_transcriptome_final.PROTEINS/blast_reports/Human.MitoCarta2.0_bl_report.csv',
-'/home/anna/bioinformatics/euglenozoa/euglena/all_euglena_proteins/E_gracilis_transcriptome_final.PROTEINS/blast_reports/yeast_orf_trans_all_bl_report.csv',
-'/home/anna/bioinformatics/euglenozoa/tripanosoma/tr_proteins/blast_reports/human_mitocarta_bl_report.csv',
-'/home/anna/bioinformatics/euglenozoa/tripanosoma/tr_proteins/blast_reports/yeast_orf_trans_all_bl_report.csv',
-'/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta2.0/blast_reports/yeast_orf_trans_all_bl_report.csv'
+# '/home/anna/bioinformatics/euglenozoa/euglena/all_euglena_proteins/E_gracilis_transcriptome_final.PROTEINS/blast_reports/tr_proteins_bl_report.csv',
+# '/home/anna/bioinformatics/euglenozoa/euglena/all_euglena_proteins/E_gracilis_transcriptome_final.PROTEINS/blast_reports/Human.MitoCarta2.0_bl_report.csv',
+# '/home/anna/bioinformatics/euglenozoa/euglena/all_euglena_proteins/E_gracilis_transcriptome_final.PROTEINS/blast_reports/yeast_orf_trans_all_bl_report.csv',
+# '/home/anna/bioinformatics/euglenozoa/tripanosoma/tr_proteins/blast_reports/human_mitocarta_bl_report.csv',
+# '/home/anna/bioinformatics/euglenozoa/tripanosoma/tr_proteins/blast_reports/yeast_orf_trans_all_bl_report.csv',
+# '/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta2.0/blast_reports/yeast_orf_trans_all_bl_report.csv',
+# '/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta2.0/blast_reports/tr_proteins_bl_report.csv',
+'/home/anna/bioinformatics/euglenozoa/yeast/orf_trans_all_yeast/blast_reports/Human.MitoCarta2.0_bl_report.csv',
+'/home/anna/bioinformatics/euglenozoa/yeast/orf_trans_all_yeast/blast_reports/tr_proteins_bl_report.csv'
 ]
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
