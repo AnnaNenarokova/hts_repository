@@ -1,5 +1,9 @@
 #!/usr/bin/python
 import csv
+import sys
+sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
+from common_helpers.dict_list_to_dict import *
+
 def parse_csv(csv_path, delimiter=','):
 	with open(csv_path) as handle_file:
 		handle_csv = csv.reader(handle_file, delimiter=delimiter)
@@ -9,13 +13,18 @@ def parse_csv(csv_path, delimiter=','):
 		handle_file.close()
 	return results
 
-def csv_to_dict(csv_path):
+def csv_to_dict_list(csv_path):
     with open(csv_path) as csvfile:
         reader = csv.DictReader(csvfile, fieldnames=None, restkey=None, restval=None, dialect='excel')
-        csv_dict = []
+        dict_list = []
     	for row in reader:
-        	csv_dict.append(row)
+        	dict_list.append(row)
         csvfile.close
+    return dict_list
+
+def csv_to_dict(csv_path, main_key):
+    dict_list = csv_to_dict_list(csv_path)
+    csv_dict = dict_list_to_dict(dict_list, main_key)
     return csv_dict
 
 def write_dicts_list(dict_list, outfile):
