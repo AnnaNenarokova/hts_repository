@@ -17,5 +17,5 @@ for id_dict in id_dicts:
     for key in info:
         id_dict[key] = info[key]
 
-outfile = '/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta2.0.csv'
+outfile = '/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta.2.0.csv'
 write_dicts_list(id_dicts, outfile)
