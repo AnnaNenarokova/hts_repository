@@ -23,8 +23,13 @@ def update_function_info(csv_info_path):
     return 0
 
 def update_len_ratio():
-    query = BlastHit.update( alen_qlen=float(BlastHit.length/float(BlastHit.extra_data['qlen'])), alen_slen=float(BlastHit.length/float(BlastHit.extra_data['slen'])) )
-    query.execute()
+    i = 0
+    for hit in BlastHit.select():
+        extra_data = hit.extra_data
+        length = hit.length
+        hit.alen_qlen = float(length/float(extra_data['qlen']))
+        hit.alen_slen = float(length/float(extra_data['slen']))
+        hit.save()
     return 0
 
 
