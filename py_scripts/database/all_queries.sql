@@ -179,6 +179,9 @@ group by query.id) as count_table;
 select count(*) from sequence where organism = 'Euglena gracilis' and loc='M' and locrate <= 2;
 1616
 
+
+
+
 Tripanosoma brucei
 Saccharomyces cerevisiae
 Homo sapiens

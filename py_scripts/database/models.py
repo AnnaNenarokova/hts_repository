@@ -81,7 +81,7 @@ class BlastHit(BaseModel):
                 query_id, subject_id = blast_dict['qseqid'], blast_dict['sseqid']
                 evalue, length = blast_dict['evalue'], blast_dict['length']
                 qlen, slen = blast_dict['slen'], blast_dict['qlen']
-                alen_qlen, alen_slen = float(length/qlen), float(length/slen)
+                alen_qlen, alen_slen = float(length/float(qlen)), float(length/float(slen))
                 other_features = {}
                 for feature in blast_dict:
                     if feature not in ['qseqid', 'sseqid', 'evalue', 'length']:

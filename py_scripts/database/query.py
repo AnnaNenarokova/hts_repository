@@ -6,13 +6,10 @@ from blast.classes.blast_parser import BlastParser
 from database.models import *
 from common_helpers.parse_csv import *
 
-csv_info_path = '/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta.2.0.csv'
-
-info_dict = csv_to_dict(csv_info_path, main_key='seqid')
-with db.atomic():
-    for seqid in info_dict:
-        print seqid
-        seq_info = info_dict[seqid]
-        # for key in seq_info:
-            # if
-        # Sequnce.update(function=seq_info[function], mitoscore=seq_info[mitoscore]).where(Sequnce.sequid == seqid)
+select = Sequence.select().join(Blasthit).where(
+    query.organism =='Euglena gracilis' and
+        (subject.organism = 'Tripanosoma brucei' or  subject.organism = 'Homo sapiens' or
+            (subject.organism = 'Saccharomyces cerevisiae' and subject.mitoscore=100)
+        )
+    and blasthit.evalue < 0.00001 and blasthit.alen_qlen > 0.3
+    )
