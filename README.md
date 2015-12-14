@@ -1,2 +1,2 @@
-HTS-repository
+ngs-repository
 ==============
