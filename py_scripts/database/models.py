@@ -10,7 +10,7 @@ sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
 from common_helpers.parse_csv import *
 from common_helpers.make_outdir import *
 
-db_path = '/home/anna/bioinformatics/euglenozoa/mitoproteome.db'
+db_path = '/home/anna/Dropbox/PhD/mitoproteome.db'
 db = SqliteDatabase(db_path)
 
 class SerializedDictField(TextField):

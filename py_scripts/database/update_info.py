@@ -12,8 +12,12 @@ info_dict = csv_to_dict(csv_info_path, main_key='seqid')
 with db.atomic():
     for seqid in info_dict:
         seq_info = info_dict[seqid]
-        other_info = {}
+        other_new_info = {}
         for key in seq_info:
-            if key not in ('function', 'mitoscore') and key in info_dict:
-                other_info[key] = info_dict[key]
-        Sequence.update(function=seq_info['function'], mitoscore=seq_info['mitoscore']).where(Sequence.seqid == seqid)
+            if key not in ('function', 'mitoscore'):
+                other_new_info[key] = seq_info[key]
+        sequence = Sequence.get(Sequence.seqid == seqid)
+        extra_data = sequence.extra_data
+        extra_data.update(other_new_info)
+        query = Sequence.update(function=seq_info['function'], mitoscore=seq_info['mitoscore'], extra_data=extra_data).where(Sequence.seqid==seqid)
+        query.execute()
