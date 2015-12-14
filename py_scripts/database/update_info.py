@@ -16,5 +16,4 @@ with db.atomic():
         for key in seq_info:
             if key not in ('function', 'mitoscore') and key in info_dict:
                 other_info[key] = info_dict[key]
-
         Sequence.update(function=seq_info['function'], mitoscore=seq_info['mitoscore']).where(Sequence.seqid == seqid)
