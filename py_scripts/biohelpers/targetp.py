@@ -2,7 +2,7 @@ from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from subprocess32 import call
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
+sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from common_helpers.make_outdir import *
 from common_helpers.lookahead import lookahead
 from subprocess import Popen, PIPE, STDOUT

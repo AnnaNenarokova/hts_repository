@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
+sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from blast.classes.blast import Blast
 from blast.classes.blast_parser import BlastParser
 

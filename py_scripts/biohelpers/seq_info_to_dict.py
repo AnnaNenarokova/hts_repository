@@ -1,8 +1,8 @@
 #!/usr/bin/python
 import csv
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
-from common_helpers.parse_csv import *
+sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
+from py_scripts.common_helpers.parse_csv import *
 
 def seq_info_to_dict(csv_path):
     with open(csv_path) as csv_file:

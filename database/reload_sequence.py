@@ -1,9 +1,9 @@
 #!/usr/bin/python
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
-from blast.classes.blast_parser import BlastParser
+sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
+from py_scripts.blast.classes.blast_parser import BlastParser
 from database.models import *
-from biohelpers.seq_info_to_dict import *
+from py_scripts.biohelpers.seq_info_to_dict import *
 
 Sequence.drop_table()
 db.create_table(Sequence)
@@ -19,7 +19,7 @@ info_dict = seq_info_to_dict(info_csv)
 Sequence.read_from_f(fasta_path, seqtype='protein', organism='Saccharomyces cerevisiae', source='yeast_orf_trans_all', info_dict=info_dict)
 
 fasta_path = '/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta2.0.fasta'
-# info_csv = '/home/anna/bioinformatics/euglenozoa/tripanosoma/triponasoma_info.csv'
+info_csv = '/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta.2.0.csv'
 info_dict = seq_info_to_dict(info_csv)
 Sequence.read_from_f(fasta_path, seqtype='protein', organism='Homo sapiens', source='Human.MitoCarta2.0')
 

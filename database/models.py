@@ -6,9 +6,9 @@ from Bio.SeqRecord import SeqRecord
 from Bio.Alphabet import *
 import simplejson as json
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
-from common_helpers.parse_csv import *
-from common_helpers.make_outdir import *
+sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
+from py_scripts.common_helpers.parse_csv import *
+from py_scripts.common_helpers.make_outdir import *
 
 db_path = '/home/anna/Dropbox/PhD/mitoproteome.db'
 db = SqliteDatabase(db_path)
@@ -73,6 +73,8 @@ class BlastHit(BaseModel):
     length = IntegerField()
     alen_qlen = FloatField()
     alen_slen = FloatField()
+    slen = FloatField()
+    qlen = FloatField()
 
     @staticmethod
     def create_from_dicts(blast_dicts):
@@ -80,7 +82,7 @@ class BlastHit(BaseModel):
             for blast_dict in blast_dicts:
                 query_id, subject_id = blast_dict['qseqid'], blast_dict['sseqid']
                 evalue, length = blast_dict['evalue'], blast_dict['length']
-                slen, qlen = blast_dict['slen'], blast_dict['qlen']
+                qlen, slen = blast_dict['qlen'], blast_dict['slen']
                 alen_qlen, alen_slen = float(length/float(qlen)), float(length/float(slen))
                 other_features = {}
                 for feature in blast_dict:
@@ -90,5 +92,5 @@ class BlastHit(BaseModel):
                 query = Sequence.select().where(Sequence.seqid == query_id).get()
                 subject = Sequence.select().where(Sequence.seqid == subject_id).get()
                 BlastHit.create(query=query, subject=subject, evalue=evalue, length=length,
-                                qlen=qlen, slen=slen, alen_qlen=alen_slen, alen_slen=alen_slen,
+                                qlen=qlen, slen=slen, alen_qlen=alen_qlen, alen_slen=alen_slen,
                                 extra_data=other_features)

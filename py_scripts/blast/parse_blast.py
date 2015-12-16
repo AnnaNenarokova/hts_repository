@@ -1,5 +1,5 @@
 #!/usr/bin/python
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
+sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from common_helpers.make_outdir import file_from_path, make_outdir
 
 from Bio.Blast import NCBIXML
@@ -20,13 +20,13 @@ def compare_blast_gbk(reference_gbk, blast_xml_file):
 	hits = []
 	for record in blast_records:
 		for alignment in record.alignments:
-			for hsp in alignment.hsps: 
+			for hsp in alignment.hsps:
 				hsp_start, hsp_end = hsp.query_start, hsp.query_end
 				if hsp_start > hsp_end: hsp_start, hsp_end = hsp_end, hsp_start
 				q_start, q_end = hsp.sbjct_start, hsp.sbjct_end
 				if q_start > q_end: q_start, q_end = q_end, q_start
-				hits.append({'name': str(alignment.title), 'hsp_start': hsp_start, 'hsp_end': hsp_end, 
-							'q_start': q_start, 'q_end': q_end, 
+				hits.append({'name': str(alignment.title), 'hsp_start': hsp_start, 'hsp_end': hsp_end,
+							'q_start': q_start, 'q_end': q_end,
 							'align_length': hsp.align_length, 'identities': hsp.identities, 'e_value': hsp.expect})
 
 	hits = sorted(hits, key=lambda k: k['hsp_start'])
@@ -48,8 +48,8 @@ def compare_blast_gbk(reference_gbk, blast_xml_file):
 					if gene_end >= hit['hsp_end']:
 						right_gene = feature
 						break
-		hit_records.append({'query': hit['name'], 'q_start': hit['q_start'], 'q_end': hit['q_end'], 
-								    'sbjct_start': hit['hsp_start'], 'sbjct_end': hit['hsp_end'], 
+		hit_records.append({'query': hit['name'], 'q_start': hit['q_start'], 'q_end': hit['q_end'],
+								    'sbjct_start': hit['hsp_start'], 'sbjct_end': hit['hsp_end'],
 								  	'align_length': hit['align_length'], 'identities': hit['identities'], 'e_value': hit['e_value'],
 								  	'left_gene': str(left_gene.qualifiers['gene']).translate(None, '[]\"\''), 'lg_start': int(left_gene.location.start), 'lg_end': int(left_gene.location.end),
 								  	'right_gene': str(right_gene.qualifiers['gene']).translate(None, '[]\"\''), 'rg_start': int(left_gene.location.start), 'rg_end': int(left_gene.location.end)})
@@ -67,14 +67,14 @@ process_count = 0
 for blast_xml_file in (xml_mut6, xml_mut9):
 	hit_records = compare_blast_gbk(file_gb, blast_xml_file)
 
-	keys = ['query', 'q_start', 'q_end', 'align_length', 'identities', 'e_value', 'sbjct_start', 'sbjct_end', 
+	keys = ['query', 'q_start', 'q_end', 'align_length', 'identities', 'e_value', 'sbjct_start', 'sbjct_end',
 		'left_gene', 'lg_start', 'lg_end', 'right_gene', 'rg_start', 'rg_end']
 
 	hit_records = natsorted(hit_records, key = lambda x: (x['query'], -x['align_length'], -x['identities']))
 
 	clean_records = [hit_records[0]]
 	for hit_record in hit_records:
-		last = clean_records[-1] 
+		last = clean_records[-1]
 		if hit_record['query'] == last['query']:
 			if hit_record['q_start'] < last['q_start'] or hit_record['q_end'] > last['q_end']:
 				clean_records.append(hit_record)
@@ -95,16 +95,16 @@ handle_file = open(handle_file)
 handle_csv = csv.reader(handle_file, delimiter=',')
 
 if ONLY_ONE_HIT:
-	sorted_csv = sorted( handle_csv, key = lambda x: ( x[0], -int(x[3]), -float(x[2]) ) ) 
+	sorted_csv = sorted( handle_csv, key = lambda x: ( x[0], -int(x[3]), -float(x[2]) ) )
 
 	results = []
 	cur_seq = None
 	for row in sorted_csv:
-		if row[0] != cur_seq: 
+		if row[0] != cur_seq:
 			cur_seq = row[0]
 			results.append(row)
 	handle_file.close()
-else: 
+else:
 	results = []
 	for row in handle_csv:
 		results.append(row)

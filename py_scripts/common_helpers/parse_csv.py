@@ -1,8 +1,8 @@
 #!/usr/bin/python
 import csv
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
-from common_helpers.dict_list_to_dict import *
+sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
+from py_scripts.common_helpers.dict_list_to_dict import *
 
 def parse_csv(csv_path, delimiter=','):
 	with open(csv_path) as handle_file:

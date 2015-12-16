@@ -3,7 +3,7 @@ from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 import csv
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
+sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from common_helpers.make_outdir import *
 from common_helpers.lookahead import *
 from common_helpers.parse_csv import *

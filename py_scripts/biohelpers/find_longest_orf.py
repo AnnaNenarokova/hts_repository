@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from Bio import SeqIO
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
+sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from common_helpers.make_outdir import file_from_path, make_outdir, new_file
 from common_helpers.lookahead import lookahead
 
@@ -22,7 +22,7 @@ def find_longest_orf(orfs_path, f_out):
 			out.append(max_orf)
 		else:
 			if trancript_id == cur_id:
-				if cur_len > max_len: 
+				if cur_len > max_len:
 					max_len = cur_len
 					max_orf = record
 			else:

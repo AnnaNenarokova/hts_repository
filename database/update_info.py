@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from peewee import *
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
+sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from blast.classes.blast_parser import BlastParser
 from database.models import *
 from common_helpers.parse_csv import *

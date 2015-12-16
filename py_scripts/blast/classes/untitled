@@ -5,7 +5,7 @@ from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 import csv
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/py_scripts/")
+sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from common_helpers.make_outdir import file_from_path, make_outdir, new_file
 from common_helpers.lookahead import lookahead
 from common_helpers.parse_csv import parse_csv
@@ -58,7 +58,7 @@ class BlastHitsCollection(object):
 					hit['s_function'] = row[1]
 					hit['s_GO_terms'] = row[2]
 
-		qseqid_index = self.features.index('qseqid')						
+		qseqid_index = self.features.index('qseqid')
 		self.features.insert(qseqid_index+1, 'q_function')
 		sseqid_index = self.features.index('sseqid')
 		self.features.insert(sseqid_index+1, 's_GO_terms')
