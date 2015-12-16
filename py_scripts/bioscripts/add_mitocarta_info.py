@@ -18,4 +18,4 @@ for id_dict in id_dicts:
         id_dict[key] = info[key]
 
 outfile = '/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta.2.0.csv'
-write_dicts_list(id_dicts, outfile)
+write_list_of_dicts(id_dicts, outfile)

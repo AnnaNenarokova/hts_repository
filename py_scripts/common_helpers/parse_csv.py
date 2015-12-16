@@ -13,36 +13,44 @@ def parse_csv(csv_path, delimiter=','):
 		handle_file.close()
 	return results
 
-def csv_to_dict_list(csv_path):
+def csv_to_list_of_dicts(csv_path):
     with open(csv_path) as csvfile:
         reader = csv.DictReader(csvfile, fieldnames=None, restkey=None, restval=None, dialect='excel')
-        dict_list = []
+        list_of_dicts = []
     	for row in reader:
-        	dict_list.append(row)
+        	list_of_dicts.append(row)
         csvfile.close
-    return dict_list
+    return list_of_dicts
 
 def csv_to_dict(csv_path, main_key):
-    dict_list = csv_to_dict_list(csv_path)
-    csv_dict = dict_list_to_dict(dict_list, main_key)
+    list_of_dicts = csv_to_list_of_dicts(csv_path)
+    csv_dict = list_of_dicts_to_dict(list_of_dicts, main_key)
     return csv_dict
 
-def write_dicts_list(dict_list, outfile):
+def write_list_of_lists(list_of_lists, outfile, delimiter=',', header=False):
+    with open(outfile, 'w') as csvfile:
+        writer = csv.writer(csvfile, delimiter=delimiter)
+        if header: writer.writerow(header)
+        writer.writerows(list_of_lists)
+        csvfile.close()
+    return outfile
+
+def write_list_of_dicts(list_of_dicts, outfile):
 	with open(outfile, 'w') as csvfile:
-		writer = csv.DictWriter(csvfile, fieldnames=dict_list[0].keys())
+		writer = csv.DictWriter(csvfile, fieldnames=list_of_dicts[0].keys())
 		writer.writeheader()
-		for row in dict_list:
+		for row in list_of_dicts:
 			writer.writerow(row)
 		csvfile.close()
 	return outfile
 
-def write_dicts_dict(dicts_dict, outfile, key_name='name'):
+def write_dict_of_dicts(dict_of_dicts, outfile, key_name='name'):
 	dicts_list = []
-	for key in dicts_dict:
+	for key in dict_of_dicts:
 		cur_dict = {}
 		cur_dict[key_name] = key
-		for k in dicts_dict[key]:
-			cur_dict[k] = dicts_dict[key][k]
-		dicts_list.append(cur_dict)
-	write_dicts_list(dicts_list, outfile)
+		for k in dict_of_dicts[key]:
+			cur_dict[k] = dict_of_dicts[key][k]
+		list_of_dicts.append(cur_dict)
+	write_list_of_dicts(list_of_dicts, outfile)
 	return outfile

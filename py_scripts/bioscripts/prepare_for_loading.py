@@ -40,4 +40,4 @@ outfile = '/home/anna/bioinformatics/euglenozoa/euglena/all_euglena_proteins/eug
 
 result = prepare_for_loading(b2g_csv_path, mitogenes_csv_path)
 
-write_dicts_dict(result, outfile, key_name='seqid')
+write_dict_of_dicts(result, outfile, key_name='seqid')
