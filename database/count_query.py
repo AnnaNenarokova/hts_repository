@@ -6,12 +6,14 @@ from database.models import *
 
 def exclude_bad_functions():
     bad_functions = ['dynein', 'kinesin', 'tubulin', 'myosin',
-                 'retrotransposon',
+                 'retrotransposon', 'repeat',
                  'kinase',
                  'ras',
                  'receptor',
-                 'transporter', 'carrier', 'atp-binding',
+                 'calmodulin',
+                 'transporter', 'transport', 'carrier', 'atp-binding', 'translocase', 'translocator',
                  'chaperon', 'chaperonin',
+                 'ubiquitin',
                  'histone', 'dnaj',
                  'leucine-rich',
                  'peptidase',
@@ -22,6 +24,7 @@ def exclude_bad_functions():
                  'binding',
                  'multidrug resistance protein',
                  'hypothetical',
+                 'protein of unknown function',
                  'putative protein'
                  ]
 
@@ -82,10 +85,8 @@ features = "and" + organisms + functions + "and" + blast_threshold
 
 print make_count_query(features)
 
-# seqs = make_select_query(features)
-# i = 0
-# for seq in seqs:
-#     print seq.function
-#     i+=1
-#     if i == 100: break
+seqs = make_select_query(features)
+
+for seq in seqs:
+    print seq.function
 
