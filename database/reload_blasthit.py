@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
-from py_scripts.blast.classes.blast_parser import BlastParser
+from blast.classes.blast_parser import BlastParser
 from database.models import *
 from py_scripts.biohelpers.seq_info_to_dict import *
 

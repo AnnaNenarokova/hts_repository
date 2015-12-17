@@ -19,8 +19,7 @@ def exclude_bad_functions():
                  'receptor',
                  'calmodulin',
                  'cyclophilin',
-                 'transporter', 'transport', 'carrier', 'atp-binding', 'translocase', 'translocator',
-                 'membrane-spanning ATPase',
+                 'transporter', 'transport', 'carrier', 'translocase', 'translocator', 'ABC',
                  'pump',
                  'chaperon', 'chaperonin',
                  'histone', 'dnaj',
@@ -28,12 +27,12 @@ def exclude_bad_functions():
                  'proteasome',
                  'ubiquitin',
                  'leucine-rich',
-                 'helicase', 'recq',
                  'dead', 'deah',
                  'williams-beuren',
                  'heat',
-                 'binding', 'binds',
+                 'zinc-finger', 'zinc finger',
                  'multidrug resistance protein',
+                 # 'binding',
                  # 'hypothetical',
                  # 'protein of unknown function',
                  # 'putative protein',
@@ -47,7 +46,7 @@ def exclude_bad_functions():
 
     return functions
 
-def make_count_query(featuresn, verbose=False):
+def make_count_query(features, verbose=False):
     count_on_blasthits = """
     select count(*) from
     (select * from sequence query
@@ -72,44 +71,69 @@ def make_select_query(features):
     where query.organism = 'Euglena gracilis'
     """
     group_by_query = " group by query.id "
-
-    raw_query = select_on_blasthits + features + group_by_query
+    group_by_function = " group by subject.function "
+    raw_query = select_on_blasthits + features + group_by_function
     results = Sequence.raw(raw_query)
     return results
 
 count_euglena = "select count(*) from sequence where query.organism = 'Euglena gracilis'"
 
-
-
 tripa = " subject.organism = 'Tripanosoma brucei' "
 homo = " subject.organism = 'Homo sapiens' "
 yeast_mito = " (subject.organism = 'Saccharomyces cerevisiae' and subject.mitoscore = 100) "
 
-blast_threshold = " (blasthit.evalue < 0.00001 and blasthit.alen_slen > 0.3) "
-
-
-
-organisms = "(" +  homo + "or" + tripa +  ")"
+blast_threshold = " (blasthit.evalue < 0.00001 and blasthit.alen_slen > 0.5) "
 
 functions = exclude_bad_functions()
 
-# features = "and" + organisms + "and" + " query.loc='M' " + "and" + " query.locrate<=2 " + functions + "and" + blast_threshold
+organisms = [
+ "(" + homo + ")",
+ "(" + tripa + ")",
+ "(" + yeast_mito + ")",
+ "(" + homo + "or" + tripa + "or" + yeast_mito + ")",
+ "(" + homo + "or" + tripa + ")",
+ "(" + tripa + "or" + yeast_mito + ")",
+ "(" + homo + "or" + yeast_mito + ")"
+  ]
 
-features = "and" + organisms + functions + "and" + blast_threshold
 
-print make_count_query(features)
+# for organism in organisms:
+#     features = "and" + organism + functions + "and" + blast_threshold
+#     # print organism
+#     print make_count_query(features)
 
-seqs = make_select_query(features)
+organism = " and " + "(" + homo + "or" + tripa + "or" + yeast_mito + ")"
 
-csv_out = []
+other_features = [
+" and " + " query.loc!='M' " + "and" + " query.mitoscore!=100 ",
+" and " + " query.loc!='M' " + "and" + " query.mitoscore=100 ",
+" and " + " query.loc='M' "  + "and" + " query.locrate> 2 " + "and" + " query.mitoscore=100 " ,
+" and " + " query.loc='M' "  + "and" + " query.locrate<=2 " + "and" + " query.mitoscore=100 " ,
+" and " + " query.loc='M' "  + "and" + " query.locrate<=2 " + "and" + " query.mitoscore!=100 " ,
+" and " + " query.loc='M' "  + "and" + " query.locrate> 2 " + "and" + " query.mitoscore!=100 "
+]
 
-for seq in seqs:
-    csv_out.append([seq.organism, seq.seqid, seq.function])
+for other_feature in other_features:
+    features = organism + other_feature + functions + "and" + blast_threshold
+    # print other_feature
+    print make_count_query(features)
 
-csv_out = sorted(csv_out, key=lambda protein: protein[2])
 
-outfile = '/home/anna/bioinformatics/euglenozoa/euglena/filtered_functions.csv'
+# organism = "(" + homo + "or" + tripa + "or" + yeast_mito + ")"
+# features = "and" + organism + functions + "and" + blast_threshold
+# print make_count_query(features)
 
-header = ['organism', 'seqid', 'function']
+# seqs = make_select_query(features)
 
-write_list_of_lists(csv_out, outfile, header=header)
+# csv_out = []
+
+# for seq in seqs:
+#     csv_out.append([seq.organism, seq.seqid, seq.function, seq.mitoscore, seq.loc, seq.locrate])
+
+# csv_out = sorted(csv_out, key=lambda protein: protein[2])
+
+# outfile = '/home/anna/bioinformatics/euglenozoa/euglena/filtered_functions.csv'
+
+# header = ['organism', 'seqid', 'function', 'mitoscore', 'loc', 'locrate']
+
+# write_list_of_lists(csv_out, outfile, header=header)

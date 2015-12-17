@@ -24,7 +24,7 @@ def csv_to_list_of_dicts(csv_path):
 
 def csv_to_dict(csv_path, main_key):
     list_of_dicts = csv_to_list_of_dicts(csv_path)
-    csv_dict = list_of_dicts_to_dict(list_of_dicts, main_key)
+    csv_dict = dict_list_to_dict(list_of_dicts, main_key)
     return csv_dict
 
 def write_list_of_lists(list_of_lists, outfile, delimiter=',', header=False):

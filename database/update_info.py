@@ -4,7 +4,7 @@ import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from blast.classes.blast_parser import BlastParser
 from database.models import *
-from common_helpers.parse_csv import *
+from py_scripts.common_helpers.parse_csv import *
 
 def update_function_info(csv_info_path):
     info_dict = csv_to_dict(csv_info_path, main_key='seqid')
@@ -13,12 +13,13 @@ def update_function_info(csv_info_path):
             seq_info = info_dict[seqid]
             other_new_info = {}
             for key in seq_info:
-                if key not in ('function', 'mitoscore'):
+                if key not in ('function', 'mitoscore', 'loc', 'locrate'):
                     other_new_info[key] = seq_info[key]
             sequence = Sequence.get(Sequence.seqid == seqid)
             extra_data = sequence.extra_data
             extra_data.update(other_new_info)
-            query = Sequence.update(function=seq_info['function'], mitoscore=seq_info['mitoscore'], extra_data=extra_data).where(Sequence.seqid==seqid)
+            query = Sequence.update(function=seq_info['function'], mitoscore=seq_info['mitoscore'],
+                                    loc=seq_info['loc'], locrate=seq_info['locrate'],extra_data=extra_data).where(Sequence.seqid==seqid)
             query.execute()
     return 0
 
@@ -32,7 +33,10 @@ def update_len_ratio():
         hit.save()
     return 0
 
+csv_info_pathes=[
+'/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta.2.0.csv',
+# '/home/anna/bioinformatics/euglenozoa/tripanosoma/triponasoma_info.csv'
+]
 
-csv_info_path = '/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta.2.0.csv'
-
-update_len_ratio()
+for csv_info_path in csv_info_pathes:
+    update_function_info(csv_info_path)
