@@ -63,7 +63,7 @@ class Sequence(BaseModel):
         else:
             print 'Error: Unsupported sequence type'
             return False
-        seqrecord = SeqRecord(Seq(self.extra_data['sequence'], alphabet), id = seqid, description = description)
+        seqrecord = SeqRecord(Seq(self.extra_data['sequence'], alphabet), name='', id = self.seqid, description = '')
         return seqrecord
 
 class BlastHit(BaseModel):
