@@ -32,11 +32,11 @@ def exclude_bad_functions():
                  'heat',
                  'zinc-finger', 'zinc finger',
                  'multidrug resistance protein',
-                 # 'binding',
-                 # 'hypothetical',
-                 # 'protein of unknown function',
-                 # 'putative protein',
-                 # 'unspecified product'
+                 'binding',
+                 'hypothetical',
+                 'protein of unknown function',
+                 'putative protein',
+                 'unspecified product'
                  ]
 
     functions = " "
@@ -113,27 +113,27 @@ other_features = [
 " and " + " query.loc='M' "  + "and" + " query.locrate> 2 " + "and" + " query.mitoscore!=100 "
 ]
 
-for other_feature in other_features:
-    features = organism + other_feature + functions + "and" + blast_threshold
-    # print other_feature
-    print make_count_query(features)
+# for other_feature in other_features:
+#     features = organism + other_feature + functions + "and" + blast_threshold
+#     # print other_feature
+#     print make_count_query(features)
 
 
-# organism = "(" + homo + "or" + tripa + "or" + yeast_mito + ")"
-# features = "and" + organism + functions + "and" + blast_threshold
-# print make_count_query(features)
+organism = "(" + homo + "or" + tripa + "or" + yeast_mito + ")"
+features = "and" + organism + functions + "and" + blast_threshold
+print make_count_query(features)
 
-# seqs = make_select_query(features)
+seqs = make_select_query(features)
 
-# csv_out = []
+csv_out = []
 
-# for seq in seqs:
-#     csv_out.append([seq.organism, seq.seqid, seq.function, seq.mitoscore, seq.loc, seq.locrate])
+for seq in seqs:
+    csv_out.append([seq.organism, seq.seqid, seq.function, seq.mitoscore, seq.loc, seq.locrate])
 
-# csv_out = sorted(csv_out, key=lambda protein: protein[2])
+csv_out = sorted(csv_out, key=lambda protein: protein[2])
 
-# outfile = '/home/anna/bioinformatics/euglenozoa/euglena/filtered_functions.csv'
+outfile = '/home/anna/bioinformatics/euglenozoa/euglena/filtered_functions.csv'
 
-# header = ['organism', 'seqid', 'function', 'mitoscore', 'loc', 'locrate']
+header = ['organism', 'seqid', 'function', 'mitoscore', 'loc', 'locrate']
 
-# write_list_of_lists(csv_out, outfile, header=header)
+write_list_of_lists(csv_out, outfile, header=header)
