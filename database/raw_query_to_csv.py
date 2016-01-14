@@ -11,11 +11,17 @@ def dict_factory(cursor, row):
         d[col[0]] = row[idx]
     return d
 
-db_path = "/home/anna/Dropbox/PhD/mitoproteome.db"
+def exe_query(query, db_path):
+    con = sqlite3.connect(db_path)
+    con.row_factory = dict_factory
+    cur = con.cursor()
+    cur.execute(query)
+    rows = []
+    for row in cur:
+        rows.append(row)
+    return rows
 
-con = sqlite3.connect(db_path)
-con.row_factory = dict_factory
-cur = con.cursor()
+db_path = "/home/anna/Dropbox/PhD/mitoproteome.db"
 
 query = """
     SELECT *,
@@ -33,14 +39,8 @@ query = """
         OR (subject.organism = 'Saccharomyces cerevisiae' AND subject.mitoscore = 100))
 """
 
-cur.execute(query)
-
-
-rows = []
-for row in cur:
-    rows.append(row)
-
-rows = dict_list_to_dict(rows, 'query_id')
+rows = exe_query(query, db_path)
+ = dict_list_to_dict(rows, 'query_id')
 
 very_bad_functions =
                 ['dynein', 'kinesin', 'tubulin', 'actin', 'myosin',
@@ -55,7 +55,7 @@ very_bad_functions =
                  'receptor',
                  'calmodulin',
                  'cyclophilin',
-                 'transporter', 'transport', 'carrier', 'translocase', 'translocator', 'ABC',
+                 'transporter', 'transport', 'carrier', 'transloc', 'ABC',
                  'pump',
                  'chaperon', 'chaperonin',
                  'histone', 'dnaj',
