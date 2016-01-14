@@ -44,7 +44,7 @@ very_bad_functions = [
                  'receptor',
                  'calmodulin',
                  'cyclophilin',
-                 'transport', 'carrier', 'transloc', 'ABC',
+                 'transport', 'carrier', 'transloc', 'ABC', 'permease',
                  'pump',
                  'stomatin',
                  'chaperon', 'chaperonin',
@@ -55,6 +55,12 @@ very_bad_functions = [
                  'leucine-rich',
                  'dead', 'deah',
                  'williams-beuren',
+                 'poly(a) binding protein',
+                 'aldo-keto reductase',
+                 'mrb1',
+                 'heat shock',
+                 'kiaa0141',
+                 'thioredoxin reductase', 'glutathione reductase', 'trypanothione reductase', 'mercuric reductase', 'lipoamide dehydrogenase'
                  ]
 
 bad_functions = [
@@ -106,14 +112,17 @@ print len(results)
 print ''
 
 csv_list = []
-
+i=0
 for query in results:
     for blasthit in results[query]:
         row = []
         for key in needed_keys:
             row.append(blasthit[key])
         csv_list.append(row)
+        i+=1
     csv_list.append([])
+
+print i
 
 outfile = '/home/anna/bioinformatics/euglenozoa/euglena/filtered_results.csv'
 write_list_of_lists(csv_list, outfile, delimiter=',', header=needed_keys)
