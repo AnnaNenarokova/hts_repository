@@ -31,7 +31,7 @@ query = """
 rows = exe_query(query, db_path)
 query_dict = dict_list_to_dict(rows, 'query_id')
 
-very_bad_functions = [
+bad_functions = [
                  'dynein', 'kinesin', 'tubulin', 'actin', 'myosin',
                  'clathrin', 'centrin',
                  'transposon', 'repeat','ppr',
@@ -46,6 +46,7 @@ very_bad_functions = [
                  'cyclophilin',
                  'transport', 'carrier', 'mrp', 'transloc', 'abc', 'permease', 'porter', 'atp-binding',
                  'pump',
+                 'endosomal integral membrane protein; putative',
                  'stomatin',
                  'chaperon', 'chaperonin',
                  'histone', 'dnaj',
@@ -59,17 +60,6 @@ very_bad_functions = [
                  'aldo-keto reductase',
                  'mrb1-',
                  'kiaa0141'
-                 ]
-
-bad_functions = [
-                 'heat',
-                 'zinc-finger', 'zinc finger',
-                 'multidrug resistance protein',
-                 'binding',
-                 'hypothetical',
-                 'protein of unknown function',
-                 'putative protein',
-                 'unspecified product'
                  ]
 
 needed_keys = [
@@ -99,7 +89,7 @@ for query in query_dict:
     function_is_good = True
     for hit in query_dict[query]:
         if function_is_good:
-            for function in very_bad_functions:
+            for function in bad_functions:
                 if function in hit['subject_function'].lower():
                     function_is_good = False
                     break
@@ -107,20 +97,58 @@ for query in query_dict:
         results[query] = sorted(query_dict[query], key=lambda blasthit: float(blasthit['evalue']))
 
 print len(results)
-print ''
+
+# csv_list = []
+# i=0
+# for query in results:
+#     for blasthit in results[query]:
+#         row = []
+#         for key in needed_keys:
+#             row.append(blasthit[key])
+#         csv_list.append(row)
+#         i+=1
+#     csv_list.append([])
 
 csv_list = []
-i=0
+functions_list = []
+
 for query in results:
+    is_first = True
     for blasthit in results[query]:
         row = []
         for key in needed_keys:
             row.append(blasthit[key])
-        csv_list.append(row)
-        i+=1
-    csv_list.append([])
 
-print i
+        if is_first == True:
+            best_row = row
+            is_first = False
+
+        is_best = True
+        bad_functions = [
+                 'hypothetical',
+                 'protein of unknown function',
+                 'putative protein',
+                 'unspecified product',
+                 'circadian clock',
+                 'insulin',
+                 'crystallin',
+                 'carcinoma',
+                 'tumor',
+                 'death',
+                 'apoptosis'
+                 ]
+        for bad_function in bad_functions:
+            if bad_function in blasthit['function']:
+                is_best = False
+
+        if is_best == True:
+            best_row = row
+            break
+
+    csv_list.append(best_row)
+    functions_list.append(best_row[0])
+
+print len(set(functions_list))
 
 outfile = '/home/anna/bioinformatics/euglenozoa/euglena/filtered_results.csv'
 write_list_of_lists(csv_list, outfile, delimiter=',', header=needed_keys)
