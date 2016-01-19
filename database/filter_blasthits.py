@@ -34,7 +34,7 @@ query_dict = dict_list_to_dict(rows, 'query_id')
 very_bad_functions = [
                  'dynein', 'kinesin', 'tubulin', 'actin', 'myosin',
                  'clathrin', 'centrin',
-                 'transposon', 'repeat','PPR',
+                 'transposon', 'repeat','ppr',
                  'mterf',
                  'ras',
                  'rab',
@@ -58,9 +58,7 @@ very_bad_functions = [
                  'poly(a) binding protein',
                  'aldo-keto reductase',
                  'mrb1-',
-                 'heat shock',
-                 'kiaa0141',
-                 'thioredoxin reductase', 'glutathione reductase', 'trypanothione reductase', 'mercuric reductase', 'lipoamide dehydrogenase'
+                 'kiaa0141'
                  ]
 
 bad_functions = [
