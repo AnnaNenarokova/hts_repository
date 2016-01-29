@@ -33,19 +33,35 @@ def count_nodes(n_points, adj_list):
                         connecting_node['vertex_index'] = edge.index(vertex)
                         connecting_node['graph_index'] = graph_index
                         connecting_nodes.append(connecting_node)
+
             if len(connecting_nodes) == 0:
                 connected_graphs.append(list(edge))
+
             elif len(connecting_nodes) == 1:
                 connecting_node = connecting_nodes[0]
                 new_vertex_index = connecting_node['vertex_index']-1
                 new_vertex = edge[new_vertex_index]
                 graph_index = connecting_node['graph_index']
                 connected_graphs[graph_index].append(new_vertex)
+
             elif len(connecting_nodes) == 2:
-                print 'Aha'
-                for graph_index in new_edge:
-                    if graph_index:
-                        connected_graphs[graph_index].append(edge)
+                new_connected_graphs = []
+                for i in range(len(connected_graphs)):
+                    is_uniting = False
+                    for connecting_node in connecting_nodes:
+                        if connecting_node['graph_index'] == i:
+                            is_uniting = True
+                    if not is_uniting:
+                        new_connected_graphs.append(connected_graphs[i])
+
+                first_graph_index = connecting_nodes[0]['graph_index']
+                first_graph = connected_graphs[first_graph_index]
+                second_graph_index = connecting_nodes[1]['graph_index']
+                second_graph = connected_graphs[second_graph_index]
+                new_united_graph = first_graph + second_graph
+                new_connected_graphs.append(new_united_graph)
+                connected_graphs = new_connected_graphs
+
             else:
                 print "Error!"
                 os.exit(1)
