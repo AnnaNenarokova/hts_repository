@@ -34,9 +34,9 @@ def prepare_for_loading(b2g_csv_path, mitogenes_csv_path):
     result = add_mitoscore(b2g_functions_dict, mitogenes_csv_path)
     return result
 
-mitogenes_csv_path = '/home/anna/bioinformatics/euglenozoa/euglena/other_sequences/mitogenes_223/223_mitogenes.csv'
-b2g_csv_path = '/home/anna/bioinformatics/euglenozoa/euglena/all_euglena_proteins/blast2go_annotdescriptions_20151104_1903.csv'
-outfile = '/home/anna/bioinformatics/euglenozoa/euglena/all_euglena_proteins/euglena_function_info.csv'
+mitogenes_csv_path = '/home/anna/bioinformatics/euglena_project/euglena/other_sequences/mitogenes_223/223_mitogenes.csv'
+b2g_csv_path = '/home/anna/bioinformatics/euglena_project/euglena/all_euglena_proteins/blast2go_annotdescriptions_20151104_1903.csv'
+outfile = '/home/anna/bioinformatics/euglena_project/euglena/all_euglena_proteins/euglena_function_info.csv'
 
 result = prepare_for_loading(b2g_csv_path, mitogenes_csv_path)
 

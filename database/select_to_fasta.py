@@ -16,6 +16,6 @@ result = []
 for seq in seqs:
     result.append(seq.to_seqrecord())
 
-out_file = '/home/anna/bioinformatics/euglenozoa/euglena/mito_loc/all_mito.fasta'
+out_file = '/home/anna/bioinformatics/euglena_project/euglena/mito_loc/all_mito.fasta'
 print len(result)
 SeqIO.write(result, out_file, "fasta")

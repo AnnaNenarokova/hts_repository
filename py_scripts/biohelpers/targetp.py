@@ -61,11 +61,11 @@ def use_targetp(f_path, outf_path=False, is_plant=False, cleavage_sites=False, t
 
 	return outf_path
 
-# f_path = '/home/anna/bioinformatics/euglenozoa/euglena/sequences/E_gracilis_transcriptome_final_PROTEINS_first_130.fasta'
+# f_path = '/home/anna/bioinformatics/euglena_project/euglena/sequences/E_gracilis_transcriptome_final_PROTEINS_first_130.fasta'
 f_pathes = [
-'/home/anna/bioinformatics/euglenozoa/tripanosoma/tr_proteins.fasta',
-'/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta2.0.fasta',
-'/home/anna/bioinformatics/euglenozoa/yeast/yeast_orf_trans_all.fasta'
+'/home/anna/bioinformatics/euglena_project/tripanosoma/tr_proteins.fasta',
+'/home/anna/bioinformatics/euglena_project/mitocarta/Human.MitoCarta2.0.fasta',
+'/home/anna/bioinformatics/euglena_project/yeast/yeast_orf_trans_all.fasta'
 ]
 for f_path in f_pathes:
 	use_targetp(f_path, is_plant=False)

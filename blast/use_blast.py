@@ -5,18 +5,18 @@ from blast.classes.blast import Blast
 from blast.classes.blast_parser import BlastParser
 
 query_pathes = {
-'human' : '/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta2.0.fasta',
-'yeast' : '/home/anna/bioinformatics/euglenozoa/yeast/yeast_orf_trans_all.fasta',
-'trypanosoma' : '/home/anna/bioinformatics/euglenozoa/tripanosoma/tr_proteins.fasta',
-'euglena' : '/home/anna/bioinformatics/euglenozoa/euglena/all_euglena_proteins/E_gracilis_transcriptome_final.PROTEINS.fasta',
-'trypa_editing': '/home/anna/bioinformatics/euglenozoa/tryp_editing.fasta'
+'human' : '/home/anna/bioinformatics/euglena_project/mitocarta/Human.MitoCarta2.0.fasta',
+'yeast' : '/home/anna/bioinformatics/euglena_project/yeast/yeast_orf_trans_all.fasta',
+'trypanosoma' : '/home/anna/bioinformatics/euglena_project/tripanosoma/tr_proteins.fasta',
+'euglena' : '/home/anna/bioinformatics/euglena_project/euglena/all_euglena_proteins/E_gracilis_transcriptome_final.PROTEINS.fasta',
+'trypa_editing': '/home/anna/bioinformatics/euglena_project/tryp_editing.fasta'
 }
 
 db_pathes = {
-'human' : '/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta2.0/blast_db/Human.MitoCarta2.0.db',
-'yeast' : '/home/anna/bioinformatics/euglenozoa/yeast/orf_trans_all_yeast/blast_db/orf_trans_all_yeast.db',
-'trypanosoma' : '/home/anna/bioinformatics/euglenozoa/tripanosoma/tr_proteins/blast_db/tr_proteins.db',
-'euglena' : '/home/anna/bioinformatics/euglenozoa/euglena/all_euglena_proteins/E_gracilis_transcriptome_final.PROTEINS/blast_db/E_gracilis_transcriptome_final.PROTEINS.db'
+'human' : '/home/anna/bioinformatics/euglena_project/mitocarta/Human.MitoCarta2.0/blast_db/Human.MitoCarta2.0.db',
+'yeast' : '/home/anna/bioinformatics/euglena_project/yeast/orf_trans_all_yeast/blast_db/orf_trans_all_yeast.db',
+'trypanosoma' : '/home/anna/bioinformatics/euglena_project/tripanosoma/tr_proteins/blast_db/tr_proteins.db',
+'euglena' : '/home/anna/bioinformatics/euglena_project/euglena/all_euglena_proteins/E_gracilis_transcriptome_final.PROTEINS/blast_db/E_gracilis_transcriptome_final.PROTEINS.db'
 }
 
 # blast_csv_pathes = []

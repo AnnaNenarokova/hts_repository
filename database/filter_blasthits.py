@@ -23,62 +23,61 @@ query = """
     INNER JOIN sequence AS subject ON subject.id = blasthit.subject_id
     WHERE query.organism = 'Euglena gracilis'
     AND blasthit.evalue < 0.00001 AND blasthit.alen_slen > 0.3
-    AND (subject.organism = 'Tripanosoma brucei'
+    AND ( (subject.organism = 'Trypanosoma brucei' AND subject.mitoscore = 100)
         OR  subject.organism = 'Homo sapiens'
-        OR (subject.organism = 'Saccharomyces cerevisiae' AND subject.mitoscore = 100))
+        OR (subject.organism = 'Saccharomyces cerevisiae' AND subject.loc = 'Mito'))
 """
 
 rows = exe_query(query, db_path)
 query_dict = dict_list_to_dict(rows, 'query_id')
 
 bad_functions = [
-                 'dynein', 'kinesin', 'tubulin', 'actin', 'myosin',
-                 'clathrin', 'centrin',
-                 'transposon', 'repeat','ppr',
-                 'mterf',
-                 'ras',
-                 'rab',
-                 'kinase',
-                 'phosphatase',
-                 'adp-ribosylation',
-                 'receptor',
-                 'calmodulin',
-                 'cyclophilin',
-                 'transport', 'carrier', 'mrp', 'transloc', 'abc', 'permease', 'porter', 'atp-binding',
-                 'pump',
-                 'endosomal integral membrane protein; putative',
-                 'stomatin',
-                 'chaperon', 'chaperonin',
-                 'histone', 'dnaj',
-                 'peptidase', 'protease',
-                 'proteasome',
-                 'ubiquitin',
-                 'leucine-rich', 'leucine zipper',
-                 'dead', 'deah',
-                 'williams-beuren',
-                 'poly(a) binding protein',
-                 'aldo-keto reductase',
-                 'mrb1-',
-                 'kiaa0141'
+                 # 'dynein', 'kinesin', 'tubulin', 'actin', 'myosin', 'formin',
+                 # 'clathrin', 'centrin',
+                 # 'transposon', 'repeat','ppr',
+                 # 'mterf',
+                 # 'ras',
+                 # 'rab',
+                 # 'kinase', 'phosphatase',
+                 # 'adp-ribosylation',
+                 # 'receptor',
+                 # 'cyclophilin',
+                 # 'transport', 'carrier',
+                 # 'mrp', 'transloc', 'abc', 'permease', 'porter', 'atp-binding cassette',
+                 # 'lactamase',
+                 # 'pump',
+                 # 'endosomal integral membrane protein; putative',
+                 # 'stomatin',
+                 # 'chaperon', 'chaperonin',
+                 # 'histon', 'dnaj', 'nucleosome remodeling',
+                 # 'peptidas', 'protease',
+                 # 'proteasome',
+                 # 'ubiquitin',
+                 # 'leucine-rich', 'leucine zipper',
+                 # 'dead', 'deah',
+                 # 'williams-beuren',
+                 # 'poly(a) binding protein',
+                 # 'mrb1-',
+                 # 'kiaa0141'
                  ]
 
 needed_keys = [
-    "subject_function",
+    "query_id",
     "query_function",
-    "evalue",
+    "query_mitoscore",
+    "query_loc",
+    "query_locrate",
+    "subject_id",
     "subject_organism",
+    "subject_function",
+    "subject_loc",
+    "subject_locrate",
+    "evalue",
     "qlen",
     "slen",
     "length",
     "alen_slen",
-    "alen_qlen",
-    "query_mitoscore",
-    "query_loc",
-    "query_locrate",
-    "subject_loc",
-    "subject_locrate",
-    "query_id",
-    "subject_id"
+    "alen_qlen"
     ]
 
 print len(query_dict)
@@ -98,19 +97,19 @@ for query in query_dict:
 
 print len(results)
 
-# csv_list = []
-# i=0
-# for query in results:
-#     for blasthit in results[query]:
-#         row = []
-#         for key in needed_keys:
-#             row.append(blasthit[key])
-#         csv_list.append(row)
-#         i+=1
-#     csv_list.append([])
+csv_list = []
+i=0
+for query in results:
+    for blasthit in results[query]:
+        row = []
+        for key in needed_keys:
+            row.append(blasthit[key])
+        csv_list.append(row)
+        i+=1
+    csv_list.append([])
 
 csv_list = []
-functions_list = []
+function_list = []
 
 for query in results:
     is_first = True
@@ -124,21 +123,25 @@ for query in results:
             is_first = False
 
         is_best = True
-        bad_functions = [
-                 'hypothetical',
-                 'protein of unknown function',
-                 'putative protein',
-                 'unspecified product',
-                 'circadian clock',
-                 'insulin',
-                 'crystallin',
-                 'carcinoma',
-                 'tumor',
-                 'death',
-                 'apoptosis'
+        non_specific_functions = [
+                 # 'hypothetical',
+                 # 'protein of unknown function',
+                 # 'putative protein',
+                 # 'unspecified product',
+                 # 'circadian clock',
+                 # 'insulin',
+                 # 'crystallin',
+                 # 'carcinoma',
+                 # 'tumor',
+                 # 'death',
+                 # 'apoptosis',
+                 # 'chromosome',
+                 # 'growth',
+                 # 'heat',
+                 # 'prostaglandin'
                  ]
-        for bad_function in bad_functions:
-            if bad_function in blasthit['function']:
+        for function in non_specific_functions:
+            if function in blasthit['function']:
                 is_best = False
 
         if is_best == True:
@@ -146,12 +149,21 @@ for query in results:
             break
 
     csv_list.append(best_row)
-    functions_list.append(best_row[0])
+    function_list.append(best_row[7])
 
-print len(set(functions_list))
+function_set = set(function_list)
+print len(function_set)
 
-outfile = '/home/anna/bioinformatics/euglenozoa/euglena/filtered_results.csv'
+outfile = '/home/anna/bioinformatics/euglena_project/euglena/filtered_results.csv'
 write_list_of_lists(csv_list, outfile, delimiter=',', header=needed_keys)
+
+csv_list_functions = []
+
+for function in function_set:
+    csv_list_functions.append([function])
+
+outfile = '/home/anna/bioinformatics/euglena_project/euglena/filtered_set_of_functions.csv'
+write_list_of_lists(csv_list_functions, outfile, delimiter=',')
 
 # i=0
 # for key in results:

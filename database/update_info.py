@@ -34,8 +34,8 @@ def update_len_ratio():
     return 0
 
 csv_info_pathes=[
-'/home/anna/bioinformatics/euglenozoa/mitocarta/Human.MitoCarta.2.0.csv',
-# '/home/anna/bioinformatics/euglenozoa/tripanosoma/triponasoma_info.csv'
+'/home/anna/bioinformatics/euglena_project/mitocarta/Human.MitoCarta.2.0.csv',
+# '/home/anna/bioinformatics/euglena_project/tripanosoma/triponasoma_info.csv'
 ]
 
 for csv_info_path in csv_info_pathes:

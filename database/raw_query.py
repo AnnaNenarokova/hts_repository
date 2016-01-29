@@ -132,7 +132,7 @@ for seq in seqs:
 
 csv_out = sorted(csv_out, key=lambda protein: protein[2])
 
-outfile = '/home/anna/bioinformatics/euglenozoa/euglena/filtered_functions.csv'
+outfile = '/home/anna/bioinformatics/euglena_project/euglena/filtered_functions.csv'
 
 header = ['organism', 'seqid', 'function', 'mitoscore', 'loc', 'locrate']
 
