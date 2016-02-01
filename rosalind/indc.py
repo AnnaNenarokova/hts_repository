@@ -18,10 +18,10 @@ def indc(haploid_set):
     P = 0
     for k in range(n):
         P += binom(n, k, p)
-        print P
         result.insert(0, log10(P))
     return result
 
+n = 42
 
-for p in indc(5):
+for p in indc(n):
     print p,

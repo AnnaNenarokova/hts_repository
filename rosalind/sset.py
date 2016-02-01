@@ -6,10 +6,8 @@ def combination(n, k):
     return C_n_k
 
 def sset(n):
-    sset_sum = 0
-    for k in range(n+1):
-        sset_sum += combination(n, k)
-    return sset_sum
+    result = 2 ** n
+    return result
 
 
 n = 810
