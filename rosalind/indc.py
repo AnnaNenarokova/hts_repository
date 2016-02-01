@@ -1,9 +1,13 @@
 #!/usr/bin/python
 from math import *
 
+def combination(n, k):
+    C_n_k = factorial(n)/(factorial(n-k)*factorial(k))
+    return C_n_k
+
 def binom(n, k, p):
     q = 1 - p
-    n_k = factorial(n)/(factorial(n-k)*factorial(k))
+    n_k = combination(n, k)
     p = n_k*(p**k)*(q**(n-k))
     return p
 

@@ -18,6 +18,7 @@ def read_from_file(file_path):
 def count_nodes(n_points, adj_list):
     connected_graphs = []
     first = True
+
     for edge in adj_list:
         if first:
             connected_graphs.append(list(edge))
@@ -76,9 +77,6 @@ def count_nodes(n_points, adj_list):
         if is_free_point:
             free_points.append(point)
 
-    print n_points
-    print len(connected_graphs)
-    print len(free_points)
     result = len(connected_graphs) + len(free_points) - 1
     return result
 
@@ -87,7 +85,6 @@ def tree(file_path):
     result = count_nodes(n_points, adj_list)
     return result
 
-# file_path = '/home/anna/bioinformatics/ngs/rosalind/data/rosalind_tree.txt'
-file_path = '/home/anna/bioinformatics/ngs/rosalind/data/tree.txt'
+file_path = '/home/anna/bioinformatics/ngs/rosalind/data/rosalind_tree.txt'
 
 print tree(file_path)
