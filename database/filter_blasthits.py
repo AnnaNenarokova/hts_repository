@@ -32,33 +32,50 @@ rows = exe_query(query, db_path)
 query_dict = dict_list_to_dict(rows, 'query_id')
 
 bad_functions = [
-                 # 'dynein', 'kinesin', 'tubulin', 'actin', 'myosin', 'formin',
-                 # 'clathrin', 'centrin',
-                 # 'transposon', 'repeat','ppr',
-                 # 'mterf',
-                 # 'ras',
-                 # 'rab',
-                 # 'kinase', 'phosphatase',
-                 # 'adp-ribosylation',
-                 # 'receptor',
-                 # 'cyclophilin',
-                 # 'transport', 'carrier',
-                 # 'mrp', 'transloc', 'abc', 'permease', 'porter', 'atp-binding cassette',
-                 # 'lactamase',
-                 # 'pump',
-                 # 'endosomal integral membrane protein; putative',
-                 # 'stomatin',
-                 # 'chaperon', 'chaperonin',
-                 # 'histon', 'dnaj', 'nucleosome remodeling',
-                 # 'peptidas', 'protease',
-                 # 'proteasome',
-                 # 'ubiquitin',
+                 'dynein', 'kinesin', 'tubulin', 'actin', 'myosin', 'formin',
+                 'clathrin', 'centrin',
+                 'paraflagellar rod component; putative',
+                 'williams-beuren',
+                 'transposon', 'repeat',
+                 'mterf',
+                 'small gtp-binding protein rab',
+                 'ribosome-associated GTPase ',
+                 'ras-like small GTPase',
+                 'kinase',
+                 'phosphatase',
+                 'adenylate cyclase',
+                 'adp-ribosylation',
+                 'macro domain',
+                 'sirtuin',
+                 'calmodulin',
+                 'angel',
+                 'cyclophilin',
+                 'insulin-recepror',
+                 # 'disulphide',
+                 'mrp', 'abc', 'transloc', 'permease', 'atp-binding cassette', 'transporter', 'antiporter',
+                 'regulator of microtubule dynamics',
+                 'required for meiotic nuclear division 1 homolog',
+                 'lactamase',
+                 'pump',
+                 'endosomal integral membrane protein; putative',
+                 'stomatin',
+                 'chaperon', 'chaperonin',
+                 'histon', 'dnaj', 'nucleosome remodeling',
+                 'component of the condensin complex',
+                 'peptidas', 'protease',
+                 'proteasome',
+                 'ubiquitin',
                  # 'leucine-rich', 'leucine zipper',
-                 # 'dead', 'deah',
-                 # 'williams-beuren',
-                 # 'poly(a) binding protein',
-                 # 'mrb1-',
-                 # 'kiaa0141'
+                 'dead', 'deah',
+                 'rna binding',
+                 'poly(a)',
+                 'helicase',
+                 'nuclease',
+                 'topoisomerase',
+                 'photolyase',
+                 'muts', 'mutl',
+                 'mrb1-',
+                 'kiaa0141'
                  ]
 
 needed_keys = [
@@ -80,8 +97,6 @@ needed_keys = [
     "alen_qlen"
     ]
 
-print len(query_dict)
-
 results = {}
 
 for query in query_dict:
@@ -95,7 +110,7 @@ for query in query_dict:
     if function_is_good:
         results[query] = sorted(query_dict[query], key=lambda blasthit: float(blasthit['evalue']))
 
-print len(results)
+print len(results), 'proteins'
 
 csv_list = []
 i=0
@@ -124,21 +139,23 @@ for query in results:
 
         is_best = True
         non_specific_functions = [
-                 # 'hypothetical',
-                 # 'protein of unknown function',
-                 # 'putative protein',
-                 # 'unspecified product',
-                 # 'circadian clock',
-                 # 'insulin',
-                 # 'crystallin',
-                 # 'carcinoma',
-                 # 'tumor',
-                 # 'death',
-                 # 'apoptosis',
-                 # 'chromosome',
-                 # 'growth',
-                 # 'heat',
-                 # 'prostaglandin'
+                 'hypothetical',
+                 'protein of unknown function',
+                 'parkinson',
+                 'putative protein',
+                 'unspecified product',
+                 'circadian clock',
+                 'insulin',
+                 'crystallin',
+                 'carcinoma',
+                 'tumor',
+                 'death',
+                 'apoptosis',
+                 'chromosome',
+                 'growth',
+                 'heat',
+                 'prostaglandin',
+                 'zinc'
                  ]
         for function in non_specific_functions:
             if function in blasthit['function']:
@@ -152,9 +169,9 @@ for query in results:
     function_list.append(best_row[7])
 
 function_set = set(function_list)
-print len(function_set)
+print len(function_set), 'functions'
 
-outfile = '/home/anna/bioinformatics/euglena_project/euglena/filtered_results.csv'
+outfile = '/home/anna/bioinformatics/phd/euglena_project/euglena/filtered_results.csv'
 write_list_of_lists(csv_list, outfile, delimiter=',', header=needed_keys)
 
 csv_list_functions = []
@@ -162,7 +179,7 @@ csv_list_functions = []
 for function in function_set:
     csv_list_functions.append([function])
 
-outfile = '/home/anna/bioinformatics/euglena_project/euglena/filtered_set_of_functions.csv'
+outfile = '/home/anna/bioinformatics/phd/euglena_project/euglena/filtered_set_of_functions.csv'
 write_list_of_lists(csv_list_functions, outfile, delimiter=',')
 
 # i=0

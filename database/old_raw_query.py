@@ -29,14 +29,9 @@ def exclude_bad_functions():
                  'leucine-rich',
                  'dead', 'deah',
                  'williams-beuren',
-                 'heat',
+                 'heat shock',
                  'zinc-finger', 'zinc finger',
                  'multidrug resistance protein',
-                 'binding',
-                 'hypothetical',
-                 'protein of unknown function',
-                 'putative protein',
-                 'unspecified product'
                  ]
 
     functions = " "
@@ -132,7 +127,7 @@ for seq in seqs:
 
 csv_out = sorted(csv_out, key=lambda protein: protein[2])
 
-outfile = '/home/anna/bioinformatics/euglena_project/euglena/filtered_functions.csv'
+outfile = '/home/anna/bioinformatics/phd/euglena_project/euglena/filtered_functions.csv'
 
 header = ['organism', 'seqid', 'function', 'mitoscore', 'loc', 'locrate']
 
