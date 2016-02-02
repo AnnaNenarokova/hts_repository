@@ -69,7 +69,6 @@ bad_functions = [
                  'peptidas', 'protease',
                  'proteasome',
                  'ubiquitin',
-                 # 'leucine-rich', 'leucine zipper',
                  'dead', 'deah',
                  'rna binding',
                  'poly(a)',
