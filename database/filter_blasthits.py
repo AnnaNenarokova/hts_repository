@@ -23,9 +23,9 @@ query = """
     INNER JOIN sequence AS subject ON subject.id = blasthit.subject_id
     WHERE query.organism = 'Euglena gracilis'
     AND blasthit.evalue < 0.00001 AND blasthit.alen_slen > 0.3
-    AND ( (subject.organism = 'Trypanosoma brucei' AND subject.mitoscore = 100)
+    AND ( subject.organism = 'Trypanosoma brucei'
         OR  subject.organism = 'Homo sapiens'
-        OR (subject.organism = 'Saccharomyces cerevisiae' AND subject.loc = 'Mito'))
+        OR (subject.organism = 'Saccharomyces cerevisiae' AND subject.mitoscore = 100))
 """
 
 rows = exe_query(query, db_path)
@@ -34,13 +34,14 @@ query_dict = dict_list_to_dict(rows, 'query_id')
 bad_functions = [
                  'dynein', 'kinesin', 'tubulin', 'actin', 'myosin', 'formin',
                  'clathrin', 'centrin',
+                 'cytosolic coat',
                  'paraflagellar rod component; putative',
                  'williams-beuren',
                  'transposon', 'repeat',
                  'mterf',
                  'small gtp-binding protein rab',
-                 'ribosome-associated GTPase ',
-                 'ras-like small GTPase',
+                 'ribosome-associated gtpase ',
+                 'ras-like small gtpase',
                  'kinase',
                  'phosphatase',
                  'adenylate cyclase',
@@ -52,9 +53,12 @@ bad_functions = [
                  'cyclophilin',
                  'insulin-recepror',
                  # 'disulphide',
-                 'mrp', 'abc', 'transloc', 'permease', 'atp-binding cassette', 'transporter', 'antiporter',
+                 'mrp', 'abc', 'transloc', 'permease', 'atp-binding cassette', 'porter',
                  'regulator of microtubule dynamics',
                  'required for meiotic nuclear division 1 homolog',
+                 'gtpase-activating protein',
+                 'vesicle membrane protein',
+                 'universal minicircle sequence binding protein',
                  'lactamase',
                  'pump',
                  'endosomal integral membrane protein; putative',
@@ -70,6 +74,8 @@ bad_functions = [
                  'rna binding',
                  'poly(a)',
                  'helicase',
+                 'ligase',
+                 'polymerase',
                  'nuclease',
                  'topoisomerase',
                  'photolyase',
@@ -104,7 +110,7 @@ for query in query_dict:
     for hit in query_dict[query]:
         if function_is_good:
             for function in bad_functions:
-                if function in hit['subject_function'].lower():
+                if function.lower() in hit['subject_function'].lower():
                     function_is_good = False
                     break
     if function_is_good:
