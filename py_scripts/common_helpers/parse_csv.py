@@ -35,13 +35,15 @@ def write_list_of_lists(list_of_lists, outpath, delimiter=',', header=False):
         csvfile.close()
     return outpath
 
-def write_list_of_dicts(list_of_dicts, outpath):
-	with open(outpath, 'w') as csvfile:
-		writer = csv.DictWriter(csvfile, fieldnames=list_of_dicts[0].keys())
-		writer.writeheader()
-		for row in list_of_dicts:
-			writer.writerow(row)
-		csvfile.close()
+def write_list_of_dicts(list_of_dicts, outpath, fieldnames=False):
+    with open(outpath, 'w') as csvfile:
+        if not fieldnames:
+            fieldnames = list_of_dicts[0].keys()
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in list_of_dicts:
+            writer.writerow(row)
+        csvfile.close()
 	return outpath
 
 def write_dict_of_dicts(dict_of_dicts, outpath, key_name='name'):
