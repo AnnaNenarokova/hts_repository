@@ -1,0 +1,2 @@
+sqlite3 -header -csv mitoproteome.db < ~/bioinformatics/ngs/database/select_targetp.sql > targetp_result.csv
+sqlite3 -header -csv mitoproteome.db < ~/bioinformatics/ngs/database/select_b2go.sql > b2go_result.csv

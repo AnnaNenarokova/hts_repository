@@ -13,9 +13,9 @@ def parse_csv(csv_path, delimiter=','):
 		handle_file.close()
 	return results
 
-def csv_to_list_of_dicts(csv_path):
+def csv_to_list_of_dicts(csv_path, delimiter=','):
     with open(csv_path) as csvfile:
-        reader = csv.DictReader(csvfile, fieldnames=None, restkey=None, restval=None, dialect='excel')
+        reader = csv.DictReader(csvfile, fieldnames=None, delimiter=delimiter)
         list_of_dicts = []
     	for row in reader:
         	list_of_dicts.append(row)

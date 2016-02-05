@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import sqlite3
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
@@ -21,23 +22,23 @@ def select_best_hit(blasthit_dict, needed_keys):
 
             is_best = True
             non_specific_functions = [
-                     'hypothetical',
-                     'protein of unknown function',
-                     'parkinson',
-                     'putative protein',
-                     'unspecified product',
-                     'circadian clock',
-                     'insulin',
-                     'crystallin',
-                     'carcinoma',
-                     'tumor',
-                     'death',
-                     'apoptosis',
-                     'chromosome',
-                     'growth',
-                     'heat',
-                     'prostaglandin',
-                     'zinc'
+                     # 'hypothetical',
+                     # 'protein of unknown function',
+                     # 'parkinson',
+                     # 'putative protein',
+                     # 'unspecified product',
+                     # 'circadian clock',
+                     # 'insulin',
+                     # 'crystallin',
+                     # 'carcinoma',
+                     # 'tumor',
+                     # 'death',
+                     # 'apoptosis',
+                     # 'chromosome',
+                     # 'growth',
+                     # 'heat',
+                     # 'prostaglandin',
+                     # 'zinc'
                      ]
             for function in non_specific_functions:
                 if function in blasthit['function']:
@@ -139,8 +140,6 @@ def filter_euglena_blasthits(db_path):
         "subject_id",
         "subject_organism",
         "subject_function",
-        "subject_loc",
-        "subject_locrate",
         "evalue",
         "qlen",
         "slen",
