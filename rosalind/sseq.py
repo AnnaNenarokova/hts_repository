@@ -1,32 +1,35 @@
-def readfasta (fasta):
-    input = open(fasta, 'r')
-    seqs = {}
+def readfasta(fasta_path):
+    input = open(fasta_path, 'r')
+    records = []
     for line in input:
         if line[0] == '>':
             name = line[1:].rstrip()
-            seqs[name] = [] 
+            records.append({'seq_name': name, 'seq':''})
         else:
-            seqs[name].append(line.rstrip())
-    for name in seqs:
-        seqs[name] = ''.join(seqs[name])
+            records[-1]['seq'] += line.rstrip()
     input.close
-    return seqs
+    return records
 
-seqs = readfasta('test.txt')
+def sseq(fasta_path, out_path):
+    seqs = readfasta(fasta_path)
+    string = seqs[0]['seq']
+    substring = seqs[1]['seq']
+    result = []
+    start = 0
+    for s1 in substring:
+        for i, s2 in enumerate(string[start:]):
+            if s1 == s2:
+                new_start = start + i + 1
+                result.append(str(new_start))
+                start = new_start
+                break
+    result = ' '.join(result)
+    with open(out_path, 'w') as outf:
+        outf.write(result)
+        outf.closed
+    return 0
 
-str1 = seqs['Rosalind_7466']
-str2 = seqs['Rosalind_3417']
-def findnt(nt, string, first):
-	for n in range (first, len(str1)):
-		if nt == str1[n]: 
-			return (n)
 
-result = []
-n = 0
-for nt in str2:
-	first = n
-	n = findnt(nt, str1, first)
-	result.append(n+1)
-	
-for n in result:
-	print n,
+fasta_path = '/home/anna/bioinformatics/ngs/rosalind/data/rosalind_sseq.txt'
+out_path = '/home/anna/bioinformatics/ngs/rosalind/data/sseq_result.txt'
+sseq(fasta_path, out_path)

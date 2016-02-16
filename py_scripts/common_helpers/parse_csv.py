@@ -46,13 +46,13 @@ def write_list_of_dicts(list_of_dicts, outpath, fieldnames=False):
         csvfile.close()
 	return outpath
 
-def write_dict_of_dicts(dict_of_dicts, outpath, key_name='name'):
-	dicts_list = []
+def write_dict_of_dicts(dict_of_dicts, outpath, key_name=False, fieldnames=False):
+	list_of_dicts = []
 	for key in dict_of_dicts:
 		cur_dict = {}
 		cur_dict[key_name] = key
 		for k in dict_of_dicts[key]:
 			cur_dict[k] = dict_of_dicts[key][k]
 		list_of_dicts.append(cur_dict)
-	write_list_of_dicts(list_of_dicts, outpath)
+	write_list_of_dicts(list_of_dicts, outpath, fieldnames)
 	return outpath

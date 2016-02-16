@@ -21,6 +21,7 @@ nonspecific_functions = [
        'cyclophilin',
        'insulin-recepror',
        'mrp', 'abc', 'transloc', 'permease', 'atp-binding cassette', 'porter',
+       'solute carrier',
        'regulator of microtubule dynamics',
        'required for meiotic nuclear division 1 homolog',
        'gtpase-activating protein',

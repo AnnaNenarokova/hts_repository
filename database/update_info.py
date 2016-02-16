@@ -5,8 +5,9 @@ sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from blast.classes.blast_parser import BlastParser
 from database.models import *
 from py_scripts.common_helpers.parse_csv import *
+from database.trypa_new_functions import *
 
-def update_function_info(csv_info_path):
+def update_all_info(csv_info_path):
     info_dict = csv_to_dict(csv_info_path, main_key='seqid')
     with db.atomic():
         for seqid in info_dict:
@@ -33,10 +34,14 @@ def update_len_ratio():
         hit.save()
     return 0
 
-csv_info_pathes=[
-'/home/anna/bioinformatics/euglena_project/mitocarta/Human.MitoCarta.2.0.csv',
-# '/home/anna/bioinformatics/euglena_project/tripanosoma/triponasoma_info.csv'
-]
 
-for csv_info_path in csv_info_pathes:
-    update_function_info(csv_info_path)
+def update_function_info(csv_info_dict):
+    with db.atomic():
+        for seqid in csv_info_dict:
+            new_function = csv_info_dict[seqid]
+            sequence = Sequence.get(Sequence.seqid == seqid)
+            query = Sequence.update(function=new_function).where(Sequence.seqid==seqid)
+            query.execute()
+    return 0
+
+update_function_info(trypa_new_functions)

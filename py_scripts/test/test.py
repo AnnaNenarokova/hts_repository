@@ -1,24 +1,14 @@
-#!/usr/bin/python
-class Test:
-	def __init__():
-		return None
-
-n = 10000
-
-quota = 0.37
-
-a = 0
-b = 0
-
-for i in range(n):
-    if a + b == 0:
-        cur_ratio = 0
+def median(l):
+    sl = sorted(l)
+    print sl
+    llen = len(sl)
+    if ((llen % 2) == 0):
+        i = llen/2
+        med = (sl[i] + sl[i-1])/2
     else:
-        cur_ratio = a /float(a + b)
-    print cur_ratio
-    if cur_ratio < quota:
-        a += 1
-        print 'a',
-    else:
-        b += 1
-        print 'b',
+        i = (llen-1)/2
+        med = sl[i]
+    return med
+
+l = [4,5,4,5]
+print median(l)
