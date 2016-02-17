@@ -5,16 +5,24 @@ from blast.classes.blast import Blast
 from blast.classes.blast_parser import BlastParser
 
 query_pathes = {
-'human' : '/home/anna/bioinformatics/phd/mitoproteomes/mitocarta/Human.MitoCarta2.0.fasta',
-'yeast' : '/home/anna/bioinformatics/phd/mitoproteomes/yeast/yeast_orf_trans_all.fasta',
-'trypanosoma' : '/home/anna/bioinformatics/phd/mitoproteomes/trypanosoma/tr_proteins.fasta',
-# 'euglena' : '/home/anna/bioinformatics/phd/euglena_project/all_euglena_proteins/E_gracilis_transcriptome_final.PROTEINS.fasta'
+# 'arabidopsis': '/home/anna/bioinformatics/phd/mitoproteomes/arabidopsis/arabidopsis_mito.fasta',
+# 'worm': '/home/anna/bioinformatics/phd/mitoproteomes/caenorhabditis/worm_mitoproteins.fasta',
+# 'mouse' : '/home/anna/bioinformatics/phd/mitoproteomes/mitocarta/Mouse.MitoCarta2.0.fasta',
+# 'human': '/home/anna/bioinformatics/phd/mitoproteomes/mitocarta/Human.MitoCarta2.0.fasta',
+# 'yeast' : '/home/anna/bioinformatics/phd/mitoproteomes/yeast/orf_trans_all.fasta',
+# 'tetrahymena': '/home/anna/bioinformatics/phd/mitoproteomes/tetrahymena/tetrahymena_mito_gb.fasta',
+# 'trypanosoma' : '/home/anna/bioinformatics/phd/mitoproteomes/trypanosoma/trypa_mitoproteins.fasta'
+'euglena' : '/home/anna/bioinformatics/phd/euglena_project/all_euglena_proteins/E_gracilis_transcriptome_final.PROTEINS.fasta'
 }
 
 db_pathes = {
-'human' : '/home/anna/bioinformatics/phd/mitoproteomes/mitocarta/Human.MitoCarta2.0/blast_db/Human.MitoCarta2.0.db',
-'yeast' : '/home/anna/bioinformatics/phd/mitoproteomes/yeast/orf_trans_all_yeast/blast_db/orf_trans_all_yeast.db',
-'trypanosoma' : '/home/anna/bioinformatics/phd/mitoproteomes/trypanosoma/tr_proteins/blast_db/tr_proteins.db',
+'arabidopsis': '/home/anna/bioinformatics/phd/mitoproteomes/arabidopsis/arabidopsis_mito/blast_db/arabidopsis_mito.db',
+'worm': '/home/anna/bioinformatics/phd/mitoproteomes/caenorhabditis/worm_mitoproteins/blast_db/worm_mitoproteins.db',
+'mouse' : '/home/anna/bioinformatics/phd/mitoproteomes/mitocarta/Mouse.MitoCarta2.0/blast_db/Mouse.MitoCarta2.0.db',
+'human': '/home/anna/bioinformatics/phd/mitoproteomes/mitocarta/Human.MitoCarta2.0/blast_db/Human.MitoCarta2.0.db',
+'yeast' : '/home/anna/bioinformatics/phd/mitoproteomes/saccharomyces/orf_trans_all/blast_db/orf_trans_all.db',
+# 'tetrahymena': '/home/anna/bioinformatics/phd/mitoproteomes/tetrahymena/tetrahymena_mito_gb/blast_db/tetrahymena_mito_gb.db',
+# 'trypanosoma' : '/home/anna/bioinformatics/phd/mitoproteomes/trypanosoma/trypa_mitoproteins/blast_db/trypa_mitoproteins.db',
 # 'euglena' : '/home/anna/bioinformatics/phd/euglena_project/all_euglena_proteins/E_gracilis_transcriptome_final.PROTEINS/blast_db/E_gracilis_transcriptome_final.PROTEINS.db'
 }
 

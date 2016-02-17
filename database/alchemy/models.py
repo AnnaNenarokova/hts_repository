@@ -1,11 +1,14 @@
 import os
 import sys
-
 from sqlalchemy import Column, ForeignKey, Integer, String, Text, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 import sqlalchemy.types as types
 import simplejson as json
+from Bio import SeqIO
+from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
+from Bio.Alphabet import *
 
 Base = declarative_base()
 
@@ -24,10 +27,11 @@ class Sequence(Base):
     __tablename__ = 'sequence'
 
     id = Column(Integer, primary_key=True)
-    seqid = Column(String(255), nullable=False)
+    seqid = Column(String(255), nullable=False, index=True)
     seqtype = Column(String(255), nullable=False)
     organism = Column(String(255), nullable=False)
-    source = Column(String(255), nullable=False)
+    source = Column(String(255))
+    og = Column(String(255))
     function = Column(Text())
     mitoscore = Column(Float())
     loc = Column(String(255))
@@ -44,6 +48,15 @@ class Sequence(Base):
     subjects = relationship('Sequence', secondary='blasthit',
         primaryjoin=("Sequence.id == BlastHit.query_id"),
         secondaryjoin=("Sequence.id == BlastHit.subject_id"))
+
+    def to_seqrecord(self):
+        if self.seqtype =='dna': alphabet = 'generic_dna'
+        elif self.seqtype == 'prot': alphabet = 'generic_protein'
+        else:
+            print 'Error: Unsupported sequence type'
+            return False
+        seqrecord = SeqRecord(Seq(self.extra_data['sequence'], alphabet), name='', id = self.seqid, description = '')
+        return seqrecord
 
 class BlastHit(Base):
     __tablename__ = 'blasthit'
@@ -62,15 +75,3 @@ class BlastHit(Base):
 
     subject_id = Column(Integer, ForeignKey("sequence.id"))
     subject = relationship("Sequence", primaryjoin=(subject_id == Sequence.id))
-
-
-from models import *
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
-engine = create_engine('sqlite:///mitoproteome.db')
-Base.metadata.bind = engine
-
-DBSession = sessionmaker()
-DBSession.bind = engine
-session = DBSession()
