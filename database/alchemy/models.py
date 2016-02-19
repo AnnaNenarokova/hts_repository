@@ -33,6 +33,7 @@ class Sequence(Base):
     source = Column(String(255))
     og = Column(String(255))
     function = Column(Text())
+    mitochondrial = Column(Boolean())
     mitoscore = Column(Float())
     loc = Column(String(255))
     locrate = Column(Integer())
