@@ -1,6 +1,6 @@
 import os
 import sys
-from sqlalchemy import Column, ForeignKey, Integer, String, Text, Float
+from sqlalchemy import Column, ForeignKey, Integer, String, Text, Float, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 import sqlalchemy.types as types
@@ -27,7 +27,7 @@ class Sequence(Base):
     __tablename__ = 'sequence'
 
     id = Column(Integer, primary_key=True)
-    seqid = Column(String(255), nullable=False, index=True)
+    seqid = Column(String(255), nullable=False, index=True, unique=True)
     seqtype = Column(String(255), nullable=False)
     organism = Column(String(255), nullable=False)
     source = Column(String(255))

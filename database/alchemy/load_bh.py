@@ -2,6 +2,7 @@
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from database.alchemy.models import *
+from blast.classes.blast_parser import BlastParser
 
 def load_blast_csv(session, blast_csv_path, custom_outfmt=False):
     if not custom_outfmt:
