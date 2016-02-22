@@ -19,4 +19,4 @@ s = a[7635]
 bh = s.best_subject_hit()
 
 print "For: id =", s.id, " (", s.organism, ")"
-print bh.id if bh else 'suka'
+print bh.id if bh else 'N'
