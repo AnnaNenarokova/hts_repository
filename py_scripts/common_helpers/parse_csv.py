@@ -2,7 +2,7 @@
 import csv
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
-from py_scripts.common_helpers.dict_list_to_dict import *
+from py_scripts.common_helpers.parse_dicts import *
 
 def parse_csv(csv_path, delimiter=','):
 	with open(csv_path) as handle_file:
@@ -26,6 +26,11 @@ def csv_to_dict(csv_path, main_key):
     list_of_dicts = csv_to_list_of_dicts(csv_path)
     csv_dict = dict_list_to_csv_dict(list_of_dicts, main_key)
     return csv_dict
+
+def csv_to_dict_reverse(csv_path, delimiter=','):
+    list_of_lists = parse_csv(csv_path, delimiter=delimiter)
+    dic = list_of_lists_to_dict_reverse(list_of_lists)
+    return dic
 
 def write_list_of_lists(list_of_lists, outpath, delimiter=',', header=False):
     with open(outpath, 'w') as csvfile:

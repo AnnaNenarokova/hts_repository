@@ -19,13 +19,13 @@ blast_pairs = [
      }
             ]
 
-blast_csv_pathes = []
+blast_csv_paths = []
 for pair in blast_pairs:
     new_blast = Blast(query_path=pair['query'], db_path=pair['subj_db'], db_type='prot')
     custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
     blast_csv_path = new_blast.blast(bl_type='blastp', evalue=0.01, outfmt='comma_values', custom_outfmt=custom_outfmt, word_size=2)
     print blast_csv_path
-    blast_csv_pathes.append(blast_csv_path)
+    blast_csv_paths.append(blast_csv_path)
 
-for blast_path in blast_csv_pathes:
+for blast_path in blast_csv_paths:
     print blast_path

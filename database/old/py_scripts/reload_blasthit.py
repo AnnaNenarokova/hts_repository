@@ -7,7 +7,7 @@ from py_scripts.biohelpers.seq_info_to_dict import *
 
 BlastHit.drop_table()
 db.create_table(BlastHit)
-blast_csv_pathes = [
+blast_csv_paths = [
 '/home/anna/bioinformatics/euglena_project/euglena/all_euglena_proteins/E_gracilis_transcriptome_final.PROTEINS/blast_reports/tr_proteins_bl_report.csv',
 '/home/anna/bioinformatics/euglena_project/euglena/all_euglena_proteins/E_gracilis_transcriptome_final.PROTEINS/blast_reports/Human.MitoCarta2.0_bl_report.csv',
 '/home/anna/bioinformatics/euglena_project/euglena/all_euglena_proteins/E_gracilis_transcriptome_final.PROTEINS/blast_reports/yeast_orf_trans_all_bl_report.csv',
@@ -23,6 +23,6 @@ blast_csv_pathes = [
 ]
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
-for blast_csv_path in blast_csv_pathes:
+for blast_csv_path in blast_csv_paths:
     blast_dicts = BlastParser(blast_csv_path, features=custom_outfmt).read_hits()
     BlastHit.create_from_dicts(blast_dicts)

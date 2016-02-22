@@ -3,7 +3,7 @@ import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from blast.classes.blast import Blast
 
-subj_pathes = {
+subj_paths = {
 # 'amoeba': '/home/anna/bioinformatics/phd/mitoproteomes/acanthamoeba/amoeba_mitoproteins.fasta',
 # 'arabidopsis': '/home/anna/bioinformatics/phd/mitoproteomes/arabidopsis/arabidopsis_mito.fasta',
 # 'worm': '/home/anna/bioinformatics/phd/mitoproteomes/caenorhabditis/worm_mitoproteins.fasta',
@@ -15,6 +15,6 @@ subj_pathes = {
 'reference_mitoproteomes': '/home/anna/Dropbox/phd/db/proteomes/reference_mitoproteomes.fasta'
 }
 
-for subj in subj_pathes:
-	new_blast = Blast(subj_path=subj_pathes[subj], db_type='prot')
+for subj in subj_paths:
+	new_blast = Blast(subj_path=subj_paths[subj], db_type='prot')
 	new_blast.makeblastdb()

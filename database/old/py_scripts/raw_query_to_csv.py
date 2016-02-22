@@ -2,7 +2,7 @@ import sqlite3
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from py_scripts.common_helpers.parse_csv import *
-from py_scripts.common_helpers.dict_list_to_dict import *
+from py_scripts.common_helpers.parse_dicts import *
 import csv
 
 def dict_factory(cursor, row):
