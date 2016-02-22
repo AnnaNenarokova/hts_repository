@@ -25,20 +25,9 @@ def list_of_lists_to_dict_reverse(list_of_lists):
             keys = l[1::]
             for key in keys:
                 dic[key] = {}
-            print dic
-            print keys
             first = False
         else:
             key2 = l[0]
-            print key2
-            print l[1:]
-            for key1, value in keys, l[1:]:
-                print key1
-                print value
-                # dic[key1][key2] = value
+            for key1, value in zip(keys, l[1:]):
+                dic[key1][key2] = value
     return dic
-
-
-ll = [['name', 'boy', 'girl'], ['Sasha', 3, 2], ['Zhenya', 2, 3], ['Petya', 4, 0]]
-
-print list_of_lists_to_dict_reverse(ll)

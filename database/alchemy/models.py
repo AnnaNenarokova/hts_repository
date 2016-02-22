@@ -59,6 +59,23 @@ class Sequence(Base):
         seqrecord = SeqRecord(Seq(self.extra_data['sequence'], alphabet), name='', id = self.seqid, description = '')
         return seqrecord
 
+    def best_subject_hit(self):
+        hits = []
+        for hit in self.query_blasthits:
+            mode = 'slen' if self.organism == 'Euglena gracilis' else 'qlen'
+            if hit.long_homology(mode):
+                hits.append(hit)
+
+        if len(hits) == 0:
+            hits = self.query_blasthits
+
+        hits = sorted(hits, key = lambda h: h.evalue)
+        return hits[0] if hits else None
+
+    def best_subject(self):
+        bsh = self.best_subject_hit()
+        return bsh.subject if bsh else None
+
 class BlastHit(Base):
     __tablename__ = 'blasthit'
 
@@ -76,3 +93,9 @@ class BlastHit(Base):
 
     subject_id = Column(Integer, ForeignKey("sequence.id"))
     subject = relationship("Sequence", primaryjoin=(subject_id == Sequence.id))
+
+    def long_homology(self, mode, len_percent = 0.3):
+        if mode == "slen":
+            return self.alen_slen > len_percent
+        elif mode == "qlen":
+            return self.alen_qlen > len_percent
