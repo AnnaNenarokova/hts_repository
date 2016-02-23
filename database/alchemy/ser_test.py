@@ -14,9 +14,5 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-a = session.query(Sequence)
-s = a[7635]
-bh = s.best_subject_hit()
-
-print "For: id =", s.id, " (", s.organism, ")"
-print bh.id if bh else 'N'
+a = BlastHit.get_by_query_subject(session, 1, 2)
+print

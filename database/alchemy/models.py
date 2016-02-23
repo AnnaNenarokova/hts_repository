@@ -1,6 +1,7 @@
 import os
 import sys
 from sqlalchemy import Column, ForeignKey, Integer, String, Text, Float, Boolean
+from sqlalchemy.orm.session import Session
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 import sqlalchemy.types as types
@@ -76,6 +77,21 @@ class Sequence(Base):
         bsh = self.best_subject_hit()
         return bsh.subject if bsh else None
 
+    def get_reverse_blasthit(self, subject):
+        session = Session.object_session(self)
+        hits = BlastHit.get_by_query_subject(session, subject.id, self.id)
+        hit = hits[0]
+
+        #TODO: receive the best hit from hits
+
+        if self.id == subject.best_subject().id:
+            return [hit, True]
+        elif hit:
+            return [hit, False]
+        else:
+            return [None, False]
+
+
 class BlastHit(Base):
     __tablename__ = 'blasthit'
 
@@ -99,3 +115,9 @@ class BlastHit(Base):
             return self.alen_slen > len_percent
         elif mode == "qlen":
             return self.alen_qlen > len_percent
+
+    @staticmethod
+    def get_by_query_subject(session, query_id, subject_id):
+        return session.query(BlastHit) \
+            .filter(BlastHit.query_id == query_id) \
+            .filter(BlastHit.subject_id == subject_id)
