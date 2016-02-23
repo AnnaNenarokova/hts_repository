@@ -40,8 +40,8 @@ class Sequence(Base):
     locrate = Column(Integer())
     extra_data = Column(SerializedDictField())
 
-    query_blasthits = relationship("BlastHit", foreign_keys="BlastHit.query_id")
-    subject_blasthits = relationship("BlastHit", foreign_keys="BlastHit.subject_id")
+    query_blasthits = relationship("BlastHit", foreign_keys="BlastHit.query_id", lazy='dynamic')
+    subject_blasthits = relationship("BlastHit", foreign_keys="BlastHit.subject_id", lazy='dynamic')
 
     queries = relationship('Sequence', secondary='blasthit',
         primaryjoin=("Sequence.id == BlastHit.subject_id"),
@@ -75,22 +75,24 @@ class Sequence(Base):
 
     def best_subject(self):
         bsh = self.best_subject_hit()
-        return bsh.subject if bsh else None
+        return [bsh.subject, bsh] if bsh else None
 
     def get_reverse_blasthit(self, subject):
         session = Session.object_session(self)
-        hits = BlastHit.get_by_query_subject(session, subject.id, self.id)
+
+        hits = subject.query_blasthits.filter(BlastHit.subject_id == self.id)
+
         hit = hits[0]
-
-        #TODO: receive the best hit from hits
-
-        if self.id == subject.best_subject().id:
-            return [hit, True]
-        elif hit:
-            return [hit, False]
+        bs = subject.best_subject()
+        if bs:
+            if self.id == bs[0].id:
+                return [hit, True]
+            elif hit:
+                return [hit, False]
+            else:
+                return [None, False]
         else:
             return [None, False]
-
 
 class BlastHit(Base):
     __tablename__ = 'blasthit'

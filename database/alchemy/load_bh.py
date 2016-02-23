@@ -8,7 +8,10 @@ def load_blast_csv(session, blast_csv_path, custom_outfmt=False):
     if not custom_outfmt:
         custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
     blast_dicts = BlastParser(blast_csv_path, features=custom_outfmt).read_hits()
+    i = 0
     for blast_dict in blast_dicts:
+        if i%10000==0: print i, 'records have been loaded'
+        i+=1
         query_id, subject_id = blast_dict['qseqid'], blast_dict['sseqid']
         evalue, length = blast_dict['evalue'], blast_dict['length']
         qlen, slen = blast_dict['qlen'], blast_dict['slen']

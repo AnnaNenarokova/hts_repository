@@ -14,4 +14,4 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-Sequence
+session.query(Sequence).options(joinedload('query_blasthits'))

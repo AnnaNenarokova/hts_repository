@@ -19,6 +19,7 @@ def load_fasta(session, fasta_path, seqtype, organism='unknown organism', source
         if description_path:
             cur_dic = dict_of_functions[seqid]
             new_seq.function = cur_dic['function']
+            new_seq.og = cur_dic['og']
             if cur_dic['mitochondrial'] == 'yes': new_seq.mitochondrial=True
             elif cur_dic['mitochondrial'] == 'no': new_seq.mitochondrial=False
             else:

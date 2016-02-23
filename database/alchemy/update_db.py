@@ -60,13 +60,3 @@ def load_ogs(session, og_path):
             print seqid, 'og has not been loaded'
     session.commit()
     return 0
-
-db_path = 'sqlite:////home/anna/Dropbox/phd/db/mito2.db'
-engine = create_engine(db_path)
-Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
-
-targetp_csv_path = '/home/anna/Dropbox/phd/db/proteomes/euglena/data/E_gracilis_transcriptome_final_PROTEINS_first_130_targetp_out.csv'
-
-
