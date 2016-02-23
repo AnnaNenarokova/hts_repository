@@ -12,10 +12,9 @@ def load_fasta(session, fasta_path, seqtype, organism='unknown organism', source
     for record in SeqIO.parse(fasta_path, "fasta"):
         seqid = record.id
         if not source: source = file_from_path(fasta_path, endcut=6)
-        new_seq = Sequence(seqid=seqid, seqtype=seqtype, organism=organism, source=source, extra_data={})
+        new_seq = Sequence(seqid=seqid, seqtype=seqtype, organism=organism, source=source, extra_data={}, len=len(record.seq))
         new_seq.extra_data['sequence'] = str(record.seq)
         new_seq.extra_data['description'] = str(record.description)
-
         if description_path:
             cur_dic = dict_of_functions[seqid]
             new_seq.function = cur_dic['function']

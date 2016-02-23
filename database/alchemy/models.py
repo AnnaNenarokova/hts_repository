@@ -31,6 +31,7 @@ class Sequence(Base):
     seqid = Column(String(255), nullable=False, index=True, unique=True)
     seqtype = Column(String(255), nullable=False)
     organism = Column(String(255), nullable=False)
+    len = Column(Integer(), nullable=False)
     source = Column(String(255))
     og = Column(String(255))
     function = Column(Text())
@@ -88,18 +89,15 @@ class Sequence(Base):
         hits = sorted(hits, key = lambda h: h.evalue)
         if len(hits) > 0:
             hit = hits[0]
+            bs = subject.best_subject()[0]
         else:
-            hit = False
-        bs = subject.best_subject()
-        if bs:
-            if self.id == bs[0].id:
+            return None
+
+        if hit:
+            if self.id == bs.id:
                 return [hit, True]
-            elif hit:
-                return [hit, False]
             else:
-                return [None, False]
-        else:
-            return [None, False]
+                return [hit, False]
 
 class BlastHit(Base):
     __tablename__ = 'blasthit'

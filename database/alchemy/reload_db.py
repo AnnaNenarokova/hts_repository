@@ -8,7 +8,7 @@ from database.alchemy.load_seq import *
 from database.alchemy.load_bh import *
 from database.alchemy.update_db import *
 
-def reload_db(db_path, fasta_paths, blast_csv_paths=False, blast_outfmt=False, reload_seq=True, reload_bh=True, load_functions=True):
+def reload_db(db_path, fasta_paths, blast_csv_paths=False, blast_outfmt=False, reload_seq=True, reload_bh=True, load_functions=True, update_targetp=True):
     engine = create_engine(db_path)
     if reload_seq: Sequence.__table__.drop(engine, checkfirst=True)
     if reload_bh: BlastHit.__table__.drop(engine, checkfirst=True)
@@ -28,9 +28,12 @@ def reload_db(db_path, fasta_paths, blast_csv_paths=False, blast_outfmt=False, r
             load_blast_csv(session, blast_csv_path, custom_outfmt=blast_outfmt)
     if load_functions:
         pass
+    if update_targetp:
+        load_targetp(session, targetp_csv_path)
     return 0
 
-db_path = 'sqlite:////home/anna/Dropbox/phd/db/mito.db'
+# db_path = 'sqlite:////home/anna/Dropbox/phd/db/mito.db'
+db_path = 'sqlite:////home/anna/Dropbox/phd/db/mito2.db'
 
 data_paths = {
     'Arabidopsis thaliana': {'fasta_path': '/home/anna/Dropbox/phd/db/proteomes/arabidopsis/data/arabidopsis_mito.fasta', 'description_path': '/home/anna/Dropbox/phd/db/proteomes/arabidopsis/data/arabidopsis_mito_ogs.csv', 'seqtype': 'prot'},
@@ -48,7 +51,7 @@ blast_csv_paths = [
 ]
 
 blast_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
-reload_db(db_path, data_paths, blast_csv_paths, blast_outfmt, reload_seq=False, reload_bh=True)
 
 targetp_csv_path = '/home/anna/Dropbox/phd/db/proteomes/euglena/data/E_gracilis_transcriptome_final_PROTEINS_first_130_targetp_out.csv'
-# load_targetp(session, targetp_csv_path)
+
+reload_db(db_path, data_paths, blast_csv_paths, blast_outfmt, reload_seq=True, reload_bh=True, update_targetp=True)

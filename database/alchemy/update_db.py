@@ -1,6 +1,4 @@
 #!/usr/bin/python
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from database.alchemy.models import *

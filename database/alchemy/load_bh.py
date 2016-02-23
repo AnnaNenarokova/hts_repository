@@ -18,7 +18,7 @@ def load_blast_csv(session, blast_csv_path, custom_outfmt=False):
         alen_qlen, alen_slen = float(length/float(qlen)), float(length/float(slen))
         other_features = {}
         for feature in blast_dict:
-            if feature not in ['qseqid', 'sseqid', 'evalue', 'length']:
+            if feature not in ['qseqid', 'sseqid', 'evalue', 'length', 'qlen', 'slen']:
                 other_features[feature] = blast_dict[feature]
 
         query = session.query(Sequence).filter(Sequence.seqid == query_id).one()
