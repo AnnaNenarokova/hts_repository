@@ -79,7 +79,12 @@ class Sequence(Base):
 
     def get_reverse_blasthit(self, subject):
         session = Session.object_session(self)
-        hits = subject.query_blasthits.filter(BlastHit.subject_id == self.id)
+        all_hits = subject.query_blasthits
+        hits = []
+        for hit in all_hits:
+            if hit.subject_id == self.id:
+                hits.append(hit)
+
         hits = sorted(hits, key = lambda h: h.evalue)
         if len(hits) > 0:
             hit = hits[0]
