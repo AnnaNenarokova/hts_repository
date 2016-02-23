@@ -40,8 +40,8 @@ class Sequence(Base):
     locrate = Column(Integer())
     extra_data = Column(SerializedDictField())
 
-    query_blasthits = relationship("BlastHit", foreign_keys="BlastHit.query_id", lazy='dynamic')
-    subject_blasthits = relationship("BlastHit", foreign_keys="BlastHit.subject_id", lazy='dynamic')
+    query_blasthits = relationship("BlastHit", foreign_keys="BlastHit.query_id")
+    subject_blasthits = relationship("BlastHit", foreign_keys="BlastHit.subject_id")
 
     queries = relationship('Sequence', secondary='blasthit',
         primaryjoin=("Sequence.id == BlastHit.subject_id"),
