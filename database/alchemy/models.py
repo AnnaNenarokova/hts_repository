@@ -79,10 +79,12 @@ class Sequence(Base):
 
     def get_reverse_blasthit(self, subject):
         session = Session.object_session(self)
-
         hits = subject.query_blasthits.filter(BlastHit.subject_id == self.id)
-
-        hit = hits[0]
+        hits = sorted(hits, key = lambda h: h.evalue)
+        if len(hits) > 0:
+            hit = hits[0]
+        else:
+            hit = False
         bs = subject.best_subject()
         if bs:
             if self.id == bs[0].id:
@@ -114,9 +116,9 @@ class BlastHit(Base):
 
     def long_homology(self, mode, len_percent = 0.3):
         if mode == "slen":
-            return self.alen_slen > len_percent
+            return self.alen_slen >= len_percent
         elif mode == "qlen":
-            return self.alen_qlen > len_percent
+            return self.alen_qlen >= len_percent
 
     @staticmethod
     def get_by_query_subject(session, query_id, subject_id):

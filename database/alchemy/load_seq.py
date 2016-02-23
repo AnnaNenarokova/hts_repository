@@ -28,6 +28,3 @@ def load_fasta(session, fasta_path, seqtype, organism='unknown organism', source
         session.add(new_seq)
     session.commit()
     return 0
-
-def load_ogs(session, ogs_path):
-    return 0
