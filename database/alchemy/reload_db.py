@@ -20,7 +20,7 @@ def reload_db(db_path, fasta_paths, blast_csv_paths=False, blast_outfmt=False, r
         for organism in data_paths:
             fasta_path=data_paths[organism]['fasta_path']
             description_path=data_paths[organism]['description_path']
-            seqtype=data_paths[organism]['seqtype']
+            seqtype = data_paths[organism]['seqtype']
             load_fasta(session, fasta_path=fasta_path, description_path=description_path, seqtype=seqtype, organism=organism, check_functions=check_functions)
     if reload_bh:
         for blast_csv_path in blast_csv_paths:
@@ -39,7 +39,7 @@ db_path = 'sqlite:////home/anna/Dropbox/phd/db/mito_all.db'
 #     'Arabidopsis thaliana': {'fasta_path': '/home/anna/Dropbox/phd/db/proteomes/arabidopsis/data/arabidopsis_mito.fasta', 'description_path': '/home/anna/Dropbox/phd/db/proteomes/arabidopsis/data/arabidopsis_mito_ogs.csv', 'seqtype': 'prot'},
 #     'Euglena gracilis': {'fasta_path':'/home/anna/Dropbox/phd/db/proteomes/euglena/data/euglena_all_proteins.fasta', 'description_path': '/home/anna/Dropbox/phd/db/proteomes/euglena/data/euglena_all_proteins_ogs.csv', 'seqtype': 'prot'},
 #     'Giardia intestinalis': {'fasta_path': '/home/anna/Dropbox/phd/db/proteomes/giardia/data/giardia_mito.fasta', 'description_path': '/home/anna/Dropbox/phd/db/proteomes/giardia/data/giardia_mito_ogs.csv', 'seqtype': 'prot'},
-#     'Homo sapiens': {'fasta_path': '/home/anna/Dropbox/phd/db/proteomes/homo/data/human_mito.fasta', 'description_path': '/home/anna/Dropbox/phd/db/proteomes/homo/data/human_mito_ogs.csv', 'seqtype': 'prot'},
+#     'Homo sapiens': {'fasta_path': '/home/anna/Dropbox/phd/db/proteomes/homo/data/homo_mito.fasta', 'description_path': '/home/anna/Dropbox/phd/db/proteomes/homo/data/homo_mito_ogs.csv', 'seqtype': 'prot'},
 #     'Saccharomyces cerevisiae': {'fasta_path': '/home/anna/Dropbox/phd/db/proteomes/saccharomyces/data/yeast_mito.fasta', 'description_path': '/home/anna/Dropbox/phd/db/proteomes/saccharomyces/data/yeast_mito_ogs.csv', 'seqtype': 'prot'},
 #     'Trichomonas vaginalis': {'fasta_path': '/home/anna/Dropbox/phd/db/proteomes/trichomonas/data/trichomonas_mito.fasta', 'description_path': '/home/anna/Dropbox/phd/db/proteomes/trichomonas/data/trichomonas_mito_ogs.csv', 'seqtype': 'prot'},
 #     'Trypanosoma brucei': {'fasta_path': '/home/anna/Dropbox/phd/db/proteomes/trypanosoma/data/trypanosoma_mito.fasta', 'description_path': '/home/anna/Dropbox/phd/db/proteomes/trypanosoma/data/trypanosoma_mito_ogs.csv', 'seqtype': 'prot'}
@@ -55,13 +55,14 @@ data_paths = {
     'Trypanosoma brucei': {'fasta_path': '/home/anna/Dropbox/phd/db/proteomes/trypanosoma/data/trypanosoma.fasta', 'description_path': '/home/anna/Dropbox/phd/db/proteomes/trypanosoma/data/trypanosoma_mito_ogs.csv', 'seqtype': 'prot'}
                 }
 
+targetp_csv_path = '/home/anna/Dropbox/phd/db/proteomes/euglena/data/E_gracilis_transcriptome_final_PROTEINS_first_130_targetp_out.csv'
+
 blast_csv_paths = [
-'/home/anna/Dropbox/phd/db/proteomes/all_reference_mitoproteomes/blast_reports/euglena_all_proteins_bl_report.csv',
-'/home/anna/Dropbox/phd/db/proteomes/euglena/data/E_gracilis_transcriptome_final.PROTEINS/blast_reports/reference_mitoproteomes_bl_report.csv'
+'/home/anna/Dropbox/phd/db/proteomes/reference_proteomes/bl_reports/euglena_all_proteins_bl_report.csv',
+'/home/anna/Dropbox/phd/db/proteomes/euglena/data/E_gracilis_transcriptome_final.PROTEINS/blast_reports/reference_proteomes_bl_report.csv'
 ]
 
 blast_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 
-targetp_csv_path = '/home/anna/Dropbox/phd/db/proteomes/euglena/data/E_gracilis_transcriptome_final_PROTEINS_first_130_targetp_out.csv'
 
-reload_db(db_path, data_paths, blast_csv_paths, blast_outfmt, reload_seq=True, reload_bh=False, update_targetp=True)
+reload_db(db_path, data_paths, blast_csv_paths, blast_outfmt, reload_seq=True, reload_bh=True, update_targetp=True)

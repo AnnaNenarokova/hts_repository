@@ -31,7 +31,7 @@ class Sequence(Base):
     seqid = Column(String(255), nullable=False, index=True, unique=True)
     seqtype = Column(String(255), nullable=False)
     organism = Column(String(255), nullable=False)
-    len = Column(Integer(), nullable=False)
+    # len = Column(Integer(), nullable=False)
     source = Column(String(255))
     og = Column(String(255))
     function = Column(Text())
@@ -76,7 +76,7 @@ class Sequence(Base):
 
     def best_subject(self):
         bsh = self.best_subject_hit()
-        return [bsh.subject, bsh] if bsh else None
+        return {'sequence': bsh.subject, 'hit': bsh} if bsh else None
 
     def get_reverse_blasthit(self, subject):
         session = Session.object_session(self)
@@ -89,15 +89,17 @@ class Sequence(Base):
         hits = sorted(hits, key = lambda h: h.evalue)
         if len(hits) > 0:
             hit = hits[0]
-            bs = subject.best_subject()[0]
+            bs = subject.best_subject()
+            bss = bs['sequence']
+            bsh = bs['hit']
         else:
             return None
 
         if hit:
-            if self.id == bs.id:
-                return [hit, True]
+            if self.id == bss.id:
+                return {'hit': hit, 'is_best': True, 'bsh': bsh}
             else:
-                return [hit, False]
+                return {'hit': hit, 'is_best': False, 'bsh': bsh}
 
 class BlastHit(Base):
     __tablename__ = 'blasthit'

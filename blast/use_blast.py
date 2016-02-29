@@ -11,11 +11,14 @@ from blast.classes.blast import Blast
 from blast.classes.blast_parser import BlastParser
 
 blast_pairs = [
-    {'query': '/home/anna/Dropbox/phd/db/proteomes/reference_mitoproteomes.fasta',
-     'subj_db': '/home/anna/Dropbox/phd/db/proteomes/euglena/data/E_gracilis_transcriptome_final.PROTEINS/blast_db/E_gracilis_transcriptome_final.PROTEINS.db'
-     },
-    {'query': '/home/anna/Dropbox/phd/db/proteomes/euglena/data/euglena_all_proteins.fasta',
-     'subj_db': '/home/anna/Dropbox/phd/db/proteomes/reference_mitoproteomes/blast_db/reference_mitoproteomes.db'
+    # {'query': '/home/anna/Dropbox/phd/db/proteomes/reference_proteomes.fasta',
+    #  'subj_db': '/home/anna/Dropbox/phd/db/proteomes/euglena/data/E_gracilis_transcriptome_final.PROTEINS/blast_db/E_gracilis_transcriptome_final.PROTEINS.db'
+    #  },
+    # {'query': '/home/anna/Dropbox/phd/db/proteomes/euglena/data/euglena_all_proteins.fasta',
+    #  'subj_db': '/home/anna/Dropbox/phd/db/proteomes/reference_mitoproteomes/blast_db/reference_proteomes.db'
+     # },
+     {'query': '/home/anna/Dropbox/phd/db/proteomes/trichomonas/data/trichomonas_mito.fasta',
+     'subj_db': '/home/anna/Dropbox/phd/db/proteomes/giardia/data/giardia/blast_db/giardia.db'
      }
             ]
 

@@ -2,6 +2,7 @@
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from database.alchemy.models import *
+from sqlalchemy import or_
 from blast.classes.blast_parser import BlastParser
 
 def load_blast_csv(session, blast_csv_path, custom_outfmt=False):
@@ -21,8 +22,16 @@ def load_blast_csv(session, blast_csv_path, custom_outfmt=False):
             if feature not in ['qseqid', 'sseqid', 'evalue', 'length', 'qlen', 'slen']:
                 other_features[feature] = blast_dict[feature]
 
-        query = session.query(Sequence).filter(Sequence.seqid == query_id).one()
-        subject = session.query(Sequence).filter(Sequence.seqid == subject_id).one()
+        query_and_subject = session.query(Sequence).filter(or_(Sequence.seqid == query_id, Sequence.seqid == subject_id))
+        if query_and_subject:
+            for seq in query_and_subject:
+                if seq.seqid == query_id:
+                    query = seq
+                elif seq.seqid == subject_id:
+                    subject = seq
+                else:
+                    print 'Error in BlastHit loading, seqid', seq.seqid
+                    sys.exit(1)
         new_bh = BlastHit(query=query, subject=subject, evalue=evalue, length=length,
                         qlen=qlen, slen=slen, alen_qlen=alen_qlen, alen_slen=alen_slen,
                         extra_data=other_features)

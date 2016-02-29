@@ -3,18 +3,16 @@ import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from blast.classes.blast import Blast
 
-subj_paths = {
-# 'amoeba': '/home/anna/bioinformatics/phd/mitoproteomes/acanthamoeba/amoeba_mitoproteins.fasta',
-# 'arabidopsis': '/home/anna/bioinformatics/phd/mitoproteomes/arabidopsis/arabidopsis_mito.fasta',
-# 'worm': '/home/anna/bioinformatics/phd/mitoproteomes/caenorhabditis/worm_mitoproteins.fasta',
-# 'mouse' : '/home/anna/bioinformatics/phd/mitoproteomes/mitocarta/Mouse.MitoCarta2.0.fasta',
-# 'human': '/home/anna/bioinformatics/phd/mitoproteomes/mitocarta/Human.MitoCarta2.0.fasta',
-# 'yeast' : '/home/anna/bioinformatics/phd/mitoproteomes/saccharomyces/orf_trans_all.fasta',
-# 'tetrahymena': '/home/anna/bioinformatics/phd/mitoproteomes/tetrahymena/tetrahymena_mito_gb.fasta',
-# 'trypanosoma' : '/home/anna/bioinformatics/phd/mitoproteomes/trypanosoma/trypa_mitoproteins.fasta'
-'reference_mitoproteomes': '/home/anna/Dropbox/phd/db/proteomes/reference_mitoproteomes.fasta'
-}
+subj_paths = [
+# "/home/anna/Dropbox/phd/db/proteomes/arabidopsis/data/arabidopsis.fasta",
+# "/home/anna/Dropbox/phd/db/proteomes/giardia/data/giardia.fasta",
+# "/home/anna/Dropbox/phd/db/proteomes/homo/data/homo.fasta",
+# "/home/anna/Dropbox/phd/db/proteomes/saccharomyces/data/yeast.fasta",
+# "/home/anna/Dropbox/phd/db/proteomes/trichomonas/data/trichomonas.fasta",
+# "/home/anna/Dropbox/phd/db/proteomes/trypanosoma/data/trypanosoma.fasta"
+'/home/anna/Dropbox/phd/db/proteomes/reference_proteomes.fasta'
+]
 
 for subj in subj_paths:
-	new_blast = Blast(subj_path=subj_paths[subj], db_type='prot')
+	new_blast = Blast(subj_path=subj, db_type='prot')
 	new_blast.makeblastdb()
