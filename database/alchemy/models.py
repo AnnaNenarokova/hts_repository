@@ -31,7 +31,7 @@ class Sequence(Base):
     seqid = Column(String(255), nullable=False, index=True, unique=True)
     seqtype = Column(String(255), nullable=False)
     organism = Column(String(255), nullable=False)
-    # len = Column(Integer(), nullable=False)
+    len = Column(Integer(), nullable=False)
     source = Column(String(255))
     og = Column(String(255))
     function = Column(Text())
@@ -111,6 +111,7 @@ class BlastHit(Base):
     alen_slen = Column(Float(), nullable=False)
     slen = Column(Float(), nullable=False)
     qlen = Column(Float(), nullable=False)
+    # pident = Column(Float(), nullable=False)
     extra_data = Column(SerializedDictField())
 
     query_id = Column(Integer, ForeignKey("sequence.id"))

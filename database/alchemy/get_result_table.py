@@ -17,7 +17,7 @@ def get_result_table(db_path, outpath):
     total_amount = session.query(Sequence).count()
     n_pages = total_amount/heap_size
 
-    fieldnames = ['seqid', 'og', 'b2go_mito', 'loc', 'locrate', 'function', 'subj_id', 'subj_og', 'organism', 'subj_function', 'evalue', 'alen_slen', 'rev_evalue', 'rev_alen_qlen', 'is_best?', 'best_rev_evalue']
+    fieldnames = ['seqid', 'og', 'b2go_mito', 'loc', 'locrate', 'function', 'subj_id', 'subj_og', 'organism', 'subj_function', 'evalue', 'alen_slen', 'pident', 'rev_evalue', 'rev_pident', 'rev_alen_qlen', 'is_best?', 'best_rev_evalue', 'best_rev_pident']
     default_seq_dict = {}
 
     for name in fieldnames:
@@ -50,13 +50,17 @@ def get_result_table(db_path, outpath):
                     bsh = bs['hit']
                     seq_dict['evalue'] = bsh.evalue
                     seq_dict['alen_slen'] = bsh.alen_slen
+                    seq_dict['pident'] = bsh.extra_data['pident']
                     reverse_hit = seq.get_reverse_blasthit(bsseq)
+
                     if reverse_hit:
                         seq_dict['rev_evalue'] = reverse_hit['hit'].evalue
                         seq_dict['rev_alen_qlen'] = reverse_hit['hit'].alen_qlen
+                        seq_dict['rev_pident'] = reverse_hit['hit'].extra_data['pident']
                         seq_dict['is_best?'] = reverse_hit['is_best']
                         seq_dict['best_rev_evalue'] = reverse_hit['bsh'].evalue
-                if (seq_dict['og'] == seq_dict['subj_og']) and (seq_dict['evalue'] < 0.00001) and (seq_dict['rev_evalue'] < 0.001) and (seq_dict['alen_slen'] >= 0.3) and bsseq.mitochondrial:
+                        seq_dict['best_rev_pident'] = reverse_hit['bsh'].extra_data['pident']
+                if (seq_dict['evalue'] < 0.00001) and (seq_dict['rev_evalue'] < 0.01) and (seq_dict['alen_slen'] >= 0.3) and bsseq.mitochondrial:
                     result_table.append(seq_dict)
     write_list_of_dicts(result_table, outpath, fieldnames=fieldnames)
     return outpath
