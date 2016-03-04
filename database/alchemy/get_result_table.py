@@ -2,7 +2,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
+# sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
+sys.path.insert(0, "/home/nenarokova/ngs/")
 from database.alchemy.models import *
 from sqlalchemy.orm import joinedload
 from py_scripts.common_helpers.parse_csv import *
