@@ -10,7 +10,7 @@ subj_paths = [
 # "/home/anna/Dropbox/phd/db/proteomes/saccharomyces/data/yeast.fasta",
 # "/home/anna/Dropbox/phd/db/proteomes/trichomonas/data/trichomonas.fasta",
 # "/home/anna/Dropbox/phd/db/proteomes/trypanosoma/data/trypanosoma.fasta"
-'/home/anna/Dropbox/phd/db/proteomes/reference_proteomes.fasta'
+# '/home/anna/Dropbox/phd/db/proteomes/reference_proteomes.fasta'
 ]
 
 for subj in subj_paths:

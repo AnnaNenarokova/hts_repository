@@ -6,7 +6,7 @@ from database.alchemy.models import *
 from py_scripts.common_helpers.make_outdir import *
 from py_scripts.common_helpers.parse_csv import *
 
-def load_fasta(session, fasta_path, seqtype, organism='unknown organism', source=False, description_path=False, check_functions=True):
+def load_fasta(session, fasta_path, seqtype, organism='unknown organism', source=False, description_path=False):
     if description_path:
         dict_of_functions = csv_to_dict(description_path, main_key='seqid')
     for record in SeqIO.parse(fasta_path, "fasta"):
