@@ -127,3 +127,5 @@ db_path = 'sqlite:////home/anna/Dropbox/phd/db/'
 # outpath = '/home/nenarokova/result_all_proteomes.csv'
 # outpath = '/home/anna/Dropbox/phd/db/result_test.csv'
 outpath = '/home/nenarokova/result_hemistasia.csv'
+
+get_result_table_hemi(db_path, outpath)
