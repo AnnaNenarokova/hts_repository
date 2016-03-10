@@ -122,10 +122,10 @@ def get_result_table_hemi(db_path, outpath):
 # db_path = 'sqlite:////home/nenarokova/mito_all.db'
 # db_path = 'sqlite:////home/anna/Dropbox/phd/db/mito1.db'
 # db_path = 'sqlite:////home/nenarokova/mito_all.db'
-db_path = 'sqlite:////home/nenarokova/hemistasia_mito.db'
+db_path = 'sqlite:////home/nenarokova/db/hemistasia_mito.db'
 
 # outpath = '/home/nenarokova/result_all_proteomes.csv'
 # outpath = '/home/anna/Dropbox/phd/db/result_test.csv'
-outpath = '/home/nenarokova/result_hemistasia.csv'
+outpath = '/home/nenarokova/db/result_hemistasia.csv'
 
 get_result_table_hemi(db_path, outpath)
