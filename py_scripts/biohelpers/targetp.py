@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from subprocess32 import call

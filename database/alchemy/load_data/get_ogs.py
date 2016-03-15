@@ -16,33 +16,37 @@ def get_ogs_from_dict(csv_path, og_dicts, organism, outpath=False):
             seqid = dic['seqid']
             if seqid in og_dict[og]:
                 dic['og'] = og
+            elif organism == 'Arabidopsis thaliana' and seqid[0:-2] in og_dict[og]:
+                dic['og'] = og
     fieldnames = ['seqid', 'og', 'function', 'mitochondrial']
     write_list_of_dicts(csv_list, outpath, fieldnames)
     return 0
 
-def get_homo_ogs(csv_path, og_path, ids_to_ccds_path, outpath=False):
+def get_homo_ogs(csv_path, og_dicts, ids_to_ccds_path, outpath=False):
     print 'Homo sapiens'
     if not outpath: outpath = csv_path[0:-4] + '_ogs.csv'
-    og_dict = csv_to_dict_reverse(og_dicts)
+    og_dict = og_dicts['Homo sapiens']
     ids_to_ccds = csv_to_dict(ids_to_ccds_path, main_key='Entry')
+    csv_list = csv_to_list_of_dicts(csv_path)
     i = 0
     for dic in csv_list:
         if i%100 == 0: print i
         i+=1
         seqid = dic['seqid']
-        ccds = ids_to_ccds[seqid]['CCDS ID'].split(';')
-        if len(ccds[0]) == 0:
-            dic['og'] = ''
-        else:
-            has_og = False
-            if not has_og:
-                for og in og_dict:
-                    if has_og: break
-                    for ccd in ccds:
-                        if ccd in og_dict[og]:
-                            dic['og'] = og
-                            has_og = True
-                            break
+        if seqid in ids_to_ccds:
+            ccds = ids_to_ccds[seqid]['CCDS ID'].split(';')
+            if len(ccds[0]) == 0:
+                dic['og'] = ''
+            else:
+                has_og = False
+                if not has_og:
+                    for og in og_dict:
+                        if has_og: break
+                        for ccd in ccds:
+                            if ccd in og_dict[og]:
+                                dic['og'] = og
+                                has_og = True
+                                break
     fieldnames = ['seqid', 'og', 'function', 'mitochondrial']
     write_list_of_dicts(csv_list, outpath, fieldnames)
     return 0
@@ -56,12 +60,7 @@ def get_ogs(data_paths, og_path, ids_to_ccds_path):
            get_ogs_from_dict(data_paths[organism], og_dicts, organism)
 
 
-og_path = '/home/anna/Dropbox/phd/db/proteomes/parsed_ortho_groups.csv'
-
-
-
-csv_path = '/home/anna/Dropbox/phd/db/proteomes/giardia/data/giardia_mito.csv'
-outpath = '/home/anna/Dropbox/phd/db/proteomes/giardia/data/giardia_mito_ogs.csv'
+og_path = '/home/anna/Dropbox/phd/mitoproteomes/proteomes/parsed_ortho_groups.csv'
 
 data_paths = {
     'Arabidopsis thaliana': '/home/anna/Dropbox/phd/db/proteomes/arabidopsis/data/arabidopsis_mito.csv',
@@ -74,6 +73,13 @@ data_paths = {
         }
 
 # get_ogs(data_paths, og_path)
-og_path = '/home/anna/Dropbox/phd/db/proteomes/homo/data/homo_ogs.csv'
-ids_to_ccds_path = '/home/anna/Dropbox/phd/db/proteomes/homo/data/ids_to_ccds.csv'
-csv_path = '/home/anna/Dropbox/phd/db/proteomes/homo/data/human_mito.csv'
+ids_to_ccds_path = '/home/anna/Dropbox/phd/mitoproteomes/proteomes/homo/data/ids_to_ccds.csv'
+
+data_paths = {
+    # 'Arabidopsis thaliana': '/home/anna/Dropbox/phd/mitoproteomes/arabidopsis.csv',
+    'Homo sapiens': '/home/anna/Dropbox/phd/mitoproteomes/homo.csv',
+    # 'Trichomonas vaginalis': '/home/anna/Dropbox/phd/mitoproteomes/trichomonas.csv',
+    # 'Trypanosoma brucei': '/home/anna/Dropbox/phd/mitoproteomes/trypanosoma.csv'
+        }
+
+get_ogs(data_paths, og_path, ids_to_ccds_path)
