@@ -19,13 +19,14 @@ def csv_to_list_of_dicts(csv_path, delimiter=','):
         list_of_dicts = []
     	for row in reader:
         	list_of_dicts.append(row)
+        fieldnames = reader.fieldnames
         csvfile.close
-    return list_of_dicts
+    return list_of_dicts, fieldnames
 
 def csv_to_dict(csv_path, main_key):
-    list_of_dicts = csv_to_list_of_dicts(csv_path)
+    list_of_dicts, fieldnames = csv_to_list_of_dicts(csv_path)
     csv_dict = dict_list_to_csv_dict(list_of_dicts, main_key)
-    return csv_dict
+    return csv_dict, fieldnames
 
 def csv_to_dict_reverse(csv_path, delimiter=','):
     list_of_lists = parse_csv(csv_path, delimiter=delimiter)
@@ -43,7 +44,7 @@ def write_list_of_lists(list_of_lists, outpath, delimiter=',', header=False):
 def write_list_of_dicts(list_of_dicts, outpath, fieldnames=False):
     with open(outpath, 'w') as csvfile:
         if not fieldnames:
-            fieldnames = list_of_dicts[0].keys()
+            fieldnames = list_of_dicts.keys()
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         for row in list_of_dicts:

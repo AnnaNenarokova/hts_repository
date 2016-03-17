@@ -30,7 +30,7 @@ def get_og_statistics(dic_list, outhpath, fieldnames):
 
 an_path = '/home/anna/bioinformatics/phd/euglena_project/filtered_by_og.csv'
 
-dic_list = csv_to_list_of_dicts(an_path)
+dic_list = csv_to_list_of_dicts(an_path)[0]
 
 fieldnames = ['query_id', 'query_og', 'og_size', 'subject_function', 'query_function', 'query_mitoscore', 'query_loc', 'query_locrate', 'subject_id', 'subject_og', 'subject_organism', 'evalue', 'qlen', 'slen', 'length', 'alen_slen', 'alen_qlen',  'bh_id']
 outpath = '/home/anna/bioinformatics/phd/euglena_project/filtered_euglena_mito_ogs.csv'

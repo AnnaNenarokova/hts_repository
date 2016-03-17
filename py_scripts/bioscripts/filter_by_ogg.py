@@ -43,7 +43,7 @@ def filter_dic_list(dic_list, outhpath, fieldnames_list, filter_functions=True, 
 
 an_path = '/home/anna/bioinformatics/phd/euglena_project/all_results_with_ogs_and_reverse.csv'
 
-dic_list = csv_to_list_of_dicts(an_path)
+dic_list = csv_to_list_of_dicts(an_path)[0]
 
 fieldnames_list = ['query_id', 'query_function', 'query_mitoscore', 'query_loc', 'query_locrate', 'subject_id', 'subject_organism', 'subject_function', 'evalue', 'qlen', 'slen', 'length', 'alen_slen', 'alen_qlen', 'query_og', 'subject_og', 'bh_id', 'has_reverse_best_blast_hit', 'reverse_alen', 'reverse_evalue']
 

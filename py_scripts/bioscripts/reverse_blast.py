@@ -8,7 +8,7 @@ reverse_path = '/home/anna/bioinformatics/phd/euglena_project/all_results_revers
 
 an = parse_csv(an_path)
 
-reverse = csv_to_list_of_dicts(reverse_path)
+reverse = csv_to_list_of_dicts(reverse_path)[0]
 
 results = []
 first = True

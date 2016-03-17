@@ -7,7 +7,7 @@ from database.alchemy.load_bh import *
 from py_scripts.common_helpers.parse_dicts import *
 
 def load_functions(session, csv_path, exact_ids=True, organism=''):
-    for dic in csv_to_list_of_dicts(csv_path):
+    for dic in csv_to_list_of_dicts(csv_path)[0]:
         seqid = dic['seqid']
         function = dic['function']
 
@@ -27,7 +27,7 @@ def load_functions(session, csv_path, exact_ids=True, organism=''):
     return 0
 
 def load_targetp(session, targetp_csv_path):
-    for dic in csv_to_list_of_dicts(targetp_csv_path):
+    for dic in csv_to_list_of_dicts(targetp_csv_path)[0]:
         seqid = dic['seqid']
         loc = dic['loc']
         locrate = dic['locrate']
@@ -39,7 +39,7 @@ def load_targetp(session, targetp_csv_path):
     return 0
 
 def load_ogs(session, og_path):
-    ogs = csv_to_list_of_dicts(og_path)
+    ogs = csv_to_list_of_dicts(og_path)[0]
     i = 0
     for seq in session.query(Sequence):
         i+=1

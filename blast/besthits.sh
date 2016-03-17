@@ -1,0 +1,2 @@
+cd /home/anna/Dropbox/phd/mitoproteomes/proteomes/euglena/data/E_gracilis_transcriptome_final.PROTEINS/blast_reports/
+cat mch00883-mmc7_bl_report.csv |awk '/hits found/{getline;print}' | grep -v "#" > best_hits.csv

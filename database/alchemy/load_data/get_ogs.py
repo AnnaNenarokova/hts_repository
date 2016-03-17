@@ -7,7 +7,7 @@ def get_ogs_from_dict(csv_path, og_dicts, organism, outpath=False):
     print organism
     if not outpath: outpath = csv_path[0:-4] + '_ogs.csv'
     og_dict = og_dicts[organism]
-    csv_list = csv_to_list_of_dicts(csv_path)
+    csv_list = csv_to_list_of_dicts(csv_path)[0]
     i = 0
     for og in og_dict:
         if i%10000 == 0: print i
@@ -27,7 +27,7 @@ def get_homo_ogs(csv_path, og_dicts, ids_to_ccds_path, outpath=False):
     if not outpath: outpath = csv_path[0:-4] + '_ogs.csv'
     og_dict = og_dicts['Homo sapiens']
     ids_to_ccds = csv_to_dict(ids_to_ccds_path, main_key='Entry')
-    csv_list = csv_to_list_of_dicts(csv_path)
+    csv_list = csv_to_list_of_dicts(csv_path)[0]
     i = 0
     for dic in csv_list:
         if i%100 == 0: print i

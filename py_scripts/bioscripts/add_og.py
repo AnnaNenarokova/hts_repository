@@ -11,7 +11,7 @@ path_og = '/home/anna/bioinformatics/phd/euglena_project/parsed_ortho_groups.csv
 
 ll = parse_csv(an_path)
 
-ogs = csv_to_list_of_dicts(path_og, delimiter=';')
+ogs = csv_to_list_of_dicts(path_og, delimiter=';')[0]
 
 synonims = { 'Euglena gracilis':'E_gracilis', 'Homo sapiens':'H_sapiens', 'Trypanosoma brucei': 'T_brucei', 'Saccharomyces cerevisiae':'S_cerevisiae' }
 
