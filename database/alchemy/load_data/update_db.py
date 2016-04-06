@@ -2,39 +2,55 @@
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from database.alchemy.models import *
-from database.alchemy.load_seq import *
-from database.alchemy.load_bh import *
 from py_scripts.common_helpers.parse_dicts import *
+from py_scripts.common_helpers.parse_csv import *
 
 def load_functions(session, csv_path, exact_ids=True, organism=''):
+    if organism == 'Arabidopsis thaliana': exact_ids=False
     for dic in csv_to_list_of_dicts(csv_path)[0]:
         seqid = dic['seqid']
         function = dic['function']
-
         if dic['mitochondrial'] == 'yes': mitochondrial = True
         elif dic['mitochondrial'] == 'no': mitochondrial = False
         else:
             print "Error in field 'mitochondrial' "
             sys.exit(1)
 
-        if exact_ids: cur_seq = session.query(Sequence).filter(Sequence.seqid == dic['seqid']).one()
+        if exact_ids:
+            cur_seq = session.query(Sequence).filter(Sequence.seqid == dic['seqid']).one_or_none()
+            if cur_seq:
+                cur_seq.function = function
+                cur_seq.mitochondrial = mitochondrial
+                session.add(cur_seq)
+            else: print organism, seqid
         else:
-            cur_seq = session.query(Sequence).filter(Sequence.seqid.like("%" + dic['seqid'] + "%"), Sequence.organism == organism).one()
-        cur_seq.function = function
-        cur_seq.mitochondrial = mitochondrial
-        session.add(cur_seq)
+            cur_seqs = session.query(Sequence).filter(Sequence.seqid.like("%" + dic['seqid'] + "%"), Sequence.organism == organism)
+            if cur_seqs:
+                for seq in cur_seqs:
+                    seq.function = function
+                    seq.mitochondrial = mitochondrial
+                    session.add(seq)
+            else:
+                print seqid
+
     session.commit()
     return 0
 
-def load_targetp(session, targetp_csv_path):
+def load_targetp(session, targetp_csv_path, exact_ids=True, organism=False):
     for dic in csv_to_list_of_dicts(targetp_csv_path)[0]:
         seqid = dic['seqid']
         loc = dic['loc']
         locrate = dic['locrate']
-        cur_seq = session.query(Sequence).filter(Sequence.seqid == seqid).one()
-        cur_seq.loc = loc
-        cur_seq.locrate = locrate
-        session.add(cur_seq)
+        if exact_ids:
+            cur_seq = session.query(Sequence).filter(Sequence.seqid == seqid).one()
+        else:
+            cur_seq = session.query(Sequence).filter(Sequence.seqid.like(seqid + '%'), Sequence.organism == organism).one_or_none()
+        if cur_seq:
+            cur_seq.loc = loc
+            cur_seq.locrate = locrate
+            session.add(cur_seq)
+        else:
+            print seqid
     session.commit()
     return 0
 

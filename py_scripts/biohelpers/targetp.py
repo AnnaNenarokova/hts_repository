@@ -62,11 +62,9 @@ def use_targetp(f_path, outf_path=False, is_plant=False, cleavage_sites=False, t
 
 	return outf_path
 
-# f_path = '/home/anna/bioinformatics/euglena_project/euglena/sequences/E_gracilis_transcriptome_final_PROTEINS_first_130.fasta'
 f_paths = [
-'/home/anna/bioinformatics/euglena_project/tripanosoma/tr_proteins.fasta',
-'/home/anna/bioinformatics/euglena_project/mitocarta/Human.MitoCarta2.0.fasta',
-'/home/anna/bioinformatics/euglena_project/yeast/yeast_orf_trans_all.fasta'
+# '/home/anna/Dropbox/phd/mitoproteomes/proteomes/giardia/data/giardia.fasta'
+'/home/anna/Dropbox/phd/mitoproteomes/proteomes/perkinsela/perkinsela_prot_gb_ids.fasta'
 ]
 for f_path in f_paths:
 	use_targetp(f_path, is_plant=False)

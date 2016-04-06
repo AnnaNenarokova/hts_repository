@@ -14,7 +14,7 @@ def get_result_table_euglena(db_path, outpath):
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
 
-    heap_size = 10000000
+    heap_size = 100000
     total_amount = session.query(Sequence).count()
     n_pages = total_amount/heap_size
 
@@ -67,17 +67,17 @@ def get_result_table_euglena(db_path, outpath):
     return outpath
 
 
-def get_result_table_hemi(db_path, outpath):
+def get_result_table_perk(db_path, outpath):
     engine = create_engine(db_path)
     Base.metadata.bind = engine
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
 
-    heap_size = 100000
+    heap_size = 2500
     total_amount = session.query(Sequence).count()
     n_pages = total_amount/heap_size
 
-    fieldnames = ['seqid', 'subj_id','organism', 'subj_function', 'evalue', 'alen_slen', 'pident', 'rev_evalue', 'rev_pident', 'rev_alen_qlen', 'is_best?', 'best_rev_evalue', 'best_rev_pident']
+    fieldnames = ['seqid', 'loc', 'locrate', 'subj_id','organism', 'subj_function', 'evalue', 'alen_slen', 'pident', 'rev_evalue', 'rev_pident', 'rev_alen_qlen', 'is_best?', 'best_rev_evalue', 'best_rev_pident']
     default_seq_dict = {}
 
     for name in fieldnames:
@@ -89,10 +89,12 @@ def get_result_table_hemi(db_path, outpath):
         print 'page ', page
         seqs = session.query(Sequence).order_by('id').limit(heap_size).offset(heap_size*page).options(joinedload('query_blasthits'))
         for seq in seqs:
-            if seq.organism == 'Hemistasia phaeocysticola':
+            if seq.organism == 'Perkinsela amoebae':
                 seq_dict = default_seq_dict.copy()
 
                 seq_dict['seqid'] = seq.seqid
+                seq_dict['loc'] = seq.loc
+                seq_dict['locrate'] = seq.locrate
 
                 bs = seq.best_subject()
                 if bs:
@@ -114,13 +116,12 @@ def get_result_table_hemi(db_path, outpath):
                         seq_dict['is_best?'] = reverse_hit['is_best']
                         seq_dict['best_rev_evalue'] = reverse_hit['bsh'].evalue
                         seq_dict['best_rev_pident'] = reverse_hit['bsh'].extra_data['pident']
-                if (seq_dict['evalue'] < 0.00001) and (seq_dict['rev_evalue'] < 0.01) and (seq_dict['alen_slen'] >= 0.3) and bsseq.mitochondrial:
+                if ((seq_dict['evalue'] < 0.00001) and (seq_dict['rev_evalue'] < 0.01) and (seq_dict['alen_slen'] >= 0.3) and bsseq.mitochondrial) or (seq_dict['loc']=="M"):
                     result_table.append(seq_dict)
     write_list_of_dicts(result_table, outpath, fieldnames=fieldnames)
     return outpath
 
-def get_targetp_table(db_path, outpath):
-    inlist = ['EG_transcript_8779','EG_transcript_27692','EG_transcript_35867','EG_transcript_41155','EG_transcript_26449','EG_transcript_10161','EG_transcript_8552','EG_transcript_6932','EG_transcript_19736','EG_transcript_5683','EG_transcript_5801','EG_transcript_40131','EG_transcript_30862','EG_transcript_25720','EG_transcript_4221','EG_transcript_13555','EG_transcript_17654','EG_transcript_18631','EG_transcript_15105','EG_transcript_19995','EG_transcript_22270','EG_transcript_26742','EG_transcript_24975','EG_transcript_11845','EG_transcript_18691','EG_transcript_6933','EG_transcript_8825','EG_transcript_2698','EG_transcript_33323','EG_transcript_4177','EG_transcript_5458','EG_transcript_3397','EG_transcript_6257','EG_transcript_6595','EG_transcript_33208','EG_transcript_15398','EG_transcript_53084','EG_transcript_11556','EG_transcript_17713','EG_transcript_19289','EG_transcript_7857','EG_transcript_5575','EG_transcript_16635','EG_transcript_2839']
+def get_targetp_table(db_path, outpath, inlist):
     engine = create_engine(db_path)
     Base.metadata.bind = engine
     DBSession = sessionmaker(bind=engine)
@@ -173,6 +174,55 @@ def get_targetp_table(db_path, outpath):
     write_list_of_dicts(result_table, outpath, fieldnames=fieldnames)
     return outpath
 
+def get_idlist_table(db_path, outpath, idlist):
+    engine = create_engine(db_path)
+    Base.metadata.bind = engine
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
+    seqs = session.query(Sequence).filter(Sequence.seqid.in_(idlist)).all()
+    fieldnames = ['seqid', 'og', 'b2go_mito', 'loc', 'locrate', 'function', 'subj_id', 'subj_og', 'organism', 'subj_function', 'evalue', 'alen_slen', 'pident', 'rev_evalue', 'rev_pident', 'rev_alen_qlen', 'is_best?', 'best_rev_evalue', 'best_rev_pident']
+    default_seq_dict = {}
+    for name in fieldnames:
+        default_seq_dict[name] = ''
+    result_table = []
+    i = 0
+    for seq in seqs:
+        i+=1
+        print i
+        seq_dict = default_seq_dict.copy()
+        seq_dict['seqid'] = seq.seqid
+        seq_dict['og'] = seq.og
+        seq_dict['b2go_mito'] = seq.mitochondrial
+        seq_dict['loc'] = seq.loc
+        seq_dict['locrate'] = seq.locrate
+        seq_dict['function'] = seq.function
+
+        bs = seq.best_subject()
+        if bs:
+            bsseq = bs['sequence']
+            seq_dict['subj_id'] = bsseq.seqid
+            seq_dict['subj_og'] = bsseq.og
+            seq_dict['organism'] = bsseq.organism
+            seq_dict['subj_function'] = bsseq.function
+
+            bsh = bs['hit']
+            seq_dict['evalue'] = bsh.evalue
+            seq_dict['alen_slen'] = bsh.alen_slen
+            seq_dict['pident'] = bsh.extra_data['pident']
+            reverse_hit = seq.get_reverse_blasthit(bsseq)
+
+            if reverse_hit:
+                seq_dict['rev_evalue'] = reverse_hit['hit'].evalue
+                seq_dict['rev_alen_qlen'] = reverse_hit['hit'].alen_qlen
+                seq_dict['rev_pident'] = reverse_hit['hit'].extra_data['pident']
+                seq_dict['is_best?'] = reverse_hit['is_best']
+                seq_dict['best_rev_evalue'] = reverse_hit['bsh'].evalue
+                seq_dict['best_rev_pident'] = reverse_hit['bsh'].extra_data['pident']
+                seq_dict['best_rev_pident'] = reverse_hit['bsh'].extra_data['pident']
+        result_table.append(seq_dict)
+    write_list_of_dicts(result_table, outpath, fieldnames=fieldnames)
+    return outpath
+
 def get_id_table(db_path, outpath, id):
     engine = create_engine(db_path)
     Base.metadata.bind = engine
@@ -199,7 +249,8 @@ def get_id_table(db_path, outpath, id):
     write_list_of_dicts(result_table, outpath, fieldnames=fieldnames)
     return outpath
 
-db_path = 'sqlite:////home/anna/Dropbox/phd/mitoproteomes/db/mito_all.db'
+
+db_path = 'sqlite:////home/anna/Dropbox/phd/mitoproteomes/db/perkinsela_mito.db'
 # db_path = 'sqlite:////home/nenarokova/mito_all.db'
 # db_path = 'sqlite:////home/anna/Dropbox/phd/db/mito1.db'
 # db_path = 'sqlite:////home/nenarokova/mito_all.db'
@@ -208,7 +259,8 @@ db_path = 'sqlite:////home/anna/Dropbox/phd/mitoproteomes/db/mito_all.db'
 # outpath = '/home/nenarokova/result_all_proteomes.csv'
 # outpath = '/home/anna/Dropbox/phd/db/result_test.csv'
 # outpath = '/home/nenarokova/db/result_hemistasia.csv'
-outpath = '/home/anna/Dropbox/phd/mitoproteomes/epsilon_result.csv'
+outpath = '/home/anna/Dropbox/phd/mitoproteomes/perkinsela_mito.csv'
 
-
-get_id_table(db_path, outpath, id = 'Tb927.10.5050')
+id_list = ["EG_transcript_10773","EG_transcript_11225","EG_transcript_12497","EG_transcript_13899","EG_transcript_13947","EG_transcript_15660","EG_transcript_1590","EG_transcript_17752","EG_transcript_21706","EG_transcript_22111","EG_transcript_22381","EG_transcript_3480","EG_transcript_35473","EG_transcript_37041","EG_transcript_43895","EG_transcript_47790","EG_transcript_57369","EG_transcript_60280","EG_transcript_7573","EG_transcript_7601","EG_transcript_8364","EG_transcript_9333",]
+# get_idlist_table(db_path, outpath, idlist = id_list)
+get_result_table_perk(db_path, outpath)
