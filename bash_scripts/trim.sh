@@ -2,7 +2,7 @@
 
 cd /media/4TB1/kinetoplastids_hinxton/species/cer3/illumina/raw_reads
 
-trimc_dir='/home/nenarokova/tools/Trimmomatic-0.36'
+trimc_dir='/home/nenarokova/tools/Trimmomatic-0.36/'
 
 trim='java -jar '$trimc_dir'trimmomatic-0.36.jar'
 
