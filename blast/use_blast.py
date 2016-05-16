@@ -27,12 +27,16 @@ blast_pairs = [
      }
         ]
 
-query_path = '/home/anna/Dropbox/phd/mitoproteomes/proteomes/reference_proteomes/reference_proteomes.fasta'
-subj_path = '/home/anna/Dropbox/phd/mitoproteomes/proteomes/perkinsela/perkinsela_prot.fasta'
-
+query_path = '/home/anna/Dropbox/phd/mitoproteome_project/genomes/euglena/cysteine_synthases.fasta'
+subj_path = '/home/anna/Dropbox/phd/mitoproteome_project/genomes/euglena/data/E_gracilis_transcriptome_final.PROTEINS/blast_db/E_gracilis_transcriptome_final.PROTEINS.db'
+# subj_path = '/home/anna/Dropbox/phd/mitoproteome_project/genomes/trypanosoma/data/trypanosoma_mito/blast_db/trypanosoma_mito.db'
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 
-new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='prot')
-blast_csv_path = new_blast.blast(bl_type='blastp', evalue=0.01, outfmt='comma_values', custom_outfmt=custom_outfmt, word_size=2)
+new_blast = Blast(query_path=query_path, db_path=subj_path, db_type='prot')
+blast_csv_path = new_blast.blast(bl_type='blastx',
+                                 evalue=0.01,
+                                 outfmt='comma_values',
+                                 custom_outfmt=custom_outfmt,
+                                 word_size=2)
 
 add_header(best_hits(blast_csv_path), custom_outfmt)
