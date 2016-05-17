@@ -6,16 +6,16 @@ trim='java -jar '$trimc_dir'trimmomatic-0.36.jar'
 
 adapters='/media/4TB1/kinetoplastids_hinxton/illumina_adapters.fa'
 
-file_dir='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/raw_reads/'
-trim_dir='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/trimmed_reads/'
-log_dir='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/trimming_logs/'
+file_dir='/media/4TB1/kinetoplastids_hinxton/illumina/hiseq/raw_reads/'
+trim_dir='/media/4TB1/kinetoplastids_hinxton/illumina/hiseq/trimmed_reads/'
+log_dir='/media/4TB1/kinetoplastids_hinxton/illumina/hiseq/trimming_logs/'
 
 name='18021_1#2'
 
-p_out_fw=$trim_dir$name'_paired_out_fw.fastq'
-u_out_fw=$trim_dir$name'_unpaired_out_fw.fastq'
-p_out_rv=$trim_dir$name'_paired_out_rv.fastq'
-u_out_rv=$trim_dir$name'_unpaired_out_rv.fastq'
+p_out_fw=$trim_dir$name'_paired_out_fw1.fastq'
+u_out_fw=$trim_dir$name'_unpaired_out_fw1.fastq'
+p_out_rv=$trim_dir$name'_paired_out_rv1.fastq'
+u_out_rv=$trim_dir$name'_unpaired_out_rv1.fastq'
 
 log=$log_dir$name'_trimming.log'
 
