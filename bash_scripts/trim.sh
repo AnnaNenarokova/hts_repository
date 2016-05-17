@@ -6,7 +6,7 @@ trim='java -jar '$trimc_dir'trimmomatic-0.36.jar'
 
 adapters='/media/4TB1/kinetoplastids_hinxton/illumina_adapters.fa'
 
-file_dir='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/raw_reads'
+file_dir='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/raw_reads/'
 trim_dir='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/trimmed_reads/'
 log_dir='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/trimming_logs/'
 
