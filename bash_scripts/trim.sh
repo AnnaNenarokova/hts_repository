@@ -10,7 +10,7 @@ file_dir='/media/4TB1/kinetoplastids_hinxton/illumina/hiseq/raw_reads/'
 trim_dir='/media/4TB1/kinetoplastids_hinxton/illumina/hiseq/trimmed_reads/'
 log_dir='/media/4TB1/kinetoplastids_hinxton/illumina/hiseq/trimming_logs/'
 
-name='18021_1#2'
+name='19109_8#8'
 
 p_out_fw=$trim_dir$name'_paired_out_fw1.fastq'
 u_out_fw=$trim_dir$name'_unpaired_out_fw1.fastq'
