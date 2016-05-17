@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo 'AAAAAAAAAAAAAAAAAAAAa'
 trimc_dir='/home/nenarokova/tools/Trimmomatic-0.36/'
 
 trim = 'java -jar '$trimc_dir'trimmomatic-0.36.jar'
