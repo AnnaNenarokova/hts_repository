@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for f in *
+for f in 18021_1#2_*.fastq
     do
         /home/nenarokova/tools/FastQC/fastqc $f &
     done
