@@ -24,4 +24,4 @@ file_rv=$file_dir$name'_2.fastq'
 illuminaclip='ILLUMINACLIP:'$adapters':2:30:10'
 
 threads=32
-$trim PE -threads $threads $file_fw $file_rv $p_out_fw $u_out_fw $p_out_rv $u_out_rv $illuminaclip LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:30
+$trim PE -threads $threads $file_fw $file_rv $p_out_fw $u_out_fw $p_out_rv $u_out_rv $illuminaclip LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:50

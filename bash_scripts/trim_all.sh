@@ -11,10 +11,10 @@ trim_dir='/media/4TB1/kinetoplastids_hinxton/illumina/hiseq/trimmed_reads/'
 log_dir='/media/4TB1/kinetoplastids_hinxton/illumina/hiseq/trimming_logs/'
 
 for f
-p_out_fw=$trim_dir$name'_paired_out_fw.fastq'
-u_out_fw=$trim_dir$name'_unpaired_out_fw.fastq'
-p_out_rv=$trim_dir$name'_paired_out_rv.fastq'
-u_out_rv=$trim_dir$name'_unpaired_out_rv.fastq'
+p_out_fw=$trim_dir$name'_trimmed_paired_out_fw.fastq'
+u_out_fw=$trim_dir$name'_trimmed_unpaired_out_fw.fastq'
+p_out_rv=$trim_dir$name'_trimmed_paired_out_rv.fastq'
+u_out_rv=$trim_dir$name'_trimmed_unpaired_out_rv.fastq'
 
 log=$log_dir$name'_trimming.log'
 
@@ -23,4 +23,4 @@ file_rv=$file_dir$name'_2.fastq'
 illuminaclip='ILLUMINACLIP:'$adapters':2:30:10'
 
 threads=1
-$trim PE -threads $threads $file_fw $file_rv $p_out_fw $u_out_fw $p_out_rv $u_out_rv $illuminaclip LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50
+$trim PE -threads $threads $file_fw $file_rv $p_out_fw $u_out_fw $p_out_rv $u_out_rv $illuminaclip LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:30
