@@ -56,3 +56,5 @@ folders = [
 threads = 32
 
 perform(folders, threads)
+
+puts 'a'
