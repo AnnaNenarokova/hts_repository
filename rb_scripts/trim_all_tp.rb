@@ -27,7 +27,7 @@ def process_folders(folders)
     all_processes = []
     folders.each do |folder|
         Dir.glob("#{folder}/raw_reads/*.fastq").map{ |f| f.split('/').last.gsub(/_[12]\.fastq/, '') }.uniq.each do |name|
-            PARAMS.each {|k,v| all_processes << run_program folder, name, v}
+            PARAMS.each {|k,v| all_processes << run_program (folder, name, v)}
         end
     end
     return all_processes
