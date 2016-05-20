@@ -37,3 +37,6 @@ end
 def perform
     process_folder '/media/4TB1/kinetoplastids_hinxton/illumina/miseq'
 end
+
+
+            `#{exec} 2> #{output_log}`
