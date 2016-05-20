@@ -41,7 +41,7 @@ def run_in_pool(processes, threads)
         pool.process do
             puts "executing #{exec}"
             `#{exec} &> #{output_log}`
-            puts
+            puts ' ____________________________ '
         end
     end
     pool.shutdown
