@@ -39,7 +39,7 @@ def run_in_pool(processes, threads)
     pool = Thread.pool(threads)
     processes.each do |process|
         pool.process do
-            puts "executing"
+            puts "executing #{process}"
             `#{process}`
             puts ' ____________________________ '
         end
