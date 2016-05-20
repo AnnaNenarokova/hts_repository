@@ -44,7 +44,7 @@ def run_in_pool(processes, threads)
             puts ' ____________________________ '
         end
     end
-    pool.shutdown
+    # pool.shutdown
 end
 
 def perform(folders, threads)
