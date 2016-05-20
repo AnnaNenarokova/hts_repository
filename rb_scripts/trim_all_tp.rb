@@ -45,7 +45,7 @@ def run_in_pool(processes, threads)
 end
 
 def perform(folders, threads)
-    run_in_pool (process_folders(folders), threads)
+    run_in_pool(process_folders(folders), threads)
 end
 
 folders = [
