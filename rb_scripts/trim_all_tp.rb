@@ -7,7 +7,7 @@ PARAMS = {
     2 => { name: 'ad_q15_l30', value: "ILLUMINACLIP:#{ADAPTERS_PATH}:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:30" },
     3 => { name: 'ad_q15_l50', value: "ILLUMINACLIP:#{ADAPTERS_PATH}:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:50" },
     4 => { name: 'ad_q20_l30', value: "ILLUMINACLIP:#{ADAPTERS_PATH}:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:30" },
-    5 => { name: 'ad_q20_l30', value: "ILLUMINACLIP:#{ADAPTERS_PATH}:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50" },
+    5 => { name: 'ad_q20_l30', value: "ILLUMINACLIP:#{ADAPTERS_PATH}:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50" }
 }.freeze
 
 def run_program(folder, input_filename, params)
@@ -40,7 +40,7 @@ def run_in_pool(processes, threads)
     processes.each do |exec|
         pool.process do
             puts "executing #{exec}"
-            `#{exec} &> #{output_log}`
+            # `#{exec} &> #{output_log}`
             puts
         end
     end
