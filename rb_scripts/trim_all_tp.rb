@@ -40,7 +40,7 @@ def run_in_pool(processes, threads)
     processes.each do |exec|
         pool.process do
             puts "executing #{exec}"
-            # `#{exec} &> #{output_log}`
+            `#{exec} &> #{output_log}`
             puts
         end
     end
