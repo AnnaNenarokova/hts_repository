@@ -39,7 +39,7 @@ def run_in_pool(processes, threads)
     pool = Thread.pool(threads)
     processes.each do |exec|
         pool.process do
-            `ls`
+            `touch /home/nenarokova/ngs/rb_scripts/test`
             puts "executing #{exec}"
             `#{exec} &> #{output_log}`
             puts ' ____________________________ '
