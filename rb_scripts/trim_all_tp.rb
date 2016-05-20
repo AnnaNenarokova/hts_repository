@@ -59,4 +59,5 @@ folders = [
 
 threads = 32
 
+`ls -lah`
 perform(folders, threads)
