@@ -20,7 +20,7 @@ def run_program(folder, input_filename, params)
     output_log = "#{folder}/trimming_logs/#{input_filename}_output_#{params[:name]}.log"
 
     exec = "#{TRIM_EXEC} PE -threads 1 -trimlog #{trimming_log} #{file_fw} #{file_rv} #{p_out_fw} #{u_out_fw} #{p_out_rv} #{u_out_rv} #{params[:value]}"
-    return '#{exec} &> #{output_log}'
+    return "#{exec} &> #{output_log}"
 end
 
 def process_folders(folders)
