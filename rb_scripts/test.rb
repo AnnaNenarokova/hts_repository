@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 def run_program(dir, input_filename)
     trim_exec = 'java -jar /home/nenarokova/tools/Trimmomatic-0.36/trimmomatic-0.36.jar'
 

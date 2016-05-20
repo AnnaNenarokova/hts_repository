@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 require 'thread/pool'
 TRIM_EXEC = 'java -jar /home/nenarokova/tools/Trimmomatic-0.36/trimmomatic-0.36.jar'
 ADAPTERS_PATH = '/media/4TB1/kinetoplastids_hinxton/illumina_adapters.fa'

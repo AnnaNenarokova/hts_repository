@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 require 'thread/pool'
 
 pool = Thread.pool(4)
