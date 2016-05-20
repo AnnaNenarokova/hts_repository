@@ -37,10 +37,10 @@ end
 
 def run_in_pool(processes, threads)
     pool = Thread.pool(threads)
-    processes.each do |exec|
+    processes.each do |process|
         pool.process do
             puts "executing"
-            `#{exec} 2> #{output_log}`
+            `#{process}`
             puts ' ____________________________ '
         end
     end
