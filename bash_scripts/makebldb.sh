@@ -1,2 +1,0 @@
-#!/bin/bash
-makeblastdb -in /home/anna/Dropbox/phd/mitoproteomes/hemistasia/Hemistasia_cutadapt_trinity_run3.fasta -parse_seqids -dbtype nucl -out /home/anna/Dropbox/phd/mitoproteomes/hemistasia/blastdb/hemistasia.db

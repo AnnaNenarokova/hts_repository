@@ -14,12 +14,12 @@ def run_program(folder, input_filename, params)
     file_fw = "#{folder}/raw_reads/#{input_filename}_1.fastq"
     file_rv = "#{folder}/raw_reads/#{input_filename}_2.fastq"
 
-    p_out_fw = "#{folder}/trimmed_reads/#{input_filename}_paired_out_fw_#{params[:name]}.fastq"
-    u_out_fw = "#{folder}/trimmed_reads/#{input_filename}_unpaired_out_fw_#{params[:name]}.fastq"
-    p_out_rv = "#{folder}/trimmed_reads/#{input_filename}_paired_out_rv_#{params[:name]}.fastq"
-    u_out_rv = "#{folder}/trimmed_reads/#{input_filename}_unpaired_out_rv_#{params[:name]}.fastq"
-    trimming_log = "#{folder}/trimming_logs/#{input_filename}_trimming_#{params[:name]}.log"
-    output_log = "#{folder}/trimming_logs/#{input_filename}_output_#{params[:name]}.log"
+    p_out_fw = "#{folder}/trimmed_reads/#{input_filename}_#{params[:name]}_paired_out_fw.fastq"
+    u_out_fw = "#{folder}/trimmed_reads/#{input_filename}_#{params[:name]}_unpaired_out_fw.fastq"
+    p_out_rv = "#{folder}/trimmed_reads/#{input_filename}_#{params[:name]}_paired_out_rv.fastq"
+    u_out_rv = "#{folder}/trimmed_reads/#{input_filename}_#{params[:name]}_unpaired_out_rv.fastq"
+    trimming_log = "#{folder}/trimming_logs/#{input_filename}#{params[:name]}_trimming.log"
+    output_log = "#{folder}/trimming_logs/#{input_filename}_#{params[:name]}_output.log"
 
     exec = "#{TRIM_EXEC} PE -threads 1 -trimlog #{trimming_log} #{file_fw} #{file_rv} #{p_out_fw} #{u_out_fw} #{p_out_rv} #{u_out_rv} #{params[:value]}"
     return "#{exec} &> #{output_log}"
