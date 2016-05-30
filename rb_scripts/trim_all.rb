@@ -1,12 +1,13 @@
 #!/usr/bin/ruby
 require 'thread/pool'
 TRIM_EXEC = 'java -jar /home/nenarokova/tools/Trimmomatic-0.36/trimmomatic-0.36.jar'
-ADAPTERS_PATH = '/media/4TB1/kinetoplastids_hinxton/illumina_adapters.fa'
+# ADAPTERS_PATH = '/media/4TB1/kinetoplastids_hinxton/illumina_adapters.fa'
+ADAPTERS_PATH = '/home/nenarokova/tools/Trimmomatic-0.36/adapters/all_adapters.fa'
 PARAMS = {
-    1 => { name: 'q15_l30', value: " LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:30" },
-    2 => { name: 'ad_q15_l30', value: "ILLUMINACLIP:#{ADAPTERS_PATH}:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:30" },
-    3 => { name: 'ad_q15_l50', value: "ILLUMINACLIP:#{ADAPTERS_PATH}:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:50" },
-    4 => { name: 'ad_q20_l30', value: "ILLUMINACLIP:#{ADAPTERS_PATH}:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:30" },
+    # 1 => { name: 'q15_l30', value: " LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:30" },
+    # 2 => { name: 'ad_q15_l30', value: "ILLUMINACLIP:#{ADAPTERS_PATH}:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:30" },
+    # 3 => { name: 'ad_q15_l50', value: "ILLUMINACLIP:#{ADAPTERS_PATH}:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:50" },
+    # 4 => { name: 'ad_q20_l30', value: "ILLUMINACLIP:#{ADAPTERS_PATH}:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:30" },
     5 => { name: 'ad_q20_l50', value: "ILLUMINACLIP:#{ADAPTERS_PATH}:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50" }
 }.freeze
 
@@ -51,11 +52,14 @@ def perform(folders, threads)
     run_in_pool(process_folders(folders), threads)
 end
 
-folders = [
-    '/media/4TB1/kinetoplastids_hinxton/illumina/miseq',
-    '/media/4TB1/kinetoplastids_hinxton/illumina/hiseq'
-        ]
+# folders = [
+#     '/media/4TB1/kinetoplastids_hinxton/illumina/miseq',
+#     '/media/4TB1/kinetoplastids_hinxton/illumina/hiseq'
+#         ]
 
-threads = 32
+folders = [
+    '/home/nenarokova/contaminants'
+]
+threads = 16
 
 perform(folders, threads)

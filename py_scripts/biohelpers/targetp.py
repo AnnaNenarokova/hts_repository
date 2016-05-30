@@ -63,8 +63,7 @@ def use_targetp(f_path, outf_path=False, is_plant=False, cleavage_sites=False, t
 	return outf_path
 
 f_paths = [
-# '/home/anna/Dropbox/phd/mitoproteomes/proteomes/giardia/data/giardia.fasta'
-'/home/anna/Dropbox/phd/mitoproteomes/proteomes/perkinsela/perkinsela_prot_gb_ids.fasta'
+'/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/data/euglena_all_proteins.fasta'
 ]
 for f_path in f_paths:
 	use_targetp(f_path, is_plant=False)
