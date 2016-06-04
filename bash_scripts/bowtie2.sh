@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -l walltime=100:00:00
-#PBS -nodes=krtecek2.local
+#PBS -l nodes=krtecek2.local
 
 folder='/home/nenarokova/contaminants/trimmed_reads'
 bt2_base='/home/nenarokova/contaminants/genomes/blechomonas'
