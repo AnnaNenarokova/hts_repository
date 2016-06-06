@@ -4,4 +4,4 @@
 #PBS -d.
 cd /home/nenarokova/contaminants/genomes
 bw2_dir='/home/nenarokova/tools/bowtie2-2.2.9/'
-$bw2_dir'bowtie2-build' -t 60 seymouri Leptomonas_seymouri.fa
+$bw2_dir'bowtie2-build' -t 60 Leptomonas_seymouri.fa seymouri
