@@ -10,5 +10,5 @@ clean_reads_unpaired='/media/4TB1/kinetoplastids_hinxton/jaculum/cleaned_reads/1
 paired_fw=$folder'18021_1#5_paired_out_fw_ad_q20_l50.fastq'
 paired_rv=$folder'18021_1#5_paired_out_rv_ad_q20_l50.fastq'
 unpaired_fw=$folder'18021_1#5_unpaired_out_fw_ad_q20_l50.fastq'
-unpaired_rv=$folder'18021_1#5_unpaired_out_rv_ad_q20_l50_.fastq'
+unpaired_rv=$folder'18021_1#5_unpaired_out_rv_ad_q20_l50.fastq'
 /home/nenarokova/tools/bowtie2-2.2.9/bowtie2 -D 5 -R 1 -N 0 -L 32 -p 32 -x $bt2_base -1 $paired_fw -2 $paired_rv -U $unpaired_fw,$unpaired_rv -S $alignment --un $clean_reads_unpaired --un-conc $clean_reads_paired
