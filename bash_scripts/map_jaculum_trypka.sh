@@ -1,5 +1,5 @@
 #!/bin/bash
-folder='/media/4TB1/kinetoplastids_hinxton/jaculum/trimmed_reads'
+folder='/media/4TB1/kinetoplastids_hinxton/jaculum/trimmed_reads/'
 cd $folder
 alignment='/media/4TB1/kinetoplastids_hinxton/jaculum/jaculum_mapping/alignment.sam'
 bt2_base='/media/4TB1/kinetoplastids_hinxton/pyrrhocoris_bt2/leptomonas'
