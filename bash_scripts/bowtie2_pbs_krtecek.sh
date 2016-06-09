@@ -1,6 +1,4 @@
 #!/bin/bash
-#PBS -l walltime=100:00:00
-#PBS -l nodes=1:ppn=60
 
 folder='/home/nenarokova/contaminants/trimmed_reads'
 cd $folder
