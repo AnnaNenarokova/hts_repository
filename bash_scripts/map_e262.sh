@@ -1,6 +1,6 @@
 #!/bin/bash
 read_folder='/media/4TB1/kinetoplastids_hinxton/illumina/hiseq/trimmed_reads/'
-bt2_base='/media/4TB1/kinetoplastids_hinxton/pyrrhocoris_bt2/leptomonas'
+bt2_base='/media/4TB1/kinetoplastids_hinxton/contaminants/pyrrhocoris_bt2/leptomonas'
 
 out_folder='/media/4TB1/kinetoplastids_hinxton/illumina/contaminant_mapping/novymonas/'
 alignment=$out_folder'alignment.sam'
