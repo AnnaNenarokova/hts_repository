@@ -1,8 +1,8 @@
 #!/bin/bash
 
-folder='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/raw_reads'
-fw='18021_1#6_1.fastq'
-rv='18021_1#6_2.fastq'
+folder='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/raw_reads/'
+fw=$folder'18021_1#6_1.fastq'
+rv=$folder'18021_1#6_2.fastq'
 merged='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/merged_reads/18021_1#6_merged.fq'
 unmerged_fw='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/merged_reads/18021_1#6_unmerged_fw.fq'
 unmerged_rv='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/merged_reads/18021_1#6_unmerged_rv.fq'
