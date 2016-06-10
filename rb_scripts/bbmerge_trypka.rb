@@ -11,6 +11,5 @@ Dir.glob("#{folder}raw_reads/*.fastq").map{ |f| f.split('/').last.gsub(/_[12]\.f
     log = "#{folder}merged_reads/logs/#{name}_merged.txt"
     exec = "#{bbmerge} in1=#{file_fw} in2=#{file_rv} out=#{merged} outu1=#{unmerged_fw} outu2=#{unmerged_rv} strict=t qtrim2=t usejni=t > #{log}"
     puts exec
-    `echo 'aaa'`
     `exec`
 end
