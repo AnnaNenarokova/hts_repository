@@ -1,7 +1,6 @@
 #!/usr/bin/ruby
-folder='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/raw_reads/'
-Dir.glob("#{folder}/raw_reads/*.fastq")
-Dir.glob("#{folder}/raw_reads/*.fastq").map{ |f| f.split('/').last.gsub(/_[12]\.fastq/, '') }.uniq.each do |name|
+folder='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/'
+Dir.glob("#{folder}raw_reads/*.fastq").map{ |f| f.split('/').last.gsub(/_[12]\.fastq/, '') }.uniq.each do |name|
     puts name
     file_fw = "#{folder}/raw_reads/#{name}_1.fastq"
     file_rv = "#{folder}/raw_reads/#{name}_2.fastq"
