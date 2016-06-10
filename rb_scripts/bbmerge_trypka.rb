@@ -9,7 +9,7 @@ Dir.glob("#{folder}raw_reads/*.fastq").map{ |f| f.split('/').last.gsub(/_[12]\.f
     unmerged_fw = "#{folder}merged_reads/reads/#{name}_unmerged_fw.fastq"
     unmerged_rv = "#{folder}merged_reads/reads/#{name}_unmerged_rv.fastq"
     bbmerge = '/home/nenarokova/tools/bbmap/bbmerge.sh'
-    log = "#{folder}merged_reads/logs/#{name}_merged.fastq"
+    log = "#{folder}merged_reads/logs/#{name}_merged.txt"
     exec = "#{bbmerge} in1=#{file_fw} in2=#{file_rv} out=#{merged} outu1=#{unmerged_fw} outu2=#{unmerged_rv} strict=t qtrim2=t usejni=t > #{log}"
     puts exec
     `exec`
