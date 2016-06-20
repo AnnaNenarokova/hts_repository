@@ -2,7 +2,7 @@
 #PBS -l walltime=100:00:00
 #PBS -l nodes=1:ppn=60
 
-folder='/home/nenarokova/kinetoplastids/illumina/miseq/raw_reads'
+folder='/home/nenarokova/kinetoplastids/illumina/miseq/raw_reads/'
 
 fw=$folder'18098_1_7_1.fastq.gz'
 rv=$folder'18098_1_7_2.fastq.gz'
