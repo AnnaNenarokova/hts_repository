@@ -1,5 +1,5 @@
 #!/bin/bash
-folder='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/merged_reads/reads'
+folder='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/merged_reads/reads/'
 
 fw=$folder'18021_1_7_unmerged_fw.fq'
 rv=$folder'18021_1_7_unmerged_rv.fq'
