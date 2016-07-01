@@ -5,13 +5,13 @@ sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from py_scripts.common_helpers.parse_dicts import *
 
 def parse_csv(csv_path, delimiter=','):
-	with open(csv_path) as handle_file:
-		handle_csv = csv.reader(handle_file, delimiter=delimiter)
-		results = []
-		for row in handle_csv:
-			results.append(row)
-		handle_file.close()
-	return results
+    with open(csv_path) as handle_file:
+        handle_csv = csv.reader(handle_file, delimiter=delimiter)
+        results = []
+        for row in handle_csv:
+            results.append(row)
+        handle_file.close()
+    return results
 
 def csv_to_list_of_dicts(csv_path, delimiter=','):
     with open(csv_path) as csvfile:
@@ -44,7 +44,7 @@ def write_list_of_lists(list_of_lists, outpath, delimiter=',', header=False):
 def write_list_of_dicts(list_of_dicts, outpath, fieldnames=False):
     with open(outpath, 'w') as csvfile:
         if not fieldnames:
-            fieldnames = list_of_dicts.keys()
+            fieldnames = list_of_dicts[0].keys()
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         for row in list_of_dicts:

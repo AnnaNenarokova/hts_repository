@@ -3,6 +3,7 @@ import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from blast.classes.blast import Blast
 from py_scripts.biohelpers.best_hits import *
+from py_scripts.common_helpers.parse_csv import *
 
 def blast_many(blast_pairs, custom_outfmt):
     blast_csv_paths = []
@@ -11,9 +12,18 @@ def blast_many(blast_pairs, custom_outfmt):
         blast_csv_path = new_blast.blast(bl_type='blastp', evalue=10, outfmt='comma_values', custom_outfmt=custom_outfmt, word_size=2)
         print blast_csv_path
         blast_csv_paths.append(blast_csv_path)
-
     for blast_path in blast_csv_paths:
         print blast_path
+    return 0
+
+def add_qlen_alen (blast_csv_path):
+    blast_hits = csv_to_list_of_dicts(blast_csv_path)[0]
+    result = []
+    for bh in blast_hits:
+        bh['alen_qlen'] = float(bh['length'])/ float(bh['qlen'])
+        result.append(bh)
+    fieldnames = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send alen_qlen'.split(' ')
+    write_list_of_dicts(result, blast_csv_path, fieldnames=fieldnames)
     return 0
 
 def add_header(blast_csv_path, custom_outfmt):
@@ -22,21 +32,25 @@ def add_header(blast_csv_path, custom_outfmt):
     write_list_of_lists(blast_hits, blast_csv_path, header=header)
     return blast_csv_path
 
-blast_pairs = [
- {
-     }
-        ]
-
-query_path = '/home/anna/Dropbox/phd/bioinformatics/euglena_results/SufCB.fasta'
-subj_path = '/home/anna/bioinformatics/phd/euglena_project/euglena/euglena/Euglena_gracilis_genome_V1/blast_db/Euglena_gracilis_genome_V1.db'
-# subj_path = '/home/anna/Dropbox/phd/mitoproteome_project/genomes/trypanosoma/data/trypanosoma_mito/blast_db/trypanosoma_mito.db'
+query_path = '/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/SSU_GAPDH/SSU/SSU_NCBI_141_Votep.fasta'
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
+subj_pathes = [
+'/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/Angomonas_ambiguus_HiSeqMiSeq_assem/blast_db/Angomonas_ambiguus_HiSeqMiSeq_assem.db',
+'/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/Blastocrithidia_sp_HiSeqMiSeq_assem/blast_db/Blastocrithidia_sp_HiSeqMiSeq_assem.db',
+'/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/E262_cont/blast_db/E262_cont.db',
+'/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/Herpetomonas_mariadeanei_HiSeqMiSeq_assem/blast_db/Herpetomonas_mariadeanei_HiSeqMiSeq_assem.db',
+'/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/Jaculum_HiSeqMiSeq_assem/blast_db/Jaculum_HiSeqMiSeq_assem.db',
+'/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/Jaenimonas_drosophilae_HiSeqMiSeq_assem/blast_db/Jaenimonas_drosophilae_HiSeqMiSeq_assem.db',
+'/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/Sergeia_podlipaevi_HiSeqMiSeq_assem/blast_db/Sergeia_podlipaevi_HiSeqMiSeq_assem.db',
+'/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/Wallacemonas_HiSeqMiSeq_assem/blast_db/Wallacemonas_HiSeqMiSeq_assem.db'
+]
 
-new_blast = Blast(query_path=query_path, db_path=subj_path, db_type='nucl')
-blast_csv_path = new_blast.blast(bl_type='tblastn',
-                                 evalue=0.001,
-                                 outfmt='comma_values',
-                                 custom_outfmt=custom_outfmt,
-                                 word_size=2)
-
-add_header(best_hits(blast_csv_path), custom_outfmt)
+for subj_path in subj_pathes:
+    new_blast = Blast(query_path=query_path, db_path=subj_path, db_type='nucl')
+    blast_csv_path = new_blast.blast(bl_type='blastn',
+                                     evalue=0.00001,
+                                     outfmt='comma_values',
+                                     custom_outfmt=custom_outfmt,
+                                     word_size=7)
+    add_qlen_alen(add_header(best_hits(blast_csv_path), custom_outfmt))
+    add_qlen_alen(add_header(blast_csv_path, custom_outfmt))
