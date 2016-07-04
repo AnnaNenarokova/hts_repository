@@ -32,23 +32,16 @@ def add_header(blast_csv_path, custom_outfmt):
     write_list_of_lists(blast_hits, blast_csv_path, header=header)
     return blast_csv_path
 
-query_path = '/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/SSU_GAPDH/SSU/SSU_NCBI_141_Votep.fasta'
+query_path = '/home/nenarokova/kinetoplastids/contaminants/genomes/pandoraea_pnomenusa_RB38_complete.fasta'
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_pathes = [
-'/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/Angomonas_ambiguus_HiSeqMiSeq_assem/blast_db/Angomonas_ambiguus_HiSeqMiSeq_assem.db',
-'/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/Blastocrithidia_sp_HiSeqMiSeq_assem/blast_db/Blastocrithidia_sp_HiSeqMiSeq_assem.db',
-'/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/E262_cont/blast_db/E262_cont.db',
-'/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/Herpetomonas_mariadeanei_HiSeqMiSeq_assem/blast_db/Herpetomonas_mariadeanei_HiSeqMiSeq_assem.db',
-'/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/Jaculum_HiSeqMiSeq_assem/blast_db/Jaculum_HiSeqMiSeq_assem.db',
-'/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/Jaenimonas_drosophilae_HiSeqMiSeq_assem/blast_db/Jaenimonas_drosophilae_HiSeqMiSeq_assem.db',
-'/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/Sergeia_podlipaevi_HiSeqMiSeq_assem/blast_db/Sergeia_podlipaevi_HiSeqMiSeq_assem.db',
-'/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/Wallacemonas_HiSeqMiSeq_assem/blast_db/Wallacemonas_HiSeqMiSeq_assem.db'
+'/home/nenarokova/kinetoplastids/pacbio/assembly/e262_polished_assembly.fasta'
 ]
 
 for subj_path in subj_pathes:
-    new_blast = Blast(query_path=query_path, db_path=subj_path, db_type='nucl')
+    new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='nucl', threads=60)
     blast_csv_path = new_blast.blast(bl_type='blastn',
-                                     evalue=0.00001,
+                                     evalue=0.01,
                                      outfmt='comma_values',
                                      custom_outfmt=custom_outfmt,
                                      word_size=7)
