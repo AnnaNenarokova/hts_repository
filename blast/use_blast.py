@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
+sys.path.insert(0, "/home/anna/bioinformatics/ngs/", "/home/nenarokova/ngs/")
 from blast.classes.blast import Blast
 from py_scripts.biohelpers.best_hits import *
 from py_scripts.common_helpers.parse_csv import *

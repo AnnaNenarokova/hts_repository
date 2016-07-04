@@ -3,7 +3,7 @@
 # bl_types: 'blastn', 'blastp', 'psiblast', 'blastx', 'tblastn', 'tblastx'
 from subprocess import call
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
+sys.path.insert(0, "/home/anna/bioinformatics/ngs/", "/home/nenarokova/ngs/")
 from py_scripts.common_helpers.make_outdir import file_from_path, make_outdir, dir_from_path
 from py_scripts.biohelpers.convert import fastq_fasta
 from os.path import exists
