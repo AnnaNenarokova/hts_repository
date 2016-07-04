@@ -36,7 +36,7 @@ def add_header(blast_csv_path, custom_outfmt):
 query_path = '/home/nenarokova/kinetoplastids/contaminants/genomes/pandoraea_pnomenusa_RB38_complete.fasta'
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_pathes = [
-'/home/nenarokova/kinetoplastids/pacbio/assembly/e262_polished_assembly.fasta'
+'/home/nenarokova/kinetoplastids/illumina/assembly/E262_contigs.fa'
 ]
 
 for subj_path in subj_pathes:
