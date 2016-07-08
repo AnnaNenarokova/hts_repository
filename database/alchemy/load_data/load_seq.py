@@ -3,8 +3,8 @@ from Bio import SeqIO
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from database.alchemy.models import *
-from py_scripts.common_helpers.make_outdir import *
-from py_scripts.common_helpers.parse_csv import *
+from py_scripts.helpers.make_outdir import *
+from py_scripts.helpers.parse_csv import *
 
 def load_fasta(session, fasta_path, seqtype, organism='unknown organism', source=False, description_path=False):
     print description_path, organism

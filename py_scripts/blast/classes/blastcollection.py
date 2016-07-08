@@ -6,9 +6,9 @@ from Bio.SeqFeature import SeqFeature, FeatureLocation
 import csv
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
-from common_helpers.make_outdir import file_from_path, make_outdir, new_file
-from common_helpers.lookahead import lookahead
-from common_helpers.parse_csv import parse_csv
+from helpers.make_outdir import file_from_path, make_outdir, new_file
+from helpers.lookahead import lookahead
+from helpers.parse_csv import parse_csv
 
 class BlastHitsCollection(object):
 	def __init__(self, hits=False, blreport_path=False, features_string=False, features=False, header=False):

@@ -1,15 +1,15 @@
 #!/usr/bin/python
 from Bio import SeqIO
 
-record_id = []
-start = 1408
-end = 1719
-fasta_file = '/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/Angomonas_ambiguus_HiSeqMiSeq_assembly.fa'
+l = ['EG_transcript_8095', 'EG_transcript_4309', 'EG_transcript_8319', 'EG_transcript_4177']
+fasta = '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/data/E_gracilis_transcriptome_final.TRANSCRIPTS.fasta'
+results = []
 
-for record in SeqIO.parse(fasta_file, "fasta"):
-    if record_id == record.id:
-        result = record[start:end]
+for record in SeqIO.parse(fasta, "fasta"):
+    for id in l:
+        if id == record.id:
+            results.append(record)
 
-outpath = '/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/genes/Angomonas_ambiguus_SSU.fst'
+outpath = '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/data/euglena_gracilis_fts_transcripts.fasta'
 
-SeqIO.write(result, outpath, "fasta")
+SeqIO.write(results, outpath, "fasta")

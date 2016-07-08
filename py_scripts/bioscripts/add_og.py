@@ -1,9 +1,9 @@
 #!/usr/bin/python
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
-from py_scripts.common_helpers.parse_csv import *
-from py_scripts.biohelpers.gi_to_ccds import *
-from py_scripts.biohelpers.mitocarta_to_gi import *
+from py_scripts.helpers.parse_csv import *
+from py_scripts.bioscripts.gi_to_ccds import *
+from py_scripts.bioscripts.mitocarta_to_gi import *
 
 an_path = '/home/anna/bioinformatics/phd/euglena_project/results.csv'
 

@@ -3,7 +3,7 @@ import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from blast.classes.blast_parser import BlastParser
 from database.models import *
-from py_scripts.biohelpers.seq_info_to_dict import *
+from py_scripts.bioscripts.seq_info_to_dict import *
 
 Sequence.drop_table()
 db.create_table(Sequence)

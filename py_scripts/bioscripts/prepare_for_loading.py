@@ -2,7 +2,7 @@
 import csv
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
-from common_helpers.parse_csv import *
+from helpers.parse_csv import *
 
 def b2g_to_functions(b2g_dict):
     result = {}

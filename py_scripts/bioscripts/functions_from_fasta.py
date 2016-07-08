@@ -2,7 +2,7 @@
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from Bio import SeqIO
-from py_scripts.common_helpers.parse_csv import *
+from py_scripts.helpers.parse_csv import *
 
 def functions_from_fasta(fasta_path, outpath):
     result = []

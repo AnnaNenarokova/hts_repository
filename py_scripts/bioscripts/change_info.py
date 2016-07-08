@@ -4,9 +4,9 @@ from Bio.SeqRecord import SeqRecord
 import csv
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
-from common_helpers.make_outdir import *
-from common_helpers.lookahead import *
-from common_helpers.parse_csv import *
+from helpers.make_outdir import *
+from helpers.lookahead import *
+from helpers.parse_csv import *
 
 def add_functions(self, path, delimiter):
 

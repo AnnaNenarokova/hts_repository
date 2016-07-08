@@ -4,8 +4,8 @@ from Bio.SeqRecord import SeqRecord
 from subprocess32 import call
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
-from py_scripts.common_helpers.make_outdir import *
-from py_scripts.common_helpers.lookahead import lookahead
+from py_scripts.helpers.make_outdir import *
+from py_scripts.helpers.lookahead import lookahead
 from subprocess import Popen, PIPE, STDOUT
 import csv
 
@@ -62,8 +62,15 @@ def use_targetp(f_path, outf_path=False, is_plant=False, cleavage_sites=False, t
 
 	return outf_path
 
-f_paths = [
-'/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/data/euglena_all_proteins.fasta'
-]
-for f_path in f_paths:
-	use_targetp(f_path, is_plant=True)
+# f_paths = [
+# '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/data/E_gracilis_transcriptome_final.PROTEINS_M_cut.fasta'
+# ]
+# for f_path in f_paths:
+# 	use_targetp(f_path, is_plant=False)
+# 	use_targetp(f_path, is_plant=True)
+f_path = '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/data/E_gracilis_transcriptome_final.PROTEINS_M_cut.fasta'
+outf_path = '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/data/E_gracilis_transcriptome_final.PROTEINS_M_cut_targetp_not_chloro.csv'
+use_targetp(f_path, outf_path, is_plant=False)
+f_path = '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/data/E_gracilis_transcriptome_final.PROTEINS_M_cut.fasta'
+outf_path = '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/data/E_gracilis_transcriptome_final.PROTEINS_M_cut_targetp_chloro.csv'
+use_targetp(f_path, outf_path, is_plant=True)

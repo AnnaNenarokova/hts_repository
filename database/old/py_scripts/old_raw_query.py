@@ -3,7 +3,7 @@ from peewee import *
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from database.models import *
-from py_scripts.common_helpers.parse_csv import *
+from py_scripts.helpers.parse_csv import *
 import csv
 
 def exclude_bad_functions():

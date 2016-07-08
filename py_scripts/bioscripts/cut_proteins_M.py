@@ -2,13 +2,13 @@
 from Bio import SeqIO
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
-from py_scripts.common_helpers.parse_csv import *
+from py_scripts.helpers.parse_csv import *
 
 def cut_proteins_M(fasta_path, outpath):
     results = []
     for record in SeqIO.parse(fasta_path, "fasta"):
         for i, aa in enumerate(record.seq):
-            if aa == 'M':
+            if aa == 'M' and i > 5:
                 results.append(record[i::])
                 break
     SeqIO.write(results, outpath, "fasta")

@@ -2,9 +2,9 @@
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 sys.path.insert(0, "/home/nenarokova/ngs/")
-from blast.classes.blast import Blast
-from py_scripts.biohelpers.best_hits import *
-from py_scripts.common_helpers.parse_csv import *
+from py_scripts.blast.classes.blast import Blast
+from py_scripts.bioscripts.best_hits import *
+from py_scripts.helpers.parse_csv import *
 
 def blast_many(blast_pairs, custom_outfmt):
     blast_csv_paths = []
@@ -33,18 +33,20 @@ def add_header(blast_csv_path, custom_outfmt):
     write_list_of_lists(blast_hits, blast_csv_path, header=header)
     return blast_csv_path
 
-query_path = '/home/nenarokova/kinetoplastids/contaminants/genomes/pandoraea_pnomenusa_RB38_complete.fasta'
+query_path = '/home/nenarokova/kinetoplastids/contaminants/genomes/pandoraea_apista_AU2161.fasta'
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_pathes = [
-'/home/nenarokova/kinetoplastids/illumina/assembly/E262_contigs.fa'
+'/home/nenarokova/kinetoplastids/illumina/assembly/E262_cont/blast_db/E262_cont.db'
 ]
 
 for subj_path in subj_pathes:
-    new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='nucl', threads=60)
-    blast_csv_path = new_blast.blast(bl_type='blastn',
+    new_blast = Blast(query_path=query_path, db_path=subj_path, db_type='nucl', threads=60)
+    blast_csv_path = new_blast.blast(
+                                     bl_type='blastn',
                                      evalue=0.01,
                                      outfmt='comma_values',
                                      custom_outfmt=custom_outfmt,
-                                     word_size=7)
+                                     word_size=7
+                                     )
     add_qlen_alen(add_header(best_hits(blast_csv_path), custom_outfmt))
     add_qlen_alen(add_header(blast_csv_path, custom_outfmt))

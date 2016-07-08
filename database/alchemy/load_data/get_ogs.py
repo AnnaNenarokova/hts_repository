@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
-from py_scripts.common_helpers.parse_csv import *
+from py_scripts.helpers.parse_csv import *
 
 def get_ogs_from_dict(csv_path, og_dicts, organism, outpath=False):
     print organism

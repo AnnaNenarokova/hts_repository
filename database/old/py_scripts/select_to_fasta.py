@@ -4,7 +4,7 @@ import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from blast.classes.blast_parser import BlastParser
 from database.models import *
-from py_scripts.common_helpers.parse_csv import *
+from py_scripts.helpers.parse_csv import *
 
 raw_query = """
 select * from sequence

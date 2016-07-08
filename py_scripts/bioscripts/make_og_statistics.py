@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
-from py_scripts.common_helpers.parse_csv import *
+from py_scripts.helpers.parse_csv import *
 def convert_evalue(evalue):
     if evalue == '': result = 100
     else: result = float(evalue)

@@ -3,7 +3,7 @@ import sqlite3
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from database.raw_query_to_dict import *
-from py_scripts.common_helpers.parse_csv import *
+from py_scripts.helpers.parse_csv import *
 
 def select_best_hit(blasthit_dict, needed_keys):
     csv_list = []

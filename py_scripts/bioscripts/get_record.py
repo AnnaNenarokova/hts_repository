@@ -1,16 +1,15 @@
 #!/usr/bin/python
 from Bio import SeqIO
 
-record_id = '18021_1#1_trimmed_contig_199'
-start = 7626
-end = 7939
+record_id = 'NODE_1075_length_388462_cov_71.249306'
 
-fasta_file = '/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/Jaenimonas_drosophilae_HiSeqMiSeq_assembly.fa'
+fasta_file = '/home/anna/Dropbox/phd/bioinformatics/genomes/kinetoplastids/CLC_assemblies/E262_contigs.fa'
 
 for record in SeqIO.parse(fasta_file, "fasta"):
     if record_id == record.id:
-        result = record[start:end].reverse_complement()
+        result = record
+        # result = record[start:end].reverse_complement()
 
-outpath = '/home/anna/Dropbox/phd/bioinformatics/kinetoplastids/CLC_assemblies/genes/Jaenimonas_drosophilae_sp_SSU.fst'
+outpath = '/home/anna/Dropbox/phd/bioinformatics/genomes/kinetoplastids/novymonas/polished_assembly/pandorea_novymonas_contig.fasta'
 
 SeqIO.write(result, outpath, "fasta")

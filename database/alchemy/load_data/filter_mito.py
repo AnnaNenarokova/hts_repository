@@ -1,8 +1,8 @@
 #!/usr/bin/python
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
-from py_scripts.common_helpers.parse_csv import *
-from py_scripts.common_helpers.flatten import *
+from py_scripts.helpers.parse_csv import *
+from py_scripts.helpers.flatten import *
 from Bio import SeqIO
 
 def filter_mito(mitolist_path, fasta_path, outpath):

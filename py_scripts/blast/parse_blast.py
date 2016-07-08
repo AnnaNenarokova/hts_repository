@@ -1,6 +1,6 @@
 #!/usr/bin/python
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
-from common_helpers.make_outdir import file_from_path, make_outdir
+from helpers.make_outdir import file_from_path, make_outdir
 
 from Bio.Blast import NCBIXML
 from Bio import SeqIO

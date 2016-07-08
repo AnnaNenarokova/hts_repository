@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
-from py_scripts.common_helpers.parse_csv import *
+from py_scripts.helpers.parse_csv import *
 
 def add_csv_info(main_csv_path, info_csv_path, id_key='seqid', info_id_key='seqid'):
     main_csv, fieldnames = csv_to_list_of_dicts(main_csv_path)

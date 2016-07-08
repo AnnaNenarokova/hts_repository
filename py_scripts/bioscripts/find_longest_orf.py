@@ -2,8 +2,8 @@
 from Bio import SeqIO
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
-from common_helpers.make_outdir import file_from_path, make_outdir, new_file
-from common_helpers.lookahead import lookahead
+from helpers.make_outdir import file_from_path, make_outdir, new_file
+from helpers.lookahead import lookahead
 
 def find_longest_orf(orfs_path, f_out):
 	out = []

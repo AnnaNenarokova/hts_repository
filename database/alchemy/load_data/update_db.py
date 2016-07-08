@@ -2,8 +2,8 @@
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
 from database.alchemy.models import *
-from py_scripts.common_helpers.parse_dicts import *
-from py_scripts.common_helpers.parse_csv import *
+from py_scripts.helpers.parse_dicts import *
+from py_scripts.helpers.parse_csv import *
 
 def load_functions(session, csv_path, exact_ids=True, organism=''):
     if organism == 'Arabidopsis thaliana': exact_ids=False

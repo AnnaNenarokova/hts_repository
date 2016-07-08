@@ -1,8 +1,8 @@
 import sqlite3
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
-from py_scripts.common_helpers.parse_csv import *
-from py_scripts.common_helpers.parse_dicts import *
+from py_scripts.helpers.parse_csv import *
+from py_scripts.helpers.parse_dicts import *
 
 def dict_factory(cursor, row):
     d = {}

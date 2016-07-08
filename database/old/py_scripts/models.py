@@ -7,8 +7,8 @@ from Bio.Alphabet import *
 import simplejson as json
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
-from py_scripts.common_helpers.parse_csv import *
-from py_scripts.common_helpers.make_outdir import *
+from py_scripts.helpers.parse_csv import *
+from py_scripts.helpers.make_outdir import *
 
 db_path = '/home/anna/Dropbox/PhD/mitoproteome.db'
 db = SqliteDatabase(db_path)

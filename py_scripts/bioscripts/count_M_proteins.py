@@ -2,7 +2,7 @@
 from Bio import SeqIO
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
-from py_scripts.common_helpers.parse_csv import *
+from py_scripts.helpers.parse_csv import *
 
 def count_right_prot(fasta_path, outpath=False):
     m_starts = 0
