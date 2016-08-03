@@ -13,11 +13,11 @@ def split_protein_groups(csv_path, outpath=False):
             results.append(row)
         else:
             group_id = i
-            for seqid in row[0].split(';'):
+            for seqid in row[1].split(';'):
                 result = list(row)
                 result.extend([group_id, seqid])
                 results.append(result)
-    if not outpath: outpath = csv_path[0:-4] + '_splitted.csv'
+    if not outpath: outpath = csv_path[0:-4] + '_splitted_major.csv'
     write_list_of_lists(results, outpath)
     return outpath
 

@@ -33,10 +33,10 @@ def add_header(blast_csv_path, custom_outfmt):
     write_list_of_lists(blast_hits, blast_csv_path, header=header)
     return blast_csv_path
 
-query_path = '/home/nenarokova/kinetoplastids/contaminants/genomes/pandoraea_apista_AU2161.fasta'
+query_path = '/home/nenarokova/kinetoplastids/contaminants/genomes/Leptomonas_pyrrhocoris_H10.fa'
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_pathes = [
-'/home/nenarokova/kinetoplastids/illumina/assembly/E262_cont/blast_db/E262_cont.db'
+'/home/nenarokova/kinetoplastids/pacbio/assembly/e262_polished_assembly.fasta'
 ]
 
 for subj_path in subj_pathes:

@@ -1,8 +1,8 @@
 #!/usr/bin/python
 from Bio import SeqIO
 
-l = ['EG_transcript_8095', 'EG_transcript_4309', 'EG_transcript_8319', 'EG_transcript_4177']
-fasta = '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/data/E_gracilis_transcriptome_final.TRANSCRIPTS.fasta'
+l = ['TR13625|c0_g3_i1', 'TR13625|c0_g2_i1']
+fasta = '/home/anna/Dropbox/phd/bioinformatics/genomes/hemistasia/Hemistasia_cutadapt_trinity_run3.fasta'
 results = []
 
 for record in SeqIO.parse(fasta, "fasta"):
@@ -10,6 +10,6 @@ for record in SeqIO.parse(fasta, "fasta"):
         if id == record.id:
             results.append(record)
 
-outpath = '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/data/euglena_gracilis_fts_transcripts.fasta'
+outpath = '/home/anna/Dropbox/phd/bioinformatics/genomes/hemistasia/Hemistasia_histidine_phospatases.fasta'
 
 SeqIO.write(results, outpath, "fasta")
