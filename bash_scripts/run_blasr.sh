@@ -12,5 +12,5 @@ out='/home/nenarokova/kinetoplastids/contaminants/SSU_NCBI_141_Votep_Hinxton_e26
 
 for f in $folder*.bax.h5
 do
-  $blasr $f $ref --nproc 60 -m 0 >> out
+  $blasr $f $ref --nproc 60 -m 0 >> $out
 done
