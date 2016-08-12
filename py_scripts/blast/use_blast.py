@@ -33,7 +33,7 @@ def add_header(blast_csv_path, custom_outfmt):
     write_list_of_lists(blast_hits, blast_csv_path, header=header)
     return blast_csv_path
 
-query_path = '/home/nenarokova/euglena/e_gracilis_heme_ncbi.fasta'
+query_path = '/home/nenarokova/diplonema_proteins_SL.faa'
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_pathes = [
 '/home/nenarokova/euglena/blast_db/E_gracilis_transcriptome_final.PROTEINS.db'
@@ -42,11 +42,11 @@ subj_pathes = [
 for subj_path in subj_pathes:
     new_blast = Blast(query_path=query_path, db_path=subj_path, db_type='prot', threads=30)
     blast_csv_path = new_blast.blast(
-                                     bl_type='blastx',
+                                     bl_type='blastp',
                                      evalue=0.0001,
                                      outfmt='comma_values',
                                      custom_outfmt=custom_outfmt,
-                                     word_size=7
+                                     word_size=3
                                      )
     add_qlen_alen(add_header(best_hits(blast_csv_path), custom_outfmt))
     add_qlen_alen(add_header(blast_csv_path, custom_outfmt))
