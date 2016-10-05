@@ -5,7 +5,7 @@
 bt2_base='/home/nenarokova/genomes/kinetoplastids/pacbio/assembly/angomonas/angomonas'
 report_folder='/home/nenarokova/genomes/kinetoplastids/pacbio/assembly/bw2_reports/'
 read_folder='/home/nenarokova/genomes/kinetoplastids/illumina/miseq/trimming/trimmed_reads/'
-alignment_folder='/home/nenarokova/genomes/kinetoplastids/pacbio/assembly/bw2_mapping/alignments/'
+alignment_folder='/home/nenarokova/genomes/kinetoplastids/pacbio/assembly/bw2_mapping/mapping_stats'
 
 fw_paired=$read_folder'18021_1_4_paired_out_fw_ad_q20_l50.fastq.gz'
 rv_paired=$read_folder'18021_1_4_paired_out_rv_ad_q20_l50.fastq.gz'
