@@ -24,7 +24,7 @@
 # /home/nenarokova/tools/bowtie2-2.2.9/bowtie2 --very-sensitive -p 60 -x $bt2_base -1 $fw_paired -2 $rv_paired -U $fw_unpaired,$rv_unpaired -S $alignment 2> $report
 
 bt2_base='/home/nenarokova/genomes/kinetoplastids/pacbio/assembly/angomonas/angomonas'
-report_folder='/home/nenarokova/genomes/kinetoplastids/pacbio/assembly/bw2_reports/'
+report_folder='/home/nenarokova/genomes/kinetoplastids/pacbio/assembly/bw2_mapping/reports/'
 read_folder='/home/nenarokova/genomes/kinetoplastids/illumina/hiseq/trimmed_reads/'
 alignment_folder='/home/nenarokova/genomes/kinetoplastids/pacbio/assembly/bw2_mapping/alignments/'
 
