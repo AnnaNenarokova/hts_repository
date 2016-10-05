@@ -2,7 +2,7 @@
 #PBS -l walltime=100:00:00
 #PBS -l nodes=1:ppn=60
 
-bt2_base='/home/nenarokova/contaminants/genomes/'
+bt2_base='/home/nenarokova/genomes/kinetoplastids/pacbio/assembly/angomonas/angomonas'
 report_folder='/home/nenarokova/genomes/kinetoplastids/pacbio/assembly/bw2_reports/'
 read_folder='/home/nenarokova/genomes/kinetoplastids/illumina/miseq/trimming/trimmed_reads/'
 alignment_folder='/home/nenarokova/genomes/kinetoplastids/pacbio/assembly/bw2_mapping/alignments/'
