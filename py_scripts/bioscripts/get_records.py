@@ -1,8 +1,18 @@
 #!/usr/bin/python
 from Bio import SeqIO
 
-l = ['TR13625|c0_g3_i1', 'TR13625|c0_g2_i1']
-fasta = '/home/anna/Dropbox/phd/bioinformatics/genomes/hemistasia/Hemistasia_cutadapt_trinity_run3.fasta'
+l = ['EG_transcript_12368',
+'EG_transcript_11734',
+'EG_transcript_30166',
+'EG_transcript_19555',
+'EG_transcript_31130',
+'EG_transcript_16635',
+'EG_transcript_33996',
+'EG_transcript_10631',
+'EG_transcript_8016',
+'EG_transcript_25719',
+'EG_transcript_8552']
+fasta = '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/data/euglena_all_proteins.fasta'
 results = []
 
 for record in SeqIO.parse(fasta, "fasta"):
@@ -10,6 +20,6 @@ for record in SeqIO.parse(fasta, "fasta"):
         if id == record.id:
             results.append(record)
 
-outpath = '/home/anna/Dropbox/phd/bioinformatics/genomes/hemistasia/Hemistasia_histidine_phospatases.fasta'
+outpath = '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/data/euglena_import.fasta'
 
 SeqIO.write(results, outpath, "fasta")

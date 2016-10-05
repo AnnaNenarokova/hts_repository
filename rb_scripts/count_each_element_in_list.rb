@@ -1,4 +1,4 @@
 #!/usr/bin/ruby
-a = ['a', 'a', 'b', 'b', 'b', 'c']
+l = ['a', 'a', 'b', 'b', 'b', 'c']
 
-a.uniq.each { |e| puts "#{e} - #{a.count(e)}" }
+l.uniq.each { |e| puts "#{e} - #{l.count(e)}" }

@@ -14,5 +14,5 @@ def ko_pathway(file_in, file_out)
     result.each { |k,v| v.each { |val| a.puts "#{val.gsub("\n", '')} #{k}" }  }
 end
 
-file_in = '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/organellar proteome annotation/Mito/ko_pathways.txt'
-file_out = '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/organellar proteome annotation/Mito/ko_pathways.сsv'
+file_in = '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/organellar proteome annotation/Mito/ko_categories.txt'
+file_out = '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/organellar proteome annotation/Mito/ko_categories_out.txt'
