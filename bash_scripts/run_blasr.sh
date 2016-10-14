@@ -6,11 +6,11 @@ libcpp='/home/nenarokova/tools/blasr_install/blasr/libcpp'
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$libcpp/hdf:$libcpp/alignment:$libcpp/pbdata:/home/nenarokova/tools/blasr_install/hdf5/hdf5-1.8.16-linux-centos6-x86_64-gcc447-shared/lib
 blasr='/home/nenarokova/tools/blasr_install/blasr/blasr'
 
-ref='/home/nenarokova/kinetoplastids/illumina/assembly/E262_contigs.fa'
-folder='/home/nenarokova/kinetoplastids/pacbio/raw_reads/e262/'
-out='/home/nenarokova/kinetoplastids/illumina/assembly/E262_contigs_pacbio_blasr.out'
+ref='/home/nenarokova/genomes/Trypanoplasma_borreli/miniasm/contigs.fasta'
+folder='/home/nenarokova/genomes/Trypanoplasma_borreli/TCS_Michael_Giolai_TGAC/Raw_reads/all_subreads/'
+out='/home/nenarokova/genomes/Trypanoplasma_borreli/miniasm/read_mapping.sam'
 
-for f in $folder*.bax.h5
+for f in $folder*.fastq
 do
-  $blasr $f $ref --nproc 60 -m 0 >> $out
+  $blasr $f $ref --nproc 60 -sam >> $out
 done
