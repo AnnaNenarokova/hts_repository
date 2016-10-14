@@ -17,4 +17,4 @@ out='/home/nenarokova/genomes/Trypanoplasma_borreli/miniasm/read_mapping.bam'
 
 f1="/home/nenarokova/genomes/Trypanoplasma_borreli/TCS_Michael_Giolai_TGAC/Raw_reads/D06_1/Analysis_Results/m151008_074519_42165_c100914232550000001823208104301613_s1_p0.bas.h5"
 f2="/home/nenarokova/genomes/Trypanoplasma_borreli/TCS_Michael_Giolai_TGAC/Raw_reads/E06_1/Analysis_Results/m151008_120454_42165_c100914232550000001823208104301614_s1_p0.bas.h5"
-$blasr $f1 $2 $ref --nproc 60 -bam -clipping soft --out $out
+$blasr $f1 $2 $ref --nproc 60 --bam -clipping soft --out $out
