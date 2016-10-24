@@ -1,15 +1,16 @@
 #!/usr/bin/python
 from Bio import SeqIO
 
-record_id = 'unitig_0|quiver'
+record_id = 'unitig_200|quiver'
 
-fasta_file = '/home/anna/Dropbox/phd/bioinformatics/genomes/kinetoplastids/novymonas/e262_polished_pacbio_assembly.fasta'
+fasta_file = '/home/anna/bioinformatics/phd/Mbr04_Wallacemonas_polished_assembly.fasta'
 
 for record in SeqIO.parse(fasta_file, "fasta"):
     if record_id == record.id:
         result = record
         # result = record[start:end].reverse_complement()
 
-outpath = '/home/anna/Dropbox/phd/bioinformatics/genomes/kinetoplastids/novymonas/novymonas_contig_pacbio.fasta'
+outpath = '/home/anna/bioinformatics/phd/unitig_200|quiver_walla.fasta'
 
 SeqIO.write(result, outpath, "fasta")
+

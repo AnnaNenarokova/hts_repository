@@ -7,14 +7,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$libcpp/hdf:$libcpp/alignment:$libcpp/pb
 blasr='/home/nenarokova/tools/blasr_install/blasr/blasr'
 
 ref='/home/nenarokova/genomes/Trypanoplasma_borreli/miniasm/contigs.fasta'
-folder='/home/nenarokova/genomes/Trypanoplasma_borreli/TCS_Michael_Giolai_TGAC/Raw_reads/all_subreads/'
 out='/home/nenarokova/genomes/Trypanoplasma_borreli/miniasm/read_mapping.bam'
 
-# for f in $folder*.fastq
-# do
-#   $blasr $f $ref --nproc 60 -sam >> $out
-# done
-
 f1="/home/nenarokova/genomes/Trypanoplasma_borreli/TCS_Michael_Giolai_TGAC/Raw_reads/D06_1/Analysis_Results/m151008_074519_42165_c100914232550000001823208104301613_s1_p0.bas.h5"
-f2="/home/nenarokova/genomes/Trypanoplasma_borreli/TCS_Michael_Giolai_TGAC/Raw_reads/E06_1/Analysis_Results/m151008_120454_42165_c100914232550000001823208104301614_s1_p0.bas.h5"
-$blasr $f1 $2 $ref --nproc 60 --clipping soft --bam $out
+$blasr $f1 $ref --nproc 60 --clipping soft --bam $out
