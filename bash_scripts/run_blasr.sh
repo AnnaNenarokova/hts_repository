@@ -4,7 +4,7 @@
 
 libcpp='/home/nenarokova/tools/blasr_install/blasr/libcpp'
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$libcpp/hdf:$libcpp/alignment:$libcpp/pbdata:/home/nenarokova/tools/blasr_install/hdf5/hdf5-1.8.16-linux-centos6-x86_64-gcc447-shared/lib
-blasr='/home/nenarokova/tools/blasr'
+blasr='/home/nenarokova/tools/blasr/bin/blasr'
 
 ref='/home/nenarokova/genomes/Trypanoplasma_borreli/miniasm/contigs.fasta'
 out='/home/nenarokova/genomes/Trypanoplasma_borreli/miniasm/read_mapping.bam'
