@@ -10,5 +10,5 @@ blasr='/home/nenarokova/tools/blasr/bin/blasr'
 ref='/home/nenarokova/genomes/Trypanoplasma_borreli/miniasm/contigs.fasta'
 out='/home/nenarokova/genomes/Trypanoplasma_borreli/miniasm/read_mapping.bam'
 
-f1='/home/nenarokova/genomes/trypanoplasma/TCS_Michael_Giolai_TGAC/Raw_reads/all_subreads/m151008_074519_42165_c100914232550000001823208104301613_s1_p0.1.subreads.fastq'
+f1='/home/nenarokova/genomes/trypanoplasma/miniasm/reads.fasta'
 $blasr $f1 $ref --nproc 60 --clipping soft --bam $out
