@@ -1,6 +1,6 @@
 #!/bin/bash
 cd /home/nenarokova/tools/pilon/target/scala-2.11
-genome="/home/nenarokova/genomes/Trypanoplasma_borreli/miniasm/contigs.fasta"
+genome="//home/nenarokova/genomes/trypanoplasma/miniasm/contigs.fasta"
 bam="/media/4TB3/trypanoplasma/pacbio_mapping_sorted.bam"
 outdir="/media/4TB3/trypanoplasma/pilon_out"
 output="trypanoplasma"
