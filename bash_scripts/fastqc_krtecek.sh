@@ -6,10 +6,7 @@ reads2="/home/nenarokova/genomes/novymonas/raw_illumina/E262_2.fastq.gz"
 reads3="/home/nenarokova/genomes/novymonas/raw_illumina/E262_1_paired_import_trimmed_F.fastq"
 reads4="/home/nenarokova/genomes/novymonas/raw_illumina/E262_1_paired_import_trimmed_R.fastq"
 
-/home/nenarokova/tools/FastQC/fastqc $reads1 -t 30 &
 
-/home/nenarokova/tools/FastQC/fastqc $reads2 -t 30 &
+/home/nenarokova/tools/FastQC/fastqc $reads3 -t 30 &
 
-/home/nenarokova/tools/FastQC/fastqc $reads1 -t 30 &
-
-/home/nenarokova/tools/FastQC/fastqc $reads2 -t 30
+/home/nenarokova/tools/FastQC/fastqc $reads4 -t 30
