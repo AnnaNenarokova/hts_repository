@@ -7,10 +7,10 @@ dir2="/home/nenarokova/genomes/novymonas/raw_illumina/WT_MiSeq_trimmed/without_e
 
 for f in $dir1*
 do
-    /home/nenarokova/tools/FastQC/fastqc $f -t 30 &
+    /home/nenarokova/tools/FastQC/fastqc $f -t 30
 done
 
 for f in $dir2*
 do
-    /home/nenarokova/tools/FastQC/fastqc $f -t 30 &
+    /home/nenarokova/tools/FastQC/fastqc $f -t 30
 done
