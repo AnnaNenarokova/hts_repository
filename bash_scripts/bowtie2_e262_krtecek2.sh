@@ -4,12 +4,12 @@
 
 bt2_base='/home/nenarokova/genomes/hinxton_species/contaminants/genomes/leptomonas'
 
-folder="/home/nenarokova/genomes/novymonas/raw_illumina/miseq_trimmed/with_endosym_trimmed/"
+folder="/home/nenarokova/genomes/novymonas/raw_illumina/miseq_trimmed/without_endosym_trimmed"
 
-fw_paired=$folder"wt_S2_L001_trimmed_1P.fq"
-rv_paired=$folder"wt_S2_L001_trimmed_2P.fq"
-fw_unpaired=$folder"wt_S2_L001_trimmed_1U.fq"
-rv_unpaired=$folder"wt_S2_L001_trimmed_2U.fq"
+fw_paired=$folder1"azi_S1_L001_trimmed_1P.fq"
+rv_paired=$folder1"azi_S1_L001_trimmed_2P.fq"
+fw_unpaired=$folder1"azi_S1_L001_trimmed_1U.fq"
+rv_unpaired=$folder1"azi_S1_L001_trimmed_2U.fq"
 
 clean_reads_paired="/home/nenarokova/genomes/novymonas/mapping/l_pyrrhocoris/with_endosym_trimmed_clean_paired.fq.gz"
 clean_reads_unpaired="/home/nenarokova/genomes/novymonas/mapping/l_pyrrhocoris/with_endosym_trimmed_clean_unpaired.fq.gz"
