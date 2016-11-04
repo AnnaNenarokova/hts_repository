@@ -4,7 +4,7 @@
 
 bt2_base='/home/nenarokova/genomes/hinxton_species/contaminants/genomes/leptomonas'
 
-folder="/home/nenarokova/genomes/novymonas/raw_illumina/miseq_trimmed/without_endosym_trimmed"
+folder="/home/nenarokova/genomes/novymonas/raw_illumina/miseq_trimmed/without_endosym_trimmed/"
 
 fw_paired=$folder"azi_S1_L001_trimmed_1P.fq"
 rv_paired=$folder"azi_S1_L001_trimmed_2P.fq"
