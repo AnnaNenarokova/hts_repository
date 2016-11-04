@@ -1,12 +1,16 @@
 #!/bin/bash
 #PBS -l walltime=100:00:00
 #PBS -l nodes=1:ppn=30
-reads1="/home/nenarokova/genomes/novymonas/raw_illumina/E262_1.fastq.gz"
-reads2="/home/nenarokova/genomes/novymonas/raw_illumina/E262_2.fastq.gz"
-reads3="/home/nenarokova/genomes/novymonas/raw_illumina/E262_1_paired_import_trimmed_F.fastq"
-reads4="/home/nenarokova/genomes/novymonas/raw_illumina/E262_1_paired_import_trimmed_R.fastq"
 
+dir1="/home/nenarokova/genomes/novymonas/raw_illumina/WT_MiSeq_trimmed/with_endosym_trimmed/"
+dir2="/home/nenarokova/genomes/novymonas/raw_illumina/WT_MiSeq_trimmed/without_endosym_trimmed/"
 
-/home/nenarokova/tools/FastQC/fastqc $reads3 -t 30 &
+for f in $dir1*
+do
+    /home/nenarokova/tools/FastQC/fastqc $f -t 30 &
+done
 
-/home/nenarokova/tools/FastQC/fastqc $reads4 -t 30
+for f in $dir2*
+do
+    /home/nenarokova/tools/FastQC/fastqc $f -t 30 &
+done
