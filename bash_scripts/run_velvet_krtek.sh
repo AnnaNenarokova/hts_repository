@@ -9,4 +9,4 @@ reads4="/home/nenarokova/genomes/novymonas/raw_illumina/miseq_trimmed/with_endos
 
 outdir="/home/nenarokova/genomes/novymonas/raw_illumina/miseq_trimmed/with_endosym_trimmed/velvet/"
 
-/home/nenarokova/tools/VelvetOptimiser-2.2.5/VelvetOptimiser.pl -s 27 -e 31 -f '-shortPaired -fastq -separate $reads1 $reads2 -short -fastq $reads3 -short -fastq $reads4' -d $outdirc -t 32
+/home/nenarokova/tools/VelvetOptimiser-2.2.5/VelvetOptimiser.pl -s 27 -e 31 -f '-shortPaired -fastq -separate $reads1 $reads2' -d $outdirc -t 32
