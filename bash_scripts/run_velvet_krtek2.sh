@@ -7,4 +7,6 @@ reads2="/home/nenarokova/genomes/novymonas/raw_illumina/miseq_trimmed/without_en
 reads3="/home/nenarokova/genomes/novymonas/raw_illumina/miseq_trimmed/without_endosym_trimmed/azi_S1_L001_trimmed_1U.fq"
 reads4="/home/nenarokova/genomes/novymonas/raw_illumina/miseq_trimmed/without_endosym_trimmed/azi_S1_L001_trimmed_2U.fq"
 
-/home/nenarokova/tools/VelvetOptimiser-2.2.5/VelvetOptimiser.pl -s 27 -e 151 -f '-shortPaired -fasta -separate $reads1 $reads2 -short -fastq $reads3 -short -fastq $reads4' -g 31 -t 64
+outdir="/home/nenarokova/genomes/novymonas/raw_illumina/miseq_trimmed/without_endosym_trimmed/velvet/"
+
+/home/nenarokova/tools/VelvetOptimiser-2.2.5/VelvetOptimiser.pl -s 27 -e 151 -f '-shortPaired -fasta -separate $reads1 $reads2 -short -fastq $reads3 -short -fastq $reads4' -d $outdir -g 31 -t 64
