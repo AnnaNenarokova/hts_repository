@@ -36,7 +36,8 @@ def add_header(blast_csv_path, custom_outfmt):
 query_path = '/home/nenarokova/genomes/novymonas/pandoraea/pandoraea_ref.fa'
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_pathes = [
-'/home/nenarokova/genomes/novymonas/assembly/azi_S1_L001_trimmed_1P_paired_merged_assembly_genome.fa',
+"/home/nenarokova/genomes/novymonas/assembly/E262_endosymbiont_genome.fa",
+"/home/nenarokova/genomes/novymonas/assembly/E262_contigs.fa"
 ]
 
 for subj_path in subj_pathes:
