@@ -1,17 +1,13 @@
 #!/bin/bash
 
-folder='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/raw_reads/'
+dir_raw='/media/4TB1/novymonas/raw_reads/'
 
-fw=$folder'18098_1_1_1.fastq.gz'
-rv=$folder'18098_1_1_2.fastq.gz'
-merged='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/merged_reads/reads/18098_1_1_merged.fq'
-unmerged_fw='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/merged_reads/reads/18098_1_1_unmerged_fw.fq'
-unmerged_rv='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/merged_reads/reads/18098_1_1_unmerged_rv.fq'
-/home/nenarokova/tools/bbmap/bbmerge.sh in1=$fw in2=$rv out=$merged outu1=$unmerged_fw outu2=$unmerged_rv strict=t qtrim2=t usejni=t
+fw=$dir_raw'azi_S1_L001_R1_001.fastq.gz'
+rv=$dir_raw'azi_S1_L001_R2_001.fastq.gz'
 
-fw=$folder'18021_1_1_1.fastq.gz'
-rv=$folder'18021_1_1_2.fastq.gz'
-merged='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/merged_reads/reads/18021_1_1_merged.fq'
-unmerged_fw='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/merged_reads/reads/18021_1_1_unmerged_fw.fq'
-unmerged_rv='/media/4TB1/kinetoplastids_hinxton/illumina/miseq/merged_reads/reads/18021_1_1_unmerged_rv.fq'
-/home/nenarokova/tools/bbmap/bbmerge.sh in1=$fw in2=$rv out=$merged outu1=$unmerged_fw outu2=$unmerged_rv strict=t qtrim2=t usejni=t
+dir_merged="/media/4TB1/novymonas/merged_reads/"
+merged=$dir_merged'azi_S1_L001_merged.fa'
+unmerged_fw=$dir_merged'azi_S1_L001_unmerged_1.fa'
+unmerged_rv=$dir_merged'azi_S1_L001_unmerged_2.fa'
+report=$dir_merged'azi_S1_L001_report.txt'
+/home/nenarokova/tools/bbmap/bbmerge.sh t=32 in1=$fw in2=$rv out=$merged outu1=$unmerged_fw outu2=$unmerged_rv strict=t qtrim2=t usejni=t 2> $report
