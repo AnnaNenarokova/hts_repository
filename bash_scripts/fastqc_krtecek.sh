@@ -12,6 +12,6 @@ f4="wt_S2_L001_R2_001.fastq.gz"
 /home/nenarokova/tools/FastQC/fastqc $f1 &
 /home/nenarokova/tools/FastQC/fastqc $f2 &
 /home/nenarokova/tools/FastQC/fastqc $f3 &
-/home/nenarokova/tools/FastQC/fastqc $f4 &
+/home/nenarokova/tools/FastQC/fastqc $f4
 
 
