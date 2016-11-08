@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -l walltime=100:00:00
-#PBS -l nodes=1:ppn=30
+#PBS -l nodes=1:ppn=4
 
 cd /home/nenarokova/genomes/novymonas/raw_illumina/miseq_raw
 
