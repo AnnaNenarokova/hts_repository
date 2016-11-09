@@ -2,11 +2,11 @@
 
 dir_raw='/media/4TB1/novymonas/raw_reads/'
 
-fw=$dir_raw'azi_S1_L001_R1_001.fastq.gz'
-rv=$dir_raw'azi_S1_L001_R2_001.fastq.gz'
+fw=$dir_raw'wt_S2_L001_R1_001.fastq.gz'
+rv=$dir_raw'wt_S2_L001_R2_001.fastq.gz'
 
 dir_merged='/media/4TB1/novymonas/merged_reads/'
-name='azi_S1'
+name='wt_S2'
 merged=$dir_merged$name'_merged.fq'
 unmerged_fw=$dir_merged$name'_unmerged_1.fq'
 unmerged_rv=$dir_merged$name'_unmerged_2.fq'
