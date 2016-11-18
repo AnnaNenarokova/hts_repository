@@ -4,7 +4,7 @@
 
 se1="/home/nenarokova/genomes/novymonas/raw_illumina/miseq_merged/azi_S1_adapter_trimmed_merged.fq"
 pe1_1="/home/nenarokova/genomes/novymonas/raw_illumina/miseq_merged/azi_S1_unmerged_trimmed_1.fq"
-pe1_2="/home/nenarokova/genomes/novymonas/raw_illumina/miseq_merged/azi_S2_unmerged_trimmed_1.fq"
+pe1_2="/home/nenarokova/genomes/novymonas/raw_illumina/miseq_merged/azi_S1_unmerged_trimmed_2.fq"
 
 outdir="/home/nenarokova/genomes/novymonas/assembly/azi_spades/"
 
