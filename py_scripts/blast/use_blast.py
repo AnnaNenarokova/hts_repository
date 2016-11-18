@@ -33,11 +33,10 @@ def add_header(blast_csv_path, custom_outfmt):
     write_list_of_lists(blast_hits, blast_csv_path, header=header)
     return blast_csv_path
 
-query_path = '/home/nenarokova/genomes/novymonas/pandoraea/pandoraea_ref.fa'
+query_path = '/media/4TB1/novymonas/e262_hiseq_contigs.fa'
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_pathes = [
-"/home/nenarokova/genomes/novymonas/assembly/E262_endosymbiont_genome.fa",
-"/home/nenarokova/genomes/novymonas/assembly/E262_contigs.fa"
+"/home/nenarokova/genomes/novymonas/pandoraea/pandoraea_ref.fa"
 ]
 
 for subj_path in subj_pathes:
