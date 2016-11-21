@@ -19,7 +19,7 @@ report=$base_name".txt"
 unmapped_unpaired=$base_name"_unmapped_unpaired.fa.gz"
 unmapped_paired=$base_name"_unmapped_paired.fa.gz"
 
-/home/nenarokova/tools/bowtie2-2.2.9/bowtie2 --very-fast -p 60 -x $bt2_base -1 $p1_1,$p2_1 -2 $p1_2,$p2_2 -U $s1 --un-gz $unmapped_unpaired --un-conc-gz $unmapped_paired -S $alignment 2> $report
+/home/nenarokova/tools/bowtie2-2.2.9/bowtie2 --very-fast -p 60 -x $base_name -1 $p1_1,$p2_1 -2 $p1_2,$p2_2 -U $s1 --un-gz $unmapped_unpaired --un-conc-gz $unmapped_paired -S $alignment 2> $report
 
 samfile=$alignment
 bamfile=$base_name"_unsorted.bam"
