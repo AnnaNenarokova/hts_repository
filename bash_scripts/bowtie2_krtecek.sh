@@ -1,6 +1,6 @@
 #!/bin/bash
-PBS -l walltime=100:00:00
-PBS -l nodes=1:ppn=60
+# PBS -l walltime=100:00:00
+# PBS -l nodes=1:ppn=60
 
 bw2_dir='/home/nenarokova/tools/bowtie2-2.2.9/'
 base_name='/home/nenarokova/genomes/novymonas/assembly/azi_spades/azi_scaffolds_cov_more_10'
