@@ -33,14 +33,14 @@ def add_header(blast_csv_path, custom_outfmt):
     write_list_of_lists(blast_hits, blast_csv_path, header=header)
     return blast_csv_path
 
-query_path = '/media/4TB1/novymonas/spades_contigs.fasta'
+query_path = '/home/nenarokova/genomes/novymonas/assembly/azi_spades/contigs.fasta'
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_pathes = [
-"/media/4TB1/novymonas/pandoraea_all.fasta"
+"/home/nenarokova/genomes/novymonas/pandoraea/pandoraea_ref.fa"
 ]
 
 for subj_path in subj_pathes:
-    new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='nucl', threads=32)
+    new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='nucl', threads=60)
     blast_csv_path = new_blast.blast(
                                      bl_type='blastn',
                                      evalue=0.00001,
