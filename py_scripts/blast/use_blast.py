@@ -36,7 +36,7 @@ def add_header(blast_csv_path, custom_outfmt):
 query_path = '/media/4TB1/novymonas/wt_scaffolds.fa'
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_pathes = [
-"/media/4TB1/novymonas/pandoraea_all/blast_db/pandoraea_all"
+"/media/4TB1/novymonas/pandoraea_all/blast_db/pandoraea_all.db"
 ]
 
 for subj_path in subj_pathes:
