@@ -10,14 +10,14 @@ s1="/home/nenarokova/genomes/novymonas/raw_illumina/miseq_merged/wt_S2_L001_merg
 p1_1="/home/nenarokova/genomes/novymonas/raw_illumina/miseq_merged/wt_S2_L001_unmerged_trimmed_1.fq"
 p1_2="/home/nenarokova/genomes/novymonas/raw_illumina/miseq_merged/wt_S2_L001_unmerged_trimmed_2.fq"
 p2_1="/home/nenarokova/genomes/novymonas/raw_illumina/old_hiseq_trimmed/E262_1_trimmed.fastq"
-p2_1="/home/nenarokova/genomes/novymonas/raw_illumina/old_hiseq_trimmed/E262_2_trimmed.fastq"
+p2_2="/home/nenarokova/genomes/novymonas/raw_illumina/old_hiseq_trimmed/E262_2_trimmed.fastq"
 
 alignment=$base_name".sam"
 report=$base_name".txt"
 
 
-unmapped_unpaired=$base_name"unmapped_unpaired.fa.gz"
-unmapped_paired=$base_name"unmapped_paired.fa.gz"
+unmapped_unpaired=$base_name"_unmapped_unpaired.fa.gz"
+unmapped_paired=$base_name"_unmapped_paired.fa.gz"
 
 /home/nenarokova/tools/bowtie2-2.2.9/bowtie2 --very-fast -p 60 -x $bt2_base -1 $p1_1,$p2_1 -2 $p1_2,$p2_2 -U $s1 $--un-gz $unmapped_unpaired --un-conc-gz $unmapped_paired -S $alignment 2> $report
 
