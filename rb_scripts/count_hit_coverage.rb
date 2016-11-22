@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 require 'csv'
 
-blast_csv_path='/home/anna/Dropbox/PhD/bioinformatics/genomes/trypanosomatids/novymonas/blast_reports/spades_wt_contigs_bl_report_e_10.csv'
+blast_csv_path='/home/anna/Dropbox/PhD/bioinformatics/genomes/trypanosomatids/novymonas/wt_scaffo_bl_report_e10.csv'
 
 def merge_ranges(ranges)
   ranges = ranges.sort_by {|r| r.first }
@@ -21,7 +21,7 @@ blast_csv = CSV.read(blast_csv_path)
 all_seqs = {}
 
 blast_csv = blast_csv[1..-1]
-blast_csv.each do |e| 
+blast_csv.each do |e|
 	all_seqs[e.first] ||= []
 	all_seqs[e.first] << { start: e[10].to_i, end: e[11].to_i }
 end
