@@ -10,7 +10,7 @@ l = [
 "NODE_1304_length_1318_cov_1864.36",
 "NODE_1110_length_1849_cov_675.416"
 ]
-fasta = '/home/anna/Dropbox/PhD/bioinformatics/genomes/trypanosomatids/novymonas/wt_scaffolds.fa'
+fasta = '/home/anna/Dropbox/PhD/bioinformatics/genomes/trypanosomatids/novymonas/pandoraea_scaffolds.fasta'
 results = []
 
 for record in SeqIO.parse(fasta, "fasta"):
