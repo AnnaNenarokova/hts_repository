@@ -1,5 +1,6 @@
 #!/bin/bash
-
+# PBS -l nodes=1:ppn=60
+# PBS -l walltime=10000:00:00
 bw2_dir='/home/nenarokova/tools/bowtie2-2.2.9/'
 base_name='/home/nenarokova/genomes/novymonas/rnaseq/mapping/pandorea'
 ref="/home/nenarokova/genomes/novymonas/assembly/pandoraea/pandorea_final.fa"
