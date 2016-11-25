@@ -5,8 +5,14 @@ samfile="/media/4TB3/trypanoplasma/mapping/pacbio_reads_quiver_consensus3.sam"
 bamfile="/media/4TB3/trypanoplasma/mapping/pacbio_reads_quiver_consensus3_unsorted.bam"
 sorted="/media/4TB3/trypanoplasma/mapping/pacbio_reads_quiver_consensus3_sorted"
 sorted_file=$sorted".bam"
-samtools view -bS $samfile > $bamfile -@ 32
+mapped_file=$sorted"_mapped.bam"
+samtools view -bS -@ 32 $samfile > $bamfile
 samtools sort $bamfile $sorted -@ 32
 samtools index $sorted_file
 
 chmod 644 $sorted_file
+
+samtools view -b -F 4 -@ 32 $sorted_file > $mapped_file
+samtools index $mapped_file
+
+chmod 644 $mapped_file
