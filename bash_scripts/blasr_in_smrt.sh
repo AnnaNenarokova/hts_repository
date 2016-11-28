@@ -7,7 +7,7 @@ input="/media/4TB3/trypanoplasma/mapping/input.fofn"
 genome="/media/4TB3/trypanoplasma/mapping/pacbio_consensus_quiver3.fastq"
 
 out="/media/4TB3/trypanoplasma/mapping/pacbio_consensus_quiver3.sam"
-unaligned="media/4TB1/novymonas/mapping/pacbio_consensus_quiver3_unaligned.fq"
+unaligned="/media/4TB1/novymonas/mapping/pacbio_consensus_quiver3_unaligned.fq"
 
 blasr $input $genome -sam -out $out -nproc 32 -clipping soft -unaligned $unaligned
 
