@@ -1,7 +1,6 @@
 #!/bin/bash
 # PBS -l nodes=1:ppn=60
 # PBS -l walltime=10000:00:00
-source /home/smrtanalysis/current/etc/setup.sh
 
 samfile="/home/nenarokova/genomes/trypanoplasma/miniasm/read_mapping.sam"
 bamfile="/home/nenarokova/genomes/trypanoplasma/miniasm/read_mapping_unsorted.bam"
