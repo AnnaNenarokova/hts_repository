@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 require 'csv'
 
-blast_csv_path='/home/anna/Dropbox/PhD/bioinformatics/genomes/trypanosomatids/novymonas/blast_reports/wt_scaffo_kinetoplastid_bl_report_e10.csv'
+blast_csv_path='/home/anna/Dropbox/PhD/bioinformatics/genomes/trypanosomatids/novymonas/blast_reports/wt_scaffo_pandoraea_bl_report_hit_cov_e10.csv'
 
 def merge_ranges(ranges)
   ranges = ranges.sort_by {|r| r.first }
