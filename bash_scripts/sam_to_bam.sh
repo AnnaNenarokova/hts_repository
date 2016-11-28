@@ -1,4 +1,6 @@
 #!/bin/bash
+# PBS -l nodes=1:ppn=60
+# PBS -l walltime=10000:00:00
 source /home/smrtanalysis/current/etc/setup.sh
 
 samfile="/media/4TB3/trypanoplasma/mapping/pacbio_reads_quiver_consensus3.sam"
