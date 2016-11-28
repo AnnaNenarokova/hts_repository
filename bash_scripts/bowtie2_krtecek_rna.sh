@@ -3,7 +3,7 @@
 # PBS -l walltime=10000:00:00
 bw2_dir='/home/nenarokova/tools/bowtie2-2.2.9/'
 base_name='/home/nenarokova/genomes/novymonas/rnaseq/mapping/pandorea'
-ref="/home/nenarokova/genomes/novymonas/assembly/pandoraea/pandoraea_final.fasta"
+ref="/home/nenarokova/genomes/novymonas/rnaseq/mapping/PROKKA_11282016.fsa"
 $bw2_dir'bowtie2-build' --threads 60 $ref $base_name
 
 p1_1="/home/nenarokova/genomes/novymonas/rnaseq/trimmed/rna_wt1_trimmed_1.fq"
