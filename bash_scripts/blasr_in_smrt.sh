@@ -4,7 +4,7 @@
 source /home/smrtanalysis/current/etc/setup.sh
 
 input="/media/4TB3/trypanoplasma/mapping/input.fofn"
-genome="/media/4TB3/trypanoplasma/mapping/pacbio_consensus_quiver3.fastq"
+genome="pacbio_consensus_quiver3.fasta"
 
 out="/media/4TB3/trypanoplasma/mapping/pacbio_consensus_quiver3.sam"
 unaligned="/media/4TB1/novymonas/mapping/pacbio_consensus_quiver3_unaligned.fq"
