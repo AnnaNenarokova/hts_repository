@@ -40,7 +40,7 @@ subj_pathes = [
 ]
 
 for subj_path in subj_pathes:
-    new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='nucl', threads=64)
+    new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='nucl', threads=32)
     blast_csv_path = new_blast.blast(
                                      bl_type='blastn',
                                      evalue=0.00001,
