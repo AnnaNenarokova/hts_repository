@@ -1,11 +1,11 @@
 #!/usr/bin/ruby
 require 'csv'
 
-blast_csv_path='/home/anna/Dropbox/PhD/bioinformatics/genomes/trypanosomatids/novymonas/blast_reports/wt_scaffo_pandoraea_bl_report_hit_cov_e10.csv'
+blast_csv_path='/home/anna/bioinformatics/genomes/wt_novymonas_spades/scaffolds_bl_report.csv'
 
 def merge_ranges(ranges)
   ranges = ranges.sort_by {|r| r.first }
-  *outages = ranges.shift
+  outages = ranges.shift
   ranges.each do |r|
     lastr = outages[-1]
     if lastr.last >= r.first - 1
