@@ -36,7 +36,7 @@ def add_header(blast_csv_path, custom_outfmt):
 query_path = "/home/nenarokova/genomes/euglena/trypanosoma_mito_all_sources.fa"
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_pathes = [
-"home/nenarokova/genomes/euglena/euglena_all_proteins/blast_db/euglena_all_proteins.db"
+"/home/nenarokova/genomes/euglena/euglena_all_proteins/blast_db/euglena_all_proteins.db"
 ]
 
 for subj_path in subj_pathes:
