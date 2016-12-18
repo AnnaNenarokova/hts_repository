@@ -15,11 +15,11 @@ def get_ogs_from_dict(csv_path, og_dicts, organism, outpath=False):
         i+=1
         for dic in csv_list:
             seqid = dic['seqid']
-            if organism == 'Arabidopsis thaliana': seqid = seqid[0:-2]
+            # if organism == 'Arabidopsis thaliana': seqid = seqid[0:-2]
             if seqid in cur_ogs:
                 dic['og'] = og
-    # fieldnames = ['seqid',  'function', 'mitochondrial']
-    fieldnames = ['seqid','og','b2go_mito','loc','locrate','b2go function','subj_id','gene_name','alternative name','subj_og','organism','mitochondrial?','subj_function','Function','complex or function','evalue','alen_slen','pident','rev_evalue','rev_pident','rev_alen_qlen','is_best?','best_rev_evalue','best_rev_pident','pident_diff','same_og?','In Perkinsela?','Euglena (Perez et al.)','ortholog count (TriTrypDB v9)','paralog count (T.brucei; TriTrypDB v9)','references/comments','overall_score']
+    fieldnames = ['seqid', 'og', 'function', 'mitochondrial']
+    # fieldnames = ['seqid','og','b2go_mito','loc','locrate','b2go function','subj_id','gene_name','alternative name','subj_og','organism','mitochondrial?','subj_function','Function','complex or function','evalue','alen_slen','pident','rev_evalue','rev_pident','rev_alen_qlen','is_best?','best_rev_evalue','best_rev_pident','pident_diff','same_og?','In Perkinsela?','Euglena (Perez et al.)','ortholog count (TriTrypDB v9)','paralog count (T.brucei; TriTrypDB v9)','references/comments','overall_score']
     write_list_of_dicts(csv_list, outpath, fieldnames)
     return 0
 
@@ -66,7 +66,7 @@ def get_ogs(data_paths, og_path, ids_to_ccds_path):
 og_path = '/home/anna/Dropbox/PhD/bioinformatics/genomes/parsed_ortho_groups.csv'
 
 data_paths = {
-    'Arabidopsis thaliana': '/home/anna/Dropbox/PhD/bioinformatics/genomes/arabidopsis/data/arabidopsis_mito_ogs.csv,
+    'Arabidopsis thaliana': '/home/anna/Dropbox/PhD/bioinformatics/genomes/arabidopsis/data/arabidopsis_mito_ogs.csv'
     # 'Giardia intestinalis': '/home/anna/Dropbox/phd/mitoproteomes/proteomes/giardia/data/giardia_mito.csv',
     # 'Euglena gracilis': '/home/anna/Dropbox/phd/mitoproteomes/proteomes/euglena/data/euglena_all_proteins.csv',
     # 'Homo sapiens': '/home/anna/Dropbox/phd/mitoproteomes/proteomes/homo/data/homo_mito.csv',
