@@ -2,17 +2,17 @@
 from Bio import SeqIO
 
 l = [
-"NODE_360_length_5590_cov_27.5437",
-"NODE_653_length_1849_cov_366.961"
+"utg000008l|quiver|quiver|quiver",
+"utg000035l|quiver|quiver|quiver"
 ]
 
-fasta = '/home/anna/Dropbox/PhD/bioinformatics/genomes/trypanosomatids/novymonas/wt_spades/wt_scaffolds.fa'
+fasta = '/home/anna/bioinformatics/genomes/trypanoplasma/pacbio_consensus_quiver3.fasta'
 results = []
 
 for record in SeqIO.parse(fasta, "fasta"):
     if record.id in l:
         results.append(record)
 
-outpath = '/home/anna/Dropbox/PhD/bioinformatics/genomes/trypanosomatids/novymonas/wt_spades/suspicious.fa'
+outpath = '/home/anna/bioinformatics/genomes/trypanoplasma/pacbio_consensus_quiver3_most_covered_scaffolds.fasta'
 
 SeqIO.write(results, outpath, "fasta")
