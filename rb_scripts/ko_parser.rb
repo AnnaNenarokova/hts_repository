@@ -1,6 +1,11 @@
+#!/usr/bin/ruby
+
 require 'csv'
 
-data = File.readlines('ko_modules.txt')
+infile='/home/anna/Dropbox/PhD/bioinformatics/genomes/euglena/final_prediction/ko_modules.txt'
+outfile='/home/anna/Dropbox/PhD/bioinformatics/genomes/euglena/final_prediction/ko_modules.csv'
+
+data = File.readlines(infile)
 
 result = {}
 current_key = nil
@@ -16,7 +21,7 @@ end
 
 elements = result.values.flatten.uniq.sort
 
-CSV.open('ouput.csv', 'w') do |csv|
+CSV.open(outfile, 'w') do |csv|
   csv << [nil, result.keys].flatten
 
   elements.each do |element|
