@@ -33,17 +33,17 @@ def add_header(blast_csv_path, custom_outfmt):
     write_list_of_lists(blast_hits, blast_csv_path, header=header)
     return blast_csv_path
 
-query_path = "/media/4TB3/trypanoplasma/pacbio_consensus_quiver3_most_covered_scaffolds.fasta"
+query_path = "/home/nenarokova/genomes/blasto/blastocrithidia/genome/assembly/triat/scaffolds.fasta"
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_pathes = [
-"/home/pasha/CLC_Databases/nr"
+"/home/nenarokova/genomes/blasto/blastocrithidia/genome/all_SSU_NCBI_141_and_Hinxton_and_other.fasta"
 ]
 
 for subj_path in subj_pathes:
-    new_blast = Blast(query_path=query_path, db_path=subj_path, db_type='nucl', threads=32)
+    new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='nucl', threads=64)
     blast_csv_path = new_blast.blast(
                                      bl_type='blastn',
-                                     evalue=0.0001,
+                                     evalue=0.01,
                                      outfmt='comma_values',
                                      custom_outfmt=custom_outfmt,
                                      word_size=7
