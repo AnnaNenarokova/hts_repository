@@ -33,21 +33,22 @@ def add_header(blast_csv_path, custom_outfmt):
     write_list_of_lists(blast_hits, blast_csv_path, header=header)
     return blast_csv_path
 
-query_path = "/home/nenarokova/contaminants/diplonema/tubulin_epsilon.fasta"
+query_path = "/home/nenarokova/genomes/euglena/EL_ribosomal_proteins_plastid.fa"
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_pathes = [
-"/home/nenarokova/contaminants/diplonema/Proteins_and_Transcripts_201604/transcripts_trinity.fna",
-"/home/nenarokova/contaminants/diplonema/Proteins_and_Transcripts_201604/transcripts_trinity.fna"
+"/home/nenarokova/genomes/euglena/blast_proteome/euglena_all_proteins.fasta"
+
 ]
 
 for subj_path in subj_pathes:
-    new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='nucl', threads=16)
+    new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='prot', threads=30)
     blast_csv_path = new_blast.blast(
-                                     bl_type='blastn',
+                                     bl_type='blastp',
                                      evalue=0.01,
                                      outfmt='comma_values',
                                      custom_outfmt=custom_outfmt,
-                                     word_size=7
+                                     word_size=3
                                      )
-    add_qlen_alen(add_header(best_hits(blast_csv_path), custom_outfmt))
-    add_qlen_alen(add_header(blast_csv_path, custom_outfmt))
+
+add_header(best_hits(blast_csv_path), custom_outfmt)
+add_header(blast_csv_path, custom_outfmt)
