@@ -3,7 +3,8 @@ def foo:
 	return 0
 
 def bar:
-	print 'bbb'
+	print 'boo'
+	print 'ohoh'
 
 
-puts 'hello world'
+print 'hello world'
