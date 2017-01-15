@@ -1,16 +1,16 @@
 #!/usr/bin/python
 from Bio import SeqIO
 
-record_id = 'NODE_6258_length_1665_cov_2.55155'
+record_id = 'TR34074|c0_g1_i1'
 
-fasta_file = '/home/anna/Dropbox/PhD/bioinformatics/genomes/trypanosomatids/blasto_kika/scaffolds_triat.fasta'
+fasta_file = '/home/anna/Dropbox/PhD/bioinformatics/genomes/euglena/data/euglena_all_proteins.fasta'
 
 for record in SeqIO.parse(fasta_file, "fasta"):
     if record_id == record.id:
         result = record
         # result = record[start:end].reverse_complement()
 
-outpath = '/home/anna/Dropbox/PhD/bioinformatics/genomes/trypanosomatids/blasto_kika/NODE_6258_length_1665_cov_2_55155.fasta'
+outpath = '/home/anna/Dropbox/PhD/bioinformatics/genomes/euglena/data/euglena_all_proteins_gatb.fasta'
 
 SeqIO.write(result, outpath, "fasta")
 
