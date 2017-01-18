@@ -1,8 +1,7 @@
-#!/bin/bash
-name='Euglena_genome'
-input='/home/anna/bioinformatics/euglena/Euglena_gracilis_genome_V1.fasta'
-lineage='/home/anna/bioinformatics/bioprograms/busco_lineages/eukaryota'
-# python BUSCO_v1.1b1.py -o $name -in $input -l $lineage -m genome -f
-
-python BUSCO_v1.1b1.py -o Euglena_genome -in /home/anna/bioinformatics/euglena/Euglena_gracilis_genome_V1.fasta -l /home/anna/bioinformatics/bioprograms/busco_lineages/eukaryota -m genome -f
-python BUSCO_v1.1b1.py -o Euglena_proteome -in /home/anna/bioinformatics/euglena/E_gracilis_transcriptome_final.PROTEINS.fasta -l /home/anna/bioinformatics/bioprograms/busco_lineages/eukaryota -m OGS
+#!/bin/sh
+cd /home/tomas/GIT/busco
+#python BUSCO.py --cpu 16 --species leishmania_tarentolae --long -i Paratrypanosoma_PE_MP_Newbler_500bp_up_v1.fa -o BUSCO_CUL13_genome_2euk_set -l /home/tomas/GIT/busco/eukaryota_odb9 -m geno
+#python BUSCO.py --cpu 16 --species leishmania_tarentolae --long -i Lpyr_ass_v6.fa -o BUSCO_H10_genome_2euk_set -l /home/tomas/GIT/busco/eukaryota_odb9 -m geno
+#python BUSCO.py --cpu 16 --species leishmania_tarentolae --long -i Paratrypanosoma_all_annotated_AA_final_modif.fasta -o BUSCO_CUL13_proteome_euk_set -l /home/tomas/GIT/busco/eukaryota_odb9 -m prot
+#python BUSCO.py --cpu 16 --species leishmania_tarentolae --long -i Lpyr_ass_v6_prot.fa -o BUSCO_H10_proteome_euk_set -l /home/tomas/GIT/busco/eukaryota_odb9 -m prot
+python BUSCO.py --cpu 16 --species leishmania_tarentolae --long -i /home/kika/blastocrithidia/genome/p57_DNA_scaffolds.fa -o /home/kika/blastocrithidia/BUSCO/BUSCO_p57_DNA -l /home/tomas/GIT/busco/protists_ensembl -m genome
