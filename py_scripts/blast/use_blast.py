@@ -33,21 +33,25 @@ def add_header(blast_csv_path, custom_outfmt):
     write_list_of_lists(blast_hits, blast_csv_path, header=header)
     return blast_csv_path
 
-query_path = "/home/nenarokova/genomes/euglena/blast_proteome/euglena_all_proteins.fasta"
-custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
-subj_pathes = [
-"/home/nenarokova/genomes/euglena/EL_ribosomal_proteins_plastid.fa"
+query_paths = [
+    "/home/nenarokova/genomes/trypanosoma/mito_zdenek.faa",
+    "/home/nenarokova/genomes/trypanosoma/importome_tritrypdb.fa",
+    "/home/nenarokova/genomes/trypanosoma/acestor_mito_all.faa"
 ]
-
-for subj_path in subj_pathes:
-    new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='prot', threads=30)
-    blast_csv_path = new_blast.blast(
-                                     bl_type='blastp',
-                                     evalue=0.01,
-                                     outfmt='comma_values',
-                                     custom_outfmt=custom_outfmt,
-                                     word_size=3
-                                     )
+custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
+subj_paths = [
+    "/home/nenarokova/genomes/trypanosoma/TriTrypDB-29_TbruceiTREU927_AnnotatedProteins.fasta"
+]
+for query_path in query_paths:
+    for subj_path in subj_paths:
+        new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='prot', threads=30)
+        blast_csv_path = new_blast.blast(
+                                         bl_type='blastp',
+                                         evalue=0.00001,
+                                         outfmt='comma_values',
+                                         custom_outfmt=custom_outfmt,
+                                         word_size=3
+                                         )
 
 add_header(best_hits(blast_csv_path), custom_outfmt)
 add_header(blast_csv_path, custom_outfmt)
