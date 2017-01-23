@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 inFile = open('/home/kika/blastocrithidia/datasets/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff', 'r')
 
 for row in inFile:

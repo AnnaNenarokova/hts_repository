@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 from Bio import SeqIO
 
 infile = SeqIO.parse('/home/kika/blastocrithidia/datasets/Lpyr_CDs.fa', 'fasta')

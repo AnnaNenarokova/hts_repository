@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 from Bio import SeqIO
 
 infile = SeqIO.parse('/home/kika/Dropbox/blastocrithidia/genome/assembly/p57_DNA_scaffolds.fa', 'fasta')
