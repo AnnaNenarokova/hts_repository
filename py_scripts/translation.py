@@ -49,7 +49,7 @@ for sequence in infile:
     else:    
         output.write('>{}_1\n{}\n'.format(name, translation(seq)))
         output.write('>{}_2\n{}\n'.format(name, translation(seq[1:])))
-        output.write('>{}_3\n{}\n'.format(name, translation(seq[2:].upper())))
+        output.write('>{}_3\n{}\n'.format(name, translation(seq[2:])))
         output.write('>{}_4\n{}\n'.format(name, translation(seq.reverse_complement())))
         output.write('>{}_5\n{}\n'.format(name, translation(seq.reverse_complement()[1:])))
         output.write('>{}_6\n{}\n'.format(name, translation(seq.reverse_complement()[2:])))
