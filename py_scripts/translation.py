@@ -44,7 +44,7 @@ for sequence in infile:
         if nucleotide not in 'ATCGN':
             ambiguous = True
     if ambiguous == True:
-        with open('error.fasta', 'w') as error:
+        with open('/home/kika/Dropbox/blastocrithidia/genome/assembly/error.fasta', 'w') as error:
             error.write('{}\n{}\n'.format(name, seq))
     else:    
         output.write('>{}_1\n{}\n'.format(name, translation(seq)))
