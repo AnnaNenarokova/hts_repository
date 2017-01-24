@@ -33,10 +33,10 @@ def add_header(blast_csv_path, custom_outfmt):
     write_list_of_lists(blast_hits, blast_csv_path, header=header)
     return blast_csv_path
 
-query_path = "/home/kika/blastocrithidia/genome/busco/busco_hits.fa"
+query_path = "/home/kika/blastocrithidia/datasets/aa_ref_for_blasto.fa"
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_pathes = [
-"/home/kika/blastocrithidia/genome/busco/p57_contigs_by_busco.fa"
+"/home/kika/blastocrithidia/genome/p57_scaffolds.fa"
 ]
 
 for subj_path in subj_pathes:
