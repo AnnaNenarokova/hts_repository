@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 infile = open('/home/kika/Dropbox/blastocrithidia/datasets/aa_ref_for_blasto/p57_DNA_aa_ref_for_bla_bl_report_without_header.csv', 'r')
-output = open('/home/kika/Dropbox/blastocrithidia/datasets/aa_ref_for_blasto/p57_DNA_aa_ref_for_bla.gff3', 'w')
+output = open('/home/kika/Dropbox/blastocrithidia/datasets/aa_ref_for_blasto/p57_DNA_aa_ref_for_bla_more_than1.gff', 'w')
+
+output.write('{}\t{}\n'.format('##gff-version', '3'))
 
 for row in infile:
 	split_row = row.split(',')
@@ -21,7 +23,7 @@ for row in infile:
 	alen_qlen = float(split_row[14])
 	alen_slen = float(split_row[15])
 
-	if alen_slen == float(1):
+	if alen_qlen > float(1):
 		if sstart > send:
 			new_send = sstart
 			sstart = send
@@ -32,5 +34,5 @@ for row in infile:
 			strand = '+'
 
 		note = 'ID=' + qseqid
-		output.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format(sseqid, 'blast', 'gene', sstart, new_send, 1, strand, '0', note))
+		output.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format(sseqid, 'blast', 'gene', int(sstart), int(new_send), '1', strand, '0', note))
 output.close()

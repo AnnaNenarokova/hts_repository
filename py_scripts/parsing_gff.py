@@ -1,19 +1,21 @@
 #!/usr/bin/python3
-inFile = open('/home/kika/blastocrithidia/datasets/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff', 'r')
+infile = open('/home/kika/Dropbox/blastocrithidia/datasets/aa_ref_for_blasto/p57_DNA_aa_ref_for_bla.gff', 'r')
+output = open('/home/kika/Dropbox/blastocrithidia/datasets/aa_ref_for_blasto/p57_DNA_aa_ref_for_bla_with_stops.gff', 'w')
 
-for row in inFile:
+
+for row in infile:
 	split_row = row.split('\t')
 	name = split_row[0]
 	attribute = split_row[1]
 	feature = split_row[2]
 	start = split_row[3]
 	stop = split_row[4]
-	whatever = split_row[5]
+	score = split_row[5]
 	strand = split_row[6]
 	codon = split_row[7]
 	description = split_row[8]
 
-	if feature == 'CDS':
+	if feature == 'gene':
 		if strand == '+':
 			stop = int(stop) + 3
 		elif strand == '-':
@@ -23,9 +25,9 @@ for row in inFile:
 				start = int(start) - 3
 		else:
 			print("error strand")
-		new_row = '{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}'.format(name,attribute,feature,start,stop,whatever,strand,codon,description)
+		new_row = '{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}'.format(name,attribute,feature,start,stop,score,strand,codon,description)
 	else:
 		new_row = row
 		
-	with open('/home/kika/blastocrithidia/datasets/Lpyr_cds_with_stops.gff', 'a') as result:
-		result.write(new_row)
+	output.write(new_row)
+output.close()
