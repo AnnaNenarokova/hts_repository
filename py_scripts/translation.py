@@ -2,7 +2,7 @@
 from Bio import SeqIO
 
 infile = SeqIO.parse('/home/kika/Dropbox/blastocrithidia/transcriptome_trinity/p57_RNA_Trinity.fasta', 'fasta')
-output = open('/home/kika/Dropbox/blastocrithidia/transcriptome_trinity/p57__translated_RNA_Trinity.fasta', 'w')
+output = open('/home/kika/Dropbox/blastocrithidia/transcriptome_trinity/p57_translated_RNA_Trinity.fasta', 'w')
 
 gencode = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
