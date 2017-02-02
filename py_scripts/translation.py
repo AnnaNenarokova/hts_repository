@@ -3,7 +3,7 @@ from Bio import SeqIO
 
 infile = SeqIO.parse('/home/kika/blastocrithidia/transcriptome_trinity/trinity_out_dir/Trinity-GG.fasta', 'fasta')
 output = open('/media/4TB1/blasto/trinity_p57_6_frames_translated.faa', 'w')
-
+outerr = open('/media/4TB1/blasto/trinity_p57_6_frames_error.txt', 'w')
 gencode = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
     'ACA':'T', 'ACC':'T', 'ACG':'T', 'ACT':'T',
@@ -44,7 +44,7 @@ for sequence in infile:
         if nucleotide not in 'ATCGN':
             ambiguous = True
     if ambiguous == True:
-        with open('/home/kika/Dropbox/blastocrithidia/transcriptome_spades/assembly/triat/error.fasta', 'w') as error:
+        with open(outerr, 'w') as error:
             error.write('{}\n{}\n'.format(name, seq))
     else:
         output.write('>{}_1\n{}\n'.format(name, translation(seq)))
