@@ -36,7 +36,7 @@ def add_header(blast_csv_path, custom_outfmt):
 query_path = "/media/4TB1/blasto/Trinity-GG_p57_6_frames_translated.faa"
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_pathes = [
-"/home/kika/blastocrithidia/datasets/ref_for_novymonas.fa"
+"/media/4TB1/blasto/ref_for_novymonas.fa"
 ]
 
 for subj_path in subj_pathes:
