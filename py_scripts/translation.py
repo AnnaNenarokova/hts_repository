@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 from Bio import SeqIO
 
-infile = SeqIO.parse('/home/kika/Dropbox/blastocrithidia/transcriptome_trinity/p57_RNA_Trinity.fasta', 'fasta')
-output = open('/home/kika/Dropbox/blastocrithidia/transcriptome_trinity/p57_translated_RNA_Trinity.fasta', 'w')
+infile = SeqIO.parse('/home/kika/Dropbox/blastocrithidia/transcriptome_spades/assembly/triat/contigs.fasta', 'fasta')
+output = open('/home/kika/Dropbox/blastocrithidia/transcriptome_spades/assembly/triat/triat_translated_RNA_spades.fasta', 'w')
 
 gencode = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
@@ -44,7 +44,7 @@ for sequence in infile:
         if nucleotide not in 'ATCGN':
             ambiguous = True
     if ambiguous == True:
-        with open('/home/kika/Dropbox/blastocrithidia/transcriptome_trinity/error.fasta', 'w') as error:
+        with open('/home/kika/Dropbox/blastocrithidia/transcriptome_spades/assembly/triat/error.fasta', 'w') as error:
             error.write('{}\n{}\n'.format(name, seq))
     else:    
         output.write('>{}_1\n{}\n'.format(name, translation(seq)))
