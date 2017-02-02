@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
-sys.path.insert(0, "/home/nenarokova/ngs/")
+sys.path.insert(0, "/home/kika/scripts/ngs")
+sys.path.insert(0, "/home/kika/ngs")
 from py_scripts.blast.classes.blast import Blast
 from py_scripts.bioscripts.best_hits import *
 from py_scripts.helpers.parse_csv import *
@@ -33,6 +33,7 @@ def add_header(blast_csv_path, custom_outfmt):
     write_list_of_lists(blast_hits, blast_csv_path, header=header)
     return blast_csv_path
 
+<<<<<<< HEAD
 query_paths = [
     "/home/nenarokova/genomes/trypanosoma/mito_zdenek.faa",
     "/home/nenarokova/genomes/trypanosoma/importome_tritrypdb.fa",
@@ -41,6 +42,12 @@ query_paths = [
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_paths = [
     "/home/nenarokova/genomes/trypanosoma/TriTrypDB-29_TbruceiTREU927_AnnotatedProteins.fasta"
+=======
+query_path = "/home/kika/blastocrithidia/genome/scaffolds_triat.fa"
+custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
+subj_pathes = [
+"/home/kika/blastocrithidia/genome/p57_scaffolds.fa"
+>>>>>>> kika
 ]
 # for query_path in query_paths:
 #     for subj_path in subj_paths:
@@ -53,12 +60,24 @@ subj_paths = [
 #                                          word_size=3
 #                                          )
 
+<<<<<<< HEAD
 #         add_header(best_hits(blast_csv_path), custom_outfmt)
 #         add_header(blast_csv_path, custom_outfmt)
 blast_csv_paths= [
 "/home/anna/Dropbox/PhD/bioinformatics/genomes/trypanosoma/data/TriTrypDB-29_TbruceiTREU927_AnnotatedProteins/blast_reports/importome_tritry_bl_report.csv",
 "/home/anna/Dropbox/PhD/bioinformatics/genomes/trypanosoma/data/TriTrypDB-29_TbruceiTREU927_AnnotatedProteins/blast_reports/mito_zden_bl_report.csv"
 ]
+=======
+for subj_path in subj_pathes:
+    new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='nucl', threads=30)
+    blast_csv_path = new_blast.blast(
+                                     bl_type='blastn',
+                                     evalue=0.01,
+                                     outfmt='comma_values',
+                                     custom_outfmt=custom_outfmt,
+                                     word_size=11
+                                     )
+>>>>>>> kika
 
 for blast_csv_path in blast_csv_paths:
     add_header(best_hits(blast_csv_path), custom_outfmt)
