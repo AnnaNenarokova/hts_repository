@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 from Bio import SeqIO
 
-infile = SeqIO.parse('/home/kika/Dropbox/blastocrithidia/transcriptome_spades/assembly/triat/triat_RNA_scaffolds_SPAdes.fasta', 'fasta')
-output = open('/home/kika/Dropbox/blastocrithidia/transcriptome_spades/assembly/triat/triat_translated_RNA_spades.fasta', 'w')
+infile = SeqIO.parse('/home/kika/blastocrithidia/transcriptome_trinity/trinity_out_dir/Trinity-GG.fasta', 'fasta')
+output = open('/media/4TB1/blasto/trinity_p57_6_frames_translated.faa', 'w')
 
 gencode = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
@@ -46,7 +46,7 @@ for sequence in infile:
     if ambiguous == True:
         with open('/home/kika/Dropbox/blastocrithidia/transcriptome_spades/assembly/triat/error.fasta', 'w') as error:
             error.write('{}\n{}\n'.format(name, seq))
-    else:    
+    else:
         output.write('>{}_1\n{}\n'.format(name, translation(seq)))
         output.write('>{}_2\n{}\n'.format(name, translation(seq[1:])))
         output.write('>{}_3\n{}\n'.format(name, translation(seq[2:])))
