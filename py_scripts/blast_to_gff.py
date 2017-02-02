@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-infile = open('/home/kika/Dropbox/blastocrithidia/datasets/aa_ref_for_blasto/p57_DNA_aa_ref_for_bla_bl_report_without_header.csv', 'r')
-output = open('/home/kika/Dropbox/blastocrithidia/datasets/aa_ref_for_blasto/p57_DNA_aa_ref_for_bla_more_than1.gff', 'w')
+infile = open('/home/kika/Dropbox/blastocrithidia/datasets/AA-tRNA_synth/p57/AA-tRNA_syn_bl_report_best_without_header.csv', 'r')
+output = open('/home/kika/Dropbox/blastocrithidia/genes/p57_tRNA-synth.gff', 'w')
 
 output.write('{}\t{}\n'.format('##gff-version', '3'))
 
@@ -16,23 +16,23 @@ for row in infile:
 	bitscore = split_row[7]	
 	mismatch = split_row[8]	
 	gaps = split_row[9]
-	qstart = float(split_row[10])
-	qend = float(split_row[11])
-	sstart = float(split_row[12])
-	send = float(split_row[13])
+	qstart = int(split_row[10])
+	qend = int(split_row[11])
+	sstart = int(split_row[12])
+	send = int(split_row[13])
 	alen_qlen = float(split_row[14])
 	alen_slen = float(split_row[15])
 
-	if alen_qlen > float(1):
-		if sstart > send:
-			new_send = sstart
-			sstart = send
-			strand = '-'
-		else:
-			sstart = sstart
-			new_send = send
-			strand = '+'
+	# if alen_qlen > float(1):
+	if sstart > send:
+		new_send = sstart
+		sstart = send
+		strand = '-'
+	else:
+		sstart = sstart
+		new_send = send
+		strand = '+'
 
-		note = 'ID=' + qseqid
-		output.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format(sseqid, 'blast', 'gene', int(sstart), int(new_send), '1', strand, '0', note))
+	note = 'ID=' + qseqid
+	output.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format(sseqid, 'blast', 'gene', int(sstart), int(new_send), '1', strand, '0', note))
 output.close()
