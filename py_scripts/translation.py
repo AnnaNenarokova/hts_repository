@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from Bio import SeqIO
 
-infile = SeqIO.parse('/home/kika/Dropbox/blastocrithidia/transcriptome_spades/assembly/triat/contigs.fasta', 'fasta')
+infile = SeqIO.parse('/home/kika/Dropbox/blastocrithidia/transcriptome_spades/assembly/triat/triat_RNA_scaffolds_SPAdes.fasta', 'fasta')
 output = open('/home/kika/Dropbox/blastocrithidia/transcriptome_spades/assembly/triat/triat_translated_RNA_spades.fasta', 'w')
 
 gencode = {
