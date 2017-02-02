@@ -42,16 +42,24 @@ custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch 
 subj_paths = [
     "/home/nenarokova/genomes/trypanosoma/TriTrypDB-29_TbruceiTREU927_AnnotatedProteins.fasta"
 ]
-for query_path in query_paths:
-    for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='prot', threads=30)
-        blast_csv_path = new_blast.blast(
-                                         bl_type='blastp',
-                                         evalue=0.00001,
-                                         outfmt='comma_values',
-                                         custom_outfmt=custom_outfmt,
-                                         word_size=3
-                                         )
+# for query_path in query_paths:
+#     for subj_path in subj_paths:
+#         new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='prot', threads=30)
+#         blast_csv_path = new_blast.blast(
+#                                          bl_type='blastp',
+#                                          evalue=0.00001,
+#                                          outfmt='comma_values',
+#                                          custom_outfmt=custom_outfmt,
+#                                          word_size=3
+#                                          )
 
-add_header(best_hits(blast_csv_path), custom_outfmt)
-add_header(blast_csv_path, custom_outfmt)
+#         add_header(best_hits(blast_csv_path), custom_outfmt)
+#         add_header(blast_csv_path, custom_outfmt)
+blast_csv_paths= [
+"/home/anna/Dropbox/PhD/bioinformatics/genomes/trypanosoma/data/TriTrypDB-29_TbruceiTREU927_AnnotatedProteins/blast_reports/importome_tritry_bl_report.csv",
+"/home/anna/Dropbox/PhD/bioinformatics/genomes/trypanosoma/data/TriTrypDB-29_TbruceiTREU927_AnnotatedProteins/blast_reports/mito_zden_bl_report.csv"
+]
+
+for blast_csv_path in blast_csv_paths:
+    add_header(best_hits(blast_csv_path), custom_outfmt)
+    add_header(blast_csv_path, custom_outfmt)

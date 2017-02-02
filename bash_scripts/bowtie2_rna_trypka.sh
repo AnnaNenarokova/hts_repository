@@ -3,7 +3,7 @@
 bw2_dir='/home/nenarokova/tools/bowtie2-2.2.9/'
 base_name='/media/4TB1/blasto/mapping/p57_bw2'
 ref="/home/nenarokova/genomes/blasto/blastocrithidia/genome/p57_scaffolds.fa"
-$bw2_dir'bowtie2-build' --threads 32 $ref $base_name
+$bw2_dir'bowtie2-build' --threads 20 $ref $base_name
 
 p1_1="/home/kika/blastocrithidia/transcriptome/trimmed/p57_trimmed_1.fq.gz"
 p1_2="/home/kika/blastocrithidia/transcriptome/trimmed/p57_trimmed_2.fq.gz"
