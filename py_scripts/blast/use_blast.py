@@ -36,7 +36,7 @@ def add_header(blast_csv_path, custom_outfmt):
 query_path = "/home/kika/blastocrithidia/datasets/AA-tRNA_synth.txt"
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_pathes = [
-"/home/kika/blastocrithidia/genome/p57_scaffolds.fa"
+"/home/kika/blastocrithidia/datasets/Lpyr_ass_v6.fa"
 ]
 
 for subj_path in subj_pathes:
