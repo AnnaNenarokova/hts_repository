@@ -1,9 +1,9 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 from Bio import SeqIO
 
-infile = SeqIO.parse('/home/kika/blastocrithidia/transcriptome_trinity/trinity_out_dir/Trinity-GG.fasta', 'fasta')
-output = open('/media/4TB1/blasto/trinity_p57_6_frames_translated.faa', 'w')
-outerr = open('/media/4TB1/blasto/trinity_p57_6_frames_error.txt', 'w')
+infile = SeqIO.parse('/home/anna/Dropbox/PhD/bioinformatics/trypanosomatids/blastocrithidia/Trinity-GG_p57.fasta', 'fasta')
+output = open('/home/anna/Dropbox/PhD/bioinformatics/trypanosomatids/blastocrithidia/Trinity-GG_p57_6_frames_translated.faa', 'w')
+outerr = open('/home/anna/Dropbox/PhD/bioinformatics/trypanosomatids/blastocrithidia/Trinity-GG_p57_6_frames_translated_error.txt', 'w')
 gencode = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
     'ACA':'T', 'ACC':'T', 'ACG':'T', 'ACT':'T',
