@@ -9,5 +9,5 @@ raxml='/home/nenarokova/tools/raxml/raxml_sse/standard-RAxML/raxmlHPC-SSE3'
 cd $align_dir
 for f in *".fa.phy.trimal_auto1"
 do
-    $raxml -m PROTGAMMAGTR -p 12345 -s $f -n $f".tre" &
+    $raxml -m PROTGAMMAGTR -p 12345 -s $f -n $f"2.tre" > $f"raxml_out.txt" &
 done
