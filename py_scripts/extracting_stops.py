@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from Bio import SeqIO
 
-infile = SeqIO.parse('/home/kika/blastocrithidia/datasets/Lpyr_CDs.fa', 'fasta')
+infile = SeqIO.parse('/home/kika/Dropbox/blastocrithidia/datasets/aa_ref_for_blasto/p57_nt_from_ref_nt_after_stop_dedupl.fasta', 'fasta')
 taa = 0
 tag = 0
 tga = 0
@@ -21,5 +21,5 @@ for sequence in infile:
 
 stops = '{}: {}\n{}: {}\n{}: {}\n{}: {}'.format('taa',taa,'tag',tag,'tga',tga,'other',other)
 
-with open('/home/kika/blastocrithidia/datasets/Lpyr_stops_number.txt', 'w') as result:
+with open('/home/kika/Dropbox/blastocrithidia/datasets/aa_ref_for_blasto/p57_nt_from_ref_number_stops.txt', 'w') as result:
 	result.write(stops)

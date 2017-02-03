@@ -1,9 +1,10 @@
 #!/usr/bin/python3
-infile = open('/home/kika/Dropbox/blastocrithidia/datasets/AA-tRNA_synth/p57/AA-tRNA_syn_bl_report_best_without_header.csv', 'r')
+infile = open('/home/kika/Dropbox/blastocrithidia/datasets/AA-tRNA_synth/p57/AA-tRNA_syn_bl_report_best.csv', 'r')
 output = open('/home/kika/Dropbox/blastocrithidia/genes/p57_tRNA-synth.gff', 'w')
 
 output.write('{}\t{}\n'.format('##gff-version', '3'))
 
+infile.readline()
 for row in infile:
 	split_row = row.split(',')
 	qseqid = split_row[0]

@@ -1,8 +1,10 @@
 #!/usr/bin/python3
-infile = open('/home/kika/Dropbox/blastocrithidia/datasets/aa_ref_for_blasto/p57_DNA_aa_ref_for_bla.gff', 'r')
-output = open('/home/kika/Dropbox/blastocrithidia/datasets/aa_ref_for_blasto/p57_DNA_aa_ref_for_bla_with_stops.gff', 'w')
+infile = open('/home/kika/Dropbox/blastocrithidia/datasets/aa_ref_for_blasto/p57_DNA_aa_ref_for_bla_more_than1.gff', 'r')
+output = open('/home/kika/Dropbox/blastocrithidia/datasets/aa_ref_for_blasto/p57_DNA_aa_ref_for_bla_more_than1_with_stops.gff', 'w')
 
+output.write('{}\t{}\n'.format('##gff-version', '3'))
 
+infile.readline()
 for row in infile:
 	split_row = row.split('\t')
 	name = split_row[0]
