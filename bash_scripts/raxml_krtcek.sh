@@ -8,4 +8,4 @@ raxml='/home/nenarokova/tools/raxml/raxml_sse/standard-RAxML/raxmlHPC-SSE3'
 
 cd $align_dir
 
-$raxml -m PROTGAMMAGTR -p 12345 -s test_name.phy -n test_name2.tre
+$raxml -m PROTGAMMAGTR -p 12345 -s test_name.phy -n test_name3.tre
