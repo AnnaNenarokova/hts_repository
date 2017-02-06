@@ -33,10 +33,10 @@ def add_header(blast_csv_path, custom_outfmt):
     write_list_of_lists(blast_hits, blast_csv_path, header=header)
     return blast_csv_path
 
-query_path = "/home/kika/blastocrithidia/tRNAs/Lpyr_seqs.fasta"
+query_path = "/home/kika/blastocrithidia/tRNAs/p57_tRNAs_final.fasta"
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_pathes = [
-"/home/kika/blastocrithidia/tRNAs/p57_seqs.fasta"
+"/home/kika/blastocrithidia/tRNAs/Lpyr_tRNAs_final.fasta"
 ]
 
 for subj_path in subj_pathes:
