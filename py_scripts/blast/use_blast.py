@@ -46,7 +46,7 @@ for subj_path in subj_pathes:
                                      evalue=0.01,
                                      outfmt='comma_values',
                                      custom_outfmt=custom_outfmt,
-                                     word_size=3
+                                     word_size=11
                                      )
 
 add_header(best_hits(blast_csv_path), custom_outfmt)
