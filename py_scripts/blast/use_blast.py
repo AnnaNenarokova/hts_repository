@@ -33,16 +33,16 @@ def add_header(blast_csv_path, custom_outfmt):
     write_list_of_lists(blast_hits, blast_csv_path, header=header)
     return blast_csv_path
 
-query_path = "/home/kika/blastocrithidia/datasets/AA-tRNA_synth.txt"
+query_path = "/home/kika/blastocrithidia/tRNAs/p57_seqs.fasta"
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_pathes = [
-"/home/kika/blastocrithidia/datasets/Lpyr_ass_v6.fa"
+"/home/kika/blastocrithidia/tRNAs/Lpyr_seqs.fasta"
 ]
 
 for subj_path in subj_pathes:
     new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='nucl', threads=30)
     blast_csv_path = new_blast.blast(
-                                     bl_type='tblastn',
+                                     bl_type='blastn',
                                      evalue=0.01,
                                      outfmt='comma_values',
                                      custom_outfmt=custom_outfmt,
