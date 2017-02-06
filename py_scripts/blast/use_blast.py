@@ -36,11 +36,11 @@ def add_header(blast_csv_path, custom_outfmt):
 query_path = "/home/nenarokova/genomes/blasto/Trinity-GG_p57_6_frames_translated.faa"
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_pathes = [
-"/home/nenarokova/genomes/reference_kinetoplastids/ref_for_novymo/blast_db/ref_for_novymo.db"
+"/home/nenarokova/genomes/reference_kinetoplastids/aa_ref_for_blasto.fa"
 ]
 
 for subj_path in subj_pathes:
-    new_blast = Blast(query_path=query_path, db_path=subj_path, db_type='prot', threads=30)
+    new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='prot', threads=30)
     blast_csv_path = new_blast.blast(
                                      bl_type='blastp',
                                      evalue=0.01,
