@@ -34,8 +34,7 @@ def add_header(blast_csv_path, custom_outfmt):
     return blast_csv_path
 
 query_pathes = [
-"/home/nenarokova/novymonas/Ribosomal_proteins_LmF_query.fasta",
-"/home/nenarokova/novymonas/Ribosomal_proteins_LmF_query.fasta"
+"/home/nenarokova/novymonas/mitochondrial_ribosome.faa"
 ]
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_path = "/home/nenarokova/novymonas/Trinity-GG_p57_6_frames_translated.faa"
