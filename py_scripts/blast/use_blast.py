@@ -33,17 +33,19 @@ def add_header(blast_csv_path, custom_outfmt):
     write_list_of_lists(blast_hits, blast_csv_path, header=header)
     return blast_csv_path
 
-query_path = "/media/4TB1/blasto/Trinity-GG_p57_6_frames_translated.faa"
-custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
-subj_pathes = [
-"/media/4TB1/blasto/aa_ref_for_blasto.fa"
+query_pathes = [
+"/home/nenarokova/novymonas/Ribosomal_proteins_LmF_query.fasta",
+"/home/nenarokova/novymonas/Ribosomal_proteins_LmF_query.fasta"
 ]
+custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
+subj_path = "/home/nenarokova/novymonas/Trinity-GG_p57_6_frames_translated.faa"
 
-for subj_path in subj_pathes:
-    new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='prot', threads=30)
+
+for query_path in query_pathes:
+    new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='prot', threads=16)
     blast_csv_path = new_blast.blast(
                                      bl_type='blastp',
-                                     evalue=0.01,
+                                     evalue=0.00001,
                                      outfmt='comma_values',
                                      custom_outfmt=custom_outfmt,
                                      word_size=3
