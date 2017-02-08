@@ -7,4 +7,4 @@ outdir="/media/4TB1/novymonas/pandoraea_assembly/"
 
 report=$outdir"spades_report.txt"
 
-/home/nenarokova/tools/SPAdes-3.10.0-Linux/bin/spades.py --s1 $se1 --pe1-1 $pe1_1 --pe1-2 $pe1_2 --careful -t 30 -o $outdir 2> $report
+/home/nenarokova/tools/SPAdes-3.10.0-Linux/bin/spades.py --pe1-1 $pe1_1 --pe1-2 $pe1_2 --careful -t 30 -o $outdir 2> $report
