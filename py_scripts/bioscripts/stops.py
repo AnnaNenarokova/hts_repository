@@ -8,7 +8,7 @@ other=0
 
 for record in SeqIO.parse(cds, "fasta"):
     seq=record.seq
-    stop=seq[-4:-1]
+    stop=seq[-3:-0]
     if stop == "TGA":
         uga += 1
     elif stop == "TAG":
