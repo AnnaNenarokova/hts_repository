@@ -2,17 +2,33 @@
 from Bio import SeqIO
 
 l = [
-"utg000008l|quiver|quiver|quiver",
-"utg000035l|quiver|quiver|quiver"
+"TBRUC_GLU_TTC",
+"PCON_GLU_TTC",
+"LBRAZ_GLU_TTC",
+"CFAS_GLU_TTC",
+"LPYR_GLU_TTC",
+"BP57_GLU_TTC",
+"BP57_STOP_TTA",
+"BAYA_GLU_TTC",
+"BAYA_GLU_CTC2",
+"BAYA_GLU_CTC",
+"BP57_GLU_CTC",
+"LSEY_GLU_CTC3",
+"LPYR_GLU_CTC",
+"LPYR_GLU_CTC2",
+"CFAS_GLU_CTC",
+"LBRAZ_GLU_CTC",
+"BP57_PYL_CTA",
+"BAYA_ASP_GTC"
 ]
 
-fasta = '/home/anna/bioinformatics/genomes/trypanoplasma/pacbio_consensus_quiver3.fasta'
+fasta = '/home/anna/Dropbox/PhD/bioinformatics/blasto/blastocrithidia/genes/tRNAs/trna_phylogeny_deduplicated.fna'
 results = []
 
 for record in SeqIO.parse(fasta, "fasta"):
     if record.id in l:
         results.append(record)
 
-outpath = '/home/anna/bioinformatics/genomes/trypanoplasma/pacbio_consensus_quiver3_most_covered_scaffolds.fasta'
+outpath = '/home/anna/Dropbox/PhD/bioinformatics/blasto/blastocrithidia/genes/tRNAs/trna_glu_dataset.fna'
 
 SeqIO.write(results, outpath, "fasta")
