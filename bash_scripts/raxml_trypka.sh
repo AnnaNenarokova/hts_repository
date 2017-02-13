@@ -7,5 +7,4 @@ cd $align_dir
 
 f="pastajob.marker001.trna_phylogeny_deduplicated.phy"
 
-$raxml -b $RANDOM -p $RANDOM -m GTRCAT -# 100 -s $f -n $f"2.tre" > $f"raxml_out.txt"
-
+$raxml -f a -x $RANDOM -p $RANDOM -m GTRGAMMA -# autoMRE -s $f -n $f"2.tre" > $f"raxml_out.txt"
