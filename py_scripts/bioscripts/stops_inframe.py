@@ -1,6 +1,6 @@
 #!/usr/bin/python
 from Bio import SeqIO
-cds="/home/anna/Dropbox/PhD/bioinformatics/trypanosomatids/blasto/transcriptome/Trinity-GG_p57_6_frames_translat/blast_reports/Ribosomal_proteins_LmF_query_bl_report_best_4.fna"
+cds="/home/anna/Dropbox/PhD/bioinformatics/blasto/eIF3j/bl_eif3j_4.fna"
 
 stops = {
 'TGA' : 0,
@@ -17,10 +17,12 @@ non_stops = {
 
 for record in SeqIO.parse(cds, "fasta"):
     seq=record.seq
+    print len (seq)
     for i in range(0,len(seq)-4,3):
         frame=str(seq[i:i+3])
         if frame in non_stops.keys():
             non_stops[frame] += 1
+            print i, frame
     stop=str(seq[-4:-1])
     if stop in stops.keys():
         stops[stop] += 1

@@ -54,14 +54,14 @@ def cds_from_subject(blast_hits, nt_records, add_nt=0):
                         print "Len error", record.id
     return results
 
-nt_fasta_path = '/home/anna/Dropbox/PhD/bioinformatics/trypanosomatids/blasto/transcriptome/Trinity-GG_p57.fasta'
-blast_csv_path = '/home/anna/Dropbox/PhD/bioinformatics/trypanosomatids/blasto/transcriptome/Trinity-GG_p57_6_frames_translat/blast_reports/Ribosomal_proteins_LmF_query_bl_report_best.csv'
+nt_fasta_path = '/home/anna/Dropbox/PhD/bioinformatics/blasto/p57_scaffolds.fa'
+blast_csv_path = '/home/anna/Dropbox/PhD/bioinformatics/blasto/eIF3j/bl_eif3j.csv'
 outpath = blast_csv_path[:-4]+"_4.fna"
 
 nt_records = SeqIO.parse(nt_fasta_path, 'fasta')
 blast_hits = parse_csv(blast_csv_path)
 
-results = cds_from_subject(blast_hits, nt_records)
+results = cds_from_subject(blast_hits, nt_records, add_nt=0)
 
 SeqIO.write(results, outpath, "fasta")
 
