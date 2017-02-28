@@ -3,9 +3,9 @@ from collections import OrderedDict
 from collections import defaultdict
 from Bio import SeqIO
 
-infile = SeqIO.parse('/home/kika/MEGAsync/Euglena longa/2013 Sekvenovanie/Rho factor/Rho_acc.fa', 'fasta')
-output1 = open('/home/kika/MEGAsync/Euglena longa/2013 Sekvenovanie/Rho factor/Rho_acc_dedupl.fa', 'w')
-output2 = open('/home/kika/MEGAsync/Euglena longa/2013 Sekvenovanie/Rho factor/Rho_dupl_names.txt', 'w')
+infile = SeqIO.parse('/home/kika/Dropbox/blastocrithidia/genes/PABP/PABP1+2_PASTA/PABP_euk.fa', 'fasta')
+output1 = open('/home/kika/Dropbox/blastocrithidia/genes/PABP/PABP1+2_PASTA/PABP_euk_dedupl.fa', 'w')
+output2 = open('/home/kika/Dropbox/blastocrithidia/genes/PABP/PABP1+2_PASTA/PABP_euk_dupl_names.fa', 'w')
 
 multiplications = defaultdict(list)
 seq_dict = OrderedDict()

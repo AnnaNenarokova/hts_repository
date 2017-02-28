@@ -36,7 +36,7 @@ def add_header(blast_csv_path, custom_outfmt):
 query_path = "/media/4TB1/blasto/blastocrithidia/datasets/kinetoplastid_proteoms.fasta"
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_pathes = [
-"/media/4TB1/blasto/blastocrithidia/genome/p57_DNA_translated.fa"
+"/media/4TB1/blasto/Trinity-GG_p57_6_frames_translated.faa"
 ]
 
 for subj_path in subj_pathes:
