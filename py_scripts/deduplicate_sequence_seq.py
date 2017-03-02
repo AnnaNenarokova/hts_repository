@@ -12,7 +12,7 @@ seq_dict = OrderedDict()
 for sequence in infile:
     multiplications[sequence.seq].append(sequence.name)
     if sequence.seq not in seq_dict:
-        seq_dict[sequence.seq] = sequence.name 				#rename full header only with name (acc number till the first space)
+        seq_dict[sequence.seq] = sequence.name 				#rename full header only with name (acc, till the first space)
         													#no need to rename sequences then
         # seq_dict[sequence.seq] = sequence.description		#keep the full header
 
