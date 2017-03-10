@@ -17,9 +17,8 @@ unmapped_paired=$base_name"_unmapped_paired.fq"
 
 samfile=$alignment
 bamfile=$base_name"_unsorted.bam"
-sorted=$base_name"_sorted"
-sorted_file=$sorted".bam"
+sorted_file=$base_name"_sorted.bam"
 
 samtools view -bS $samfile > $bamfile -@ 20
-samtools sort $bamfile $sorted -@ 20
+samtools sort -o $sorted_file -@ 20 $bamfile
 samtools index $sorted_file

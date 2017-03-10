@@ -34,10 +34,10 @@ def add_header(blast_csv_path, custom_outfmt):
     return blast_csv_path
 
 query_pathes = [
-"/home/anna/Dropbox/PhD/bioinformatics/blasto/blastocrithidia/genes/PABP/p57_PABP_aa.txt"
+"/media/4TB1/blasto/all_peptides.fa"
 ]
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
-subj_path = "/home/anna/Dropbox/PhD/bioinformatics/blasto/scaffolds_triat_6frames.faa"
+subj_path = "/media/4TB1/blasto/p57_DNA_translated.fa"
 
 
 for query_path in query_pathes:
