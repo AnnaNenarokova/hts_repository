@@ -41,7 +41,7 @@ subj_path = "/media/4TB1/blasto/p57_DNA_translated.fa"
 
 
 for query_path in query_pathes:
-    new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='prot', threads=4)
+    new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='prot', threads=30)
     blast_csv_path = new_blast.blast(
                                      bl_type='blastp',
                                      evalue=0.00001,
