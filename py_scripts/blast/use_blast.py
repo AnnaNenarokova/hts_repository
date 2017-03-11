@@ -38,8 +38,8 @@ query_path="/media/4TB1/blasto/all_peptides.fa"
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_paths = [
-    "/media/4TB1/blasto/p57_DNA_translated.fa",
-    "Trinity-GG_p57_6_frames_translated.faa"
+    # "/media/4TB1/blasto/p57_DNA_translated.fa",
+    "/media/4TB1/blasto/Trinity-GG_p57_6_frames_translated.faa"
 ]
 
 for subj_path in subj_paths:
