@@ -37,7 +37,7 @@ query_path="/home/nenarokova/genomes/blasto/all_peptides.fa"
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_paths = [
-    "/home/nenarokova/genomes/blasto/p57_DNA_translated.fa"
+    "/home/nenarokova/genomes/blasto/Trinity-GG_p57_6_frames_translated.faa"
 ]
 
 for subj_path in subj_paths:
