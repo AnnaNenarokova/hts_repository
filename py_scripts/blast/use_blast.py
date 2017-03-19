@@ -33,11 +33,11 @@ def add_header(blast_csv_path, custom_outfmt):
     write_list_of_lists(blast_hits, blast_csv_path, header=header)
     return blast_csv_path
 
-query_path="/home/nenarokova/genomes/blasto/all_peptides.fa"
+query_path="/home/nenarokova/genomes/blasto/all_peptides_triat.faa"
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_paths = [
-    "/home/nenarokova/genomes/blasto/Trinity-GG_p57_6_frames_translated.faa"
+    "/home/nenarokova/genomes/blasto/triat_DNA_translated.fa"
 ]
 
 for subj_path in subj_paths:
