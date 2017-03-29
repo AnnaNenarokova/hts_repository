@@ -2,10 +2,7 @@
 #PBS -l walltime=100:00:00
 #PBS -l nodes=1:ppn=30
 
-bw2_dir='/home/nenarokova/tools/bowtie2-2.2.9/'
-cd /home/nenarokova/genomes/novymonas/assembly/
-$bw2_dir'bowtie2-build' --threads 30 PROKKA_11282016.fna pandoraea_genome
-bt_base="/home/nenarokova/genomes/novymonas/assembly/pandoraea_genome"
+bt2_base="/home/nenarokova/genomes/novymonas/assembly/pandoraea_genome"
 
 p1_1="/home/nenarokova/genomes/novymonas/raw_illumina/old_hiseq/E262_1.fastq"
 p1_2="/home/nenarokova/genomes/novymonas/raw_illumina/old_hiseq/E262_2.fastq"
