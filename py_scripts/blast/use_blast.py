@@ -34,23 +34,23 @@ def add_header(blast_csv_path, custom_outfmt):
     return blast_csv_path
 
 query_paths= [
-    "/home/anna/Dropbox/PhD/projects/trypanosoma/mito/importome/importome_tritrypdb.fa"
+    "/media/4TB1/blasto/p57_trinity.fasta"
     ]
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_paths = [
-"/home/anna/Dropbox/PhD/projects/trypanosoma/mito/mito_zdenek/mito_zdenek.faa"
+"/media/4TB1/blasto/p57_scaffolds.fa"
 ]
 
 for query_path in query_paths:
     for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='prot', threads=4)
+        new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='prot', threads=30)
         blast_csv_path = new_blast.blast(
-                                         bl_type='blastp',
-                                         evalue=0.0001,
+                                         bl_type='blastn',
+                                         evalue=0.00001,
                                          outfmt='comma_values',
                                          custom_outfmt=custom_outfmt,
-                                         word_size=3
+                                         word_size=4
                                          )
         add_header(best_hits(blast_csv_path), custom_outfmt)
         add_header(blast_csv_path, custom_outfmt)
