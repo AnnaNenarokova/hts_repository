@@ -34,17 +34,20 @@ def add_header(blast_csv_path, custom_outfmt):
     return blast_csv_path
 
 query_paths= [
-    "/media/4TB1/blasto/p57_trinity.fasta"
+    "/home/anna/bioinformatics/blasto/rRNA/ltar_9S.fa",
+    "/home/anna/bioinformatics/blasto/rRNA/ltar_12S.fa",
+
     ]
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_paths = [
-"/media/4TB1/blasto/p57_scaffolds.fa"
+"/home/anna/bioinformatics/blasto/rRNA/p57_kinetoplast.fa",
+"/home/anna/bioinformatics/blasto/rRNA/mito_rDNA_trbucei.fasta"
 ]
 
 for query_path in query_paths:
     for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='nucl', threads=30)
+        new_blast = Blast(query_path=query_path, subj_path=subj_path, db_type='nucl', threads=4)
         blast_csv_path = new_blast.blast(
                                          bl_type='blastn',
                                          evalue=0.00001,

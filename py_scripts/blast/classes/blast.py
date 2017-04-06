@@ -29,7 +29,7 @@ class Blast(object):
         if not self.outdir:
             self.outdir = make_outdir(self.subj_path)
         db_folder = self.outdir + 'blast_db/'
-        db_path = db_folder + file_from_path(self.subj_path, endcut=6) + '.db'
+        db_path = db_folder + file_from_path(self.subj_path, endcut=0) + '.db'
         make_blast_db = ['makeblastdb', '-in', self.subj_path, '-parse_seqids', '-dbtype', self.db_type, '-out', db_path]
         call(make_blast_db)
         return db_path
@@ -61,7 +61,7 @@ class Blast(object):
             else:
                 self.db_path = self.makeblastdb()
 
-        query_name = file_from_path(self.query_path, endcut=6)
+        query_name = file_from_path(self.query_path, endcut=0)
 
         blreports_dir = self.outdir + "blast_reports/"
         if not exists(blreports_dir):

@@ -2,17 +2,17 @@
 from Bio import SeqIO
 
 l = [
-"EG_transcript_18355",
-"EG_transcript_20320"
+"TRINITY_GG_1794_c0_g1_i1",
+"TRINITY_GG_1794_c0_g2_i1"
 ]
 
-fasta = '/media/anna/data/Dropbox/PhD/projects/euglena/data/E_gracilis_transcriptome_final.TRANSCRIPTS.fasta'
+fasta = '/home/anna/bioinformatics/blasto/p57_trinity.fasta'
 results = []
 
 for record in SeqIO.parse(fasta, "fasta"):
     if record.id in l:
         results.append(record)
 
-outpath = '/media/anna/data/Dropbox/PhD/projects/euglena/data/hassan.fasta'
+outpath = '/home/anna/bioinformatics/blasto/p57_RNA_helicase_transcript.fa'
 
 SeqIO.write(results, outpath, "fasta")
