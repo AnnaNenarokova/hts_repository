@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-infile = open('/home/kika/Dropbox/blastocrithidia/datasets/AA-tRNA_synth/p57/AA-tRNA_syn_bl_report_best.csv', 'r')
-output = open('/home/kika/Dropbox/blastocrithidia/genes/p57_tRNA-synth.gff', 'w')
+infile = open('/home/kika/Dropbox/check_inserti_bl_report_best_mod.csv', 'r')
+output = open('/home/kika/Dropbox/check_insertions.gff', 'w')
 
 output.write('{}\t{}\n'.format('##gff-version', '3'))
 
