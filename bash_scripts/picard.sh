@@ -8,3 +8,4 @@ java -jar picard.jar CollectInsertSizeMetrics \
       O=$insert_size_metrics\
       H=$insert_size_histogram.pdf \
       M=0.5
+
