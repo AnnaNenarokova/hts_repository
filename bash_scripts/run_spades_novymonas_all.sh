@@ -19,4 +19,4 @@ outdir="/home/nenarokova/genomes/novymonas/assembly/novymonas_all_spades/"
 
 report=$outdir"spades_report.txt"
 
-/home/nenarokova/tools/SPAdes-3.9.0-Linux/bin/spades.py --s1 $se1 --s2 $se2 --pe1-1 $pe1_1 --pe1-2 $pe1_2 --pe2-1 $pe2_1 --pe3-1 $pe3_1 --pe3-2 $pe3_2 --untrusted-contigs $contigs --careful -t 30 -o $outdir 2> $report
+/home/nenarokova/tools/SPAdes-3.9.0-Linux/bin/spades.py --s1 $se1 --s2 $se2 --pe1-1 $pe1_1 --pe1-2 $pe1_2 --pe2-1 $pe2_1 --pe2-2 $pe2_2 --pe3-1 $pe3_1 --pe3-2 $pe3_2 --untrusted-contigs $contigs --careful -t 30 -o $outdir 2> $report
