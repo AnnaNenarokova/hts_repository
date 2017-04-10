@@ -3,7 +3,9 @@ from Bio import SeqIO
 
 # record_id = 'NODE_399_length_12721_cov_299.805'
 # record_id = "NODE_480_length_8410_cov_643.285"
-record_id = "NODE_368_length_15062_cov_139.327"
+# record_id = "NODE_368_length_15062_cov_139.327"
+
+
 start=13156
 end=13438
 # fasta_file = '/media/anna/data/Dropbox/PhD/projects/blasto/blastocrithidia/genome/assembly/triat_DNA_scaffolds.fa'

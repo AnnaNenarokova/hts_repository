@@ -2,17 +2,19 @@
 from Bio import SeqIO
 
 l = [
-"TRINITY_GG_1794_c0_g1_i1",
-"TRINITY_GG_1794_c0_g2_i1"
+"NODE_98438_length_2364_cov_805.717",
+"NODE_78410_length_20700_cov_930.266",
+"NODE_54685_length_2424_cov_883.647",
+"NODE_90282_length_848_cov_754.927"
 ]
 
-fasta = '/home/anna/bioinformatics/blasto/p57_trinity.fasta'
+fasta = '/home/anna/bioinformatics/blasto/jaculum/jaculum_before_rr.fasta'
 results = []
 
 for record in SeqIO.parse(fasta, "fasta"):
     if record.id in l:
         results.append(record)
 
-outpath = '/home/anna/bioinformatics/blasto/p57_RNA_helicase_transcript.fa'
+outpath = '/home/anna/bioinformatics/blasto/jaculum/jaculum_kinetoplast.fasta'
 
 SeqIO.write(results, outpath, "fasta")
