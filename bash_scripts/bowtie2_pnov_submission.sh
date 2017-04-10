@@ -24,6 +24,7 @@ p1_2="/home/nenarokova/genomes/novymonas/raw_illumina/miseq_raw/wt_S2_L001_R2_00
 mapped_reads="/home/nenarokova/genomes/novymonas/assembly/pnov_submission/miseq_mapped.fq.gz"
 
 bt2_base="/home/nenarokova/genomes/novymonas/assembly/pnov_submission/pandoraea_genome"
+base_name="/home/nenarokova/genomes/novymonas/assembly/pnov_submission/miseq"
 alignment=$base_name".sam"
 report=$base_name".txt"
 
