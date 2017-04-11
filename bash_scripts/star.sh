@@ -5,4 +5,6 @@ genome_dir="/media/4TB1/blasto/star_mapping"
 r1="/media/4TB1/blasto/blastocrithidia/transcriptome/trimmed/p57_trimmed_1.fq.gz"
 r2="/media/4TB1/blasto/blastocrithidia/transcriptome/trimmed/p57_trimmed_2.fq.gz"
 
-$star --runThreadN 30 --genomeSAindexNbases 12 --runMode genomeGenerate --genomeFastaFiles $genome --readFilesCommand zcat--genomeDir $genome_dir --readFilesIn $r1 $r2
+$star --runThreadN 30 --genomeSAindexNbases 12 --runMode genomeGenerate --genomeFastaFiles $genome --readFilesCommand zcat --genomeDir $genome_dir --readFilesIn $r1 $r2
+
+$star --runThreadN 30 --genomeSAindexNbases 12 --runMode alignReads --genomeFastaFiles $genome --readFilesCommand zcat --genomeDir $genome_dir --readFilesIn $r1 $r2
