@@ -1,11 +1,22 @@
 #!/bin/bash
+picard="/home/nenarokova/tools/picard.jar"
 
-input="/home/anna/bioinformatics/scaffolds_bw2_sorted.bam"
-insert_size_metrics="/home/anna/bioinformatics/scaffolds_bw2_sorted_insert_size_metrics.txt"
-insert_size_histogram="/home/anna/bioinformatics/scaffolds_bw2_sorted_insert_size_histogram.pdf"
-java -jar picard.jar CollectInsertSizeMetrics \
-      I=$input \
+input="/home/nenarokova/genomes/novymonas/assembly/pnov_submission/hiseq_sorted"
+bam=$input".bam"
+insert_size_metrics=$input"insert_size_metrics.txt"
+insert_size_histogram=$input"insert_size_histogram.pdf"
+java -jar $picard CollectInsertSizeMetrics \
+      I=$bam \
       O=$insert_size_metrics\
       H=$insert_size_histogram.pdf \
       M=0.5
 
+input="/home/nenarokova/genomes/novymonas/assembly/pnov_submission/miseq_sorted"
+bam=$input".bam"
+insert_size_metrics=$input"insert_size_metrics.txt"
+insert_size_histogram=$input"insert_size_histogram.pdf"
+java -jar $picard CollectInsertSizeMetrics \
+      I=$bam \
+      O=$insert_size_metrics\
+      H=$insert_size_histogram.pdf \
+      M=0.5
