@@ -20,8 +20,8 @@ pe3_2="/home/nenarokova/genomes/novymonas/raw_illumina/old_hiseq_trimmed/E262_2_
 
 base_name="/home/nenarokova/genomes/novymonas/assembly/pandoraea_all_nodes_mapping"
 mapped_unpaired=$base_name"_mapped_unpaired.fq"
-mapped_unconc=$base_name"_mapped.fq"
-mapped_conc=$base_name"_mapped.fq"
+mapped_unconc=$base_name"_mapped_unconc.fq"
+mapped_conc=$base_name"_mapped_conc.fq"
 alignment=$base_name".sam"
 report=$base_name".txt"
 
