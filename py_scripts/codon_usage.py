@@ -3,7 +3,7 @@ from collections import OrderedDict
 from Bio import SeqIO
 import pandas as pd
 
-infile = SeqIO.parse('/home/kika/Dropbox/blasto_project/blastocrithidia/genes/insertions/alignments/out_p57_nt.fasta', 'fasta')
+infile = SeqIO.parse('/home/kika/Dropbox/blasto_project/blastocrithidia/genes/insertions/alignments/ins_p57_nt.fasta', 'fasta')
 
 
 codon_list = ['GCG', 'GCA', 'GCT', 'GCC', 'TGT', 
@@ -73,4 +73,4 @@ col_list[0], col_list[1] = col_list[1], col_list[0]
 df = df.reindex(columns=col_list)
 df.set_index('AA', inplace=True)
 df = df.transpose()
-df.to_csv('/home/kika/Dropbox/blasto_project/blastocrithidia/genes/insertions/alignments/p57_ins_codons.tsv', sep='\t')
+df.to_csv('/home/kika/Dropbox/blasto_project/blastocrithidia/genes/insertions/alignments/ins_p57_codons.tsv', sep='\t')
