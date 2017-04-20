@@ -8,13 +8,26 @@ l = [
 "NODE_90282_length_848_cov_754.927"
 ]
 
-fasta = '/home/anna/bioinformatics/blasto/jaculum/jaculum_before_rr.fasta'
+# fasta = '/home/anna/bioinformatics/blasto/jaculum/jaculum_before_rr.fasta'
+# results = []
+
+# for record in SeqIO.parse(fasta, "fasta"):
+#     if record.id in l:
+#         results.append(record)
+
+# outpath = '/home/anna/bioinformatics/blasto/jaculum/jaculum_kinetoplast.fasta'
+
+# SeqIO.write(results, outpath, "fasta")
+
+n = 3000
+fasta = '/home/anna/bioinformatics/blasto/jaculum/jaculum_scaffolds.fasta'
 results = []
-
+i = 0
 for record in SeqIO.parse(fasta, "fasta"):
-    if record.id in l:
+    if i < n:
         results.append(record)
+    i+=1
 
-outpath = '/home/anna/bioinformatics/blasto/jaculum/jaculum_kinetoplast.fasta'
+outpath = '/home/anna/bioinformatics/blasto/jaculum/jaculum_first3000.fasta'
 
 SeqIO.write(results, outpath, "fasta")
