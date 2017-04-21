@@ -39,7 +39,7 @@ query_paths= [
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_paths = [
-"/media/4TB1/blasto/Trinity-GG_p57_6_frames_translat/blast_db/Trinity-GG_p57_6_frames_translat.db.phr"
+"/media/4TB1/blasto/Trinity-GG_p57_6_frames_translat/blast_db/Trinity-GG_p57_6_frames_translat.db"
 ]
 
 for query_path in query_paths:
