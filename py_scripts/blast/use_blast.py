@@ -34,12 +34,12 @@ def add_header(blast_csv_path, custom_outfmt):
     return blast_csv_path
 
 query_paths= [
-    "/media/4TB1/blasto/jaculum/companion/proteins.fasta"
+    "/media/4TB1/blasto/blastocrithidia/datasets/kinetoplastid_proteoms.fasta"
     ]
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_paths = [
-"/media/4TB1/blasto/Trinity-GG_p57_6_frames_translat/blast_db/Trinity-GG_p57_6_frames_translat.db"
+"/media/4TB1/blasto/jaculum/assembly/jaculum_scaffolds_6frames.fasta"
 ]
 
 for query_path in query_paths:
