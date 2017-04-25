@@ -4,4 +4,4 @@ def reverse(seq):
 	reverse = seq.translate(complement)[::-1]
 	return reverse
 
-print reverse("ACGCATTTTTTGTTACAGTTTCTGTACTTTATT")
+print reverse("AACGCATTTTTTGTTACAGTTTCTGTACTTTATT")
