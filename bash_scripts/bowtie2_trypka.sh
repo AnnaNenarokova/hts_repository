@@ -1,12 +1,12 @@
 #!/bin/bash
 
 bw2_dir='/home/nenarokova/tools/bowtie2-2.2.9/'
-base_name='/home/kika/blastocrithidia/mapping/triat_to_p57_DNA/triat_bw2'
-ref="/home/kika/blastocrithidia/genome/p57_scaffolds.fa"
+base_name='/media/4TB1/blastocrithidia/mapping/p57_bowtie2_DNA/p57_DNA_bw2'
+ref="/media/4TB1/blastocrithidia/genome_assembly/p57_scaffolds.fa"
 $bw2_dir'bowtie2-build' --threads 32 $ref $base_name
 
-p1_1="/home/nenarokova/genomes/blasto/blastocrithidia/genome/trimmed/triat_trimmed_1.fq"
-p1_2="/home/nenarokova/genomes/blasto/blastocrithidia/genome/trimmed/triat_trimmed_2.fq"
+p1_1="/media/4TB1/blastocrithidia/reads/genome/trimmed/p57_trimmed_1.fq"
+p1_2="/media/4TB1/blastocrithidia/reads/genome/trimmed/p57_trimmed_2.fq"
 
 alignment=$base_name".sam"
 report=$base_name".txt"
