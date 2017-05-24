@@ -1,8 +1,8 @@
 #!/usr/bin/python
 from Bio import SeqIO
 
-infile = SeqIO.parse('/home/anna/bioinformatics/blasto/jaculum/jaculum_scaffolds.fasta', 'fasta')
-output = open('/home/anna/bioinformatics/blasto/jaculum/jaculum_scaffolds_6frames.fasta', 'w')
+infile = SeqIO.parse('/home/anna/bioinformatics/blasto/jaculum/mt_contig_jaculum.fasta', 'fasta')
+output = open('/home/anna/bioinformatics/blasto/jaculum/mt_contig_jaculum_6_frames.fasta', 'w')
 outerr = open('/home/anna/bioinformatics/blasto/jaculum/jaculum_scaffolds_err.txt', 'w')
 gencode = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',

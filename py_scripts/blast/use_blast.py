@@ -34,20 +34,20 @@ def add_header(blast_csv_path, custom_outfmt):
     return blast_csv_path
 
 query_paths= [
-    "/home/nenarokova/genomes/euglena/tom40/all_tom40.fasta"
+    "/media/4TB1/blasto/p57_mito_contig.fasta"
     ]
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_paths = [
-"/home/nenarokova/genomes/euglena/blast_proteome/euglena_all_proteins/blast_db/euglena_all_proteins.db"
+"/media/4TB1/blasto/scaffolds_triat.fa"
 ]
 
 for query_path in query_paths:
     for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path, db_path=subj_path, db_type='prot', threads=30)
+        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='nucl', threads=30)
         blast_csv_path = new_blast.blast(
-                                         bl_type='blastp',
-                                         evalue=10,
+                                         bl_type='blastn',
+                                         evalue=,
                                          outfmt='comma_values',
                                          custom_outfmt=custom_outfmt,
                                          word_size=4
