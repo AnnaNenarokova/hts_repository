@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 from Bio import SeqIO
 
-infile = SeqIO.parse('/home/kika/Dropbox/blasto_project/blastocrithidia/genes/tRNA-synthetases/p57_ala-synth_CDs.txt', 'fasta')
-output = open('/home/kika/Dropbox/blasto_project/blastocrithidia/genes/tRNA-synthetases/p57_ala-synth_6-f-transl.txt', 'w')
+infile = SeqIO.parse('/home/kika/Dropbox/blasto_project/jaculum/genes/mt/never_edited_nt.txt', 'fasta')
+output = open('/home/kika/Dropbox/blasto_project/jaculum/genes/mt/never_edited_nt_trans.fasta', 'w')
 
 gencode = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
@@ -19,7 +19,7 @@ gencode = {
     'GGA':'G', 'GGC':'G', 'GGG':'G', 'GGT':'G',
     'TCA':'S', 'TCC':'S', 'TCG':'S', 'TCT':'S',
     'TTC':'F', 'TTT':'F', 'TTA':'L', 'TTG':'L',
-    'TAC':'Y', 'TAT':'Y', 'TAA':'E', 'TAG':'E',
+    'TAC':'Y', 'TAT':'Y', 'TAA':'X', 'TAG':'X',
     'TGC':'C', 'TGT':'C', 'TGA':'W', 'TGG':'W'}
 
 def translation(sequence):
@@ -44,7 +44,7 @@ for sequence in infile:
         if nucleotide not in 'ATCGN':
             ambiguous = True
     if ambiguous == True:
-        with open('/home/kika/Dropbox/blasto_project/blastocrithidia/genes/PABP/error.txt', 'w') as error:
+        with open('/home/kika/Dropbox/blasto_project/jaculum/genes/mt/error.txt', 'w') as error:
             error.write('{}\n{}\n'.format(name, seq))
     else:    
         output.write('>{}_1\n{}\n'.format(name, translation(seq)))

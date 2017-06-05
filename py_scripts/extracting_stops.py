@@ -1,25 +1,31 @@
 #!/usr/bin/python3
 from Bio import SeqIO
 
-infile = SeqIO.parse('/home/kika/Dropbox/blastocrithidia/datasets/aa_ref_for_blasto/p57_nt_from_ref_nt_after_stop_dedupl.fasta', 'fasta')
+out_seqs = open('/home/kika/Dropbox/blasto_project/blastocrithidia/reference_tryps_genomes/Lpyr_GCA_001293395.1_ASM129339v1_CDs_stops_other.fasta', 'w')
+
+infile = SeqIO.parse('/home/kika/Dropbox/blasto_project/blastocrithidia/reference_tryps_genomes/Lpyr_GCA_001293395.1_ASM129339v1_CDs.fasta', 'fasta')
 taa = 0
 tag = 0
 tga = 0
 other = 0
 
 for sequence in infile:
+	full_seq = sequence.seq
 	seq = sequence.seq[-3:]
 	name = sequence.name
 	if seq == 'taa':
-		taa = taa+1
+		taa += 1
 	elif seq == 'tag':
-		tag = tag+1
+		tag += 1
 	elif seq == 'tga':
-		tga = tga+1
+		tga += 1
 	else:
-		other = other+1
+		other += 1
+		out_seqs.write('>{}\n{}\n'.format(name, full_seq))
+
+out_seqs.close()
 
 stops = '{}: {}\n{}: {}\n{}: {}\n{}: {}'.format('taa',taa,'tag',tag,'tga',tga,'other',other)
 
-with open('/home/kika/Dropbox/blastocrithidia/datasets/aa_ref_for_blasto/p57_nt_from_ref_number_stops.txt', 'w') as result:
+with open('/home/kika/Dropbox/blasto_project/blastocrithidia/reference_tryps_genomes/Lpyr_GCA_001293395.1_ASM129339v1_CDs_stops.txt', 'w') as result:
 	result.write(stops)

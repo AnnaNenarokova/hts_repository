@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 
 #file in format Acc. number \t name of organism
-names = open('/home/kika/MEGAsync/Euglena longa/2013 Sekvenovanie/Glycerolipids/SQD pathway/SQD2 tree/names.txt', 'r')
+names = open('/home/kika/MEGAsync/Euglena longa/2013 Sekvenovanie/Calvin cycle/RBCL/names.txt', 'r')
 
 name_dict = {}
 for name in names:
     split_line = name.split('\t')
     name_dict[split_line[0]] = split_line[1][:-1]
 
-tree = open('/home/kika/MEGAsync/Euglena longa/2013 Sekvenovanie/Glycerolipids/SQD pathway/SQD2 tree/SQD2_trimal_automated1.phy.treefile', 'r')
+tree = open('/home/kika/MEGAsync/Euglena longa/2013 Sekvenovanie/Calvin cycle/RBCL/RBCL_trimal.phy.treefile', 'r')
 tree_line = tree.readline()
 
 for key in name_dict:
@@ -22,5 +22,5 @@ for key in name_dict:
 ##result.close()
 
 #2) closes result file automatically
-with open('/home/kika/MEGAsync/Euglena longa/2013 Sekvenovanie/Glycerolipids/SQD pathway/SQD2 tree/SQD2_iqtree.txt', 'w') as result:
+with open('/home/kika/MEGAsync/Euglena longa/2013 Sekvenovanie/Calvin cycle/RBCL/RBCL_tree_renamed.txt', 'w') as result:
     result.write(tree_line)

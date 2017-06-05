@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-infile = open('/home/kika/Dropbox/check_inserti_bl_report_best_mod.csv', 'r')
-output = open('/home/kika/Dropbox/check_insertions.gff', 'w')
+infile = open('/home/kika/Dropbox/blasto_project/blastocrithidia/genome/assembly/p57_DNA_scaffo/blast_reports/p57_RNA_Trinity_bl_report_best.csv', 'r')
+output = open('/home/kika/Dropbox/blasto_project/blastocrithidia/transcriptome_trinity/p57_RNA_trinity.gff', 'w')
 
 output.write('{}\t{}\n'.format('##gff-version', '3'))
 

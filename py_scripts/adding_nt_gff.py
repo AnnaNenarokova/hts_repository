@@ -17,7 +17,7 @@ for row in infile:
 	codon = split_row[7]
 	description = split_row[8]
 
-	stop = stop +1
+	stop = stop + 1
 	new_row = '{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}'.format(name,attribute,feature,start,stop,score,strand,codon,description)		
 	output.write(new_row)
 output.close()

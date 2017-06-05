@@ -21,5 +21,5 @@ sorted=$base_name"_sorted"
 sorted_file=$sorted".bam"
 
 samtools view -bS $samfile > $bamfile -@ 20
-samtools sort $bamfile $sorted -@ 20
-samtools index $sorted_file
+samtools sort -o $sorted_file -@ 20 $bamfile
+samtools index -b $sorted_file
