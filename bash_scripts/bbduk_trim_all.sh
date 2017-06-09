@@ -2,7 +2,7 @@
 
 fw="/media/4TB1/novymonas/transcriptome/raw_reads/No_AZ3_1.fastq.gz"
 rv="/media/4TB1/novymonas/transcriptome/raw_reads/No_AZ3_2.fastq.gz"
-trimdir="/media/4TB1/novymonas/transcriptome/trimmed_reads"
+trimdir="/media/4TB1/novymonas/transcriptome/trimmed_reads/"
 name="azi_rna"
 trimmed_fw=$trimdir$name"_trimmed_1.fq.gz"
 trimmed_rv=$trimdir$name"_trimmed_2.fq.gz"
@@ -12,7 +12,7 @@ adapters="/home/nenarokova/tools/bbmap/resources/adapters.fa"
 
 fw="/media/4TB1/novymonas/transcriptome/raw_reads/No_WT1_1.fastq.gz"
 rv="/media/4TB1/novymonas/transcriptome/raw_reads/No_WT1_2.fastq.gz"
-trimdir="/media/4TB1/novymonas/transcriptome/trimmed_reads"
+trimdir="/media/4TB1/novymonas/transcriptome/trimmed_reads/"
 name="wt_rna"
 trimmed_fw=$trimdir$name"_trimmed_1.fq.gz"
 trimmed_rv=$trimdir$name"_trimmed_2.fq.gz"
