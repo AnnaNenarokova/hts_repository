@@ -11,7 +11,7 @@ r2="/media/4TB1/novymonas/transcriptome/reads/trimmed_reads/azi_rna_trimmed_2.fq
 alignment=$base_name".sam"
 report=$base_name".txt"
 
-/home/nenarokova/tools/bowtie2-2.2.9/bowtie2 --very-sensitive -p 30 -x $bw2_base -1 $r1 -2 $r2 -S $alignment 2> $report
+/home/nenarokova/tools/bowtie2-2.2.9/bowtie2 --very-sensitive -p 30 -x $bt2_base -1 $r1 -2 $r2 -S $alignment 2> $report
 
 samfile=$alignment
 bamfile=$base_name"_unsorted.bam"
