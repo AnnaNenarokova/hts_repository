@@ -34,20 +34,20 @@ def add_header(blast_csv_path, custom_outfmt):
     return blast_csv_path
 
 query_paths= [
-    "/media/anna/data/Dropbox/PhD/projects/diplonema/diplonema_homol_rec.fasta"
+    "/media/4TB1/blastocrithidia/genome_assembly/p57_DNA_translated.fa"
     ]
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_paths = [
-"/media/anna/data/Dropbox/PhD/projects/diplonema/Proteins_and_Transcripts_201604/proteins_/blast_db/proteins_.db"
+"/media/4TB1/blastocrithidia/scaffolding/reference_genomes/leish/TriTrypDB-32_LmajorFriedlin_Genome.fasta"
 ]
 
 for query_path in query_paths:
     for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path,db_path=subj_path, db_type='prot', threads=4)
+        new_blast = Blast(query_path=query_path,db_path=subj_path, db_type='nucl', threads=30)
         blast_csv_path = new_blast.blast(
-                                         bl_type='blastp',
-                                         evalue=0.01,
+                                         bl_type='tblastn',
+                                         evalue=1,
                                          outfmt='comma_values',
                                          custom_outfmt=custom_outfmt,
                                          word_size=3
