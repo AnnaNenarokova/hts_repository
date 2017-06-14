@@ -1,0 +1,1 @@
+Trinity --seqType fq --max_memory 100G --left /media/4TB1/blasto/blastocrithidia/transcriptome/trimmed/triat_trimmed_1.fq.gz --right /media/4TB1/blasto/blastocrithidia/transcriptome/trimmed/triat_trimmed_2.fq.gz --CPU 30
