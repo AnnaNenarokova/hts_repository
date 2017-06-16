@@ -34,12 +34,12 @@ def add_header(blast_csv_path, custom_outfmt):
     return blast_csv_path
 
 query_paths= [
-    "/media/4TB1/novymonas/genome/wt_scaffolds.fa"
+    "/home/nenarokova/blasto/p57_DNA_scaffolds.fa"
     ]
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_paths = [
-"/media/4TB1/novymonas/genome/pandoraea_from_graph.fasta"
+"/home/nenarokova/blasto/TriTrypDB-32_LmajorFriedlin_Genome.fasta"
 ]
 
 for query_path in query_paths:
