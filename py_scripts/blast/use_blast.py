@@ -34,7 +34,7 @@ def add_header(blast_csv_path, custom_outfmt):
     return blast_csv_path
 
 query_paths= [
-    "/media/4TB1/blastocrithidia/datasets/aa_ref_for_bla.fa"
+    "/media/4TB1/blastocrithidia/datasets/aa_ref_for_blasto.fa"
     ]
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
