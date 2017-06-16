@@ -39,7 +39,7 @@ query_paths= [
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_paths = [
-"/media/4TB1/blastocrithidia/datasets/aa_ref_for_bla/blast_db/aa_ref_for_bla"
+"/media/4TB1/novymonas/aa_ref_for_bla/blast_db/aa_ref_for_bla.db"
 ]
 
 for query_path in query_paths:
