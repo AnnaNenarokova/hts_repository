@@ -1,7 +1,7 @@
 #!/bin/bash
 star="/home/nenarokova/tools/STAR-2.5.3a/bin/Linux_x86_64/STAR"
-genome="/media/4TB1/novymonas/companion/pseudochr.fasta"
-mapping_dir="/media/4TB1/novymonas/transcriptome/mapping/star_mapping"
+genome="/media/4TB1/novymonas/transcriptome/mapping/novymonas_no_pand_scaffolds.fasta"
+mapping_dir="/media/4TB1/novymonas/transcriptome/mapping/star_mapping_no_pand"
 r1="/media/4TB1/novymonas/transcriptome/reads/trimmed_reads/wt_rna_trimmed_1.fq.gz"
 r2="/media/4TB1/novymonas/transcriptome/reads/trimmed_reads/wt_rna_trimmed_2.fq.gz"
 

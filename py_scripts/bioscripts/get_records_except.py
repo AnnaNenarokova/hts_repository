@@ -9,13 +9,13 @@ l = [
 "NODE_106_length_108046_cov_858.69",
 "NODE_104_length_108845_cov_889.343"
 ]
-fasta = '/home/anna/Dropbox/PhD/bioinformatics/genomes/trypanosomatids/novymonas/wt_scaffolds.fa'
+fasta = '/home/anna/bioinformatics/novymonas/wt_scaffolds.fasta'
 results = []
 
 for record in SeqIO.parse(fasta, "fasta"):
   if record.id not in l:
     results.append(record)
 
-outpath = '/home/anna/Dropbox/PhD/bioinformatics/genomes/trypanosomatids/novymonas/wt_scaffolds_novymonas_without_pand.fa'
+outpath = '/home/anna/bioinformatics/novymonas/novymonas_no_pand_scaffolds.fasta'
 
 SeqIO.write(results, outpath, "fasta")
