@@ -1,9 +1,9 @@
 #!/usr/bin/python
 from Bio import SeqIO
 
-infile = SeqIO.parse('/home/anna/Dropbox/PhD/bioinformatics/blasto/scaffolds_triat.fasta', 'fasta')
-output = open('/home/anna/Dropbox/PhD/bioinformatics/blasto/scaffolds_triat_6frames.faa', 'w')
-outerr = open('/home/anna/Dropbox/PhD/bioinformatics/blasto/scaffolds_triat_6frames.err', 'w')
+# infile = SeqIO.parse('/home/anna/Dropbox/PhD/bioinformatics/blasto/scaffolds_triat.fasta', 'fasta')
+# output = open('/home/anna/Dropbox/PhD/bioinformatics/blasto/scaffolds_triat_6frames.faa', 'w')
+# outerr = open('/home/anna/Dropbox/PhD/bioinformatics/blasto/scaffolds_triat_6frames.err', 'w')
 gencode = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
     'ACA':'T', 'ACC':'T', 'ACG':'T', 'ACT':'T',
@@ -34,25 +34,30 @@ def translation(sequence):
             aa.append(gencode[codon])
     return ''.join(aa)
 
-i = 0
-for sequence in infile:
-    i += 1
-    name = sequence.name
-    seq = sequence.seq.upper()
-    ambiguous = False
-    for nucleotide in seq:
-        if nucleotide not in 'ATCGN':
-            ambiguous = True
-    if ambiguous == True:
-        with open(outerr, 'w') as error:
-            error.write('{}\n{}\n'.format(name, seq))
-    else:
-        output.write('>{}_1\n{}\n'.format(name, translation(seq)))
-        output.write('>{}_2\n{}\n'.format(name, translation(seq[1:])))
-        output.write('>{}_3\n{}\n'.format(name, translation(seq[2:])))
-        output.write('>{}_4\n{}\n'.format(name, translation(seq.reverse_complement())))
-        output.write('>{}_5\n{}\n'.format(name, translation(seq.reverse_complement()[1:])))
-        output.write('>{}_6\n{}\n'.format(name, translation(seq.reverse_complement()[2:])))
-    if i%100 == 0:
-        print(i)
-output.close()
+# i = 0
+# for sequence in infile:
+#     i += 1
+#     name = sequence.name
+#     seq = sequence.seq.upper()
+#     ambiguous = False
+#     for nucleotide in seq:
+#         if nucleotide not in 'ATCGN':
+#             ambiguous = True
+#     if ambiguous == True:
+#         with open(outerr, 'w') as error:
+#             error.write('{}\n{}\n'.format(name, seq))
+#     else:
+#         output.write('>{}_1\n{}\n'.format(name, translation(seq)))
+#         output.write('>{}_2\n{}\n'.format(name, translation(seq[1:])))
+#         output.write('>{}_3\n{}\n'.format(name, translation(seq[2:])))
+#         output.write('>{}_4\n{}\n'.format(name, translation(seq.reverse_complement())))
+#         output.write('>{}_5\n{}\n'.format(name, translation(seq.reverse_complement()[1:])))
+#         output.write('>{}_6\n{}\n'.format(name, translation(seq.reverse_complement()[2:])))
+#     if i%100 == 0:
+#         print(i)
+# output.close()
+
+seq = "ATGACTGAGTTGACTGATATTACTCGATTAGAATTGTAGTCCGTTGTTGGCTTTAGTGGTCAGGTGCCTAACGGCTTGTTAGCACATCCAGATGGAGTGCACTTAATTTACCCTCTAGGTGCTTGCATTGTCATTCGTGAAATTGCCAACCCGCAGGTGTCTGATTTTTTGTACGGACACAATGACAAGATCAGCTGCTTAGCTATCAGTCCATCGGGTAAATACATTGCCTCTGGTCAGCAAACACACCCAGGCTTTCAGGCAGATGTCTGCATCTTTGACTTTGAGTAGCGCCGTTTGCTTCATCGAATGCTACTGCACAAGGTCAAAGTACAGGCGCTGGCATTTTCACCAGATGAAAACTACTTAGCCTCTGTAGGCGGACAAGATGACAACACGGTGGTGTTGTGAGATGTTAACACAGGACGACCGTTGTGTGGGGCACCGGCGCACCACACATAGACCAAGACACTCGTCTTTTGCAATCAACACAATGAACGCCTTCTTACTGCCGGAGTAGGTTCGTTACGGGTGTGAAATGTCGACTTAACCACACGTAAGATGAACCCAATAGATGTCAACATGGGTAATCTACGACGCAGTGTAACTACGGTGGTGGTGTAGGCAACAGACAAGTACGCCTACTGTGGCACGACAAGTGGGGATGTCATTTGTGTACAGCTGTAAAACGCCAACGTGTACAAGATGTCCGGCCCACAGAAGAAGTTGTCCGGTGGGATTACCGCCACTCGATTAAACCTTGACGGCGATGTGCTCATAGGCAGCGGAAGTGGACAGGTGCAGTTACTGTCTAAAATTAATTTAACTGTACTGCAAGACACACAGGTGCTGGGTGCCGTGACGGGATTAGCTCTCACTGGCCCACACTACTATGTTGGTACCACTCTAAGTAACATGTACTTTATCAATGGGGCTAACTTTCACAGTCAACTCCGGTTAACTTGTCACAGTGAGAGCATCAGTGATGTTGTCTACCCCGATGGCTTTGCCATGGTGTTTGCCACGTGCTGTGGCAGTGACATTCGTGTCTGAAACGCAGACTCGTGCACCTAGTTGTTACGAATTGAGATTCCTGATCGAGTGTGCAACTGCCTTCAGTTTAGCCATGACGGCTCCTTGATTATCTCAGGCTGGGCCGATGGTAAGCTGCGTTGCTTTGGGCCTCAGTCTGGTAAACTGGTTATCTGTGTCGCCGATGCCCACAAGGTAGCCGAGGAGCGACGAACAAAGTCGGGAGACAAGATGGGAGTGACGGCGGTGTGTGCCTCACATAATGGACGGCAAATTATTACCGGTGGTGGGTGTGGTCTGGTGCGGGTGTGGCAGATCTGCGGTACTGGGTGCAAACTCGTAGCCTCATTAAAAGAGCATAAGGCGTGCATCAACGCTGTCATTGTCTCACAGAATGACAAGGAATGCATCTCTGCCAGCAACGATGGCAGTTGCATTGTCTGGGACTTGGTCAAGTTTATCCGTCGCAACATCATGTACGCACAAACCTACTTTAGAGCTGTCTAGTTTGCCATTGATGAGAGTCAACTTTTAACCTGTGGGAGTGATAAGATGATCGGTTACTGAGACGCGGTAGATTGCAGTACACTGCGCTAGATACGTGGTAGTAAGACTGGTGAACTAAACTCACTGTCCATCTCACCGGATAATACGTTTTTTGCCACTGGTGGTAATGATCGTATACTGAAAGTGTGGGATTACGAACGTGGAGATTGTATTGCGGTGGGTTTAGCACATAGTTGTAGCATTAGCAAAGTTCGTGTATCGCCAGACGGGCAAAAAATAATCACCGTAGGTGACGACGGAGCTATCATGATATGGAAGGTAGGTGATTTGCAGGTCGAAGGATTG"
+
+print translation(seq)
+
