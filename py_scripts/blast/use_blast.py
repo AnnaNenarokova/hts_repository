@@ -34,7 +34,7 @@ def add_header(blast_csv_path, custom_outfmt):
     return blast_csv_path
 
 query_paths= [
-    "/home/tomas/genomes/Proteoms/TriTrypDB-9.0_LmajorFriedlin_AnnotatedProteins.fasta"
+    "/media/4TB1/blastocrithidia/synteny/GCF_001293395.1_ASM129339v1_protein_leptomonas.faa"
     ]
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
