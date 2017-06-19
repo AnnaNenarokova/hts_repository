@@ -1,17 +1,17 @@
 #!/usr/bin/python3
+#check parsing the file name in the end of the script
 import os
 from Bio import AlignIO
 from Bio import SeqIO
 
-os.chdir('/home/kika/Dropbox/blasto_project/jaculum/genes/nucleoporins')
+os.chdir('/home/kika/Dropbox/blasto_project/jaculum/genes/cv_subunits/PASTA/')
 files = os.listdir()
 
-out_p57 = open('/home/kika/Dropbox/blasto_project/jaculum/genes/nucleoporins/out_p57.txt', 'w')
-out_triat = open('/home/kika/Dropbox/blasto_project/jaculum/genes/nucleoporins/out_triat.txt', 'w')
-out_BexLH = open('/home/kika/Dropbox/blasto_project/jaculum/genes/nucleoporins/out_BexLH.txt', 'w')
-out_jac = open('/home/kika/Dropbox/blasto_project/jaculum/genes/nucleoporins/out_jac.txt', 'w')
-out_len = open('/home/kika/Dropbox/blasto_project/jaculum/genes/nucleoporins/out_len.tsv', 'w')
-
+out_p57 = open('/home/kika/Dropbox/blasto_project/jaculum/genes/cv_subunits/PASTA/out_p57.txt', 'w')
+out_triat = open('/home/kika/Dropbox/blasto_project/jaculum/genes/cv_subunits/PASTA/out_triat.txt', 'w')
+out_BexLH = open('/home/kika/Dropbox/blasto_project/jaculum/genes/cv_subunits/PASTA/out_BexLH.txt', 'w')
+out_jac = open('/home/kika/Dropbox/blasto_project/jaculum/genes/cv_subunits/PASTA/out_jac.txt', 'w')
+out_len = open('/home/kika/Dropbox/blasto_project/jaculum/genes/cv_subunits/PASTA/out_len.tsv', 'w')
 
 def get_sequence_number(file):
 	sequences = SeqIO.parse(file, 'fasta')
@@ -35,7 +35,6 @@ def get_sequence_number(file):
 			number +=1
 	return p57_triat_BexLH_jac
 
-
 def find_insertions(alignment_file):
 	alignment = AlignIO.read(alignment_file, 'fasta')
 	positions = (get_sequence_number(alignment_file))
@@ -57,7 +56,6 @@ def find_insertions(alignment_file):
 				list_col.append(i)
 				result_list.append(list_col)
 	return result_list	
-
 
 def peptides(table, alignment_file):
 	positions = (get_sequence_number(alignment_file))
@@ -148,16 +146,14 @@ def peptides(table, alignment_file):
 							out_len.write(length + ', ')
 						out_len.write('\n')
 
-
-
 for file in files:
 	if '.aln' in file:
 		print(file)
-		out_p57.write(file.split('.')[0] + '\n')
-		out_triat.write(file.split('.')[0] + '\n')
-		out_BexLH.write(file.split('.')[0] + '\n')
-		out_jac.write(file.split('.')[0] + '\n')
-		out_len.write('\t' + file.split('.')[0] + '\n')
+		out_p57.write(file.split('.m')[0] + '\n')
+		out_triat.write(file.split('.m')[0] + '\n')
+		out_BexLH.write(file.split('.m')[0] + '\n')
+		out_jac.write(file.split('.m')[0] + '\n')
+		out_len.write('\t' + file.split('.m')[0] + '\n')
 		x = find_insertions(file)
 		peptides(x, file)
 		out_p57.write('\n')
