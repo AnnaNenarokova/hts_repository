@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python2
 import os
 import re
 from Bio import SeqIO
@@ -15,11 +15,11 @@ for file in files:
 		errors = open('/media/4TB1/blastocrithidia/bexlh/reads/trimmed/' + file_name + '_errors.fq', 'w')
 		for read in SeqIO.parse(file, 'fastq'):
 			if re.search('SRR\d+.\d+.1 ', read.description):
-				print(read.name)
+				print read.name
 				fw.write(read.format('fastq'))
 			elif re.search('SRR\d+.\d+.2 ', read.description):
-				print(read.name)
+				print read.name
 				rev.write(read.format('fastq'))
 			else:
-				print(read.name)
+				print read.name
 				errors.write(read.format('fastq'))
