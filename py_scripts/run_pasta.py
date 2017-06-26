@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import os
 
-os.chdir('/home/kika/Dropbox/blasto_project/jaculum/genes/thiolation/')
+os.chdir('/home/kika/Dropbox/blasto_project/blastocrithidia/genes/thiolation/')
 files = os.listdir()
 
 for file in files:
