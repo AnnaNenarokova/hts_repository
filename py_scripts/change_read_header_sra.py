@@ -1,0 +1,17 @@
+#!/usr/bin/python3
+import os
+import re
+from Bio import SeqIO
+
+os.chdir('/home/kika/work_dir/bexlh/reads/trimmed/')
+files = os.listdir()
+
+for file in files:
+	if ('sra' in file and '_fw.fq' in file) or ('sra' in file and '_rev.fq' in file):
+		print(file)
+		file_name = file.split('.')[0]
+		out = open('/home/kika/work_dir/bexlh/reads/trimmed/' + file_name + '_upd.fq', 'w')
+
+		for read in SeqIO.parse(file, 'fastq'):
+			read.description = re.sub(r'(?P<name>SRR\d+.\d+).(?P<num>\d) (?P<rest>.*)', '\g<2> \g<3>', read.description)
+			out.write(read.format('fastq'))
