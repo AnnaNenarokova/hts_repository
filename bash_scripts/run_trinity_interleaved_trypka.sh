@@ -1,6 +1,6 @@
 #!/bin/bash
 
-read_dir='/media/4TB1/blastocrithidia/bexlh/reads/trimmed/'
+read_dir='/media/4TB1/blastocrithidia/bexlh/reads/'
 reads=$read_dir'testing_reads.fq'
 out_dir='/media/4TB1/blastocrithidia/bexlh/trinity_testing_assembly/'
 
