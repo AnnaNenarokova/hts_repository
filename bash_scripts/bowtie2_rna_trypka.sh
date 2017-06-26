@@ -1,7 +1,7 @@
 #!/bin/bash
 
 bw2_dir='/home/nenarokova/tools/bowtie2-2.2.9/'
-base_name='/media/4TB1/blasto/mapping/p57_bw2'
+base_name='/media/4TB1/novymonas/transcriptome/mapping/bowtie2_no_pand_pseudochr/no_pand_pseudochr'
 ref="/home/nenarokova/genomes/novymonas/assembly/pseudochr.fasta"
 $bw2_dir'bowtie2-build' --threads 20 $ref $base_name
 
