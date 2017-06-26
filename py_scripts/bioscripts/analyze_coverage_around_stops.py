@@ -1,4 +1,5 @@
 #!/usr/bin/python
+from subprocess import call
 
 def get_stop_codon_environs(gff_path, bed_outpath, left_border=200, right_border=200):
     stop_codon_environs = {}
@@ -8,27 +9,31 @@ def get_stop_codon_environs(gff_path, bed_outpath, left_border=200, right_border
             for row in gff_file:
                 split_row = row.split('\t')
                 contig_id = split_row[0]
-                gene_start = int(split_row[3])
-                gene_end = int(split_row[4])
-                score = split_row[5]
-                strand = split_row[6]
-                contig_length = int(contig_id.split('_')[3])
-                if gene_end <= gene_start:
-                    print "Gene end <= gene start error"
-                    exit(1)
-                if strand == "+":
-                    current_borders = [gene_end-left_border, gene_end+right_border]
-                elif strand == "-":
-                    current_borders = [gene_start-right_border, gene_start+left_border]
-                else:
-                    print "GFF strand error"
-                    exit(1)
-                if current_borders[0] > 0 and current_borders[1] <= contig_length:
-                    if contig_id not in stop_codon_environs.keys():
-                        stop_codon_environs[contig_id]=[]
-                    stop_codon_environs[contig_id].append( {"strand":strand, "borders": current_borders} )
-                    new_row = '{}\t{}\t{}\t{}\t{}\t{}\n'.format(contig_id, current_borders[0], current_borders[1], 'name', score, strand)
-                    output.write(new_row)
+                if contig_id[0] != "#":
+                    feature_type = split_row[2]
+                    gene_start = int(split_row[3])
+                    gene_end = int(split_row[4])
+                    score = split_row[5]
+                    strand = split_row[6]
+                    contig_length = int(contig_id.split('_')[3])
+                    if feature_type == "gene":
+                        if gene_end <= gene_start:
+                            print "Gene end <= gene start error"
+                            print gene_start, gene_end
+                            exit(1)
+                        if strand == "+":
+                            current_borders = [gene_end-left_border, gene_end+right_border]
+                        elif strand == "-":
+                            current_borders = [gene_start-right_border, gene_start+left_border]
+                        else:
+                            print "GFF strand error"
+                            exit(1)
+                        if current_borders[0] > 0 and current_borders[1] <= contig_length:
+                            if contig_id not in stop_codon_environs.keys():
+                                stop_codon_environs[contig_id]=[]
+                            stop_codon_environs[contig_id].append( {"strand":strand, "borders": current_borders} )
+                            new_row = '{}\t{}\t{}\t{}\t{}\t{}\n'.format(contig_id, current_borders[0], current_borders[1], 'name', score, strand)
+                            output.write(new_row)
         output.close()
     gff_file.close()
     return stop_codon_environs
@@ -50,8 +55,11 @@ def parse_mpileup_file(mpileup_path):
 
 def count_mean_cov_pos(coverage, regions, region_len):
     cov_matrix = [0 for i in range(region_len)]
+    region_number = 0
     for contig in regions:
+        print contig
         for region in regions[contig]:
+            region_number += 1
             cur_cov_matrix = [0 for i in range(region_len)]
             for i,v in enumerate(cur_cov_matrix):
                 position = str(region["borders"][0] + i + 1)
@@ -68,27 +76,31 @@ def count_mean_cov_pos(coverage, regions, region_len):
                 exit (1)
             for i, v in enumerate(cov_matrix):
                 cov_matrix[i] += int(cur_cov_matrix[i])
-            break
-        break
-
+    cov_matrix = [i/float(region_number) for i in cov_matrix]
     return cov_matrix
 
 
 left_border = 200
-right_border = 200
+right_border = 500
 environ_length = left_border + right_border
 
 gff_path = "/home/anna/bioinformatics/blasto/igv_session_p57/annotation.gff"
 bed_outpath = "/home/anna/bioinformatics/blasto/igv_session_p57/stop_codon_environs.bed"
+bam_path="/home/anna/bioinformatics/blasto/igv_session_p57/RNA_30_junction.bam"
+mpileup_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/stop_codon_environs.mpileup"
+
+gff_path = "/home/anna/bioinformatics/novymonas/companion_np_pand_lbraz/scaffold.out.gff3"
+bed_outpath = "/home/anna/bioinformatics/blasto/rna_cov_analysis/novymonas_stop_codon_environs.bed"
+bam_path="/home/anna/bioinformatics/novymonas/wt_rna_mapped_sorted.bam"
+mpileup_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/novymonas_stop_codon_environs.mpileup"
 
 stop_codon_environs = get_stop_codon_environs(gff_path, bed_outpath, left_border=left_border, right_border=right_border)
-
-# print stop_codon_environs.keys()
 print len(stop_codon_environs)
 
-mpileup_path = "/home/anna/bioinformatics/blasto/rna_cov_analysis/stop_codon_environs.mpileup"
-environ_cov = parse_mpileup_file(mpileup_path)
-# print environ_cov[environ_cov.keys()[0]]
-# print environ_cov.keys()
-print len(environ_cov.keys())
-print count_mean_cov_pos(environ_cov, stop_codon_environs, environ_length)
+samtools_call = ['samtools', 'mpileup', '-l', bed_outpath, bam_path, '-o', mpileup_path]
+call(samtools_call)
+
+# mpileup_path = "/home/anna/bioinformatics/blasto/rna_cov_analysis/stop_codon_environs.mpileup"
+# environ_cov = parse_mpileup_file(mpileup_path)
+# print len(environ_cov.keys())
+# print count_mean_cov_pos(environ_cov, stop_codon_environs, environ_length)

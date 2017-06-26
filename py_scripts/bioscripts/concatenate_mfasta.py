@@ -3,9 +3,9 @@ from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
-fasta_file = '/home/anna/bioinformatics/blastocrithidia/scaffolding/reference_genomes/leish/leptomonas.fasta'
-outfile = '/home/anna/bioinformatics/blastocrithidia/scaffolding/reference_genomes/leish/leptomonas_concatenated.fasta'
-id='leptomonas_H10_concatenated'
+fasta_file = '/home/anna/bioinformatics/blasto/jaculum/jaculum_scaffolds.fasta'
+outfile = '/home/anna/bioinformatics/blasto/jaculum/jaculum_scaffolds_concatenated.fasta'
+id='jaculum_concatenated'
 handle = open(fasta_file, 'r')
 
 whole_seq=''

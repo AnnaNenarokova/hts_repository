@@ -2,11 +2,11 @@
 
 bw2_dir='/home/nenarokova/tools/bowtie2-2.2.9/'
 base_name='/media/4TB1/blasto/mapping/p57_bw2'
-ref="/home/nenarokova/genomes/blasto/blastocrithidia/genome/p57_scaffolds.fa"
+ref="/home/nenarokova/genomes/novymonas/assembly/pseudochr.fasta"
 $bw2_dir'bowtie2-build' --threads 20 $ref $base_name
 
-p1_1="/home/kika/blastocrithidia/transcriptome/trimmed/p57_trimmed_1.fq.gz"
-p1_2="/home/kika/blastocrithidia/transcriptome/trimmed/p57_trimmed_2.fq.gz"
+p1_1="/media/4TB1/novymonas/transcriptome/reads/trimmed_reads/wt_rna_trimmed_1.fq.gz"
+p1_2="/media/4TB1/novymonas/transcriptome/reads/trimmed_reads/wt_rna_trimmed_2.fq.gz"
 
 alignment=$base_name".sam"
 report=$base_name".txt"
