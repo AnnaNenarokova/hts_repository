@@ -34,63 +34,12 @@ def add_header(blast_csv_path, custom_outfmt):
     return blast_csv_path
 
 query_paths= [
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/Blechomonas_ayalai_aa.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/Bodo_proteins_18190proteins_17_02_2016.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/E_gracilis_transcriptome_final.PROTEINS.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/jaculum_concatenated_companion_proteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/Leptomonas_pyrrhocoris_aa.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/Leptomonas_seymouri_plus_short_contigs_aa.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/Mbr04_wallacemonas_companion_proteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/Naegleria_gruberi_V1.0_protein.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/Ndesignis_MMETSP1114_pep.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/Novymonas_E262_proteins_Companion.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/Paratrypanosoma_all_annotated_AA_final.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/Perkinsela_sp_CCAP_1560_proteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/Phytomonas_EM1_V1.protein_Steve_Kelly.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/Phytomonas_Hart1_V1.protein_Steve_Kelly.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/PNG-M02_Ambiguus_companion_proteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_BayalaiB08-376_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_CfasciculataCfCl_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_EmonterogeiiLV88_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_LaethiopicaL147_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_LarabicaLEM1108_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_LbraziliensisMHOMBR75M2903_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_LbraziliensisMHOMBR75M2904_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_LdonovaniBPK282A1_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_LenriettiiLEM3045_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_LgerbilliLEM452_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_LinfantumJPCM5_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_LmajorFriedlin_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_LmajorLV39c5_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_LmajorSD75.1_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_LmexicanaMHOMGT2001U1103_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_LpanamensisMHOMCOL81L13_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_LseymouriATCC30220_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_LspMARLEM2494_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_LtarentolaeParrotTarII_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_LtropicaL590_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_LturanicaLEM423_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_TbruceigambienseDAL972_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_TbruceiLister427_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_TbruceiTREU927_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_TcongolenseIL3000_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_TcruziCLBrener_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_TcruziCLBrenerEsmeraldo-like_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_TcruziCLBrenerNon-Esmeraldo-like_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_TcruziDm28c_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_TcruzimarinkelleiB7_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_TcruziSylvioX10-1_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_TevansiSTIB805_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_TgrayiANR4_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_TrangeliSC58_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/TriTrypDB-32_TvivaxY486_AnnotatedProteins.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/Trypanoplasma_borreli_contigs_20120411_ORF50.fasta",
-    "/media/4TB1/blastocrithidia/datasets/all_kinetoplastid_references/Trypanosoma_grayi_V1.protein_Steve_Kelly.fasta"
+    "media/4TB1/blastocrithidia/trypanosoma_homol_rec.fasta"
     ]
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_paths = [
-"/media/4TB1/blastocrithidia/p57_DNA_translated_all_ref_blast/blast_db/p57_DNA_transla.db"
+"/media/4TB1/blastocrithidia/genome_assembly/p57_DNA_transla/blast_db/p57_DNA_transla.db"
 ]
 
 for query_path in query_paths:

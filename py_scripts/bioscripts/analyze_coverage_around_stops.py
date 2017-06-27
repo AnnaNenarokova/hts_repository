@@ -65,26 +65,29 @@ def parse_mpileup_file(mpileup_path):
 def count_mean_cov_pos(coverage, regions, region_len):
     cov_matrix = [0 for i in range(region_len)]
     region_number = 0
+    print coverage.keys()
     for contig in regions:
         print contig
         for region in regions[contig]:
-            region_number += 1
-            cur_cov_matrix = [0 for i in range(region_len)]
-            for i,v in enumerate(cur_cov_matrix):
-                position = str(region["borders"][0] + i + 1)
-                if position in coverage[contig].keys():
-                    cur_cov_matrix[i] = coverage[contig][position]
+            if contig in coverage.keys():
+                region_number += 1
+                cur_cov_matrix = [0 for i in range(region_len)]
+                for i,v in enumerate(cur_cov_matrix):
+                    position = str(region["borders"][0] + i + 1)
+                    if position in coverage[contig].keys():
+                        cur_cov_matrix[i] = coverage[contig][position]
+                    else:
+                        cur_cov_matrix[i] = 0
+                if region["strand"] == "+":
+                    pass
+                elif region["strand"] == "-":
+                    cur_cov_matrix.reverse()
                 else:
-                    cur_cov_matrix[i] = 0
-            if region["strand"] == "+":
-                pass
-            elif region["strand"] == "-":
-                cur_cov_matrix.reverse()
-            else:
-                print "Strand error"
-                exit (1)
-            for i, v in enumerate(cov_matrix):
-                cov_matrix[i] += int(cur_cov_matrix[i])
+                    print "Strand error"
+                    exit (1)
+                for i, v in enumerate(cov_matrix):
+                    cov_matrix[i] += int(cur_cov_matrix[i])
+            else: print contig, "not found in mpileup file"
     cov_matrix = [i/float(region_number) for i in cov_matrix]
     return cov_matrix
 
@@ -98,16 +101,16 @@ environ_length = left_border + right_border
 # bam_path="/home/anna/bioinformatics/blasto/igv_session_p57/RNA_30_junction.bam"
 # mpileup_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/p57_stop_codon_environs.mpileup"
 
-gff_path = "/home/anna/bioinformatics/blasto/rna_cov_analysis/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff"
-bed_path = "/home/anna/bioinformatics/blasto/rna_cov_analysis/leptomonas_stop_codon_environs.bed"
-bam_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/H10_polyA_180_380_paired_trimmed_paired_alignment.bam"
-mpileup_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/leptomonas_stop_codon_environs.mpileup"
+# gff_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff"
+# bed_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/leptomonas_stop_codon_environs.bed"
+# bam_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/H10_polyA_180_380_paired_trimmed_paired_alignment.bam"
+# mpileup_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/leptomonas_stop_codon_environs.mpileup"
 
 stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=False)
 print len(stop_codon_environs)
 
-samtools_call = ['samtools', 'mpileup', '-l', bed_path, bam_path, '-o', mpileup_path]
-call(samtools_call)
+# samtools_call = ['samtools', 'mpileup', '-l', bed_path, bam_path, '-o', mpileup_path]
+# call(samtools_call)
 
 environ_cov = parse_mpileup_file(mpileup_path)
 print len(environ_cov.keys())
