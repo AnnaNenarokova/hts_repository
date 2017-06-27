@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from subprocess import call
 
-def get_stop_codon_environs(gff_path, bed_out_path, left_border=200, right_border=200, spades_ids=False):
+def get_stop_codon_environs(gff_path, bed_out_path, left_border=200, right_border=200, spades_ids=False, feature="gene"):
     stop_codon_environs = {}
     with open(gff_path, 'r') as gff_file:
         len_contigs={}
@@ -25,7 +25,7 @@ def get_stop_codon_environs(gff_path, bed_out_path, left_border=200, right_borde
                         contig_length = int(contig_id.split('_')[3])
                     else:
                         contig_length = len_contigs[contig_id]
-                    if feature_type == "gene":
+                    if feature_type == feature:
                         if gene_end <= gene_start:
                             print "Gene end <= gene start error"
                             print gene_start, gene_end
@@ -101,12 +101,18 @@ environ_length = left_border + right_border
 # bam_path="/home/anna/bioinformatics/blasto/igv_session_p57/RNA_30_junction.bam"
 # mpileup_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/p57_stop_codon_environs.mpileup"
 
+# gff_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/novymonas_pseudo.out.gff3"
+# bed_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/no_pand_pseudochr_sorted.bed"
+# bam_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/no_pand_pseudochr_sorted.bam"
+# mpileup_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/novymonas_stop_codon_environs.mpileup"
+
 gff_path="/home/nenarokova/blasto/rna_cov_analysis/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff"
 bed_path="/home/nenarokova/blasto/rna_cov_analysis/leptomonas_stop_codon_environs.bed"
 bam_path="/home/pasha/Anzhelika/LpyrH10_data_for_Tomas/H10_totalRNA_200_400_paired_trimmed_paired_alignment.bam"
 mpileup_path="/home/nenarokova/blasto/rna_cov_analysis/leptomonas_stop_codon_environs.mpileup"
 
-stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=False)
+
+stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS")
 print len(stop_codon_environs)
 
 samtools_call = ['samtools', 'mpileup', '-l', bed_path, bam_path, '-o', mpileup_path]
