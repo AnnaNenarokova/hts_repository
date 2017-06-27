@@ -90,7 +90,7 @@ query_paths= [
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_paths = [
-"/media/4TB1/blastocrithidia/genome_assembly/p57_DNA_transla/blast_db/p57_DNA_transla.db"
+"/media/4TB1/blastocrithidia/p57_DNA_translated_all_ref_blast/blast_db/p57_DNA_transla.db"
 ]
 
 for query_path in query_paths:
