@@ -101,16 +101,16 @@ environ_length = left_border + right_border
 # bam_path="/home/anna/bioinformatics/blasto/igv_session_p57/RNA_30_junction.bam"
 # mpileup_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/p57_stop_codon_environs.mpileup"
 
-# gff_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff"
-# bed_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/leptomonas_stop_codon_environs.bed"
-# bam_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/H10_polyA_180_380_paired_trimmed_paired_alignment.bam"
-# mpileup_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/leptomonas_stop_codon_environs.mpileup"
+gff_path="/home/nenarokova/blasto/rna_cov_analysis/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff"
+bed_path="/home/nenarokova/blasto/rna_cov_analysis/leptomonas_stop_codon_environs.bed"
+bam_path="/home/pasha/Anzhelika/LpyrH10_data_for_Tomas/H10_totalRNA_200_400_paired_trimmed_paired_alignment.bam"
+mpileup_path="/home/nenarokova/blasto/rna_cov_analysis/leptomonas_stop_codon_environs.mpileup"
 
 stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=False)
 print len(stop_codon_environs)
 
-# samtools_call = ['samtools', 'mpileup', '-l', bed_path, bam_path, '-o', mpileup_path]
-# call(samtools_call)
+samtools_call = ['samtools', 'mpileup', '-l', bed_path, bam_path, '-o', mpileup_path]
+call(samtools_call)
 
 environ_cov = parse_mpileup_file(mpileup_path)
 print len(environ_cov.keys())
