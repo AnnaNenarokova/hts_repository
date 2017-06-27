@@ -1,20 +1,30 @@
 #!/usr/bin/python
 from subprocess import call
 
-def get_stop_codon_environs(gff_path, bed_out_path, left_border=200, right_border=200):
+def get_stop_codon_environs(gff_path, bed_out_path, left_border=200, right_border=200, spades_ids=False):
     stop_codon_environs = {}
     with open(gff_path, 'r') as gff_file:
+        len_contigs={}
         with open(bed_out_path, 'w') as output:
             for row in gff_file:
-                split_row = row.split('\t')
-                contig_id = split_row[0]
-                if contig_id[0] != "#":
+                if row[0] == "#":
+                    if not spades_ids and row[:17] == "##sequence-region" :
+                        split_row = row.split('\t')
+                        contig_id = split_row[1]
+                        contig_length = split_row[3]
+                        len_contigs[contig_id] = contig_length
+                else:
+                    split_row = row.split('\t')
+                    contig_id = split_row[0]
                     feature_type = split_row[2]
                     gene_start = int(split_row[3])
                     gene_end = int(split_row[4])
                     score = split_row[5]
                     strand = split_row[6]
-                    contig_length = int(contig_id.split('_')[3])
+                    if spades_ids:
+                        contig_length = int(contig_id.split('_')[3])
+                    else:
+                        contig_length = len_contigs[contig_id]
                     if feature_type == "gene":
                         if gene_end <= gene_start:
                             print "Gene end <= gene start error"
@@ -88,18 +98,17 @@ environ_length = left_border + right_border
 # bam_path="/home/anna/bioinformatics/blasto/igv_session_p57/RNA_30_junction.bam"
 # mpileup_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/p57_stop_codon_environs.mpileup"
 
-gff_path = "/home/anna/bioinformatics/novymonas/companion_np_pand_lbraz/scaffold.out.gff3"
-bed_path = "/home/anna/bioinformatics/blasto/rna_cov_analysis/novymonas_stop_codon_environs.bed"
-bam_path="/home/anna/bioinformatics/novymonas/wt_rna_mapped_sorted.bam"
-mpileup_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/novymonas_stop_codon_environs.mpileup"
+gff_path = "/home/anna/bioinformatics/blasto/rna_cov_analysis/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff"
+bed_path = "/home/anna/bioinformatics/blasto/rna_cov_analysis/leptomonas_stop_codon_environs.bed"
+bam_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/H10_polyA_180_380_paired_trimmed_paired_alignment.bam"
+mpileup_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/leptomonas_stop_codon_environs.mpileup"
 
-stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border)
+stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=False)
 print len(stop_codon_environs)
 
-# samtools_call = ['samtools', 'mpileup', '-l', bed_path, bam_path, '-o', mpileup_path]
-# call(samtools_call)
+samtools_call = ['samtools', 'mpileup', '-l', bed_path, bam_path, '-o', mpileup_path]
+call(samtools_call)
 
-# mpileup_path = "/home/anna/bioinformatics/blasto/rna_cov_analysis/stop_codon_environs.mpileup"
-# environ_cov = parse_mpileup_file(mpileup_path)
-# print len(environ_cov.keys())
-# print count_mean_cov_pos(environ_cov, stop_codon_environs, environ_length)
+environ_cov = parse_mpileup_file(mpileup_path)
+print len(environ_cov.keys())
+print count_mean_cov_pos(environ_cov, stop_codon_environs, environ_length)
