@@ -9,9 +9,9 @@ for file in files:
 	file_name = file.split('.')[0]
 	out = open('/media/4TB1/blastocrithidia/bexlh/reads/trimmed/' + file_name + '_upd.fq', 'w')
 	if ('sra' in file and '_fw.fq' in file) or ('sra' in file and '_rev.fq' in file):
+		print(file)
 		infile = open(file).read()
 		lines = infile.split('\n')
-
 		for line in lines:
 			if line.startswith('@SRR'):
 				#@SRR2173361.101.1 HWI-ST885:166:H84KHADXX:1:1101:2021:2092 length=100
@@ -24,9 +24,9 @@ for file in files:
 				out.write(line + '\n')
 
 	if ('sra' not in file and '_fw.fq' in file) or ('sra' not in file and '_rev.fq' in file):
+		print(file)
 		infile = open(file).read()
 		lines = infile.split('\n')
-
 		for line in lines:
 			if line.startswith('@SRR'):
 				#@SRR1186295.25.1 25 length=100
