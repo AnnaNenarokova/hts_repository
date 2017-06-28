@@ -101,15 +101,15 @@ environ_length = left_border + right_border
 # bam_path="/home/anna/bioinformatics/blasto/igv_session_p57/RNA_30_junction.bam"
 # mpileup_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/p57_stop_codon_environs.mpileup"
 
-# gff_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/novymonas_pseudo.out.gff3"
-# bed_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/no_pand_pseudochr_sorted.bed"
-# bam_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/no_pand_pseudochr_sorted.bam"
-# mpileup_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/novymonas_stop_codon_environs.mpileup"
+gff_path="/home/nenarokova/novymonas/no_pandoraea/novymonas_scaffold.out.gff3"
+bed_path="/home/nenarokova/novymonas/no_pandoraea/novymonas_stop_codon_environs.bed"
+bam_path="/home/nenarokova/novymonas/no_pandoraea/Aligned.sortedByCoord.out.bam"
+mpileup_path="/home/nenarokova/novymonas/no_pandoraea/novymonas_stop_codon_environs.mpileup"
 
-gff_path="/home/nenarokova/blasto/rna_cov_analysis/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff"
-bed_path="/home/nenarokova/blasto/rna_cov_analysis/leptomonas_stop_codon_environs.bed"
-bam_path="/home/pasha/Anzhelika/LpyrH10_data_for_Tomas/H10_totalRNA_200_400_paired_trimmed_paired_alignment.bam"
-mpileup_path="/home/nenarokova/blasto/rna_cov_analysis/leptomonas_stop_codon_environs.mpileup"
+# gff_path="/home/nenarokova/blasto/rna_cov_analysis/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff"
+# bed_path="/home/nenarokova/blasto/rna_cov_analysis/leptomonas_stop_codon_environs.bed"
+# bam_path="/home/pasha/Anzhelika/LpyrH10_data_for_Tomas/H10_totalRNA_200_400_paired_trimmed_paired_alignment.bam"
+# mpileup_path="/home/nenarokova/blasto/rna_cov_analysis/leptomonas_stop_codon_environs.mpileup"
 
 
 stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS")
