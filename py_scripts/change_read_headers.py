@@ -5,11 +5,10 @@ os.chdir('/media/4TB1/blastocrithidia/bexlh/reads/trimmed/')
 files = os.listdir()
 
 for file in files:
-	print(file)
-	file_name = file.split('.')[0]
-	out = open('/media/4TB1/blastocrithidia/bexlh/reads/trimmed/' + file_name + '_upd.fq', 'w')
 	if ('sra' in file and '_fw.fq' in file) or ('sra' in file and '_rev.fq' in file):
 		print(file)
+		file_name = file.split('.')[0]
+		out = open('/media/4TB1/blastocrithidia/bexlh/reads/trimmed/' + file_name + '_upd.fq', 'w')
 		infile = open(file).read()
 		lines = infile.split('\n')
 		for line in lines:
@@ -25,6 +24,8 @@ for file in files:
 
 	if ('sra' not in file and '_fw.fq' in file) or ('sra' not in file and '_rev.fq' in file):
 		print(file)
+		file_name = file.split('.')[0]
+		out = open('/media/4TB1/blastocrithidia/bexlh/reads/trimmed/' + file_name + '_upd.fq', 'w')
 		infile = open(file).read()
 		lines = infile.split('\n')
 		for line in lines:
