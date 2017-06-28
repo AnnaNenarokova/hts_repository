@@ -103,7 +103,7 @@ environ_length = left_border + right_border
 
 gff_path="/home/nenarokova/novymonas/no_pandoraea/novymonas_scaffold.out.gff3"
 bed_path="/home/nenarokova/novymonas/no_pandoraea/novymonas_stop_codon_environs.bed"
-bam_path="/home/nenarokova/novymonas/no_pandoraea/Aligned.sortedByCoord.out.bam"
+# bam_path="/home/nenarokova/novymonas/no_pandoraea/Aligned.sortedByCoord.out.bam"
 mpileup_path="/home/nenarokova/novymonas/no_pandoraea/novymonas_stop_codon_environs.mpileup"
 
 # gff_path="/home/nenarokova/blasto/rna_cov_analysis/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff"
@@ -115,8 +115,8 @@ mpileup_path="/home/nenarokova/novymonas/no_pandoraea/novymonas_stop_codon_envir
 stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS")
 print len(stop_codon_environs)
 
-samtools_call = ['samtools', 'mpileup', '-l', bed_path, bam_path, '-o', mpileup_path]
-call(samtools_call)
+# samtools_call = ['samtools', 'mpileup', '-l', bed_path, bam_path, '-o', mpileup_path]
+# call(samtools_call)
 
 environ_cov = parse_mpileup_file(mpileup_path)
 print len(environ_cov.keys())
