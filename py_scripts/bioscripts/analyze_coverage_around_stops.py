@@ -99,13 +99,13 @@ left_border = 200
 right_border = 500
 environ_length = left_border + right_border
 
-gff_path="/home/anna/bioinformatics/reference_rna_alignments/LpyrH10/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff"
-bam_path="/home/anna/bioinformatics/reference_rna_alignments/LpyrH10/H10_all_RNA.bam"
+gff_path="/media/4TB1/blastocrithidia/UTR_analyisis/references/blechomonas/TriTrypDB-33_BayalaiB08-376.gff"
+bam_path="/media/4TB1/blastocrithidia/UTR_analyisis/references/blechomonas/mapping/blechomonas_rna_sorted.bam"
 
-bed_path="/home/anna/bioinformatics/reference_rna_alignments/LpyrH10/LpyrH10_stop_codon_environs.bed"
-mpileup_path="/home/anna/bioinformatics/reference_rna_alignments/LpyrH10/LpyrH10_stop_codon_environs.mpileup"
+bed_path="/media/4TB1/blastocrithidia/UTR_analyisis/references/blechomonas/blechomonas_stop_environs.bed"
+mpileup_path="/media/4TB1/blastocrithidia/UTR_analyisis/references/blechomonas/blechomonas_stop_environs.mpileup"
 
-outpath="/home/anna/bioinformatics/reference_rna_alignments/LpyrH10/LpyrH10_stop_codon_environs.txt"
+outpath="/media/4TB1/blastocrithidia/UTR_analyisis/references/blechomonas/blechomonas_stop_environs.txt"
 
 stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS", stops_included=True)
 # stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=True, feature="gene", stops_included=False)
