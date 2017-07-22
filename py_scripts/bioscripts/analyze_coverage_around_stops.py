@@ -9,7 +9,7 @@ def get_stop_codon_environs(gff_path, bed_out_path, left_border=200, right_borde
             for row in gff_file:
                 if row[0] == "#":
                     if not spades_ids and row[:17] == "##sequence-region" :
-                        split_row = row.split('\t')
+                        split_row = row.split(' ')
                         contig_id = split_row[1]
                         contig_length = split_row[3]
                         len_contigs[contig_id] = contig_length
