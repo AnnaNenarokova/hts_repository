@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from subprocess import call
 
-def get_stop_codon_environs(gff_path, bed_out_path, left_border=200, right_border=200, spades_ids=False, feature="gene"):
+def get_stop_codon_environs(gff_path, bed_out_path, left_border=200, right_border=200, spades_ids=False, feature="gene", stops_included="True"):
     stop_codon_environs = {}
     with open(gff_path, 'r') as gff_file:
         len_contigs={}
@@ -18,7 +18,10 @@ def get_stop_codon_environs(gff_path, bed_out_path, left_border=200, right_borde
                     contig_id = split_row[0]
                     feature_type = split_row[2]
                     gene_start = int(split_row[3])
-                    gene_end = int(split_row[4])
+                    if stops_included:
+                        gene_end = int(split_row[4])
+                    else:
+                        gene_end = int(split_row[4]) + 3
                     score = split_row[5]
                     strand = split_row[6]
                     if spades_ids:
@@ -96,28 +99,29 @@ left_border = 200
 right_border = 500
 environ_length = left_border + right_border
 
-# gff_path="/home/anna/bioinformatics/blasto/igv_session_p57/annotation.gff"
-# bed_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/p57_stop_codon_environs.bed"
-# bam_path="/home/anna/bioinformatics/blasto/igv_session_p57/RNA_30_junction.bam"
-# mpileup_path="/home/anna/bioinformatics/blasto/rna_cov_analysis/p57_stop_codon_environs.mpileup"
+gff_path="/home/anna/bioinformatics/reference_rna_alignments/LpyrH10/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff"
+bam_path="/home/anna/bioinformatics/reference_rna_alignments/LpyrH10/H10_all_RNA.bam"
 
-gff_path="/home/nenarokova/novymonas/no_pandoraea/novymonas_scaffold.out.gff3"
-bed_path="/home/nenarokova/novymonas/no_pandoraea/novymonas_stop_codon_environs.bed"
-# bam_path="/home/nenarokova/novymonas/no_pandoraea/Aligned.sortedByCoord.out.bam"
-mpileup_path="/home/nenarokova/novymonas/no_pandoraea/novymonas_stop_codon_environs.mpileup"
+bed_path="/home/anna/bioinformatics/reference_rna_alignments/LpyrH10/LpyrH10_stop_codon_environs.bed"
+mpileup_path="/home/anna/bioinformatics/reference_rna_alignments/LpyrH10/LpyrH10_stop_codon_environs.mpileup"
 
-# gff_path="/home/nenarokova/blasto/rna_cov_analysis/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff"
-# bed_path="/home/nenarokova/blasto/rna_cov_analysis/leptomonas_stop_codon_environs.bed"
-# bam_path="/home/pasha/Anzhelika/LpyrH10_data_for_Tomas/H10_totalRNA_200_400_paired_trimmed_paired_alignment.bam"
-# mpileup_path="/home/nenarokova/blasto/rna_cov_analysis/leptomonas_stop_codon_environs.mpileup"
+outpath="/home/anna/bioinformatics/reference_rna_alignments/LpyrH10/LpyrH10_stop_codon_environs.txt"
 
-
-stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS")
+stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS", stops_included=True)
+# stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=True, feature="gene", stops_included=False)
 print len(stop_codon_environs)
 
-# samtools_call = ['samtools', 'mpileup', '-l', bed_path, bam_path, '-o', mpileup_path]
-# call(samtools_call)
+samtools_call = ['samtools', 'mpileup', '-l', bed_path, bam_path, '-o', mpileup_path]
+call(samtools_call)
 
 environ_cov = parse_mpileup_file(mpileup_path)
 print len(environ_cov.keys())
-print count_mean_cov_pos(environ_cov, stop_codon_environs, environ_length)
+result = count_mean_cov_pos(environ_cov, stop_codon_environs, environ_length)
+
+print result
+
+with open(outpath, 'w') as outfile:
+    for item in result:
+      outfile.write("%s\n" % item)
+outfile.close()
+

@@ -1,12 +1,12 @@
 #!/bin/bash
 bw2_dir="/home/nenarokova/tools/bowtie2-2.2.9/"
-fasta="/media/4TB1/novymonas/transcriptome/mapping/wt_scaffolds.fasta"
-bt2_base="/media/4TB1/novymonas/transcriptome/mapping/wt_scaffolds"
+fasta="/media/4TB1/blastocrithidia/UTR_analyisis/references/blechomonas/TriTrypDB-33_BayalaiB08-376_Genome.fasta"
+bt2_base="/media/4TB1/blastocrithidia/UTR_analyisis/references/blechomonas/mapping/blechomonas_genome"
 $bw2_dir"bowtie2-build" --threads 30 $fasta $bt2_base
 
-base_name="/media/4TB1/novymonas/transcriptome/mapping/wt_rna_mapped"
-r1="/media/4TB1/novymonas/transcriptome/reads/trimmed_reads/wt_rna_trimmed_1.fq.gz"
-r2="/media/4TB1/novymonas/transcriptome/reads/trimmed_reads/wt_rna_trimmed_2.fq.gz"
+base_name="/media/4TB1/blastocrithidia/UTR_analyisis/references/blechomonas/mapping/blechomonas_rna"
+r1="/media/4TB1/blastocrithidia/UTR_analyisis/references/blechomonas/reads/Blechomonas_forward_reads.fastq.gz"
+r2="/media/4TB1/blastocrithidia/UTR_analyisis/references/blechomonas/reads/Blechomonas_reverse_reads.fastq.gz"
 
 alignment=$base_name".sam"
 report=$base_name".txt"
