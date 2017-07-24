@@ -4,14 +4,14 @@ import os
 from Bio import AlignIO
 from Bio import SeqIO
 
-os.chdir('/home/kika/Dropbox/blasto_project/jaculum/genes/cv_subunits/PASTA/')
+os.chdir('/home/kika/alignments/')
 files = os.listdir()
 
-out_p57 = open('/home/kika/Dropbox/blasto_project/jaculum/genes/cv_subunits/PASTA/out_p57.txt', 'w')
-out_triat = open('/home/kika/Dropbox/blasto_project/jaculum/genes/cv_subunits/PASTA/out_triat.txt', 'w')
-out_BexLH = open('/home/kika/Dropbox/blasto_project/jaculum/genes/cv_subunits/PASTA/out_BexLH.txt', 'w')
-out_jac = open('/home/kika/Dropbox/blasto_project/jaculum/genes/cv_subunits/PASTA/out_jac.txt', 'w')
-out_len = open('/home/kika/Dropbox/blasto_project/jaculum/genes/cv_subunits/PASTA/out_len.tsv', 'w')
+out_p57 = open('/home/kika/alignments/out_p57_test.txt', 'w')
+out_triat = open('/home/kika/alignments/out_triat_test.txt', 'w')
+out_BexLH = open('/home/kika/alignments/out_bexlh_test.txt', 'w')
+out_jac = open('/home/kika/alignments/out_jac_test.txt', 'w')
+out_len = open('/home/kika/alignments/out_len_test.txt', 'w')
 
 def get_sequence_number(file):
 	sequences = SeqIO.parse(file, 'fasta')

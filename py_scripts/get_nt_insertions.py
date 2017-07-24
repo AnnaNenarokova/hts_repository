@@ -51,7 +51,7 @@ for key in proteins.keys():
 	print(key_root)
 	if key_root in nucleotides.keys():
 		nucl = nucleotides[key_root]
-		reverse = nucl.reverse_complement ()
+		reverse = nucl.reverse_complement()
 		prot = proteins[key]
 		if str(prot) in translation(nucl):
 			start = (translation(nucl).find(str(prot))) * 3

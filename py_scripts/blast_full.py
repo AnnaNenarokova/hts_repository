@@ -1,24 +1,26 @@
 #!/usr/bin/python3
-#!!! do not forget to change TABLE and OUT in the end of script !!!
+#!!! do not forget to change TABLE, OUT, and parsing of QSEQID in the end of script !!!
 import os
 import subprocess
 from Bio.Blast import NCBIXML
 
-out_blast = open('/home/kika/Dropbox/blasto_project/jac_thiol_blast.xlsx', 'w')
-out_best = open('/home/kika/Dropbox/blasto_project/jac_thiol_best_blast.xlsx', 'w')
+out_blast = open('/home/kika/Dropbox/blasto_project/jaculum/genes/repair/jac_repair_blast.xlsx', 'w')
+out_best = open('/home/kika/Dropbox/blasto_project/jaculum/genes/repair/jac_repair_best_blast.xlsx', 'w')
 
 cmd = '/home/kika/programs/blast-2.5.0+/bin/tblastn'
-query = '/home/kika/programs/blast-2.5.0+/bin/input.txt'
+query = '/home/kika/Dropbox/blasto_project/blastocrithidia/genes/repair/Tb927_repair.fasta'
 db = '/home/kika/programs/blast-2.5.0+/bin/jaculum_scaffolds.fasta'
-output = '/home/kika/Dropbox/blasto_project/jac_thiol_blast.xml'
+output = '/home/kika/Dropbox/blasto_project/jaculum/genes/repair/jac_repair_blast.xml'
 evalue = 10
 outfmt = 5
 word_size = 3
 
+print('starting BLAST')
 # os.system('{} -query {} -db {} -out {} -evalue {} -outfmt {} -word_size {}'.format(
 # 		cmd, query, db, output, evalue, outfmt, word_size))
 subprocess.call('{} -query {} -db {} -out {} -evalue {} -outfmt {} -word_size {}'.format(
 		cmd, query, db, output, evalue, outfmt, word_size), shell=True)
+print('BLAST done')
 
 result_handle = open(output)
 blast_records = NCBIXML.parse(result_handle)
@@ -57,12 +59,12 @@ for record in blast_records:
 out_best.close()
 out_blast.close()
 
-table = open('/home/kika/Dropbox/blasto_project/jac_thiol_best_blast.xlsx', 'r')
+table = open('/home/kika/Dropbox/blasto_project/jaculum/genes/repair/jac_repair_best_blast.xlsx', 'r')
 table.readline()
 
 for row in table:
 	split_row = row.split('\t')
-	qseqid = split_row[0].split(':')[0].split('_')[0]
+	qseqid = split_row[0].split('| ')[2].split(',')[0].replace(' ', '_')
 	qlen = int(split_row[1])
 	sseqid = split_row[2]
 	slen = int(split_row[3])
@@ -78,7 +80,7 @@ for row in table:
 	send = int(split_row[13])
 	alen_qlen = float(split_row[14])
 	alen_slen = float(split_row[15])
-	out = '/home/kika/Dropbox/blasto_project/jac_' + qseqid + '_nt.txt'
+	out = '/home/kika/Dropbox/blasto_project/jaculum/genes/repair/jac_' + qseqid + '_nt.txt'
 
 	if qstart == 1:
 		if qend == qlen:

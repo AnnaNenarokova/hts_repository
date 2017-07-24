@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 import os
 
-table = open('/home/kika/Dropbox/blasto_project/jaculum/genes/thiolation/thiol_best_blast.xlsx', 'r')
 db = '/home/kika/programs/blast-2.5.0+/bin/jaculum_scaffolds.fasta'
-
+table = open('/home/kika/Dropbox/blasto_project/jaculum/genes/thiolation/thiol_best_blast.xlsx', 'r')
 table.readline()
 
 for row in table:
