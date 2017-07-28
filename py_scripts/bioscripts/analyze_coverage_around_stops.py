@@ -95,33 +95,39 @@ def count_mean_cov_pos(coverage, regions, region_len):
     return cov_matrix
 
 
-left_border = 200
-right_border = 500
-environ_length = left_border + right_border
+# left_border = 200
+# right_border = 500
+# environ_length = left_border + right_border
 
-gff_path="/home/nenarokova/blasto/rna_cov_analysis/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff"
-bam_path="/home/nenarokova/blasto/rna_cov_analysis/lpyr_h10_rna_all.bam"
+# gff_path="/home/nenarokova/blasto/rna_cov_analysis/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff"
+# bam_path="/home/nenarokova/blasto/rna_cov_analysis/lpyr_h10_rna_all.bam"
 
-bed_path="/home/nenarokova/blasto/rna_cov_analysis/lpyr_h10_stop_environs.bed"
-mpileup_path="/home/nenarokova/blasto/rna_cov_analysis/lpyr_h10_stop_environs.mpileup"
+# bed_path="/home/nenarokova/blasto/rna_cov_analysis/lpyr_h10_stop_environs.bed"
+# mpileup_path="/home/nenarokova/blasto/rna_cov_analysis/lpyr_h10_stop_environs.mpileup"
 
-outpath="/home/nenarokova/blasto/rna_cov_analysis/lpyr_h10_stop_environs.txt"
+# outpath="/home/nenarokova/blasto/rna_cov_analysis/lpyr_h10_stop_environs.txt"
 
-stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS", stops_included=True)
-# stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=True, feature="gene", stops_included=False)
-print len(stop_codon_environs)
+# stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS", stops_included=True)
+# # stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=True, feature="gene", stops_included=False)
+# print len(stop_codon_environs)
 
-samtools_call = ['samtools', 'mpileup', '-l', bed_path, bam_path, '-o', mpileup_path]
-call(samtools_call)
+# samtools_call = ['samtools', 'mpileup', '-l', bed_path, bam_path, '-o', mpileup_path]
+# call(samtools_call)
 
-environ_cov = parse_mpileup_file(mpileup_path)
-print len(environ_cov.keys())
-result = count_mean_cov_pos(environ_cov, stop_codon_environs, environ_length)
+# environ_cov = parse_mpileup_file(mpileup_path)
+# print len(environ_cov.keys())
+# result = count_mean_cov_pos(environ_cov, stop_codon_environs, environ_length)
 
-print result
+# print result
 
-with open(outpath, 'w') as outfile:
-    for item in result:
-      outfile.write("%s\n" % item)
-outfile.close()
+# with open(outpath, 'w') as outfile:
+#     for item in result:
+#       outfile.write("%s\n" % item)
+# outfile.close()
 
+gff_path="/home/anna/bioinformatics/blasto/utr_analysis/p57_only_taa_dist_10.gff"
+bed_path="/home/anna/bioinformatics/blasto/utr_analysis/p57_stop_only_taa_dist10_1200_-3_environs_.bed"
+left_border = 1200
+right_border = -3
+
+stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=True, feature="gene", stops_included=False)
