@@ -4,7 +4,9 @@ import matplotlib.pyplot as plt
 from Bio import SeqIO
 from Bio import motifs
 
-def get_codon_environs(gff_path, bed_out_path, left_border=-200, right_border=200, spades_ids=False, feature="gene", stops_included="True", starts=False):
+def get_codon_environs(gff_path, left_border=-200, right_border=200, spades_ids=False, feature="gene", stops_included="True", starts=False, bed_out_path=False):
+    if not bed_out_path:
+        bed_out_path='{}_{}_{}_stop_environs.bed'.format(gff_path[:-4],left_border, right_border)
     codon_environs = {}
     with open(gff_path, 'r') as gff_file:
         len_contigs={}
@@ -21,36 +23,22 @@ def get_codon_environs(gff_path, bed_out_path, left_border=-200, right_border=20
                     contig_id = split_row[0]
                     feature_type = split_row[2]
                     gene_start = int(split_row[3])
-                    if stops_included:
-                        gene_end = int(split_row[4])
-                    else:
-                        gene_end = int(split_row[4]) + 3
+                    gene_end = int(split_row[4])
                     score = split_row[5]
                     strand = split_row[6]
+                    if strand == "-":
+                        gene_start, gene_end = gene_end, gene_start
+                    if stops_included:
+                        gene_end -= 3
                     if spades_ids:
                         contig_length = int(contig_id.split('_')[3])
                     else:
                         contig_length = len_contigs[contig_id]
                     if feature_type == feature:
-                        if gene_end <= gene_start:
-                            print "Gene end <= gene start error"
-                            print gene_start, gene_end
-                            exit(1)
                         if starts:
-                            if strand == "+":
-                                current_borders = [gene_start+left_border, gene_start+right_border]
-                            elif strand == "-":
-                                current_borders = [gene_end-right_border-4, gene_end-left_border-4]
-                            else:
-                                print "GFF strand error"
+                            current_borders = [gene_start+left_border, gene_start+right_border]
                         else:
-                            if strand == "+":
-                                current_borders = [gene_end+left_border, gene_end+right_border]
-                            elif strand == "-":
-                                current_borders = [gene_start-right_border-4, gene_start-left_border-4]
-                            else:
-                                print "GFF strand error"
-                                exit(1)
+                            current_borders = [gene_end+left_border, gene_end+right_border]
                         if current_borders[0] > 0 and current_borders[1] <= contig_length:
                             if contig_id not in codon_environs.keys():
                                 codon_environs[contig_id]=[]
@@ -59,7 +47,7 @@ def get_codon_environs(gff_path, bed_out_path, left_border=-200, right_border=20
                             output.write(new_row)
         output.close()
     gff_file.close()
-    return codon_environs
+    return codon_environs, bed_out_path
 
 def codon_usage_per_position(fasta_path):
     codon_usage = False
@@ -76,6 +64,20 @@ def codon_usage_per_position(fasta_path):
                 codon_usage[i][codon] = 1
     return codon_usage
 
+def gc_per_position(fasta_path):
+    gc_usage = False
+    for record in SeqIO.parse(fasta_path, "fasta"):
+        seq = record.seq.upper()
+        seq_length = len(seq)
+        if not gc_usage:
+            gc_usage = [{"A": 0, "C": 0, "G": 0, "T": 0} for x in range(seq_length)]
+        for i, k in enumerate(range(0, seq_length)):
+            codon = str(seq[k])
+            if codon in gc_usage[i].keys():
+                gc_usage[i][codon]+= 1
+    return gc_usage
+
+
 def create_logo_from_fasta(fasta_path, logo_path):
     sequences=[]
     for record in SeqIO.parse(fasta_path, "fasta"):
@@ -87,24 +89,32 @@ def create_logo_from_fasta(fasta_path, logo_path):
     print "Logo is available in " + logo_path
     return 0
 
+left_border = -15
+right_border = 15
 
-in_fasta="/home/anna/bioinformatics/blasto/utr_analysis/P57/p57_DNA_scaffolds.fa"
-gff_path="/home/anna/bioinformatics/blasto/utr_analysis/P57/p57_only_taa_dist_10.gff"
+# in_fasta="/home/anna/bioinformatics/blasto/utr_analysis/P57/p57_DNA_scaffolds.fa"
+# gff_path="/home/anna/bioinformatics/blasto/utr_analysis/P57/p57_stop_distance_10.gff"
+# gff_path="/home/anna/bioinformatics/blasto/utr_analysis/P57/p57_TAA_stop_distance_10.gff"
+# codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=True, feature="gene", stops_included=False)
 
 # gff_path="/home/anna/bioinformatics/blasto/utr_analysis/LpyrH10/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff"
 # in_fasta="/home/anna/bioinformatics/blasto/utr_analysis/LpyrH10/Leptomonas_pyrrhocoris.fa"
+# codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS", stops_included=False)
 
-# gff_path="/home/anna/bioinformatics/blasto/utr_analysis/tbrucei/TriTrypDB-33_TbruceiTREU927.gff"
-# in_fasta="/home/anna/bioinformatics/blasto/utr_analysis/tbrucei/TriTrypDB-33_TbruceiTREU927_Genome.fasta"
+gff_path="/home/anna/bioinformatics/blasto/utr_analysis/tbrucei/TriTrypDB-33_TbruceiTREU927.gff"
+in_fasta="/home/anna/bioinformatics/blasto/utr_analysis/tbrucei/TriTrypDB-33_TbruceiTREU927_Genome.fasta"
+codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS", stops_included=True)
 
-left_border = -300
-right_border = 300
-bed_path='{}_{}_{}_stop_environs.bed'.format(gff_path[:-4],left_border, right_border)
+
+# gff_path="/home/anna/bioinformatics/blasto/utr_analysis/novymonas/nesm_pseudo.out.gff3"
+# in_fasta="/home/anna/bioinformatics/blasto/utr_analysis/novymonas/nesm_pseudochr.fasta"
+# codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS", stops_included=False)
+
+# gff_path="/home/anna/bioinformatics/blasto/utr_analysis/blechomonas/TriTrypDB-33_BayalaiB08-376.gff"
+# in_fasta="/home/anna/bioinformatics/blasto/utr_analysis/blechomonas/TriTrypDB-33_BayalaiB08-376_Genome.fasta"
+# codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS", stops_included=False)
+
 logo_path='{}_{}_{}_stop_environs_logo.png'.format(gff_path[:-4],left_border, right_border)
-
-codon_environs = get_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=True, feature="gene", stops_included=False)
-# codon_environs = get_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS", stops_included=False)
-
 
 out_fasta=bed_path[:-3]+"fna"
 
@@ -121,22 +131,22 @@ codon_usage = codon_usage_per_position(fasta_path)
 
 interest_codons = {
     "TAA"  : [],
-    "GAA"  : [],
+    # "GAA"  : [],
     "TAG"  : [],
-    "GAG"  : [],
-    # "TGA"  : [],
+    # "GAG"  : [],
+    "TGA"  : []
     # "TGG"  : []
 }
-interest_codons = {
-    "AAA"  : [],
-    "TAA"  : [],
-    "ATA"  : [],
-    "AAT"  : [],
-    "ATT"  : [],
-    "TAT"  : [],
-    "TTA"  : [],
-    "TTT"  : []
-}
+# interest_codons = {
+#     "AAA"  : [],
+#     "TAA"  : [],
+#     "ATA"  : [],
+#     "AAT"  : [],
+#     "ATT"  : [],
+#     "TAT"  : [],
+#     "TTA"  : [],
+#     "TTT"  : []
+# }
 for pos in codon_usage:
     for interest_codon in interest_codons:
         if interest_codon in pos.keys():
@@ -161,3 +171,27 @@ for interest_codon in interest_codons:
 plt.legend()
 
 plt.show()
+
+# gc_usage = gc_per_position(fasta_path)
+
+# nts = {"A": [], "C": [], "G": [], "T": []}
+
+# for pos in gc_usage:
+#     for nt in nts:
+#         nts[nt].append(pos[nt])
+
+
+# plots = []
+
+# x = range(left_border, right_border)
+
+# for nt in nts:
+#     print nt
+#     coverage = nts[nt]
+#     print len(coverage)
+#     new_plot = plt.plot(x,coverage,label=nt)
+
+# plt.legend()
+
+# plt.show()
+

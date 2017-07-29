@@ -1,15 +1,15 @@
 #!/usr/bin/python
 from subprocess import call
 
-def get_stop_codon_environs(gff_path, bed_out_path, left_border=200, right_border=200, spades_ids=False, feature="gene", stops_included="True"):
-    stop_codon_environs = {}
+def get_codon_environs(gff_path, bed_out_path, left_border=-200, right_border=200, spades_ids=False, feature="gene", stops_included="True", starts=False):
+    codon_environs = {}
     with open(gff_path, 'r') as gff_file:
         len_contigs={}
         with open(bed_out_path, 'w') as output:
             for row in gff_file:
                 if row[0] == "#":
                     if not spades_ids and row[:17] == "##sequence-region" :
-                        split_row = row.split('\t')
+                        split_row = row.split(' ')
                         contig_id = split_row[1]
                         contig_length = split_row[3]
                         len_contigs[contig_id] = contig_length
@@ -33,22 +33,30 @@ def get_stop_codon_environs(gff_path, bed_out_path, left_border=200, right_borde
                             print "Gene end <= gene start error"
                             print gene_start, gene_end
                             exit(1)
-                        if strand == "+":
-                            current_borders = [gene_end-left_border, gene_end+right_border]
-                        elif strand == "-":
-                            current_borders = [gene_start-right_border, gene_start+left_border]
+                        if starts:
+                            if strand == "+":
+                                current_borders = [gene_start+left_border, gene_start+right_border]
+                            elif strand == "-":
+                                current_borders = [gene_end-right_border-4, gene_end-left_border-4]
+                            else:
+                                print "GFF strand error"
                         else:
-                            print "GFF strand error"
-                            exit(1)
+                            if strand == "+":
+                                current_borders = [gene_end+left_border, gene_end+right_border]
+                            elif strand == "-":
+                                current_borders = [gene_start-right_border-4, gene_start-left_border-4]
+                            else:
+                                print "GFF strand error"
+                                exit(1)
                         if current_borders[0] > 0 and current_borders[1] <= contig_length:
-                            if contig_id not in stop_codon_environs.keys():
-                                stop_codon_environs[contig_id]=[]
-                            stop_codon_environs[contig_id].append( {"strand":strand, "borders": current_borders} )
+                            if contig_id not in codon_environs.keys():
+                                codon_environs[contig_id]=[]
+                            codon_environs[contig_id].append( {"strand":strand, "borders": current_borders} )
                             new_row = '{}\t{}\t{}\t{}\t{}\t{}\n'.format(contig_id, current_borders[0], current_borders[1], 'name', score, strand)
                             output.write(new_row)
         output.close()
     gff_file.close()
-    return stop_codon_environs
+    return codon_environs
 
 def parse_mpileup_file(mpileup_path):
     with open(mpileup_path, 'r') as mpileup_file:
@@ -95,39 +103,33 @@ def count_mean_cov_pos(coverage, regions, region_len):
     return cov_matrix
 
 
-# left_border = 200
-# right_border = 500
-# environ_length = left_border + right_border
+left_border = 300
+right_border = 300
+environ_length = left_border + right_border
 
-# gff_path="/home/nenarokova/blasto/rna_cov_analysis/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff"
-# bam_path="/home/nenarokova/blasto/rna_cov_analysis/lpyr_h10_rna_all.bam"
+gff_path="/home/nenarokova/blasto/rna_cov_analysis/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff"
+bam_path="/home/nenarokova/blasto/rna_cov_analysis/lpyr_h10_rna_all.bam"
 
-# bed_path="/home/nenarokova/blasto/rna_cov_analysis/lpyr_h10_stop_environs.bed"
-# mpileup_path="/home/nenarokova/blasto/rna_cov_analysis/lpyr_h10_stop_environs.mpileup"
+bed_path="/home/nenarokova/blasto/rna_cov_analysis/lpyr_h10_stop_environs.bed"
+mpileup_path="/home/nenarokova/blasto/rna_cov_analysis/lpyr_h10_stop_environs.mpileup"
 
-# outpath="/home/nenarokova/blasto/rna_cov_analysis/lpyr_h10_stop_environs.txt"
+outpath="/home/nenarokova/blasto/rna_cov_analysis/lpyr_h10_stop_environs.txt"
 
-# stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS", stops_included=True)
-# # stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=True, feature="gene", stops_included=False)
-# print len(stop_codon_environs)
+stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS", stops_included=True)
+# stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=True, feature="gene", stops_included=False)
+print len(stop_codon_environs)
 
-# samtools_call = ['samtools', 'mpileup', '-l', bed_path, bam_path, '-o', mpileup_path]
-# call(samtools_call)
+samtools_call = ['samtools', 'mpileup', '-l', bed_path, bam_path, '-o', mpileup_path]
+call(samtools_call)
 
-# environ_cov = parse_mpileup_file(mpileup_path)
-# print len(environ_cov.keys())
-# result = count_mean_cov_pos(environ_cov, stop_codon_environs, environ_length)
+environ_cov = parse_mpileup_file(mpileup_path)
+print len(environ_cov.keys())
+result = count_mean_cov_pos(environ_cov, stop_codon_environs, environ_length)
 
-# print result
+print result
 
-# with open(outpath, 'w') as outfile:
-#     for item in result:
-#       outfile.write("%s\n" % item)
-# outfile.close()
+with open(outpath, 'w') as outfile:
+    for item in result:
+      outfile.write("%s\n" % item)
+outfile.close()
 
-gff_path="/home/anna/bioinformatics/blasto/utr_analysis/p57_only_taa_dist_10.gff"
-bed_path="/home/anna/bioinformatics/blasto/utr_analysis/p57_stop_only_taa_dist10_1200_-3_environs_.bed"
-left_border = 1200
-right_border = -3
-
-stop_codon_environs = get_stop_codon_environs(gff_path, bed_path, left_border=left_border, right_border=right_border, spades_ids=True, feature="gene", stops_included=False)
