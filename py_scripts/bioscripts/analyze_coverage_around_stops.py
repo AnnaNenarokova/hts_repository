@@ -80,7 +80,6 @@ mpileup_path=bed_path[:-4]+".mpileup"
 outpath=bed_path[:-4]+"_cov_analysis.txt"
 
 regions=parse_bed_file(bed_path)
-print regions
 
 samtools_call = ['samtools', 'mpileup', '-l', bed_path, bam_path, '-o', mpileup_path]
 call(samtools_call)
