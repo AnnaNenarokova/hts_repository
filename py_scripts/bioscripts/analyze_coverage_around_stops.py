@@ -64,17 +64,17 @@ left_border = 300
 right_border = 300
 environ_length = left_border + right_border
 
-bam_path="/media/4TB1/blastocrithidia/UTR_analyisis/references/blechomonas/mapping/blechomonas_rna_sorted.bam"
-bed_path="/media/4TB1/blastocrithidia/UTR_analyisis/references/blechomonas/TriTrypDB-33_BayalaiB08-376_-300_300_stop_environs.clean.bed"
+# bam_path="/media/4TB1/blastocrithidia/UTR_analyisis/references/blechomonas/mapping/blechomonas_rna_sorted.bam"
+# bed_path="/media/4TB1/blastocrithidia/UTR_analyisis/references/blechomonas/TriTrypDB-33_BayalaiB08-376_-300_300_stop_environs.clean.bed"
 
-bam_path="/home/anna/bioinformatics/igv_sessions/igv_session_novymonas/no_pand_pseudochr_sorted.bam"
-bed_path="/home/anna/bioinformatics/blasto/utr_analysis/novymonas/test.bed"
+# bam_path="/media/4TB1/blastocrithidia/UTR_analyisis/references/lseymouri/mapping/lseymouri_23_1_rna_sorted.bam"
+# bed_path="/media/4TB1/blastocrithidia/UTR_analyisis/references/lseymouri/TriTrypDB-33_LseymouriATCC30220_-300_300_stop_environs.clean.bed"
 
-bam_path="/home/anna/bioinformatics/igv_sessions/igv_session_novymonas/no_pand_pseudochr_sorted.bam"
-bed_path="/home/anna/bioinformatics/blasto/utr_analysis/novymonas/test.bed"
+# bam_path="/media/4TB1/novymonas/transcriptome/mapping/bowtie2_no_pand_pseudochr/no_pand_pseudochr_sorted.bam"
+# bed_path="/media/4TB1/blastocrithidia/UTR_analyisis/references/novymonas/nesm_pseudo.out._-300_300_stop_environs.clean.bed"
 
-bam_path="/home/anna/bioinformatics/igv_sessions/igv_session_novymonas/no_pand_pseudochr_sorted.bam"
-bed_path="/home/anna/bioinformatics/blasto/utr_analysis/novymonas/test.bed"
+# bam_path="/home/nenarokova/blasto/rna_cov_analysis/lpyr/lpyr_h10_rna_all.bam"
+# bed_path="/home/nenarokova/blasto/rna_cov_analysis/lpyr/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected_-300_300_stop_environs.clean.bed"
 
 mpileup_path=bed_path[:-4]+".mpileup"
 outpath=bed_path[:-4]+"_cov_analysis.txt"

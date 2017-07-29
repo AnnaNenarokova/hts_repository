@@ -120,6 +120,11 @@ in_fasta="/home/anna/bioinformatics/blasto/utr_analysis/lseymouri/TriTrypDB-33_L
 gff_path="/home/anna/bioinformatics/blasto/utr_analysis/lseymouri/TriTrypDB-33_LseymouriATCC30220.gff"
 codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS", stops_included=True)
 
+in_fasta="/home/anna/bioinformatics/blasto/utr_analysis/LpyrH10/old/Leptomonas_pyrrhocoris.fa"
+gff_path="/home/anna/bioinformatics/blasto/utr_analysis/LpyrH10/old/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff"
+codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS", stops_included=False)
+
+
 logo_path='{}_{}_{}_stop_environs_logo.png'.format(gff_path[:-4],left_border, right_border)
 
 out_fasta=bed_path[:-3]+"fna"
