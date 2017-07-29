@@ -25,7 +25,7 @@ def get_codon_environs(gff_path, bed_out_path=False, left_border=-200, right_bor
 					gene_start = int(split_row[3])
 					gene_end = int(split_row[4])
 					score = split_row[5]
-					strand = split_row[6]
+					strand = split_row[6][0]
 					if strand == "+":
 						if feature_type == feature:
 							if gene_end <= gene_start:
@@ -97,16 +97,12 @@ def create_logo_from_fasta(fasta_path, logo_path):
 	print "Logo is available in " + logo_path
 	return 0
 
-left_border = -30
-right_border = 30
+left_border = -300
+right_border = 300
 
 # in_fasta="/home/anna/bioinformatics/blasto/utr_analysis/P57/p57_DNA_scaffolds.fa"
 # gff_path="/home/anna/bioinformatics/blasto/utr_analysis/P57/annotation_only_TAA.gff"
 # codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=True, feature="gene", stops_included=False)
-
-in_fasta="/home/anna/bioinformatics/blasto/utr_analysis/tbrucei/TriTrypDB-33_TbruceiTREU927_Genome.fasta"
-gff_path="/home/anna/bioinformatics/blasto/utr_analysis/tbrucei/TriTrypDB-33_TbruceiTREU927.gff"
-codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS", stops_included=True)
 
 in_fasta="/home/anna/bioinformatics/blasto/utr_analysis/LpyrH10/GCF_001293395.1_ASM129339v1_genomic.fna"
 gff_path="/home/anna/bioinformatics/blasto/utr_analysis/LpyrH10/GCF_001293395.1_ASM129339v1_genomic.gff"
@@ -116,9 +112,13 @@ in_fasta="/home/anna/bioinformatics/blasto/utr_analysis/novymonas/nesm_pseudochr
 gff_path="/home/anna/bioinformatics/blasto/utr_analysis/novymonas/nesm_pseudo.out.gff3"
 codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS", stops_included=True)
 
-# in_fasta="/home/anna/bioinformatics/blasto/utr_analysis/blechomonas/TriTrypDB-33_BayalaiB08-376_Genome.fasta"
-# gff_path="/home/anna/bioinformatics/blasto/utr_analysis/blechomonas/TriTrypDB-33_BayalaiB08-376.gff"
-# codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS", stops_included=True)
+in_fasta="/home/anna/bioinformatics/blasto/utr_analysis/blechomonas/TriTrypDB-33_BayalaiB08-376_Genome.fasta"
+gff_path="/home/anna/bioinformatics/blasto/utr_analysis/blechomonas/TriTrypDB-33_BayalaiB08-376.gff"
+codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS", stops_included=True)
+
+in_fasta="/home/anna/bioinformatics/blasto/utr_analysis/lseymouri/TriTrypDB-33_LseymouriATCC30220_Genome.fasta"
+gff_path="/home/anna/bioinformatics/blasto/utr_analysis/lseymouri/TriTrypDB-33_LseymouriATCC30220.gff"
+codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS", stops_included=True)
 
 logo_path='{}_{}_{}_stop_environs_logo.png'.format(gff_path[:-4],left_border, right_border)
 
