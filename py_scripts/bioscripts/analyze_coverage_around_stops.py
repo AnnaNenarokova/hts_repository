@@ -1,62 +1,6 @@
 #!/usr/bin/python
 from subprocess import call
 
-def get_codon_environs(gff_path, bed_out_path, left_border=-200, right_border=200, spades_ids=False, feature="gene", stops_included="True", starts=False):
-    codon_environs = {}
-    with open(gff_path, 'r') as gff_file:
-        len_contigs={}
-        with open(bed_out_path, 'w') as output:
-            for row in gff_file:
-                if row[0] == "#":
-                    if not spades_ids and row[:17] == "##sequence-region" :
-                        split_row = row.split(' ')
-                        contig_id = split_row[1]
-                        contig_length = split_row[3]
-                        len_contigs[contig_id] = contig_length
-                else:
-                    split_row = row.split('\t')
-                    contig_id = split_row[0]
-                    feature_type = split_row[2]
-                    gene_start = int(split_row[3])
-                    if stops_included:
-                        gene_end = int(split_row[4])
-                    else:
-                        gene_end = int(split_row[4]) + 3
-                    score = split_row[5]
-                    strand = split_row[6]
-                    if spades_ids:
-                        contig_length = int(contig_id.split('_')[3])
-                    else:
-                        contig_length = len_contigs[contig_id]
-                    if feature_type == feature:
-                        if gene_end <= gene_start:
-                            print "Gene end <= gene start error"
-                            print gene_start, gene_end
-                            exit(1)
-                        if starts:
-                            if strand == "+":
-                                current_borders = [gene_start+left_border, gene_start+right_border]
-                            elif strand == "-":
-                                current_borders = [gene_end-right_border-4, gene_end-left_border-4]
-                            else:
-                                print "GFF strand error"
-                        else:
-                            if strand == "+":
-                                current_borders = [gene_end+left_border, gene_end+right_border]
-                            elif strand == "-":
-                                current_borders = [gene_start-right_border-4, gene_start-left_border-4]
-                            else:
-                                print "GFF strand error"
-                                exit(1)
-                        if current_borders[0] > 0 and current_borders[1] <= contig_length:
-                            if contig_id not in codon_environs.keys():
-                                codon_environs[contig_id]=[]
-                            codon_environs[contig_id].append( {"strand":strand, "borders": current_borders} )
-                            new_row = '{}\t{}\t{}\t{}\t{}\t{}\n'.format(contig_id, current_borders[0], current_borders[1], 'name', score, strand)
-                            output.write(new_row)
-        output.close()
-    gff_file.close()
-    return codon_environs
 
 def parse_mpileup_file(mpileup_path):
     with open(mpileup_path, 'r') as mpileup_file:
