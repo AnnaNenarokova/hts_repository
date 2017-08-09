@@ -178,19 +178,19 @@ for interest_codon in interest_codons:
 	print interest_codon
 	coverage = interest_codons[interest_codon]
 	print len(coverage)
-	new_plot = plt.plot(x,coverage,label=interest_codon)
+	if interest_codon == "TAA":
+		new_plot = plt.plot(x,coverage,label=interest_codon, linewidth=1.0)
+	else:
+		new_plot = plt.plot(x,coverage,label=interest_codon, linewidth=1.0)
 
-plt.legend()
-
-plt.show()
 
 # gc_usage = gc_per_position(fasta_path)
 
 # nts = {"A": [], "C": [], "G": [], "T": []}
 
 # for pos in gc_usage:
-#	 for nt in nts:
-#		 nts[nt].append(pos[nt])
+# 	 for nt in nts:
+# 		 nts[nt].append(pos[nt])
 
 
 # plots = []
@@ -198,12 +198,12 @@ plt.show()
 # x = range(left_border, right_border)
 
 # for nt in nts:
-#	 print nt
-#	 coverage = nts[nt]
-#	 print len(coverage)
-#	 new_plot = plt.plot(x,coverage,label=nt)
+# 	 print nt
+# 	 coverage = nts[nt]
+# 	 print len(coverage)
+# 	 new_plot = plt.plot(x,coverage,label=nt)
 
-# plt.legend()
+plt.legend()
 
-# plt.show()
+plt.show()
 
