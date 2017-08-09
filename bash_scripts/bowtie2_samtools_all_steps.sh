@@ -3,7 +3,7 @@
 threads=30
 
 bw2_dir="/home/nenarokova/tools/bowtie2-2.2.9/"
-fasta="/media/4TB1/blastocrithidia/UTR_analyisis/references/lseymouri/TriTrypDB-33_LseymouriATCC$threads220_Genome.fasta"
+fasta="/media/4TB1/blastocrithidia/UTR_analyisis/references/lseymouri/TriTrypDB-33_LseymouriATCC30220_Genome.fasta"
 bt2_base="/media/4TB1/blastocrithidia/UTR_analyisis/references/lseymouri/mapping/lseymouri_genome"
 $bw2_dir"bowtie2-build" --threads $threads $fasta $bt2_base
 
