@@ -4,13 +4,14 @@ import os
 import subprocess
 from Bio.Blast import NCBIXML
 
-out_blast = open('/home/kika/Dropbox/blasto_project/jaculum/genes/repair/jac_repair_blast.xlsx', 'w')
-out_best = open('/home/kika/Dropbox/blasto_project/jaculum/genes/repair/jac_repair_best_blast.xlsx', 'w')
+out_blast = open('/home/kika/MEGAsync/Chlamydomonas/cam_cre_pt_blast.xlsx', 'w')
+out_best = open('/home/kika/MEGAsync/Chlamydomonas/cam_cre_pt_best_blast.xlsx', 'w')
+errors = open('/home/kika/MEGAsync/Chlamydomonas/cam_cre_pt_errors.txt', 'w')
 
 cmd = '/home/kika/programs/blast-2.5.0+/bin/tblastn'
-query = '/home/kika/Dropbox/blasto_project/blastocrithidia/genes/repair/Tb927_repair.fasta'
-db = '/home/kika/programs/blast-2.5.0+/bin/jaculum_scaffolds.fasta'
-output = '/home/kika/Dropbox/blasto_project/jaculum/genes/repair/jac_repair_blast.xml'
+query = '/home/kika/MEGAsync/Chlamydomonas/cre_pt_renamed.txt'
+db = '/home/kika/programs/blast-2.5.0+/bin/cam_spades_12.fasta'
+output = '/home/kika/MEGAsync/Chlamydomonas/cam_cre_pt_blast.xml'
 evalue = 10
 outfmt = 5
 word_size = 3
@@ -59,48 +60,58 @@ for record in blast_records:
 out_best.close()
 out_blast.close()
 
-table = open('/home/kika/Dropbox/blasto_project/jaculum/genes/repair/jac_repair_best_blast.xlsx', 'r')
+table = open('/home/kika/MEGAsync/Chlamydomonas/cam_cre_pt_best_blast.xlsx', 'r')
 table.readline()
 
+print('sorting hits by evalue')
 for row in table:
 	split_row = row.split('\t')
-	qseqid = split_row[0].split('| ')[2].split(',')[0].replace(' ', '_')
+	qseqid = split_row[0].split('_')[3]
 	qlen = int(split_row[1])
 	sseqid = split_row[2]
-	slen = int(split_row[3])
-	alen = int(split_row[4])
-	evalue = split_row[5]
-	pident = int(split_row[6])
-	bitscore = float(split_row[7])
-	mismatch = int(split_row[8])
-	gaps = int(split_row[9])
-	qstart = int(split_row[10])
-	qend = int(split_row[11])
-	sstart = int(split_row[12])
-	send = int(split_row[13])
-	alen_qlen = float(split_row[14])
-	alen_slen = float(split_row[15])
-	out = '/home/kika/Dropbox/blasto_project/jaculum/genes/repair/jac_' + qseqid + '_nt.txt'
+	try:
+		slen = int(split_row[3])
+		alen = int(split_row[4])
+		evalue = float(split_row[5])
+		pident = int(split_row[6])
+		bitscore = float(split_row[7])
+		mismatch = int(split_row[8])
+		gaps = int(split_row[9])
+		qstart = int(split_row[10])
+		qend = int(split_row[11])
+		sstart = int(split_row[12])
+		send = int(split_row[13])
+		alen_qlen = float(split_row[14])
+		alen_slen = float(split_row[15])
+		out = '/home/kika/MEGAsync/Chlamydomonas/cam_pt_' + qseqid + '_nt.txt'
 
-	if qstart == 1:
-		if qend == qlen:
-			send = send + 300
+		if evalue < 0.001:
+			if qstart == 1:
+				if qend == qlen:
+					send = send + 300
+				else:
+					send = send + 3*(qlen - qend) + 300
+				sstart = sstart - 300
+				if sstart < 1:
+					sstart = 1
+			else:
+				if qend == qlen:
+					send = send + 300
+				else:
+					send = send + 3*(qlen - qend) + 300
+				sstart = sstart - (3*qstart + 300)
+				if sstart < 1:
+					sstart = 1
+			b_range = '{}-{}'.format(sstart, send)
+			os.system('/home/kika/programs/blast-2.5.0+/bin/blastdbcmd -entry {} -db {} -out {} -range {}'.format(
+				sseqid, db, out, b_range))
 		else:
-			send = send + 3*(qlen - qend) + 300
-		sstart = sstart - 300
-		if sstart < 1:
-			sstart = 1
-	else:
-		if qend == qlen:
-			send = send + 300
-		else:
-			send = send + 3*(qlen - qend) + 300
-		sstart = sstart - (3*qstart + 300)
-		if sstart < 1:
-			sstart = 1
-	
-	b_range = '{}-{}'.format(sstart, send)
-	os.system('/home/kika/programs/blast-2.5.0+/bin/blastdbcmd -entry {} -db {} -out {} -range {}'.format(
-		sseqid, db, out, b_range))
+			errors.write('{}: too high evalue ({})\n'. format(qseqid, evalue))
 
+	except:
+		errors.write(qseqid + ': no hit found\n')
+
+print('writing hits to files done')
+
+errors.close()
 table.close()

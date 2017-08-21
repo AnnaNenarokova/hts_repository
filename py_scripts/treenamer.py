@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
 #file in format Acc. number \t name of organism \n
-names = open('/home/kika/MEGAsync/Euglena longa/2013 Sekvenovanie/Glycerolipids/SQD pathway/SQD2 tree/names.txt', 'r')
-tree = open('/home/kika/MEGAsync/Euglena longa/2013 Sekvenovanie/Glycerolipids/SQD pathway/SQD2 tree/SQD2_trimal_automated1.phy.treefile', 'r')
+names = open('/home/kika/MEGAsync/Publikacie/Rheb/figures/species.txt', 'r')
+tree = open('/home/kika/MEGAsync/Publikacie/Rheb/figures/Euglenozoa_rheb_tree.txt', 'r')
 
 name_dict = {}
 for name in names:
@@ -22,5 +22,5 @@ for key in name_dict:
 ##result.close()
 
 #2) closes result file automatically
-with open('/home/kika/MEGAsync/Euglena longa/2013 Sekvenovanie/Glycerolipids/SQD pathway/SQD2 tree/SQD2_tree_renamed.txt', 'w') as result:
+with open('/home/kika/MEGAsync/Publikacie/Rheb/figures/Euglenozoa_rheb_tree_renamed.txt', 'w') as result:
     result.write(tree_line)

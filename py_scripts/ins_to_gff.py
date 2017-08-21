@@ -3,7 +3,7 @@
 import os
 import re
 from Bio import SeqIO, AlignIO
-from collections import OrderedDict
+from collections import OrderedDict, defaultdict
 
 os.chdir('/home/kika/alignments/')
 files = os.listdir()
@@ -155,12 +155,15 @@ def full_prot(aln_file):
 	alignment = AlignIO.read(aln_file, 'fasta')
 	file_name = aln_file.split('.marker')[0]
 	full_protein = []
-	full_prot_dict = {}
+	# full_prot_dict = {}
+	full_prot_dict = defaultdict(list)
 	for seq in alignment:
 		if 'p57' in seq.name:
 			name = re.search(r'NODE_\d+_length_\d+_cov_\d+.\d+', seq.name).group()
-			full_protein.append([name, str(seq.seq).replace('-', ''), file_name])
-	full_prot_dict[full_protein[0][0]] = (full_protein[0][1], full_protein[0][2])
+	# 		full_protein.append([name, str(seq.seq).replace('-', ''), file_name])
+	# full_prot_dict[full_protein[0][0]] = (full_protein[0][1], full_protein[0][2])
+			full_prot_dict[name].append(str(seq.seq).replace('-', ''))
+			full_prot_dict[name].append(file_name)
 	return full_prot_dict
 
 def translation(nucl_seq):
