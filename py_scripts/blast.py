@@ -3,19 +3,19 @@ from Bio.Blast import NCBIXML
 from Bio.Blast.Applications import NcbiblastxCommandline
 
 blast_cline = NcbiblastxCommandline(cmd='tblastn', 
-									query='/home/kika/Dropbox/blasto_project/blastocrithidia/genes/thiolation/p57_mtu1_synteny_aa.txt', 
-									db='/home/kika/programs/blast-2.5.0+/bin/jaculum_scaffolds.fasta', 
-									out='/home/kika/Dropbox/blasto_project/jaculum/genes/thiolation/jac_mtu1_synteny_p57_blast.xml',
+									query='/home/kika/blasto_project/blastocrithidia/datasets/all_SSU_NCBI_141_and_Hinxton.fasta', 
+									db='/home/kika/programs/blast-2.5.0+/bin/jac_trinity.fasta', 
+									out='/home/kika/blasto_project/blastocrithidia/datasets/all_SSU_NCBI_141_and_Hinxton_jac_RNA/jacRNA_blast.xml',
 									evalue=10,
 									outfmt=5,
 									word_size=3)
 stdout, stderr = blast_cline()
 print('blast done')
 
-result_handle = open('/home/kika/Dropbox/blasto_project/jaculum/genes/thiolation/jac_mtu1_synteny_p57_blast.xml')
+result_handle = open('/home/kika/blasto_project/blastocrithidia/datasets/all_SSU_NCBI_141_and_Hinxton_jac_RNA/jacRNA_blast.xml')
 blast_records = NCBIXML.parse(result_handle)
-output = open('/home/kika/Dropbox/blasto_project/jaculum/genes/thiolation/jac_mtu1_synteny_p57_blast.xlsx', 'w')
-out_best = open('/home/kika/Dropbox/blasto_project/jaculum/genes/thiolation/jac_mtu1_synteny_p57_best_blast.xlsx', 'w')
+output = open('/home/kika/blasto_project/blastocrithidia/datasets/all_SSU_NCBI_141_and_Hinxton_jac_RNA/jacRNA_blast.xlsx', 'w')
+out_best = open('/home/kika/blasto_project/blastocrithidia/datasets/all_SSU_NCBI_141_and_Hinxton_jac_RNA/jacRNA_best_blast.xlsx', 'w')
 
 output.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format('qseqid', 'qlen', 'sseqid', 'slen', 
 	'alen', 'evalue', 'pident', 'bitscore', 'mismatch', 'gaps', 'qstart', 'qend', 'sstart', 'send', 'alen_qlen', 

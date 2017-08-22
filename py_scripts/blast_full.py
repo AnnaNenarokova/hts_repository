@@ -4,17 +4,17 @@ import os
 import subprocess
 from Bio.Blast import NCBIXML
 
-out_blast = open('/home/kika/MEGAsync/Chlamydomonas/cam_cre_pt_blast.xlsx', 'w')
-out_best = open('/home/kika/MEGAsync/Chlamydomonas/cam_cre_pt_best_blast.xlsx', 'w')
+out_blast = open('/home/kika/blasto_project/blastocrithidia/datasets/all_SSU_NCBI_141_and_Hinxton_jac_RNA/jacRNA_blast.xlsx', 'w')
+out_best = open('/home/kika/blasto_project/blastocrithidia/datasets/all_SSU_NCBI_141_and_Hinxton_jac_RNA/jacRNA_best_blast.xlsx', 'w')
 errors = open('/home/kika/MEGAsync/Chlamydomonas/cam_cre_pt_errors.txt', 'w')
 
-cmd = '/home/kika/programs/blast-2.5.0+/bin/tblastn'
-query = '/home/kika/MEGAsync/Chlamydomonas/cre_pt_renamed.txt'
-db = '/home/kika/programs/blast-2.5.0+/bin/cam_spades_12.fasta'
-output = '/home/kika/MEGAsync/Chlamydomonas/cam_cre_pt_blast.xml'
+cmd = '/home/kika/programs/blast-2.5.0+/bin/blastn'
+query = '/home/kika/blasto_project/blastocrithidia/datasets/all_SSU_NCBI_141_and_Hinxton.fasta'
+db = '/home/kika/programs/blast-2.5.0+/bin/jac_trinity.fasta'
+output = '/home/kika/blasto_project/blastocrithidia/datasets/all_SSU_NCBI_141_and_Hinxton_jac_RNA/jacRNA_blast.xml'
 evalue = 10
 outfmt = 5
-word_size = 3
+word_size = 11
 
 print('starting BLAST')
 # os.system('{} -query {} -db {} -out {} -evalue {} -outfmt {} -word_size {}'.format(
