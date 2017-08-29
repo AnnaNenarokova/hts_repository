@@ -4,17 +4,17 @@ import os
 import subprocess
 from Bio.Blast import NCBIXML
 
-out_blast = open('/home/kika/blasto_project/blastocrithidia/datasets/all_SSU_NCBI_141_and_Hinxton_jac_RNA/jacRNA_blast.xlsx', 'w')
-out_best = open('/home/kika/blasto_project/blastocrithidia/datasets/all_SSU_NCBI_141_and_Hinxton_jac_RNA/jacRNA_best_blast.xlsx', 'w')
-errors = open('/home/kika/MEGAsync/Chlamydomonas/cam_cre_pt_errors.txt', 'w')
+out_blast = open('/home/kika/blasto_project/genes/catalase/jac_blast.xlsx', 'w')
+out_best = open('/home/kika/blasto_project/genes/catalase/jac_best_blast.xlsx', 'w')
+errors = open('/home/kika/MEGAsync/Chlamydomonas/jac_errors.txt', 'w')
 
-cmd = '/home/kika/programs/blast-2.5.0+/bin/blastn'
-query = '/home/kika/blasto_project/blastocrithidia/datasets/all_SSU_NCBI_141_and_Hinxton.fasta'
-db = '/home/kika/programs/blast-2.5.0+/bin/jac_trinity.fasta'
-output = '/home/kika/blasto_project/blastocrithidia/datasets/all_SSU_NCBI_141_and_Hinxton_jac_RNA/jacRNA_blast.xml'
+cmd = '/home/kika/programs/blast-2.5.0+/bin/tblastn'
+query = '/home/kika/blasto_project/genes/catalase/lpyr.txt'
+db = '/home/kika/programs/blast-2.5.0+/bin/jaculum_scaffolds.fasta'
+output = '/home/kika/blasto_project/genes/catalase/jac_blast.xml'
 evalue = 10
 outfmt = 5
-word_size = 11
+word_size = 3
 
 print('starting BLAST')
 # os.system('{} -query {} -db {} -out {} -evalue {} -outfmt {} -word_size {}'.format(
@@ -60,13 +60,13 @@ for record in blast_records:
 out_best.close()
 out_blast.close()
 
-table = open('/home/kika/MEGAsync/Chlamydomonas/cam_cre_pt_best_blast.xlsx', 'r')
+table = open('/home/kika/blasto_project/genes/catalase/jac_best_blast.xlsx', 'r')
 table.readline()
 
 print('sorting hits by evalue')
 for row in table:
 	split_row = row.split('\t')
-	qseqid = split_row[0].split('_')[3]
+	qseqid = split_row[0].split(' ')[0]
 	qlen = int(split_row[1])
 	sseqid = split_row[2]
 	try:
@@ -83,7 +83,7 @@ for row in table:
 		send = int(split_row[13])
 		alen_qlen = float(split_row[14])
 		alen_slen = float(split_row[15])
-		out = '/home/kika/MEGAsync/Chlamydomonas/cam_pt_' + qseqid + '_nt.txt'
+		out = '/home/kika/blasto_project/genes/catalase/jac_' + qseqid + '_nt.txt'
 
 		if evalue < 0.001:
 			if qstart == 1:
