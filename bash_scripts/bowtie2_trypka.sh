@@ -5,8 +5,8 @@ base_name='/media/4TB1/blastocrithidia/mapping/jac_RNA_to_DNA/jac_bw2_'
 ref="/media/4TB1/blastocrithidia/genome_assembly/jaculum_scaffolds.fa"
 $bw2_dir'bowtie2-build' --threads 32 $ref $base_name
 
-p1_1="/media/4TB1/blastocrithidia/jac_rna_reads/trimmed/jac_trimmed_1.fq"
-p1_2="/media/4TB1/blastocrithidia/jac_rna_reads/trimmed/jac_trimmed_1.fq"
+p1_1="/media/4TB1/blastocrithidia/reads/transcriptome/trimmed/jac_trimmed_1.fq"
+p1_2="/media/4TB1/blastocrithidia/reads/transcriptome/trimmed/jac_trimmed_2.fq"
 
 alignment=$base_name".sam"
 report=$base_name".txt"
