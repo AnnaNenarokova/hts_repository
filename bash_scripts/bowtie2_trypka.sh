@@ -1,8 +1,8 @@
 #!/bin/bash
 
 bw2_dir='/home/nenarokova/tools/bowtie2-2.2.9/'
-base_name='/media/4TB1/blastocrithidia/mapping/jac_bowtie2_RNA/jac_RNA_bw2'
-ref="/media/4TB1/blastocrithidia/transcriptome_assembly/trinity_denovo/jac_default/Trinity.fasta"
+base_name='/media/4TB1/blastocrithidia/mapping/jac_RNA_to_DNA/jac_bw2_'
+ref="/media/4TB1/blastocrithidia/genome_assembly/jaculum_scaffolds.fa"
 $bw2_dir'bowtie2-build' --threads 32 $ref $base_name
 
 p1_1="/media/4TB1/blastocrithidia/jac_rna_reads/trimmed/jac_trimmed_1.fq"
