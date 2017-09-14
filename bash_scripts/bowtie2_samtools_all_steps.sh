@@ -3,11 +3,11 @@
 threads=30
 
 bw2_dir="/home/nenarokova/tools/bowtie2-2.2.9/"
-fasta="/media/4TB1/blastocrithidia/mapping/jac_RNA_to_genome-transc/jac_genome_transc.fna"
-bt2_base="/media/4TB1/blastocrithidia/mapping/jac_genome_transc/jac_genome_transc"
+fasta=""
+bt2_base="/media/4TB1/blastocrithidia/mapping/jac_genome/jac_bw2"
 # $bw2_dir"bowtie2-build" --threads $threads $fasta $bt2_base
 
-file_path="/media/4TB1/blastocrithidia/mapping/jac_genome_transc/jac_genome_transc_DNA"
+file_path="/media/4TB1/blastocrithidia/mapping/jac_genome_transc/jac_genome_DNA"
 r1="/media/4TB1/blastocrithidia/reads/genome/trimmed/jaculum_trimmed_1.fastq.gz"
 r2="/media/4TB1/blastocrithidia/reads/genome/trimmed/jaculum_trimmed_2.fastq.gz"
 
