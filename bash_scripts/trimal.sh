@@ -1,11 +1,9 @@
 #!/bin/bash
-trimal="/home/nenarokova/tools/trimAl/source/trimal"
+trimal="/home/nenarokova/tools/trimal/source/trimal"
 
-al_dir="/home/nenarokova/novymonas/alignments_1_og"
+in="/home/nenarokova/dasha/pastajob.marker001.16S_endo_dasha.aln"
 
-cd $al_dir
+out=$in"_trimmed.phy"
 
-for f in OG*.fa
-do
-    $trimal -in $f -out $f"_trimmed.phy" -phylip -nogaps
-done
+$trimal -in $in -out $out -phylip -nogaps
+

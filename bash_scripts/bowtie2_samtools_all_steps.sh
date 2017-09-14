@@ -3,13 +3,13 @@
 threads=30
 
 bw2_dir="/home/nenarokova/tools/bowtie2-2.2.9/"
-fasta="/media/4TB1/blastocrithidia/UTR_analyisis/references/lseymouri/TriTrypDB-33_LseymouriATCC30220_Genome.fasta"
-bt2_base="/media/4TB1/blastocrithidia/UTR_analyisis/references/lseymouri/mapping/lseymouri_genome"
-$bw2_dir"bowtie2-build" --threads $threads $fasta $bt2_base
+fasta="/media/4TB1/blastocrithidia/mapping/jac_RNA_to_genome-transc/jac_genome_transc.fna"
+bt2_base="/media/4TB1/blastocrithidia/mapping/jac_genome_transc/jac_genome_transc"
+# $bw2_dir"bowtie2-build" --threads $threads $fasta $bt2_base
 
-file_path="/media/4TB1/blastocrithidia/UTR_analyisis/references/lseymouri/mapping/lseymouri_23_1_rna"
-r1="/media/4TB1/blastocrithidia/UTR_analyisis/references/lseymouri/reads/L_seymouri_23_1_trimmed_paired_forward.fastq.gz"
-r2="/media/4TB1/blastocrithidia/UTR_analyisis/references/lseymouri/reads/L_seymouri_23_1_trimmed_paired_reverse.fastq.gz"
+file_path="/media/4TB1/blastocrithidia/mapping/jac_genome_transc/jac_genome_transc_DNA"
+r1="/media/4TB1/blastocrithidia/reads/genome/trimmed/jaculum_trimmed_1.fastq.gz"
+r2="/media/4TB1/blastocrithidia/reads/genome/trimmed/jaculum_trimmed_2.fastq.gz"
 
 alignment=$file_path".sam"
 report=$file_path".txt"
