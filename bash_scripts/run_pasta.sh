@@ -1,7 +1,7 @@
 #!/bin/sh
 
-i="/home/kika/MEGAsync/Publikacie/Rheb/figures/PX-Rheb_renamed.txt"
+i="/home/kika/blasto_project/genes/tRNA-synthetases/iqtree/synth.fasta"
 d=protein
-j=PX-Rheb
+j=synth
 
 run_pasta.py -i $i -d $d -j $j

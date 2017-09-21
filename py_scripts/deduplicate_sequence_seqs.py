@@ -3,9 +3,9 @@ from collections import OrderedDict
 from collections import defaultdict
 from Bio import SeqIO
 
-infile = SeqIO.parse('/home/kika/scripts/EC/outfile.fasta', 'fasta')
-output1 = open('/home/kika/scripts/EC/outfile_dedupl_acc.fasta', 'w')
-output2 = open('/home/kika/scripts/EC/outfile_dupl_names.txt', 'w')
+infile = SeqIO.parse('/home/kika/MEGAsync/blasto_project/genes/tRNAs/iqtree/trna_phylogeny_dataset2.fna', 'fasta')
+out_fasta = open('/home/kika/MEGAsync/blasto_project/genes/tRNAs/iqtree/trna_phylogeny_deduplicated2.fasta', 'w')
+out_dedupl = open('/home/kika/MEGAsync/blasto_project/genes/tRNAs/iqtree/duplicated_names2.txt', 'w')
 
 multiplications = defaultdict(list)
 seq_dict = OrderedDict()
@@ -18,11 +18,11 @@ for sequence in infile:
         # seq_dict[sequence.seq] = sequence.description
 
 for key, value in seq_dict.items():
-    output1.write('>{}\n{}\n'.format(value, key))
+    out_fasta.write('>{}\n{}\n'.format(value, key))
 
 for key, value in multiplications.items():
     if len(value) > 1:
-        output2.write('{}\n'.format(str(value)))
+        out_dedupl.write('{}\n'.format(str(value)))
 
-output1.close()
-output2.close()
+out_fasta.close()
+out_dedupl.close()
