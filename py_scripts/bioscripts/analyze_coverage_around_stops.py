@@ -82,6 +82,9 @@ environ_length = left_border + right_border
 # bam_path="/media/4TB1/blastocrithidia/mapping/p57_RNA_to_DNA/p57_bw2_sorted.bam"
 # bed_path="/media/4TB1/blastocrithidia/UTR_analyisis/annotation_only_TAA_distance_-300_300_stop_environs.clean.bed"
 
+bam_path="/media/4TB1/blastocrithidia/mapping/jac_genome_transc/jac_genome_transc_DNA_sorted.bam"
+bed_path="/media/4TB1/blastocrithidia/UTR_analyisis/jaculum_gt_pseudo-300_300_stop_environs.bed"
+
 mpileup_path=bed_path[:-4]+".mpileup"
 outpath=bed_path[:-4]+"_cov_analysis.txt"
 

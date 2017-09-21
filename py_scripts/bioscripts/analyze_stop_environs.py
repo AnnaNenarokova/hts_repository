@@ -100,10 +100,10 @@ def create_logo_from_fasta(fasta_path, logo_path):
 left_border = -300
 right_border = 300
 
-in_fasta="/home/anna/bioinformatics/blasto/utr_analysis/P57/p57_DNA_scaffolds.fa"
-gff_path="/home/anna/bioinformatics/blasto/utr_analysis/P57/annotation_only_TAA.gff"
-gff_path="/home/anna/bioinformatics/blasto/utr_analysis/P57/annotation_only_TAA_distance_10.gff"
-codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=True, feature="gene", stops_included=False)
+# in_fasta="/home/anna/bioinformatics/blasto/utr_analysis/P57/p57_DNA_scaffolds.fa"
+# gff_path="/home/anna/bioinformatics/blasto/utr_analysis/P57/annotation_only_TAA.gff"
+# gff_path="/home/anna/bioinformatics/blasto/utr_analysis/P57/annotation_only_TAA_distance_10.gff"
+# codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=True, feature="gene", stops_included=False)
 
 # in_fasta="/home/anna/bioinformatics/blasto/utr_analysis/LpyrH10/GCF_001293395.1_ASM129339v1_genomic.fna"
 # gff_path="/home/anna/bioinformatics/blasto/utr_analysis/LpyrH10/GCF_001293395.1_ASM129339v1_genomic.gff"
@@ -125,6 +125,10 @@ codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border,
 # gff_path="/home/anna/bioinformatics/blasto/utr_analysis/LpyrH10/old/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected.gff"
 # codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="CDS", stops_included=False)
 
+# in_fasta="/home/anna/bioinformatics/blasto/jaculum/companion_jaculum/pseudochr.fasta"
+# gff_path="/home/anna/bioinformatics/blasto/jaculum/companion_jaculum/pseudo.out.gff3"
+
+codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="gene", stops_included=True)
 
 logo_path='{}_{}_{}_stop_environs_logo.png'.format(gff_path[:-4],left_border, right_border)
 

@@ -34,20 +34,20 @@ def add_header(blast_csv_path, custom_outfmt):
     return blast_csv_path
 
 query_paths= [
-    "/media/4TB1/novymonas/suspicious_sequences_pand_nesm.fasta"
+    "/media/anna/data/blasto_drive/genes/tRNAs/p57_tRNAs_final.fasta"
     ]
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_paths = [
-"/media/4TB1/novymonas/genome/novymonas_wt_scaffo/blast_db/novymonas_wt_scaffolds.fa.db"
+"/home/anna/bioinformatics/igv_sessions/igv_session_p57/new_files/p57_DNA_scaffolds.fa"
 ]
 
 for query_path in query_paths:
     for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path,db_path=subj_path, db_type='nucl', threads=30)
+        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='nucl', threads=4)
         blast_csv_path = new_blast.blast(
                                          bl_type='blastn',
-                                         evalue=1,
+                                         evalue=10,
                                          outfmt='comma_values',
                                          custom_outfmt=custom_outfmt,
                                          word_size=7
