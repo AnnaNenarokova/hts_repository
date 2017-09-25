@@ -44,13 +44,13 @@ subj_paths = [
 
 for query_path in query_paths:
     for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='prot', threads=4)
+        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='prot', threads=31)
         blast_csv_path = new_blast.blast(
                                          bl_type='blastp',
-                                         evalue=10,
+                                         evalue=1,
                                          outfmt='comma_values',
                                          custom_outfmt=custom_outfmt,
-                                         word_size=7
+                                         word_size=3
                                          )
         add_header(best_hits(blast_csv_path), custom_outfmt)
         add_header(blast_csv_path, custom_outfmt)
