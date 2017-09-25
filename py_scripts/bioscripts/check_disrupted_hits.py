@@ -15,13 +15,16 @@ for bh in blast_hits:
     if first:
         first = False
     else:
+        qstart = int(bh[10])
+        qend = int(bh[11])
+        qlen = bh[1]
         sseqid = bh[2]
         slen = int(bh[3])
         sstart = int(bh[12])
         send = int(bh[13])
-        if sstart == 1 and sseqid not in disrupted_left_end:
+        if (sstart == 1) and (sseqid not in disrupted_left_end) and (qstart != 1):
             disrupted_left_end.append(sseqid)
-        elif send == slen and sseqid not in disrupted_right_end:
+        elif send == slen and (sseqid not in disrupted_right_end) and (qlen != qend):
             disrupted_right_end.append(sseqid)
 
 print len(disrupted_left_end)

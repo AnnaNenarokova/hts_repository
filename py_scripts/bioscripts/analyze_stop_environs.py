@@ -128,8 +128,11 @@ right_border = 300
 # in_fasta="/home/anna/bioinformatics/blasto/jaculum/companion_jaculum/pseudochr.fasta"
 # gff_path="/home/anna/bioinformatics/blasto/jaculum/companion_jaculum/pseudo.out.gff3"
 
-in_fasta="/home/anna/bioinformatics/blasto/jaculum/companion_jaculum/scafs.fasta"
-gff_path="/home/anna/bioinformatics/blasto/jaculum/companion_jaculum/scaffold.out.gff3"
+# in_fasta="/home/anna/bioinformatics/blasto/jaculum/companion_jaculum/scafs.fasta"
+# gff_path="/home/anna/bioinformatics/blasto/jaculum/companion_jaculum/scaffold.out.gff3"
+
+in_fasta="/home/anna/bioinformatics/blasto/perkinsela/GCA_001235845.1_ASM123584v1_genomic.fna"
+gff_path="/home/anna/bioinformatics/blasto/perkinsela/GCA_001235845.1_ASM123584v1_genomic.gff"
 
 codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="gene", stops_included=True)
 

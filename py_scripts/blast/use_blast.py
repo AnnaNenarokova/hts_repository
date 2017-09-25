@@ -34,19 +34,19 @@ def add_header(blast_csv_path, custom_outfmt):
     return blast_csv_path
 
 query_paths= [
-    "/media/anna/data/blasto_drive/genes/tRNAs/p57_tRNAs_final.fasta"
+    "/media/4TB1/blastocrithidia/blast_searches/datasets/all_kinetoplastid_references.faa"
     ]
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_paths = [
-"/home/anna/bioinformatics/igv_sessions/igv_session_p57/new_files/p57_DNA_scaffolds.fa"
+"/media/4TB1/blastocrithidia/blast_searches/jaculum_genome_transctiptome.fna"
 ]
 
 for query_path in query_paths:
     for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='nucl', threads=4)
+        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='prot', threads=4)
         blast_csv_path = new_blast.blast(
-                                         bl_type='blastn',
+                                         bl_type='blastp',
                                          evalue=10,
                                          outfmt='comma_values',
                                          custom_outfmt=custom_outfmt,
