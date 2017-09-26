@@ -3,8 +3,8 @@ from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
-fasta_file = '/home/anna/bioinformatics/blasto/utr_analysis/P57/p57_DNA_scaffolds.fa'
-outfile = '/home/anna/bioinformatics/blasto/p57_DNA_scaffolds_concatenated.fasta'
+fasta_file = '/home/anna/bioinformatics/blasto/jaculum/jaculum_contigs_companion.fa'
+outfile = '/home/anna/bioinformatics/blasto/jaculum/jaculum_contigs_companion_concatenated.fa'
 id='jaculum_concatenated'
 handle = open(fasta_file, 'r')
 

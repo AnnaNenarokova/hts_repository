@@ -39,6 +39,6 @@ def count_truncated_hits(blast_csv_path):
 
     return 0
 
-blast_csv_path = "/home/anna/bioinformatics/blasto/kinetoplastid_proteoms_bl_report_best.csv"
+blast_csv_path = "/home/anna/bioinformatics/blasto/jaculum/all_kinetoplastid_references.faa_bl_report_best.csv"
 
 count_truncated_hits(blast_csv_path)

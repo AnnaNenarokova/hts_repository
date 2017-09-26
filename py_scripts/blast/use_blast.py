@@ -34,19 +34,19 @@ def add_header(blast_csv_path, custom_outfmt):
     return blast_csv_path
 
 query_paths= [
-    "/media/4TB1/blastocrithidia/blast_searches/datasets/all_kinetoplastid_references.faa"
+    "/media/4TB1/blastocrithidia/blast_searches/datasets/all_kinetoplastid_references_filtered.aa"
     ]
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 subj_paths = [
-"/media/4TB1/blastocrithidia/blast_searches/jaculum_genome_transctiptome.fna"
+"/media/4TB1/blastocrithidia/blast_searches/p57_scaffolds/blast_db/p57_scaffo.db"
 ]
 
 for query_path in query_paths:
     for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='nucl', threads=31)
+        new_blast = Blast(query_path=query_path,db_path=subj_path, db_type='prot', threads=31)
         blast_csv_path = new_blast.blast(
-                                         bl_type='tblastn',
+                                         bl_type='blastp',
                                          evalue=1,
                                          outfmt='comma_values',
                                          custom_outfmt=custom_outfmt,
