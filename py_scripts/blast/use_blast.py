@@ -33,11 +33,12 @@ def add_header(blast_csv_path, custom_outfmt):
     write_list_of_lists(blast_hits, blast_csv_path, header=header)
     return blast_csv_path
 
+custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
+
 # query_paths= [
 #     "/media/4TB1/blastocrithidia/blast_searches/datasets/all_kinetoplastid_references_filtered.aa"
 #     ]
 
-# custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 # subj_paths = [
 # "/media/4TB1/blastocrithidia/blast_searches/p57_DNA_translated/blast_db/p57_DNA_transla.db"
 # ]
