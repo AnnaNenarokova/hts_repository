@@ -3,10 +3,10 @@ from Bio.Blast import NCBIXML
 from Bio.Blast.Applications import NcbiblastxCommandline
 
 print('starting BLAST')
-blast_cline = NcbiblastxCommandline(cmd='blastx', 
-									query='/home/kika/MEGAsync/Chlamydomonas/mareks_hits/Amazonie_plastid_genome_assembly.txt', 
-									db='/home/kika/MEGAsync/Chlamydomonas/mareks_hits/db/pt_prot.fasta', 
-									out='/home/kika/MEGAsync/Chlamydomonas/mareks_hits/Amazonie_plastid_genome_assembly_blast.xml',
+blast_cline = NcbiblastxCommandline(cmd='tblastn', 
+									query='/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jac_nucleoporins_aa.txt', 
+									db='/home/kika/programs/blast-2.5.0+/bin/jaculum_scaffolds_transc.fasta', 
+									out='/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_genome/jac_blast.xml',
 									evalue=10,
 									outfmt=5,
 									word_size=3)
@@ -14,10 +14,10 @@ stdout, stderr = blast_cline()
 print('BLAST done')
 print('writing BLAST results to tables')
 
-result_handle = open('/home/kika/MEGAsync/Chlamydomonas/mareks_hits/Amazonie_plastid_genome_assembly_blast.xml')
+result_handle = open('/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_genome/jac_blast.xml')
 blast_records = NCBIXML.parse(result_handle)
-output = open('/home/kika/MEGAsync/Chlamydomonas/mareks_hits/Amazonie_plastid_genome_assembly_blast.xlsx', 'w')
-out_best = open('/home/kika/MEGAsync/Chlamydomonas/mareks_hits/Amazonie_plastid_genome_assembly_best_blast.xlsx', 'w')
+output = open('/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_genome/jac_blast.xlsx', 'w')
+out_best = open('/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_genome/jac_best_blast.xlsx', 'w')
 
 output.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format('qseqid', 'qlen', 'sseqid', 'slen', 
 	'alen', 'evalue', 'pident', 'bitscore', 'mismatch', 'gaps', 'qstart', 'qend', 'sstart', 'send', 'alen_qlen', 
