@@ -33,24 +33,37 @@ def add_header(blast_csv_path, custom_outfmt):
     write_list_of_lists(blast_hits, blast_csv_path, header=header)
     return blast_csv_path
 
-query_paths= [
-    "/media/4TB1/blastocrithidia/blast_searches/datasets/all_kinetoplastid_references_filtered.aa"
-    ]
+# query_paths= [
+#     "/media/4TB1/blastocrithidia/blast_searches/datasets/all_kinetoplastid_references_filtered.aa"
+#     ]
 
-custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
-subj_paths = [
-"/media/4TB1/blastocrithidia/blast_searches/p57_DNA_translated/blast_db/p57_DNA_transla.db"
-]
+# custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
+# subj_paths = [
+# "/media/4TB1/blastocrithidia/blast_searches/p57_DNA_translated/blast_db/p57_DNA_transla.db"
+# ]
 
-for query_path in query_paths:
-    for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path,db_path=subj_path, db_type='prot', threads=31)
-        blast_csv_path = new_blast.blast(
-                                         bl_type='blastp',
-                                         evalue=1,
-                                         outfmt='comma_values',
-                                         custom_outfmt=custom_outfmt,
-                                         word_size=3
-                                         )
-        add_header(best_hits(blast_csv_path), custom_outfmt)
-        add_header(blast_csv_path, custom_outfmt)
+# for query_path in query_paths:
+#     for subj_path in subj_paths:
+#         new_blast = Blast(query_path=query_path,db_path=subj_path, db_type='prot', threads=31)
+#         blast_csv_path = new_blast.blast(
+#                                          bl_type='blastp',
+#                                          evalue=1,
+#                                          outfmt='comma_values',
+#                                          custom_outfmt=custom_outfmt,
+#                                          word_size=3
+#                                          )
+#         add_header(best_hits(blast_csv_path), custom_outfmt)
+#         add_header(blast_csv_path, custom_outfmt)
+
+query_path = sys.argv[1]
+db_path = "/media/4TB1/blastocrithidia/blast_searches/p57_DNA_translated/blast_db/p57_DNA_transla.db"
+new_blast = Blast(query_path=query_path,db_path=subj_path, db_type='prot', threads=30)
+blast_csv_path = new_blast.blast(
+                                 bl_type='blastp',
+                                 evalue=1,
+                                 outfmt='comma_values',
+                                 custom_outfmt=custom_outfmt,
+                                 word_size=3
+                                 )
+add_header(best_hits(blast_csv_path), custom_outfmt)
+add_header(blast_csv_path, custom_outfmt)
