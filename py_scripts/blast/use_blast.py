@@ -57,7 +57,7 @@ def add_header(blast_csv_path, custom_outfmt):
 
 query_path = sys.argv[1]
 db_path = "/media/4TB1/blastocrithidia/blast_searches/p57_DNA_translated/blast_db/p57_DNA_transla.db"
-new_blast = Blast(query_path=query_path,db_path=subj_path, db_type='prot', threads=30)
+new_blast = Blast(query_path=query_path,db_path=db_path, db_type='prot', threads=30)
 blast_csv_path = new_blast.blast(
                                  bl_type='blastp',
                                  evalue=1,
