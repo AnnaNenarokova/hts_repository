@@ -4,23 +4,24 @@ import os
 import subprocess
 from Bio.Blast import NCBIXML
 
-out_blast = open('/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_genome/jac_blast.xlsx', 'w')
-out_best = open('/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_genome/jac_best_blast.xlsx', 'w')
-errors = open('/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_genome/jac_errors.xlsx', 'w')
+out_blast = open('/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_assembly/jac_blast.xlsx', 'w')
+out_best = open('/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_assembly/jac_best_blast.xlsx', 'w')
+errors = open('/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_assembly/jac_errors.xlsx', 'w')
 
 cmd = '/home/kika/programs/blast-2.5.0+/bin/tblastn'
-query = '/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_genome/jac_nucleoporins.txt'
+query = '/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_assembly/jac_nucleoporins.txt'
 db = '/home/kika/programs/blast-2.5.0+/bin/jaculum_scaffolds_transc.fasta'
-output = '/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_genome/jac_blast.xml'
+output = '/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_assembly/jac_blast.xml'
 evalue = 10
 outfmt = 5
 word_size = 3
+threads = 4
 
 print('starting BLAST')
 # os.system('{} -query {} -db {} -out {} -evalue {} -outfmt {} -word_size {}'.format(
 # 		cmd, query, db, output, evalue, outfmt, word_size))
-subprocess.call('{} -query {} -db {} -out {} -evalue {} -outfmt {} -word_size {}'.format(
-		cmd, query, db, output, evalue, outfmt, word_size), shell=True)
+subprocess.call('{} -query {} -db {} -out {} -evalue {} -outfmt {} -word_size {} -num_threads {}'.format(
+		cmd, query, db, output, evalue, outfmt, word_size, threads), shell=True)
 print('BLAST done')
 
 result_handle = open(output)
@@ -60,7 +61,7 @@ for record in blast_records:
 out_best.close()
 out_blast.close()
 
-table = open('/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_genome/jac_best_blast.xlsx', 'r')
+table = open('/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_assembly/jac_best_blast.xlsx', 'r')
 table.readline()
 
 print('sorting hits by evalue')
@@ -83,7 +84,7 @@ for row in table:
 		send = int(split_row[13])
 		alen_qlen = float(split_row[14])
 		alen_slen = float(split_row[15])
-		out = '/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_genome/' + qseqid + '_nt.txt'
+		out = '/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_assembly/' + qseqid + '_nt.txt'
 
 		if evalue < 0.001:
 			if qstart == 1:
