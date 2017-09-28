@@ -83,7 +83,7 @@ for row in table:
 		send = int(split_row[13])
 		alen_qlen = float(split_row[14])
 		alen_slen = float(split_row[15])
-		out = '/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_genome/jac_' + qseqid + '_nt.txt'
+		out = '/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_genome/' + qseqid + '_nt.txt'
 
 		if evalue < 0.001:
 			if qstart == 1:

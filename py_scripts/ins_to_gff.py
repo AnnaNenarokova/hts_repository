@@ -147,6 +147,8 @@ def p57_orf(result_dict):
 	for contig in contigs:
 		p57_contigs[contig.name] = contig.seq
 	orf = {}
+	not_genome = {}
+	no_orf = {}
 	for key in proteins_from_aln.keys():
 		if 'p57' in key:
 			key_root = re.sub(r'.*(NODE_\d+_length_\d+_cov_\d+.\d+).*', r'\g<1>', key)
@@ -191,10 +193,10 @@ def p57_orf(result_dict):
 					frame = 'c3'
 					orf[key_root] = [reverse[orf_start:orf_end], orf_start_contig, orf_end_contig, frame, proteins_from_aln[key][1]]
 				else:
-					p57_errors.write('{}\t{}\t no frame found\n'.format(proteins_from_aln[key][1], key))
+					no_orf[proteins_from_aln[key][1]] = key
 			else:
-				p57_errors.write('{}\t{}\t not found in the genome\n'.format(proteins_from_aln[key][1], key))
-	return orf
+				not_genome[proteins_from_aln[key][1]] = key
+	return orf, no_orf, not_genome
 	#contig name : orf sequence 	orf start 	orf end 	frame	file name
 	#			   [0]				[1]			[2]			[3]		[4]	
 
@@ -205,10 +207,8 @@ def jac_orf(result_dict):
 	for contig in contigs:
 		jac_contigs[contig.name] = contig.seq
 	orf = {}
-	not_genome_s = set()
-	not_genome_d = {}
-	no_orf_s = set()
-	no_orf_d = {}
+	not_genome = {}
+	no_orf = {}
 	for key in proteins_from_aln.keys():
 		if 'jac' in key:
 			key_root = re.sub(r'.*(NODE_\d+_length_\d+_cov_\d+.\d+).*', r'\g<1>', key)
@@ -253,35 +253,46 @@ def jac_orf(result_dict):
 					frame = 'c3'
 					orf[key_root] = [reverse[orf_start:orf_end], orf_start_contig, orf_end_contig, frame, proteins_from_aln[key][1]]
 				else:
-					no_orf_d[proteins_from_aln[key][1]] = key
-					no_orf_s.update(no_orf_d)
-					# jac_errors.write('{}\t{}\t no frame found\n'.format(proteins_from_aln[key][1], key))
+					no_orf[proteins_from_aln[key][1]] = key
 			else:
-				not_genome_d[proteins_from_aln[key][1]] = key
-				not_genome_s.update(not_genome_d)
-				# jac_errors.write('{}\t{}\t not found in the genome\n'.format(proteins_from_aln[key][1], key))
-	jac_errors.write('NO FRAME FOUND:\n')
-	for item in not_genome_s:
-		jac_errors.write(item)
-		jac_errors.write('\n')
-	return orf, no_orf_s
+				not_genome[proteins_from_aln[key][1]] = key
+	return orf, no_orf, not_genome
 	#contig name : orf sequence 	orf start 	orf end 	frame	file name
 	#			   [0]				[1]			[2]			[3]		[4]	
 
 final_dict = {}
+p57_no_orf = {}
+p57_not_genome = {}
+jac_no_orf = {}
+jac_not_genome = {}
 for file in files:
 	if '.aln' in file:
 		print(file)
 		ins_aln_positions = find_insertion(file)
 		result_dict = get_peptides(ins_aln_positions, file)
 		final_dict.update(result_dict)
-		p57_dict = p57_orf(final_dict)
-		jac_dict, no_orf_s = jac_orf(final_dict)
-		for item in no_orf_s:
-			jac_errors.write('NO FRAME FOUND:\n')
-			jac_errors.write(item)
-			jac_errors.write('\n')
-			jac_errors.write('\n')
+		p57_dict, p57_no_orf, p57_not_genome = p57_orf(final_dict)
+		jac_dict, jac_no_orf, jac_not_genome = jac_orf(final_dict)
+		jac_no_orf.update(jac_no_orf)
+		jac_not_genome.update(jac_not_genome)
+
+p57_errors.write('NO FRAME FOUND:\n')
+for key, value in p57_no_orf.items():
+	p57_errors.write('{}\t{}'.format(value, key))
+	p57_errors.write('\n')
+p57_errors.write('NOT FOUND IN GENOME:\n')
+for key, value in p57_not_genome.items():
+	p57_errors.write('{}\t{}'.format(value, key))
+	p57_errors.write('\n')
+
+jac_errors.write('NO FRAME FOUND:\n')
+for key, value in jac_no_orf.items():
+	jac_errors.write('{}\t{}'.format(value, key))
+	jac_errors.write('\n')
+jac_errors.write('NOT FOUND IN GENOME:\n')
+for key, value in jac_not_genome.items():
+	jac_errors.write('{}\t{}'.format(value, key))
+	jac_errors.write('\n')
 
 for key in p57_dict.keys():
 	orf_start = p57_dict[key][1]
