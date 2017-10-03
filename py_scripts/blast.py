@@ -9,7 +9,8 @@ blast_cline = NcbiblastxCommandline(cmd='tblastn',
 									out='/media/4TB1/blastocrithidia/kika_workdir/bexlh_blast.xml',
 									evalue=10,
 									outfmt=5,
-									word_size=3)
+									word_size=3,
+									num_threads=30)
 stdout, stderr = blast_cline()
 print('BLAST done')
 print('writing BLAST results to tables')
