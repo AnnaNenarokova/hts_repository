@@ -4,9 +4,9 @@ from Bio.Blast.Applications import NcbiblastxCommandline
 
 print('starting BLAST')
 blast_cline = NcbiblastxCommandline(cmd='tblastn', 
-									query='/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jac_nucleoporins_aa.txt', 
-									db='/home/kika/programs/blast-2.5.0+/bin/jaculum_scaffolds_transc.fasta', 
-									out='/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_genome/jac_blast.xml',
+									query='/media/4TB1/blastocrithidia/kika_workdir/p57_trinity_translated.fasta', 
+									db='/media/4TB1/blastocrithidia/kika_workdir/PRJNA238835_trinity.fasta', 
+									out='/media/4TB1/blastocrithidia/kika_workdir/bexlh_blast.xml',
 									evalue=10,
 									outfmt=5,
 									word_size=3)
@@ -14,10 +14,10 @@ stdout, stderr = blast_cline()
 print('BLAST done')
 print('writing BLAST results to tables')
 
-result_handle = open('/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_genome/jac_blast.xml')
+result_handle = open('/media/4TB1/blastocrithidia/kika_workdir/bexlh_blast.xml')
 blast_records = NCBIXML.parse(result_handle)
-output = open('/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_genome/jac_blast.xlsx', 'w')
-out_best = open('/home/kika/MEGAsync/blasto_project/genes/nucleoporins/jaculum_new_genome/jac_best_blast.xlsx', 'w')
+output = open('/media/4TB1/blastocrithidia/kika_workdir/bexlh_blast.xlsx', 'w')
+out_best = open('/media/4TB1/blastocrithidia/kika_workdir/bexlh_best_blast.xlsx', 'w')
 
 output.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format('qseqid', 'qlen', 'sseqid', 'slen', 
 	'alen', 'evalue', 'pident', 'bitscore', 'mismatch', 'gaps', 'qstart', 'qend', 'sstart', 'send', 'alen_qlen', 

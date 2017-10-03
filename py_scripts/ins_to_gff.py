@@ -201,7 +201,7 @@ def p57_orf(result_dict):
 	#			   [0]				[1]			[2]			[3]		[4]	
 
 def jac_orf(result_dict):
-	contigs = SeqIO.parse('/home/kika/programs/blast-2.5.0+/bin/jaculum_scaffolds.fasta', 'fasta')
+	contigs = SeqIO.parse('/home/kika/programs/blast-2.5.0+/bin/jaculum_scaffolds_transc.fasta', 'fasta')
 	proteins_from_aln = result_dict
 	jac_contigs = {}
 	for contig in contigs:
@@ -280,7 +280,7 @@ p57_errors.write('NO FRAME FOUND:\n')
 for key, value in p57_no_orf.items():
 	p57_errors.write('{}\t{}'.format(value, key))
 	p57_errors.write('\n')
-p57_errors.write('NOT FOUND IN GENOME:\n')
+p57_errors.write('\nNOT FOUND IN GENOME:\n')
 for key, value in p57_not_genome.items():
 	p57_errors.write('{}\t{}'.format(value, key))
 	p57_errors.write('\n')
@@ -289,7 +289,7 @@ jac_errors.write('NO FRAME FOUND:\n')
 for key, value in jac_no_orf.items():
 	jac_errors.write('{}\t{}'.format(value, key))
 	jac_errors.write('\n')
-jac_errors.write('NOT FOUND IN GENOME:\n')
+jac_errors.write('\nNOT FOUND IN GENOME:\n')
 for key, value in jac_not_genome.items():
 	jac_errors.write('{}\t{}'.format(value, key))
 	jac_errors.write('\n')
