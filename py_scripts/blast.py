@@ -5,7 +5,7 @@ from Bio.Blast.Applications import NcbiblastxCommandline
 print('starting BLAST')
 blast_cline = NcbiblastxCommandline(cmd='tblastn', 
 									query='/media/4TB1/blastocrithidia/kika_workdir/p57_trinity_translated.fasta', 
-									db='/media/4TB1/blastocrithidia/kika_workdir/PRJNA238835_trinity.fasta', 
+									db='/media/4TB1/blastocrithidia/kika_workdir/PRJNA284294_trinity.fasta', 
 									out='/media/4TB1/blastocrithidia/kika_workdir/bexlh_blast.xml',
 									evalue=10,
 									outfmt=5,
