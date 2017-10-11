@@ -2,7 +2,7 @@
 from Bio.Blast import NCBIXML
 from Bio.Blast.Applications import NcbiblastxCommandline
 
-print('starting BLAST')
+print('running BLAST')
 blast_cline = NcbiblastxCommandline(cmd='tblastn', 
 									query='/media/4TB1/blastocrithidia/kika_workdir/p57_trinity_translated.fasta', 
 									db='/media/4TB1/blastocrithidia/kika_workdir/PRJNA284294_trinity.fasta', 

@@ -1,7 +1,7 @@
 #!/bin/sh
 
-i="/home/kika/blasto_project/genes/tRNA-synthetases/iqtree/synth.fasta"
+i="/home/kika/MEGAsync/blasto_project/genes/tRNA-synthetases/TrpRS/trpRS.fasta"
 d=protein
-j=synth
+j=trpRS
 
 run_pasta.py -i $i -d $d -j $j
