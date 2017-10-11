@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import os
 
-os.chdir('/home/kika/MEGAsync/Data/brevimastigomonas_motovehiculus/')
+os.chdir('/media/4TB1/blastocrithidia/kika_workdir/reads/')
 files = os.listdir()
 
 for file in files:
