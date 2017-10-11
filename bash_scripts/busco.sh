@@ -1,7 +1,10 @@
 #!/bin/sh
 cd /home/nenarokova/tools/busco
 
-genome=""
+infile=""
 name=""
 ref_set=""
-python scripts/run_BUSCO.py -i $genome -o $name -l $ref_set -m [MODE]
+mode="proteins"
+#--mode sets the assessment MODE: genдome, proteins, transcriptome
+cd
+python scripts/run_BUSCO.py -i $infile -o $name -l $ref_set -m [MODE]

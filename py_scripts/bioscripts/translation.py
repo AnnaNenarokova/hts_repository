@@ -1,8 +1,8 @@
 #!/usr/bin/python
 from Bio import SeqIO
 
-infile = SeqIO.parse('/home/anna/bioinformatics/blasto/jaculum/mt_contig_jaculum.fasta', 'fasta')
-output = open('/home/anna/bioinformatics/blasto/jaculum/mt_contig_jaculum_6_frames.fasta', 'w')
+infile = SeqIO.parse('/home/anna/bioinformatics/igv_sessions/igv_session_p57/annotation_09_10.fna', 'fasta')
+output = open('/home/anna/bioinformatics/igv_sessions/igv_session_p57/annotation_09_10.faa', 'w')
 outerr = open('/home/anna/bioinformatics/blasto/jaculum/jaculum_scaffolds_err.txt', 'w')
 gencode = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
@@ -47,12 +47,12 @@ for sequence in infile:
         with open(outerr, 'w') as error:
             error.write('{}\n{}\n'.format(name, seq))
     else:
-        output.write('>{}_1\n{}\n'.format(name, translation(seq)))
-        output.write('>{}_2\n{}\n'.format(name, translation(seq[1:])))
-        output.write('>{}_3\n{}\n'.format(name, translation(seq[2:])))
-        output.write('>{}_4\n{}\n'.format(name, translation(seq.reverse_complement())))
-        output.write('>{}_5\n{}\n'.format(name, translation(seq.reverse_complement()[1:])))
-        output.write('>{}_6\n{}\n'.format(name, translation(seq.reverse_complement()[2:])))
+        output.write('>{}\n{}\n'.format(name, translation(seq)))
+        # output.write('>{}_2\n{}\n'.format(name, translation(seq[1:])))
+        # output.write('>{}_3\n{}\n'.format(name, translation(seq[2:])))
+        # output.write('>{}_4\n{}\n'.format(name, translation(seq.reverse_complement())))
+        # output.write('>{}_5\n{}\n'.format(name, translation(seq.reverse_complement()[1:])))
+        # output.write('>{}_6\n{}\n'.format(name, translation(seq.reverse_complement()[2:])))
     if i%100 == 0:
         print(i)
 output.close()
