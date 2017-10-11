@@ -1,8 +1,8 @@
 #!/bin/bash
 
-read_dir='/media/4TB1/blastocrithidia/bexlh/reads/trimmed/PRJNA284294/'
-fw=$read_dir'SRR2170108_trimmed_1.fq.gz',$read_dir'SRR2170117_trimmed_1.fq.gz',$read_dir'SRR2173361_trimmed_1.fq.gz'
-rv=$read_dir'SRR2170108_trimmed_2.fq.gz',$read_dir'SRR2170117_trimmed_2.fq.gz',$read_dir'SRR2173361_trimmed_2.fq.gz'
-out_dir='/media/4TB1/blastocrithidia/bexlh/PRJNA284294_trinity/'
+read_dir='/media/4TB1/blastocrithidia/kika_workdir/reads/'
+fw=$read_dir'SRR4017973_trimmed_1.fq.gz',$read_dir'SRR4017993_trimmed_1.fq.gz'
+rv=$read_dir'SRR4017973_trimmed_2.fq.gz',$read_dir'SRR4017993_trimmed_2.fq.gz'
+out_dir='/media/4TB1/blastocrithidia/kika_workdir/trinity_assembly/'
 
-Trinity --seqType fq --left $fw --right $rv --output $out_dir --max_memory 100G --CPU 30
+Trinity --seqType fq --left $fw --right $rv --output $out_dir --max_memory 100G --CPU 16
