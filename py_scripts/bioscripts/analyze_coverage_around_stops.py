@@ -1,5 +1,7 @@
 #!/usr/bin/python
 from subprocess import call
+import sys
+
 def parse_bed_file(bed_path):
     with open(bed_path, 'r') as bed_file:
         regions = {}
@@ -60,30 +62,12 @@ def count_mean_cov_pos(coverage, regions, region_len):
     return cov_matrix
 
 
-left_border = 300
+left_border = 600
 right_border = 300
 environ_length = left_border + right_border
 
-# bam_path="/media/4TB1/blastocrithidia/UTR_analyisis/references/blechomonas/mapping/blechomonas_rna_sorted.bam"
-# bed_path="/media/4TB1/blastocrithidia/UTR_analyisis/references/blechomonas/TriTrypDB-33_BayalaiB08-376_-300_300_stop_environs.clean.bed"
-
-# bam_path="/media/4TB1/blastocrithidia/UTR_analyisis/references/lseymouri/mapping/lseymouri_23_1_rna_sorted.bam"
-# bed_path="/media/4TB1/blastocrithidia/UTR_analyisis/references/lseymouri/TriTrypDB-33_LseymouriATCC30220_-300_300_stop_environs.clean.bed"
-
-# bam_path="/media/4TB1/novymonas/transcriptome/mapping/bowtie2_no_pand_pseudochr/no_pand_pseudochr_sorted.bam"
-# bed_path="/media/4TB1/blastocrithidia/UTR_analyisis/references/novymonas/nesm_pseudo.out._-300_300_stop_environs.clean.bed"
-
-# bam_path="/home/nenarokova/blasto/rna_cov_analysis/lpyr/lpyr_h10_rna_all.bam"
-# bed_path="/home/nenarokova/blasto/rna_cov_analysis/lpyr/Leptomonas_pyrrhocoris_with_UTRs_all_genes_stops_corrected_-300_300_stop_environs.clean.bed"
-
-# bam_path="/media/4TB1/blastocrithidia/mapping/p57_RNA_to_DNA/p57_bw2_sorted.bam"
-# bed_path="/media/4TB1/blastocrithidia/UTR_analyisis/annotation_only_TAA_distance_10_-300_300_stop_environs.clean.bed"
-
-# bam_path="/media/4TB1/blastocrithidia/mapping/p57_RNA_to_DNA/p57_bw2_sorted.bam"
-# bed_path="/media/4TB1/blastocrithidia/UTR_analyisis/annotation_only_TAA_distance_-300_300_stop_environs.clean.bed"
-
-bam_path="/media/4TB1/blastocrithidia/mapping/jac_genome_transc/jac_genome_transc_DNA_sorted.bam"
-bed_path="/media/4TB1/blastocrithidia/UTR_analyisis/scaffold.out._-300_300_stop_environs.bed"
+bam_path=sys.argv[1]
+bed_path=sys.argv[2]
 
 mpileup_path=bed_path[:-4]+".mpileup"
 outpath=bed_path[:-4]+"_cov_analysis.txt"

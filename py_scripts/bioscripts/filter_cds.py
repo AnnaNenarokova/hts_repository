@@ -65,9 +65,9 @@ def filter_cds(fasta_path, translated=False, translate=True, stop_included=True)
         else:
             result_incorrect.append(result_record)
 
-    outpath_correct = fasta_path[:-6]+"_filtered.fasta"
+    outpath_correct = fasta_path[:-6]+"_filtered.fna"
     SeqIO.write(result_correct, outpath_correct, "fasta")
-    outpath_incorrect = fasta_path[:-6]+"_incorrect.fasta"
+    outpath_incorrect = fasta_path[:-6]+"_incorrect.fna"
     SeqIO.write(result_incorrect, outpath_incorrect, "fasta")
 
     correct = len(result_correct)
