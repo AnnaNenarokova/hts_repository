@@ -3,13 +3,13 @@
 threads=16
 
 bw2_dir="/home/nenarokova/tools/bowtie2-2.2.9/"
-fasta="/media/4TB1/blastocrithidia/UTR_analyisis/references/tbrucei/TriTrypDB-34_TbruceiTREU927_Genome.fasta"
-bt2_base="/media/4TB1/blastocrithidia/UTR_analyisis/references/tbrucei/TriTrypDB-34_TbruceiTREU927"
+fasta="/media/4TB1/blastocrithidia/UTR_analyisis/references/lmajor/TriTrypDB-34_LmajorFriedlin_Genome.fasta"
+bt2_base="/media/4TB1/blastocrithidia/UTR_analyisis/references/lmajor/TriTrypDB-34_LmajorFriedlin"
 $bw2_dir"bowtie2-build" --threads $threads $fasta $bt2_base
 
-file_path="/media/4TB1/blastocrithidia/UTR_analyisis/references/tbrucei/SRR1136853"
-r1="/media/4TB1/blastocrithidia/UTR_analyisis/references/tbrucei/SRR1136853_1.fastq"
-r2="/media/4TB1/blastocrithidia/UTR_analyisis/references/tbrucei/SRR1136853_2.fastq"
+file_path="/media/4TB1/blastocrithidia/UTR_analyisis/references/lmajor/SRR1460770"
+r1="/media/4TB1/blastocrithidia/UTR_analyisis/references/lmajor/SRR1460770_1.fastq"
+r2="/media/4TB1/blastocrithidia/UTR_analyisis/references/lmajor/SRR1460770_2.fastq"
 
 alignment=$file_path".sam"
 report=$file_path".txt"

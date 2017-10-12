@@ -3,43 +3,82 @@ from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 import sys
 
-def filter_cds(fasta_path, translated=False):
-    non_truncated = 0
-    truncated = 0
-    has_stops = 0
-    result = []
-    result_stops = []
+def check_start(translated_seq):
+    if translated_seq[0] == "M":
+        return True
+    else:
+        return False
+
+def check_inframe(translated_seq):
+    if "*" in translated_seq:
+        return False
+    else:
+        return True
+
+def check_finish(translated_seq):
+    if translated_seq[-1] == "*":
+        return True
+    else:
+        return False
+
+def cds_correct(translated_cds, stop_included=True):
+    start_correct = check_start(translated_cds)
+    if stop_included:
+        inframe_correct = check_inframe(translated_cds[:-1])
+        finish_correct = True
+    else:
+        inframe_correct = check_inframe(translated_cds)
+        finish_correct = check_finish(translated_seq)
+
+    if start_correct and inframe_correct and finish_correct:
+        return True
+    else:
+        return False
+
+def filter_cds(fasta_path, translated=False, translate=True, stop_included=True):
+    result_correct = []
+    result_incorrect = []
     for record in SeqIO.parse(fasta_path, "fasta"):
-        if translated or ( len(record.seq) % 3 == 0 ):
-            if translated:
-                translated_seq = record.seq
-            else:
-                translated_seq = record.seq.translate()
-            if (translated_seq[0] == 'M'):# and (translated_seq[-1] == '*'):
-                non_truncated += 1
-                result_seq = translated_seq[:-1]
-                result_record = SeqRecord(result_seq, id=record.id, name=record.name, description=record.description)
-                if "*" in result_seq:
-                    has_stops += 1
-                    result_stops.append(result_record)
-                else:
-                    result.append(result_record)
-            else:
-                truncated += 1
+        seq = record.seq
+        if translated:
+            translated_cds = seq()
+        elif ( len(seq) % 3 == 0 ):
+            translated_cds = seq.translate()
         else:
-            truncated += 1
-    outpath = fasta_path[:-6]+"_filtered.faa"
-    SeqIO.write(result, outpath, "fasta")
-    outpath_stops = fasta_path[:-6]+"_inframe_stops.faa"
-    SeqIO.write(result_stops, outpath_stops, "fasta")
+            print "Error! Len % 3 not equal 0"
+
+        if translate:
+            if stop_included:
+                result_seq = translated_cds[:-1]
+            else:
+                result_seq = translated_cds
+        else:
+            if stop_included:
+                result_seq = seq[:-3]
+            else:
+                result_seq = seq
+
+        result_record = SeqRecord(result_seq, id=record.id, name=record.name, description=record.description)
+
+        if cds_correct(translated_cds, stop_included=stop_included):
+            result_correct.append(result_record)
+        else:
+            result_incorrect.append(result_record)
+
+    outpath_correct = fasta_path[:-6]+"_filtered.fasta"
+    SeqIO.write(result_correct, outpath_correct, "fasta")
+    outpath_incorrect = fasta_path[:-6]+"_incorrect.fasta"
+    SeqIO.write(result_incorrect, outpath_incorrect, "fasta")
+
+    correct = len(result_correct)
+    incorrect = len(result_incorrect)
 
     print fasta_path
-    print "non truncated genes", non_truncated
-    print "truncated genes", truncated
-    print "genes with in-frame stop codons", has_stops
+    print "correct genes", correct
+    print "incorrect genes", incorrect
     return 0
 
 # fasta_path = sys.argv[1]
 # filter_cds(fasta_path)
-fasta_path = "/home/anna/bioinformatics/all_proteome_references/new_ref/Phytomonas_Hart1_GCA_000982615.1_AKI_PRJEB1539_v1_protein.faa"
-filter_cds(fasta_path, translated = True)
+fasta_path = "/home/anna/bioinformatics/all_tryp_references/cds/TriTrypDB-34_TbruceiTREU927_AnnotatedCDSs.fasta"
+filter_cds(fasta_path, translated = False, translate = False)

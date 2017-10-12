@@ -2,12 +2,14 @@
 from Bio import SeqIO
 import matplotlib.pyplot as plt
 
-fasta_path='/home/anna/bioinformatics/blasto/utr_analysis/p57_stop_dist10_1200_-3_environs.fasta'
+fasta_path='/home/anna/bioinformatics/all_tryp_references/cds/TriTrypDB-34_TbruceiTREU927_AnnotatedCDSs_filtered.fasta'
 
 codon_usage = False
 
 for record in SeqIO.parse(fasta_path, "fasta"):
     seq_length = len(record.seq)
+    if seq_length % 3 != 0:
+        print "Error! Len % 3 not equal 0"
     if not codon_usage:
         codon_usage = [{} for x in range(seq_length/3)]
     for i, k in enumerate(range(0, seq_length, 3)):
