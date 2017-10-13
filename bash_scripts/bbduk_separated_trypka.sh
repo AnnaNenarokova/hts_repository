@@ -3,7 +3,7 @@
 #PBS -l nodes=1:ppn=60
 
 fw="/media/4TB1/blastocrithidia/kika_workdir/ena_reads/SRR4017973_1.fastq"
-rv="/media/4TB1/blastocrithidia/kika_workdir/ena_reads/SRR4017973_1.fastq"
+rv="/media/4TB1/blastocrithidia/kika_workdir/ena_reads/SRR4017973_2.fastq"
 trimdir='/media/4TB1/blastocrithidia/kika_workdir/ena_reads/'
 name='SRR4017973'
 trimmed_fw=$trimdir$name'_trimmed_1.fq.gz'
