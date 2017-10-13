@@ -4,7 +4,7 @@
 
 fw="/media/4TB1/blastocrithidia/kika_workdir/ena_reads/SRR4017973_1.fastq"
 rv="/media/4TB1/blastocrithidia/kika_workdir/ena_reads/SRR4017973_1.fastq"
-trimdir='/media/4TB1/blastocrithidia/kika_workdir/reads/'
+trimdir='/media/4TB1/blastocrithidia/kika_workdir/ena_reads/'
 name='SRR4017973'
 trimmed_fw=$trimdir$name'_trimmed_1.fq.gz'
 trimmed_rv=$trimdir$name'_trimmed_2.fq.gz'
@@ -14,7 +14,7 @@ adapt='/home/kika/tools/bbmap/resources/adapters.fa'
 
 fw="/media/4TB1/blastocrithidia/kika_workdir/ena_reads/SRR4017993_1.fastq"
 rv="/media/4TB1/blastocrithidia/kika_workdir/ena_reads/SRR4017993_2.fastq"
-trimdir='/media/4TB1/blastocrithidia/kika_workdir/reads/'
+trimdir='/media/4TB1/blastocrithidia/kika_workdir/ena_reads/'
 name='SRR4017993'
 trimmed_fw=$trimdir$name'_trimmed_1.fq.gz'
 trimmed_rv=$trimdir$name'_trimmed_2.fq.gz'
