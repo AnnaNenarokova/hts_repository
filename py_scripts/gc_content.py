@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 from Bio import SeqIO
 
-infile = SeqIO.parse('/home/kika/Dropbox/blasto_project/blastocrithidia/genes/insertions/alignments/ins_p57_nt.fasta', 'fasta')
-outfile = open('/home/kika/Dropbox/blasto_project/blastocrithidia/genes/insertions/alignments/ins_p57_GC.tsv', 'w')
+infile = SeqIO.parse('/home/kika/alignments/p57_nt.txt', 'fasta')
+outfile = open('/home/kika/alignments/p57_ins_stat.tsv', 'w')
 
-outfile.write('{}\t{}\t{}\t{}\t{}\n'.format('sequence', 'sequence length [# nt]', 'GC content [%]', 
-	'AT content [%]', 'ambiguous [# nt]'))
+outfile.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format('insertion', 'insertion length [# nt]', 'A [# nt]', 
+	'T [# nt]', 'C [# nt]', 'G [# nt]', 'ambiguous [# nt]', 'GC content [%]', 'AT content [%]'))
 
-def GC_calculator(sequence):
+def calculator(sequence):
 	ambiguous = 0
 	T = sequence.count('T')
 	A = sequence.count('A')
@@ -22,11 +22,12 @@ def GC_calculator(sequence):
 	else:
 		GC_content = 'NA'
 		AT_content = 'NA'
-	return GC_content, AT_content, ambiguous
+	return A, T, C, G, ambiguous, GC_content, AT_content
 
 for sequence in infile:
 	seq = sequence.seq.upper()
 	name = sequence.name
-	outfile.write('{}\t{}\t{}\t{}\t{}\n'.format(name, len(seq), GC_calculator(seq)[0], 
-		GC_calculator(seq)[1], GC_calculator(seq)[2]))
+	outfile.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format(name, len(seq), calculator(seq)[0], 
+		calculator(seq)[1], calculator(seq)[2], calculator(seq)[3], calculator(seq)[4], calculator(seq)[5], 
+		calculator(seq)[6]))
 outfile.close()

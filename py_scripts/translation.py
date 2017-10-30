@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 from Bio import SeqIO
 
-infile = SeqIO.parse('/home/kika/Dropbox/blasto_project/jaculum/genes/mt/never_edited_nt.txt', 'fasta')
-output = open('/home/kika/Dropbox/blasto_project/jaculum/genes/mt/never_edited_nt_trans.fasta', 'w')
+infile = SeqIO.parse('/home/kika/MEGAsync/blasto_project/genes/UAG_stops/out', 'fasta')
+output = open('/home/kika/MEGAsync/blasto_project/genes/UAG_stops/mit_ATP_dep_Zn_metallopeptidase.txt', 'w')
 
 gencode = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
@@ -20,7 +20,7 @@ gencode = {
     'TCA':'S', 'TCC':'S', 'TCG':'S', 'TCT':'S',
     'TTC':'F', 'TTT':'F', 'TTA':'L', 'TTG':'L',
     'TAC':'Y', 'TAT':'Y', 'TAA':'X', 'TAG':'X',
-    'TGC':'C', 'TGT':'C', 'TGA':'W', 'TGG':'W'}
+    'TGC':'C', 'TGT':'C', 'TGA':'X', 'TGG':'W'}
 
 def translation(sequence):
     cut_seq = []

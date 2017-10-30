@@ -197,6 +197,7 @@ def p57_orf(result_dict):
 			else:
 				not_genome[proteins_from_aln[key][1]] = key
 	return orf, no_orf, not_genome
+	#orf
 	#contig name : orf sequence 	orf start 	orf end 	frame	file name
 	#			   [0]				[1]			[2]			[3]		[4]	
 
@@ -257,6 +258,7 @@ def jac_orf(result_dict):
 			else:
 				not_genome[proteins_from_aln[key][1]] = key
 	return orf, no_orf, not_genome
+	#orf
 	#contig name : orf sequence 	orf start 	orf end 	frame	file name
 	#			   [0]				[1]			[2]			[3]		[4]	
 
