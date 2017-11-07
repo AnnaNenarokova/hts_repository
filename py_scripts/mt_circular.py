@@ -24,7 +24,7 @@ circ_dict = {}
 nc_dict = {}
 for contig in contigs:
 	print(contig.description)
-	#ssearch for the beginning repeat at the end of the conting
+	#search for the beginning repeat at the end of the conting
 	for i in range(len(contig.seq)):
 		if contig.seq.count(contig.seq[0:i+1]) > 1:
 			repeat = str(contig.seq[0:i+1])
