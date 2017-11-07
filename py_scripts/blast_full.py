@@ -4,14 +4,14 @@ import os
 import subprocess
 from Bio.Blast import NCBIXML
 
-out_blast = open('/home/kika/MEGAsync/blasto_project/genes/selenoproteins/jac_selenoprot_blast.xlsx', 'w')
-out_best = open('/home/kika/MEGAsync/blasto_project/genes/selenoproteins/jac_selenoprot_best_blast.xlsx', 'w')
-errors = open('/home/kika/MEGAsync/blasto_project/genes/selenoproteins/jac_selenoprot_errors.txt', 'w')
+out_blast = open('/home/kika/MEGAsync/blasto_project/genes/replication/p57_repl_blast.xlsx', 'w')
+out_best = open('/home/kika/MEGAsync/blasto_project/genes/replication/p57_repl_best_blast.xlsx', 'w')
+errors = open('/home/kika/MEGAsync/blasto_project/genes/replication/p57_repl_errors.txt', 'w')
 
-cmd = '/home/kika/programs/blast-2.5.0+/bin/tblastn'
-query = '/home/kika/MEGAsync/blasto_project/genes/selenoproteins/p57_selenoprot_aa.txt'
-db = '/home/kika/programs/blast-2.5.0+/bin/jaculum_scaffolds_transc.fasta'
-output = '/home/kika/MEGAsync/blasto_project/genes/selenoproteins/jac_selenoprot.xml'
+cmd = 'tblastn'
+query = '/home/kika/MEGAsync/blasto_project/genes/replication/jac_seqs.txt'
+db = '/home/kika/programs/blast-2.5.0+/bin/p57_DNA_scaffolds.fa'
+output = '/home/kika/MEGAsync/blasto_project/genes/replication/p57_repl.xml'
 evalue = 10
 outfmt = 5
 word_size = 3
@@ -61,13 +61,13 @@ for record in blast_records:
 out_best.close()
 out_blast.close()
 
-table = open('/home/kika/MEGAsync/blasto_project/genes/selenoproteins/jac_selenoprot_best_blast.xlsx', 'r')
+table = open('/home/kika/MEGAsync/blasto_project/genes/replication/p57_repl_best_blast.xlsx', 'r')
 table.readline()
 
 print('sorting hits by evalue')
 for row in table:
 	split_row = row.split('\t')
-	qseqid = split_row[0].split('_')[0]
+	qseqid = split_row[0].split('jac_')[1]
 	qlen = int(split_row[1])
 	sseqid = split_row[2]
 	try:
@@ -84,7 +84,7 @@ for row in table:
 		send = int(split_row[13])
 		alen_qlen = float(split_row[14])
 		alen_slen = float(split_row[15])
-		out = '/home/kika/MEGAsync/blasto_project/genes/selenoproteins/jac_' + qseqid + '_nt.txt'
+		out = '/home/kika/MEGAsync/blasto_project/genes/replication/p57_' + qseqid + '_nt.txt'
 
 		if evalue < 0.001:
 			if qstart == 1:
@@ -104,8 +104,7 @@ for row in table:
 				if sstart < 1:
 					sstart = 1
 			b_range = '{}-{}'.format(sstart, send)
-			os.system('/home/kika/programs/blast-2.5.0+/bin/blastdbcmd -entry {} -db {} -out {} -range {}'.format(
-				sseqid, db, out, b_range))
+			os.system('blastdbcmd -entry {} -db {} -out {} -range {}'.format(sseqid, db, out, b_range))
 		else:
 			errors.write('{}: too high evalue ({})\n'. format(qseqid, evalue))
 

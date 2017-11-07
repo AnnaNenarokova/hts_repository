@@ -1,21 +1,32 @@
 #!/usr/bin/python3
 from bioservices.kegg import KEGG
 
-output = open('/home/kika/scripts/EC/eclist2.txt', 'w')
+output = open('/home/kika/MEGAsync/blasto_project/genes/replication/lmaj.txt', 'w')
 
 kegg = KEGG()
-pathway = kegg.get('ko00564')
+# pathway = kegg.get('tbr03030')
+pathway = kegg.get('lma03030')
 dict_data = kegg.parse(pathway)
 # print(dict_data)
 
-for key in dict_data['ORTHOLOGY'].keys():
-	value = dict_data['ORTHOLOGY'][key]
-	if 'EC' in value:
-		EC = value.split('[EC:')[1]
-		EC = EC.split(']')[0]
-		EC = EC.replace(' ', '\n')
-		output.write(EC + '\n')
-output.close()
+genes = {}
+for key in dict_data.keys():
+	if key == 'GENE':
+		genes = dict_data[key]
+
+for key in genes.keys():
+	output.write(key + '\n')
+
+
+
+# for key in dict_data['ORTHOLOGY'].keys():
+# 	value = dict_data['ORTHOLOGY'][key]
+# 	if 'EC' in value:
+# 		EC = value.split('[EC:')[1]
+# 		EC = EC.split(']')[0]
+# 		EC = EC.replace(' ', '\n')
+# 		output.write(EC + '\n')
+# output.close()
 
 # # g = x.get('tbr03440:Tb11.01.0910/aaseq')
 # # print(g)

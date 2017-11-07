@@ -4,9 +4,9 @@ from Bio.Blast.Applications import NcbiblastxCommandline
 
 print('running BLAST')
 blast_cline = NcbiblastxCommandline(cmd='tblastn', 
-									query='/home/kika/MEGAsync/blasto_project/genes/tRNA-synthetases/TiaS/Tias.fasta', 
-									db='/home/kika/programs/blast-2.5.0+/bin/jac_raw_reads.fasta', 
-									out='/home/kika/MEGAsync/blasto_project/genes/tRNA-synthetases/TiaS/jac_tblastn_reads.xml',
+									query='/home/kika/MEGAsync/blasto_project/genes/replication/lmaj_seqs.txt', 
+									db='/home/kika/programs/blast-2.5.0+/bin/p57_DNA_scaffolds.fa', 
+									out='/home/kika/MEGAsync/blasto_project/genes/replication/p57_tblastn.xml',
 									evalue=10,
 									outfmt=5,
 									word_size=3,
@@ -15,10 +15,10 @@ stdout, stderr = blast_cline()
 print('BLAST done')
 print('writing BLAST results to tables')
 
-result_handle = open('/home/kika/MEGAsync/blasto_project/genes/tRNA-synthetases/TiaS/jac_tblastn_reads.xml')
+result_handle = open('/home/kika/MEGAsync/blasto_project/genes/replication/p57_tblastn.xml')
 blast_records = NCBIXML.parse(result_handle)
-output = open('/home/kika/MEGAsync/blasto_project/genes/tRNA-synthetases/TiaS/jac_tblastn_reads.xlsx', 'w')
-out_best = open('/home/kika/MEGAsync/blasto_project/genes/tRNA-synthetases/TiaS/jac_tblastn_reads_best.xlsx', 'w')
+output = open('/home/kika/MEGAsync/blasto_project/genes/replication/p57_tblastn.xlsx', 'w')
+out_best = open('/home/kika/MEGAsync/blasto_project/genes/replication/p57_tblastn_best.xlsx', 'w')
 
 output.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format('qseqid', 'qlen', 'sseqid', 'slen', 
 	'alen', 'evalue', 'pident', 'bitscore', 'mismatch', 'gaps', 'qstart', 'qend', 'sstart', 'send', 'alen_qlen', 
