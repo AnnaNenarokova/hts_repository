@@ -26,33 +26,33 @@ def get_codon_environs(gff_path, bed_out_path=False, left_border=-200, right_bor
 					gene_end = int(split_row[4])
 					score = split_row[5]
 					strand = split_row[6][0]
-					if strand == "+":
-						if feature_type == feature:
-							if gene_end <= gene_start:
-								print "Gene end <= gene start error"
-								print gene_start, gene_end
-							else:
-								if starts:
-									if strand == "+":
-										current_borders = [gene_start+left_border, gene_start+right_border]
-									elif strand == "-":
-										current_borders = [gene_end-right_border-1, gene_end-left_border-1]
-									else:
-										print "GFF strand error"
+					if feature_type == feature:
+						if gene_end < gene_start:
+							print "Gene end < gene start error"
+							print gene_start, gene_end
+						else:
+							if starts:
+								if strand == "+":
+									current_borders = [gene_start+left_border, gene_start+right_border]
+								elif strand == "-":
+									current_borders = [gene_end-right_border-1, gene_end-left_border-1]
 								else:
-									if strand == "+":
-										current_borders = [gene_end+left_border, gene_end+right_border]
-									elif strand == "-":
-										current_borders = [gene_start-right_border-1, gene_start-left_border-1]
-									else:
-										print "GFF strand error"
-										exit(1)
-									if contig_id not in codon_environs.keys():
-										codon_environs[contig_id]=[]
-									if current_borders[0] > 0:
-										codon_environs[contig_id].append( {"strand":strand, "borders": current_borders} )
-										new_row = '{}\t{}\t{}\t{}\t{}\t{}\n'.format(contig_id, current_borders[0], current_borders[1], 'name', score, strand)
-									output.write(new_row)
+									print "GFF strand error"
+							else:
+								if strand == "+":
+									current_borders = [gene_end+left_border, gene_end+right_border]
+								elif strand == "-":
+									current_borders = [gene_start-right_border-1, gene_start-left_border-1]
+								else:
+									print "GFF strand error"
+									exit(1)
+								if contig_id not in codon_environs.keys():
+									codon_environs[contig_id]=[]
+								if current_borders[0] > 0:
+									codon_environs[contig_id].append( {"strand":strand, "borders": current_borders} )
+							new_row = '{}\t{}\t{}\t{}\t{}\t{}\n'.format(contig_id, current_borders[0], current_borders[1], 'name', score, strand)
+							print new_row
+							output.write(new_row)
 		output.close()
 	gff_file.close()
 	return codon_environs, bed_out_path
@@ -104,6 +104,7 @@ in_fasta="/home/anna/bioinformatics/all_tryp_references/TriTrypDB-34_TbruceiTREU
 gff_path="/home/anna/bioinformatics/all_tryp_references/TriTrypDB-34_TbruceiTREU927_cleaned.gff"
 
 codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="gene", stops_included=True)
+
 
 logo_path='{}_{}_{}_stop_environs_logo.png'.format(gff_path[:-4],left_border, right_border)
 

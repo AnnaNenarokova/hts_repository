@@ -1,10 +1,10 @@
 #!/bin/sh
-cd /home/nenarokova/tools/busco
+busco_dir=""
 
 infile=""
-name=""
-ref_set=""
+out=$infile"_out"
+ref_set=$busco_dir"/lineages/eukaryota_odb9/"
 mode="proteins"
-#--mode sets the assessment MODE: genдome, proteins, transcriptome
+#--mode sets the assessment MODE: genome, proteins, transcriptome
 cd
-python scripts/run_BUSCO.py -i $infile -o $name -l $ref_set -m [MODE]
+python $busco_dir"scripts/run_BUSCO.py" -i $infile -o $out -l $ref_set -m [MODE]
