@@ -9,13 +9,18 @@ l = [
 "NODE_106_length_108046_cov_858.69",
 "NODE_104_length_108845_cov_889.343"
 ]
-fasta = '/home/anna/bioinformatics/novymonas/wt_scaffolds.fasta'
 results = []
 
-for record in SeqIO.parse(fasta, "fasta"):
-  if record.id not in l:
-    results.append(record)
+# for record in SeqIO.parse(fasta, "fasta"):
+#   if record.id not in l:
+#     results.append(record)
 
-outpath = '/home/anna/bioinformatics/novymonas/novymonas_no_pand_scaffolds.fasta'
+
+
+fasta = "/home/anna/bioinformatics/references/ncbi/GCA_000982615.1_AKI_PRJEB1539_v1_Phytomonas_Hart1_protein.faa"
+outpath = "/home/anna/bioinformatics/references/ncbi/GCA_000982615.1_AKI_PRJEB1539_v1_Phytomonas_Hart1_full_proteins.faa"
+for record in SeqIO.parse(fasta, "fasta"):
+  if "partial" not in record.description:
+    results.append(record)
 
 SeqIO.write(results, outpath, "fasta")
