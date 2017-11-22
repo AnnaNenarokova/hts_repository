@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 from Bio.Blast import NCBIXML
 from Bio.Blast.Applications import NcbiblastxCommandline
 
