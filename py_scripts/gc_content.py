@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 from Bio import SeqIO
 
-infile = SeqIO.parse('/home/kika/alignments/p57_nt.txt', 'fasta')
-outfile = open('/home/kika/alignments/p57_ins_stat.tsv', 'w')
+infile = SeqIO.parse('/home/kika/MEGAsync/blasto_project/transcriptome_assembly/trinity/lhes2_PRJNA284294_trinity.fasta', 'fasta')
+outfile = open('//home/kika/MEGAsync/blasto_project/gc_content/lhes2.tsv', 'w')
 
-outfile.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format('insertion', 'insertion length [# nt]', 'A [# nt]', 
+outfile.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format('contig', 'contig length [# nt]', 'A [# nt]', 
 	'T [# nt]', 'C [# nt]', 'G [# nt]', 'ambiguous [# nt]', 'GC content [%]', 'AT content [%]'))
 
 def calculator(sequence):

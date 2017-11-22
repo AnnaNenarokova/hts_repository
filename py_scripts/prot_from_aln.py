@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import os
-from Bio import SeqIO, AlignIO
+from Bio import AlignIO
 
 os.chdir('/home/kika/alignments/')
 files = os.listdir()

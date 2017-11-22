@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 import os
 
-db = '/home/kika/programs/blast-2.5.0+/bin/jaculum_scaffolds.fasta'
-table = open('/home/kika/Dropbox/blasto_project/jaculum/genes/thiolation/thiol_best_blast.xlsx', 'r')
+db = '/home/kika/programs/blast-2.5.0+/bin/triat_RNA.fasta'
+table = open('/home/kika/MEGAsync/blasto_project/genes/replication/triat_repl_RNA_best_blast.xlsx', 'r')
 table.readline()
 
 for row in table:
 	split_row = row.split('\t')
-	qseqid = split_row[0].split(':')[0].split('_')[0]
+	qseqid = split_row[0].split('p57_')[1]
 	qlen = int(split_row[1])
 	sseqid = split_row[2]
 	slen = int(split_row[3])
@@ -23,27 +23,27 @@ for row in table:
 	send = int(split_row[13])
 	alen_qlen = float(split_row[14])
 	alen_slen = float(split_row[15])
-	out = '/home/kika/Dropbox/blasto_project/jaculum/genes/thiolation/jac_' + qseqid + '_nt.txt'
+	out = '/home/kika/MEGAsync/blasto_project/genes/replication/triat_' + qseqid + '_nt.txt'
 
-	if qstart == 1:
-		if qend == qlen:
-			send = send + 300
-		else:
-			send = send + 3*(qlen - qend) + 300
-		sstart = sstart - 300
-		if sstart < 1:
-			sstart = 1
-	else:
-		if qend == qlen:
-			send = send + 300
-		else:
-			send = send + 3*(qlen - qend) + 300
-		sstart = sstart - (3*qstart + 300)
-		if sstart < 1:
-			sstart = 1
+	# if qstart == 1:
+	# 	if qend == qlen:
+	# 		send = send + 300
+	# 	else:
+	# 		send = send + 3*(qlen - qend) + 300
+	# 	sstart = sstart - 300
+	# 	if sstart < 1:
+	# 		sstart = 1
+	# else:
+	# 	if qend == qlen:
+	# 		send = send + 300
+	# 	else:
+	# 		send = send + 3*(qlen - qend) + 300
+	# 	sstart = sstart - (3*qstart + 300)
+	# 	if sstart < 1:
+	# 		sstart = 1
 	
-	b_range = '{}-{}'.format(sstart, send)
-	os.system('/home/kika/programs/blast-2.5.0+/bin/blastdbcmd -entry {} -db {} -out {} -range {}'.format(
-		sseqid, db, out, b_range))
+	# os.system('blastdbcmd -entry {} -db {} -out {} -range {}-{}'.format(sseqid, db, out, sstart, send))
+
+	os.system('blastdbcmd -entry {} -db {} -out {}'.format(sseqid, db, out))
 
 table.close()

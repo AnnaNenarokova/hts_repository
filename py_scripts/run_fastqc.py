@@ -2,11 +2,12 @@
 import os
 import subprocess
 
-os.chdir('/media/4TB1/blastocrithidia/bexlh/reads/trimmed/PRJNA284294/')
+os.chdir('/home/kika/llin/')
 files = os.listdir()
 
-fastqc = '/home/kika/tools/FastQC/fastqc'
-out_dir = '/media/4TB1/blastocrithidia/bexlh/reads/fastqc/PRJNA284294/'
+fastqc = 'fastqc'
+out_dir = '/home/kika/llin/'
+threads = 2
 
 for file in files:
-	subprocess.call('{} -o {} {}'.format(fastqc, out_dir, file), shell=True)
+	subprocess.call('{} -t {} -o {} {}'.format(fastqc, threads, out_dir, file), shell=True)

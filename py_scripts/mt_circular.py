@@ -16,9 +16,6 @@ repeats_out = open('repeats.fa', 'w')
 
 print('Searching for repeats in sequences')
 
-# 1) search for the beginning repeat at the end of the conting
-# 2) constrain the length of the contig
-# 3) search for the beginning repeat in the second half of the contig + search for the last repeat in the
 cand_dict = {}
 circ_dict = {}
 nc_dict = {}

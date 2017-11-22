@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 from Bio import SeqIO
 
-infile = SeqIO.parse('/home/kika/MEGAsync/blasto_project/genes/UAG_stops/out', 'fasta')
-output = open('/home/kika/MEGAsync/blasto_project/genes/UAG_stops/mit_ATP_dep_Zn_metallopeptidase.txt', 'w')
+infile = SeqIO.parse('/home/kika/MEGAsync/blasto_project/transcriptome_assembly/trinity/lygus_lineolaris_tsa.fsa', 'fasta')
+output = open('/home/kika/MEGAsync/blasto_project/transcriptome_assembly/trinity/lygus_lineolaris_tsa_translated.fsa', 'w')
+error = open('/home/kika/MEGAsync/blasto_project/transcriptome_assembly/trinity/lygus_lineolaris_errors.txt', 'w')
 
 gencode = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
@@ -44,8 +45,7 @@ for sequence in infile:
         if nucleotide not in 'ATCGN':
             ambiguous = True
     if ambiguous == True:
-        with open('/home/kika/Dropbox/blasto_project/jaculum/genes/mt/error.txt', 'w') as error:
-            error.write('{}\n{}\n'.format(name, seq))
+        error.write('{}\n{}\n'.format(name, seq))
     else:    
         output.write('>{}_1\n{}\n'.format(name, translation(seq)))
         output.write('>{}_2\n{}\n'.format(name, translation(seq[1:])))
@@ -56,3 +56,4 @@ for sequence in infile:
     if i%100 == 0:
         print(i)
 output.close()
+error.close()
