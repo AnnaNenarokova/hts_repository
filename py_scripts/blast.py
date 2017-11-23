@@ -5,8 +5,8 @@ from Bio.Blast.Applications import NcbiblastxCommandline
 print('running BLAST')
 blast_cline = NcbiblastxCommandline(cmd='tblastx', 
 									query='/home/kika/blastocrithidia/transcriptome/lygus_lineolaris_tsa.fsa', 
-									db='/home/kika/blastocrithidia/blast_searches/lhes1_PRJNA238835/db/lhes1_PRJNA238835_trinity.fasta', 
-									out='/home/kika/blastocrithidia/blast_searches/lhes1_PRJNA238835/results/llin_blast.xml',
+									db='/home/kika/blastocrithidia/blast_searches/lhes2_PRJNA284294/db/lhes2_PRJNA284294_trinity.fasta', 
+									out='/home/kika/blastocrithidia/blast_searches/lhes2_PRJNA284294/results/llin_blast.xml',
 									evalue=10,
 									outfmt=5,
 									word_size=3,
@@ -15,10 +15,10 @@ stdout, stderr = blast_cline()
 print('BLAST done')
 print('writing BLAST results to tables')
 
-result_handle = open('/home/kika/blastocrithidia/blast_searches/lhes1_PRJNA238835/results/llin_blast.xml')
+result_handle = open('/home/kika/blastocrithidia/blast_searches/lhes2_PRJNA284294/results/llin_blast.xml')
 blast_records = NCBIXML.parse(result_handle)
-output = open('/home/kika/blastocrithidia/blast_searches/lhes1_PRJNA238835/results/llin_blast.tsv', 'w')
-out_best = open('/home/kika/blastocrithidia/blast_searches/lhes1_PRJNA238835/results/llin_best_blast.tsv', 'w')
+output = open('/home/kika/blastocrithidia/blast_searches/lhes2_PRJNA284294/results/llin_blast.tsv', 'w')
+out_best = open('/home/kika/blastocrithidia/blast_searches/lhes2_PRJNA284294/results/llin_best_blast.tsv', 'w')
 
 output.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format('qseqid', 'qlen', 'sseqid', 'slen', 
 	'alen', 'evalue', 'pident', 'bitscore', 'mismatch', 'gaps', 'qstart', 'qend', 'sstart', 'send', 'alen_qlen', 
