@@ -20,6 +20,7 @@ blast_records = NCBIXML.parse(result_handle)
 output = open('/home/kika/blastocrithidia/blast_searches/lhes2_PRJNA284294/results/llin_blast.tsv', 'w')
 out_best = open('/home/kika/blastocrithidia/blast_searches/lhes2_PRJNA284294/results/llin_best_blast.tsv', 'w')
 
+
 output.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format('qseqid', 'qlen', 'sseqid', 'slen', 
 	'alen', 'evalue', 'pident', 'bitscore', 'mismatch', 'gaps', 'qstart', 'qend', 'sstart', 'send', 'alen_qlen', 
 	'alen_slen'))
