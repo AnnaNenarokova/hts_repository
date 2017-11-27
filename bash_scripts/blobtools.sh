@@ -8,5 +8,5 @@ out='/home/kika/tools/blobtools/example/my_first_blobplot/'
 # /home/kika/tools/blobtools/blobtools create -i $input -b $bam -o $out
 # -t $blast 
 
-v_in=$out+'blobDB.json'
+v_in=$out'blobDB.json'
 /home/kika/tools/blobtools/blobtools view -i $v_in -o $out
