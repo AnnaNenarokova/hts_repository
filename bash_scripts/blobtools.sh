@@ -1,11 +1,12 @@
 #!/bin/bash
 
-c_in='/home/kika/tools/blobtools/example/assembly.fna'
-bam='/home/kika/tools/blobtools/example/mapping_1.bam'
+blob='/home/kika/tools/blobtools/blobtools'
+c_in='/media/4TB1/blastocrithidia/bexlh/lhes1_PRJNA238835_trinity/Trinity.fasta'
+bam='/media/4TB1/blastocrithidia/mapping/lhes1_bowtie2_RNA/lhes1_bw2_sorted.bam'
 blast='/home/kika/tools/blobtools/example/blast.out'
-out='/home/kika/tools/blobtools/example/my_second_blobplot_blast/'
+out='/media/4TB1/blastocrithidia/bexlh/blobtools_results/'
 v_in=$out'blobDB.json'
 
-/home/kika/tools/blobtools/blobtools create -i $c_in -b $bam -t $blast -o $out
-/home/kika/tools/blobtools/blobtools view -i $v_in -o $out
-/home/kika/tools/blobtools/blobtools plot -i $v_in -o $out
+$blob create -i $c_in -b $bam -o $out -t $blast 
+$blob view -i $v_in -o $out
+$blob plot -i $v_in -o $out

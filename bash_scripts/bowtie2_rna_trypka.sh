@@ -13,7 +13,7 @@ report=$base_name".txt"
 unmapped_unpaired=$base_name"_unmapped_unpaired.fq"
 unmapped_paired=$base_name"_unmapped_paired.fq"
 
-/home/nenarokova/tools/bowtie2-2.2.9/bowtie2 --very-sensitive -p 20 -x $base_name -1 $p1_1 -2 $p1_2 --un-gz $unmapped_unpaired --un-conc-gz $unmapped_paired -S $alignment 2> $report
+$bw2_dir'bowtie2' --very-sensitive -p 20 -x $base_name -1 $p1_1 -2 $p1_2 --un-gz $unmapped_unpaired --un-conc-gz $unmapped_paired -S $alignment 2> $report
 
 samfile=$alignment
 bamfile=$base_name"_unsorted.bam"
