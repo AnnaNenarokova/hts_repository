@@ -7,6 +7,6 @@ blast='/media/4TB1/blastocrithidia/kika_workdir/lhes1.diamond_out'
 out='/media/4TB1/blastocrithidia/kika_workdir/lhes1_blobtools/'
 v_in=$out'blobDB.json'
 
-$blob create -i $c_in -b $bam -o $out -t $blast 
+$blob create -i $c_in -b $bam -t $blast -o $out
 $blob view -i $v_in -o $out
 $blob plot -i $v_in -o $out
