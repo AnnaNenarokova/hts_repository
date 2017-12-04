@@ -1,8 +1,8 @@
 #!/usr/bin/python
 from Bio import SeqIO
 
-infile = SeqIO.parse('/home/anna/bioinformatics/igv_sessions/igv_session_p57/annotation_09_10.fna', 'fasta')
-output = open('/home/anna/bioinformatics/igv_sessions/igv_session_p57/annotation_09_10.faa', 'w')
+infile = SeqIO.parse('/home/anna/bioinformatics/blasto/tRNA_pictures/triat_cyt_deamin_cds.fna', 'fasta')
+output = open('/home/anna/bioinformatics/blasto/tRNA_pictures/triat_cyt_deamin.faa', 'w')
 outerr = open('/home/anna/bioinformatics/blasto/jaculum/jaculum_scaffolds_err.txt', 'w')
 gencode = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
