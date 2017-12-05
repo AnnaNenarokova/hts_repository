@@ -3,9 +3,9 @@ from collections import OrderedDict
 from collections import defaultdict
 from Bio import SeqIO
 
-infile = SeqIO.parse('/home/kika/MEGAsync/blasto_project/genes/tRNAs/iqtree/trna_phylogeny_dataset2.fna', 'fasta')
-out_fasta = open('/home/kika/MEGAsync/blasto_project/genes/tRNAs/iqtree/trna_phylogeny_deduplicated2.fasta', 'w')
-out_dedupl = open('/home/kika/MEGAsync/blasto_project/genes/tRNAs/iqtree/duplicated_names2.txt', 'w')
+infile = SeqIO.parse('/home/kika/MEGAsync/blasto_project/reference_tryps_proteoms/imp_mit.fa', 'fasta')
+out_fasta = open('/home/kika/MEGAsync/blasto_project/reference_tryps_proteoms/imp_mit_dedupl.fa', 'w')
+out_names = open('/home/kika/MEGAsync/blasto_project/reference_tryps_proteoms/imp_mit_dupl-names.txt', 'w')
 
 multiplications = defaultdict(list)
 seq_dict = OrderedDict()
@@ -22,7 +22,7 @@ for key, value in seq_dict.items():
 
 for key, value in multiplications.items():
     if len(value) > 1:
-        out_dedupl.write('{}\n'.format(str(value)))
+        out_names.write('{}\n'.format(str(value)))
 
 out_fasta.close()
-out_dedupl.close()
+out_names.close()

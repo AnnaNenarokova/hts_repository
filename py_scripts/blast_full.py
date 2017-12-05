@@ -4,18 +4,18 @@ import os
 import subprocess
 from Bio.Blast import NCBIXML
 
-out_blast = open('/home/kika/MEGAsync/blasto_project/genes/replication/bexlh1_repl_blast.xlsx', 'w')
-out_best = open('/home/kika/MEGAsync/blasto_project/genes/replication/bexlh1_repl_best_blast.xlsx', 'w')
-errors = open('/home/kika/MEGAsync/blasto_project/genes/replication/bexlh1_repl_errors.txt', 'w')
+out_blast = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/bla/blast.tsv', 'w')
+out_best = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/bla/best_blast.tsv', 'w')
+errors = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/bla/errors.txt', 'w')
 
 cmd = 'tblastn'
-query = '/home/kika/MEGAsync/blasto_project/genes/replication/p57_seqs.txt'
-db = '/home/kika/programs/blast-2.5.0+/bin/lhes1_PRJNA238835_trinity.fasta'
-output = '/home/kika/MEGAsync/blasto_project/genes/replication/bexlh1_repl.xml'
+query = '/home/kika/MEGAsync/blasto_project/genes/c_deaminase/bla/new.txt'
+db = '/home/kika/programs/blast-2.5.0+/bin/p57_DNA_scaffolds.fa'
+output = '/home/kika/MEGAsync/blasto_project/genes/c_deaminase/bla/blast.xml'
 evalue = 10
 outfmt = 5
 word_size = 3
-threads = 4
+threads = 3
 
 print('starting BLAST')
 # os.system('{} -query {} -db {} -out {} -evalue {} -outfmt {} -word_size {}'.format(
@@ -61,13 +61,13 @@ for record in blast_records:
 out_best.close()
 out_blast.close()
 
-table = open('/home/kika/MEGAsync/blasto_project/genes/replication/bexlh1_repl_best_blast.xlsx', 'r')
+table = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/bla/best_blast.tsv', 'r')
 table.readline()
 
 print('sorting hits by evalue')
 for row in table:
 	split_row = row.split('\t')
-	qseqid = split_row[0].split('p57_')[1]
+	qseqid = split_row[0].split(' ')[0]
 	qlen = int(split_row[1])
 	sseqid = split_row[2]
 	try:
@@ -84,29 +84,29 @@ for row in table:
 		send = int(split_row[13])
 		alen_qlen = float(split_row[14])
 		alen_slen = float(split_row[15])
-		out = '/home/kika/MEGAsync/blasto_project/genes/replication/bexlh1_' + qseqid + '_nt.txt'
+		out = '/home/kika/MEGAsync/blasto_project/genes/c_deaminase/bla/' + qseqid + '_nt.txt'
 
 		if evalue < 0.001:
-			# if qstart == 1:
-			# 	if qend == qlen:
-			# 		send = send + 300
-			# 	else:
-			# 		send = send + 3*(qlen - qend) + 300
-			# 	sstart = sstart - 300
-			# 	if sstart < 1:
-			# 		sstart = 1
-			# else:
-			# 	if qend == qlen:
-			# 		send = send + 300
-			# 	else:
-			# 		send = send + 3*(qlen - qend) + 300
-			# 	sstart = sstart - (3*qstart + 300)
-			# 	if sstart < 1:
-			# 		sstart = 1
-			# b_range = '{}-{}'.format(sstart, send)
-			# os.system('blastdbcmd -entry {} -db {} -out {} -range {}'.format(sseqid, db, out, b_range))
+			if qstart == 1:
+				if qend == qlen:
+					send = send + 300
+				else:
+					send = send + 3*(qlen - qend) + 300
+				sstart = sstart - 300
+				if sstart < 1:
+					sstart = 1
+			else:
+				if qend == qlen:
+					send = send + 300
+				else:
+					send = send + 3*(qlen - qend) + 300
+				sstart = sstart - (3*qstart + 300)
+				if sstart < 1:
+					sstart = 1
+			b_range = '{}-{}'.format(sstart, send)
+			os.system('blastdbcmd -entry {} -db {} -out {} -range {}'.format(sseqid, db, out, b_range))
 
-			os.system('blastdbcmd -entry {} -db {} -out {}'.format(sseqid, db, out))
+			# os.system('blastdbcmd -entry {} -db {} -out {}'.format(sseqid, db, out))
 
 		else:
 			errors.write('{}: too high evalue ({})\n'. format(qseqid, evalue))

@@ -1,12 +1,14 @@
 #!/usr/bin/python3
+#Check spliting names in all three files!
 import os
+import re
 from collections import OrderedDict
 
 os.chdir('/home/kika/MEGAsync/blasto_project/reference_tryps_proteoms/')
-multiloc = open('multiloc2.txt', 'r')
-targetp = open('targetp.txt', 'r')
-predsl = open('predsl.txt', 'r')
-predictions = open('predictions.tsv', 'w')
+multiloc = open('importome_tritrypdb_multiloc.txt', 'r')
+targetp = open('importome_tritrypdb_targetp.txt', 'r')
+predsl = open('importome_tritrypdb_predsl.txt', 'r')
+predictions = open('importome_tritrypdb_predictions.tsv', 'w')
 
 ml_dict = OrderedDict()
 for line in multiloc:
@@ -37,22 +39,25 @@ for line in multiloc:
 
 tp_dict = {}
 for line in targetp:
-	name = line.split('\t')[0].split('_')[0]
-	mit = line.split('\t')[2]
-	sp = line.split('\t')[3]
-	other = line.split('\t')[4]
-	loc = line.split('\t')[5]
-	if loc == 'M':
-		pred = 'mit: ' + mit
-		tp_dict[name] = pred
-	elif loc == 'S':
-		pred = 'mit: ' + mit + ' (sp: ' + sp + ')'
-		tp_dict[name] = pred
-	elif loc == '_':
-		pred = 'other: ' + other
-		tp_dict[name] = pred
-	else:
-		print(name + '_____tp')
+	try:
+		name = line.split('\t')[0].split(':')[0]
+		mit = line.split('\t')[2]
+		sp = line.split('\t')[3]
+		other = line.split('\t')[4]
+		loc = line.split('\t')[5]
+		if loc == 'M':
+			pred = 'mit: ' + mit
+			tp_dict[name] = pred
+		elif loc == 'S':
+			pred = 'mit: ' + mit + ' (sp: ' + sp + ')'
+			tp_dict[name] = pred
+		elif loc == '_':
+			pred = 'other: ' + other
+			tp_dict[name] = pred
+		else:
+			print(name + '_____tp')
+	except:
+		pass
 # print(tp_dict)
 
 ps_dict = {}
