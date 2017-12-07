@@ -1,12 +1,11 @@
 #!/usr/bin/python3
-#!!! Check parsing record.query in the end of blast_parser function !!!
 from Bio import SeqIO
 from Bio.Blast import NCBIXML
 
-fasta = SeqIO.parse('/home/kika/programs/blast-2.5.0+/bin/jaculum_scaffolds_transc.fasta', 'fasta')
-nt_out = open('/home/kika/MEGAsync/blasto_project/genes/replication/jac/jac_repl_nt.txt', 'w')
-aa_out = open('/home/kika/MEGAsync/blasto_project/genes/replication/jac/jac_repl_aa.txt', 'w')
-result_handle = open('/home/kika/MEGAsync/blasto_project/genes/replication/jac/jac_repl.xml')
+fasta = SeqIO.parse('/home/kika/programs/blast-2.5.0+/bin/p57_DNA_scaffolds.fa', 'fasta')
+nt_out = open('/home/kika/MEGAsync/blasto_project/genes/replication/p57/p57_repl_nt.txt', 'w')
+aa_out = open('/home/kika/MEGAsync/blasto_project/genes/replication/p57/p57_repl_aa.txt', 'w')
+result_handle = open('/home/kika/MEGAsync/blasto_project/genes/replication/p57/p57_repl.xml')
 blast_records = NCBIXML.parse(result_handle)
 
 gencode = {
@@ -24,8 +23,8 @@ gencode = {
     'GGA':'G', 'GGC':'G', 'GGG':'G', 'GGT':'G',
     'TCA':'S', 'TCC':'S', 'TCG':'S', 'TCT':'S',
     'TTC':'F', 'TTT':'F', 'TTA':'L', 'TTG':'L',
-    'TAC':'Y', 'TAT':'Y', 'TAA':'B', 'TAG':'B',
-    'TGC':'C', 'TGT':'C', 'TGA':'B', 'TGG':'W'}
+    'TAC':'Y', 'TAT':'Y', 'TAA':'B', 'TAG':'Z',
+    'TGC':'C', 'TGT':'C', 'TGA':'J', 'TGG':'W'}
 
 def translation(sequence):
     cut_seq = []
@@ -90,11 +89,9 @@ def blast_parser(blast_records):
 				else:
 					print(record.query + '___frames do not correspond')
 			if frame in [1, 2, 3]:
-				result[best.hit_id] = [min_sstart, max_send, frame, record.query.split(':')[0], 
-					record.query_length, min_qstart, max_qend]
+				result[best.hit_id] = [min_sstart, max_send, frame, record.query, record.query_length, min_qstart, max_qend]
 			else:
-				result[best.hit_id] = [max_send, min_sstart, frame, record.query.split(':')[0], 
-					record.query_length, min_qstart, max_qend]
+				result[best.hit_id] = [max_send, min_sstart, frame, record.query, record.query_length, min_qstart, max_qend]
 	return result
 
 blast_dict = blast_parser(blast_records)
@@ -156,7 +153,7 @@ for contig in fasta:
 				else:
 					seq_end = len(contig.seq)
 			nucleotides = contig.seq[seq_start:seq_end]
-			protein = translation(nucleotides).replace('B', 'X')
+			protein = translation(nucleotides[:-3]).replace('B', 'X').replace('Z', 'X').replace('J', 'X')
 			nt_out.write('>{}__{}\n{}\n'.format(contig.name, ref_name, nucleotides))
 			aa_out.write('>{}__{}\n{}\n'.format(contig.name, ref_name, protein))
 		else:
@@ -208,7 +205,7 @@ for contig in fasta:
 				else:
 					seq_end = len(reverse)
 			nucleotides = reverse[seq_start:seq_end]
-			protein = translation(nucleotides).replace('B', 'X')
+			protein = translation(nucleotides[:-3]).replace('B', 'X').replace('Z', 'X').replace('J', 'X')
 			nt_out.write('>{}__{}\n{}\n'.format(contig.name, ref_name, nucleotides))
 			aa_out.write('>{}__{}\n{}\n'.format(contig.name, ref_name, protein))
 	else:

@@ -4,16 +4,16 @@ import os
 import re
 from collections import OrderedDict
 
-os.chdir('/home/kika/MEGAsync/blasto_project/reference_tryps_proteoms/')
-multiloc = open('importome_tritrypdb_multiloc.txt', 'r')
-targetp = open('importome_tritrypdb_targetp.txt', 'r')
-predsl = open('importome_tritrypdb_predsl.txt', 'r')
-predictions = open('importome_tritrypdb_predictions.tsv', 'w')
+os.chdir('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/p57_imp_mit/')
+multiloc = open('p57_hits_multiloc.txt', 'r')
+targetp = open('p57_hits_targetp.txt', 'r')
+predsl = open('p57_hits_predsl.txt', 'r')
+predictions = open('p57_hits_predictions.tsv', 'w')
 
 ml_dict = OrderedDict()
 for line in multiloc:
 	try:
-		name = line.split('\t')[0].split(':')[0]
+		name = line.split('\t')[0]
 		first = line.split('\t')[1]
 		second = line.split('\t')[2]
 		if 'mitochondrial' in first:
@@ -40,7 +40,7 @@ for line in multiloc:
 tp_dict = {}
 for line in targetp:
 	try:
-		name = line.split('\t')[0].split(':')[0]
+		name = line.split('\t')[0]
 		mit = line.split('\t')[2]
 		sp = line.split('\t')[3]
 		other = line.split('\t')[4]
@@ -62,7 +62,7 @@ for line in targetp:
 
 ps_dict = {}
 for line in predsl:
-	name = line.split('\t')[0].split(':')[0]
+	name = line.split('\t')[0]
 	mit = line.split('\t')[2]
 	sp = line.split('\t')[3]
 	loc = line.split('\t')[4]

@@ -4,14 +4,14 @@ import os
 import subprocess
 from Bio.Blast import NCBIXML
 
-out_blast = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/bla/blast.tsv', 'w')
-out_best = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/bla/best_blast.tsv', 'w')
-errors = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/bla/errors.txt', 'w')
+out_blast = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/p57_imp_mit/blast.tsv', 'w')
+out_best = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/p57_imp_mit/best_blast.tsv', 'w')
+errors = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/p57_imp_mit/errors.txt', 'w')
 
 cmd = 'tblastn'
-query = '/home/kika/MEGAsync/blasto_project/genes/c_deaminase/bla/new.txt'
+query = '/home/kika/MEGAsync/blasto_project/genes/c_deaminase/imp_mit_candidates.fa'
 db = '/home/kika/programs/blast-2.5.0+/bin/p57_DNA_scaffolds.fa'
-output = '/home/kika/MEGAsync/blasto_project/genes/c_deaminase/bla/blast.xml'
+output = '/home/kika/MEGAsync/blasto_project/genes/c_deaminase/p57_imp_mit/blast.xml'
 evalue = 10
 outfmt = 5
 word_size = 3
@@ -61,13 +61,13 @@ for record in blast_records:
 out_best.close()
 out_blast.close()
 
-table = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/bla/best_blast.tsv', 'r')
+table = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/p57_imp_mit/best_blast.tsv', 'r')
 table.readline()
 
 print('sorting hits by evalue')
 for row in table:
 	split_row = row.split('\t')
-	qseqid = split_row[0].split(' ')[0]
+	qseqid = split_row[0].split(':')[0]
 	qlen = int(split_row[1])
 	sseqid = split_row[2]
 	try:
@@ -84,7 +84,7 @@ for row in table:
 		send = int(split_row[13])
 		alen_qlen = float(split_row[14])
 		alen_slen = float(split_row[15])
-		out = '/home/kika/MEGAsync/blasto_project/genes/c_deaminase/bla/' + qseqid + '_nt.txt'
+		out = '/home/kika/MEGAsync/blasto_project/genes/c_deaminase/p57_imp_mit/' + qseqid + '_nt.txt'
 
 		if evalue < 0.001:
 			if qstart == 1:
