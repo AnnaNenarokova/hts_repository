@@ -3,9 +3,9 @@ from Bio import SeqIO
 from Bio.Blast import NCBIXML
 
 fasta = SeqIO.parse('/home/kika/programs/blast-2.5.0+/bin/p57_DNA_scaffolds.fa', 'fasta')
-nt_out = open('/home/kika/MEGAsync/blasto_project/genes/replication/p57/p57_repl_nt.txt', 'w')
-aa_out = open('/home/kika/MEGAsync/blasto_project/genes/replication/p57/p57_repl_aa.txt', 'w')
-result_handle = open('/home/kika/MEGAsync/blasto_project/genes/replication/p57/p57_repl.xml')
+nt_out = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/tb927.10.8850/p57_nt.txt', 'w')
+aa_out = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/tb927.10.8850/p57_aa.txt', 'w')
+result_handle = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/tb927.10.8850/p57_blast.xml')
 blast_records = NCBIXML.parse(result_handle)
 
 gencode = {
@@ -114,7 +114,7 @@ for contig in fasta:
 					seq_start = seq_start
 				else:
 					while translation(contig.seq[seq_start:seq_start+3]) != 'M':
-						if seq_start > 3:
+						if seq_start > 2:
 							seq_start = seq_start - 3
 						else:
 							seq_start = seq_start
@@ -126,7 +126,7 @@ for contig in fasta:
 				else:
 					seq_start = 1
 				while translation(contig.seq[seq_start:seq_start+3]) != 'M':
-					if seq_start > 3:
+					if seq_start > 2:
 						seq_start = seq_start - 3
 					else:
 						seq_start = seq_start
@@ -166,7 +166,7 @@ for contig in fasta:
 					seq_start = seq_start
 				else:
 					while translation(reverse[seq_start:seq_start+3]) != 'M':
-						if seq_start > 3:
+						if seq_start > 2:
 							seq_start = seq_start - 3
 						else:
 							seq_start = seq_start
@@ -178,7 +178,7 @@ for contig in fasta:
 				else:
 					seq_start = 1
 				while translation(reverse[seq_start:seq_start+3]) != 'M':
-					if seq_start > 3:
+					if seq_start > 2:
 						seq_start = seq_start - 3
 					else:
 						seq_start = seq_start
