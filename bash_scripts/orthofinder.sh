@@ -1,6 +1,6 @@
 #!/bin/sh
 
-of='OrthoFinder-2.1.2/orthofinder'
+of='/home/kika/tools/OrthoFinder-2.1.2/orthofinder'
 proteins='/home/kika/tools/OrthoFinder-2.1.2/ExampleData/'
 blast_method=diamond
 
