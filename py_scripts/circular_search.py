@@ -1,17 +1,14 @@
 #!/usr/bin/python3
 import os
-import subprocess
 from Bio import SeqIO
 
 os.chdir('/home/kika/tara/')
 contigs = SeqIO.parse('CENF01.fasta', 'fasta')
-circular = open('circular_RC.fa', 'w')
-candidates = open('candidates_RC.fa', 'w')
-non_circ = open('non_circular_RC.fa', 'w')
-short_long = open('short_long_RC.fa', 'w')
-repeats_out = open('repeats_RC.fa', 'w')
-
-print('Searching for repeats in sequences')
+circular = open('circular.fa', 'w')
+candidates = open('candidates.fa', 'w')
+non_circ = open('non_circular.fa', 'w')
+short_long = open('short_long.fa', 'w')
+repeats_out = open('repeats.fa', 'w')
 
 cand_dict = {}
 circ_dict = {}
@@ -39,17 +36,16 @@ for contig in contigs:
 				cand_dict[contig.description] = contig.seq
 				repeats_out.write('>{}_BR@{}\n{}\n'.format(contig.description, repeat, 
 					contig.seq[int(len(contig.seq)/2):]))
+
 			#search for the last repeat longer than 15bp and present in the first half of the contig
-			else:
-				reverse = contig.seq.reverse_complement()
-				for i in range(len(reverse)):
-					if reverse.count(reverse[0:i+1]) > 1:
-						repeat = str(reverse[0:i+1])
-					i += 1
-				if len (repeat) >= 15 and repeat in reverse[int(len(reverse)/2):]:
-					cand_dict[contig.description + '_RC'] = reverse
-					repeats_out.write('>{}_LR@{}\n{}\n'.format(contig.description, repeat, 
-						reverse[int(len(reverse)/2):]))
+			for i in range(len(contig.seq)-1, -1, -1):
+				if contig.seq.count(contig.seq[i:]) > 1:
+					repeat = str(contig.seq[i:])
+				i += 1
+			if len(repeat) >= 15 and repeat in contig.seq[:int(len(contig.seq)/2)]:
+				cand_dict[contig.description] = contig.seq
+				repeats_out.write('>{}_LR@{}\n{}\n'.format(contig.description, repeat,
+					contig.seq[:int(len(contig.seq)/2)]))
 
 			if contig.description in cand_dict:
 				pass

@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 from bioservices.kegg import KEGG
 
-output = open('/home/kika/MEGAsync/blasto_project/genes/replication/lmaj.txt', 'w')
+output = open('/home/kika/MEGAsync/blasto_project/genes/HR/lmaj_acc.txt', 'w')
 
 kegg = KEGG()
-# pathway = kegg.get('tbr03030')
-pathway = kegg.get('lma03030')
+# pathway = kegg.get('tbr03430')
+pathway = kegg.get('lma03440')
 dict_data = kegg.parse(pathway)
 # print(dict_data)
 
@@ -15,7 +15,7 @@ for key in dict_data.keys():
 		genes = dict_data[key]
 
 for key in genes.keys():
-	output.write(key + '\n')
+	output.write(key.replace('_', '.').replace('LMJF', 'LmjF') + '\n')
 
 
 

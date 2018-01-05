@@ -9,5 +9,5 @@ def make_sweet(fruit_class):
 orange = Fruit()
 make_sweet(orange)
 
-print orange.taste
-print orange.edible
+print(orange.taste)
+print(orange.edible)

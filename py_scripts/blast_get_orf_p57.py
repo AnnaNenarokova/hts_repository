@@ -1,11 +1,13 @@
 #!/usr/bin/python3
+#!!! Check parsing record.query in the blast_parser function (5x) !!!
 from Bio import SeqIO
 from Bio.Blast import NCBIXML
 
 fasta = SeqIO.parse('/home/kika/programs/blast-2.5.0+/bin/p57_DNA_scaffolds.fa', 'fasta')
-nt_out = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/tb927.10.8850/p57_nt.txt', 'w')
-aa_out = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/tb927.10.8850/p57_aa.txt', 'w')
-result_handle = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/tb927.10.8850/p57_blast.xml')
+nt_out = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/tb927.11.3190/p57_nt.txt', 'w')
+aa_out = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/tb927.11.3190/p57_aa.txt', 'w')
+err_out = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/tb927.11.3190/p57_errors.txt', 'w')
+result_handle = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/tb927.11.3190/p57_blast.xml')
 blast_records = NCBIXML.parse(result_handle)
 
 gencode = {
@@ -40,176 +42,206 @@ def translation(sequence):
 
 def blast_parser(blast_records):
 	result = {}
+	errors = []
 	for record in blast_records:
-		best = record.alignments[0]
-		min_sstart = False
-		max_send = False
-		min_qstart = False
-		max_qend = False
-		frame = best.hsps[0].frame[1]
-		frame_state = ''
-		if frame < 0:
-			frame_state = 0
-		else:
-			frame_state = 1
-		if best.hsps[0].expect > 0.01:
-			print(record.query + '___too high evalue')
-		else:
-			for hsp in best.hsps:
-				hsp_state = ''
-				if hsp.frame[1] < 0:
-					hsp_state = 0
-				else:
-					hsp_state = 1
-				if hsp_state == frame_state:
-					if not min_qstart:
-						min_qstart = hsp.query_start
+		try:
+			best = record.alignments[0]
+			min_sstart = False
+			max_send = False
+			min_qstart = False
+			max_qend = False
+			frame = best.hsps[0].frame[1]
+			if best.hsps[0].expect > 0.01:
+				err_out.write('{}:\ttoo high evalue\n'.format(record.query.split('__')[1]))
+			else:
+				for hsp in best.hsps:
+					if frame == hsp.frame[1]:
+						if not min_qstart:
+							min_qstart = hsp.query_start
+							if frame in [1, 2, 3]:
+								min_sstart = best.hsps[0].sbjct_start
+							else:
+								min_sstart = best.hsps[0].sbjct_end
+						if not max_qend:
+							max_qend = hsp.query_end
+							if frame in [1, 2, 3]:
+								max_send = best.hsps[0].sbjct_end
+							else:
+								max_send = best.hsps[0].sbjct_start
+						if min_qstart > hsp.query_start:
+							min_qstart = hsp.query_start
+							if frame in [1, 2, 3]:
+								min_sstart = hsp.sbjct_start
+							else:
+								min_sstart = hsp.sbjct_end
+						if max_qend < hsp.query_end:
+							max_qend = hsp.query_end
+							if frame in [1, 2, 3]:
+								max_send = hsp.sbjct_end
+							else:
+								max_send = hsp.sbjct_start
+					else:
+						errors.append(record.query.split('__')[1])
 						if frame in [1, 2, 3]:
 							min_sstart = best.hsps[0].sbjct_start
-						else:
-							min_sstart = best.hsps[0].sbjct_end
-					if not max_qend:
-						max_qend = hsp.query_end
-						if frame in [1, 2, 3]:
 							max_send = best.hsps[0].sbjct_end
 						else:
+							min_sstart = best.hsps[0].sbjct_end
 							max_send = best.hsps[0].sbjct_start
-					if min_qstart > hsp.query_start:
-						min_qstart = hsp.query_start
-						if frame in [1, 2, 3]:
-							min_sstart = hsp.sbjct_start
-						else:
-							min_sstart = hsp.sbjct_end
-					if max_qend < hsp.query_end:
-						max_qend = hsp.query_end
-						if frame in [1, 2, 3]:
-							max_send = hsp.sbjct_end
-						else:
-							max_send = hsp.sbjct_start
+				if frame in [1, 2, 3]:
+					result[record.query.split('__')[1]] = [min_sstart, max_send, frame, best.hit_id,
+					record.query_length, min_qstart, max_qend]
 				else:
-					print(record.query + '___frames do not correspond')
-			if frame in [1, 2, 3]:
-				result[best.hit_id] = [min_sstart, max_send, frame, record.query, record.query_length, min_qstart, max_qend]
-			else:
-				result[best.hit_id] = [max_send, min_sstart, frame, record.query, record.query_length, min_qstart, max_qend]
+					result[record.query.split('__')[1]] = [max_send, min_sstart, frame, best.hit_id, 
+					record.query_length, min_qstart, max_qend]
+		except:
+			err_out.write('{}:\tno hit found\n'.format(record.query.split('__')[1]))
+	errors = set(errors)
+	for i in errors:
+		err_out.write('{}:\thsps frames do not correspond\n'.format(i))
 	return result
 
 blast_dict = blast_parser(blast_records)
 # print(blast_dict)
 
 for contig in fasta:
-	if contig.name in blast_dict.keys():
-		frame = blast_dict[contig.name][2]
-		ref_name = blast_dict[contig.name][3]
-		ref_length = blast_dict[contig.name][4]
-		ref_start = blast_dict[contig.name][5]-1
-		ref_end = blast_dict[contig.name][6]
-		ref_dif = ref_length - ref_end
-		if frame in [1, 2, 3]:
-			print(contig.name + '_____forward')
-			seq_start = blast_dict[contig.name][0]-1
-			seq_end = blast_dict[contig.name][1]
-			if ref_start == 1:
-				if translation(contig.seq[seq_start:seq_start+3]) == 'M':
-					seq_start = seq_start
+	for key, value in blast_dict.items():
+		if contig.name == value[3]:
+			frame = value[2]
+			ref_name = key
+			ref_length = value[4]
+			ref_start = value[5]-1
+			ref_end = value[6]
+			ref_dif = ref_length - ref_end
+			if frame in [1, 2, 3]:
+				print(contig.name + '_____forward')
+				seq_start = value[0]-1
+				seq_end = value[1]
+				if ref_start == 1:
+					if translation(contig.seq[seq_start:seq_start+3]) == 'M':
+						seq_start = seq_start
+					else:
+						while translation(contig.seq[seq_start:seq_start+3]) != 'M':
+							if seq_start > 2:
+								seq_start = seq_start - 3
+							else:
+								seq_start = seq_start
+								break
+						else:
+							seq_start = seq_start
 				else:
+					if seq_start > 3*ref_start:
+						seq_start = seq_start - 3*ref_start
+					else:
+						if frame == 1:
+							seq_start = 0
+						elif frame == 2:
+							seq_start = 1
+						elif frame == 3:
+							seq_start = 2
 					while translation(contig.seq[seq_start:seq_start+3]) != 'M':
 						if seq_start > 2:
 							seq_start = seq_start - 3
 						else:
 							seq_start = seq_start
+							break
 					else:
 						seq_start = seq_start
-			else:
-				if seq_start > 3*ref_start:
-					seq_start = seq_start - 3*ref_start
-				else:
-					seq_start = 1
-				while translation(contig.seq[seq_start:seq_start+3]) != 'M':
-					if seq_start > 2:
-						seq_start = seq_start - 3
+				if ref_end == ref_length:
+					if translation(contig.seq[seq_end-3:seq_end]) == 'B':
+						seq_end = seq_end
 					else:
-						seq_start = seq_start
+						while translation(contig.seq[seq_end-3:seq_end]) != 'B':
+							if seq_end < len(contig.seq) - 3:
+								seq_end = seq_end + 3
+							else:
+								seq_end = seq_end
+								break
+						else:
+							seq_end = seq_end
 				else:
-					seq_start = seq_start
-			if ref_end == ref_length:
-				if translation(contig.seq[seq_end-3:seq_end]) == 'B':
-					seq_end = seq_end
-				else:
-					while translation(contig.seq[seq_end-3:seq_end]) != 'B':
-						if seq_end < len(contig.seq) - 3:
-							seq_end = seq_end + 3
+					if seq_end + 3*ref_dif < len(contig.seq) - 3:
+						seq_end = seq_end + 3*ref_dif
+						while translation(contig.seq[seq_end-3:seq_end]) != 'B':
+							if seq_end < len(contig.seq) - 3:
+								seq_end = seq_end + 3
+							else:
+								seq_end = seq_end
+								break
 						else:
 							seq_end = seq_end
 					else:
-						seq_end = seq_end
+						seq_end = len(contig.seq)
+				nucleotides = contig.seq[seq_start:seq_end]
+				protein = translation(nucleotides[:-3]).replace('B', 'X').replace('Z', 'X').replace('J', 'X')
+				nt_out.write('>{}__{}\n{}\n'.format(contig.name, ref_name, nucleotides))
+				aa_out.write('>{}__{}\n{}\n'.format(contig.name, ref_name, protein))
 			else:
-				if seq_end + 3*ref_dif < len(contig.seq) - 3:
-					seq_end = seq_end + 3*ref_dif
-					while translation(contig.seq[seq_end-3:seq_end]) != 'B':
-						seq_end = seq_end + 3
+				print(contig.name + '_____reverse')
+				reverse = contig.seq.reverse_complement()
+				seq_start = len(reverse) - value[1]
+				seq_end = len(reverse) - value[0] + 1
+				if ref_start == 1:
+					if translation(reverse[seq_start:seq_start+3]) == 'M':
+						seq_start = seq_start
 					else:
-						seq_end = seq_end
+						while translation(reverse[seq_start:seq_start+3]) != 'M':
+							if seq_start > 2:
+								seq_start = seq_start - 3
+							else:
+								seq_start = seq_start
+								break
+						else:
+							seq_start = seq_start
 				else:
-					seq_end = len(contig.seq)
-			nucleotides = contig.seq[seq_start:seq_end]
-			protein = translation(nucleotides[:-3]).replace('B', 'X').replace('Z', 'X').replace('J', 'X')
-			nt_out.write('>{}__{}\n{}\n'.format(contig.name, ref_name, nucleotides))
-			aa_out.write('>{}__{}\n{}\n'.format(contig.name, ref_name, protein))
-		else:
-			print(contig.name + '_____reverse')
-			reverse = contig.seq.reverse_complement()
-			seq_start = len(reverse) - blast_dict[contig.name][1]
-			seq_end = len(reverse) - blast_dict[contig.name][0] + 1
-			if ref_start == 1:
-				if translation(reverse[seq_start:seq_start+3]) == 'M':
-					seq_start = seq_start
-				else:
+					if seq_start > 3*ref_start:
+						seq_start = seq_start - 3*ref_start
+					else:
+						if frame == 1:
+							seq_start = 0
+						elif frame == 2:
+							seq_start = 1
+						elif frame == 3:
+							seq_start = 2
 					while translation(reverse[seq_start:seq_start+3]) != 'M':
 						if seq_start > 2:
 							seq_start = seq_start - 3
 						else:
 							seq_start = seq_start
+							break
 					else:
 						seq_start = seq_start
-			else:
-				if seq_start > 3*ref_start:
-					seq_start = seq_start - 3*ref_start
-				else:
-					seq_start = 1
-				while translation(reverse[seq_start:seq_start+3]) != 'M':
-					if seq_start > 2:
-						seq_start = seq_start - 3
+				if ref_end == ref_length:
+					if translation(reverse[seq_end-3:seq_end]) == 'B':
+						seq_end = seq_end
 					else:
-						seq_start = seq_start
+						while translation(reverse[seq_end-3:seq_end]) != 'B':
+							if seq_end < len(reverse) - 3:
+								seq_end = seq_end + 3
+							else:
+								seq_end = seq_end
+								break
+						else:
+							seq_end = seq_end
 				else:
-					seq_start = seq_start
-			if ref_end == ref_length:
-				if translation(reverse[seq_end-3:seq_end]) == 'B':
-					seq_end = seq_end
-				else:
-					while translation(reverse[seq_end-3:seq_end]) != 'B':
-						if seq_end < len(reverse) - 3:
-							seq_end = seq_end + 3
+					if seq_end + 3*ref_dif < len(reverse) - 3:
+						seq_end = seq_end + 3*ref_dif
+						while translation(reverse[seq_end-3:seq_end]) != 'B':
+							if seq_end < len(reverse) - 3:
+								seq_end = seq_end + 3
+							else:
+								seq_end = seq_end
+								break
 						else:
 							seq_end = seq_end
 					else:
-						seq_end = seq_end
-			else:
-				if seq_end + 3*ref_dif < len(reverse) - 3:
-					seq_end = seq_end + 3*ref_dif
-					while translation(reverse[seq_end-3:seq_end]) != 'B':
-						seq_end = seq_end + 3
-					else:
-						seq_end = seq_end
-				else:
-					seq_end = len(reverse)
-			nucleotides = reverse[seq_start:seq_end]
-			protein = translation(nucleotides[:-3]).replace('B', 'X').replace('Z', 'X').replace('J', 'X')
-			nt_out.write('>{}__{}\n{}\n'.format(contig.name, ref_name, nucleotides))
-			aa_out.write('>{}__{}\n{}\n'.format(contig.name, ref_name, protein))
-	else:
-		pass
+						seq_end = len(reverse)
+				nucleotides = reverse[seq_start:seq_end]
+				protein = translation(nucleotides[:-3]).replace('B', 'X').replace('Z', 'X').replace('J', 'X')
+				nt_out.write('>{}__{}\n{}\n'.format(contig.name, ref_name, nucleotides))
+				aa_out.write('>{}__{}\n{}\n'.format(contig.name, ref_name, protein))
+		else:
+			pass
 
 nt_out.close()
 aa_out.close()
