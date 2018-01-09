@@ -8,4 +8,4 @@ outdir='/media/4TB1/blastocrithidia/genome_assembly/triat_spades_transcriptome/'
 
 report=$outdir"spades_report.txt"
 
-/home/nenarokova/tools/SPAdes-3.9.0-Linux/bin/spades.py --pe1-1 $pe1_1 --pe1-2 $pe1_2 --untrusted-contigs $transcriptome --careful -t 30 -o $outdir 2> $report
+/home/nenarokova/tools/SPAdes-3.10.1-Linux/bin/spades.py --pe1-1 $pe1_1 --pe1-2 $pe1_2 --untrusted-contigs $transcriptome --careful -t 30 -o $outdir 2> $report
