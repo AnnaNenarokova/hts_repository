@@ -1,6 +1,6 @@
 #!/bin/sh
 
-/home/kika/tools/FastQC/fastqc -o /media/4TB1/blastocrithidia/kika_workdir/reads/fastqc /media/4TB1/blastocrithidia/kika_workdir/reads/SRR4017973_trimmed_1.fq.gz
-/home/kika/tools/FastQC/fastqc -o /media/4TB1/blastocrithidia/kika_workdir/reads/fastqc /media/4TB1/blastocrithidia/kika_workdir/reads/SRR4017973_trimmed_2.fq.gz
-/home/kika/tools/FastQC/fastqc -o /media/4TB1/blastocrithidia/kika_workdir/reads/fastqc /media/4TB1/blastocrithidia/kika_workdir/reads/SRR4017993_trimmed_1.fq.gz
-/home/kika/tools/FastQC/fastqc -o /media/4TB1/blastocrithidia/kika_workdir/reads/fastqc /media/4TB1/blastocrithidia/kika_workdir/reads/SRR4017993_trimmed_2.fq.gz
+out_dir='/home/kika/diplonema/reads/raw/fastqc/'
+read_dir='/home/kika/diplonema/reads/raw'
+
+/home/kika/tools/FastQC/fastqc -o $out_dir $read_dir'MI.M03555_0253.001.Index_13.YPF1604_R1.fastq.gz'
