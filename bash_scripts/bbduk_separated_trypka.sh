@@ -3,8 +3,8 @@
 #PBS -l nodes=1:ppn=60
 
 read_dir='/home/kika/diplonema/reads/raw/'
-fw='MI.M03555_0253.001.Index_13.YPF1604_R1.fastq.gz'
-rv='MI.M03555_0253.001.Index_13.YPF1604_R2.fastq.gz'
+fw=$read_dir'MI.M03555_0253.001.Index_13.YPF1604_R1.fastq.gz'
+rv=$read_dir'MI.M03555_0253.001.Index_13.YPF1604_R2.fastq.gz'
 trimdir='/home/kika/diplonema/reads/trimmed/'
 name='YPF1604'
 trimmed_fw=$trimdir$name'_adapter_trimmed_1.fq.gz'
