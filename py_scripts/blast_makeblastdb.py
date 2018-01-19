@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-import os
+import subprocess
 
-db = ''
-dbtype = nucl
+db = '/home/kika/tara/andalucia_mtProteins_test_set.fa'
+dbtype = 'prot'
 
-os.system('makeblastdb -in {} -dbtype {} -parse_seqids'.format(db, dbtype))
+subprocess.call('makeblastdb -in {} -dbtype {} -parse_seqids'.format(db, dbtype), shell=True)

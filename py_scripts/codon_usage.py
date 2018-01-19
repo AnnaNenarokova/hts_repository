@@ -1,76 +1,42 @@
 #!/usr/bin/python3
-from collections import OrderedDict
 from Bio import SeqIO
-import pandas as pd
+from collections import OrderedDict
 
-infile = SeqIO.parse('/home/kika/Dropbox/blasto_project/blastocrithidia/genes/insertions/alignments/ins_p57_nt.fasta', 'fasta')
+sequences = SeqIO.parse('/home/kika/alignments/p57_nt.txt', 'fasta')
+table = open('/home/kika/alignments/p57_cu.tsv', 'w')
 
+codons = OrderedDict([
+		('GCG', 0), ('GCA', 0), ('GCT', 0), ('GCC', 0), ('TGT', 0), ('TGC', 0), ('GAT', 0), ('GAC', 0), ('GAG', 0), 
+		('GAA', 0), ('TTT', 0), ('TTC', 0), ('GGG', 0), ('GGA', 0), ('GGT', 0), ('GGC', 0), ('CAT', 0), ('CAC', 0), 
+		('ATA', 0), ('ATT', 0), ('ATC', 0), ('AAG', 0), ('AAA', 0), ('TTG', 0), ('TTA', 0), ('CTG', 0), ('CTA', 0), 
+		('CTT', 0), ('CTC', 0), ('ATG', 0), ('AAT', 0), ('AAC', 0), ('CCG', 0), ('CCA', 0), ('CCT', 0), ('CCC', 0), 
+		('CAG', 0), ('CAA', 0), ('AGG', 0), ('AGA', 0), ('CGG', 0), ('CGA', 0), ('CGT', 0), ('CGC', 0), ('AGT', 0), 
+		('AGC', 0), ('TCG', 0), ('TCA', 0), ('TCT', 0), ('TCC', 0), ('ACG', 0), ('ACA', 0), ('ACT', 0), ('ACC', 0), 
+		('GTG', 0), ('GTA', 0), ('GTT', 0), ('GTC', 0), ('TGG', 0), ('TAT', 0), ('TAC', 0), ('TGA', 0), ('TAG', 0), 
+		('TAA', 0),	('ambig', 0)])
 
-codon_list = ['GCG', 'GCA', 'GCT', 'GCC', 'TGT', 
-              'TGC', 'GAT', 'GAC', 'GAG', 'GAA', 
-              'TTT', 'TTC', 'GGG', 'GGA', 'GGT', 
-              'GGC', 'CAT', 'CAC', 'ATA', 'ATT', 
-              'ATC', 'AAG', 'AAA', 'TTG', 'TTA', 
-              'CTG', 'CTA', 'CTT', 'CTC', 'ATG', 
-              'AAT', 'AAC', 'CCG', 'CCA', 'CCT', 
-              'CCC', 'CAG', 'CAA', 'AGG', 'AGA', 
-              'CGG', 'CGA', 'CGT', 'CGC', 'AGT', 
-              'AGC', 'TCG', 'TCA', 'TCT', 'TCC', 
-              'ACG', 'ACA', 'ACT', 'ACC', 'GTG', 
-              'GTA', 'GTT', 'GTC', 'TGG', 'TAT', 
-              'TAC', 'TGA', 'TAG', 'TAA']
-
-aa_list = ['Ala', 'Ala', 'Ala', 'Ala', 'Cys', 
-           'Cys', 'Asp', 'Asp', 'Glu', 'Glu', 
-           'Phe', 'Phe', 'Gly', 'Gly', 'Gly', 
-           'Gly', 'His', 'His', 'Ile', 'Ile', 
-           'Ile', 'Lys', 'Lys', 'Leu', 'Leu', 
-           'Leu', 'Leu', 'Leu', 'Leu', 'Met', 
-           'Asn', 'Asn', 'Pro', 'Pro', 'Pro', 
-           'Pro', 'Gln', 'Gln', 'Arg', 'Arg', 
-           'Arg', 'Arg', 'Arg', 'Arg', 'Ser', 
-           'Ser', 'Ser', 'Ser', 'Ser', 'Ser', 
-           'Thr', 'Thr', 'Thr', 'Thr', 'Val', 
-           'Val', 'Val', 'Val', 'Trp', 'Tyr', 
-           'Tyr', 'zEnd', 'zEnd', 'zEnd']
+table.write('\tAla\t\t\t\tCys\t\tAsp\t\tGlu\t\tPhe\t\tGly\t\t\t\tHis\t\tIle\t\t\tLys\t\tLeu\t\t\t\t\t\tMet\tAsn\t\tPro\t\t\t\tGln\t\tArg\t\t\t\t\t\tSer\t\t\t\t\t\tThr\t\t\t\tVal\t\t\t\tTrp\tTyr\t\tEnd\n')
+for key in codons.keys():
+	table.write('\t' + key)
+table.write('\n')
 
 def count_codons(sequence):
-    codon_table = OrderedDict()
-    for cod in codon_list:
-        codon_table[cod] = 0
-    for i in range(0, len(seq), 3):
-        codon = seq[i:i+3]
-        if codon not in codon_table:
-            codon_table[codon] = 1
-        else:
-            for key, value in codon_table.items():
-                if codon == key:
-                    codon_table[codon] += 1
-    for key,value in codon_table.items():
-        return codon_table
+	for i in range(0, len(sequence)-2, 3):
+		if 'N' in sequence[i:i+3]:
+			codons['ambig'] += 1
+		else:
+			codons[sequence[i:i+3]] += 1
+	return codons
 
-aa_dict = {}
-for i in range(len(codon_list)):
-    aa_dict[codon_list[i]] = aa_list[i]
-
-pandas_dict = {}
-for sequence in infile:
-	seq = sequence.seq.upper()
-	name = sequence.name
-	pandas_dict[name] = count_codons(sequence)
-    
-pandas_dict['AA'] = aa_dict
-
-df = pd.DataFrame(pandas_dict)
-df.sort('AA', ascending=1, inplace=True)
-df.fillna(0, inplace=True)
-df['AA'][df['AA'] == 0] = 'X'
-df['AA'][df['AA'] == 'zEnd'] = 'END'
-df.reset_index(level=0, inplace=True)
-df.rename(columns={'index': 'codon'}, inplace=True)
-col_list = list(df)
-col_list[0], col_list[1] = col_list[1], col_list[0]
-df = df.reindex(columns=col_list)
-df.set_index('AA', inplace=True)
-df = df.transpose()
-df.to_csv('/home/kika/Dropbox/blasto_project/blastocrithidia/genes/insertions/alignments/ins_p57_codons.tsv', sep='\t')
+for sequence in sequences:
+	print(sequence.description)
+	numbers = []
+	codons = count_codons(sequence.seq)
+	for value in codons.values():
+		numbers.append(value)
+	table.write(sequence.description)
+	for num in numbers:
+		table.write('\t' + str(num))
+	table.write('\n')
+	codons = OrderedDict([(key, 0) for key in codons])
+table.close()

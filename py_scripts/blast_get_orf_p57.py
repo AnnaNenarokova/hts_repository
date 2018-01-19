@@ -3,11 +3,11 @@
 from Bio import SeqIO
 from Bio.Blast import NCBIXML
 
-fasta = SeqIO.parse('/home/kika/programs/blast-2.5.0+/bin/p57_DNA_scaffolds.fa', 'fasta')
-nt_out = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/tb927.11.3190/p57_nt.txt', 'w')
-aa_out = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/tb927.11.3190/p57_aa.txt', 'w')
-err_out = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/tb927.11.3190/p57_errors.txt', 'w')
-result_handle = open('/home/kika/MEGAsync/blasto_project/genes/c_deaminase/tb927.11.3190/p57_blast.xml')
+fasta = SeqIO.parse('/home/kika/programs/blast-2.5.0+/bin/bexlh2_strict.fa', 'fasta')
+nt_out = open('/home/kika/MEGAsync/blasto_project/genes/RNAi/bexlh2/bexlh2_nt.txt', 'w')
+aa_out = open('/home/kika/MEGAsync/blasto_project/genes/RNAi/bexlh2/bexlh2_aa.txt', 'w')
+err_out = open('/home/kika/MEGAsync/blasto_project/genes/RNAi/bexlh2/bexlh2_errors.txt', 'w')
+result_handle = open('/home/kika/MEGAsync/blasto_project/genes/RNAi/bexlh2/bexlh2_blast.xml')
 blast_records = NCBIXML.parse(result_handle)
 
 gencode = {

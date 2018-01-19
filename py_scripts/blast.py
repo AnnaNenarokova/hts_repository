@@ -3,10 +3,10 @@ from Bio.Blast import NCBIXML
 from Bio.Blast.Applications import NcbiblastxCommandline
 
 print('running BLAST')
-blast_cline = NcbiblastxCommandline(cmd='tblastn', 
-									query='/home/kika/MEGAsync/Euglena_longa/2013_Sekvenovanie/SUF_system/EL_Suf.txt', 
-									db='/home/kika/programs/blast-2.5.0+/bin/eg_tsa_Field.fasta', 
-									out='/home/kika/MEGAsync/Euglena_longa/2013_Sekvenovanie/SUF_system/EG_blast.xml',
+blast_cline = NcbiblastxCommandline(cmd='blastx', 
+									query='/home/kika/tara/circular/circular_all.fa', 
+									db='/home/kika/tara/andalucia_mtProteins_test_set.fa', 
+									out='/home/kika/tara/circular/circular_all_blast.xml',
 									evalue=10,
 									outfmt=5,
 									word_size=3,
@@ -15,10 +15,10 @@ stdout, stderr = blast_cline()
 print('BLAST done')
 print('writing BLAST results to tables')
 
-result_handle = open('/home/kika/MEGAsync/Euglena_longa/2013_Sekvenovanie/SUF_system/EG_blast.xml')
+result_handle = open('/home/kika/tara/circular/circular_all_blast.xml')
 blast_records = NCBIXML.parse(result_handle)
-output = open('/home/kika/MEGAsync/Euglena_longa/2013_Sekvenovanie/SUF_system/EG_blast.tsv', 'w')
-out_best = open('/home/kika/MEGAsync/Euglena_longa/2013_Sekvenovanie/SUF_system/EG_best_blast.tsv', 'w')
+output = open('/home/kika/tara/circular/circular_all_blast.tsv', 'w')
+out_best = open('/home/kika/tara/circular/circular_all_best_blast.tsv', 'w')
 
 output.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format('qseqid', 'qlen', 'sseqid', 'slen', 
 	'alen', 'evalue', 'pident', 'bitscore', 'mismatch', 'gaps', 'qstart', 'qend', 'sstart', 'send', 'alen_qlen', 
