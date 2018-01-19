@@ -16,5 +16,5 @@ ihist=$dir_merged$name'_hist.txt'
 # extra3=$dir_raw"wt_S2_L001_unmerged_trimmed_1.fq"
 # extra4=$dir_raw"wt_S2_L001_unmerged_trimmed_2.fq"
 
-/home/kika/tools/bbmap/bbmerge-auto.sh in1=$fw in2=$rv out=$merged outu1=$unmerged_fw outu2=$unmerged_rv strict=t qtrim2=t usejni=t rem extend2=50 k=62 2> $report
+/home/kika/tools/bbmap/bbmerge-auto.sh in1=$fw in2=$rv out=$merged outu1=$unmerged_fw outu2=$unmerged_rv strict=t qtrim2=t trimq=20 usejni=t rem extend2=50 k=62 2> $report
 # extra=$extra1,$extra2,$extra3,$extra4
