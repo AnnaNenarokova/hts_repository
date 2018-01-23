@@ -1,12 +1,10 @@
 #!/bin/bash
-#PBS -l walltime=100:00:00
-#PBS -l nodes=1:ppn=64
 
-pe1_1="/home/nenarokova/genomes/blasto/blastocrithidia/genome/trimmed/p57_trimmed_1.fq"
-pe1_2="/home/nenarokova/genomes/blasto/blastocrithidia/genome/trimmed/p57_trimmed_2.fq"
+read_dir='/home/kika/diplonema/reads/trimmed/'
+pe1_1=$read_dir'YPF1604_trimmed_1.fq.gz'
+pe1_2=$read_dir'YPF1604_trimmed_1.fq.gz'
 
-outdir="/home/nenarokova/genomes/blasto/blastocrithidia/genome/assembly/p57/"
+outdir='/home/kika/diplonema/genome_assembly/1604/'
+report=$outdir'spades_report.txt'
 
-report=$outdir"spades_report.txt"
-
-/home/nenarokova/tools/SPAdes-3.9.0-Linux/bin/spades.py --pe1-1 $pe1_1 --pe1-2 $pe1_2 --careful -t 64 -o $outdir
+/home/kika/tools/SPAdes-3.11.1-Linux/bin/spades.py --pe1-1 $pe1_1 --pe1-2 $pe1_2 --careful -t 30 -o $outdir 2> $report
