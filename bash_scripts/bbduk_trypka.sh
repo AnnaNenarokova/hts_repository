@@ -1,6 +1,6 @@
 #!/bin/bash
 
-read_dir='/home/kika/diplonema/reads/merged_qtrimmed_strict/'
+read_dir='/home/kika/diplonema/reads/merged_qtrimmed_vstrict/'
 in1=$read_dir'YPF1604_adapter_trimmed_unmerged_1.fq'
 in2=$read_dir'YPF1604_adapter_trimmed_unmerged_2.fq'
 out1=$read_dir'YPF1604_unmerged_fully_trimmed_1.fq'
