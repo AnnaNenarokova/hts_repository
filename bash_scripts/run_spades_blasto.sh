@@ -2,7 +2,7 @@
 
 read_dir='/home/kika/diplonema/reads/trimmed/'
 pe1_1=$read_dir'YPF1604_trimmed_1.fq.gz'
-pe1_2=$read_dir'YPF1604_trimmed_1.fq.gz'
+pe1_2=$read_dir'YPF1604_trimmed_2.fq.gz'
 
 outdir='/home/kika/diplonema/genome_assembly/1604/'
 report=$outdir'spades_report.txt'
