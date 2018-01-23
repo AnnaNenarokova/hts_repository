@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import os
 
-os.chdir('/home/kika/MEGAsync/blasto_project/genes/RNAi/PASTA/')
+os.chdir('/home/kika/MEGAsync/blasto_project/genes/repair/missing/PASTA/')
 files = os.listdir()
 
 for file in files:

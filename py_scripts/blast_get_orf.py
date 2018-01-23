@@ -5,10 +5,10 @@ import re
 from Bio.Blast import NCBIXML
 
 fasta = SeqIO.parse('/home/kika/programs/blast-2.5.0+/bin/jaculum_scaffolds_transc.fasta', 'fasta')
-nt_out = open('/home/kika/MEGAsync/blasto_project/genes/RNAi/jac/jac_nt.txt', 'w')
-aa_out = open('/home/kika/MEGAsync/blasto_project/genes/RNAi/jac/jac_aa.txt', 'w')
-err_out = open('/home/kika/MEGAsync/blasto_project/genes/RNAi/jac/jac_errors.txt', 'w')
-result_handle = open('/home/kika/MEGAsync/blasto_project/genes/RNAi/jac/jac_blast.xml')
+nt_out = open('/home/kika/MEGAsync/blasto_project/genes/repair/missing/jac_nt.txt', 'w')
+aa_out = open('/home/kika/MEGAsync/blasto_project/genes/repair/missing/jac_aa.txt', 'w')
+err_out = open('/home/kika/MEGAsync/blasto_project/genes/repair/missing/jac_errors.txt', 'w')
+result_handle = open('/home/kika/MEGAsync/blasto_project/genes/repair/missing/jac_blast.xml')
 blast_records = NCBIXML.parse(result_handle)
 
 gencode = {
