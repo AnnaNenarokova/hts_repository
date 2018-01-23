@@ -4,9 +4,9 @@ from Bio.Blast.Applications import NcbiblastxCommandline
 
 print('running BLAST')
 blast_cline = NcbiblastxCommandline(cmd='tblastn', 
-									query='/home/kika/MEGAsync/blasto_project/genes/repair/missing/in', 
-									db='/home/kika/programs/blast-2.5.0+/bin/jaculum_scaffolds_transc.fasta', 
-									out='/home/kika/MEGAsync/blasto_project/genes/repair/missing/jac_blast.xml',
+									query='/home/kika/MEGAsync/blasto_project/genes/repair/missing/p57_aa.txt', 
+									db='/home/kika/programs/blast-2.5.0+/bin/triat_scaffolds_transc.fasta', 
+									out='/home/kika/MEGAsync/blasto_project/genes/repair/missing/triat_blast.xml',
 									evalue=10,
 									outfmt=5,
 									word_size=3,
@@ -15,10 +15,10 @@ stdout, stderr = blast_cline()
 print('BLAST done')
 print('writing BLAST results to tables')
 
-result_handle = open('/home/kika/MEGAsync/blasto_project/genes/repair/missing/jac_blast.xml')
+result_handle = open('/home/kika/MEGAsync/blasto_project/genes/repair/missing/triat_blast.xml')
 blast_records = NCBIXML.parse(result_handle)
-output = open('/home/kika/MEGAsync/blasto_project/genes/repair/missing/jac_blast.tsv', 'w')
-out_best = open('/home/kika/MEGAsync/blasto_project/genes/repair/missing/jac_best_blast.tsv', 'w')
+output = open('/home/kika/MEGAsync/blasto_project/genes/repair/missing/triat_blast.tsv', 'w')
+out_best = open('/home/kika/MEGAsync/blasto_project/genes/repair/missing/triat_best_blast.tsv', 'w')
 
 output.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format('qseqid', 'qlen', 'sseqid', 'slen', 
 	'alen', 'evalue', 'pident', 'bitscore', 'mismatch', 'gaps', 'qstart', 'qend', 'sstart', 'send', 'alen_qlen', 
