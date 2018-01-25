@@ -1,1 +1,0 @@
-/home/tomas/bioinfo_software/trinityrnaseq-Trinity-v2.3.2/Trinity --genome_guided_bam /home/kika/blastocrithidia/mapping/p57_bw2_sorted.bam --genome_guided_max_intron 1 --max_memory 10G --CPU 32
