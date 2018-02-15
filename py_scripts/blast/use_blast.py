@@ -36,11 +36,11 @@ def add_header(blast_csv_path, custom_outfmt):
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 
 query_paths= [
-    "/media/4TB1/blastocrithidia/blast_searches/tbrucei_3000.faa"
+    "/media/4TB1/blastocrithidia/blast_searches/datasets/all_kinetoplastid_references_filtered/TriTrypDB-34_TbruceiTREU927_AnnotatedCDSs_filtered.faa"
     ]
 
 subj_paths = [
-"/media/4TB1/blastocrithidia/blast_searches/all_filtered_proteins_20_11.faa"
+    "/media/4TB1/blastocrithidia/anna_workdir/p57_fused_proteins.fasta"
 ]
 
 for query_path in query_paths:
@@ -53,7 +53,7 @@ for query_path in query_paths:
                                          # outfmt='pairwise',
 
                                          custom_outfmt=custom_outfmt,
-                                         word_size=3
+                                         word_size=2
                                          )
         add_header(best_hits(blast_csv_path), custom_outfmt)
         add_header(blast_csv_path, custom_outfmt)
@@ -62,7 +62,6 @@ for query_path in query_paths:
 # db_path = "/media/4TB1/blastocrithidia/blast_searches/p57_DNA_translated/blast_db/p57_DNA_transla.db"
 # new_blast = Blast(query_path=query_path,db_path=db_path, db_type='prot', threads=30)
 # blast_csv_path = new_blast.blast(
-#                                  bl_type='blastp',
 #                                  evalue=0.00001,
 #                                  outfmt='comma_values',
 #                                  custom_outfmt=custom_outfmt,

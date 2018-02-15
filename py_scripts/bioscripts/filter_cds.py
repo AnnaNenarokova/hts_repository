@@ -86,5 +86,5 @@ def filter_proteins(infasta_path, translated=True, finish_included=True):
     return 0
 
 # fasta_path = sys.argv[1]
-fasta_path = "/home/anna/bioinformatics/references/tritrypdb_references/tritrypdb_33/TriTrypDB-33_TbruceiTREU927_AnnotatedProteins.fasta"
+fasta_path = "/home/anna/bioinformatics/references/other_references/other/Naegleria_gruberi_V1.0_protein.fasta"
 filter_proteins(fasta_path, finish_included = False, translated=True)
