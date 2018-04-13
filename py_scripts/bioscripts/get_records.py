@@ -18,7 +18,6 @@ def keep_from_list(fasta_file, list_file, outpath):
     with open(list_file) as f:
         for line in f:
             keep_list.append(line.rstrip())
-        f.closed
     for record in SeqIO.parse(fasta_file, "fasta"):
         id = record.id
         if id in keep_list:
@@ -28,8 +27,8 @@ def keep_from_list(fasta_file, list_file, outpath):
     SeqIO.write(results, outpath, "fasta")
     return 0
 
-fasta_file = 'D:/anna_drive/projects/mitoproteomes/euglena/euglena_mitoproteome_paper/E_gracilis_transcriptome_final.PROTEINS.fasta'
-list_file = 'D:/anna_drive/projects/mitoproteomes/euglena/euglena_mitoproteome_paper/mitoproteome_datasets/egracilis_all_mito_fraction_list.csv'
-outpath = 'D:/anna_drive/projects/mitoproteomes/euglena/euglena_mitoproteome_paper/mitoproteome_datasets/egracilis_all_mito_fraction_list.faa'
+fasta_file = 'D:/anna_drive/projects/mitoproteomes/trypanosoma/mito/importome/TriTrypDB-8.1_TbruceiTREU927_AnnotatedProteins.fasta'
+list_file = 'D:/anna_drive/projects/mitoproteomes/trypanosoma/mito/importome/importome.csv'
+outpath = 'D:/anna_drive/projects/mitoproteomes/trypanosoma/mito/importome/importome_8.1.faa'
 
 keep_from_list(fasta_file, list_file, outpath)

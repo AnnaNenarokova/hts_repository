@@ -2,7 +2,6 @@
 from Bio import SeqIO
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
-from py_scripts.helpers.parse_csv import *
 
 def cut_proteins_M(fasta_path, outpath):
     results = []
