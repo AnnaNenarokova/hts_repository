@@ -19,9 +19,11 @@ def find_organism(id):
 
 Entrez.email = "a.nenarokova@gmail.com"
 
-idlist_path = "D:/anna_drive/projects/ku70/apicomplexa_eggnog/api_nog_ids.txt"
+# idlist_path = "D:/anna_drive/projects/ku70/apicomplexa_eggnog/api_nog_ids.txt"
+idlist_path = "/home/nenarokova/api_nog_ids.txt"
 
-outpath = "D:/anna_drive/projects/ku70/apicomplexa_eggnog/api_nog_ids_ncbi_species.txt"
+# outpath = "D:/anna_drive/projects/ku70/apicomplexa_eggnog/api_nog_ids_ncbi_species.txt"
+outpath = "/home/nenarokova/api_nog_ids_ncbi_species.txt"
 
 with open(idlist_path) as idlist_file, open(outpath, "w") as outfile:
     for line in idlist_file:
