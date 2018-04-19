@@ -17,8 +17,8 @@ def csv_to_list_of_dicts(csv_path, delimiter=','):
     with open(csv_path) as csvfile:
         reader = csv.DictReader(csvfile, fieldnames=None, delimiter=delimiter)
         list_of_dicts = []
-    	for row in reader:
-        	list_of_dicts.append(row)
+        for row in reader:
+            list_of_dicts.append(row)
         fieldnames = reader.fieldnames
         csvfile.close
     return list_of_dicts, fieldnames
@@ -50,15 +50,15 @@ def write_list_of_dicts(list_of_dicts, outpath, fieldnames=False):
         for row in list_of_dicts:
             writer.writerow(row)
         csvfile.close()
-	return outpath
+    return outpath
 
 def write_dict_of_dicts(dict_of_dicts, outpath, key_name=False, fieldnames=False):
-	list_of_dicts = []
-	for key in dict_of_dicts:
-		cur_dict = {}
-		cur_dict[key_name] = key
-		for k in dict_of_dicts[key]:
-			cur_dict[k] = dict_of_dicts[key][k]
-		list_of_dicts.append(cur_dict)
-	write_list_of_dicts(list_of_dicts, outpath, fieldnames)
-	return outpath
+    list_of_dicts = []
+    for key in dict_of_dicts:
+        cur_dict = {}
+        cur_dict[key_name] = key
+        for k in dict_of_dicts[key]:
+            cur_dict[k] = dict_of_dicts[key][k]
+        list_of_dicts.append(cur_dict)
+    write_list_of_dicts(list_of_dicts, outpath, fieldnames)
+    return outpath
