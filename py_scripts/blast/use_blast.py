@@ -36,7 +36,7 @@ def add_header(blast_csv_path, custom_outfmt):
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 
 query_paths= [
-    "/media/anna/data/anna_drive/projects/mitoproteomes/euglena/mitogenome/LQMU01_orfs_200aa.faa"
+    "/home/nenarokova/genomes/euglena/LQMU01_orfs_200aa.faa"
     ]
 
 subj_paths = [
