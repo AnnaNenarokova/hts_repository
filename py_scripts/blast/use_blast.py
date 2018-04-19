@@ -36,23 +36,23 @@ def add_header(blast_csv_path, custom_outfmt):
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 
 query_paths= [
-    "/home/nenarokova/genomes/euglena/LQMU01_orfs_200aa.faa"
+    "/home/nenarokova/genomes/euglena/LQMU01.1.fsa_nt"
     ]
 
 subj_paths = [
-    "/home/nenarokova/genomes/euglena/E_gracilis_transcriptome_final.PROTEINS.fasta"
+    "/media/4TB3/euglena_all/nuclear_genome/Euglena_gracilis_genome_V1/blast_db/Euglena_gracilis_genome_V1.db"
 ]
 
 for query_path in query_paths:
     for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='prot', threads=31)
+        new_blast = Blast(query_path=query_path,db_path=subj_path, db_type='nucl', threads=20)
         blast_csv_path = new_blast.blast(
-                                         bl_type='blastp',
+                                         bl_type='blastn',
                                          evalue=0.000001,
                                          outfmt='comma_values',
                                          # outfmt='pairwise',
                                          custom_outfmt=custom_outfmt,
-                                         word_size=7
+                                         word_size=50
                                          )
         add_header(best_hits(blast_csv_path), custom_outfmt)
         add_header(blast_csv_path, custom_outfmt)
