@@ -48,7 +48,7 @@ for query_path in query_paths:
         new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='prot', threads=31)
         blast_csv_path = new_blast.blast(
                                          bl_type='blastp',
-                                         evalue=1,
+                                         evalue=0.000001,
                                          outfmt='comma_values',
                                          # outfmt='pairwise',
                                          custom_outfmt=custom_outfmt,
