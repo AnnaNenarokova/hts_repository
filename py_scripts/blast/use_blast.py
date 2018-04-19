@@ -51,34 +51,8 @@ for query_path in query_paths:
                                          evalue=1,
                                          outfmt='comma_values',
                                          # outfmt='pairwise',
-
                                          custom_outfmt=custom_outfmt,
                                          word_size=7
                                          )
         add_header(best_hits(blast_csv_path), custom_outfmt)
         add_header(blast_csv_path, custom_outfmt)
-
-# query_path = sys.argv[1]
-# db_path = "/media/4TB1/blastocrithidia/blast_searches/p57_DNA_translated/blast_db/p57_DNA_transla.db"
-# new_blast = Blast(query_path=query_path,db_path=db_path, db_type='prot', threads=30)
-# blast_csv_path = new_blast.blast(
-#                                  evalue=0.00001,
-#                                  outfmt='comma_values',
-#                                  custom_outfmt=custom_outfmt,
-#                                  word_size=3
-#                                  )
-# add_header(best_hits(blast_csv_path), custom_outfmt)
-# add_header(blast_csv_path, custom_outfmt)
-
-# query_path = "/media/4TB1/blastocrithidia/blast_searches/tbrucei_3000.faa"
-# subj_path = sys.argv[1]
-# new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='prot', threads=30)
-# blast_csv_path = new_blast.blast(
-#                                  bl_type='blastp',
-#                                  evalue=0.00001,
-#                                  outfmt='comma_values',
-#                                  custom_outfmt=custom_outfmt,
-#                                  word_size=3
-#                                  )
-# add_header(best_hits(blast_csv_path), custom_outfmt)
-# add_header(blast_csv_path, custom_outfmt)
