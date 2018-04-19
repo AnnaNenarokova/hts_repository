@@ -23,10 +23,10 @@ def count_cov_median (coords, bam_path):
     median = statistics.median([int(f) for f in os.popen(ex).read().strip().split("\n")])
     return median
 
-fasta_path = "/home/anna/bioinformatics/blasto/p57_last_annotation.fna"
-bam_path = "/home/anna/bioinformatics/igv_sessions/igv_session_p57/new_files/p57_DNA_bw2_sorted.bam"
+fasta_path = "/media/anna/data/anna_drive/projects/blastocrithidia/blasto/annotation_og/p57_CDs.fna"
+bam_path = "/media/anna/data/big_files/p57_DNA_bw2_sorted.bam"
 codons = ['TGA', 'TAG', 'TAA', 'TGG', 'GAG', 'GAA']
-outpath = fasta_path[:-4]+ "_stop_analysis2.tsv"
+outpath = fasta_path[:-4]+ "_stop_analysis.tsv"
 delimeter="\t"
 median = "n"
 
@@ -34,14 +34,20 @@ with open(outpath, 'w') as outfile:
     header = ['id', 'len', 'gc', 'median_cov']
     header.extend(codons)
     outfile.write(delimeter.join(header) + '\n')
+    i = 0
     for record in SeqIO.parse(fasta_path, "fasta"):
+        i+=1
+        if i%100 == 0: print i
         result = []
         id = record.id
         seq = record.seq
         gc_content = GC(seq)
         seq_length = len(seq)
-        coords = id[:-3]
-        # median = count_cov_median(coords, bam_path)
+        # coords = id[:-3]
+        coords = record.description.split(' ')[1][0:-3]
+        # print coords
+        median = count_cov_median(coords, bam_path)
+        # print median
         codon_usage = count_codon_usage(seq, codons)
         codon_counts = [str(codon_usage[codon]) for codon in codons]
         result = [id, str(seq_length), str(gc_content), str(median)]

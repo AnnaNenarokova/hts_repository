@@ -36,16 +36,16 @@ def add_header(blast_csv_path, custom_outfmt):
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 
 query_paths= [
-    "/media/4TB1/blastocrithidia/blast_searches/datasets/all_kinetoplastid_references_filtered/TriTrypDB-34_TbruceiTREU927_AnnotatedCDSs_filtered.faa"
+    "/media/anna/data/anna_drive/projects/mitoproteomes/euglena/mitogenome/LQMU01_orfs_200aa.faa"
     ]
 
 subj_paths = [
-    "/media/4TB1/blastocrithidia/anna_workdir/p57_fused_proteins.fasta"
+    "/home/nenarokova/genomes/euglena/E_gracilis_transcriptome_final.PROTEINS.fasta"
 ]
 
 for query_path in query_paths:
     for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='prot', threads=30)
+        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='prot', threads=4)
         blast_csv_path = new_blast.blast(
                                          bl_type='blastp',
                                          evalue=1,
@@ -53,7 +53,7 @@ for query_path in query_paths:
                                          # outfmt='pairwise',
 
                                          custom_outfmt=custom_outfmt,
-                                         word_size=2
+                                         word_size=7
                                          )
         add_header(best_hits(blast_csv_path), custom_outfmt)
         add_header(blast_csv_path, custom_outfmt)
