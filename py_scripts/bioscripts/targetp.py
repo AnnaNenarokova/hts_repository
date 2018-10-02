@@ -3,7 +3,7 @@ from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from subprocess32 import call
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
+sys.path.insert(0, "/home/anna/bioinformatics/code/ngs")
 from py_scripts.helpers.make_outdir import *
 from py_scripts.helpers.lookahead import lookahead
 from subprocess import Popen, PIPE, STDOUT
@@ -15,7 +15,7 @@ def is_targetp_info(targetp_line):
 	else: return True
 
 def use_targetp(f_path, outf_path=False, is_plant=False, cleavage_sites=False, txt_out=False):
-	targetp_path = '/home/anna/bioinformatics/bioprograms/targetp-1.1/'
+	targetp_path = '/home/anna/bioinformatics/tools/targeting/targetp-1.1/'
 	targetp_path += 'targetp'
 	if is_plant: targetp_call = [targetp_path, '-P']
 	else: targetp_call = [targetp_path, '-N']
@@ -62,15 +62,6 @@ def use_targetp(f_path, outf_path=False, is_plant=False, cleavage_sites=False, t
 
 	return outf_path
 
-# f_paths = [
-# '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/data/E_gracilis_transcriptome_final.PROTEINS_M_cut.fasta'
-# ]
-# for f_path in f_paths:
-# 	use_targetp(f_path, is_plant=False)
-# 	use_targetp(f_path, is_plant=True)
-f_path = '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/data/E_gracilis_transcriptome_final.PROTEINS_M_cut.fasta'
-outf_path = '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/data/E_gracilis_transcriptome_final.PROTEINS_M_cut_targetp_not_chloro.csv'
+f_path = '/media/anna/data/anna_drive/projects/diplonemids/diplonema/Proteins_and_Transcripts_201604/proteins_SL_renamed.fasta'
+outf_path = '/media/anna/data/anna_drive/projects/diplonemids/diplonema/Proteins_and_Transcripts_201604/proteins_SL_renamed_targetp.csv'
 use_targetp(f_path, outf_path, is_plant=False)
-f_path = '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/data/E_gracilis_transcriptome_final.PROTEINS_M_cut.fasta'
-outf_path = '/home/anna/Dropbox/phd/bioinformatics/genomes/euglena/data/E_gracilis_transcriptome_final.PROTEINS_M_cut_targetp_chloro.csv'
-use_targetp(f_path, outf_path, is_plant=True)

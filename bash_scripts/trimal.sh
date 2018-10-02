@@ -1,9 +1,9 @@
 #!/bin/bash
-trimal="/home/nenarokova/tools/trimal/source/trimal"
+trimal="/home/anna/bioinformatics/tools/trimal.v1.2rev59/trimAl/source/trimal"
 
-in="/home/nenarokova/dasha/pastajob.marker001.16S_endo_dasha.aln"
+in="OG0002170.marker001.OG0002170_replaced.fa.sorted.aln"
 
-out=$in"_trimmed.phy"
+out=$in"_trimmed.aln"
 
-$trimal -in $in -out $out -phylip -nogaps
+$trimal -in $in -out $out -fasta -st 0.003
 

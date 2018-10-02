@@ -1,9 +1,9 @@
 #!/usr/bin/python
 from Bio import SeqIO
 
-infile = SeqIO.parse('/home/anna/Downloads/bexlh_tb3000_nt.txt', 'fasta')
-output = open('/home/anna/bioinformatics/blasto/tb3000/bexlh_6frames.faa', 'w')
-outerr = open('/home/anna/bioinformatics/blasto/jaculum/jaculum_scaffolds_err.txt', 'w')
+infile = SeqIO.parse('/home/anna/bioinformatics/blasto_local/p57_TDRD3.fna', 'fasta')
+output = open('/home/anna/bioinformatics/blasto_local/p57_TDRD3.faa', 'w')
+outerr = open('/home/anna/bioinformatics/blasto_local/p57_TDRD3.fna_err.txt', 'w')
 gencode = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
     'ACA':'T', 'ACC':'T', 'ACG':'T', 'ACT':'T',

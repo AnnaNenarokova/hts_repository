@@ -1,18 +1,8 @@
 #!/bin/bash
-folder="/home/nenarokova/genomes/euglena/tom40/"
+folder="/media/anna/data/anna_drive/projects/mitoproteomes/euglena/euglena_mitoproteome/NADH/hmm_searches/"
 
-alignment="/home/nenarokova/genomes/euglena/tom40/pastajob2.marker001.canonical_tom40.aln"
-name="canonical_tom40"
-
-alignment="/home/nenarokova/genomes/euglena/tom40/pastajob3.marker001.atom40.aln"
-name="atom40"
-
-alignment="/home/nenarokova/genomes/euglena/tom40/pastajob4.marker001.alveolata_tom40.aln"
-name="alveolata_tom40"
-
-alignment="/home/nenarokova/genomes/euglena/tom40/pastajob5.marker001.all_tom40.aln"
-name="all_tom40"
-
+alignment="/media/anna/data/anna_drive/projects/mitoproteomes/euglena/euglena_mitoproteome/NADH/hmm_searches/atp6_tryp.aln"
+name="atp6_tryp"
 
 outfile=$folder$name".hmm"
-/home/nenarokova/tools/hmmer-3.1b2-linux-intel-x86_64/binaries/hmmbuild -n $name $outfile $alignment
+/home/anna/bioinformatics/tools/hmmer-3.1b2-linux-intel-x86_64/binaries/hmmbuild -n $name $outfile $alignment
