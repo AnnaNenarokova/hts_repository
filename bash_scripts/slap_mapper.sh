@@ -7,7 +7,7 @@ gff="/media/4TB1/blastocrithidia/mapping/slap_mapping/p57_empty_annotation.gff"
 work_dir="/media/4TB1/blastocrithidia/mapping/slap_mapping/p57_both_rna_4"
 
 SL="AACGCATTTTTTGTTACAGTTTCTGTACTTTATTG"
-min_length="4"
+min_length="2"
 
 cd $work_dir
 ln -s $reads1 reads1.fastq
