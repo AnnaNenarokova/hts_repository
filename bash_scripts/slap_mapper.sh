@@ -1,8 +1,8 @@
 #!/bin/bash
 slap_mapper="/home/nenarokova/tools/SLaPMapper/SLaPMapper.pl"
 genome="/media/4TB1/novymonas/genome/annotation/companion_no_pand_lbraz/scafs.fasta"
-reads1="/media/4TB1/novymonas/transcriptome/reads/raw_reads/No_WT1_1.fastq.gz"
-reads2="/media/4TB1/novymonas/transcriptome/reads/raw_reads/No_WT1_2.fastq.gz"
+reads1="/media/4TB1/novymonas/transcriptome/reads/raw_reads/No_WT1_1.fastq"
+reads2="/media/4TB1/novymonas/transcriptome/reads/raw_reads/No_WT1_2.fastq"
 gff="/media/4TB1/novymonas/genome/annotation/companion_no_pand_lbraz/scaffold.out.gff3"
 work_dir="/media/4TB1/novymonas/slap_mapping/"
 
