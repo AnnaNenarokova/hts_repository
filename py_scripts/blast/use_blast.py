@@ -36,23 +36,23 @@ def add_header(blast_csv_path, custom_outfmt):
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 
 query_paths= [
-    "/home/anna/bioinformatics/blasto_local/tbrucei_tubulins.fasta"
+    "/home/anna/bioinformatics/novymonas/primers_23_10.fa"
     ]
 
 subj_paths = [
-    "/home/anna/bioinformatics/blasto_local/p57_scaffolds.fasta"
+    "/home/anna/bioinformatics/novymonas/novymonas_no_pand_scaffolds/blast_db/novymonas_no_pand_scaffolds.fasta.db"
     ]
 
 for query_path in query_paths:
     for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='nucl', threads=4)
+        new_blast = Blast(query_path=query_path,db_path=subj_path, db_type='nucl', threads=4)
         blast_csv_path = new_blast.blast(
-                                         bl_type='tblastn',
-                                         evalue=0.1,
-                                         outfmt='comma_values',
-                                         # outfmt='pairwise',
+                                         bl_type='blastn',
+                                         evalue=1,
+                                         # outfmt='comma_values',
+                                         outfmt='pairwise',
                                          custom_outfmt=custom_outfmt,
-                                         word_size=2
+                                         word_size=7
                                          )
         add_header(best_hits(blast_csv_path), custom_outfmt)
         add_header(blast_csv_path, custom_outfmt)
