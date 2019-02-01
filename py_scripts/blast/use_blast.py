@@ -2,6 +2,7 @@
 import sys
 sys.path.insert(0, "/home/anna/bioinformatics/code/ngs/")
 sys.path.insert(0, "/home/nenarokova/ngs/")
+sys.path.insert(0, "../../")
 from py_scripts.blast.classes.blast import Blast
 from py_scripts.bioscripts.best_hits import *
 from py_scripts.helpers.parse_csv import *
