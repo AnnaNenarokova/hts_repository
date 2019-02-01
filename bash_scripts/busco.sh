@@ -1,7 +1,7 @@
 #!/bin/sh
 
-infile="/home/anna/bioinformatics/diplonema/Tbor_RNAseq_cd_hit_est_latest_transdecoder.fa"
-out="tbor"
+infile="/home/anna/bioinformatics/diplonema/proteins_SL_Loc+PFAM+BLASTP_trim_newIDs.faa"
+out="dpapillatum_transcriptome"
 ref_set="/home/anna/bioinformatics/tools/BUSCO/busco_lineages/eukaryota_odb9"
 mode="proteins"
 #--mode sets the assessment MODE: genome, proteins, transcriptome
