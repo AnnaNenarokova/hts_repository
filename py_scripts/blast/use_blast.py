@@ -36,19 +36,19 @@ def add_header(blast_csv_path, custom_outfmt):
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 
 query_paths= [
-    "/home/nenarokova/genomes/diplonema/Dp_PB-MI_190104_dedup_cut_l100.faa"
+    "/home/vl18625/diplonema/Dp_PB-MI_190104_dedup_cut_l100.faa"
     ]
 
 subj_paths = [
-    "E_gracilis_transcriptome_final.PROTEINS/blast_db/E_gracilis_transcriptome_final.PROTEINS.fasta.db"
+    "/home/vl18625/diplonema/E_gracilis_transcriptome_final.PROTEINS.fasta"
     ]
 
 for query_path in query_paths:
     for subj_path in subj_paths:
         new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='prot', threads=15)
         blast_csv_path = new_blast.blast(
-                                         bl_type='tblastn',
-                                         evalue=1,
+                                         bl_type='blastp',
+                                         evalue=0.00001,
                                          # outfmt='comma_values',
                                          outfmt='pairwise',
                                          custom_outfmt=custom_outfmt,
