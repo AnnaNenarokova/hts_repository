@@ -1,7 +1,7 @@
 #!/bin/bash
-fasta="/media/4TB3/ncbi/nr.gz"
-taxonmap="/media/4TB3/ncbi/prot.accession2taxid.gz"
-taxonnodes="/media/4TB3/ncbi/taxdmp.zip"
-db_path="/media/4TB3/ncbi/nr_diamond.dmnd"
-
-diamond makedb --in $fasta --db $db_path --taxonmap $taxonmap --taxonnodes $taxonnodes
+fasta="/projects/Diplonema_genome_evolution/databases/nr/nr.gz"
+taxonmap="/projects/Diplonema_genome_evolution/databases/nr/prot.accession2taxid.gz"
+taxonnodes="/projects/Diplonema_genome_evolution/databases/nr/taxdmp.zip"
+db_path="/projects/Diplonema_genome_evolution/databases/nr/nr_diamond.dmnd"
+threads="30"
+diamond makedb --in $fasta --db $db_path --taxonmap $taxonmap --taxonnodes $taxonnodes --threads $threads
