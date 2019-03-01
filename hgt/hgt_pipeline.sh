@@ -2,11 +2,21 @@
 threads="30"
 
 infasta=""
-outdir=""
+outdir="/projects/Diplonema_genome_evolution/hgt/"
 
 #Diamond
-nr_diamond_path="/media/4TB3/ncbi/nr_diamond.dmnd"
-taxonmap="/media/4TB3/ncbi/prot.accession2taxid.gz"
-taxonnodes="/media/4TB3/ncbi/taxdmp/nodes.dmp"
+nr_diamond_db_path="/projects/Diplonema_genome_evolution/databases/nr/nr_diamond.dmnd"
+taxonmap="/projects/Diplonema_genome_evolution/databases/nr/prot.accession2taxid.gz"
+taxonnodes="/projects/Diplonema_genome_evolution/databases/nr/taxdmp/nodes.dmp"
 
-diamond_out=$outdir"dpapi_genome_diamond.out"
+diamond_tax_out=$outdir"tax_nr_diamond.tsv"
+
+diamond_hgt_out=$outdir"hgt_nr_diamond.tsv"
+
+candidates_path="/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_candidates.faa"
+
+max_hits="25"
+e_cutoff="0.001"
+
+outfmt_opts="qseqid qlen sseqid slen staxids length evalue bitscore"
+diamond blastp -q $candidates_path -d $nr_diamond_db_path -o $diamond_hgt_out -p $threads --max-hsps 1 --taxonmap $taxonmap -f 6 $outfmt_opts #-evalue e_cutoff -k $max_hits tab-separated output, staxids for subject taxids
