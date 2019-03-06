@@ -12,7 +12,7 @@ dpapi_seqs = {}
 for record in SeqIO.parse(infasta_path, "fasta"):
 	dpapi_seqs[record.id] = record
 
-with open diamond_result_path as diamond_f:
+with open(diamond_result_path) as diamond_f:
 	current_qseqid = None
 	current_f = None
 
