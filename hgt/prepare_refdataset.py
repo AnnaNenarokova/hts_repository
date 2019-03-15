@@ -26,7 +26,7 @@ fasta_outpath = "/projects/Diplonema_genome_evolution/refdataset_diplonema/archa
 metadata = parse_metadata(metadata_path)
 
 result_records = []
-result_data = [["old_id","new_id", "taxid", "species_code", "species_name"]]
+result_data = [["new_id", "old_id", "taxid", "species_code", "species_name"]]
 
 for seqfile in listdir(seqdir_path):
     if seqfile in metadata.keys():
@@ -45,7 +45,7 @@ for seqfile in listdir(seqdir_path):
             new_record.id = new_id
             new_record.description = new_description
             result_records.append(new_record)
-            result_data.append([old_id, new_id, taxid, species_code, species_name])
+            result_data.append([new_id, old_id, taxid, species_code, species_name])
     else:
         print(seqfile + "is not in the metadata!\n")
 
