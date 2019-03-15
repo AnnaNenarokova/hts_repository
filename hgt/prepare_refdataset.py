@@ -18,7 +18,7 @@ def parse_metadata(metadata_path):
             }
     return parsed_data
 
-seqdir_path = "/home/vl18625/bioinformatics/diplonema/refdataset/seqfolder/"
+seqdir_path = "//home/shared/BANK/archaeal_proteomes_4Gareth/"
 metadata_path = "/home/vl18625/bioinformatics/diplonema/refdataset/archaeal_dataset_taxids_edited_checked.csv"
 seqdata_path = "/home/vl18625/bioinformatics/diplonema/refdataset/archaeal_dataset_info.csv"
 fasta_outpath = "/home/vl18625/bioinformatics/diplonema/refdataset/archaeal_dataset_ready.fasta"
@@ -29,22 +29,25 @@ result_records = []
 result_data = [["old_id","new_id", "taxid", "species_code", "species_name"]]
 
 for seqfile in listdir(seqdir_path):
-    seqfile_path = seqdir_path + seqfile
-    i = 0
-    for record in SeqIO.parse(seqfile_path, "fasta"):
-        i += 1
-        old_id = record.id
-        old_description = record.description
-        taxid = metadata[seqfile]["taxid"]
-        species_code = metadata[seqfile]["species_code"]
-        species_name = metadata[seqfile]["species_name"]
-        new_id = species_code + "_" + species_name + "_{:05d}".format(i)
-        new_description = 'old_id:{}\ttaxid:{}\tdescription:{}'.format(old_id, taxid,old_description)
-        new_record = record
-        new_record.id = new_id
-        new_record.description = new_description
-        result_records.append(new_record)
-        result_data.append([old_id, new_id, taxid, species_code, species_name])
+    if seqfile in metadata.keys():
+        seqfile_path = seqdir_path + seqfile
+        i = 0
+        for record in SeqIO.parse(seqfile_path, "fasta"):
+            i += 1
+            old_id = record.id
+            old_description = record.description
+            taxid = metadata[seqfile]["taxid"]
+            species_code = metadata[seqfile]["species_code"]
+            species_name = metadata[seqfile]["species_name"]
+            new_id = species_code + "_" + species_name + "_{:05d}".format(i)
+            new_description = 'old_id:{}\ttaxid:{}\tdescription:{}'.format(old_id, taxid,old_description)
+            new_record = record
+            new_record.id = new_id
+            new_record.description = new_description
+            result_records.append(new_record)
+            result_data.append([old_id, new_id, taxid, species_code, species_name])
+    else:
+        print(seqfile + "is not in the metadata!\n")
 
 SeqIO.write(result_records, fasta_outpath, "fasta")
 
