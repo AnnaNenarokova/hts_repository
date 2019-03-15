@@ -4,14 +4,21 @@ from Bio import Entrez
 Entrez.email = "a.nenarokova@gmail.com"
 
 diamond_result_path = "/projects/Diplonema_genome_evolution/hgt/hgt_nr_diamond_0e.tsv"
+diamond_refset_path = "/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_cand_diamond_euglenozoans.tsv"
 infasta_path = "/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_candidates.faa"
 outdir="/projects/Diplonema_genome_evolution/hgt/results/fasta/"
+outfmt_opts="qseqid qlen sseqid slen staxids length evalue bitscore"
+
+# diamond_result_path = "/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_cand_diamond_euglenozoans.tsv"
+# infasta_path = "/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_candidates.faa"
+# outdir="/projects/Diplonema_genome_evolution/hgt/results/fasta2/"
+# outfmt_opts="qseqid qlen sseqid slen length evalue bitscore"
 
 # diamond_result_path = "/home/vl18625/bioinformatics/diplonema/hgt/hgt_nr_diamond_0e.tsv"
 # infasta_path = "/home/vl18625/bioinformatics/diplonema/hgt/dpapi_hgt_candidates.faa"
 # outdir="/home/vl18625/bioinformatics/diplonema/hgt/results/fasta/"
 
-outfmt_opts="qseqid qlen sseqid slen staxids length evalue bitscore"
+
 outfmt_opt_list = outfmt_opts.split(" ")
 
 dpapi_seqs = {}

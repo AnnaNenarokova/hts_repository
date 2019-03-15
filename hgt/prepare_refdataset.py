@@ -1,0 +1,53 @@
+#!python3
+import csv
+from os import listdir
+from Bio import SeqIO
+def parse_metadata(metadata_path):
+    parsed_data = {}
+    with open (metadata_path) as metadata_f:
+        metadata = csv.DictReader(metadata_f)
+        for row in metadata:
+            file_name = row["file_name"]
+            species_name = row["species_short"]
+            species_code = row["code"]
+            taxid = row["taxid"]
+            parsed_data[file_name] = {
+            "species_code": species_code,
+            "species_name": species_name,
+            "taxid": taxid
+            }
+    return parsed_data
+
+seqdir_path = "/home/vl18625/bioinformatics/diplonema/refdataset/seqfolder/"
+metadata_path = "/home/vl18625/bioinformatics/diplonema/refdataset/archaeal_dataset_taxids_edited_checked.csv"
+seqdata_path = "/home/vl18625/bioinformatics/diplonema/refdataset/archaeal_dataset_info.csv"
+fasta_outpath = "/home/vl18625/bioinformatics/diplonema/refdataset/archaeal_dataset_ready.fasta"
+
+metadata = parse_metadata(metadata_path)
+
+result_records = []
+result_data = [["old_id","new_id", "taxid", "species_code", "species_name"]]
+
+for seqfile in listdir(seqdir_path):
+    seqfile_path = seqdir_path + seqfile
+    i = 0
+    for record in SeqIO.parse(seqfile_path, "fasta"):
+        i += 1
+        old_id = record.id
+        old_description = record.description
+        taxid = metadata[seqfile]["taxid"]
+        species_code = metadata[seqfile]["species_code"]
+        species_name = metadata[seqfile]["species_name"]
+        new_id = species_code + "_" + species_name + "_{:05d}".format(i)
+        new_description = 'old_id:{}\ttaxid:{}\tdescription:{}'.format(old_id, taxid,old_description)
+        new_record = record
+        new_record.id = new_id
+        new_record.description = new_description
+        result_records.append(new_record)
+        result_data.append([old_id, new_id, taxid, species_code, species_name])
+
+SeqIO.write(result_records, fasta_outpath, "fasta")
+
+with open(seqdata_path, 'w') as f:
+    writer = csv.writer(f)
+    writer.writerows(result_data)
