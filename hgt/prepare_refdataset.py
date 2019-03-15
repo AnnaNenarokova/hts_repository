@@ -47,7 +47,7 @@ for seqfile in listdir(seqdir_path):
             result_records.append(new_record)
             result_data.append([new_id, old_id, taxid, species_code, species_name])
     else:
-        print(seqfile + "is not in the metadata!\n")
+        print(seqfile + " is not in the metadata!\n")
 
 SeqIO.write(result_records, fasta_outpath, "fasta")
 
