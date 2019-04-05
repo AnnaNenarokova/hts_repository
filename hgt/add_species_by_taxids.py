@@ -4,10 +4,10 @@ Entrez.email = "a.nenarokova@gmail.com"
 from ete3 import NCBITaxa
 ncbi = NCBITaxa()
 
-input_path = "/home/vl18625/bioinformatics/diplonema/archaeal_dataset_taxids_edited.csv"
-output_path = "/home/vl18625/bioinformatics/diplonema/archaeal_dataset_taxids_edited_checked.csv"
-delimiter = "\t"
-n_column_taxid = 5
+input_path = "/home/vl18625/bioinformatics/diplonema/refdataset/ready_tables/euk_sps_list_taxids.csv"
+output_path = "/home/vl18625/bioinformatics/diplonema/refdataset/ready_tables/euk_sps_list_taxids_sps.csv"
+delimiter = ","
+n_column_taxid = 2
 
 n_column_taxid = n_column_taxid - 1
 
@@ -31,7 +31,7 @@ with open(input_path) as input_f, open(output_path,"w") as output_f:
         print (i)
         line_split = line.rstrip().split(delimiter)
         taxid = line_split[n_column_taxid]
-        tax_name = "tax_name"
+        tax_name = "taxid_name"
         rank = "rank"
         if taxid.isdigit():
             taxid = int(taxid)

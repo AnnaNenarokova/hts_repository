@@ -41,4 +41,3 @@ do
 	iqtree -s $trimmed_msa -nt $threads
 done
 
-
