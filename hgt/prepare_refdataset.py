@@ -8,8 +8,8 @@ def parse_metadata(metadata_path):
         metadata = csv.DictReader(metadata_f)
         for row in metadata:
             file_name = row["file_name"]
-            species_name = row["species_short"]
-            species_code = row["code"]
+            species_name = row["species_name"]
+            species_code = row["species_code"]
             taxid = row["taxid"]
             parsed_data[file_name] = {
             "species_code": species_code,
