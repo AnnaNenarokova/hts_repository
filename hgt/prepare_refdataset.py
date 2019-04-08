@@ -20,8 +20,8 @@ def parse_metadata(metadata_path):
 
 seqdir_path = "/home/shared/BANK/diplonema_dataset/all_refs/"
 metadata_path = "/home/shared/BANK/diplonema_dataset/all_refdataset.csv"
-seqdata_path = "/projects/Diplonema_genome_evolution/refdataset_diplonema/archaeal_dataset_info.csv"
-fasta_outpath = "/projects/Diplonema_genome_evolution/refdataset_diplonema/archaeal_dataset_ready.fasta"
+seqdata_path = "/projects/Diplonema_genome_evolution/refdataset_diplonema/dpapi_refdataset_info.csv"
+fasta_outpath = "/projects/Diplonema_genome_evolution/refdataset_diplonema/dpapi_refdataset.faa"
 
 metadata = parse_metadata(metadata_path)
 
@@ -30,6 +30,7 @@ result_data = [["new_id", "old_id", "taxid", "species_code", "species_name"]]
 
 for seqfile in listdir(seqdir_path):
     if seqfile in metadata.keys():
+        print (seqfile)
         seqfile_path = seqdir_path + seqfile
         i = 0
         for record in SeqIO.parse(seqfile_path, "fasta"):
