@@ -18,8 +18,8 @@ def parse_metadata(metadata_path):
             }
     return parsed_data
 
-seqdir_path = "/home/shared/BANK/archaeal_proteomes_4Gareth/"
-metadata_path = "/projects/Diplonema_genome_evolution/refdataset_diplonema/archaeal_dataset_taxids_edited_checked.csv"
+seqdir_path = "/home/shared/BANK/diplonema_dataset/all_refs/"
+metadata_path = "/home/shared/BANK/diplonema_dataset/all_refdataset.csv"
 seqdata_path = "/projects/Diplonema_genome_evolution/refdataset_diplonema/archaeal_dataset_info.csv"
 fasta_outpath = "/projects/Diplonema_genome_evolution/refdataset_diplonema/archaeal_dataset_ready.fasta"
 
