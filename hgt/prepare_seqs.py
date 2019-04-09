@@ -3,7 +3,7 @@ from Bio import SeqIO
 from Bio import Entrez
 Entrez.email = "a.nenarokova@gmail.com"
 
-diamond_result_path = "/projects/Diplonema_genome_evolution/hgt/hgt_nr_diamond_0e.tsv"
+diamond_result_path = "/projects/Diplonema_genome_evolution/hgt/results/dpapi_hgt_cand_diamond_dpapi_refdataset.tsv"
 diamond_refset_path = "/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_cand_diamond_euglenozoans.tsv"
 infasta_path = "/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_candidates.faa"
 outdir="/projects/Diplonema_genome_evolution/hgt/results/fasta/"

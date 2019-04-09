@@ -1,8 +1,8 @@
 #!/bin/bash
 query="/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_candidates.faa"
-db_path="/home/shared/BANK/diplonema_dataset/euglenozoa_anzhelika/all_euglenozoans.dmnd"
+db_path="/projects/Diplonema_genome_evolution/refdataset_diplonema/dpapi_refdataset.dmnd"
 threads="30"
-outfile="/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_cand_diamond_euglenozoans.tsv"
+outfile="/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_cand_diamond_dpapi_refdataset.tsv"
 
 outfmt_opts="qseqid qlen sseqid slen length evalue bitscore"
 diamond blastp -q $query -d $db_path -o $outfile -p $threads -f 6 $outfmt_opts --max-hsps 1

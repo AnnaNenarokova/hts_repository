@@ -50,8 +50,10 @@ for seqfile in listdir(seqdir_path):
     else:
         print(seqfile + " is not in the metadata!\n")
 
+print ("writing seqs")
 SeqIO.write(result_records, fasta_outpath, "fasta")
 
+print ("writing info")
 with open(seqdata_path, 'w') as f:
     writer = csv.writer(f)
     writer.writerows(result_data)
