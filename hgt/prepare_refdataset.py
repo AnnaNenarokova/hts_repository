@@ -19,9 +19,9 @@ def parse_metadata(metadata_path):
     return parsed_data
 
 seqdir_path = "/home/shared/BANK/diplonema_dataset/all_refs/"
-metadata_path = "/home/shared/BANK/diplonema_dataset/all_refdataset.csv"
-seqdata_path = "/projects/Diplonema_genome_evolution/refdataset_diplonema/dpapi_refdataset_info.csv"
-fasta_outpath = "/projects/Diplonema_genome_evolution/refdataset_diplonema/dpapi_refdataset.faa"
+metadata_path = "/home/shared/BANK/diplonema_dataset/refdataset_no_dpapi.csv"
+seqdata_path = "/projects/Diplonema_genome_evolution/refdataset_diplonema/no_dpapi_refdataset_info.csv"
+fasta_outpath = "/projects/Diplonema_genome_evolution/refdataset_diplonema/no_dpapi_refdataset.faa"
 
 metadata = parse_metadata(metadata_path)
 

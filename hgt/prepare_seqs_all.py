@@ -1,78 +1,59 @@
 #!python3
 from Bio import SeqIO
 from Bio import Entrez
+Entrez.email = "a.nenarokova@gmail.com"
 
+diamond_refset="/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_cand_diamond_dpapi_refdataset.tsv"
+outfmt_opts_refset="qseqid qlen sseqid slen length evalue bitscore"
 
-diamond_refdataset="/projects/Diplonema_genome_evolution/hgt/results/dpapi_hgt_cand_diamond_dpapi_refdataset.tsv"
-outfmt_opts_ref="qseqid qlen sseqid slen length evalue bitscore"
+diamond_ncbi="/projects/Diplonema_genome_evolution/hgt/hgt_nr_diamond.tsv"
+outfmt_opts_ncbi="qseqid qlen sseqid slen staxids length evalue bitscore"
 
-diamond_nr="/projects/Diplonema_genome_evolution/hgt/hgt_nr_diamond.tsv"
-outfmt_opts_nr="qseqid qlen sseqid slen staxids length evalue bitscore"
-
-infasta_path = "/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_candidates.faa"
-ref_fasta_path = "/projects/Diplonema_genome_evolution/refdataset_diplonema/dpapi_refdataset.faa"
+qfasta_path="/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_candidates.faa"
+refset_fasta_path="/projects/Diplonema_genome_evolution/refdataset_diplonema/dpapi_refdataset.faa"
 
 outdir="/projects/Diplonema_genome_evolution/hgt/results/fasta/"
 
-dpapi_seqs = {}
-for record in SeqIO.parse(infasta_path, "fasta"):
-    dpapi_seqs[record.id] = record
+def add_diamond_dict(diamond_path, outfmt_opts, seq_dict, ncbi=False, delimeter="\t"):
+    outfmt_opt_list = outfmt_opts.split(" ")
+    with open(diamond_path) as diamond_f:
+        for line in diamond_f:
+            line_split = line.rstrip().split(delimeter)
+            qseqid = line_split[outfmt_opt_list.index("qseqid")]
+            sseqid = line_split[outfmt_opt_list.index("sseqid")]
+            evalue = float(line_split[outfmt_opt_list.index("evalue")])
+            if qseqid not in seq_dict.keys():
+                seq_dict[qseqid] = {"ncbi":[], "refset":[]}
+            if ncbi:
+                seq_dict[qseqid]["ncbi"].append(sseqid)
+            else:
+                seq_dict[qseqid]["refset"].append(sseqid)
+    return seq_dict
 
-outfmt_opt_list = outfmt_opts.split(" ")
+def write_seqs(seq_dict, qfasta_path, refset_fasta_path, outdir):
+    q_seqs = {}
+    for record in SeqIO.parse(qfasta_path, "fasta"):
+        q_seqs[record.id] = record
 
-results = {}
+    refset_seqs = {}
+    for record in SeqIO.parse(refset_fasta_path, "fasta"):
+        refset_seqs[record.id] = record
 
-with open(diamond_result_path) as diamond_f:
-    current_qseqid = None
-    i = 0
-    for line in diamond_f:
-        i += 1
-        # print (i)
-        line_split = line.rstrip().split("\t")
-        qseqid = line_split[outfmt_opt_list.index("qseqid")]
-        sseqid = line_split[outfmt_opt_list.index("sseqid")]
-        evalue = float(line_split[outfmt_opt_list.index("evalue")])
-        if qseqid != current_qseqid:
-            print (current_qseqid)
-            if current_qseqid:
-                SeqIO.write(records, current_path, "fasta")
-            current_qseqid = qseqid
-            current_path = outdir + current_qseqid + ".faa"
-            records = [dpapi_seqs[qseqid]]
-            print (current_path)
-        ref_record = ref_seqs[sseqid]
-        records.append(ref_record)
+    for qseqid in seq_dict:
+        print (qseqid)
+        outpath = outdir + qseqid + ".faa"
+        out_records = [q_seqs[qseqid]]
+        for refset_id in seq_dict[qseqid]["refset"]:
+            out_records.append(refset_seqs[refset_id])
+        SeqIO.write(out_records, outpath, "fasta")
+        with open(outpath, "a") as outfile:
+            for ncbi_id in seq_dict[qseqid]["ncbi"]:
+                ncbi_record = Entrez.efetch(db="protein", id=ncbi_id, rettype="fasta").read()[:-1]
+                outfile.write(ncbi_record)
 
-outfmt_opt_list = outfmt_opts.split(" ")
+seq_dict = {}
 
-dpapi_seqs = {}
-for record in SeqIO.parse(infasta_path, "fasta"):
-    dpapi_seqs[record.id] = record
+seq_dict = add_diamond_dict(diamond_refset, outfmt_opts_refset, seq_dict)
+seq_dict = add_diamond_dict(diamond_ncbi, outfmt_opts_ncbi, seq_dict, ncbi=True)
 
-with open(diamond_result_path) as diamond_f:
-    current_qseqid = None
-    current_f = None
-    i = 0
-    for line in diamond_f:
-        i += 1
-        print (i)
-        line_split = line.rstrip().split("\t")
-        qseqid = line_split[outfmt_opt_list.index("qseqid")]
-        sseqid = line_split[outfmt_opt_list.index("sseqid")]
-        taxid = line_split[outfmt_opt_list.index("staxids")]
-        evalue = float(line_split[outfmt_opt_list.index("evalue")])
-        
-        print (current_qseqid)
-
-
-        if qseqid != current_qseqid:
-            if current_f: current_f.close()
-            current_qseqid = qseqid
-            current_path = outdir + current_qseqid + ".faa"
-            dpapi_record = [dpapi_seqs[qseqid]]
-            SeqIO.write(dpapi_record, current_path, "fasta")
-            current_f = open(current_path, "a")
-            print (current_path)
-        ncbi_record = Entrez.efetch(db="protein", id=sseqid, rettype="fasta").read()[:-1]
-        current_f.write(ncbi_record)
-    current_f.close()
+write_seqs(seq_dict, qfasta_path, refset_fasta_path, outdir)
