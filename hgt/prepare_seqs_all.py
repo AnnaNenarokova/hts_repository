@@ -3,7 +3,7 @@ from Bio import SeqIO
 from Bio import Entrez
 Entrez.email = "a.nenarokova@gmail.com"
 
-diamond_refset="/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_cand_diamond_dpapi_refdataset.tsv"
+diamond_refset="/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_cand_diamond_no_dpapi_refdataset.tsv"
 outfmt_opts_refset="qseqid qlen sseqid slen length evalue bitscore"
 
 diamond_ncbi="/projects/Diplonema_genome_evolution/hgt/hgt_nr_diamond.tsv"
@@ -47,9 +47,11 @@ def write_seqs(seq_dict, qfasta_path, refset_fasta_path, outdir):
             out_records.append(refset_seqs[refset_id])
         SeqIO.write(out_records, outpath, "fasta")
         with open(outpath, "a") as outfile:
+            ncbi_ids_string = ""
             for ncbi_id in seq_dict[qseqid]["ncbi"]:
-                ncbi_record = Entrez.efetch(db="protein", id=ncbi_id, rettype="fasta").read()[:-1]
-                outfile.write(ncbi_record)
+                ncbi_ids_string = ncbi_ids_string + ncbi_id + ","
+            ncbi_records = Entrez.efetch(db="protein", id=ncbi_ids_string, rettype="fasta").read()[:-1]
+            outfile.write(ncbi_records)
 
 seq_dict = {}
 
