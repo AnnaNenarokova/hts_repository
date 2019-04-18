@@ -5,7 +5,7 @@ import sys
 from os import listdir
 
 treedir_path="/projects/Diplonema_genome_evolution/hgt/results/trees/"
-taxid_path="/projects/Diplonema_genome_evolution/hgt/wholedataset_1_taxid.csv"
+taxid_path="/projects/Diplonema_genome_evolution/hgt/whole_set_taxids.csv"
 bootstrap_threshold = 70.0
 
 def parse_taxids(taxid_path, delimeter=","):
@@ -34,8 +34,6 @@ def get_tags_leaves(tree, taxid_dict):
         if "DIPPA" in seqid:
             leaf_tags[seqid] = "dpapi"
         else:
-            print (seqid)
-            print (taxid_dict[seqid])
             taxid = int(taxid_dict[seqid])
             if taxid == dpapi_taxid:
                 leaf_tags[seqid] = "dpapi"
