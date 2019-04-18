@@ -1,17 +1,18 @@
 #!/bin/bash
-threads="20"
+threads="5"
 
 infasta=""
 outdir="/projects/Diplonema_genome_evolution/hgt/results"
 
-bmge="/home/vl18625/bioinformatics/tools/BMGE-1.12/BMGE.jar"
+# bmge="/home/vl18625/bioinformatics/tools/BMGE-1.12/BMGE.jar"
+bmge="/home/vl18625/tools/BMGE-1.12/BMGE.jar"
 
 # creating directories
 fasta_dir=$outdir"/fasta/"
-msa_dir="/msa/"
-trimmed_msa_dir="/trimmed_msa/"
-iqtree_dir="/iqtree_files/"
-tree_dir=""
+msa_dir=$outdir"/msa/"
+trimmed_msa_dir=$outdir"/trimmed_msa/"
+iqtree_dir="$outdir/iqtree_files/"
+tree_dir=$outdir"trees"
 
 rm -r $msa_dir
 mkdir $msa_dir
@@ -44,14 +45,10 @@ cd $fasta_dir
 
 for fasta in *.faa
 do
-	msa=$msa_dir$fasta".aligned.fasta"
-	trimmed_msa=$trimmed_msa_dir$fasta"_trimmed_msa.fasta"
-	tree="$tree_dir$fasta"
-	# mafft --auto --inputorder $fasta > $msa
-	# java -jar $bmge -i $msa -t "AA" -of $trimmed_msa
-	# iqtree -s $trimmed_msa -nt $threads -m LG+G+F -bb 1000 -bnni
-	# mv $trimmed_msa"."*
-	cp $trimmed_msa".treefile" $tree_dir$fasta".tree"
-	mv $trimmed_msa"."* $iqtree_dir
+    msa=$msa_dir$fasta".aligned.fasta"
+    trimmed_msa=$trimmed_msa_dir$fasta"_trimmed_msa.fasta"
+    mafft --auto --inputorder $fasta > $msa
+    java -jar $bmge -i $msa -t "AA" -of $trimmed_msa
+    iqtree -s $trimmed_msa -nt $threads -m LG+G+F -bb 1000 -bnni
 done
 

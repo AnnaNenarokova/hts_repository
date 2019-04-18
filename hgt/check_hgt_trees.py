@@ -2,13 +2,10 @@
 from ete3 import NCBITaxa
 from ete3 import Tree
 import sys 
+from os import listdir
 
-tree_path = sys.argv[1]
-# tree_path="/home/vl18625/bioinformatics/diplonema/hgt/results/trees_copy/DIPPA_01494.mRNA.1.faa_trimmed_msa.fasta.treefile.tree"
-
-taxid_path = sys.argv[2]
-# taxid_path="/home/vl18625/bioinformatics/diplonema/hgt/all_seqids_taxids.csv"
-
+treedir_path="/projects/Diplonema_genome_evolution/hgt/results/trees/"
+taxid_path="/projects/Diplonema_genome_evolution/hgt/wholedataset_1_taxid.csv"
 bootstrap_threshold = 70.0
 
 def parse_taxids(taxid_path, delimeter=","):
@@ -52,8 +49,7 @@ def check_sisters_bacteria(node, leaf_tags):
                 return False
     return True
 
-def check_hgt(tree_path, taxid_path, bootstrap_threshold=70.0):
-    taxid_dict = parse_taxids(taxid_path)
+def check_hgt(tree_path, taxid_dict, bootstrap_threshold=70.0):
 
     tree = Tree(tree_path)
     tree = remove_bad_nodes(tree, support_threshold=bootstrap_threshold)
@@ -79,7 +75,7 @@ def check_hgt(tree_path, taxid_path, bootstrap_threshold=70.0):
     else:
         return False
 
-is_hgt = check_hgt(tree_path, taxid_path, bootstrap_threshold=bootstrap_threshold)
-
-print (tree_path)
-print ("HGT", is_hgt)
+taxid_dict = parse_taxids(taxid_path)
+for tree in listdir(treedir_path):
+    is_hgt = check_hgt(tree, taxid_dict, bootstrap_threshold=bootstrap_threshold)
+    print (tree, is_hgt)
