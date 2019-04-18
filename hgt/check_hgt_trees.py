@@ -35,6 +35,7 @@ def get_tags_leaves(tree, taxid_dict):
             leaf_tags[seqid] = "dpapi"
         else:
             taxid = int(taxid_dict[seqid])
+            if 
             if taxid == dpapi_taxid:
                 leaf_tags[seqid] = "dpapi"
             elif bacteria_taxid in ncbi_taxa.get_lineage(taxid):
@@ -81,5 +82,6 @@ def check_hgt(tree_path, taxid_dict, bootstrap_threshold=70.0):
 taxid_dict = parse_taxids(taxid_path)
 for tree in listdir(treedir_path):
     tree_path = treedir_path + tree
+    print ("@", tree)
     is_hgt = check_hgt(tree_path, taxid_dict, bootstrap_threshold=bootstrap_threshold)
     print (tree, is_hgt)
