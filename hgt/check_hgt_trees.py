@@ -70,7 +70,10 @@ def check_hgt(tree_path, taxid_dict, bootstrap_threshold=70.0):
                 print ("More than one Dpapi leaf!\n" + tree_path + "\n")
 
     farthest_node = dpapi_leaf.get_farthest_node(topology_only=True)[0]
-    tree.set_outgroup(farthest_node.up)
+    if farthest_node.up == tree:
+        return False
+    else:
+        tree.set_outgroup(farthest_node.up)
 
     edited_tree_path = tree_path + "_edited.tree"
     tree.write(outfile=edited_tree_path)
