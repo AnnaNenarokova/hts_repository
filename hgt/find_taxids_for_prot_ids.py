@@ -2,8 +2,8 @@
 from Bio import Entrez
 Entrez.email = "a.nenarokova@gmail.com"
 
-input_path = "/home/vl18625/bioinformatics/diplonema/hgt/seqnames_ncbi_nr.csv"
-output_path = "/home/vl18625/bioinformatics/diplonema/hgt/seqnames_ncbi_nr_taxids.csv"
+input_path = "/home/vl18625/bioinformatics/diplonema/hgt/problem_ncbi.csv"
+output_path = "/home/vl18625/bioinformatics/diplonema/hgt/problem_ncbi_taxids.csv"
 delimiter = ","
 prot_id_column = 1
 with open(input_path) as input_f, open(output_path,"w") as output_f:
