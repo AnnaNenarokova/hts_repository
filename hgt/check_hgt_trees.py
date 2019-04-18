@@ -31,13 +31,16 @@ def get_tags_leaves(tree, taxid_dict):
     leaf_tags = {}
     for leaf in tree.iter_leaves():
         seqid = leaf.name
-        taxid = int(taxid_dict[seqid])
-        if taxid == dpapi_taxid:
+        if "DIPPA" in seqid:
             leaf_tags[seqid] = "dpapi"
-        elif bacteria_taxid in ncbi_taxa.get_lineage(taxid):
-            leaf_tags[seqid] = "bacteria"
         else:
-            leaf_tags[seqid] = "other"
+            taxid = int(taxid_dict[seqid])
+            if taxid == dpapi_taxid:
+                leaf_tags[seqid] = "dpapi"
+            elif bacteria_taxid in ncbi_taxa.get_lineage(taxid):
+                leaf_tags[seqid] = "bacteria"
+            else:
+                leaf_tags[seqid] = "other"
     return leaf_tags
 
 def check_sisters_bacteria(node, leaf_tags):
@@ -78,6 +81,5 @@ def check_hgt(tree_path, taxid_dict, bootstrap_threshold=70.0):
 taxid_dict = parse_taxids(taxid_path)
 for tree in listdir(treedir_path):
     tree_path = treedir_path + tree
-    print ("@", tree_path)
     is_hgt = check_hgt(tree_path, taxid_dict, bootstrap_threshold=bootstrap_threshold)
     print (tree, is_hgt)
