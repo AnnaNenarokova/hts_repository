@@ -78,5 +78,6 @@ def check_hgt(tree_path, taxid_dict, bootstrap_threshold=70.0):
 taxid_dict = parse_taxids(taxid_path)
 for tree in listdir(treedir_path):
     tree_path = treedir_path + tree
+    print ("@", tree_path)
     is_hgt = check_hgt(tree_path, taxid_dict, bootstrap_threshold=bootstrap_threshold)
     print (tree, is_hgt)
