@@ -5,7 +5,7 @@ import sys
 from os import listdir
 
 treedir_path="/projects/Diplonema_genome_evolution/hgt/results/trees/"
-taxid_path="/projects/Diplonema_genome_evolution/hgt/whole_set_taxids.csv"
+taxid_path="/projects/Diplonema_genome_evolution/hgt/whole_taxids_no_problem.csv"
 bootstrap_threshold = 70.0
 
 def parse_taxids(taxid_path, delimeter=","):
