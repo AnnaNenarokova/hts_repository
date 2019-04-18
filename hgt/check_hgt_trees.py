@@ -33,7 +33,7 @@ def get_tags_leaves(tree, taxid_dict):
         seqid = leaf.name
         if "DIPPA" in seqid:
             leaf_tags[seqid] = "dpapi"
-        else:
+        elif seqid in taxid_dict.keys():
             # print (seqid)
             # print (taxid_dict[seqid])
             taxid = int(taxid_dict[seqid])
@@ -43,6 +43,9 @@ def get_tags_leaves(tree, taxid_dict):
                 leaf_tags[seqid] = "bacteria"
             else:
                 leaf_tags[seqid] = "other"
+        else:
+            print (seqid, "is not in taxid dict!")
+            leaf_tags[seqid] = "other"
     return leaf_tags
 
 def check_sisters_bacteria(node, leaf_tags):
