@@ -27,8 +27,8 @@ def keep_from_list(fasta_file, list_file, outpath):
     SeqIO.write(results, outpath, "fasta")
     return 0
 
-fasta_file = 'D:/anna_drive/projects/mitoproteomes/trypanosoma/mito/importome/TriTrypDB-8.1_TbruceiTREU927_AnnotatedProteins.fasta'
-list_file = 'D:/anna_drive/projects/mitoproteomes/trypanosoma/mito/importome/importome.csv'
-outpath = 'D:/anna_drive/projects/mitoproteomes/trypanosoma/mito/importome/importome_8.1.faa'
+fasta_file = '/home/vl18625/bioinformatics/diplonema/Dp_PB-MI_190104_dedup_cut_l100.faa'
+list_file = '/home/vl18625/bioinformatics/diplonema/hgt_cases.csv'
+outpath = '/home/vl18625/bioinformatics/diplonema/hgt_cases.faa'
 
 keep_from_list(fasta_file, list_file, outpath)
