@@ -35,7 +35,6 @@ def get_tags_leaves(tree, taxid_dict):
             leaf_tags[seqid] = "dpapi"
         else:
             taxid = int(taxid_dict[seqid])
-            if 
             if taxid == dpapi_taxid:
                 leaf_tags[seqid] = "dpapi"
             elif bacteria_taxid in ncbi_taxa.get_lineage(taxid):
