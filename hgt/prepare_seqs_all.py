@@ -10,7 +10,7 @@ diamond_ncbi="/projects/Diplonema_genome_evolution/hgt/results/hgt_nr_diamond.ts
 outfmt_opts_ncbi="qseqid qlen sseqid slen staxids length evalue bitscore"
 
 qfasta_path="/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_candidates.faa"
-refset_fasta_path="/projects/Diplonema_genome_evolution/refdataset_diplonema/dpapi_refdataset.faa"
+refset_fasta_path="/projects/Diplonema_genome_evolution/refdataset_diplonema/no_dpapi_refdataset.faa"
 
 outdir="/projects/Diplonema_genome_evolution/hgt/results/fasta/"
 
