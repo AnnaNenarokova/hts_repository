@@ -37,21 +37,21 @@ def add_header(blast_csv_path, custom_outfmt):
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 
 query_paths= [
-    "/home/vl18625/bioinformatics/diplonema/hgt_cases.faa"
+    "/home/anna/bioinformatics/euglena/euglena_heme.faa"
     ]
 
 subj_paths = [
-    "/home/vl18625/bioinformatics/diplonema/proteins_SL_Loc+PFAM+BLASTP_trim_newIDs.faa"
+    "/home/anna/bioinformatics/diplonema/Dp_190104_no_isoforms.faa"
     ]
 
 for query_path in query_paths:
     for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='prot', threads=8)
+        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='prot', threads=4)
         blast_csv_path = new_blast.blast(
                                          bl_type='blastp',
-                                         evalue=0.00001,
-                                         outfmt='comma_values',
-                                         #outfmt='pairwise',
+                                         evalue=10,
+                                         # outfmt='comma_values',
+                                         outfmt='pairwise',
                                          custom_outfmt=custom_outfmt,
                                          word_size=2
                                          )

@@ -1,15 +1,15 @@
 #!/bin/bash
 
-threads=16
+threads=30
 
-fasta="/media/4TB1/blastocrithidia/genome_assembly/p57_scaffolds.fa"
-bt2_base="/media/4TB1/blastocrithidia/mapping/bw2_indexes/p57_DNA_bw2"
+fasta="/media/4TB1/lmexicana_ku/genome_assembly/LmxM379-SNV.fa"
+bt2_base="/media/4TB1/lmexicana_ku/mapping/LmxM379-SNV/LmxM379-SNV.fa.bt2"
 
-#bowtie2-build --threads $threads $fasta $bt2_base
+bowtie2-build --threads $threads $fasta $bt2_base
 
-file_path="/media/4TB1/blastocrithidia/mapping/p57_both_RNA_to_DNA/p57_both_RNA"
-r1="/media/4TB1/blastocrithidia/reads/transcriptome/trimmed/p57_both_rna_trimmed_1.fq"
-r2="/media/4TB1/blastocrithidia/reads/transcriptome/trimmed/p57_both_rna_trimmed_2.fq"
+file_path="/media/4TB1/blastocrithidia/mapping/p57_ra_polished/illumina_rna/p57_ra_polished_rna"
+r1="/media/4TB1/blastocrithidia/reads/transcriptome/trimmed/p57_trimmed_1.fq.gz"
+r2="/media/4TB1/blastocrithidia/reads/transcriptome/trimmed/p57_trimmed_2.fq.gz"
 
 alignment=$file_path".sam"
 report=$file_path".txt"
