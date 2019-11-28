@@ -3,14 +3,14 @@ from Bio import SeqIO
 from Bio import Entrez
 Entrez.email = "a.nenarokova@gmail.com"
 
-diamond_refset="/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_cand_diamond_no_dpapi_refdataset.tsv"
+diamond_refset="/projects/Diplonema_genome_evolution/hgt/results/hgt_refset_diamond.tsv"
 outfmt_opts_refset="qseqid qlen sseqid slen length evalue bitscore"
 
-diamond_ncbi="/projects/Diplonema_genome_evolution/hgt/hgt_nr_diamond.tsv"
+diamond_ncbi="/projects/Diplonema_genome_evolution/hgt/results/hgt_nr_diamond.tsv"
 outfmt_opts_ncbi="qseqid qlen sseqid slen staxids length evalue bitscore"
 
 qfasta_path="/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_candidates.faa"
-refset_fasta_path="/projects/Diplonema_genome_evolution/refdataset_diplonema/dpapi_refdataset.faa"
+refset_fasta_path="/projects/Diplonema_genome_evolution/refdataset_diplonema/no_dpapi_refdataset.faa"
 
 outdir="/projects/Diplonema_genome_evolution/hgt/results/fasta/"
 
