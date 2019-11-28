@@ -1,7 +1,7 @@
 #!python3
 from ete3 import NCBITaxa
 from ete3 import Tree
-import sys 
+import sys
 from os import listdir
 
 treedir_path="/projects/Diplonema_genome_evolution/hgt/results/trees/"
@@ -27,7 +27,7 @@ def remove_bad_nodes(tree, support_threshold=70.0):
 def get_tags_leaves(tree, taxid_dict):
     ncbi_taxa = NCBITaxa()
     bacteria_taxid = 2
-    dpapi_taxid = 91374
+    dpapi_taxid = 91374 #Diplonema papillatum taxid
     leaf_tags = {}
     for leaf in tree.iter_leaves():
         seqid = leaf.name

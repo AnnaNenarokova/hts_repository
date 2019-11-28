@@ -17,10 +17,10 @@ report=$file_path".txt"
 bowtie2 --very-sensitive -p $threads -x $bt2_base -1 $r1 -2 $r2 -S $alignment 2> $report
 
 samfile=$alignment
-bamfile=$file_path"_unsorted.bam"
-sorted_file=$file_path"_sorted.bam"
+unsorted_bam=$file_path"_unsorted.bam"
+sorted_bam=$file_path"_sorted.bam"
 
-samtools view -bS -@ $threads $samfile > $bamfile
-samtools sort -o $sorted_file -@ $threads $bamfile
-samtools index -b $sorted_file
+samtools view -bS -@ $threads $samfile > $unsorted_bam
+samtools sort -o $sorted_bam -@ $threads $unsorted_bam
+samtools index -b $sorted_bam
 
