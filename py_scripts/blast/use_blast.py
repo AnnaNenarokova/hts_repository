@@ -37,24 +37,25 @@ def add_header(blast_csv_path, custom_outfmt):
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 
 query_paths= [
-    "/home/anna/bioinformatics/blasto_local/ambar/p57_UAG_tRNA_locus.fna"
+    "/home/anna/bioinformatics/blasto_local/ambar/trp-tRNA/Order_11106670028-1_Results/fasta/clipped/all_extracted.fasta"
     ]
 
 subj_paths = [
-    "/home/anna/bioinformatics/blasto_local/p57_scaffolds/blast_db/p57_scaffolds.fasta.db",
-    "/home/anna/bioinformatics/blasto_local/p57_polis/blast_db/p57_polished.fa.db"
+    # "/home/anna/bioinformatics/blasto_local/blast/p57_polis/blast_db/p57_polished.fa.db",
+    # "/home/anna/bioinformatics/blasto_local/blast/p57_scaffolds/blast_db/p57_scaffolds.fasta.db"
+    "/home/anna/bioinformatics/blasto_local/fasta/p57_tRNAs.fna"
     ]
 
 for query_path in query_paths:
     for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path,db_path=subj_path, db_type='nucl', threads=4)
+        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='nucl', threads=4)
         blast_csv_path = new_blast.blast(
                                          bl_type='blastn',
                                          evalue=1,
                                          outfmt='comma_values',
-                                         #outfmt='pairwise',
+                                         # outfmt='pairwise',
                                          custom_outfmt=custom_outfmt,
-                                         word_size=10
+                                         word_size=7
                                          )
         add_header(best_hits(blast_csv_path), custom_outfmt)
         add_header(blast_csv_path, custom_outfmt)

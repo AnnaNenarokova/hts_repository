@@ -1,0 +1,52 @@
+('pdb_5JOS_A', 'is not in taxid dict!')
+2512121
+2512136
+DIPPA_24122.mRNA.1.faa_trimmed_msa.fasta.treefile_edited.tree
+DIPPA_07915.mRNA.1.faa_trimmed_msa.fasta.treefile
+2500528
+DIPPA_15960.mRNA.1.faa_trimmed_msa.fasta.treefile_edited.tree
+DIPPA_29285.mRNA.1.faa_trimmed_msa.fasta.treefile
+('pdb_4TNC_A', 'is not in taxid dict!')
+('pdb_2W49_0', 'is not in taxid dict!')
+DIPPA_14113.mRNA.1.faa_trimmed_msa.fasta.treefile
+DIPPA_03429.mRNA.1.faa_trimmed_msa.fasta.treefile
+DIPPA_28675.mRNA.1.faa_trimmed_msa.fasta.treefile
+DIPPA_35170.mRNA.1.faa_trimmed_msa.fasta.treefile
+2508877
+2510794
+DIPPA_35388.mRNA.1.faa_trimmed_msa.fasta.treefile
+('pdb_5JOS_A', 'is not in taxid dict!')
+DIPPA_06774.mRNA.1.faa_trimmed_msa.fasta.treefile
+DIPPA_35891.mRNA.1.faa_trimmed_msa.fasta.treefile_edited.tree_edited.tree
+DIPPA_08933.mRNA.1.faa_trimmed_msa.fasta.treefile
+DIPPA_34354.mRNA.1.faa_trimmed_msa.fasta.treefile
+DIPPA_04363.mRNA.1.faa_trimmed_msa.fasta.treefile
+('pdb_5JOS_A', 'is not in taxid dict!')
+2510337
+DIPPA_30773.mRNA.1.faa_trimmed_msa.fasta.treefile_edited.tree
+DIPPA_17843.mRNA.1.faa_trimmed_msa.fasta.treefile_edited.tree
+2509458
+DIPPA_08145.mRNA.2.faa_trimmed_msa.fasta.treefile_edited.tree_edited.tree_edited.tree_edited.tree
+2502893
+DIPPA_08958.mRNA.1.faa_trimmed_msa.fasta.treefile_edited.tree
+2509457
+DIPPA_05409.mRNA.1.faa_trimmed_msa.fasta.treefile
+DIPPA_17759.mRNA.1.faa_trimmed_msa.fasta.treefile
+2502893
+DIPPA_08958.mRNA.1.faa_trimmed_msa.fasta.treefile_edited.tree_edited.tree
+2502893
+2500160
+DIPPA_17760.mRNA.1.faa_trimmed_msa.fasta.treefile
+DIPPA_14747.mRNA.1.faa_trimmed_msa.fasta.treefile
+2511995
+2510337
+DIPPA_17882.mRNA.1.faa_trimmed_msa.fasta.treefile
+DIPPA_07352.mRNA.1.faa_trimmed_msa.fasta.treefile
+2510647
+DIPPA_09095.mRNA.1.faa_trimmed_msa.fasta.treefile
+DIPPA_21767.mRNA.1.faa_trimmed_msa.fasta.treefile
+DIPPA_03446.mRNA.1.faa_trimmed_msa.fasta.treefile
+DIPPA_35167.mRNA.1.faa_trimmed_msa.fasta.treefile_edited.tree
+DIPPA_33862.mRNA.1.faa_trimmed_msa.fasta.treefile
+2508719
+2512121

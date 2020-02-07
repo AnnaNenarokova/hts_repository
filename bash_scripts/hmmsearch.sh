@@ -1,22 +1,14 @@
 #!/bin/bash
-hmmsearch="/home/anna/bioinformatics/tools/hmmer-3.1b2-linux-intel-x86_64/binaries/hmmsearch"
+cpu=60
 
+hmmsearch="/home/users/nenarokova/tools/hmmer/bin/hmmsearch"
 
-# subject="/media/anna/data/anna_drive/projects/mitoproteomes/euglena/mitogenome/LQMU01_orfs_50aa.faa"
-# pfam_hits="/media/anna/data/anna_drive/projects/mitoproteomes/euglena/mitogenome/ND_hmm/hmmsearch_reports/COG0377_hmm_NUOB_LQMU01_orfs_50aa.txt"
+hmm="/home/users/nenarokova/zachar/ENOG410ZRF1_scf25_eggnogdb.hmm"
 
-subject1="/home/anna/bioinformatics/euglena/LQMU01_orfs_50aa.faa"
-subject2="/home/anna/bioinformatics/euglena/E_gracilis_transcriptome_final.PROTEINS.fasta"
+subject="/home/users/nenarokova/diplonema/ref_dataset/no_dpapi_refdataset_cleaned.faa"
 
-output_dir="/home/anna/bioinformatics/euglena/ND_hmm/"
+output_dir="/home/users/nenarokova/zachar/archaea_ref/hmm_reports/"
 
-hmm="/home/anna/bioinformatics/euglena/ND_hmm/ncbi_tryps/atp6_tryp.hmm"
-hmm="/home/anna/bioinformatics/euglena/ND_hmm/ncbi_tryps/nd2_tryp.hmm"
-hmm="/home/anna/bioinformatics/euglena/ND_hmm/ncbi_tryps/nd3_tryp.hmm"
+pfam_hits=$output_dir"all_ref_dataset_hmm_report.txt"
 
-
-
-pfam_hits1=$output_dir"LQMU01_orfs_50aa_hmm_atp6_tryp.txt"
-pfam_hits2=$output_dir"E_gracilis_PROTEINS_hmm_atp6_tryp.txt"
-$hmmsearch --pfamtblout $pfam_hits1 $hmm $subject1
-$hmmsearch --pfamtblout $pfam_hits2 $hmm $subject2
+$hmmsearch --pfamtblout $pfam_hits --cpu $cpu $hmm $subject

@@ -1,3 +1,5 @@
 #!/bin/bash
-fasta="/home/nenarokova/genomes/euglena/tom40/canonical_tom40.fasta"
-python /home/nenarokova/tools/pasta_tools/pasta/run_pasta.py -d PROTEIN -i $fasta
+pasta="/home/users/nenarokova/tools/pasta-code/pasta/run_pasta.py"
+fasta="/home/users/nenarokova/zachar/scf25_dataset.faa"
+
+python $pasta -d PROTEIN -i $fasta

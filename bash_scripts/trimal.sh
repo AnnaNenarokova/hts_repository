@@ -1,9 +1,8 @@
 #!/bin/bash
-trimal="/home/anna/bioinformatics/tools/trimal.v1.2rev59/trimAl/source/trimal"
+trimal="/home/users/nenarokova/tools/trimAl/source/trimal"
 
-in="OG0002170.marker001.OG0002170_replaced.fa.sorted.aln"
+msa="/home/users/nenarokova/zachar/scf25_dataset/pasta/pastajob.marker001.scf25_dataset.faa.aln"
+trimmed_msa="/home/users/nenarokova/zachar/scf25_dataset/scf25_dataset_trimmed_msa.fasta"
 
-out=$in"_trimmed.aln"
-
-$trimal -in $in -out $out -fasta -st 0.003
+$trimal -in $msa -out $trimmed_msa -fasta -automated1
 

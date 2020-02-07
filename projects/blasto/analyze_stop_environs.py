@@ -1,8 +1,9 @@
-#!/usr/bin/python3
+#!/usr/bin/python2
 from subprocess import call
 import matplotlib.pyplot as plt
 from Bio import SeqIO
 from Bio import motifs
+import os
 
 def get_codon_environs(gff_path, bed_out_path=False, left_border=-200, right_border=200, spades_ids=False, feature="gene", stops_included="False", starts=False):
 	if not bed_out_path:
@@ -50,9 +51,9 @@ def get_codon_environs(gff_path, bed_out_path=False, left_border=-200, right_bor
 									codon_environs[contig_id]=[]
 								if current_borders[0] > 0:
 									codon_environs[contig_id].append( {"strand":strand, "borders": current_borders} )
-							new_row = '{}\t{}\t{}\t{}\t{}\t{}\n'.format(contig_id, current_borders[0], current_borders[1], 'name', score, strand)
-							print new_row
-							output.write(new_row)
+									new_row = '{}\t{}\t{}\t{}\t{}\t{}\n'.format(contig_id, current_borders[0], current_borders[1], 'name', score, strand)
+									# print new_row
+									output.write(new_row)
 		output.close()
 	gff_file.close()
 	return codon_environs, bed_out_path
@@ -97,38 +98,58 @@ def create_logo_from_fasta(fasta_path, logo_path):
 	print "Logo is available in " + logo_path
 	return 0
 
+gff_folder="/home/anna/bioinformatics/blasto_local/utr_analysis/other_species/gff/"
+genome_folder="/home/anna/bioinformatics/blasto_local/utr_analysis/other_species/genomes/"
+bed_folder="/home/anna/bioinformatics/blasto_local/utr_analysis/other_species/bed/"
+outfasta_folder="/home/anna/bioinformatics/blasto_local/utr_analysis/other_species/extracted_fasta/"
+
 left_border = -300
-right_border = 0
+right_border = 300
+gff_files = os.listdir(gff_folder)
+# for gff_file in gff_files:
+# 	gff_path = gff_folder + gff_file
+# 	name = gff_file[:-4]
+# 	bed_out_path = bed_folder + name + "-300_300_stop_environs.bed"
+# 	codon_environs, bed_path = get_codon_environs(gff_path, bed_out_path=bed_out_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="gene", stops_included=True)
+# 	genome_path = genome_folder + name + "_Genome.fasta"
+# 	bed_path = bed_folder + name + "-300_300_stop_environs.bed"
+# 	out_fasta= outfasta_folder + name + "-300_300_stop_environs" +".fna"
+# 	bedtools_call = ['bedtools', 'getfasta', '-fi', genome_path, '-bed', bed_path, '-fo', out_fasta, '-s']
+# 	call(bedtools_call)
 
-in_fasta="/home/anna/bioinformatics/all_tryp_references/TriTrypDB-34_TbruceiTREU927_Genome.fasta"
-gff_path="/home/anna/bioinformatics/all_tryp_references/TriTrypDB-34_TbruceiTREU927_cleaned.gff"
+# in_fasta="/home/anna/bioinformatics/all_tryp_references/TriTrypDB-34_TbruceiTREU927_Genome.fasta"
+# gff_path="/home/anna/bioinformatics/all_tryp_references/TriTrypDB-34_TbruceiTREU927_cleaned.gff"
 
-codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="gene", stops_included=True)
+# codon_environs, bed_path = get_codon_environs(gff_path, left_border=left_border, right_border=right_border, spades_ids=False, feature="gene", stops_included=True)
 
 
-logo_path='{}_{}_{}_stop_environs_logo.png'.format(gff_path[:-4],left_border, right_border)
+# logo_path='{}_{}_{}_stop_environs_logo.png'.format(gff_path[:-4],left_border, right_border)
 
+in_fasta="/home/anna/bioinformatics/blasto_local/utr_analysis/other_species/genomes/jac_scaffolds_Genome.fasta"
+bed_path = "/home/anna/bioinformatics/blasto_local/utr_analysis/other_species/bed/jac_scaffolds_-300_300_stop_environs.bed"
 out_fasta=bed_path[:-3]+"fna"
 
 bedtools_call = ['bedtools', 'getfasta', '-fi', in_fasta, '-bed', bed_path, '-fo', out_fasta, '-s']
 call(bedtools_call)
 
-fasta_path=out_fasta
+# fasta_path=out_fasta
 
-print fasta_path
+# print fasta_path
 
-create_logo_from_fasta(fasta_path, logo_path)
+# fasta_path="/home/anna/bioinformatics/blasto_local/utr_analysis/LpyrH10/GCF_001293395.1_ASM129339v1_genomic_-300_300_stop_environs.fna"
 
-codon_usage = codon_usage_per_position(fasta_path)
+# create_logo_from_fasta(fasta_path, logo_path)
 
-interest_codons = {
-	"TAA"  : [],
-	# "GAA"  : [],
-	"TAG"  : [],
-	# "GAG"  : [],
-	"TGA"  : []
-	# "TGG"  : []
-}
+# codon_usage = codon_usage_per_position(fasta_path)
+
+# interest_codons = {
+# 	"TAA"  : [],
+# 	# "GAA"  : [],
+# 	"TAG"  : [],
+# 	# "GAG"  : [],
+# 	"TGA"  : []
+# 	# "TGG"  : []
+# }
 # interest_codons = {
 #	 "AAA"  : [],
 #	 "TAA"  : [],
@@ -139,49 +160,53 @@ interest_codons = {
 #	 "TTA"  : [],
 #	 "TTT"  : []
 # }
-for pos in codon_usage:
-	for interest_codon in interest_codons:
-		if interest_codon in pos.keys():
-			interest_codons[interest_codon].append(pos[interest_codon])
-		else:
-			interest_codons[interest_codon].append(0)
-
-
-plots = []
-
-codon_left_border = left_border/3
-codon_right_border = right_border/3
-
-x = range(codon_left_border, codon_right_border)
-
-for interest_codon in interest_codons:
-	print interest_codon
-	coverage = interest_codons[interest_codon]
-	print len(coverage)
-	if interest_codon == "TAA":
-		new_plot = plt.plot(x,coverage,label=interest_codon, linewidth=1.0)
-	else:
-		new_plot = plt.plot(x,coverage,label=interest_codon, linewidth=1.0)
-
-
-# gc_usage = gc_per_position(fasta_path)
-
-# nts = {"A": [], "C": [], "G": [], "T": []}
-
-# for pos in gc_usage:
-# 	 for nt in nts:
-# 		 nts[nt].append(pos[nt])
+# for pos in codon_usage:
+# 	for interest_codon in interest_codons:
+# 		if interest_codon in pos.keys():
+# 			interest_codons[interest_codon].append(pos[interest_codon])
+# 		else:
+# 			interest_codons[interest_codon].append(0)
 
 
 # plots = []
 
-# x = range(left_border, right_border)
+# codon_left_border = left_border/3
+# codon_right_border = right_border/3
 
-# for nt in nts:
-# 	 print nt
-# 	 coverage = nts[nt]
-# 	 print len(coverage)
-# 	 new_plot = plt.plot(x,coverage,label=nt)
+# x = range(codon_left_border, codon_right_border)
+
+# for interest_codon in interest_codons:
+# 	print interest_codon
+# 	coverage = interest_codons[interest_codon]
+# 	print len(coverage)
+# 	if interest_codon == "TAA":
+# 		new_plot = plt.plot(x,coverage,label=interest_codon, linewidth=1.0)
+# 	else:
+# 		new_plot = plt.plot(x,coverage,label=interest_codon, linewidth=1.0)
+
+fasta_path = "/home/anna/bioinformatics/blasto_local/utr_analysis/other_species/extracted_fasta/jac_scaffolds_-300_300_stop_environs.fna"
+
+gc_usage = gc_per_position(fasta_path)
+
+nts = {"A": [], "C": [], "G": [], "T": []}
+
+for pos in gc_usage:
+	 for nt in nts:
+		 nts[nt].append(pos[nt])
+
+
+nt_colors = {"A": "g", "C": "b", "G": "y", "T": "r"}
+
+plots = []
+
+x = range(left_border, right_border)
+
+for nt in nts:
+	 print nt
+
+	 coverage = nts[nt]
+	 print len(coverage)
+	 new_plot = plt.plot(x,coverage, nt_colors[nt],label=nt)
 
 plt.legend()
 

@@ -22,8 +22,6 @@ def report_contig_gc(fasta, output_path):
             new_line = id + delimiter + str(gc) + "\n"
             output_f.write(new_line)
 
-fasta="/home/anna/bioinformatics/novymonas/novymonas_no_pand_scaffolds.fasta"
+fasta="/home/anna/bioinformatics/blasto_local/ciliates/genomes/GCA_002087855.2_ASM208785v2_genomic.fna"
 
-output_path = "/home/anna/bioinformatics/novymonas/novymonas_no_pand_scaffolds_gc_report.fasta"
-
-report_contig_gc(fasta, output_path)
+count_total_gc(fasta)
