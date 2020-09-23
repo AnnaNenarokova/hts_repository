@@ -26,10 +26,10 @@
 # taxonnodes="/home/users/DBS/nodes.dmp"
 # diamond blastx -q $query -d $db_path -o $outfile -f 102 -p $threads --taxonmap $taxonmap --taxonnodes $taxonnodes
 
-query="/home/users/nenarokova/diplonema/Dp_190104_no_isoforms.faa"
+query="/home/users/nenarokova/myxo/smol_augustus_6_annot_prot.faa"
 db_path="/home/users/DBS/nr_tax.dmnd"
-threads="30"
-outfile="/home/users/nenarokova/diplonema/no_isoforms_diamond_nr.tsv"
+threads="40"
+outfile="/home/users/nenarokova/myxo/smol_diamond_nr.tsv"
 taxonmap="/home/users/DBS/prot.accession2taxid.gz"
 taxonnodes="/home/users/DBS/nodes.dmp"
 diamond blastp -q $query -d $db_path -o $outfile -f 102 -p $threads --taxonmap $taxonmap --taxonnodes $taxonnodes
