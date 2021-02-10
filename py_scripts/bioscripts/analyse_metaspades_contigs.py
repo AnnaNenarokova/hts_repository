@@ -44,8 +44,8 @@ def analyse_metaspades_contigs(contigs_fasta, blast_path_dict, outpath, outfmt=F
 
 
 
-contigs_fasta = "/Users/annanenarokova/work/hypsa/K26_contigs.fasta"
-outpath = "/Users/annanenarokova/work/hypsa/K26_contigs_info.csv"
+contigs_fasta = "/mnt/data/metagenomic_data/spades_runs/K26/contigs.fasta"
+outpath = "/mnt/data/metagenomic_data/ref_blast/K26_contigs_info.csv"
 outfmt = "qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send"
 
 blast_path_dict = {
