@@ -49,7 +49,15 @@ outpath = "/Users/annanenarokova/work/hypsa/K26_contigs_info.csv"
 outfmt = "qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send"
 
 blast_path_dict = {
-    "Wolbachia": "/Users/annanenarokova/work/hypsa/K26_wolbachia_ncbi.faa.dmnd.tsv"
+    "Wolbachia": "/mnt/data/metagenomic_data/ref_blast/diamond_blast_results/K26_wolbachia_ncbi.faa.dmnd.tsv",
+    "Arsenophonus": "/mnt/data/metagenomic_data/ref_blast/diamond_blast_results/K26_arsenophonus_ncbi.faa.dmnd.tsv",
+    "Bartonella": "/mnt/data/metagenomic_data/ref_blast/diamond_blast_results/K26_bartonella_ncbi.faa.dmnd.tsv",
+    "D_rerio": "/mnt/data/metagenomic_data/ref_blast/diamond_blast_results/K26_danio_rerio_uniprot.faa.dmnd.tsv",
+    "Hippoboscidae": "/mnt/data/metagenomic_data/ref_blast/diamond_blast_results/K26_hipoboscoidea_ncbi.faa.dmnd.tsv",
+    "Spiroplasma": "/mnt/data/metagenomic_data/ref_blast/diamond_blast_results/K26_spiroplasma_ncbi.faa.dmnd.tsv",
+    "D_melanogaster": "/mnt/data/metagenomic_data/ref_blast/diamond_blast_results/K26_uniprot_drosophila_melanogaster.faa.dmnd.tsv",
+    "H_sapiens": "/mnt/data/metagenomic_data/ref_blast/diamond_blast_results/K26_uniprot_homo_sapiens.faa.dmnd.tsv",
+    "M_musculus": "/mnt/data/metagenomic_data/ref_blast/diamond_blast_results/K26_uniprot_mus_musculus.faa.dmnd.tsv"
     }
 
 contigs_info = analyse_metaspades_contigs(contigs_fasta, blast_path_dict, outpath, outfmt=outfmt)
