@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
+sys.path.insert(0, "/Users/annanenarokova/work/code/ngs/")
+sys.path.insert(0, "/home/users/nenarokova/ngs/")
 from py_scripts.helpers.parse_csv import *
 
 an_path = '/home/anna/bioinformatics/phd/euglena_project/all_results_with_ogs.csv'

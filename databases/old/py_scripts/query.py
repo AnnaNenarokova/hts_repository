@@ -1,7 +1,8 @@
 #!/usr/bin/python
 from peewee import *
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
+sys.path.insert(0, "/Users/annanenarokova/work/code/ngs/")
+sys.path.insert(0, "/home/users/nenarokova/ngs/")
 from database.models import *
 
 i=0

@@ -3,7 +3,8 @@
 # bl_types: 'blastn', 'blastp', 'psiblast', 'blastx', 'tblastn', 'tblastx'
 from subprocess import call
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
+sys.path.insert(0, "/Users/annanenarokova/work/code/ngs/")
+sys.path.insert(0, "/home/users/nenarokova/ngs/")
 sys.path.insert(0, "/home/nenarokova/ngs/")
 from py_scripts.helpers.make_outdir import file_from_path, make_outdir, dir_from_path
 # from py_scripts.bioscripts.convert import fastq_fasta
@@ -90,8 +91,8 @@ class Blast(object):
                 return False
             else: blast_call.extend(['-task', 'blastn-short'])
 
-        print 'Blast is running'
-        print blast_call
+        print ('Blast is running')
+        print (blast_call)
         call(blast_call)
         self.bl_report = outfile
         return outfile

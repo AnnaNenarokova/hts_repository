@@ -34,6 +34,6 @@ def new_file(oldfile_path, outdir=False, new_name=False, new_end=False):
 		without_ext = ''.join(f_name.split('.')[:-1])
 		file_path = outdir + without_ext + new_end
 	else:
-		print "Error: Incomparible options"
+		print ("Error: Incomparible options")
 		return "Error"
 	return file_path

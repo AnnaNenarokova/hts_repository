@@ -1,7 +1,8 @@
 #!/usr/bin/python
 import csv
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
+sys.path.insert(0, "/Users/annanenarokova/work/code/ngs/")
+sys.path.insert(0, "/home/users/nenarokova/ngs/")
 from py_scripts.helpers.parse_dicts import *
 
 def parse_csv(csv_path, delimiter=','):
@@ -13,20 +14,19 @@ def parse_csv(csv_path, delimiter=','):
         handle_file.close()
     return results
 
-def csv_to_list_of_dicts(csv_path, delimiter=','):
+def csv_to_list_of_dicts(csv_path, delimiter=',', fieldnames=None):
     with open(csv_path) as csvfile:
-        reader = csv.DictReader(csvfile, fieldnames=None, delimiter=delimiter)
+        reader = csv.DictReader(csvfile, fieldnames=fieldnames, delimiter=delimiter)
         list_of_dicts = []
         for row in reader:
             list_of_dicts.append(row)
-        fieldnames = reader.fieldnames
         csvfile.close
-    return list_of_dicts, fieldnames
+    return list_of_dicts
 
-def csv_to_dict(csv_path, main_key):
-    list_of_dicts, fieldnames = csv_to_list_of_dicts(csv_path)
+def csv_to_dict(csv_path, main_key, delimiter=','):
+    list_of_dicts = csv_to_list_of_dicts(csv_path, delimiter=delimiter)
     csv_dict = dict_list_to_csv_dict(list_of_dicts, main_key)
-    return csv_dict, fieldnames
+    return csv_dict
 
 def csv_to_dict_reverse(csv_path, delimiter=','):
     list_of_lists = parse_csv(csv_path, delimiter=delimiter)

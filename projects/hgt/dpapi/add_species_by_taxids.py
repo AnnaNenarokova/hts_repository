@@ -41,7 +41,7 @@ def add_species_by_taxids(input, output):
             outline = line[:-1] + delimiter + tax_name + delimiter + rank + "\n"
             output_f.write(outline)
 
-input_path = "/home/anna/bioinformatics/novymonas/assembly_diamond_nr.csv"
-output_path = "/home/anna/bioinformatics/novymonas/assembly_diamond_nr_sps.csv"
+input_path = "/Users/annanenarokova/work/hypsa/poly_assembly_unknown_diamond_nr.tsv"
+output_path = "/Users/annanenarokova/work/hypsa/poly_assembly_unknown_diamond_nr_sps.tsv"
 
 add_species_by_taxids(input_path, output_path)

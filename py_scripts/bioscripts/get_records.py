@@ -20,7 +20,7 @@ def keep_from_list(fasta_file, list_file, outpath):
             keep_list.append(line.rstrip())
     i = 0
     for record in SeqIO.parse(fasta_file, "fasta"):
-        if i % 100000 == 0: print i
+        if i % 100000 == 0: print (i)
         i+=1
         id = record.id
         if id in keep_list:
@@ -30,8 +30,29 @@ def keep_from_list(fasta_file, list_file, outpath):
     SeqIO.write(results, outpath, "fasta")
     return 0
 
-fasta_file = '/home/anna/bioinformatics/diplonema/dataset/no_dpapi_refdataset_cleaned.faa'
-list_file = '/home/anna/bioinformatics/zachar/all_ref_best_hits_ids.txt'
-outpath = '/home/anna/bioinformatics/zachar/refdataset_best_hits.faa'
+def exclude_fasta(fasta_in, fasta_exclude, outpath):
+    exclude_list = []
+    results = []
+    i = 0
+    for record in SeqIO.parse(fasta_exclude, "fasta"):
+        if i % 10000 == 0: print (i)
+        i+=1
+        id = record.id
+        exclude_list.append(id)
 
-keep_from_list(fasta_file, list_file, outpath)
+    i = 0
+    for record in SeqIO.parse(fasta_in, "fasta"):
+        if i % 10000 == 0: print (i)
+        i+=1
+        id = record.id
+        if id not in exclude_list:
+            results.append(record)
+    SeqIO.write(results, outpath, "fasta")
+    return 0
+
+
+fasta_in = '/Users/annanenarokova/work/blasto_local/tRNAs/tRNAseq/P57-cyto_trimmed_vsearch_out.fasta'
+fasta_exclude = '/Users/annanenarokova/work/blasto_local/tRNAs/tRNAseq/P57-cyto_trimmed_unaligned_vsearch_out.fasta'
+outpath = '/Users/annanenarokova/work/blasto_local/tRNAs/tRNAseq/p57_cyto_vsearch_out_aligned.fasta'
+
+exclude_fasta(fasta_in, fasta_exclude, outpath)

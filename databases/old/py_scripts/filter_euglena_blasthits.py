@@ -1,7 +1,8 @@
 #!/usr/bin/python
 import sqlite3
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
+sys.path.insert(0, "/Users/annanenarokova/work/code/ngs/")
+sys.path.insert(0, "/home/users/nenarokova/ngs/")
 from database.raw_query_to_dict import *
 from py_scripts.helpers.parse_csv import *
 

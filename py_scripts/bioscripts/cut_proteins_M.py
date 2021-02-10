@@ -1,7 +1,8 @@
 #!/usr/bin/python
 from Bio import SeqIO
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
+sys.path.insert(0, "/Users/annanenarokova/work/code/ngs/")
+sys.path.insert(0, "/home/users/nenarokova/ngs/")
 
 def cut_proteins_M(fasta_path, outpath):
     results = []

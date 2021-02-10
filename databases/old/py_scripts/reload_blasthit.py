@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
+sys.path.insert(0, "/Users/annanenarokova/work/code/ngs/")
+sys.path.insert(0, "/home/users/nenarokova/ngs/")
 from blast.classes.blast_parser import BlastParser
 from database.models import *
 from py_scripts.bioscripts.seq_info_to_dict import *

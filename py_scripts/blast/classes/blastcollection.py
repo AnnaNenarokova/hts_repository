@@ -5,7 +5,8 @@ from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 import csv
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
+sys.path.insert(0, "/Users/annanenarokova/work/code/ngs/")
+sys.path.insert(0, "/home/users/nenarokova/ngs/")
 from helpers.make_outdir import file_from_path, make_outdir, new_file
 from helpers.lookahead import lookahead
 from helpers.parse_csv import parse_csv

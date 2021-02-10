@@ -1,7 +1,8 @@
 #!/usr/bin/python
 import csv
 import sys
-sys.path.insert(0, "/home/anna/bioinformatics/ngs/")
+sys.path.insert(0, "/Users/annanenarokova/work/code/ngs/")
+sys.path.insert(0, "/home/users/nenarokova/ngs/")
 from helpers.parse_csv import *
 
 def b2g_to_functions(b2g_dict):
