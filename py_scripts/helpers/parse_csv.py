@@ -23,6 +23,15 @@ def csv_to_list_of_dicts(csv_path, delimiter=',', fieldnames=None):
         csvfile.close
     return list_of_dicts
 
+def csv_to_dict_of_dicts(csv_path, main_key=None, delimiter=',', fieldnames=None):
+    with open(csv_path) as csvfile:
+        reader = csv.DictReader(csvfile, fieldnames=fieldnames, delimiter=delimiter)
+        #list_of_dicts = []
+        #for row in reader:
+            #list_of_dicts.append(row)
+        csvfile.close
+    return dict_of_dicts
+
 def csv_to_dict(csv_path, main_key, delimiter=','):
     list_of_dicts = csv_to_list_of_dicts(csv_path, delimiter=delimiter)
     csv_dict = dict_list_to_csv_dict(list_of_dicts, main_key)

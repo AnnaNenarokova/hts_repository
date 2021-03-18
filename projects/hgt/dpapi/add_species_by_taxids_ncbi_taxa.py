@@ -5,8 +5,8 @@ from ete3 import NCBITaxa
 ncbi = NCBITaxa()
 
 def add_species_by_taxids(input, output):
-    delimiter = ","
-    n_column_taxid = 3
+    delimiter = "\t"
+    n_column_taxid = 2
     n_column_taxid = n_column_taxid - 1
     taxids = []
     with open(input_path) as input_f:
@@ -15,6 +15,8 @@ def add_species_by_taxids(input, output):
             taxid = line_split[n_column_taxid]
             if taxid.isdigit():
                 taxids.append(taxid)
+            else:
+                print(taxid, "is not digit!")
     taxids_nr = list(set(taxids))
     tax_names = ncbi.get_taxid_translator(taxids_nr)
     tax_ranks = ncbi.get_rank(taxids_nr)
@@ -22,7 +24,6 @@ def add_species_by_taxids(input, output):
         i = 0
         for line in input_f:
             i += 1
-            print (i)
             line_split = line.rstrip().split(delimiter)
             taxid = line_split[n_column_taxid]
             tax_name = "taxid_name"
@@ -41,7 +42,7 @@ def add_species_by_taxids(input, output):
             outline = line[:-1] + delimiter + tax_name + delimiter + rank + "\n"
             output_f.write(outline)
 
-input_path = "/Users/annanenarokova/work/hypsa/poly_assembly_unknown_diamond_nr.tsv"
-output_path = "/Users/annanenarokova/work/hypsa/poly_assembly_unknown_diamond_nr_sps.tsv"
+input_path = "/Users/annanenarokova/work/hypsa_local/K28_Hippobosca_contigs_dmnd_tax.tsv"
+output_path = "/Users/annanenarokova/work/hypsa_local/K28_Hippobosca_contigs_dmnd_tax_sps.tsv"
 
 add_species_by_taxids(input_path, output_path)

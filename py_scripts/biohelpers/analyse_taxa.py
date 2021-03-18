@@ -3,8 +3,11 @@ from Bio import Entrez
 Entrez.email = "a.nenarokova@gmail.com"
 from encoder import XML2Dict
 
-def read_diamond_result(diamond_taxa_result_path, outfmt_opts):
+def read_diamond_result(diamond_taxa_result_path, outfmt_opts=False):
+    if not outfmt_opts:
+        outfmt_opts = "qseqid taxid evalue"
     outfmt_opt_list = outfmt_opts.split(" ")
+    seq_dict = {}
     taxid_dict = {}
     with open(diamond_taxa_result_path) as diamond_f:
         for line in diamond_f:
@@ -12,12 +15,13 @@ def read_diamond_result(diamond_taxa_result_path, outfmt_opts):
             qseqid = line_split[outfmt_opt_list.index("qseqid")]
             taxid = line_split[outfmt_opt_list.index("taxid")]
             evalue = float(line_split[outfmt_opt_list.index("evalue")])
+            seq_dict[qseqid] = {"taxid": taxid, "evalue": evalue}
             if taxid in taxid_dict:
                 taxid_dict[taxid]["count"] += 1
             else:
                 taxid_dict[taxid] = {}
                 taxid_dict[taxid]["count"] = 1
-    return taxid_dict
+    return taxid_dict, seq_dict
 
 def add_lineages(taxid_dict):
     taxids = list(taxid_dict.keys())
@@ -41,10 +45,10 @@ def add_lineages(taxid_dict):
     taxid_dict['0']["lineage"] = "none"
     return taxid_dict
 
-def get_taxid_dict(diamond_taxa_result_path, outfmt_opts):
-    taxid_dict = read_diamond_result(diamond_taxa_result_path, outfmt_opts)
+def get_taxid_dicts(diamond_taxa_result_path, outfmt_opts=False):
+    taxid_dict, seq_dict = read_diamond_result(diamond_taxa_result_path, outfmt_opts)
     taxid_dict = add_lineages(taxid_dict)
-    return taxid_dict
+    return taxid_dict, seq_dict
 
 def write_taxid_report(taxid_dict, outpath): 
     with open(outpath, "w") as outfile:
@@ -57,23 +61,6 @@ def write_taxid_report(taxid_dict, outpath):
             row = "{}\t{}\t{}\t{}\n".format(taxid,count,name,lineage)
             outfile.write(row)
     return outpath
-
-def add_species_by_taxids(input, taxid_dict, output):
-
-    return output
-
-diamond_taxa_result_path = "/Users/annanenarokova/work/hypsa_local/K28_Hippobosca_contigs_dmnd_tax.tsv"
-outfmt_opts = "qseqid taxid evalue"
-
-outpath = "/Users/annanenarokova/work/hypsa_local/K28_Hippobosca_contigs_dmnd_tax_sps.tsv"
-
-
-taxid_dict = get_taxid_dict(diamond_taxa_result_path, outfmt_opts)
-
-write_taxid_dict(taxid_dict, outpath)
-
-
-
 
 
 

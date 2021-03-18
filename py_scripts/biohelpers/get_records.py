@@ -52,7 +52,8 @@ def exclude_fasta(fasta_in, fasta_exclude, outpath):
 
 
 fasta_in = '/Users/annanenarokova/work/blasto_local/tRNAs/tRNAseq/P57-cyto_trimmed_vsearch_out.fasta'
-fasta_exclude = '/Users/annanenarokova/work/blasto_local/tRNAs/tRNAseq/P57-cyto_trimmed_unaligned_vsearch_out.fasta'
-outpath = '/Users/annanenarokova/work/blasto_local/tRNAs/tRNAseq/p57_cyto_vsearch_out_aligned.fasta'
+keep_list = '/Users/annanenarokova/work/blasto_local/tRNAs/tRNAseq/unknown_vsearch_clusters.txt'
+outpath = '/Users/annanenarokova/work/blasto_local/tRNAs/tRNAseq/unknown_vsearch_clusters.fasta'
 
-exclude_fasta(fasta_in, fasta_exclude, outpath)
+
+keep_from_list(fasta_in, keep_list, outpath)
