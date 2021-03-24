@@ -6,8 +6,8 @@ Entrez.email = "a.nenarokova@gmail.com"
 diamond_refset="/projects/Diplonema_genome_evolution/hgt/results/hgt_refset_diamond.tsv"
 outfmt_opts_refset="qseqid qlen sseqid slen length evalue bitscore"
 
-diamond_ncbi="/projects/Diplonema_genome_evolution/hgt/results/hgt_nr_diamond.tsv"
-outfmt_opts_ncbi="qseqid qlen sseqid slen staxids length evalue bitscore"
+diamond_ncbi="/home/users/nenarokova/diplonema/hgt_new/diamond_results/dpapi_nr_dmnd.tsv"
+outfmt_opts_ncbi="qseqid qlen sseqid slen length evalue bitscore"
 
 qfasta_path="/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_candidates.faa"
 refset_fasta_path="/projects/Diplonema_genome_evolution/refdataset_diplonema/no_dpapi_refdataset.faa"

@@ -42,7 +42,7 @@ class Blast(object):
     'flat_query_anchored_identities': {'#':'3', 'ext':'.txt'},
     'flat_query_anchored_no_identities': {'#':'4', 'ext':'.txt'},
     'xml': {'#':'5', 'ext':'.xml'},
-    'tabular': {'#':'6', 'ext':'.csv'},
+    'tabular': {'#':'6', 'ext':'.tsv'},
     'tabular_comment_lines': {'#':'7', 'ext':'.txt'},
     'text_asn': {'#':'8', 'ext':'.txt'},
     'binary_asn': {'#':'9', 'ext':'.txt'},
