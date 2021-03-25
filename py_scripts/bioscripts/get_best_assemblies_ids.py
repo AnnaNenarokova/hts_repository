@@ -54,7 +54,7 @@ def choose_best_assembly(ncbi_assembly_records):
                     best_assembly = assembly
     return best_assembly
 
-def get_best_assembly(assemblies_list):
+def get_best_assembly_id(assemblies_list):
     best_assembly_id = 0
     if len(assemblies_list) == 1:
         best_assembly_id = assemblies_list[0]
@@ -67,11 +67,25 @@ def get_best_assembly(assemblies_list):
         best_assembly_id = best_assembly['#DocumentSummary']['uid']
     return best_assembly_id
 
-genome_id_list = [11136, 3258, 2529, 1115, 167]
+def get_best_assembly_ids(genome_ids_path, outpath):
+    genome_id_list=[]
+    with open(genome_ids_path) as infile:
+        for line in infile:
+            genome_id_list.append(line.rstrip())
 
-assemblies_dict = get_assemblies_dict(genome_id_list)
-best_assembly_ids = []
+    assemblies_dict = get_assemblies_dict(genome_id_list)
 
-for genome in assemblies_dict:
-    best_assembly_id = get_best_assembly(assemblies_dict[genome])
-    best_assembly_ids.append(best_assembly_id)
+    best_assembly_ids = []
+    for genome in assemblies_dict:
+        print (genome)
+        best_assembly_id = get_best_assembly_id(assemblies_dict[genome])
+        best_assembly_ids.append(best_assembly_id)
+
+    with open(outpath, "w") as outfile:
+        for assembly_id in best_assembly_ids:
+            outfile.write("%s\n" % assembly_id)
+    return outpath
+
+genome_ids_path = "/Users/annanenarokova/work/hypsa_local/pangenome/enterobac_all_genomes_ncbi_ids.txt"
+outpath = "/Users/annanenarokova/work/hypsa_local/pangenome/enterobac_all_genomes_best_assemblies_ids.txt"
+get_best_assembly_ids(genome_ids_path, outpath)
