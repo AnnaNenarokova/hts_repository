@@ -1,21 +1,21 @@
 #!/usr/bin/python
 from Bio import SeqIO
 
-def keep_n_first(fasta_file, outhpath, n):
+def keep_n_first(infasta, outhpath, n):
     results = []
     i = 0
     for record in SeqIO.parse(fasta, "fasta"):
         if i < n:
             results.append(record)
             i+=1
-    SeqIO.write(results, outpath, "fasta")
+    SeqIO.write(results, outfasta, "fasta")
     return 0
 
-def keep_from_list(fasta_file, keep_list, outpath):
+def keep_from_list(infasta, keep_list, outfasta):
     results=[]
     not_found_list = keep_list
     i = 0
-    for record in SeqIO.parse(fasta_file, "fasta"):
+    for record in SeqIO.parse(infasta, "fasta"):
         if i % 100000 == 0: print (i)
         i+=1
         id = record.id
@@ -23,18 +23,18 @@ def keep_from_list(fasta_file, keep_list, outpath):
             results.append(record)
             not_found_list.remove(id)
     print ('Not found:', not_found_list)
-    SeqIO.write(results, outpath, "fasta")
+    SeqIO.write(results, outfasta, "fasta")
     return 0
 
-def keep_from_listfile(fasta_file, list_file, outpath):
+def keep_from_listfile(infasta, list_file, outfasta):
     keep_list=[]
     with open(list_file) as f:
         for line in f:
             keep_list.append(line.rstrip())
-    keep_from_list(fasta_file, keep_list, outpath)
+    keep_from_list(infasta, keep_list, outfasta)
     return 0
 
-def exclude_fasta(fasta_in, fasta_exclude, outpath):
+def exclude_fasta(infasta, fasta_exclude, outfasta):
     exclude_list = []
     results = []
     i = 0
@@ -45,11 +45,11 @@ def exclude_fasta(fasta_in, fasta_exclude, outpath):
         exclude_list.append(id)
 
     i = 0
-    for record in SeqIO.parse(fasta_in, "fasta"):
+    for record in SeqIO.parse(infasta, "fasta"):
         if i % 10000 == 0: print (i)
         i+=1
         id = record.id
         if id not in exclude_list:
             results.append(record)
-    SeqIO.write(results, outpath, "fasta")
+    SeqIO.write(results, outfasta, "fasta")
     return 0

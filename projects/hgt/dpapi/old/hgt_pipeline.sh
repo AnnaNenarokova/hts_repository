@@ -1,14 +1,14 @@
 #!/bin/bash
-threads="30"
+threads="40"
 
 infasta=""
-outdir="/projects/Diplonema_genome_evolution/hgt/results/"
+outdir="/home/users/nenarokova/diplonema/hgt_new/"
 
-# bmge="/home/vl18625/bioinformatics/tools/BMGE-1.12/BMGE.jar"
-bmge="/home/vl18625/tools/BMGE-1.12/BMGE.jar"
+bmge="/home/users/nenarokova/tools/BMGE-1.12/BMGE.jar"
 
 # creating directories
 fasta_dir=$outdir"fasta/"
+
 msa_dir=$outdir"msa/"
 trimmed_msa_dir=$outdir"trimmed_msa/"
 iqtree_dir=$outdir"iqtree_files/"
@@ -39,10 +39,10 @@ max_hits="25"
 e_cutoff="0.001"
 
 outfmt_opts="qseqid qlen sseqid slen staxids length evalue bitscore"
-diamond blastp -q $candidates_path -d $nr_db_path -o $diamond_nr_out -p $threads --max-hsps 1 --taxonmap $taxonmap -f 6 $outfmt_opts #-evalue e_cutoff -k $max_hits -f 6 tab-separated output, staxids for subject taxids
+#diamond blastp -q $candidates_path -d $nr_db_path -o $diamond_nr_out -p $threads --max-hsps 1 --taxonmap $taxonmap -f 6 $outfmt_opts #-evalue e_cutoff -k $max_hits -f 6 tab-separated output, staxids for subject taxids
 
 outfmt_opts="qseqid qlen sseqid slen length evalue bitscore"
-diamond blastp -q $candidates_path -d $refset_db_path -o $diamond_refset_out -p $threads --max-hsps 1 -f 6 $outfmt_opts #-evalue e_cutoff -k $max_hits -f 6 tab-separated output
+#diamond blastp -q $candidates_path -d $refset_db_path -o $diamond_refset_out -p $threads --max-hsps 1 -f 6 $outfmt_opts #-evalue e_cutoff -k $max_hits -f 6 tab-separated output
 
 cd $fasta_dir
 

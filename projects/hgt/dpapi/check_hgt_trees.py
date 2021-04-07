@@ -1,10 +1,7 @@
 #!python3
 from ete3 import Tree
-from ete3 import NCBITaxa
 import sys
 from os import listdir
-from Bio import Entrez
-Entrez.email = "a.nenarokova@gmail.com"
 
 def parse_tags(tag_path, delimeter="\t"):
     tag_dict = {}
@@ -24,16 +21,25 @@ def get_tags_leaves(tree, tag_dict):
     leaf_tags = {}
     for leaf in tree.iter_leaves():
         seqid = leaf.name
-        if "DIPPA" in seqid:
-            leaf_tags[seqid] = "dpapi"
-        elif seqid in tag_dict.keys():
+        if seqid in tag_dict.keys():
             leaf_tags[seqid] = tag_dict[seqid]
         else:
-            # print (seqid, "is not in tag dict!")
+            print (seqid, "is not in tag dict!")
             leaf_tags[seqid] = "other"
     return leaf_tags
 
-def check_sisters_tag(node, leaf_tags, tag="bacteria"):
+def get_mono_tag_node(in_node, leaf_tags, needed_tag="Diplonemea"):
+    sister_branches = in_node.get_sisters()
+    for node in sister_branches:
+        leaves = node.get_leaves()
+        for leaf in leaves:
+            leaf_tag = leaf_tags[leaf.name]
+            if leaf_tag != needed_tag:
+                return in_node
+    result = get_mono_tag_node(in_node.up, leaf_tags, needed_tag=needed_tag)
+    return result
+
+def check_sisters_tag(node, leaf_tags, tag):
     sister_branches = node.get_sisters()
     if sister_branches:
         for node in sister_branches:
@@ -43,71 +49,47 @@ def check_sisters_tag(node, leaf_tags, tag="bacteria"):
                     return False
     return True
 
-def get_mono_tag_node(in_node, leaf_tags, needed_tag="diplonemid"):
-    # bad_tree = False
-    # if not bad_tree and in_node.get_leaves()[0].name == "DIPPA_19042.mRNA.1":
-    #     bad_tree = True
-    sister_branches = in_node.get_sisters()
-    for node in sister_branches:
-        leaves = node.get_leaves()
-        for leaf in leaves:
-            leaf_tag = leaf_tags[leaf.name]
-            # if bad_tree:
-            #     print leaf, leaf_tag
-            if leaf_tag != needed_tag:
-                return in_node
-    result = get_mono_tag_node(in_node.up, leaf_tags, needed_tag="diplonemid")
-    return result
-
-def check_hgt(dpapi_leaf, leaf_tags, mode="dpapi"):
-    if mode == "dpapi":
-        diplo_node = dpapi_leaf
-    elif mode == "diplonemid":
-        diplo_node = get_mono_tag_node(dpapi_leaf, leaf_tags, needed_tag="diplonemid")
-    if check_sisters_tag(diplo_node, leaf_tags, tag="bacteria") and check_sisters_tag(diplo_node.up, leaf_tags, tag="bacteria"):
-        return True
-    return False
-
-def analyse_tree(tree_path, tag_dict, bootstrap_threshold=70.0, mode="diplonemid"):
+def analyse_tree(tree_path, tag_dict, bootstrap_threshold=70.0):
+    result = None
     tree = Tree(tree_path)
-    tree = remove_bad_nodes(tree, support_threshold=bootstrap_threshold)
-
+    tree_name = tree_path.split("/")[-1].split(".")[0]
+    dpapi_name = tree_name
     leaf_tags = get_tags_leaves(tree, tag_dict)
+    edited_tree = remove_bad_nodes(tree, support_threshold=bootstrap_threshold)
 
     dpapi_leaf = None
-    for leaf in tree.iter_leaves():
-        if leaf_tags[leaf.name] == "dpapi":
+    for leaf in edited_tree.iter_leaves():
+        if leaf.name == dpapi_name:
             if not dpapi_leaf:
                 dpapi_leaf = leaf
             else:
                 print ("More than one Dpapi leaf!\n" + tree_path + "\n")
     if not dpapi_leaf:
         print ("No Dpapi leaf!\n" + tree_path + "\n")
+        return result
+
     farthest_node = dpapi_leaf.get_farthest_node(topology_only=True)[0]
-    if farthest_node.up == tree:
+    if farthest_node.up == edited_tree:
         result = False
+        return result
     else:
         tree.set_outgroup(farthest_node.up)
-    edited_tree_path = tree_path + "_edited.tree"
-    tree.write(outfile=edited_tree_path)
-
-    result = check_hgt(dpapi_leaf, leaf_tags, mode=mode)
-    # if result:
-    #     print tree
+    diplo_node = get_mono_tag_node(dpapi_leaf, leaf_tags, needed_tag="Diplonemea")
+    if check_sisters_tag(diplo_node, leaf_tags, tag="Bacteria") and check_sisters_tag(diplo_node.up, leaf_tags, tag="Bacteria"):
+        result = True
+        return result
+    result = False
     return result
 
 bootstrap_threshold = 70.0
 
-treedir_path="/home/anna/bioinformatics/diplonema/hgt/results_last/trees/"
-tag_path="/home/anna/bioinformatics/diplonema/hgt/results_last/taxids_tags.tsv"
+treedir_path="/Users/annanenarokova/work/dpapi_local/results/trees2/"
+tag_path="/Users/annanenarokova/work/dpapi_local/seqs_tags.tsv"
 
-tag_dict = parse_tags(tag_path)
-i = 0
+tag_dict = parse_tags(tag_path, delimeter="\t")
+
 for tree_name in listdir(treedir_path):
     tree_path = treedir_path + tree_name
-    # if i == 5:
-    #     break
-    is_hgt = analyse_tree(tree_path, tag_dict, bootstrap_threshold=bootstrap_threshold, mode = "diplonemid")
+    is_hgt = analyse_tree(tree_path, tag_dict, bootstrap_threshold=bootstrap_threshold)
     if is_hgt:
-        i += 1
-        print "hgt", tree_name
+        print (tree_name, "HGT", is_hgt)

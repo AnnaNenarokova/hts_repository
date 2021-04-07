@@ -37,11 +37,11 @@ def add_header(blast_csv_path, custom_outfmt):
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 
 query_paths= [
-    "/home/nenarokova/blasto/tRNAseq/p57_tRNAs_final.fasta"
+    "/media/4TB1/novymonas/daria_primers_29_03_21.fasta"
     ]
 
 subj_paths = [
-    "/home/nenarokova/blasto/tRNAseq/p57_cyto_vsearch_out_aligned.fasta"
+    "/media/4TB1/novymonas/genome/novymonas_no_pand_scaffolds.fasta"
     ]
 
 for query_path in query_paths:
@@ -50,7 +50,7 @@ for query_path in query_paths:
         blast_csv_path = new_blast.blast(
                                          bl_type='blastp',
                                          evalue=0.001,
-                                         # outfmt='comma_values',
+                                         # outfmt='cocmma_values',
                                          outfmt='pairwise',
                                          custom_outfmt=custom_outfmt,
                                          word_size=3

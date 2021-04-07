@@ -89,7 +89,8 @@ merged=$namepath'_merged.fq'
 report=$namepath'_merge_report.txt'
 alnout=$namepath'_merged_align.txt'
 tabbedout=$namepath'_merged_tab.txt'
-usearch -fastq_mergepairs $reads1_demux -reverse $reads2_demux -fastq_maxdiffs 20 -fastq_maxdiffpct 50 -fastq_minmergelen 400 -fastq_maxmergelen 450 -fastq_minovlen 70 -relabel @ -fastqout $merged -report $report -alnout $alnout -tabbedout $tabbedout
+
+usearch -fastq_mergepairs $reads1_demux -reverse $reads2_demux -fastq_maxdiffs 20 -fastq_maxdiffpct 50 -fastq_minmergelen 400 -fastq_maxmergelen 450 -fastq_minovlen 70 -fastqout $merged -report $report -alnout $alnout -tabbedout $tabbedout
 
 # Check the merged file
 echo "Checking merged reads"
@@ -132,6 +133,11 @@ final_reads_fasta=$namepath"_final.fa"
 otutable=$namepath"_otutable97.txt"
 usearch -usearch_global $final_reads_fasta -db $otus -id 0.97 -strand plus -otutabout $otutable
 
+otu_map_table=$namepath"_otumaptable.txt"
+otu_map=$namepath"_otumap.txt"
+
+usearch -otutab $final_reads -otus $otus -otutabout $otu_map_table -mapout $otu_map
+
 blastout=$namepath"_otus_silva_blast.out"
 
 blastn -query $otus -db $silva_blastdb -max_target_seqs 1 -outfmt "7 qseqid sseqid evalue bitscore length sstart send stitle sseq qseq" -num_threads $threads -out $blastout
@@ -139,5 +145,7 @@ blastn -query $otus -db $silva_blastdb -max_target_seqs 1 -outfmt "7 qseqid sseq
 blastout=$namepath"_otus_silva_blast.tsv"
 
 blastn -query $otus -db $silva_blastdb -max_target_seqs 1 -num_threads $threads -out $blastout -outfmt "6 qseqid qlen sseqid stitle slen length evalue pident bitscore mismatch gaps qstart qend sstart send" 
+
+
 
 

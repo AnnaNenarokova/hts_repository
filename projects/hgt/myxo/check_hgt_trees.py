@@ -23,7 +23,7 @@ def get_lineage(seqid):
         lineage = lineage
     return lineage
 
-def get_lineages(seqids):
+def get_lineages_bulk(seqids):
     ncbi_xml_record = Entrez.efetch(db="protein", id=seqids, retmode="xml").read()
     ncbi_dict = XML2Dict().parse(ncbi_xml_record)
     records = ncbi_dict['GBSet']['GBSeq']
@@ -72,7 +72,7 @@ def get_tags_leaves(tree, tax_names):
         else:
             ncbi_seqids.append(seqid)
 
-    lineages = get_lineages(ncbi_seqids)
+    lineages = get_lineages_bulk(ncbi_seqids)
            
     for leaf in tree.iter_leaves():
         seqid = leaf.name

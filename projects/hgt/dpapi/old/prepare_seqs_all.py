@@ -3,17 +3,6 @@ from Bio import SeqIO
 from Bio import Entrez
 Entrez.email = "a.nenarokova@gmail.com"
 
-diamond_refset="/projects/Diplonema_genome_evolution/hgt/results/hgt_refset_diamond.tsv"
-outfmt_opts_refset="qseqid qlen sseqid slen length evalue bitscore"
-
-diamond_ncbi="/home/users/nenarokova/diplonema/hgt_new/diamond_results/dpapi_nr_dmnd.tsv"
-outfmt_opts_ncbi="qseqid qlen sseqid slen length evalue bitscore"
-
-qfasta_path="/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_candidates.faa"
-refset_fasta_path="/projects/Diplonema_genome_evolution/refdataset_diplonema/no_dpapi_refdataset.faa"
-
-outdir="/projects/Diplonema_genome_evolution/hgt/results/fasta/"
-
 def add_diamond_dict(diamond_path, outfmt_opts, seq_dict, ncbi=False, delimeter="\t"):
     outfmt_opt_list = outfmt_opts.split(" ")
     with open(diamond_path) as diamond_f:
@@ -52,6 +41,17 @@ def write_seqs(seq_dict, qfasta_path, refset_fasta_path, outdir):
                 ncbi_ids_string = ncbi_ids_string + ncbi_id + ","
             ncbi_records = Entrez.efetch(db="protein", id=ncbi_ids_string, rettype="fasta").read()[:-1]
             outfile.write(ncbi_records)
+
+diamond_refset="/projects/Diplonema_genome_evolution/hgt/results/hgt_refset_diamond.tsv"
+outfmt_opts_refset="qseqid qlen sseqid slen length evalue bitscore"
+
+diamond_ncbi="/home/users/nenarokova/diplonema/hgt_new/diamond_results/dpapi_nr_dmnd.tsv"
+outfmt_opts_ncbi="qseqid qlen sseqid slen length evalue bitscore"
+
+qfasta_path="/projects/Diplonema_genome_evolution/hgt/dpapi_hgt_candidates.faa"
+refset_fasta_path="/projects/Diplonema_genome_evolution/refdataset_diplonema/no_dpapi_refdataset.faa"
+
+outdir="/projects/Diplonema_genome_evolution/hgt/results/fasta/"
 
 seq_dict = {}
 

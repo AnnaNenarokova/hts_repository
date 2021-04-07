@@ -61,18 +61,11 @@ def select_seqs(taxid_dict, name, outpath):
  
 	return seq_list
 
-
-diamond_taxa_result_path = "/Users/annanenarokova/work/hgt/smol_diamond_nr_tax2.tsv"
+diamond_taxa_result_path = "/Users/annanenarokova/work/dpapi_local/dpapi_recoded_nr_tax.tsv"
 outfmt_opts = "qseqid taxid evalue"
+name = "Bacteria"
+outpath = "/Users/annanenarokova/work/dpapi_local/dpapi_recorded_hgt_cands.txt"
 
 taxid_dict = get_taxid_dict(diamond_taxa_result_path, outfmt_opts)
-
-outpath= "/Users/annanenarokova/work/hgt/smol_vertebrate_hgt_candidates.txt"
-name="Vertebrata"
-
 select_seqs(taxid_dict, name, outpath)
 
-outpath= "/Users/annanenarokova/work/hgt/smol_fungi_hgt_candidates.txt"
-name="Fungi"
-
-select_seqs(taxid_dict, name, outpath)

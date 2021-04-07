@@ -109,22 +109,32 @@ def read_diamond_result(diamond_taxa_result_path, outfmt_opts=False):
 
 def add_lineages(taxid_dict):
     taxids = list(taxid_dict.keys())
-
     ncbi_xml_record = Entrez.efetch(db="taxonomy", id=taxids).read()
-
     ncbi_dict = XML2Dict().parse(ncbi_xml_record)
-
-    taxa_dict_list = ncbi_dict['TaxaSet']['Taxon']
-
-    for taxon in taxa_dict_list:
+    taxa = ncbi_dict['TaxaSet']['Taxon']
+    for taxon in taxa:
         taxid = taxon['TaxId'].decode("utf-8")
         name = taxon['ScientificName'].decode("utf-8")
         try:
             lineage = taxon['Lineage'].decode("utf-8")
         except:
             lineage = taxon['Lineage']
-        taxid_dict[taxid]["name"] = name
-        taxid_dict[taxid]["lineage"] = lineage
+        if taxid in taxid_dict.keys():
+            taxid_dict[taxid]["name"] = name
+            taxid_dict[taxid]["lineage"] = lineage
+        else:
+            taxid_found = False
+            if 'LineageEx' in taxon.keys():
+                for ex_lineage in taxon['LineageEx']['Taxon']:
+                    old_taxid = ex_lineage['TaxId'].decode("utf-8") 
+                    if old_taxid in taxid_dict.keys():
+                        taxid_found = True
+                        taxid = old_taxid
+                        taxid_dict[taxid]["name"] = name
+                        taxid_dict[taxid]["lineage"] = lineage  
+                        break
+            if not taxid_found:
+                print ("Taxid", taxid, "not found in taxid dict")
     taxid_dict['0']["name"] = "none"
     taxid_dict['0']["lineage"] = "none"
     return taxid_dict
