@@ -51,6 +51,7 @@ def check_sisters_tag(node, leaf_tags, tag):
 
 def analyse_tree(tree_path, tag_dict, bootstrap_threshold=70.0):
     result = None
+    diplo_ids = []
     tree = Tree(tree_path)
     tree_name = tree_path.split("/")[-1].split(".")[0]
     dpapi_name = tree_name
@@ -66,30 +67,77 @@ def analyse_tree(tree_path, tag_dict, bootstrap_threshold=70.0):
                 print ("More than one Dpapi leaf!\n" + tree_path + "\n")
     if not dpapi_leaf:
         print ("No Dpapi leaf!\n" + tree_path + "\n")
-        return result
+        return result, diplo_ids
 
     farthest_node = dpapi_leaf.get_farthest_node(topology_only=True)[0]
     if farthest_node.up == edited_tree:
         result = False
-        return result
+        return result, diplo_ids
     else:
         tree.set_outgroup(farthest_node.up)
     diplo_node = get_mono_tag_node(dpapi_leaf, leaf_tags, needed_tag="Diplonemea")
     if check_sisters_tag(diplo_node, leaf_tags, tag="Bacteria") and check_sisters_tag(diplo_node.up, leaf_tags, tag="Bacteria"):
         result = True
-        return result
-    result = False
-    return result
+        for leaf in diplo_node.get_leaves():
+            diplo_ids.append(leaf.name)
+    else:
+        result = False
+    return result, diplo_ids
 
-bootstrap_threshold = 70.0
+def analyse_trees(treedir_path, tag_path, outdir, bootstrap_threshold=70.0):
+    tag_dict = parse_tags(tag_path, delimeter="\t")
+    hgt_result_path = outdir + "hgt_result.tsv"
+    hgt_dict = {}
+    with open(hgt_result_path, "w") as hgt_result:
+        hgt_result.write("gene_id\tis_hgt\n")
+        for tree_name in listdir(treedir_path):
+            tree_path = treedir_path + tree_name
+            current_dpapi_id = tree_name.split(".")[0]
+            try:
+                is_hgt, diplo_ids = analyse_tree(tree_path, tag_dict, bootstrap_threshold=bootstrap_threshold)
+                hgt_result.write(current_dpapi_id + "\t" + str(is_hgt) + "\n")
+                if is_hgt:
+                    in_dict = False
+                    for dpapi_id in hgt_dict:
+                        if current_dpapi_id in hgt_dict[dpapi_id]:
+                            in_dict = True
+                            hgt_dict[dpapi_id].update(diplo_ids)
+                            break
+                    if not in_dict:
+                        hgt_dict[current_dpapi_id] = set(diplo_ids)       
+            except:
+                print (tree_name, "Error!")
+                result = analyse_tree(tree_path, tag_dict, bootstrap_threshold=bootstrap_threshold)
+                print (result)
+    return hgt_dict
 
-treedir_path="/Users/annanenarokova/work/dpapi_local/results/trees2/"
+def analyse_hgt_dict(hgt_dict, outdir):
+    hgt_ids_path = outdir + "hgt_ids.tsv"
+    hgt_ids_dpapi_path = outdir + "hgt_dpapi_only_ids.tsv"
+    hgt_group_result_path = outdir + "hgt_group_result.tsv"
+    with open(hgt_ids_path, "w") as hgt_ids, open(hgt_ids_dpapi_path,"w") as hgt_ids_dpapi, open(hgt_group_result_path,"w") as hgt_group_result:
+        hgt_ids.write("hgt_id_group\tgene_id\n")
+        hgt_ids_dpapi.write("hgt_id_group\tgene_id\n")
+        hgt_group_result.write("hgt_id_group\tonly_dpapi\n")
+        for dpapi_id in hgt_dict:
+            non_dpapi_seq = False
+            for id in hgt_dict[dpapi_id]:
+                hgt_ids.write(dpapi_id + "\t" + id + "\n")
+                if "Diplonema-papillatum" in id:
+                    hgt_ids_dpapi.write(dpapi_id + "\t" + id + "\n")
+                else:
+                    non_dpapi_seq = True
+            if non_dpapi_seq:
+                group_result = False
+            else:
+                group_result = True
+            hgt_group_result.write(dpapi_id + "\t" + str(group_result) + "\n")
+
+    return 0
+
+treedir_path="/Users/annanenarokova/work/dpapi_local/results/trees/"
 tag_path="/Users/annanenarokova/work/dpapi_local/seqs_tags.tsv"
+outdir="/Users/annanenarokova/work/dpapi_local/results/"
+hgt_dict = analyse_trees(treedir_path, tag_path, outdir)
+analyse_hgt_dict(hgt_dict, outdir)
 
-tag_dict = parse_tags(tag_path, delimeter="\t")
-
-for tree_name in listdir(treedir_path):
-    tree_path = treedir_path + tree_name
-    is_hgt = analyse_tree(tree_path, tag_dict, bootstrap_threshold=bootstrap_threshold)
-    if is_hgt:
-        print (tree_name, "HGT", is_hgt)

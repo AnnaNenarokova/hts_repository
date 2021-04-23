@@ -1,17 +1,19 @@
 #!/bin/bash
 
-chunk_size=4000000
+chunk_size=2
 
-outdir="/home/qiime1/damian/reads/chunks_reads/"
+file="/home/qiime1/damian/bar.fa"
 
-indexes='/home/qiime1/damian/reads/indexes_sorted.fq'
-reads1='/home/qiime1/damian/reads/reads1_sorted.fq'
-reads2='/home/qiime1/damian/reads/reads2_sorted.fq'
+file_lines=$(cat $file | wc -l )
+chunk_number=$(expr $file_lines / $chunk_size )
 
-indexes_prefix=$outdir"indexes.fq."
-reads1_prefix=$outdir"reads1.fq."
-reads2_prefix=$outdir"reads2.fq."
+outdir="/home/qiime1/damian/split_test/"
+prefix=$outdir"bar.fa."
 
-split -l $chunk_size $indexes $indexes_prefix
-split -l $chunk_size $reads1 $reads1_prefix
-split -l $chunk_size $reads2 $reads2_prefix
+split -x -l $chunk_size $file $prefix
+
+for i in $(seq 1 $chunk_number)
+do 
+    chunk=$(printf '%x\n' $i)
+    echo $chunk
+done

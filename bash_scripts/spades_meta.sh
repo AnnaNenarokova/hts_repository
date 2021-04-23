@@ -9,4 +9,4 @@ report=$outdir"spades_report.txt"
 spades="/home/software/SPAdes-3.15.0-Linux/bin/spades.py"
 
 mkdir $outdir
-$spades -m 500 -1 $pe1 -2 $pe2 --meta -t 40 -o $outdir 
+$spades -m 504 -1 $pe1 -2 $pe2 --meta -t 40 -o $outdir 

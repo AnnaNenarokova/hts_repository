@@ -1,0 +1,11 @@
+-rwxr-xr-x    1 annanenarokova  staff     9B Sep 23  2020 .gitignore
+-rwxr-xr-x    1 annanenarokova  staff    51B Sep 23  2020 README.md
+-rwxr-xr-x    1 annanenarokova  staff   147B Sep 23  2020 __init__.pyc
+drwxr-xr-x    7 annanenarokova  staff   224B Sep 23  2020 configs
+drwxr-xr-x    5 annanenarokova  staff   160B Sep 23  2020 databases
+drwxr-xr-x    3 annanenarokova  staff    96B Sep 23  2020 r_scripts
+drwxr-xr-x   18 annanenarokova  staff   576B Sep 23  2020 rb_scripts
+drwxr-xr-x    8 annanenarokova  staff   256B Sep 23  2020 re
+-rw-r--r--    1 annanenarokova  staff   812B Sep 23  2020 splice_leaders.txt
+Hey, I added this to the end of your file!
+And this. And this also.

@@ -53,7 +53,7 @@ def get_tags(seqid_taxid_path, outpath, tag_list):
 
 tag_list = ["Bacteria", "Diplonemea"]
 
-seqid_taxid_path = "/Users/annanenarokova/work/dpapi_local/dmd_extracted_taxids.tsv"
+seqid_taxid_path = "/Users/annanenarokova/work/dpapi_local/test_dmd_extracted_taxids.tsv"
 outpath = "/Users/annanenarokova/work/dpapi_local/seqs_tags.tsv"
 
 get_tags(seqid_taxid_path, outpath, tag_list)

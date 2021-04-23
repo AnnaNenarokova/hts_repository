@@ -73,12 +73,12 @@ def extract_taxids(nr_diamond_path, refset_diamond_path, refsetinfo_path, outpat
             outfile.write(seq + "\t" + taxid_dict[seq] + "\n")
     return outpath
 
-nr_diamond_path = "/Users/annanenarokova/work/dpapi_local/dpapi_cand_nr_dmnd_tax.tsv"
+nr_diamond_path="/Users/annanenarokova/work/dpapi_local/dpapi_recoded_cand_nr_dmnd_tax.tsv"
 nr_outfmt_opts = "qseqid qlen sseqid slen staxids length evalue bitscore"
 
-refset_diamond_path = "/Users/annanenarokova/work/dpapi_local/dpapi_hgt_cand_refdataset_dmnd.tsv"
+refset_diamond_path="/Users/annanenarokova/work/dpapi_local/dpapi_recoded_cand_refset_dmnd.tsv"
 refsetinfo_path = "/Users/annanenarokova/work/dpapi_local/dpapi_full_dataset_info.csv"
 
-outpath = "/Users/annanenarokova/work/dpapi_local/test_dmd_extracted_taxids.tsv"
+outpath = "/Users/annanenarokova/work/dpapi_local/dmd_extracted_taxids.tsv"
 extract_taxids(nr_diamond_path, refset_diamond_path, refsetinfo_path, outpath, nr_outfmt_opts=nr_outfmt_opts)
  
