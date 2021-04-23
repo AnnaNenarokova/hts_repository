@@ -41,12 +41,12 @@ query_paths= [
     ]
 
 subj_paths = [
-    "/home/blastdb/nt_v5"
+    "/home/nenarokova/amoebozoa/pr2_version_4.13.0_18S_taxo_long.fasta"
     ]
 
 for query_path in query_paths:
     for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path,subj_db=subj_path, db_type='nucl', threads=125)
+        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='nucl', threads=125)
         blast_csv_path = new_blast.blast(
                                          bl_type='blastn',
                                          evalue=0.001,
