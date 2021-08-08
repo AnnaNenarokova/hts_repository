@@ -1,15 +1,15 @@
 #!/bin/bash
 cd /media/4TB1/tritryp_ref/ver35
 names=(BayalaiB08-376 CfasciculataCfCl EmonterogeiiLV88 LaethiopicaL147 LarabicaLEM1108 LbraziliensisMHOMBR75M2903 LbraziliensisMHOMBR75M2904 LdonovaniBHU1220 LdonovaniBPK282A1 LenriettiiLEM3045 LgerbilliLEM452 LinfantumJPCM5 LmajorFriedlin LmajorLV39c5 LmajorSD75.1 LmexicanaMHOMGT2001U1103 LpanamensisMHOMCOL81L13 LpyrrhocorisH10 LseymouriATCC30220 LspMARLEM2494 LtarentolaeParrotTarII LtropicaL590 LturanicaLEM423 TbruceigambienseDAL972 TbruceiLister427 TbruceiTREU927 TcongolenseIL3000 TcruziCLBrener TcruziCLBrenerEsmeraldo-like TcruziCLBrenerNon-Esmeraldo-like TcruziDm28c TcruzimarinkelleiB7 TcruziSylvioX10-1 TevansiSTIB805 TgrayiANR4 TrangeliSC58 TvivaxY486)
-
+names=(AdeaneiATCCPRA-265 Bayalai BayalaiB08-376 Bodonidae BodonidaeReference Bsaltans BsaltansLakeKonstanz Cfasciculata CfasciculataCfCl Emonterogeii EmonterogeiiLV88 Laethiopica LaethiopicaL147 Lamazonensis LamazonensisMHOMBR71973M2269 Larabica LarabicaLEM1108 Lbraziliensis LbraziliensisMHOMBR75M2903 LbraziliensisMHOMBR75M2904 LbraziliensisMHOMBR75M2904_2019 Ldonovani LdonovaniBHU1220 LdonovaniBPK282A1 LdonovaniCL-SL LdonovaniLV9 Lenriettii LenriettiiLEM3045 Lgerbilli LgerbilliLEM452 Linfantum LinfantumJPCM5 Lmajor LmajorFriedlin LmajorLV39c5 LmajorSD75.1 Lmexicana LmexicanaMHOMGT2001U1103 Lpanamensis LpanamensisMHOMCOL81L13 LpanamensisMHOMPA94PSC1 Lpyrrhocoris LpyrrhocorisH10 Lseymouri LseymouriATCC30220 LspMAR LspMARLEM2494 Ltarentolae LtarentolaeParrotTarII Ltropica LtropicaL590 Lturanica LturanicaLEM423 Pconfusum PconfusumCUL13 Tbrucei TbruceigambienseDAL972 TbruceiLister427 TbruceiLister427_2018 TbruceiTREU927 Tcongolense TcongolenseIL3000 TcongolenseIL3000_2019 Tcruzi Tcruzi231 TcruziBrazilA4 TcruziBug2148 TcruziCL TcruziCLBrener TcruziCLBrenerEsmeraldo-like TcruziCLBrenerNon-Esmeraldo-like 2021-05-18 09:45 TcruziDm28c2014 TcruziDm28c2017 TcruziDm28c2018 TcruziEsmeraldo TcruziG TcruziJRcl4 TcruzimarinkelleiB7 TcruziS11 TcruziS15 TcruziS154a TcruziS162a TcruziS23b TcruziS44a TcruziS92a TcruziSylvioX10-1-2012 TcruziSylvioX10-1 TcruziTCC TcruziTulacl2 TcruziY TcruziYC6 TcruziYcl2 TcruziYcl4 TcruziYcl6 Tevansi TevansiSTIB805 Tgrayi TgrayiANR4 Trangeli TrangeliSC58 Trypanosomatidae TrypanosomatidaeReference Ttheileri TtheileriEdinburgh Tvivax TvivaxY486)
 for name in ${names[*]}
 do
-    wget "http://tritrypdb.org/common/downloads/Current_Release/"$name"/fasta/data/TriTrypDB-35_"$name"_AnnotatedCDSs.fasta"
-    wget "http://tritrypdb.org/common/downloads/Current_Release/"$name"/fasta/data/TriTrypDB-35_"$name"_AnnotatedProteins.fasta"
-    wget "http://tritrypdb.org/common/downloads/Current_Release/"$name"/fasta/data/TriTrypDB-35_"$name"_AnnotatedTranscripts.fasta"
-    wget "http://tritrypdb.org/common/downloads/Current_Release/"$name"/fasta/data/TriTrypDB-35_"$name"_Genome.fasta"
-    wget "http://tritrypdb.org/common/downloads/Current_Release/"$name"/fasta/data/TriTrypDB-35_"$name"_ORFs_AA.fasta"
-    wget "http://tritrypdb.org/common/downloads/Current_Release/"$name"/gff/data/TriTrypDB-35_"$name".gff"
-    wget "http://tritrypdb.org/common/downloads/Current_Release/"$name"/txt/TriTrypDB-35_"$name"_CodonUsage.txt"
-    wget "http://tritrypdb.org/common/downloads/Current_Release/"$name"/txt/TriTrypDB-35_"$name"_InterproDomains.txt"
+    wget "http://tritrypdb.org/common/downloads/Current_Release/"$name"/fasta/data/TriTrypDB-52_"$name"_AnnotatedCDSs.fasta"
+    wget "http://tritrypdb.org/common/downloads/Current_Release/"$name"/fasta/data/TriTrypDB-52_"$name"_AnnotatedProteins.fasta"
+    wget "http://tritrypdb.org/common/downloads/Current_Release/"$name"/fasta/data/TriTrypDB-52_"$name"_AnnotatedTranscripts.fasta"
+    wget "http://tritrypdb.org/common/downloads/Current_Release/"$name"/fasta/data/TriTrypDB-52_"$name"_Genome.fasta"
+    wget "http://tritrypdb.org/common/downloads/Current_Release/"$name"/fasta/data/TriTrypDB-52_"$name"_ORFs_AA.fasta"
+    wget "http://tritrypdb.org/common/downloads/Current_Release/"$name"/gff/data/TriTrypDB-52_"$name".gff"
+    wget "http://tritrypdb.org/common/downloads/Current_Release/"$name"/txt/TriTrypDB-52_"$name"_CodonUsage.txt"
+    wget "http://tritrypdb.org/common/downloads/Current_Release/"$name"/txt/TriTrypDB-52_"$name"_InterproDomains.txt"
 done

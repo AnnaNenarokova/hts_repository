@@ -80,7 +80,6 @@ def get_tags_leaves(tree, tax_names):
         if seqid not in leaf_tags.keys():
             try:
                 lineage = lineages[seqid]
-                # print (lineage)
                 for tax_name in tax_names:
                     if tax_name in lineage:
                         leaf_tags[seqid] = tax_name
@@ -116,6 +115,24 @@ def get_group_node(target_leaf, leaf_tags, group_tag):
             return node
     return node
 
+def write_hgt_tree(tree, outpath):
+    smol_regex = "^g\d+\.t1"
+    ncbi_seqids = []
+
+    for leaf in tree.iter_leaves():
+        seqid = leaf.name
+        if not re.match(smol_regex, seqid):
+            ncbi_seqids.append(seqid)
+    lineages = get_lineages_bulk(ncbi_seqids)
+
+    for leaf in tree.iter_leaves():
+        seqid = leaf.name
+        if seqid in lineages.keys():
+            lineage = lineages[seqid]
+            leaf.name = lineage
+    tree.write(outfile=outpath)
+    return outpath
+
 def analyse_tree(tree_path, hgt_tax_name, bootstrap_threshold=70.0, group_name=False):
     tree = Tree(tree_path)
     tree = remove_bad_nodes(tree, support_threshold=bootstrap_threshold)
@@ -126,8 +143,6 @@ def analyse_tree(tree_path, hgt_tax_name, bootstrap_threshold=70.0, group_name=F
         tax_names = [hgt_tax_name]
 
     leaf_tags = get_tags_leaves(tree, tax_names)
-    # print ("Leaf tags obtained")
-    # print (leaf_tags)
     target_leaf = None
     for leaf in tree.iter_leaves():
         if leaf_tags[leaf.name] == "smol":
@@ -151,14 +166,19 @@ def analyse_tree(tree_path, hgt_tax_name, bootstrap_threshold=70.0, group_name=F
         result = check_hgt(group_node, leaf_tags, hgt_tax_name)
     else:
         result = check_hgt(target_leaf, leaf_tags, hgt_tax_name)
-    # print ("Tree analysed")
+
+    if result:
+        outpath = tree_path + "_hr_formated.tree"
+        write_hgt_tree(tree, outpath)
     return result
 
 bootstrap_threshold = 70.0
 
-treedir_path="/Users/annanenarokova/Google Drive/projects/myxozoans/hgt/hgt_candidates/vertebrates/contrees/"
-tag_path="/Users/annanenarokova/Google Drive/projects/myxozoans/hgt/results_last/taxids_tags.tsv"
+treedir_path="/Users/annanenarokova/Google Drive/projects/myxozoans/hgt/hgt_candidates_old/vertebrates/contrees/"
 hgt_tax_name = "Vertebrata"
+
+#treedir_path="/Users/annanenarokova/Google Drive/projects/myxozoans/hgt/hgt_candidates_old/fungi/contrees/"
+#hgt_tax_name = "Fungi"
 
 i = 0
 for tree_name in listdir(treedir_path):

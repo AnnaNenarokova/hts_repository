@@ -1,8 +1,5 @@
 #!/usr/bin/python
 import sys
-sys.path.insert(0, "/Users/annanenarokova/work/code/ngs/")
-sys.path.insert(0, "/home/users/nenarokova/ngs/")
-
 def get_clusters_array(mmseq_fasta_txt):
     clusters_array = []
     with open(mmseq_fasta_txt, "r") as input_f:

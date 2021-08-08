@@ -4,7 +4,7 @@ from Bio import SeqIO
 def keep_n_first(infasta, outhpath, n):
     results = []
     i = 0
-    for record in SeqIO.parse(fasta, "fasta"):
+    for record in SeqIO.parse(infasta, "fasta"):
         if i < n:
             results.append(record)
             i+=1

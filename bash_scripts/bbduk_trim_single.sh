@@ -1,7 +1,7 @@
 #!/bin/bash
-raw_reads="/media/4TB1/blastocrithidia/reads/tRNAs/raw/Zdenek_Paris_J_021220-tRNA-seq-1_01082021/Raw_Data/P57-cyto.fastq.gz"
+raw_reads="/media/4TB1/blastocrithidia/reads/tRNAs/raw/tbrucei/Zdenek_Paris_J_022321-tRNA-seq-1_04232021/Raw_Data/2-T-brucei-cyto.fastq.gz"
 trimdir="/media/4TB1/blastocrithidia/reads/tRNAs/trimmed/"
-name="P57-cyto"
+name="tbrucei-cyto"
 trimmed_reads=$trimdir$name"_trimmed.fq.gz"
 report=$trimdir$name"_report.txt"
 threads="30"

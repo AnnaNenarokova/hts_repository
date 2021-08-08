@@ -50,12 +50,12 @@ def write_seqs(seq_dict, refset_fasta_path, outdir):
             ncbi_records = Entrez.efetch(db="protein", id=ncbi_ids_string, rettype="fasta").read()[:-1]
             outfile.write(ncbi_records)
 
-diamond_ncbi="/home/nenarokova/dpapi/recoded_cands/dpapi_recoded_cand_nr_dmnd_tax.tsv"
+diamond_ncbi="/Users/annanenarokova/work/dpapi_local/results_21_07/dpapi_recoded_cand_nr_dmnd_tax.tsv"
 ncbi_outfmt_opts = "qseqid qlen sseqid slen staxids length evalue bitscore"
-diamond_refset="/home/nenarokova/dpapi/recoded_cands/dpapi_recoded_cand_refset_dmnd.tsv"
-refset_fasta_path="/home/nenarokova/dpapi/dpapi_full_dataset.faa"
+diamond_refset="/Users/annanenarokova/work/dpapi_local/results_21_07/dpapi_recoded_cand_refset_dmnd.tsv"
+refset_fasta_path="/Users/annanenarokova/work/dpapi_local/dpapi_full_dataset.faa"
 
-outdir="/home/nenarokova/dpapi/recoded_cands/results/fasta/"
+outdir="/Users/annanenarokova/work/dpapi_local/results_21_07/fasta"
 
 seq_dict = {}
 

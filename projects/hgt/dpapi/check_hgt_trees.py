@@ -135,9 +135,9 @@ def analyse_hgt_dict(hgt_dict, outdir):
 
     return 0
 
-treedir_path="/Users/annanenarokova/work/dpapi_local/results/trees/"
+treedir_path="/Users/annanenarokova/work/dpapi_local/results_09_04/trees/"
 tag_path="/Users/annanenarokova/work/dpapi_local/seqs_tags.tsv"
 outdir="/Users/annanenarokova/work/dpapi_local/results/"
 hgt_dict = analyse_trees(treedir_path, tag_path, outdir)
-analyse_hgt_dict(hgt_dict, outdir)
+analyse_hgt_dict(hgt_dict, outdirc)
 

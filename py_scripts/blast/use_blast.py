@@ -3,6 +3,8 @@ import sys
 sys.path.insert(0, "/Users/annanenarokova/work/code/ngs")
 sys.path.insert(0, "/home/nenarokova/ngs/")
 sys.path.insert(0, "../../")
+
+from os import listdir
 from py_scripts.blast.classes.blast import Blast
 from py_scripts.bioscripts.best_hits import *
 from py_scripts.helpers.parse_csv import *
@@ -36,24 +38,27 @@ def add_header(blast_csv_path, custom_outfmt):
 
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 
-query_paths= [
-    "/home/nenarokova/amoebozoa/AmoebozoaOnlySSUHomeDatabase_all.fna"
-    ]
+query_folder = "/media/4TB1/blastocrithidia/blast_searches/datasets/tritrypdb_52/proteins/"
+# query_paths= [
+#     "/home/nenarokova/amoebozoa/AmoebozoaOnlySSUHomeDatabase_all.fna"
+#     ]
 
 subj_paths = [
-    "/home/nenarokova/amoebozoa/pr2_version_4.13.0_18S_taxo_long.fasta"
+    "/media/4TB1/blastocrithidia/blast_searches/p57_ra_polished_6frames.faa"
     ]
 
-for query_path in query_paths:
+#for query_path in query_paths:
+for query_file in listdir(query_folder):
+    query_path = query_folder + query_file
     for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='nucl', threads=125)
+        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='prot', threads=32)
         blast_csv_path = new_blast.blast(
-                                         bl_type='blastn',
+                                         bl_type='blastp',
                                          evalue=0.001,
                                          outfmt='comma_values',
                                          #outfmt='pairwise',
                                          custom_outfmt=custom_outfmt,
-                                         word_size=7
+                                         word_size=3
                                          )
-        add_header(best_hits(blast_csv_path), custom_outfmt)
+        # add_header(best_hits(blast_csv_path), custom_outfmt)
         add_header(blast_csv_path, custom_outfmt)

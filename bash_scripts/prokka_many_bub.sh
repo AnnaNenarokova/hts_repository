@@ -6,16 +6,18 @@ PATH=$PATH:$signalp_path:$tbl2asn_path:$barrnap_path
 prokka="/home/software/prokka/bin/prokka"
 
 
-genome_dir="/mnt/data/pangenome/genomes_ncbi/ncbi-genomes-2021-03-25/"
-prokka_outdir="/mnt/data/pangenome/genomes_ncbi/prokka_out/"
+genome_dir="/mnt/data/pangenome/home_genomes/"
+
+prokka_outdir="/mnt/data/pangenome/prokka_out/"
 
 cd $genome_dir
 
 for genome in *.fna
 do
-    name=${genome:0:12}
+    #name=${genome:0:13}
+    name=${genome:0:16}
     echo $name
     outdir=$prokka_outdir$name
-    #mkdir $outdir
-    $prokka --cpus 20 --kingdom Bacteria  --gram neg --addgenes --force --outdir $outdir $genome
+    mkdir $outdir
+    $prokka --cpus 20 --kingdom Bacteria  --gram neg --addgenes --force --centre X --compliant --outdir $outdir $genome
 done

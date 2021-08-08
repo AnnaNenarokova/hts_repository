@@ -1,9 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 from Bio import SeqIO
 
-# infile = SeqIO.parse('/home/anna/Dropbox/PhD/bioinformatics/blasto/scaffolds_triat.fasta', 'fasta')
-# output = open('/home/anna/Dropbox/PhD/bioinformatics/blasto/scaffolds_triat_6frames.faa', 'w')
-# outerr = open('/home/anna/Dropbox/PhD/bioinformatics/blasto/scaffolds_triat_6frames.err', 'w')
 gencode = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
     'ACA':'T', 'ACC':'T', 'ACG':'T', 'ACT':'T',
@@ -34,30 +31,34 @@ def translation(sequence):
             aa.append(gencode[codon])
     return ''.join(aa)
 
-# i = 0
-# for sequence in infile:
-#     i += 1
-#     name = sequence.name
-#     seq = sequence.seq.upper()
-#     ambiguous = False
-#     for nucleotide in seq:
-#         if nucleotide not in 'ATCGN':
-#             ambiguous = True
-#     if ambiguous == True:
-#         with open(outerr, 'w') as error:
-#             error.write('{}\n{}\n'.format(name, seq))
-#     else:
-#         output.write('>{}_1\n{}\n'.format(name, translation(seq)))
-#         output.write('>{}_2\n{}\n'.format(name, translation(seq[1:])))
-#         output.write('>{}_3\n{}\n'.format(name, translation(seq[2:])))
-#         output.write('>{}_4\n{}\n'.format(name, translation(seq.reverse_complement())))
-#         output.write('>{}_5\n{}\n'.format(name, translation(seq.reverse_complement()[1:])))
-#         output.write('>{}_6\n{}\n'.format(name, translation(seq.reverse_complement()[2:])))
-#     if i%100 == 0:
-#         print(i)
-# output.close()
+def translate(infile_path, output_path, outerr_path):
+    with open(output_path, "w") as output, open(outerr_path, "w") as outerr:
+        i = 0
+        print (i)
+        infile = SeqIO.parse(infile_path, "fasta")
+        print ("parsing complete")
+        for sequence in infile:
+            i += 1
+            name = sequence.name
+            seq = sequence.seq.upper()
+            ambiguous = False
+            for nucleotide in seq:
+                if nucleotide not in 'ATCGN':
+                    outerr.write('{}\n{}\n'.format(name, seq))
+                    ambiguous = True
+                    break
+            if not ambiguous:
+                output.write('>{}_1\n{}\n'.format(name, translation(seq)))
+                output.write('>{}_2\n{}\n'.format(name, translation(seq[1:])))
+                output.write('>{}_3\n{}\n'.format(name, translation(seq[2:])))
+                output.write('>{}_4\n{}\n'.format(name, translation(seq.reverse_complement())))
+                output.write('>{}_5\n{}\n'.format(name, translation(seq.reverse_complement()[1:])))
+                output.write('>{}_6\n{}\n'.format(name, translation(seq.reverse_complement()[2:])))
+                print(i)
 
-seq = "ATGAAACGCACTGTCGTTGTTGTTGCTCCTCCTCCTCAAAGGCGTTGAAGCTGTGCTACAAAGCGGTGACGCTATACGCTATTATTACAAAAACTTAATATTCTACCATTTTATTCTACTTGTTGGCGTCAACCTCAACTATAATAAAATGTGTGTAGTACAAAAGTATCTGCGTCTTATTTATCAAGGCACAAAACTAATATGTCAATATTCATGAAAATAGCTAACGCGCATAGTTTCAGTCATATCTATTTACAGAAACGTTTTTCTAGTTCCTACAATGCCAATAATGATATCAATGATGATGATACGATAAATTATTGTAACAATTCTTGTAAAAGATCATAAAAAATAGTTTCATGCGTTACATCTTACAATTATTCTCGTCGCTTCTTGTACACACTGCCATCTGCTATTTCACATGAATAGCTGACTAATATAAAATCACAATAATCACAAAACTTACAATAATAAAAACAGTGCAATAAATAAAGTGAAATATAGTAAGATAATAATAATTAGTAACAGATCAATATCAACATCATTTCGTTTGCAAATTTGCAATCAAAACATCAAAGTGCTATCAAGAAACTAAAAACTTTTCTAGACAATGCCACATGCTCTAAACGAAAACAGAAAATTCGTAACAGCTTGCAGAATGTTAGTAGCGAGCTGCTGTCCTAAAATAAAACTTTTGTGGCTTGTCTAGTTCGTCTATCATAGTAAAAAAATGAAGATCAAAATATCAATGGTAGTTAGAATATGCTTGCAAAATGCATAAATTTAAATATTTAGTAATTACACGAGATTGAGGATAGTGTTAATAGTATAGTGCAAAATAACAACGCATCTAATACCAAGTACAATGGCACAGTAACAAATTGCAAACGTAAATAAAGTATTTGTGCGGCTAATACCACATAAAAGAATGACAAGTAGGTCATTGGAGTTAATTACGCGTTACATGAGTGCATCAATGCCAATGTGTCAAGGACTTGCACGCATTCATCTACACACACTCTACGAGGTTTGTTGAAAGGGTGTGCTGAGCAGAATGCACTTGGTGCAATCGCCGCTCAAGGGTATAAATACACGGAAATTACTGATGTGTATGTCATGTCACGTCATAAAAATGCGTGCTAAGATTGTAAAGTAAACAGTGAAGACAACGTCATTACTCAATTTAAATGAGAGTAAGGTGACATAACTACATAAAGTAATCAAACAACTGTAACTCCTCACAATCATTTGTGATCTACATCATTATCATCATCAACAGCATAACGAATAGACCATGATTGTTCGCACTATGAAAAAGTGCATTTGTGCAATCAAGTATAATTAACGTCAAATCAAATATTACAAAGCTAGTTTACGAAAGCAATCTCAGAAAATAACAGCTGCATGTGCTCAAACAAGGCAATGCCTGTTTGTTTTCCATGTCCGTTGTGCTGACGATATTTGTGTCAAGTCAACACGTGGAAAGAAGAATAGCAATTGCAAAAGAAACAAAAACAGCAGTGCAGACACAAATCAGTTAGTGCAGCAAACATATCTGTACACAATGAGCAACGTAACTGTACTGGTTTAACAAAAACTGTTAACAGTGCAGCACCTCTAAATTTGTTCATTGCATGTGATAATATACCCATGCTAATGCAGGCTGTTGCATTGGCAAAGTTACGTGCACTGACTATCCATCCCTCATCTATGAAAATTACATTTGTGCTGATGAATGACCAAATGTAAAATCATTGCTAATTATAA"
+infile_path = '/Users/annanenarokova/work/blasto_local/fasta/p57_ra_polished.fa'
+output_path = '/Users/annanenarokova/work/blasto_local/fasta/p57_ra_polished_6frames.faa'
+outerr_path = '/Users/annanenarokova/work/blasto_local/fasta/p57_ra_polished_6frames.err'
 
-print translation(seq)
+translate(infile_path, output_path, outerr_path)
 

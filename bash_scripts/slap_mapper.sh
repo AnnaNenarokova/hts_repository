@@ -1,14 +1,13 @@
 #!/bin/bash
 slap_mapper="/home/nenarokova/tools/SLaPMapper/SLaPMapper.pl"
-genome="/media/4TB1/blastocrithidia/UTR_analysis/references/blechomonas/TriTrypDB-33_BayalaiB08-376_Genome.fasta"
-reads1="/media/4TB1/blastocrithidia/UTR_analysis/references/blechomonas/reads/Blechomonas_forward_reads.fastq"
-reads2="/media/4TB1/blastocrithidia/UTR_analysis/references/blechomonas/reads/Blechomonas_reverse_reads.fastq"
-gff="/media/4TB1/blastocrithidia/UTR_analysis/references/blechomonas/TriTrypDB-33_BayalaiB08-376.gff"
-work_dir="/media/4TB1/blastocrithidia/mapping/slap_mapping/blechomonas"
+genome="/media/4TB1/blastocrithidia/genome_assembly/p57_ra_polished.fa"
+reads1="/media/4TB1/blastocrithidia/reads/transcriptome/trimmed/p57_both_rna_trimmed_1.fq"
+reads2="/media/4TB1/blastocrithidia/reads/transcriptome/trimmed/p57_both_rna_trimmed_2.fq"
+gff="media/4TB1/blastocrithidia/mapping/slap_mapping/p57_new_assembly_both_rna/p57_ra_polished.gff"
+work_dir="/media/4TB1/blastocrithidia/mapping/slap_mapping/p57_new_assembly_both_rna/"
 
-#SL="AACGCATTTTTTGTTACAGTTTCTGTACTTTATTG" #p57
+SL="AACGCATTTTTTGTTACAGTTTCTGTACTTTATTG" #p57
 #SL="ATCAGTTTCTGTACTTTATTG" #Novymonas
-SL="AACTAACGCTATTATTGATACAGTTTCTGTACTATATTG" #b_ayalai
 min_length="6"
 
 cd $work_dir

@@ -1,8 +1,6 @@
 #!/bin/bash
-orthofinder="/home/nenarokova/tools/OrthoFinder-master/orthofinder/orthofinder.py"
-fasta_dir="/media/4TB1/euglenozoa_references/euglenozoa_ref/"
-threads="30"
-python2 $orthofinder -f $fasta_dir -t $threads -S diamond
-old_working_dir="/media/4TB1/euglenozoa_references/euglenozoa_ref/OrthoFinder/Results_Aug25/WorkingDirectory/"
-new_fasta_dir="/media/4TB1/euglenozoa_references/editing/"
-python2 $orthofinder -b $old_working_dir -f $new_fasta_dir -t $threads
+orthofinder="/home/software/OrthoFinder/orthofinder"
+fasta_dir="/mnt/data/martij04/Poly_Genome_annotation/orthofinder/polyplax_ref_proteomes/"
+outdir="/mnt/data/martij04/Poly_Genome_annotation/orthofinder/orthofinder_out/"
+threads="128"
+$orthofinder -f $fasta_dir -t $threads -o $outdir -S diamond
