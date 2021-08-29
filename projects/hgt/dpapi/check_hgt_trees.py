@@ -53,20 +53,25 @@ def analyse_tree(tree_path, tag_dict, bootstrap_threshold=70.0):
     result = None
     diplo_ids = []
     tree = Tree(tree_path)
-    tree_name = tree_path.split("/")[-1].split(".")[0]
-    dpapi_name = tree_name
+    query_name = tree_path.split("/")[-1].split(".")[0]
     leaf_tags = get_tags_leaves(tree, tag_dict)
     edited_tree = remove_bad_nodes(tree, support_threshold=bootstrap_threshold)
-
     dpapi_leaf = None
+
     for leaf in edited_tree.iter_leaves():
-        if leaf.name == dpapi_name:
+        if leaf.name == query_name:
             if not dpapi_leaf:
                 dpapi_leaf = leaf
             else:
-                print ("More than one Dpapi leaf!\n" + tree_path + "\n")
+                print ("More than one query_name leaf!\n" + tree_path + "\n")
     if not dpapi_leaf:
-        print ("No Dpapi leaf!\n" + tree_path + "\n")
+        print ("No query_name leaf!\n" + tree_path + "\n")
+        for leaf in edited_tree.iter_leaves():
+            if "Diplonema-papillatum" in leaf.name:
+                dpapi_leaf = leaf
+
+    if not dpapi_leaf:
+        print ("No D. papi leaf!\n" + tree_path + "\n")
         return result, diplo_ids
 
     farthest_node = dpapi_leaf.get_farthest_node(topology_only=True)[0]
@@ -132,12 +137,11 @@ def analyse_hgt_dict(hgt_dict, outdir):
             else:
                 group_result = True
             hgt_group_result.write(dpapi_id + "\t" + str(group_result) + "\n")
-
     return 0
 
-treedir_path="/Users/annanenarokova/work/dpapi_local/results_09_04/trees/"
-tag_path="/Users/annanenarokova/work/dpapi_local/seqs_tags.tsv"
-outdir="/Users/annanenarokova/work/dpapi_local/results/"
+treedir_path="/Users/annanenarokova/work/dpapi_local/results_16_08/trees/"
+tag_path="/Users/annanenarokova/work/dpapi_local/results_16_08/all_tags.tsv"
+outdir="/Users/annanenarokova/work/dpapi_local/results_16_08/"
 hgt_dict = analyse_trees(treedir_path, tag_path, outdir)
-analyse_hgt_dict(hgt_dict, outdirc)
+analyse_hgt_dict(hgt_dict, outdir)
 

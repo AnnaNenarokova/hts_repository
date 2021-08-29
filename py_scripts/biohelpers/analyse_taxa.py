@@ -59,20 +59,19 @@ def get_lineages_singly(taxid_set):
             taxid_dict[taxid] = { "lineage" : lineage, "name" : name }
     return taxid_dict
 
-def get_taxid_dict(taxid_set):
-    taxid_list = list(taxid_set)
+def get_taxid_dict(taxid_list):
+    taxid_set = set(taxid_list)
+    taxid_list = list(taxid_list)
 
     print ("Getting lineages")
     taxid_dict = get_lineages_bulk(taxid_list)
-
     taxid_dict_set = set(taxid_dict.keys())
-    not_in_taxids_set = taxid_set - taxid_dict_set
 
+    not_in_taxids_set = taxid_set - taxid_dict_set
     missing_taxid_dict = get_lineages_singly(not_in_taxids_set)
 
     taxid_dict.update(missing_taxid_dict)
     return taxid_dict
-
 
 def get_taxid_dicts(diamond_taxa_result_path, outfmt_opts=False):
     taxid_set, seq_tax_dict = read_diamond_result(diamond_taxa_result_path, outfmt_opts)

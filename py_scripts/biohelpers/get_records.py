@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!python3
 from Bio import SeqIO
 
 def keep_n_first(infasta, outhpath, n):

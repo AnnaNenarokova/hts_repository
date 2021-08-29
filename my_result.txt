@@ -1,4 +1,0 @@
-my_err.txt
-my_output.txt
-my_result.txt
-splice_leaders.txt

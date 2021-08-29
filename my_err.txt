@@ -1,2 +1,0 @@
-ls: illegal option -- _
-usage: ls [-@ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1%] [file ...]
