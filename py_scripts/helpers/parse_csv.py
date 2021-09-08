@@ -23,6 +23,15 @@ def csv_to_list_of_dicts(csv_path, delimiter=',', fieldnames=None):
         csvfile.close
     return list_of_dicts
 
+def csv_to_dict_simple(csv_path, delimiter=','):
+    csv_dict = {}
+    with open(csv_path) as handle_file:
+        handle_csv = csv.reader(handle_file, delimiter=delimiter)
+        for row in handle_csv:
+            csv_dict[row[0]] = row[1]
+        handle_file.close()
+    return csv_dict
+
 def csv_to_dict(csv_path, main_key, delimiter=','):
     list_of_dicts = csv_to_list_of_dicts(csv_path, delimiter=delimiter)
     csv_dict = dict_list_to_csv_dict(list_of_dicts, main_key)
@@ -52,7 +61,7 @@ def write_list_of_dicts(list_of_dicts, outpath, fieldnames=False):
         csvfile.close()
     return outpath
 
-def write_dict_of_dicts(dict_of_dicts, outpath, key_name=False, fieldnames=False):
+def write_dict_of_dicts(dict_of_dicts, outpath, key_name, fieldnames=False):
     list_of_dicts = []
     for key in dict_of_dicts:
         cur_dict = {}
@@ -61,4 +70,11 @@ def write_dict_of_dicts(dict_of_dicts, outpath, key_name=False, fieldnames=False
             cur_dict[k] = dict_of_dicts[key][k]
         list_of_dicts.append(cur_dict)
     write_list_of_dicts(list_of_dicts, outpath, fieldnames)
+    return outpath
+
+def write_dict(mydict, outpath, delimiter=","):
+    with open(outpath, 'w') as csv_file:  
+        writer = csv.writer(csv_file, delimiter=delimiter)
+        for key, value in mydict.items():
+           writer.writerow([key, value])
     return outpath

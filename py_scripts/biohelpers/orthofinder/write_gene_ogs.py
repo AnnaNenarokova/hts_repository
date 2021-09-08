@@ -1,27 +1,29 @@
 #!python3
-import csv
-def write_gene_ogs(og_path, outpath, name, delimiter):
-    gene_delimeter = ", "
-    og_dict = {}
-    with open(og_path) as og_file:
-        reader = csv.DictReader(og_file, delimiter=delimiter)
-        for row in reader:
-            og = row["Orthogroup"]
-            genes = row[name].split(gene_delimeter)
-            for gene in genes:
-                if gene:
-                    og_dict[gene] = og
-    with open(outpath, "w") as out_f:
-        out_f.write("id\tOG\n")
-        for gene in sorted(list(og_dict.keys())):
-            new_line = '{}\t{}\n'.format(gene, og_dict[gene])
-            out_f.write(new_line)
+import sys
+sys.path.insert(0, "/Users/annanenarokova/work/code/ngs/")
+sys.path.insert(0, "/home/users/nenarokova/ngs/")
+from py_scripts.helpers.parse_csv import *
 
+def read_og_file(og_path, gene_delimeter=", "):
+    og_dict = csv_to_dict(og_path, "Orthogroup", delimiter='\t')
+    for og in og_dict:
+        for species in og_dict[og]:
+            og_dict[og][species] = og_dict[og][species].split(gene_delimeter)
+    return og_dict
+
+def write_gene_ogs(og_path, outpath, species_name):
+    og_dict = read_og_file(og_path)
+    gene_dict = {}
+    for og in og_dict:
+        genes = og_dict[og][species_name]
+        for gene in genes:
+            if gene:
+                gene_dict[gene] = og
+    write_dict(gene_dict, outpath)
     return outpath
 
-og_path = "/Users/annanenarokova/work/myxo/orthogroups_smol.csv"
-outpath = "/Users/annanenarokova/work/myxo/smol_genes_ogs.tsv"
-delimiter = ";"
-name = "Sphaerospora_molnari_G"
+og_path = "/Users/annanenarokova/work/myxo_local/orthofinder/old_orthofinder/Orthogroups.tsv"
+outpath = "/Users/annanenarokova/work/myxo_local/orthofinder/old_orthofinder/smol_genes_ogs.tsv"
+species_name = "Sphaerospora_molnari_G"
 
-write_gene_ogs(og_path, outpath, name, delimiter)
+write_gene_ogs(og_path, outpath, species_name)

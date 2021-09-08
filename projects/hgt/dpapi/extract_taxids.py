@@ -1,8 +1,8 @@
 #!python3
 import sys
 sys.path.insert(0, "/Users/annanenarokova/work/code/ngs/")
-from encoder import XML2Dict
 from py_scripts.helpers.parse_csv import *
+from encoder import XML2Dict
 from Bio import Entrez
 Entrez.email = "a.nenarokova@gmail.com"
 def get_taxids_ncbi_proteins(protein_list):
