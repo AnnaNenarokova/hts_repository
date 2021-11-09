@@ -1,18 +1,20 @@
 #!/bin/bash
 
-hmmsearch="/home/users/nenarokova/tools/hmmer/bin/hmmsearch"
+cog_dir="/home/anna/work/euk_local/cogs/"
+prot_dir="/home/anna/work/euk_local/proteomes/"
+out_dir="/home/anna/work/euk_local/hmm_results/"
 
-hmm="/home/users/nenarokova/zachar/ENOG410ZRF1_scf25_eggnogdb.hmm"
+cd $prot_dir
 
-output_dir="/home/users/nenarokova/zachar/archaea_ref/hmm_reports/proteomes/"
-
-ref_folder="/home/users/nenarokova/zachar/archaea_ref/proteomes"
-
-cd $ref_folder
-
-for ref in *.fsa_aa
+for proteome in *.fasta
 do
-    pfam_hits=$output_dir$ref".hmm"
-    $hmmsearch --pfamtblout $pfam_hits $hmm $ref
+    for cog_hmm in $cog_dir*.hmm
+        do
+            result=$out_dir
+            hmm_name="$(basename -- $cog_hmm)"
+            result=$out_dir$proteome$hmm_name".txt"
+            echo $result
+            hmmsearch --tblout $result $cog_hmm $proteome
+        done
 done
 
