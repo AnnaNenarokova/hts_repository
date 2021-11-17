@@ -1,8 +1,6 @@
 #!/bin/bash
-trimal="/home/users/nenarokova/tools/trimAl/source/trimal"
 
-msa="/home/users/nenarokova/zachar/scf25_dataset/pasta/pastajob.marker001.scf25_dataset.faa.aln"
-trimmed_msa="/home/users/nenarokova/zachar/scf25_dataset/scf25_dataset_trimmed_msa.fasta"
+msa="/Users/anna/work/euk_local/NCBI_COGs/COG0016_aligned.fasta"
+trimmed_msa="/Users/anna/work/euk_local/NCBI_COGs/COG0016_aligned_trimal_08_90.fasta"
 
-$trimal -in $msa -out $trimmed_msa -fasta -automated1
-
+trimal -in $msa -out $trimmed_msa -resoverlap 0.8 -seqoverlap 90

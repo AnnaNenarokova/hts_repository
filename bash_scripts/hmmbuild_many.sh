@@ -1,9 +1,9 @@
 #!/bin/bash
-cog_dir=""
-cog_hmm_dir=""
+cog_dir="/Users/anna/work/euk_local/ed_markers_trimmed/"
 
 cd $cog_dir
-for cog in *.fa
+for fasta in *.fas
 do
-	hmmbuild $outfile $alignment
+    hmm_file=$fasta".hmm"
+    hmmbuild $hmm_file $fasta
 done

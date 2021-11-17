@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import sys
-sys.path.insert(0, "/Users/annanenarokova/work/code/ngs")
+sys.path.insert(0, "/Users/anna/work/code/ngs/")
 sys.path.insert(0, "/home/nenarokova/ngs/")
 sys.path.insert(0, "../../")
 
@@ -40,25 +40,25 @@ custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch 
 
 # query_folder = "/media/4TB1/blastocrithidia/blast_searches/datasets/tritrypdb_52/proteins/"
 query_paths= [
-    "/Users/annanenarokova/work/dpapi_local/results_16_08/hgt_genes.faa"
+    "/Users/anna/work/blasto_local/genomes/annotation_new/p57_proteins.fasta"
     ]
 
 subj_paths = [
-    "/Users/annanenarokova/work/dpapi_local/transcripts_SL_newIDs.fna"
+    "/Users/anna/work/blasto_local/genomes/TriTrypDB-54_TbruceiTREU927_AnnotatedProteins.fasta"
     ]
 
 for query_path in query_paths:
 # for query_file in listdir(query_folder):
     # query_path = query_folder + query_file
     for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='nucl', threads=4)
+        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='prot', threads=4)
         blast_csv_path = new_blast.blast(
-                                         bl_type='tblastn',
-                                         evalue=0.001,
+                                         bl_type='blastp',
+                                         evalue=0.00001,
                                          outfmt='comma_values',
                                          #outfmt='pairwise',
                                          custom_outfmt=custom_outfmt,
                                          word_size=3
                                          )
-        # add_header(best_hits(blast_csv_path), custom_outfmt)
-        add_header(blast_csv_path, custom_outfmt)
+        add_header(best_hits(blast_csv_path), custom_outfmt)
+        # add_header(blast_csv_path, custom_outfmt)

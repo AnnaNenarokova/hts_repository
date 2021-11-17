@@ -1,11 +1,12 @@
 #!/bin/bash
-cog_dir="/home/anna/work/euk_local/cogs/"
+cog_dir="/Users/anna/work/euk_local/ed_markers_untrimmed/"
 
 cd $cog_dir
-for fasta in *.fa
+for fasta in *.faa
 do
-	aligned=$fasta".aligned.fasta"
-	mafft $fasta > $aligned
-	hmm_file=$fasta".hmm"
-	hmmbuild $hmm_file $aligned
+  aligned=$fasta".aligned.fasta"
+  mafft $fasta > $aligned
+  hmm_file=$fasta".hmm"
+  hmmbuild $hmm_file $aligned
 done
+

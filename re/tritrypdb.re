@@ -1,0 +1,1 @@
+https://tritrypdb.org/common/downloads/Current_Release/\1/fasta/data/TriTrypDB-54_\1_Genome.fasta\n

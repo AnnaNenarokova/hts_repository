@@ -1,11 +1,11 @@
 #!/bin/bash
-trimal="/home/nenarokova/tools/trimAl/source/trimal"
 
-al_dir="/home/nenarokova/novymonas/alignments_1_og"
+al_dir="/Users/anna/work/blasto_local/tRNA/aragorn_out/aragorn_standalone_out/tRNAs_fasta_cleaned_0.9/"
 
 cd $al_dir
 
-for f in OG*.fa
+for msa in *.fasta
 do
-    $trimal -in $f -out $f"_trimmed.phy" -phylip -nogaps
+    trimmed_msa=$msa"_95.fasta"
+    trimal -in $msa -out $trimmed_msa -resoverlap 0.95 -seqoverlap 95
 done

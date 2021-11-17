@@ -53,3 +53,8 @@ def exclude_fasta(infasta, fasta_exclude, outfasta):
             results.append(record)
     SeqIO.write(results, outfasta, "fasta")
     return 0
+
+infasta = "/Users/anna/work/blasto_local/genomes/annotation_new/p57_proteins.fasta"
+list_file = "/Users/anna/work/blasto_local/no_stop_p57_list.txt"
+outfasta = "/Users/anna/work/blasto_local/no_stop_p57.faa"
+keep_from_listfile(infasta, list_file, outfasta)
