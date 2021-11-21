@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from ete3 import Tree
 import csv
+from os import listdir
 
 def csv_to_dict_simple(csv_path, delimiter=','):
     csv_dict = {}
@@ -11,12 +12,22 @@ def csv_to_dict_simple(csv_path, delimiter=','):
         handle_file.close()
     return csv_dict
 
-def rename_trees(treedir, info_path):
-	info_dict = csv_to_dict_simple(info_path)
-	for tree_name in listdir(treedir_path):
-		pass
-	return 0
+def rename_trees(treedir, name_info_path):
+    name_dict = csv_to_dict_simple(name_info_path)
+    for tree_file in listdir(treedir):
+        tree_path = treedir + tree_file
+        tree = Tree(tree_path)
+        used_names = []
+        for leaf in tree.iter_leaves():
+            old_name = leaf.name
+            if old_name in name_dict:
+                new_name = name_dict[old_name].split("")
+                leaf.name = new_name
+        new_tree_path = treedir + tree_file + "_renamed"
+        tree.write(format=1, outfile=new_tree_path)
+    return 0
 
-treedir="/Users/anna/work/euk_local/ed_markers/single_gene_trees/"
-info_path="/Users/anna/work/euk_local/ed_markers/ids_taxonomy.csv"
-csv_dict = csv_to_dict_simple(info_path)
+treedir="/home/anna/work/euk_local/ed_markers_and_euks/single_gene_trees/"
+name_info_path="/home/anna/work/euk_local/ed_markers_and_euks/ids_taxonomy.csv"
+
+rename_trees(treedir, name_info_path)

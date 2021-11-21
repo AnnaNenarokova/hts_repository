@@ -1,8 +1,7 @@
 #!/bin/bash
 
-fasta="/Users/anna/work/blasto_local/tRNA/aragorn_out/aragorn_standalone_out/all_tryp_tRNAs_80_80.fasta"
-aligned="/Users/anna/work/blasto_local/tRNA/aragorn_out/aragorn_standalone_out/all_tryp_tRNAs_80_realigned.fasta"
-cleaned="/Users/anna/work/blasto_local/tRNA/aragorn_out/aragorn_standalone_out/all_tryp_tRNAs_80_realigned_90_90.fasta"
+fasta="/home/anna/work/blasto_local/tRNA_tree/all_tryp_tRNAs.fasta"
+aligned="/home/anna/work/blasto_local/tRNA_tree/all_tryp_tRNAs_linsi_aligned_0_5.fasta"
 
-mafft --op 5 --ep 0 --genafpair --maxiterate 1000 $fasta > $aligned
-trimal -in $aligned -out $cleaned -resoverlap 0.90 -seqoverlap 90
+mafft --localpair --ep 0 --op 5 --maxiterate 1000 $fasta > $aligned
+trimal -in $aligned -out $cleaned -resoverlap 0.80 -seqoverlap 80
