@@ -69,7 +69,7 @@ def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, n_best=5, 
 	return 0
 
 hmm_report_dir = "/Users/anna/work/euk_local/ed_markers/hmm_results_ed_cogs/"
-proteome_dir = "/Users/anna/work/euk_local/uniprot_proteomes/"
+proteome_dir = "/Users/anna/work/euk_local/uniprot_proteomes/original_fastas/"
 cog_dir = "/Users/anna/work/euk_local/ed_markers/fastas_untrimmed/"
 result_dir = "/Users/anna/work/euk_local/ed_markers/fastas_with_euks/"
 

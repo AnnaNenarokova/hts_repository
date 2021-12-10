@@ -8,13 +8,15 @@ bt2_base="/media/4TB1/novymonas/ncbi_annotation_submission/GCA_019188245.1_ASM19
 bowtie2-build --threads $threads $fasta $bt2_base
 
 file_path="/media/4TB1/novymonas/ncbi_annotation_submission/GCA_019188245.1_ASM1918824v1"
-r1="/media/4TB1/novymonas/transcriptome/reads/trimmed_reads/wt_rna_trimmed_1.fq.gz"
-r2="/media/4TB1/novymonas/transcriptome/reads/trimmed_reads/wt_rna_trimmed_2.fq.gz"
+r1_1="/media/4TB1/novymonas/transcriptome/reads/trimmed_reads/wt_rna_trimmed_1.fq.gz"
+r1_2="/media/4TB1/novymonas/transcriptome/reads/trimmed_reads/wt_rna_trimmed_2.fq.gz"
+r2_1="/media/4TB1/novymonas/transcriptome/reads/trimmed_reads/azi_rna_trimmed_1.fq.gz"
+r2_2="/media/4TB1/novymonas/transcriptome/reads/trimmed_reads/azi_rna_trimmed_2.fq.gz"
 
 alignment=$file_path".sam"
 report=$file_path".txt"
 
-bowtie2 --very-sensitive -p $threads -x $bt2_base -1 $r1 -2 $r2 -S $alignment 2> $report
+bowtie2 --very-sensitive -p $threads -x $bt2_base -1 $r1_1,$r2_1 -2 $r1_2,$r2_2 -S $alignment 2> $report
 
 samfile=$alignment
 unsorted_bam=$file_path"_unsorted.bam"

@@ -1,4 +1,4 @@
-#!python3
+#!/usr/bin/python3
 from Bio import SeqIO
 
 def keep_n_first(infasta, outhpath, n):
@@ -54,7 +54,7 @@ def exclude_fasta(infasta, fasta_exclude, outfasta):
     SeqIO.write(results, outfasta, "fasta")
     return 0
 
-infasta = "/Users/anna/work/blasto_local/genomes/annotation_new/p57_proteins.fasta"
-list_file = "/Users/anna/work/blasto_local/no_stop_p57_list.txt"
-outfasta = "/Users/anna/work/blasto_local/no_stop_p57.faa"
+infasta = "/Users/anna/work/blasto_local/tRNA/tRNAseq/p57_cyto_vsearch_out_aligned.fasta"
+list_file = "/Users/anna/work/blasto_local/tRNA/tRNAseq/p57_aligned_clusters_list.csv"
+outfasta = "/Users/anna/work/blasto_local/tRNA/tRNAseq/p57_Trp_aligned_clusters.fasta"
 keep_from_listfile(infasta, list_file, outfasta)
