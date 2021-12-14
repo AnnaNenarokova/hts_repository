@@ -55,8 +55,8 @@ for query_path in query_paths:
         blast_csv_path = new_blast.blast(
                                          bl_type='blastn',
                                          evalue=0.001,
-                                         # outfmt='comma_values',
-                                         outfmt='pairwise',
+                                         outfmt='comma_values',
+                                         # outfmt='pairwise',
                                          custom_outfmt=custom_outfmt,
                                          word_size=7
                                          )
