@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 from Bio import SeqIO
 
-record_id ="Ctg32_length_42107"
+record_id="p57_illumina.fa"
 
-start=299
-end=470
+start=0
+end=689
 
-fasta_file="/Users/annanenarokova/work/blasto_local/p57_ra_polished.fa"
+fasta_file="/Users/anna/work/blasto_local/genomes/ref_genomes/p57_ra_polished.fa"
 
 for record in SeqIO.parse(fasta_file, "fasta"):
     if record_id == record.id:
@@ -16,6 +16,6 @@ for record in SeqIO.parse(fasta_file, "fasta"):
         break
 
 
-outpath = '/Users/annanenarokova/work/blasto_local/p57_ctg32_kinetoplast.fa'
+outpath='/Users/anna/work/blasto_local/genomes/ref_genomes/Ctg28_length_81690.fasta'
 
 SeqIO.write(result, outpath, "fasta")
