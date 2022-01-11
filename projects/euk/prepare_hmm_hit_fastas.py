@@ -46,7 +46,9 @@ def prepare_hmm_dict(hmm_report_dir, n_best=5, max_evalue=0.0001):
 	return hmm_dict
 
 def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, n_best=5, max_evalue=0.0001):
+	print("Parcing hmm_reports")
 	hmm_dict = prepare_hmm_dict(hmm_report_dir, n_best=n_best, max_evalue=max_evalue)
+	print("Parcing proteomes sequences")
 	for proteome in listdir_nohidden(proteome_dir):
 		proteome_dict = hmm_dict[proteome]
 		proteome_path = proteome_dir + proteome
@@ -55,6 +57,7 @@ def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, n_best=5, 
 			for cog in proteome_dict:
 				if record.id in proteome_dict[cog]:
 					hmm_dict[proteome][cog][sseqid] = record
+	print("Writing down sequences")
 	for cog in listdir_nohidden(cog_dir):
 		out_records = []
 		cog_path = cog_dir + cog
@@ -68,9 +71,9 @@ def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, n_best=5, 
 		SeqIO.write(out_records, outpath, "fasta")
 	return 0
 
-hmm_report_dir = "/Users/anna/work/euk_local/ed_markers/hmm_results_ed_cogs/"
-proteome_dir = "/Users/anna/work/euk_local/uniprot_proteomes/original_fastas/"
-cog_dir = "/Users/anna/work/euk_local/ed_markers/fastas_untrimmed/"
-result_dir = "/Users/anna/work/euk_local/ed_markers/fastas_with_euks/"
+hmm_report_dir = "/Users/anna/work/euk_local/cogs_arcogs/COGs/hmm_results/"
+proteome_dir = "/Users/anna/work/euk_local/uniprot_proteomes/renamed_fastas/"
+cog_dir = "/Users/anna/work/euk_local/cogs_arcogs/COGs/fasta_filtered/"
+result_dir = "/Users/anna/work/euk_local/cogs_arcogs/COGs/fasta_results_with_euks/"
 
 prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir)

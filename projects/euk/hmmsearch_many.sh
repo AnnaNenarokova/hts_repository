@@ -1,8 +1,8 @@
 #!/bin/bash
 
-cog_dir="/Users/anna/work/euk_local/ed_markers_untrimmed/"
-prot_dir="/Users/anna/work/euk_local/uniprot_proteomes/"
-out_dir="/Users/anna/work/euk_local/hmm_results_ed_cogs/"
+cog_hmm_dir="/Users/anna/work/euk_local/cogs_arcogs/COGs/hmm_unfiltered_cogs/"
+prot_dir="/Users/anna/work/euk_local/uniprot_proteomes/renamed_fastas/"
+out_dir="/Users/anna/work/euk_local/cogs_arcogs/COGs/hmm_results/"
 
 cd $prot_dir
 e_threshold="1"
@@ -11,7 +11,7 @@ mkdir $out_dir
 
 for proteome in *.fasta
 do
-    for cog_hmm in $cog_dir*.hmm
+    for cog_hmm in $cog_hmm_dir*.hmm
         do
             result=$out_dir
             hmm_name="$(basename -- $cog_hmm)"

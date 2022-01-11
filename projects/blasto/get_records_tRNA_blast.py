@@ -53,9 +53,9 @@ def write_blast_seqs(blast_report_path, query_path, subject_path, outfolder):
         SeqIO.write(results, outpath, "fasta")
     return 0
 
-blast_report_path="/Users/anna/work/blasto_local/tRNA/tRNAseq/reference_RNAs_B_nonstop/blast_reports/p57_cyto_vsearch_out_aligned.fasta_bl_report_best.csv"
-query_path="/Users/anna/work/blasto_local/tRNA/tRNAseq/p57_cyto_vsearch_out_aligned.fasta"
-subject_path="/Users/anna/work/blasto_local/tRNA/tRNAseq/reference_RNAs_B_nonstop.fasta"
+blast_report_path="/Users/anna/work/blasto_local/tRNA/tRNAseq/reference_RNAs_B_nonstop_corrected/blast_reports/corrected_assembly_tRNA_vsearch_clusters.fasta_bl_report_best.csv"
+query_path="/Users/anna/work/blasto_local/tRNA/tRNAseq/corrected_assembly_tRNA_vsearch_clusters.fasta"
+subject_path="/Users/anna/work/blasto_local/tRNA/tRNAseq/corrected_assembly_tRNA_vsearch_clusters.fasta"
 outfolder="/Users/anna/work/blasto_local/tRNA/tRNAseq/fasta_results_tRNAseq/"
 
 write_blast_seqs(blast_report_path, query_path, subject_path, outfolder)
