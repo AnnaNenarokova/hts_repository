@@ -71,7 +71,7 @@ def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, n_best=5, 
 		SeqIO.write(out_records, outpath, "fasta")
 	return 0
 
-hmm_report_dir = "/Users/anna/work/euk_local/cogs_arcogs/COGs/hmm_results/"
+hmm_report_dir = "/Users/anna/work/euk_local/cogs_arcogs/COGs/hmm_results_filt/"
 proteome_dir = "/Users/anna/work/euk_local/uniprot_proteomes/renamed_fastas/"
 cog_dir = "/Users/anna/work/euk_local/cogs_arcogs/COGs/fasta_filtered/"
 result_dir = "/Users/anna/work/euk_local/cogs_arcogs/COGs/fasta_results_with_euks/"

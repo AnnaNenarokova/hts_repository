@@ -1,8 +1,8 @@
 #!/bin/bash
 
-cog_hmm_dir="/Users/anna/work/euk_local/cogs_arcogs/COGs/hmm_unfiltered_cogs/"
+cog_hmm_dir="/Users/anna/work/euk_local/cogs_arcogs/COGs/hmm_filtered_cogs/"
 prot_dir="/Users/anna/work/euk_local/uniprot_proteomes/renamed_fastas/"
-out_dir="/Users/anna/work/euk_local/cogs_arcogs/COGs/hmm_results/"
+out_dir="/Users/anna/work/euk_local/cogs_arcogs/COGs/hmm_results_filt/"
 
 cd $prot_dir
 e_threshold="1"
