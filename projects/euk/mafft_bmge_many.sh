@@ -8,6 +8,6 @@ for fasta in *.faa
 do
   aligned=$aligned_dir$fasta".aligned"
   mafft-linsi $fasta > $aligned
-  trimmed=$trimmed_dir$fasta".trimmed.fasta"
+  trimmed=$trimmed_dir$fasta
   bmge -i $aligned -t AA -m BLOSUM30 -o $trimmed
 done
