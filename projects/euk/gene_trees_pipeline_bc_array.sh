@@ -21,4 +21,4 @@ java -jar $bmge -i $msa -t "AA" -m BLOSUM30 -of $trimmed_msa
 
 cd tree_dir
 
-$iqtree -s $f -m MFP -bb 1000 -nt 10
+$iqtree -s $f -m MFP -bb 1000 -nt AUTO
