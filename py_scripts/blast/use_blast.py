@@ -40,7 +40,7 @@ custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch 
 
 # query_folder = "/media/4TB1/blastocrithidia/blast_searches/datasets/tritrypdb_52/proteins/"
 query_paths= [
-    "/Users/anna/work/blasto_local/tRNA/tRNAseq/corrected_assembly_tRNA_vsearch_clusters.fasta"
+    "/Users/anna/work/blasto_local/oxopap_ambar/all_clipped/wrong_orientation_fw_inserts.fasta"
     ]
 
 subj_paths = [

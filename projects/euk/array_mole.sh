@@ -7,4 +7,4 @@
 #SBATCH --mem=1000M
 #SBATCH --array=1-172
 
-srun gene_trees_pipeline_array.sh
+srun gene_trees_pipeline_bc_array.sh

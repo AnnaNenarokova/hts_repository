@@ -1,11 +1,11 @@
 #!/bin/bash
 
-cog_hmm_dir="/Users/anna/work/euk_local/cogs_arcogs/COGs/hmm_filtered_cogs/"
+cog_hmm_dir="/Users/anna/work/euk_local/ed/ed_markers/hmm_filtered/"
 prot_dir="/Users/anna/work/euk_local/uniprot_proteomes/renamed_fastas/"
-out_dir="/Users/anna/work/euk_local/cogs_arcogs/COGs/hmm_results_filt/"
+out_dir="/Users/anna/work/euk_local/ed/ed_markers/hmm_results_filt/"
 
 cd $prot_dir
-e_threshold="1"
+e_threshold="0.0001"
 
 mkdir $out_dir
 
