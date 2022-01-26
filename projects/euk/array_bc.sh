@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=iqtree_array
-#SBATCH --partition=cpu*
+#SBATCH --partition=cpu
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=10
@@ -9,4 +9,5 @@
 #SBATCH --mem=1000M
 #SBATCH --array=1-27
 
-srun /user/home/vl18625/code/ngs/projects/euk/gene_trees_pipeline_bc_array.sh
+cd /user/home/vl18625/code/ngs/projects/euk/
+srun gene_trees_pipeline_bc_array.sh
