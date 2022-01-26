@@ -9,4 +9,4 @@
 #SBATCH --mem=1000M
 #SBATCH --array=1-27
 
-srun gene_trees_pipeline_bc_array.sh
+srun /user/home/vl18625/code/ngs/projects/euk/gene_trees_pipeline_bc_array.sh
