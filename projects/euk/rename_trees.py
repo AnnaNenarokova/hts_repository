@@ -2,22 +2,15 @@
 from ete3 import Tree
 import csv
 from os import listdir
+from py_scripts.helpers.parse_csv import *
 
 def listdir_nohidden(path):
     for f in listdir(path):
         if not f.startswith('.'):
             yield f
 
-def csv_to_dict_simple(csv_path, delimiter=','):
-    csv_dict = {}
-    with open(csv_path) as handle_file:
-        handle_csv = csv.reader(handle_file, delimiter=delimiter)
-        for row in handle_csv:
-            csv_dict[row[0]] = row[1]
-        handle_file.close()
-    return csv_dict
 
-def rename_trees(treedir, name_info_path):
+def annotate_trees(treedir, name_info_path):
     name_dict = csv_to_dict_simple(name_info_path)
     for tree_file in listdir_nohidden(treedir):
         tree_path = treedir + tree_file

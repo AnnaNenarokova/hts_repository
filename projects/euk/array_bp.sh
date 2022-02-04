@@ -10,4 +10,4 @@
 #SBATCH --array=1-27
 
 cd /user/home/vl18625/code/ngs/projects/euk/
-srun gene_trees_pipeline_bc_array.sh
+srun gene_trees_pipeline_bp_array.sh

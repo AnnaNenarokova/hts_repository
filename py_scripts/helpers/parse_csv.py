@@ -1,8 +1,7 @@
 #!/usr/bin/python
 import csv
 import sys
-sys.path.insert(0, "/Users/annanenarokova/work/code/ngs/")
-sys.path.insert(0, "/home/users/nenarokova/ngs/")
+sys.path.insert(0, "/Users/anna/work/code/ngs/")
 from py_scripts.helpers.parse_dicts import *
 
 def parse_csv(csv_path, delimiter=','):
