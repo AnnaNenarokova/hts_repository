@@ -4,7 +4,7 @@
 #SBATCH --partition=taw
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=8
+#SBATCH --cpus-per-task=2
 #SBATCH --time=14-00:0:0
 #SBATCH --mem=100G
 #SBATCH --array=1-11
