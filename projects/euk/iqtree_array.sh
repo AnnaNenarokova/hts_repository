@@ -1,7 +1,7 @@
 #!/bin/bash
 module load apps/iqtree/2.1.3
 
-workdir="/mnt/storage/scratch/vl18625/ed_cogs_with_euks/"
+workdir="/user/home/vl18625/euk/ed_markers/trees_refitted/"
 
 cd $workdir
 
