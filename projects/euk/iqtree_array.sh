@@ -5,7 +5,7 @@ workdir="/user/home/vl18625/euk/ed_markers/trees_refitted/"
 
 cd $workdir
 
-file=$(ls *.fasta | sed -n ${SLURM_ARRAY_TASK_ID}p)
+file=$(ls *.faa | sed -n ${SLURM_ARRAY_TASK_ID}p)
 
 echo $file
 
