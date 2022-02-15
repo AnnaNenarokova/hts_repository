@@ -8,10 +8,6 @@ fasta_dir="/user/home/vl18625/euk/ed_markers/unaligned/"
 msa_dir="/user/home/vl18625/euk/ed_markers/aligned/"
 trimmed_msa_dir="/user/home/vl18625/euk/ed_markers/aligned_trimmed/"
 
-mkdir $msa_dir
-mkdir $trimmed_msa_dir
-mkdir $tree_dir
-
 cd $fasta_dir
 fasta=$(ls *.faa | sed -n ${SLURM_ARRAY_TASK_ID}p)
 
