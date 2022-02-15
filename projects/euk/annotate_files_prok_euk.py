@@ -44,6 +44,26 @@ def annotate_tree(tree, prok_info_dict, euk_info_dict):
         used_names.append(new_name)
     return tree
 
+def annotate_msa(infasta_path, outfasta_path, prok_info_dict, euk_info_dict):
+    with open(infasta_path) as infasta, open(outfasta_path, "w") as outfasta:
+        lines = infasta.readlines()
+        for line in lines:
+            if line[0] == ">":
+                id = line.rstrip()[1::]
+                if id in prok_info_dict.keys():
+                    id_dict = prok_info_dict[id]
+                    description = '_'.join([id, id_dict['Domain'], id_dict['Phylum'], id_dict['Class'], id_dict['Order']])
+                elif id in euk_info_dict.keys():
+                    description = euk_info_dict[id]
+                else:
+                    print(id, "was not found in any dicts!")
+                    description = ""
+                new_line = ">" + id + " " + description + "\n"
+            else:
+                new_line = line
+            outfasta.write(new_line)
+    return outfasta_path
+
 def annotate_trees(in_treedir, out_treedir, prok_info_path, euk_fasta_folder):
     prok_info_dict = csv_to_dict(prok_info_path, main_key="id", delimiter=',')
     euk_info_dict = prepare_euk_info(euk_fasta_folder)
@@ -55,9 +75,22 @@ def annotate_trees(in_treedir, out_treedir, prok_info_path, euk_fasta_folder):
         tree.write(format=2, outfile=new_tree_path)
     return 0
 
+def annotate_msas(in_dir, out_dir, prok_info_path, euk_fasta_folder):
+    prok_info_dict = csv_to_dict(prok_info_path, main_key="id", delimiter=',')
+    euk_info_dict = prepare_euk_info(euk_fasta_folder)
+    for fasta_file in listdir_nohidden(in_dir):
+        infasta_path = in_dir + fasta_file
+        outfasta_path = out_dir + fasta_file
+        annotate_msa(infasta_path, outfasta_path, prok_info_dict, euk_info_dict)
+    return 0
+
 in_treedir="/Users/anna/work/euk_local/ed_markers/trees/"
 out_treedir="/Users/anna/work/euk_local/ed_markers/trees_annotated/"
+infasta_dir="/Users/anna/work/euk_local/ed_markers/fasta_with_euks/aligned_trimmed/"
+outfasta_dir="/Users/anna/work/euk_local/ed_markers/fasta_with_euks/al_trimmed_annotated/"
 prok_info_path="/Users/anna/work/euk_local/ed_markers/S3_700ArcBac_species_list.csv"
 euk_fasta_folder="/Users/anna/work/euk_local/uniprot_proteomes/original_fastas/"
 
-annotate_trees(in_treedir, out_treedir, prok_info_path, euk_fasta_folder)
+# annotate_trees(in_treedir, out_treedir, prok_info_path, euk_fasta_folder)
+
+annotate_msas(infasta_dir, outfasta_dir, prok_info_path, euk_fasta_folder)
