@@ -58,10 +58,11 @@ def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, n_best=5, 
 				if record.id in proteome_dict[cog]:
 					hmm_dict[proteome][cog][sseqid] = record
 	print("Writing down sequences")
-	for cog in listdir_nohidden(cog_dir):
+	for cog_file in listdir_nohidden(cog_dir):
+		cog = cog_file.split(".fasta")[0]
 		out_records = []
-		cog_path = cog_dir + cog
-		outpath = result_dir + cog
+		cog_path = cog_dir + cog_file
+		outpath = result_dir + cog_file
 		for record in SeqIO.parse(cog_path, "fasta"):
 			out_records.append(record)
 		for proteome in hmm_dict:
@@ -71,9 +72,9 @@ def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, n_best=5, 
 		SeqIO.write(out_records, outpath, "fasta")
 	return 0
 
-hmm_report_dir = "/Users/anna/work/euk_local/ed_markers/hmm_results_filt/"
-proteome_dir = "/Users/anna/work/euk_local/uniprot_proteomes/renamed_fastas/"
-cog_dir = "/Users/anna/work/euk_local/ed_markers/fasta_filtered/"
-result_dir = "/Users/anna/work/euk_local/ed_markers/fasta_with_euks/"
+hmm_report_dir = "/Users/vl18625/work/euk/ollie_data/hmm-searches-txt/"
+proteome_dir = "/Users/vl18625/work/euk/ollie_data/proteomes/"
+cog_dir = "/Users/vl18625/work/euk/ollie_data/cogs-allfastas/"
+result_dir = "/Users/vl18625/work/euk/ollie_data/hmm-searches-fasta/"
 
 prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir)
