@@ -5,7 +5,7 @@ prot_dir="/Users/anna/work/euk_local/uniprot_proteomes/renamed_fastas/"
 out_dir="/Users/anna/work/euk_local/ed/ed_markers/hmm_results_filt/"
 
 cd $prot_dir
-e_threshold="0.0001"
+e_threshold="0.00001"
 
 mkdir $out_dir
 
