@@ -88,7 +88,7 @@ def prepare_fastas_keep_list(keep_list_path, hmm_report_dir, proteome_dir, cog_d
 	for proteome in listdir_nohidden(proteome_dir):
 		proteome_id = proteome.split("_")[0]
 		if proteome_id in keep_list:
-			proteome_list.add(proteome)
+			proteome_set.add(proteome)
 			proteome_dict = hmm_dict[proteome]
 			proteome_path = proteome_dir + proteome
 			for record in SeqIO.parse(proteome_path, "fasta"):
