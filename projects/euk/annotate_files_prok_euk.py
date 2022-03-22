@@ -84,13 +84,15 @@ def annotate_msas(in_dir, out_dir, prok_info_path, euk_fasta_folder):
         annotate_msa(infasta_path, outfasta_path, prok_info_dict, euk_info_dict)
     return 0
 
-in_treedir="/Users/anna/work/euk_local/elife_markers/trees/new_trees/new_new_trees/"
-out_treedir="/Users/anna/work/euk_local/elife_markers/trees/new_trees/trees_annotated/"
-infasta_dir="/Users/anna/work/euk_local/elife_markers/fasta_with_euks/aligned_trimmed/"
-outfasta_dir="/Users/anna/work/euk_local/elife_markers/fasta_with_euks/al_trimmed_annotated/"
+
+in_treedir="/Users/anna/work/euk_local/elife_markers/trees/alphabac_tests/constrained_trees/"
+out_treedir="/Users/anna/work/euk_local/elife_markers/trees/alphabac_tests/annotated_constrained_trees/"
+
 prok_info_path="/Users/anna/work/euk_local/elife_markers/S3_700ArcBac_species_list.csv"
 euk_fasta_folder="/Users/anna/work/euk_local/uniprot_proteomes/original_fastas/"
 
 annotate_trees(in_treedir, out_treedir, prok_info_path, euk_fasta_folder)
 
+# infasta_dir="/Users/anna/work/euk_local/elife_markers/fasta_with_euks/aligned_trimmed/"
+# outfasta_dir="/Users/anna/work/euk_local/elife_markers/fasta_with_euks/al_trimmed_annotated/"
 # annotate_msas(infasta_dir, outfasta_dir, prok_info_path, euk_fasta_folder)

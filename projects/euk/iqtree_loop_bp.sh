@@ -17,5 +17,5 @@ cd $workdir
 for f in *.faa
 do
     echo $f
-    iqtree -s $f iqtree2 -s alignment.aln -mset LG -madd "LG+C20,LG+C20+F" -score-diff ALL -bb 1000 -nt AUTO
+    iqtree -s $f iqtree2 -s alignment.aln -mset LG -madd "LG+C20,LG+C20+F" -score-diff ALL -bb 1000 -nt 1
 done
