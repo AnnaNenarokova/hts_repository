@@ -104,7 +104,7 @@ def prepare_fastas_keep_list(keep_list_path, hmm_report_dir, proteome_dir, cog_d
 		outpath = result_dir + cog_file
 		for record in SeqIO.parse(cog_path, "fasta"):
 			out_records.append(record)
-		for proteome in proteome_list:
+		for proteome in proteome_set:
 			proteome_cog_dict = hmm_dict[proteome][cog]
 			for sseqid in proteome_cog_dict:
 				out_records.append(proteome_cog_dict[sseqid])
