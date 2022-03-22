@@ -66,7 +66,7 @@ def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, n_best=5, 
 					hmm_dict[proteome][cog][sseqid] = record
 	print("Writing down sequences")
 	for cog_file in listdir_nohidden(cog_dir):
-		cog = cog_file.split(".fasta")[0]
+		cog = cog_file.split(".faa")[0]
 		out_records = []
 		cog_path = cog_dir + cog_file
 		outpath = result_dir + cog_file
