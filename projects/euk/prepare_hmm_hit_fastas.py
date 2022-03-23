@@ -83,9 +83,10 @@ def prepare_fastas_keep_list(keep_list_path, hmm_report_dir, proteome_dir, cog_d
 	keep_list = read_list(keep_list_path)
 	print("Parcing hmm_reports")
 	hmm_dict = prepare_hmm_dict(hmm_report_dir, n_best=n_best, max_evalue=max_evalue)
-	print("Parcing proteomes sequences")
+	print("Parcing proteome sequences")
 	proteome_set = set()
 	for proteome in listdir_nohidden(proteome_dir):
+		print (hmm_dict[proteome])
 		proteome_id = proteome.split("_")[0]
 		if proteome_id in keep_list:
 			proteome_set.add(proteome)
