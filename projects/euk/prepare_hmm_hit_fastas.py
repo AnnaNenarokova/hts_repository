@@ -86,7 +86,6 @@ def prepare_fastas_keep_list(keep_list_path, hmm_report_dir, proteome_dir, cog_d
 	print("Parcing proteome sequences")
 	proteome_set = set()
 	for proteome in listdir_nohidden(proteome_dir):
-		print (hmm_dict[proteome])
 		proteome_id = proteome.split("_")[0]
 		if proteome_id in keep_list:
 			proteome_set.add(proteome)
@@ -105,9 +104,10 @@ def prepare_fastas_keep_list(keep_list_path, hmm_report_dir, proteome_dir, cog_d
 		for record in SeqIO.parse(cog_path, "fasta"):
 			out_records.append(record)
 		for proteome in proteome_set:
-			proteome_cog_dict = hmm_dict[proteome][cog_file]
-			for sseqid in proteome_cog_dict:
-				out_records.append(proteome_cog_dict[sseqid])
+			if cog_file in hmm_dict[proteome]:
+				proteome_cog_dict = hmm_dict[proteome][cog_file]
+				for sseqid in proteome_cog_dict:
+					out_records.append(proteome_cog_dict[sseqid])
 		SeqIO.write(out_records, outpath, "fasta")
 	return 0
 
