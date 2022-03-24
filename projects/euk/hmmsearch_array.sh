@@ -9,7 +9,7 @@ cd $prot_dir
 
 proteome=$(ls *.fasta | sed -n ${SLURM_ARRAY_TASK_ID}p)
 
-for cog_hmm in $cog_hmm_dir*.faa
+for cog_hmm in $cog_hmm_dir*.hmm
     do
         hmm_name="$(basename -- $cog_hmm)"
         result=$out_dir$proteome$hmm_name".txt"
