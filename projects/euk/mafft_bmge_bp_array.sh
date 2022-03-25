@@ -16,5 +16,5 @@ echo $fasta
 msa=$msa_dir$fasta
 trimmed_msa=$trimmed_msa_dir$fasta
 
-mafft $fasta > $msa
+mafft-linsi $fasta > $msa
 java -jar $bmge -i $msa -t "AA" -m BLOSUM30 -of $trimmed_msa
