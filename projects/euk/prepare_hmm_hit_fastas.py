@@ -33,12 +33,12 @@ def parse_hmmreport(hmm_report_path, columns_str=False):
 				results.append(result_dict)
 	return results
 
-def prepare_hmm_dict(hmm_report_dir, n_best=5, max_evalue=0.0001, proteome_ext=".fasta", hmm_ext=".hmm.txt", cog_ext=".faa"):
+def prepare_hmm_dict(hmm_report_dir, proteome_ext, hmm_ext, n_best, max_evalue):
 	hmm_dict = {}
 	for hmm_report in listdir_nohidden(hmm_report_dir):
 		hmm_report_name_split = hmm_report.split(proteome_ext)
 		proteome_file = hmm_report_name_split[0] + proteome_ext
-		cog_file = hmm_report_name_split[1].split(hmm_ext)[0]+".faa"
+		cog_file = hmm_report_name_split[1].split(hmm_ext)[0]
 		if proteome_file not in hmm_dict:
 			hmm_dict[proteome_file] = {}
 		hmm_dict[proteome_file][cog_file] = {}
@@ -52,7 +52,7 @@ def prepare_hmm_dict(hmm_report_dir, n_best=5, max_evalue=0.0001, proteome_ext="
 			hmm_dict[proteome_file][cog_file][hmm_result["sseqid"]] = ""
 	return hmm_dict
 
-def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, n_best=5, max_evalue=0.0001):
+def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, n_best, max_evalue):
 	print("Parcing hmm_reports")
 	hmm_dict = prepare_hmm_dict(hmm_report_dir, n_best=n_best, max_evalue=max_evalue)
 	print("Parcing proteomes sequences")
@@ -79,10 +79,10 @@ def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, n_best=5, 
 		SeqIO.write(out_records, outpath, "fasta")
 	return 0
 
-def prepare_fastas_keep_list(keep_list_path, hmm_report_dir, proteome_dir, cog_dir, result_dir, n_best=10, max_evalue=0.00001):
+def prepare_fastas_keep_list(keep_list_path, hmm_report_dir, proteome_dir, cog_dir, result_dir, hmm_ext=".hmm", prot_ext=".fasta", n_best=10, max_evalue=0.00001):
 	keep_list = read_list(keep_list_path)
 	print("Parcing hmm_reports")
-	hmm_dict = prepare_hmm_dict(hmm_report_dir, n_best=n_best, max_evalue=max_evalue)
+	prepare_hmm_dict(hmm_report_dir, proteome_ext, hmm_ext, n_best, max_evalue)
 	print("Parcing proteome sequences")
 	proteome_set = set()
 	for proteome in listdir_nohidden(proteome_dir):
