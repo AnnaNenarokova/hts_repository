@@ -30,6 +30,6 @@ def filter_fastas(indir, outdir):
 		outfasta = outdir + fasta
 		filter_bad_seqs(infasta, outfasta, len_threshold=0.7)
 
-indir="/Users/anna/work/euk_local/ed/ed_markers/fastas_untrimmed/"
-outdir="/Users/anna/work/euk_local/ed/ed_markers/fastas_filtered/"
+indir="/Users/vl18625/work/euk/ed_markers/raw_27/"
+outdir="/Users/vl18625/work/euk/ed_markers/filtered/"
 filter_fastas(indir, outdir)

@@ -111,10 +111,10 @@ def prepare_fastas_keep_list(keep_list_path, hmm_report_dir, proteome_dir, cog_d
 		SeqIO.write(out_records, outpath, "fasta")
 	return 0
 
-hmm_report_dir = "/user/work/vl18625/euk/nina_markers/all_markers/hmmresults_eukprot/"
+hmm_report_dir = "/user/work/vl18625/euk/ed_markers/hmm_results_all_euks/"
 proteome_dir = "/user/work/vl18625/euk/eukprot/proteins/"
-cog_dir = "/user/work/vl18625/euk/nina_markers/all_markers/faa/"
-result_dir = "/user/work/vl18625/euk/nina_markers/all_markers/faa_with_euks/"
+cog_dir = "/user/work/vl18625/euk/ed_markers/faa_filtered/"
+result_dir = "/user/work/vl18625/euk/ed_markers/faa_with_euks/"
 
 keep_list_path = "/user/work/vl18625/euk/eukprot/anna_euk_keep_list.txt"
 prepare_fastas_keep_list(keep_list_path, hmm_report_dir, proteome_dir, cog_dir, result_dir)
