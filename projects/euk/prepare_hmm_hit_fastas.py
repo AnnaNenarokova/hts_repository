@@ -79,7 +79,7 @@ def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, n_best, ma
 		SeqIO.write(out_records, outpath, "fasta")
 	return 0
 
-def prepare_fastas_keep_list(keep_list_path, hmm_report_dir, proteome_dir, cog_dir, result_dir, hmm_ext=".hmm", prot_ext=".fasta", n_best=10, max_evalue=0.00001):
+def prepare_fastas_keep_list(keep_list_path, hmm_report_dir, proteome_dir, cog_dir, result_dir, hmm_ext=".hmm", proteome_ext=".fasta", n_best=10, max_evalue=0.00001):
 	keep_list = read_list(keep_list_path)
 	print("Parcing hmm_reports")
 	prepare_hmm_dict(hmm_report_dir, proteome_ext, hmm_ext, n_best, max_evalue)
