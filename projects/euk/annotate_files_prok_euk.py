@@ -1,10 +1,13 @@
 #!/usr/bin/python3
-from ete3 import Tree
+# from ete3 import Tree
 from Bio import SeqIO
 import csv
 from os import listdir
 import sys
 sys.path.insert(0, "/Users/anna/work/code/ngs/")
+sys.path.insert(0, "/user/home/vl18625/code/ngs")
+sys.path.insert(0, "/Users/vl18625/work/code/ngs/")
+
 from py_scripts.helpers.parse_csv import *
 
 def listdir_nohidden(path):
@@ -12,7 +15,14 @@ def listdir_nohidden(path):
         if not f.startswith('.'):
             yield f
 
-def prepare_euk_info(fasta_folder):
+def read_list(list_path):
+    result_list = []
+    with open (list_path) as list_file:
+        for line in list_file:
+            result_list.append(line.rstrip())
+    return result_list
+
+def prepare_euk_info_uniprot(fasta_folder):
     annotation_dict = {}
     for filename in listdir_nohidden(fasta_folder):
         print (filename)
@@ -22,6 +32,19 @@ def prepare_euk_info(fasta_folder):
             prot_id = record_id.split("|")[1]
             annotation = record.description
             annotation_dict[prot_id]= annotation
+    return annotation_dict
+
+def prepare_euk_info_eukprot_keeplist(fasta_folder, keep_list):
+    annotation_dict = {}
+    for filename in listdir_nohidden(fasta_folder):
+        print (filename)
+        proteome_id = filename.split("_")[0]
+        if proteome_id in keep_list:
+            fasta_path = fasta_folder + filename
+            for record in SeqIO.parse(fasta_path, "fasta"):
+                record_id = record.id
+                annotation = record.description
+                annotation_dict[record_id]= annotation
     return annotation_dict
 
 def annotate_tree(tree, prok_info_dict, euk_info_dict):
@@ -64,6 +87,23 @@ def annotate_msa(infasta_path, outfasta_path, prok_info_dict, euk_info_dict):
             outfasta.write(new_line)
     return outfasta_path
 
+def annotate_msa_only_prok(infasta_path, outfasta_path, prok_info_dict):
+    with open(infasta_path) as infasta, open(outfasta_path, "w") as outfasta:
+        lines = infasta.readlines()
+        for line in lines:
+            if line[0] == ">":
+                id = line.rstrip()[1::]
+                if id in prok_info_dict.keys():
+                    id_dict = prok_info_dict[id]
+                    description = '_'.join([id, id_dict['Domain'], id_dict['Phylum'], id_dict['Class'], id_dict['Order']])
+                    new_line = ">" + id + " " + description + "\n"
+                else:
+                    new_line = line
+            else:
+                new_line = line
+            outfasta.write(new_line)
+    return outfasta_path
+
 def annotate_trees(in_treedir, out_treedir, prok_info_path, euk_fasta_folder):
     prok_info_dict = csv_to_dict(prok_info_path, main_key="id", delimiter=',')
     euk_info_dict = prepare_euk_info(euk_fasta_folder)
@@ -84,15 +124,29 @@ def annotate_msas(in_dir, out_dir, prok_info_path, euk_fasta_folder):
         annotate_msa(infasta_path, outfasta_path, prok_info_dict, euk_info_dict)
     return 0
 
+def annotate_msas_only_prok(in_dir, out_dir, prok_info_path):
+    prok_info_dict = csv_to_dict(prok_info_path, main_key="id", delimiter=',')
+    for fasta_file in listdir_nohidden(in_dir):
+        infasta_path = in_dir + fasta_file
+        outfasta_path = out_dir + fasta_file
+        annotate_msa_only_prok(infasta_path, outfasta_path, prok_info_dict)
+    return 0
 
-in_treedir="/Users/anna/work/euk_local/elife_markers/trees/alphabac_tests/constrained_trees/"
-out_treedir="/Users/anna/work/euk_local/elife_markers/trees/alphabac_tests/annotated_constrained_trees/"
+def annotate_msas_keep_list(in_dir, out_dir, prok_info_path, euk_fasta_folder, keep_list_path):
+    keep_list = read_list(keep_list_path)
+    print("Reading prokaryote info")
+    prok_info_dict = csv_to_dict(prok_info_path, main_key="id", delimiter=',')
+    print("Reading eukaryote info")
+    euk_info_dict = prepare_euk_info_eukprot_keeplist(fasta_folder, keep_list)
+    print("Annotating sequences")
+    for fasta_file in listdir_nohidden(in_dir):
+        infasta_path = in_dir + fasta_file
+        outfasta_path = out_dir + fasta_file
+        annotate_msa(infasta_path, outfasta_path, prok_info_dict, euk_info_dict)
+    return 0
 
-prok_info_path="/Users/anna/work/euk_local/elife_markers/S3_700ArcBac_species_list.csv"
-euk_fasta_folder="/Users/anna/work/euk_local/uniprot_proteomes/original_fastas/"
+infasta_dir="/Users/vl18625/work/euk/msa_w_euks_trimmed/"
+outfasta_dir="/Users/vl18625/work/euk/msa_w_euks_trimmed_annotated/"
+prok_info_path="/Users/vl18625/work/euk/ed_markers/S3_700ArcBac_species_list.csv"
 
-annotate_trees(in_treedir, out_treedir, prok_info_path, euk_fasta_folder)
-
-# infasta_dir="/Users/anna/work/euk_local/elife_markers/fasta_with_euks/aligned_trimmed/"
-# outfasta_dir="/Users/anna/work/euk_local/elife_markers/fasta_with_euks/al_trimmed_annotated/"
-# annotate_msas(infasta_dir, outfasta_dir, prok_info_path, euk_fasta_folder)
+annotate_msas_only_prok(infasta_dir, outfasta_dir, prok_info_path)
