@@ -11,4 +11,4 @@ fasta=$(ls *.fasta | sed -n ${SLURM_ARRAY_TASK_ID}p)
 
 echo $fasta
 
-busco -i $fasta -l eukaryota_odb10 -o $outdir -m proteins
+busco -i $fasta -l eukaryota_odb10 -o $outdir -m proteins -f
