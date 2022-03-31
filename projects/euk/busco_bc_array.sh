@@ -14,4 +14,4 @@ fasta_path=$indir$fasta
 outdir="/user/work/vl18625/eukprot/eukprot2_proteins_busco/"
 
 cd $outdir
-busco -i $fasta_path -l eukaryota_odb10 -o $fasta -m proteins -f
+busco -i $fasta_path --auto-lineage-euk -o $fasta -m proteins -f
