@@ -3,7 +3,7 @@
 module add languages/anaconda3/3.7
 source activate busco
 
-cd
+indir="/user/work/vl18625/eukprot/eukprot2_proteins/"
 outdir="/user/work/vl18625/eukprot/eukprot2_proteins_busco/"
 cd $indir
 
