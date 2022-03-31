@@ -2,6 +2,8 @@
 
 module add languages/anaconda3/3.7
 source activate busco
+hmmer_dir="/user/home/vl18625/tools/hmmer-3.3.2/src/"
+PATH=$PATH:$hmmer_dir
 
 indir="/user/work/vl18625/eukprot/eukprot2_proteins/"
 cd $indir
