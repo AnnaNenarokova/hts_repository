@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-import os
 import re
 import sys
 sys.path.insert(0, "/Users/anna/work/code/ngs/")
@@ -25,7 +24,7 @@ def parse_hmmreport(hmm_report_path, columns_str=False):
 				results.append(result_dict)
 	return results
 
-def prepare_hmm_dict(hmm_report_dir, proteome_ext, hmm_ext):
+def prepare_hmm_stats_dict(hmm_report_dir, proteome_ext, hmm_ext):
 	hmm_dict = {}
 	for hmm_report in listdir_nohidden(hmm_report_dir):
 		hmm_report_name_split = hmm_report.split(proteome_ext)
@@ -40,11 +39,25 @@ def prepare_hmm_dict(hmm_report_dir, proteome_ext, hmm_ext):
 			hmm_dict[proteome_name][cog_name] += 1
 	return hmm_dict
 
+def sum_hmm_stats_dict(hmm_dict):
+	for proteome in hmm_dict:
+		markers_sum = 0
+		for marker in hmm_dict[proteome]:
+			marker_int = hmm_dict[proteome][marker]
+			marker_bool = int(bool(marker_int))
+			hmm_dict[proteome][marker] = marker_bool
+			markers_sum += marker_bool
+		hmm_dict[proteome]["markers_sum"] = markers_sum
+	return hmm_dict
+
 
 hmm_report_dir = "/Users/vl18625/work/euk/markers_euks/hmm_results_elife_eukrpot2/"
 full_stats_path = "/Users/vl18625/work/euk/markers_euks/hmm_results_elife_eukrpot2.csv"
+sum_stats_path = "/Users/vl18625/work/euk/markers_euks/hmm_results_elife_eukrpot2_sum.csv"
+
 proteome_ext = ".fasta"
 hmm_ext = ".faa"
-hmm_dict = prepare_hmm_dict(hmm_report_dir, proteome_ext, hmm_ext)
-
-write_dict_of_dicts(hmm_dict, full_stats_path, key_name="species")
+hmm_stats_dict = prepare_hmm_stats_dict(hmm_report_dir, proteome_ext, hmm_ext)
+sum_hmm_dict = sum_hmm_stats_dict(hmm_stats_dict)
+write_dict_of_dicts(hmm_stats_dict, full_stats_path, key_name="species")
+write_dict_of_dicts(sum_hmm_dict, sum_stats_path, key_name="species")
