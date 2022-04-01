@@ -57,7 +57,9 @@ sum_stats_path = "/user/work/vl18625/euk/nina_markers/eukprot2_results/hmm_resul
 
 proteome_ext = ".fasta"
 hmm_ext = ".faa"
+print("preparing hmm dict")
 hmm_stats_dict = prepare_hmm_stats_dict(hmm_report_dir, proteome_ext, hmm_ext)
+print("summarizing the results")
 sum_hmm_dict = sum_hmm_stats_dict(hmm_stats_dict)
 write_dict_of_dicts(hmm_stats_dict, full_stats_path, key_name="species")
 write_dict_of_dicts(sum_hmm_dict, sum_stats_path, key_name="species")
