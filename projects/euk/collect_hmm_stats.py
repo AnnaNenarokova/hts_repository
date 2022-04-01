@@ -26,7 +26,10 @@ def parse_hmmreport(hmm_report_path, columns_str=False):
 
 def prepare_hmm_stats_dict(hmm_report_dir, proteome_ext, hmm_ext):
 	hmm_dict = {}
+	i = 0
 	for hmm_report in listdir_nohidden(hmm_report_dir):
+		if i % 1000 == 0:
+			print (i)
 		hmm_report_name_split = hmm_report.split(proteome_ext)
 		proteome_name = hmm_report_name_split[0]
 		cog_name = hmm_report_name_split[1].split(hmm_ext)[0]
@@ -37,6 +40,7 @@ def prepare_hmm_stats_dict(hmm_report_dir, proteome_ext, hmm_ext):
 		hmm_results = parse_hmmreport(hmm_report_path)
 		for hmm_result in hmm_results:
 			hmm_dict[proteome_name][cog_name] += 1
+		i += 1
 	return hmm_dict
 
 def sum_hmm_stats_dict(hmm_dict):
