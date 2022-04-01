@@ -60,7 +60,9 @@ def write_list_of_lists(list_of_lists, outpath, delimiter=',', header=False):
 def write_list_of_dicts(list_of_dicts, outpath, fieldnames=False):
     with open(outpath, 'w') as csvfile:
         if not fieldnames:
-            fieldnames = list_of_dicts[0].keys()
+            fieldnames = list(list_of_dicts[0].keys())
+            fieldnames.sort()
+            print (fieldnames)
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         for row in list_of_dicts:

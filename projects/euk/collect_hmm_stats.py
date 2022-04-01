@@ -51,19 +51,18 @@ def sum_hmm_stats_dict(hmm_dict):
 			marker_bool = int(bool(marker_int))
 			hmm_dict[proteome][marker] = marker_bool
 			markers_sum += marker_bool
-		hmm_dict[proteome]["markers_sum"] = markers_sum
+		hmm_dict[proteome]["01_markers_sum"] = markers_sum
 	return hmm_dict
 
-
-hmm_report_dir = "/user/work/vl18625/euk/nina_markers/eukprot2_results/hmmresults_eukprot/"
-full_stats_path = "/user/work/vl18625/euk/nina_markers/eukprot2_results/hmm_results_ninam_eukrpot2.csv"
-sum_stats_path = "/user/work/vl18625/euk/nina_markers/eukprot2_results/hmm_results_ninam_eukrpot2_sum.csv"
+hmm_report_dir = "/user/work/vl18625/euk/nina_markers/eukprot3_results/hmm_results/"
+full_stats_path = "/user/work/vl18625/euk/nina_markers/eukprot3_results/hmm_results_ninam_eukrpot3.csv"
+sum_stats_path = "/user/work/vl18625/euk/nina_markers/eukprot3_results/hmm_results_ninam_eukrpot3_sum.csv"
 
 proteome_ext = ".fasta"
 hmm_ext = ".faa"
 print("preparing hmm dict")
 hmm_stats_dict = prepare_hmm_stats_dict(hmm_report_dir, proteome_ext, hmm_ext)
 print("summarizing the results")
+write_dict_of_dicts(hmm_stats_dict, full_stats_path, key_name="00_species")
 sum_hmm_dict = sum_hmm_stats_dict(hmm_stats_dict)
-write_dict_of_dicts(hmm_stats_dict, full_stats_path, key_name="species")
-write_dict_of_dicts(sum_hmm_dict, sum_stats_path, key_name="species")
+write_dict_of_dicts(sum_hmm_dict, sum_stats_path, key_name="00_species")
