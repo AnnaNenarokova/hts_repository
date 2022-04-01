@@ -1,4 +1,11 @@
 #!/usr/bin/python
+import shutil
+import os
+
+def listdir_nohidden(path):
+	for f in os.listdir(path):
+		if not f.startswith('.'):
+			yield f
 
 def read_list(list_path):
 	result_list = []
@@ -7,23 +14,18 @@ def read_list(list_path):
 			result_list.append(line.rstrip())
 	return result_list
 
+def copy_files(ids_path, indir, outdir):
+	ids_list = read_list(ids_path)
+	for file_name in listdir_nohidden(indir):
+		id = file_name.split("_")[0]
+		if id in ids_list:
+			print ("copying", file_name)
+			file_path = indir + file_name
+			outpath = outdir + file_name
+			shutil.copyfile(file_path, outpath)
+	return 0
 
-ids_path = "/Users/vl18625/work/euk/134_euk_id_list.txt"
-
-full_file_names_path = "/Users/vl18625/work/euk/euk_list.txt"
-
-full_file_names_list = read_list(full_file_names_path)
-
-ids_list = read_list(ids_path)
-
-keep_files = []
-for file_name in full_file_names_list:
-	if file_name.split("_")[0] in ids_list:
-		keep_files.append(file_name)
-
-outfile_path = "/Users/vl18625/work/euk/get_132_proteomes.sh"
-outdir = "/user/work/vl18625/euk/eukprot/132_euk_prots/"
-with open(outfile_path, "w") as outfile:
-	for file in keep_files:
-		line = "cp " + file + " " + outdir + '\n'
-		outfile.write(line)
+ids_path = "/Users/anna/work/euk_local/EukProt_Data/anna_euk_keep_list.txt"
+indir = "/Users/anna/work/euk_local/EukProt_Data/12417881/proteins/"
+outdir = "/Users/anna/work/euk_local/EukProt_Data/132_proteomes/"
+copy_files(ids_path, indir, outdir)

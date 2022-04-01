@@ -40,8 +40,8 @@ def annotate_trees(in_treedir, out_treedir, info_path):
         tree.write(format=2, outfile=new_tree_path)
     return 0
 
-in_treedir="/Users/vl18625/work/euk/ed_markers/toyset_trees/"
-out_treedir="/Users/vl18625/work/euk/ed_markers/toyset_trees_annotated/"
-info_path="/Users/vl18625/work/euk/ed_markers/S3_700ArcBac_species_list.csv"
+in_treedir="/Users/anna/work/euk_local/elife_markers/euk_large_set/trees/21trees/"
+out_treedir="/Users/anna/work/euk_local/elife_markers/euk_large_set/trees/21trees_annotated/"
+info_path="/Users/anna/work/euk_local/elife_markers/S3_700ArcBac_species_list.csv"
 
 annotate_trees(in_treedir, out_treedir, info_path)
