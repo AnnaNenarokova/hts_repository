@@ -33,7 +33,7 @@ def check_fastas(indir, outpath):
 # indir = "/Users/vl18625/work/euk/eukprot/proteins/"
 # outpath = "/Users/vl18625/work/euk/eukprot/eukprot3_bad_seqs_stats.txt"
 
-indir = "/user/work/vl18625/euk/eukprot/eukprot2/proteins"
+indir = "/user/work/vl18625/euk/eukprot/eukprot2/proteins/"
 outpath = "/user/work/vl18625/euk/eukprot/eukprot2/eukprot2_bad_seqs_stats.txt"
 
 check_fastas(indir, outpath)
