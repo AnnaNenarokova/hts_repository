@@ -55,7 +55,7 @@ def sum_hmm_stats_dict(hmm_dict):
 	return hmm_dict
 
 hmm_report_dir = "/user/work/vl18625/euk/nina_markers/eukprot3_results/hmm_results/"
-full_stats_path = "/user/work/vl18625/euk/nina_markers/eukprot3_results/hmm_results_ninam_eukrpot3.csv"
+full_stats_path = "/user/work/vl18625/euk/nina_markers/eukprot3_results/hmm_results_ninam_eukrpot3c.csv"
 sum_stats_path = "/user/work/vl18625/euk/nina_markers/eukprot3_results/hmm_results_ninam_eukrpot3_sum.csv"
 
 proteome_ext = ".fasta"
