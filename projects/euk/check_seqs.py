@@ -22,18 +22,19 @@ def check_fastas(indir, outpath):
 				all_seq_n += 1
 				if any(x in bad_symbols for x in record.seq):
 					bad_seq_n += 1
-			species_info_split = fasta_file.split(".fasta")[0].split("_")
-			out_list = species_info_split
-			out_list.extend([str(bad_seq_n), str(all_seq_n)])
+			species_info = fasta_file.split(".fasta")[0]
+			species_info_split = species_info.split("_")
+			id = species_info_split[0]
+			out_list =[id, species_info, str(bad_seq_n), str(all_seq_n)]
 			out_line = "\t".join(out_list) + "\n"
 			outfile.write(out_line)
 			i +=1
 	return outpath
 
 # indir = "/Users/vl18625/work/euk/eukprot/proteins/"
-# outpath = "/Users/vl18625/work/euk/eukprot/eukprot3_bad_seqs_stats.txt"
+# outpath = "/Users/vl18625/work/euk/eukprot/eukprot3_bad_seqs_stats.tsv"
 
 indir = "/user/work/vl18625/euk/eukprot/eukprot2/proteins/"
-outpath = "/user/work/vl18625/euk/eukprot/eukprot2/eukprot2_bad_seqs_stats.txt"
+outpath = "/user/work/vl18625/euk/eukprot/eukprot2/eukprot2_bad_seqs_stats.tsv"
 
 check_fastas(indir, outpath)
