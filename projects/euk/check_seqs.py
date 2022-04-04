@@ -20,7 +20,7 @@ def check_fastas(indir, outpath):
 			fasta_path = indir + fasta_file
 			for record in SeqIO.parse(fasta_path, "fasta"):
 				all_seq_n += 1
-				if any(x in bad_symbols for x in record.seq):
+				if any(x in bad_symbols for x in record.seq[:-1]):
 					bad_seq_n += 1
 			species_info = fasta_file.split(".fasta")[0]
 			species_info_split = species_info.split("_")
@@ -31,10 +31,10 @@ def check_fastas(indir, outpath):
 			i +=1
 	return outpath
 
-# indir = "/Users/vl18625/work/euk/eukprot/proteins/"
-# outpath = "/Users/vl18625/work/euk/eukprot/eukprot3_bad_seqs_stats.tsv"
+indir = "/Users/vl18625/work/euk/eukprot/eukprot3/proteins/"
+outpath = "/Users/vl18625/work/euk/eukprot/eukprot3/bad_seqs_stats.tsv"
 
-indir = "/user/work/vl18625/euk/eukprot/eukprot2/proteins/"
-outpath = "/user/work/vl18625/euk/eukprot/eukprot2/eukprot2_bad_seqs_stats.tsv"
+# indir = "/user/work/vl18625/euk/eukprot/eukprot2/proteins/"
+# outpath = "/user/work/vl18625/euk/eukprot/eukprot2/eukprot2_bad_seqs_stats.tsv"
 
 check_fastas(indir, outpath)
