@@ -31,10 +31,10 @@ def check_fastas(indir, outpath):
 			i +=1
 	return outpath
 
-indir = "/Users/vl18625/work/euk/eukprot/eukprot3/proteins/"
-outpath = "/Users/vl18625/work/euk/eukprot/eukprot3/bad_seqs_stats.tsv"
+# indir = "/Users/vl18625/work/euk/eukprot/eukprot3/proteins/"
+# outpath = "/Users/vl18625/work/euk/eukprot/eukprot3/bad_seqs_stats.tsv"
 
-# indir = "/user/work/vl18625/euk/eukprot/eukprot2/proteins/"
-# outpath = "/user/work/vl18625/euk/eukprot/eukprot2/eukprot2_bad_seqs_stats.tsv"
+indir = "/user/work/vl18625/euk/eukprot/eukprot2/proteins/"
+outpath = "/user/work/vl18625/euk/eukprot/eukprot2/eukprot2_bad_seqs_stats.tsv"
 
 check_fastas(indir, outpath)
