@@ -52,7 +52,7 @@ def prepare_hmm_dict(hmm_report_dir, proteome_ext, hmm_ext, n_best, max_evalue):
 			hmm_dict[proteome_file][cog_file][hmm_result["sseqid"]] = ""
 	return hmm_dict
 
-def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, n_best=10, max_evalue=0.00001):
+def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, hmm_ext=".hmm", proteome_ext=".fasta", n_best=10, max_evalue=0.00001):
 	print("Parcing hmm_reports")
 	hmm_dict = prepare_hmm_dict(hmm_report_dir, n_best=n_best, max_evalue=max_evalue)
 	print("Parcing proteomes sequences")
@@ -79,15 +79,15 @@ def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, n_best=10,
 		SeqIO.write(out_records, outpath, "fasta")
 	return 0
 
-def prepare_fastas_keep_list(keep_list_path, hmm_report_dir, proteome_dir, cog_dir, result_dir, hmm_ext=".hmm", proteome_ext=".fasta", n_best=10, max_evalue=0.00001):
-	keep_list = read_list(keep_list_path)
+def prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir, keep_list_path=False, hmm_ext=".hmm", proteome_ext=".fasta", n_best=10, max_evalue=0.00001):
+	if keep_list_path: keep_list = read_list(keep_list_path)
 	print("Parcing hmm_reports")
 	hmm_dict = prepare_hmm_dict(hmm_report_dir, proteome_ext, hmm_ext, n_best, max_evalue)
 	print("Parcing proteome sequences")
 	proteome_set = set()
 	for proteome in listdir_nohidden(proteome_dir):
 		proteome_id = proteome.split("_")[0]
-		if proteome_id in keep_list:
+		if not keep_list_path or (proteome_id in keep_list):
 			proteome_set.add(proteome)
 			proteome_dict = hmm_dict[proteome]
 			proteome_path = proteome_dir + proteome
