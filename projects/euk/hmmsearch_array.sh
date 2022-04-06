@@ -1,9 +1,9 @@
 #!/bin/bash
 module load apps/hmmer/3.3.2
 
-cog_hmm_dir="/user/work/vl18625/euk/ed_markers/hmm_filtered/"
+cog_hmm_dir="/user/work/vl18625/euk/nina_markers/all_markers/hmm_profiles/"
 prot_dir="/user/work/vl18625/euk/eukprot/anna_eukprot3_proteome_dataset/"
-out_dir="/user/work/vl18625/euk/ed_markers/anna_set_results/hmm_results/"
+out_dir="/user/work/vl18625/euk/nina_markers/anna_set_results/hmm_results/"
 
 e_threshold="0.00001"
 

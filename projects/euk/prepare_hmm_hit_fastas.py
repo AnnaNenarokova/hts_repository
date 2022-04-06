@@ -35,7 +35,6 @@ def parse_hmmreport(hmm_report_path, columns_str=False):
 
 def prepare_hmm_dict(hmm_report_dir, hmm_ext, proteome_ext, n_best, max_evalue):
 	hmm_dict = {}
-	print (proteome_ext, hmm_ext)
 	for hmm_report in listdir_nohidden(hmm_report_dir):
 		hmm_report_name_split = hmm_report.split(proteome_ext)
 		proteome_file = hmm_report_name_split[0] + proteome_ext
