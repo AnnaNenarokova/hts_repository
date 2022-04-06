@@ -33,12 +33,11 @@ def parse_hmmreport(hmm_report_path, columns_str=False):
 				results.append(result_dict)
 	return results
 
-def prepare_hmm_dict(hmm_report_dir, proteome_ext, hmm_ext, n_best, max_evalue):
+def prepare_hmm_dict(hmm_report_dir, hmm_ext, proteome_ext, n_best, max_evalue):
 	hmm_dict = {}
 	print (proteome_ext, hmm_ext)
 	for hmm_report in listdir_nohidden(hmm_report_dir):
 		hmm_report_name_split = hmm_report.split(proteome_ext)
-		print(hmm_report_name_split)
 		proteome_file = hmm_report_name_split[0] + proteome_ext
 		cog_file = hmm_report_name_split[1].split(hmm_ext)[0]
 		if proteome_file not in hmm_dict:
@@ -85,7 +84,6 @@ def prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir, 
 	if keep_list_path: keep_list = read_list(keep_list_path)
 	print("Parcing hmm_reports")
 	hmm_dict = prepare_hmm_dict(hmm_report_dir, hmm_ext, proteome_ext, n_best, max_evalue)
-	print(hmm_dict.keys()[:10])
 	print("Parcing proteome sequences")
 	proteome_set = set()
 	for proteome in listdir_nohidden(proteome_dir):
