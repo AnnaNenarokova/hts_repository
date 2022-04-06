@@ -13,8 +13,9 @@ for cog_hmm in $cog_hmm_dir*.hmm
     do
         hmm_name="$(basename -- $cog_hmm)"
         result=$out_dir$proteome$hmm_name".txt"
+        echo $cog_hmm
+        echo $proteome
         echo $result
         hmmsearch -E $e_threshold --tblout $result $cog_hmm $proteome
     done
-
 
