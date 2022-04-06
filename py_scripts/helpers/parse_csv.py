@@ -1,8 +1,16 @@
 #!/usr/bin/python
 import csv
+from os import listdir
 import sys
 sys.path.insert(0, "/Users/anna/work/code/ngs/")
+sys.path.insert(0, "/user/home/vl18625/code/ngs")
+sys.path.insert(0, "/Users/vl18625/work/code/ngs/")
 from py_scripts.helpers.parse_dicts import *
+
+def listdir_nohidden(path):
+    for f in listdir(path):
+        if not f.startswith('.'):
+            yield f
 
 def parse_csv(csv_path, delimiter=','):
     with open(csv_path) as handle_file:
@@ -52,7 +60,8 @@ def write_list_of_lists(list_of_lists, outpath, delimiter=',', header=False):
 def write_list_of_dicts(list_of_dicts, outpath, fieldnames=False):
     with open(outpath, 'w') as csvfile:
         if not fieldnames:
-            fieldnames = list_of_dicts[0].keys()
+            fieldnames = list(list_of_dicts[0].keys())
+            fieldnames.sort()
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         for row in list_of_dicts:
