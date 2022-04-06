@@ -83,7 +83,6 @@ def prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir, 
 	if keep_list_path: keep_list = read_list(keep_list_path)
 	print("Parcing hmm_reports")
 	hmm_dict = prepare_hmm_dict(hmm_report_dir, hmm_ext, proteome_ext, n_best, max_evalue)
-	print(hmm_dict.keys())
 	print("Parcing proteome sequences")
 	proteome_set = set()
 	for proteome in listdir_nohidden(proteome_dir):
@@ -112,9 +111,9 @@ def prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir, 
 		SeqIO.write(out_records, outpath, "fasta")
 	return 0
 
-hmm_report_dir = "/user/work/vl18625/euk/ed_markers/anna_set_results/hmm_results/"
+hmm_report_dir = "/user/work/vl18625/euk/nina_markers/anna_set_results/hmm_results/"
 proteome_dir = "/user/work/vl18625/euk/eukprot/anna_eukprot3_proteome_dataset/"
-cog_dir = "/user/work/vl18625/euk/ed_markers/faa_filtered/"
-result_dir = "/user/work/vl18625/euk/ed_markers/anna_set_results/faa/"
+cog_dir = "/user/work/vl18625/euk/nina_markers/all_markers/faa/"
+result_dir = "/user/work/vl18625/euk/nina_markers/anna_set_results/faa/"
 
 prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir)
