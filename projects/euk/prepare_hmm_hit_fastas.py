@@ -52,7 +52,7 @@ def prepare_hmm_dict(hmm_report_dir, proteome_ext, hmm_ext, n_best, max_evalue):
 			hmm_dict[proteome_file][cog_file][hmm_result["sseqid"]] = ""
 	return hmm_dict
 
-def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, n_best, max_evalue):
+def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, n_best=10, max_evalue=0.00001):
 	print("Parcing hmm_reports")
 	hmm_dict = prepare_hmm_dict(hmm_report_dir, n_best=n_best, max_evalue=max_evalue)
 	print("Parcing proteomes sequences")
@@ -116,5 +116,4 @@ proteome_dir = "/user/work/vl18625/euk/eukprot/anna_eukprot3_proteome_dataset/"
 cog_dir = "/user/work/vl18625/euk/ed_markers/faa_filtered/"
 result_dir = "/user/work/vl18625/euk/ed_markers/anna_set_results/faa/"
 
-keep_list_path = "/user/work/vl18625/euk/eukprot/anna_euk_keep_list.txt"
-prepare_fastas_keep_list(keep_list_path, hmm_report_dir, proteome_dir, cog_dir, result_dir)
+prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir)
