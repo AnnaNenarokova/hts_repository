@@ -14,7 +14,7 @@ fasta=$(ls *.faa | sed -n ${SLURM_ARRAY_TASK_ID}p)
 echo $fasta
 
 msa=$msa_dir$fasta
-hmm_file=$hmm_dir$fasta
+hmm_file=$hmm_dir$fasta".hmm"
 
 mafft --anysymbol $fasta > $msa
 hmmbuild $hmm_file $msa
