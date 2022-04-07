@@ -3,7 +3,7 @@ module load apps/hmmer/3.3.2
 
 cog_hmm_dir="/user/work/vl18625/euk/nina_markers/hmmprofile_COG1034"
 prot_dir="/user/work/vl18625/euk/eukprot/anna_eukprot3_proteome_dataset/"
-out_dir="/user/work/vl18625/euk/nina_markers/anna_set_results/hmm_results/c"
+out_dir="/user/work/vl18625/euk/nina_markers/anna_set_results/hmm_results/"
 
 e_threshold="0.00001"
 
