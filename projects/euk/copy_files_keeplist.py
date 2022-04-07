@@ -25,7 +25,7 @@ def copy_files(ids_path, indir, outdir):
 			shutil.copyfile(file_path, outpath)
 	return 0
 
-ids_path = "/Users/anna/work/euk_local/EukProt_Data/anna_euk_keep_list.txt"
-indir = "/Users/anna/work/euk_local/EukProt_Data/12417881/proteins/"
-outdir = "/Users/anna/work/euk_local/EukProt_Data/132_proteomes/"
+ids_path = "/Users/anna/work/euk_local/eukprot/new_eukprot3_proteomes_list.txt"
+indir = "/Users/anna/work/euk_local/eukprot/eukprot3/proteins/"
+outdir = "/Users/anna/work/euk_local/eukprot/anna_eukprot3_proteome_dataset/"
 copy_files(ids_path, indir, outdir)
