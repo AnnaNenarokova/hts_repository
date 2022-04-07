@@ -16,5 +16,5 @@ echo $fasta
 msa=$msa_dir$fasta
 hmm_file=$hmm_dir$fasta
 
-mafft $fasta > $msa
+mafft --anysymbol $fasta > $msa
 hmmbuild $hmm_file $msa
