@@ -9,7 +9,7 @@ msa_dir="/user/work/vl18625/euk/ed_markers/anna_set_results/monobranch_results/m
 hmm_dir="/user/work/vl18625/euk/ed_markers/anna_set_results/monobranch_results/hmm_profiles/"
 
 cd $fasta_dir
-fasta=$(ls *.faa | sed -n ${SLURM_ARRAY_TASK_ID}p)
+fasta=$(ls *.fasta | sed -n ${SLURM_ARRAY_TASK_ID}p)
 
 echo $fasta
 
