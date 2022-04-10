@@ -1,19 +1,12 @@
 #!/usr/bin/python3
-# from ete3 import Tree
+from ete3 import Tree
 from Bio import SeqIO
-import csv
-from os import listdir
 import sys
 sys.path.insert(0, "/Users/anna/work/code/ngs/")
 sys.path.insert(0, "/user/home/vl18625/code/ngs")
 sys.path.insert(0, "/Users/vl18625/work/code/ngs/")
 
 from py_scripts.helpers.parse_csv import *
-
-def listdir_nohidden(path):
-    for f in listdir(path):
-        if not f.startswith('.'):
-            yield f
 
 def read_list(list_path):
     result_list = []
@@ -56,7 +49,9 @@ def annotate_tree(tree, prok_info_dict, euk_info_dict):
             id_dict = prok_info_dict[id]
             new_name = '_'.join([id, id_dict['Domain'], id_dict['Phylum'], id_dict['Class'], id_dict['Order']])
         elif id in euk_info_dict.keys():
-            new_name = euk_info_dict[id]
+            description = euk_info_dict[id]
+            new_name = id + "\t" + description
+
         else:
             print(id, "was not found in any dicts!")
             new_name = old_name
@@ -104,7 +99,7 @@ def annotate_msa_only_prok(infasta_path, outfasta_path, prok_info_dict):
             outfasta.write(new_line)
     return outfasta_path
 
-def annotate_trees(in_treedir, out_treedir, prok_info_path, euk_fasta_folder):
+def annotate_trees_fasta_files(in_treedir, out_treedir, prok_info_path, euk_fasta_folder):
     prok_info_dict = csv_to_dict(prok_info_path, main_key="id", delimiter=',')
     euk_info_dict = prepare_euk_info(euk_fasta_folder)
     for tree_file in listdir_nohidden(in_treedir):
@@ -145,8 +140,27 @@ def annotate_msas_keep_list(in_dir, out_dir, prok_info_path, euk_fasta_folder, k
         annotate_msa(infasta_path, outfasta_path, prok_info_dict, euk_info_dict)
     return 0
 
-infasta_dir="/Users/vl18625/work/euk/msa_w_euks_trimmed/"
-outfasta_dir="/Users/vl18625/work/euk/msa_w_euks_trimmed_annotated/"
-prok_info_path="/Users/vl18625/work/euk/ed_markers/S3_700ArcBac_species_list.csv"
+def annotate_trees(in_treedir, out_treedir, prok_info_path, euk_info_path):
+    print("Reading prokaryote info")
+    prok_info_dict = csv_to_dict(prok_info_path, main_key="id", delimiter=',')
+    print("Reading eukaryote info")
+    euk_info_dict = csv_to_dict_simple(euk_info_path, delimiter='\t')
+    print("Annotating sequences")
+    for tree_file in listdir_nohidden(in_treedir):
+        tree_path = in_treedir + tree_file
+        tree = Tree(tree_path)
+        new_tree = annotate_tree(tree, prok_info_dict, euk_info_dict)
+        new_tree_path = out_treedir + tree_file
+        tree.write(format=2, outfile=new_tree_path)
+    return 0
 
-annotate_msas_only_prok(infasta_dir, outfasta_dir, prok_info_path)
+# infasta_dir="/Users/vl18625/work/euk/msa_w_euks_trimmed/"
+# outfasta_dir="/Users/vl18625/work/euk/msa_w_euks_trimmed_annotated/"
+# prok_info_path="/Users/vl18625/work/euk/ed_markers/S3_700ArcBac_species_list.csv"
+
+in_treedir="/Users/vl18625/work/euk/markers_euks/25_trees/25_initial_trees/"
+out_treedir="/Users/vl18625/work/euk/markers_euks/25_trees/25_annotated_trees/"
+prok_info_path="/Users/vl18625/work/euk/markers_euks/S3_700ArcBac_species_list.csv"
+euk_info_path="/Users/vl18625/work/euk/eukprot/anna_set_prot_info.tsv"
+
+annotate_trees(in_treedir, out_treedir, prok_info_path, euk_info_path)
