@@ -124,17 +124,23 @@ def prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir, 
 						hmm_dict[proteome][cog_file][sseqid] = record
 	print("Writing down sequences")
 	for cog_file in listdir_nohidden(cog_dir):
-		out_records_set = set()
+		out_set = set()
+		out_records = []
 		cog_path = cog_dir + cog_file
 		outpath = result_dir + cog_file
 		for record in SeqIO.parse(cog_path, "fasta"):
-			out_records_set.update(record)
+			seqid = record.id
+			if seqid not in out_set:
+				out_records.append(record)
+				out_set.update(seqid)
 		for proteome in proteome_set:
 			if cog_file in hmm_dict[proteome]:
 				proteome_cog_dict = hmm_dict[proteome][cog_file]
 				for sseqid in proteome_cog_dict:
-					out_records_set.update(proteome_cog_dict[sseqid])
-		out_records = list(out_records_set)
+					seqid = proteome_cog_dict[sseqid].id
+					if seqid not in out_set:
+						out_records.append(record)
+						out_set.update(seqid)
 		SeqIO.write(out_records, outpath, "fasta")
 	return 0
 
