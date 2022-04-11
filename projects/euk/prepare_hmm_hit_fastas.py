@@ -105,7 +105,7 @@ def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, hmm_ext=".
 		SeqIO.write(out_records, outpath, "fasta")
 	return 0
 
-def prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir, monobranch=False, keep_list_path=False, hmm_ext=".hmm", proteome_ext=".fasta", n_best=10, max_evalue=0.00001):
+def prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir, monobranch=False, keep_list_path=False, hmm_ext=".hmm", proteome_ext=".fasta", n_best=1, max_evalue=0.00001):
 	if keep_list_path: keep_list = read_list(keep_list_path)
 	print("Parcing hmm_reports")
 	hmm_dict = prepare_hmm_dict(hmm_report_dir, hmm_ext, proteome_ext, n_best, max_evalue, monobranch=monobranch)
@@ -124,16 +124,17 @@ def prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir, 
 						hmm_dict[proteome][cog_file][sseqid] = record
 	print("Writing down sequences")
 	for cog_file in listdir_nohidden(cog_dir):
-		out_records = []
+		out_records_set = set()
 		cog_path = cog_dir + cog_file
 		outpath = result_dir + cog_file
 		for record in SeqIO.parse(cog_path, "fasta"):
-			out_records.append(record)
+			out_records_set.update(record)
 		for proteome in proteome_set:
 			if cog_file in hmm_dict[proteome]:
 				proteome_cog_dict = hmm_dict[proteome][cog_file]
 				for sseqid in proteome_cog_dict:
-					out_records.append(proteome_cog_dict[sseqid])
+					out_records_set.update(proteome_cog_dict[sseqid])
+		out_records = list(out_records_set)
 		SeqIO.write(out_records, outpath, "fasta")
 	return 0
 
