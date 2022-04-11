@@ -40,7 +40,7 @@ def prepare_hmm_dict(hmm_report_dir, hmm_ext, proteome_ext, n_best, max_evalue, 
 		proteome_file = hmm_report_name_split[0] + proteome_ext
 		hmm_file = hmm_report_name_split[1].split(hmm_ext)[0]
 		if monobranch:
-			hmm_file_split = cog_file.split("_")
+			hmm_file_split = hmm_file.split("_")
 			cog_file = hmm_file_split[0] + ("_") + hmm_file_split[1] + ".faa"
 		else:
 			cog_file = hmm_file
