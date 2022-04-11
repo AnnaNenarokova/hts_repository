@@ -1,8 +1,8 @@
 #!/bin/bash
 trimal="/Users/vl18625/work/tools/trimAl/source/trimal"
 
-al_dir="/Users/vl18625/work/euk/markers_euks/ed_markers/msa_trimmed/"
-cleaned_dir="/Users/vl18625/work/euk/markers_euks/ed_markers/msa_bmge_trimal_75/"
+al_dir="/Users/vl18625/work/euk/markers_euks/ed_markers/mono_msa_trimmed/"
+cleaned_dir="/Users/vl18625/work/euk/markers_euks/ed_markers/mono_msa_bmge_trimal_75/"
 mkdir $cleaned_dir
 cd $al_dir
 
