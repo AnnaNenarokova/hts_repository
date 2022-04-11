@@ -137,7 +137,8 @@ def prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir, 
 			if cog_file in hmm_dict[proteome]:
 				proteome_cog_dict = hmm_dict[proteome][cog_file]
 				for sseqid in proteome_cog_dict:
-					seqid = proteome_cog_dict[sseqid].id
+					record = proteome_cog_dict[sseqid]
+					seqid = record.id
 					if seqid not in out_set:
 						out_records.append(record)
 						out_set.update(seqid)
