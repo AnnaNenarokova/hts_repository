@@ -1,7 +1,7 @@
 #!/bin/bash
 module load apps/iqtree/2.1.3
 
-workdir="/user/work/vl18625/euk/ed_markers/anna_set_results/msa_bmge_trimal_75/"
+workdir="/user/work/vl18625/euk/ed_markers/anna_set_results/monobranch_linsi/msa_trimmed/"
 
 cd $workdir
 
