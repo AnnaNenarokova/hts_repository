@@ -158,9 +158,9 @@ def annotate_trees(in_treedir, out_treedir, prok_info_path, euk_info_path):
 # outfasta_dir="/Users/vl18625/work/euk/msa_w_euks_trimmed_annotated/"
 # prok_info_path="/Users/vl18625/work/euk/ed_markers/S3_700ArcBac_species_list.csv"
 
-in_treedir="/Users/vl18625/work/euk/markers_euks/25_trees/25_initial_trees/"
-out_treedir="/Users/vl18625/work/euk/markers_euks/25_trees/25_annotated_trees/"
+in_treedir="/Users/vl18625/work/euk/markers_euks/ed_markers/25_trees/monobranch_trees/"
+out_treedir="/Users/vl18625/work/euk/markers_euks/ed_markers/25_trees/monobranch_trees_annotated/"
 prok_info_path="/Users/vl18625/work/euk/markers_euks/S3_700ArcBac_species_list.csv"
-euk_info_path="/Users/vl18625/work/euk/eukprot/anna_set_prot_info.tsv"
+euk_info_path="/Users/vl18625/work/euk/protein_sets/eukprot/anna_set_prot_info.tsv"
 
 annotate_trees(in_treedir, out_treedir, prok_info_path, euk_info_path)

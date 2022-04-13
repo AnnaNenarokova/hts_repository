@@ -51,7 +51,7 @@ def prepare_fastas(seqid_folder, fasta_folder, out_folder):
 		SeqIO.write(out_records, outpath, "fasta")
 	return out_folder
 
-seqid_folder = "/Users/vl18625/work/euk/markers_euks/25_trees/monobranch_lists_euks/"
+seqid_folder = "/Users/vl18625/work/euk/markers_euks/ed_markers/25_trees/cleaned_dataset_for_linsi/cleaned_lists_for_linsi/"
 fasta_folder = "/Users/vl18625/work/euk/protein_sets/anna_eukprot3_proteome_dataset/"
-out_folder = "/Users/vl18625/work/euk/markers_euks/25_trees/monobranch_fastas/"
+out_folder = "/Users/vl18625/work/euk/markers_euks/ed_markers/25_trees/cleaned_dataset_for_linsi/cleaned_fastas/"
 prepare_fastas(seqid_folder, fasta_folder, out_folder)
