@@ -151,4 +151,4 @@ proteome_dir = "/user/work/vl18625/euk/eukprot/anna_eukprot3_proteome_dataset/"
 cog_dir = "/user/work/vl18625/euk/nina_markers/faa/"
 result_dir = "/user/work/vl18625/euk/nina_markers/anna_set_results/faa1/"
 
-prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir
+prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir)
