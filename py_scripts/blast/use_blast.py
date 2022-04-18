@@ -41,7 +41,7 @@ custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch 
 
 # query_folder = "/media/4TB1/blastocrithidia/blast_searches/datasets/tritrypdb_52/proteins/"
 query_paths= [
-    "/user/home/vl18625/blasto/bnonstop_trinity.fasta"
+    "/user/home/vl18625/blasto/p57_all_rRNAs.fa"
     ]
 
 subj_paths = [
@@ -52,7 +52,7 @@ for query_path in query_paths:
 # for query_file in listdir(query_folder):
     # query_path = query_folder + query_file
     for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='nucl', threads=30)
+        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='nucl', threads=5)
         blast_csv_path = new_blast.blast(
                                          bl_type='blastn',
                                          evalue=0.001,
