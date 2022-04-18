@@ -52,7 +52,7 @@ for query_path in query_paths:
 # for query_file in listdir(query_folder):
     # query_path = query_folder + query_file
     for subj_path in subj_paths:
-        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='nucl', threads=5)
+        new_blast = Blast(query_path=query_path,subj_path=subj_path, db_type='nucl', threads=1)
         blast_csv_path = new_blast.blast(
                                          bl_type='blastn',
                                          evalue=0.001,
