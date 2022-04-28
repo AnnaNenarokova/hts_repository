@@ -43,7 +43,7 @@ def prepare_fastas(seqid_folder, fasta_folder, out_folder):
 	seq_dict = prepare_seq_dict(fasta_folder, seqids_set)
 	print ("Writing results")
 	for name in seqid_dict:
-		outpath = out_folder + name + ".fasta"
+		outpath = out_folder + name + ".faa"
 		out_records = []
 		for seqid in seqid_dict[name]:
 			record = seq_dict[seqid]
@@ -51,7 +51,7 @@ def prepare_fastas(seqid_folder, fasta_folder, out_folder):
 		SeqIO.write(out_records, outpath, "fasta")
 	return out_folder
 
-seqid_folder = "/Users/vl18625/work/euk/markers_euks/ed_markers/25_trees/cleaned_dataset_for_linsi/cleaned_lists_for_linsi/"
-fasta_folder = "/Users/vl18625/work/euk/protein_sets/anna_eukprot3_proteome_dataset/"
-out_folder = "/Users/vl18625/work/euk/markers_euks/ed_markers/25_trees/cleaned_dataset_for_linsi/cleaned_fastas/"
+seqid_folder = "/Users/vl18625/work/euk/markers_euks/nina_markers/singlehit_results/euk_largest_branches/treefiles/in/"
+fasta_folder = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_proteome_dataset/"
+out_folder = "/Users/vl18625/work/euk/markers_euks/nina_markers/singlehit_results/euk_largest_branches/euk_fastas/"
 prepare_fastas(seqid_folder, fasta_folder, out_folder)

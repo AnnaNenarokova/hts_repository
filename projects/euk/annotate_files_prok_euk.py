@@ -40,29 +40,8 @@ def prepare_euk_info_eukprot_keeplist(fasta_folder, keep_list):
                 annotation_dict[record_id]= annotation
     return annotation_dict
 
-def annotate_tree(tree, prok_info_dict, euk_info_dict):
-    used_names = []
-    for leaf in tree.iter_leaves():
-        old_name = leaf.name
-        id = old_name
-        if id in prok_info_dict.keys():
-            id_dict = prok_info_dict[id]
-            new_name = '_'.join([id, id_dict['Domain'], id_dict['Phylum'], id_dict['Class'], id_dict['Order']])
-        elif id in euk_info_dict.keys():
-            description = euk_info_dict[id]
-            new_name = id + "\t" + description
 
-        else:
-            print(id, "was not found in any dicts!")
-            new_name = old_name
-        if new_name in used_names:
-            print (id, "is duplicated!")
-            return (1)
-        leaf.name = new_name
-        used_names.append(new_name)
-    return tree
-
-def annotate_msa(infasta_path, outfasta_path, prok_info_dict, euk_info_dict):
+def annotate_msa_elife(infasta_path, outfasta_path, prok_info_dict, euk_info_dict):
     with open(infasta_path) as infasta, open(outfasta_path, "w") as outfasta:
         lines = infasta.readlines()
         for line in lines:
@@ -82,7 +61,7 @@ def annotate_msa(infasta_path, outfasta_path, prok_info_dict, euk_info_dict):
             outfasta.write(new_line)
     return outfasta_path
 
-def annotate_msa_only_prok(infasta_path, outfasta_path, prok_info_dict):
+def annotate_msa_only_prok_elife(infasta_path, outfasta_path, prok_info_dict):
     with open(infasta_path) as infasta, open(outfasta_path, "w") as outfasta:
         lines = infasta.readlines()
         for line in lines:
@@ -98,17 +77,6 @@ def annotate_msa_only_prok(infasta_path, outfasta_path, prok_info_dict):
                 new_line = line
             outfasta.write(new_line)
     return outfasta_path
-
-def annotate_trees_fasta_files(in_treedir, out_treedir, prok_info_path, euk_fasta_folder):
-    prok_info_dict = csv_to_dict(prok_info_path, main_key="id", delimiter=',')
-    euk_info_dict = prepare_euk_info(euk_fasta_folder)
-    for tree_file in listdir_nohidden(in_treedir):
-        tree_path = in_treedir + tree_file
-        tree = Tree(tree_path)
-        new_tree = annotate_tree(tree, prok_info_dict, euk_info_dict)
-        new_tree_path = out_treedir + tree_file
-        tree.write(format=2, outfile=new_tree_path)
-    return 0
 
 def annotate_msas(in_dir, out_dir, prok_info_path, euk_fasta_folder):
     prok_info_dict = csv_to_dict(prok_info_path, main_key="id", delimiter=',')
@@ -140,7 +108,60 @@ def annotate_msas_keep_list(in_dir, out_dir, prok_info_path, euk_fasta_folder, k
         annotate_msa(infasta_path, outfasta_path, prok_info_dict, euk_info_dict)
     return 0
 
-def annotate_trees(in_treedir, out_treedir, prok_info_path, euk_info_path):
+def annotate_tree_euk_elife(tree, prok_info_dict, euk_info_dict):
+    used_names = []
+    for leaf in tree.iter_leaves():
+        old_name = leaf.name
+        id = old_name
+        if id in prok_info_dict.keys():
+            id_dict = prok_info_dict[id]
+            new_name = '_'.join([id, id_dict['Domain'], id_dict['Phylum'], id_dict['Class'], id_dict['Order']])
+        elif id in euk_info_dict.keys():
+            description = euk_info_dict[id]
+            new_name = id + "\t" + description
+
+        else:
+            print(id, "was not found in any dicts!")
+            new_name = old_name
+        if new_name in used_names:
+            print (id, "is duplicated!")
+            return (1)
+        leaf.name = new_name
+        used_names.append(new_name)
+    return tree
+
+def annotate_tree_nina(tree, prok_info_dict, euk_info_dict):
+    used_names = []
+    for leaf in tree.iter_leaves():
+        old_name = leaf.name
+        id = old_name
+        genome_id = id.split("-")[0]
+        if genome_id in prok_info_dict.keys():
+            new_name = prok_info_dict[genome_id] + "_" + old_name
+        elif id in euk_info_dict.keys():
+            description = euk_info_dict[id]
+            new_name = id + "\t" + description
+        else:
+            print(id, genome_id, "were not found in any dicts!")
+            new_name = old_name
+        if new_name in used_names:
+            print (id, "is duplicated!")
+        leaf.name = new_name
+        used_names.append(new_name)
+    return tree
+
+def annotate_trees_fasta_files(in_treedir, out_treedir, prok_info_path, euk_fasta_folder):
+    prok_info_dict = csv_to_dict(prok_info_path, main_key="id", delimiter=',')
+    euk_info_dict = prepare_euk_info(euk_fasta_folder)
+    for tree_file in listdir_nohidden(in_treedir):
+        tree_path = in_treedir + tree_file
+        tree = Tree(tree_path)
+        new_tree = annotate_tree(tree, prok_info_dict, euk_info_dict)
+        new_tree_path = out_treedir + tree_file
+        tree.write(format=2, outfile=new_tree_path)
+    return 0
+
+def annotate_trees_elife(in_treedir, out_treedir, prok_info_path, euk_info_path):
     print("Reading prokaryote info")
     prok_info_dict = csv_to_dict(prok_info_path, main_key="id", delimiter=',')
     print("Reading eukaryote info")
@@ -154,13 +175,33 @@ def annotate_trees(in_treedir, out_treedir, prok_info_path, euk_info_path):
         tree.write(format=2, outfile=new_tree_path)
     return 0
 
-# infasta_dir="/Users/vl18625/work/euk/msa_w_euks_trimmed/"
-# outfasta_dir="/Users/vl18625/work/euk/msa_w_euks_trimmed_annotated/"
-# prok_info_path="/Users/vl18625/work/euk/ed_markers/S3_700ArcBac_species_list.csv"
 
-in_treedir="/Users/vl18625/work/euk/markers_euks/ed_markers/converged_18Apr/"
-out_treedir="/Users/vl18625/work/euk/markers_euks/ed_markers/converged_18Apr_annotated/"
-prok_info_path="/Users/vl18625/work/euk/markers_euks/S3_700ArcBac_species_list.csv"
-euk_info_path="/Users/vl18625/work/euk/protein_sets/eukprot/anna_set_prot_info.tsv"
+def annotate_trees_nina(in_treedir, out_treedir, prok_info_path, euk_info_path):
+    print("Reading prokaryote info")
+    prok_info_dict = csv_to_dict_simple(prok_info_path, delimiter='\t')
+    print("Reading eukaryote info")
+    euk_info_dict = csv_to_dict_simple(euk_info_path, delimiter='\t')
+    print("Annotating trees")
+    for tree_file in listdir_nohidden(in_treedir):
+        print (tree_file)
+        tree_path = in_treedir + tree_file 
+        new_tree_path = out_treedir + tree_file + ".tree"
+        try: 
+            tree = Tree(tree_path)
+            new_tree = annotate_tree_nina(tree, prok_info_dict, euk_info_dict)
+            tree.write(format=2, outfile=new_tree_path)
+        except:
+            print ("Error", tree_path, new_tree_path)
+    return 0
 
-annotate_trees(in_treedir, out_treedir, prok_info_path, euk_info_path)
+
+elife_info_path="/Users/vl18625/work/euk/markers_euks/S3_700ArcBac_species_list.csv"
+
+prok_info_path="/Users/vl18625/work/euk/markers_euks/nina_markers/arch_id_species.tsv"
+euk_info_path="/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_set_prot_info.tsv"
+
+in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/singlehit_results/msa1_LGG/arcog_treefiles/"
+out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/singlehit_results/msa1_LGG/treefiles_annotated/"
+
+annotate_trees_nina(in_treedir, out_treedir, prok_info_path, euk_info_path)
+

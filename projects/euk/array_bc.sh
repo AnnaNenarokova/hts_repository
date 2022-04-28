@@ -1,13 +1,14 @@
 #!/bin/bash
-
-#SBATCH --job-name=iqtree_array
-#SBATCH --partition=cpu
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=10
-#SBATCH --time=14-00:0:0
-#SBATCH --mem=1000M
-#SBATCH --array=1-27
+#SBATCH --job-name=ae_markers
+#SBATCH --output=ae_markers_%A_%a.out
+#SBATCH --partition=high
+#SBATCH --time=7-12:00:00
+#SBATCH --array=1-87
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=6GB
+##SBATCH --nodes=1
+## --cpu_bind=v,threads
 
 cd /user/home/vl18625/code/ngs/projects/euk/
 srun gene_trees_pipeline_bc_array.sh
