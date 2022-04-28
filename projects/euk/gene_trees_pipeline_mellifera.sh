@@ -3,8 +3,8 @@
 outdir="/scratch/nenarokova/euk/nina_markers/euk_largest_monobranch/arch/"
 
 fasta_dir=$outdir"fasta/"
-msa_dir=$outdir"msa/"
-trimmed_msa_dir=$outdir"msa_bmge/"
+msa_dir=$outdir"msa_linsi/"
+trimmed_msa_dir=$outdir"msa_linsi_bmge/"
 
 cd $fasta_dir
 
@@ -14,7 +14,7 @@ echo $fasta
 
 msa=$msa_dir$fasta
 trimmed_msa=$trimmed_msa_dir$fasta
-mafft --anysymbol $fasta > $msa
+linsi --anysymbol $fasta > $msa
 BMGE -i $msa -t "AA" -m BLOSUM30 -of $trimmed_msa
 cd $trimmed_msa_dir
 
