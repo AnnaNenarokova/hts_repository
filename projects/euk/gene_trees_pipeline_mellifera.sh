@@ -17,4 +17,5 @@ trimmed_msa=$trimmed_msa_dir$fasta
 mafft --anysymbol $fasta > $msa
 BMGE -i $msa -t "AA" -m BLOSUM30 -of $trimmed_msa
 cd $trimmed_msa_dir
-iqtree2 -s $f -m LG+G -B 1000 -nt 1 
+
+iqtree2 -s $fasta -m LG+G -B 1000 -nt 1 
