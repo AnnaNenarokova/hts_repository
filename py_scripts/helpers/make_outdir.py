@@ -14,15 +14,17 @@ def dir_from_path(path, lift=0):
 		upper_dir = split(upper_dir)[0]
 	return upper_dir + '/'
 
-def name_outdir(f_path, workdir=False, subfolder='', endcut=6):
-	name = file_from_path(f_path, endcut=endcut) + '/'
+def name_outdir(f_path, workdir=False, subfolder='', endcut=6, suffix=""):
+	name = file_from_path(f_path, endcut=endcut) + suffix + '/'
 	if workdir: outdir = workdir + subfolder + name
 	else: outdir = dir_from_path(f_path) + subfolder + name
 	return outdir
 
-def make_outdir(f_path, workdir=False, subfolder='', endcut=6):
-	outdir = name_outdir(f_path, workdir, subfolder, endcut=endcut)
-	if not exists(outdir): makedirs(outdir)
+def make_outdir(f_path, workdir=False, subfolder='', endcut=6, suffix=""):
+	outdir = name_outdir(f_path, workdir, subfolder, endcut=endcut, suffix=suffix)
+	if not exists(outdir): 
+		print ("Making outdir", outdir)
+		makedirs(outdir)
 	return outdir
 
 def new_file(oldfile_path, outdir=False, new_name=False, new_end=False):

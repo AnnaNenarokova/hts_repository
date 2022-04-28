@@ -44,7 +44,18 @@ def get_lineages_bulk(seqids):
         lineages[name] = lineage
     return lineages
 
-def get_tags_leaves_old(tree, tax_names):
+def get_tags_leaves_smol(tree, tax_names):
+    smol_regex = "^g\d+\.t1"
+    leaf_tags = {}
+    for leaf in tree.iter_leaves():
+        seqid = leaf.name
+        if re.match(smol_regex, seqid):
+            leaf_tags[seqid] = "smol"
+        else:
+            leaf_tags[seqid] = "other"
+    return leaf_tags
+    
+def get_tags_leaves_myxo_old(tree, tax_names):
     leaf_tags = {}
     smol_regex = "^g\d+\.t1"
     for leaf in tree.iter_leaves():
@@ -107,15 +118,14 @@ def check_hgt(target_node, leaf_tags, hgt_tag):
     return False
 
 def get_group_node(target_leaf, leaf_tags, group_tag):
-    old_node = target_leaf
-    node = old_node
+    node = target_leaf
     while check_sisters_tag(node, leaf_tags, group_tag):
-        old_node = node
         if node.up:
             node = node.up
         else: 
             return node
-    else: return old_node
+    else:
+        return node
 
 def write_lineage_tree(tree, outpath):
     smol_regex = "^g\d+\.t1"

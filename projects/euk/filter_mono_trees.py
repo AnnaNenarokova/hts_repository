@@ -8,7 +8,7 @@ def listdir_nohidden(path):
 		if not f.startswith('.'):
 			yield f
 
-def get_tags_leaves_euk(tree):
+def get_tags_leaves_eukprot(tree):
 	euk_regex = "^EP\d+_P\d+"
 	leaf_tags = {}
 	for leaf in tree.iter_leaves():
@@ -30,20 +30,18 @@ def check_sisters_tag(node, leaf_tags, tag):
 	return True
 
 def get_group_node(target_leaf, leaf_tags, group_tag):
-	old_node = target_leaf
-	node = old_node
+	node = target_leaf
 	while check_sisters_tag(node, leaf_tags, group_tag):
-		old_node = node
 		if node.up:
 			node = node.up
 		else: 
 			return node
-	else: return old_node
+	else: return node
 
 def get_largest_group_node(tree, leaf_tags, group_tag):
 	largest_group_node = []
 	for leaf in tree.iter_leaves():
-		if leaf not in largest_group_node:
+		if (leaf_tags[leaf.name] == group_tag) and (leaf not in largest_group_node):
 			group_node = get_group_node(leaf, leaf_tags, group_tag=group_tag)
 			if len(group_node) > len(largest_group_node):
 				largest_group_node = group_node
@@ -51,7 +49,7 @@ def get_largest_group_node(tree, leaf_tags, group_tag):
 
 def filter_mono_tree(tree_path, outpath, group_tag):
 	tree = Tree(tree_path)
-	leaf_tags = get_tags_leaves_euk(tree)
+	leaf_tags = get_tags_leaves_eukprot(tree)
 	group_largest_branch = get_largest_group_node(tree, leaf_tags, group_tag=group_tag)
 	group_seqs_kept = []
 	group_seqs_out = []
@@ -62,20 +60,24 @@ def filter_mono_tree(tree_path, outpath, group_tag):
 			else:
 				group_seqs_out.append(leaf.name)
 	print (tree_path, len(group_seqs_kept), len(group_seqs_out))
-	# print (len(group_seqs_kept), group_tag, "seqs kept,", len(group_seqs_out), group_tag, "seqs filtered out")
-	with open(outpath, "w") as outfile:
+	outpath_in = outpath + "_in.txt"
+	outpath_out = outpath + "_out.txt"
+	with open(outpath_in, "w") as outfile:
 		for seqid in group_seqs_kept:
-			outfile.write(seqid)
+			outfile.write(seqid + "\n")
+	with open(outpath_out, "w") as outfile:
+		for seqid in group_seqs_out:
+			outfile.write(seqid + "\n")
 	return group_seqs_kept
 
 def filter_mono_trees(treedir, outdir, group_tag):
 	for tree_file in listdir_nohidden(treedir):
 		tree_path = treedir + tree_file
-		outpath = outdir + tree_file + "_" +group_tag + ".txt"
+		outpath = outdir + tree_file + "_" + group_tag
 		filter_mono_tree(tree_path, outpath, group_tag=group_tag)
 	return outdir
 
-treedir = "/Users/vl18625/work/euk/markers_euks/nina_markers/singlehit_results/msa1_LGG/"
-outdir = "/Users/vl18625/work/euk/markers_euks/nina_markers/singlehit_results/euk_largest_branches/"
+treedir = "/Users/vl18625/work/euk/markers_euks/nina_markers/singlehit_results/msa1_LGG/treefiles/"
+outdir = "/Users/vl18625/work/euk/markers_euks/nina_markers/singlehit_results/euk_largest_branches/treefiles/"
 
 filter_mono_trees(treedir, outdir, group_tag="euk")
