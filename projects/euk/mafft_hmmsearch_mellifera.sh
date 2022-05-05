@@ -6,7 +6,7 @@ hmmsearch="/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmsearch"
 fasta_dir="/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set1/faa/"
 msa_dir="/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set1/msa/"
 hmm_dir="/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set1/hmm/"
-hmm_result_dir="/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set1hmm_results/"
+hmm_result_dir="/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set1/hmm_results/"
 
 subject_path="/scratch/nenarokova/euk/nina_prok_proteomes/all_nina_prok.faa"
 
