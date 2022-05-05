@@ -3,7 +3,7 @@
 #SBATCH --output=/scratch/nenarokova/code/slurm_out/hmmsearch_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
-#SBATCH --array=1-200
+#SBATCH --array=1-87
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=6GB
@@ -13,10 +13,10 @@
 hmmbuild="/mnt/alvarium2pool/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmbuild"
 hmmsearch="/mnt/alvarium2pool/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmsearch"
 
-fasta_dir="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set2/faa/"
-msa_dir="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set2/msa/"
-hmm_dir="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set2/hmm/"
-hmm_result_dir="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set2/hmm_results/"
+fasta_dir="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set3/faa/"
+msa_dir="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set3/msa/"
+hmm_dir="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set3/hmm/"
+hmm_result_dir="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set3/hmm_results/"
 
 subject_path="/mnt/alvarium2pool/scratch/nenarokova/euk/nina_prok_proteomes/all_nina_prok.faa"
 
