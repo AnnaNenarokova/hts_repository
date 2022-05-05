@@ -6,7 +6,7 @@ bmge="/sw/apps/BMGE-1.12/BMGE.jar"
 
 fasta_dir="/user/work/vl18625/euk/markers/nina_markers/anna_set_results/mono_euk_sets/set1/faa/"
 msa_dir="/user/work/vl18625/euk/markers/nina_markers/anna_set_results/mono_euk_sets/set1/msa/"
-hmm_dir="/user/work/vl18625/euk/markers/nina_markers/anna_set_results/mono_euk_sets/set1/hmm_profiles/"
+hmm_dir="/user/work/vl18625/euk/markers/nina_markers/anna_set_results/mono_euk_sets/set1/hmm/"
 
 cd $fasta_dir
 fasta=$(ls *.fasta | sed -n ${SLURM_ARRAY_TASK_ID}p)
