@@ -3,10 +3,10 @@
 hmmbuild="/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmbuild"
 hmmsearch="/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmsearch"
 
-fasta_dir="/Users/vl18625/work/euk/markers_euks/nina_markers/mono_euk_sets/set1/faa/"
-msa_dir="/Users/vl18625/work/euk/markers_euks/nina_markers/mono_euk_sets/set1/msa/"
-hmm_dir="/Users/vl18625/work/euk/markers_euks/nina_markers/mono_euk_sets/set1/hmm/"
-hmm_result_dir="/Users/vl18625/work/euk/markers_euks/nina_markers/mono_euk_sets/set1/hmm_results/"
+fasta_dir="/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set1/faa/"
+msa_dir="/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set1/msa/"
+hmm_dir="/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set1/hmm/"
+hmm_result_dir="/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set1hmm_results/"
 
 subject_path="/scratch/nenarokova/euk/nina_prok_proteomes/all_nina_prok.faa"
 
