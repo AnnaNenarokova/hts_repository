@@ -10,7 +10,7 @@ hmm_result_dir="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/nina_markers/m
 subject_path="/mnt/alvarium2pool/scratch/nenarokova/euk/nina_prok_proteomes/all_nina_prok.faa"
 
 cd $fasta_dir
-fasta=$(ls *.fasta | sed -n ${SLURM_ARRAY_TASK_ID}p)
+fasta=$(ls *.faa | sed -n ${SLURM_ARRAY_TASK_ID}p)
 
 echo $fasta
 
