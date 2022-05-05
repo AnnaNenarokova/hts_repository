@@ -1,5 +1,4 @@
-#!/usr/bin/python3
-
+#!/bin/bash
 hmmbuild="/mnt/alvarium2pool/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmbuild"
 hmmsearch="/mnt/alvarium2pool/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmsearch"
 
