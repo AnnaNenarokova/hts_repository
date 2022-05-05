@@ -25,4 +25,4 @@ e_threshold="0.00001"
 
 result=$hmm_result_dir$fasta".txt"
 echo $result
-hmmsearch -E $e_threshold --tblout $result $cog_hmm $proteome
+hmmsearch -E $e_threshold --tblout $result $hmm_file $subject_pathf
