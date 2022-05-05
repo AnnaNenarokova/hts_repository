@@ -197,10 +197,10 @@ def annotate_trees_nina(in_treedir, out_treedir, prok_info_path, euk_info_path):
 
 elife_info_path="/Users/vl18625/work/euk/markers_euks/S3_700ArcBac_species_list.csv"
 
-prok_info_path="/Users/vl18625/work/euk/markers_euks/nina_markers/arch_id_species.tsv"
+prok_info_path="/Users/vl18625/work/euk/markers_euks/nina_markers/nina_ids_taxonomies.tsv"
 euk_info_path="/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_set_prot_info.tsv"
 
-in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/singlehit_results/msa1_LGG/arcog_treefiles/"
+in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/singlehit_results/msa1_LGG/treefiles/"
 out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/singlehit_results/msa1_LGG/treefiles_annotated/"
 
 annotate_trees_nina(in_treedir, out_treedir, prok_info_path, euk_info_path)

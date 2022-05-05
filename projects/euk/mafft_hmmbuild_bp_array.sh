@@ -4,9 +4,9 @@ module load apps/mafft/7.429 apps/hmmer/3.3.2
 
 bmge="/sw/apps/BMGE-1.12/BMGE.jar"
 
-fasta_dir="/user/work/vl18625/euk/ed_markers/anna_set_results/monobranch_results/fasta/"
-msa_dir="/user/work/vl18625/euk/ed_markers/anna_set_results/monobranch_results/msa/"
-hmm_dir="/user/work/vl18625/euk/ed_markers/anna_set_results/monobranch_results/hmm_profiles/"
+fasta_dir="/user/work/vl18625/euk/markers/nina_markers/anna_set_results/mono_euk_sets/set1/faa/"
+msa_dir="/user/work/vl18625/euk/markers/nina_markers/anna_set_results/mono_euk_sets/set1/msa/"
+hmm_dir="/user/work/vl18625/euk/markers/nina_markers/anna_set_results/mono_euk_sets/set1/hmm_profiles/"
 
 cd $fasta_dir
 fasta=$(ls *.fasta | sed -n ${SLURM_ARRAY_TASK_ID}p)

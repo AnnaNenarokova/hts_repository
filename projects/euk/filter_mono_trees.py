@@ -50,6 +50,10 @@ def get_largest_group_node(tree, leaf_tags, group_tag):
 def filter_mono_tree(tree_path, outpath, group_tag):
 	tree = Tree(tree_path)
 	leaf_tags = get_tags_leaves_eukprot(tree)
+	for leaf in tree.iter_leaves():
+		if leaf_tags[leaf.name] != group_tag:
+			tree.set_outgroup(leaf)
+			break
 	group_largest_branch = get_largest_group_node(tree, leaf_tags, group_tag=group_tag)
 	group_seqs_kept = []
 	group_seqs_out = []
@@ -77,7 +81,7 @@ def filter_mono_trees(treedir, outdir, group_tag):
 		filter_mono_tree(tree_path, outpath, group_tag=group_tag)
 	return outdir
 
-treedir = "/Users/vl18625/work/euk/markers_euks/nina_markers/singlehit_results/msa1_LGG/treefiles/"
-outdir = "/Users/vl18625/work/euk/markers_euks/nina_markers/singlehit_results/euk_largest_branches/treefiles/"
+treedir = "/Users/vl18625/work/euk/markers_euks/nina_markers/singlehit_results/euk_largest_branches/treefiles/"
+outdir = "/Users/vl18625/work/euk/markers_euks/nina_markers/singlehit_results/euk_largest_branches/euk_mono2_seqids/"
 
 filter_mono_trees(treedir, outdir, group_tag="euk")
