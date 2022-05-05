@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 
-hmmbuild="/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmbuild"
-hmmsearch="/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmsearch"
+hmmbuild="/mnt/alvarium2pool/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmbuild"
+hmmsearch="/mnt/alvarium2pool/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmsearch"
 
-fasta_dir="/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set1/faa/"
-msa_dir="/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set1/msa/"
-hmm_dir="/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set1/hmm/"
-hmm_result_dir="/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set1/hmm_results/"
+fasta_dir="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set1/faa/"
+msa_dir="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set1/msa/"
+hmm_dir="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set1/hmm/"
+hmm_result_dir="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/nina_markers/mono_euk_sets/set1/hmm_results/"
 
-subject_path="/scratch/nenarokova/euk/nina_prok_proteomes/all_nina_prok.faa"
+subject_path="/mnt/alvarium2pool/scratch/nenarokova/euk/nina_prok_proteomes/all_nina_prok.faa"
 
 cd $fasta_dir
 fasta=$(ls *.fasta | sed -n ${SLURM_ARRAY_TASK_ID}p)
