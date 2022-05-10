@@ -5,6 +5,7 @@ import sys
 sys.path.insert(0, "/Users/anna/work/code/ngs/")
 sys.path.insert(0, "/user/home/vl18625/code/ngs")
 sys.path.insert(0, "/Users/vl18625/work/code/ngs/")
+import re
 
 from py_scripts.helpers.parse_csv import *
 
@@ -194,14 +195,71 @@ def annotate_trees_nina(in_treedir, out_treedir, prok_info_path, euk_info_path):
             print ("Error", tree_path, new_tree_path)
     return 0
 
+def annotate_tree_tax_info(tree, tax_info_dict,key_name="taxonomy"):
+    used_names = []
+    for leaf in tree.iter_leaves():
+        old_name = leaf.name
+        genome_id = old_name
+        if genome_id in tax_info_dict.keys():
+            new_name = genome_id + "_" + tax_info_dict[genome_id][key_name]
+        else:
+            print(id, genome_id, "was not found in the dict!")
+            new_name = old_name
+        if new_name in used_names:
+            print (id, "is duplicated!")
+        leaf.name = new_name
+        used_names.append(new_name)
+    return tree
 
-elife_info_path="/Users/vl18625/work/euk/markers_euks/S3_700ArcBac_species_list.csv"
+def annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy"):
+    used_names = []
+    euk_regex = "^EP\d+_P\d+"
+    for leaf in tree.iter_leaves():
+        old_name = leaf.name
+        if re.match(euk_regex, old_name):
+            delimiter = "_"
+        else:
+            delimiter = "-"
+        genome_id = old_name.split(delimiter)[0]
+        if genome_id in tax_info_dict.keys():
+            new_name =  tax_info_dict[genome_id][key_name]
+        else:
+            print(id, genome_id, "was not found in the dict!")
+            new_name = old_name
+        if new_name in used_names:
+            print (id, "is duplicated!")
+        leaf.name = new_name
+        used_names.append(new_name)
+    return tree
 
-prok_info_path="/Users/vl18625/work/euk/markers_euks/nina_markers/nina_ids_taxonomies.tsv"
-euk_info_path="/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_set_prot_info.tsv"
 
-in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/singlehit_results/msa1_LGG/treefiles/"
-out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/singlehit_results/msa1_LGG/treefiles_annotated/"
+def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=False):
+    print("Reading taxonomy info")
+    tax_info_dict = csv_to_dict(tax_info_path, main_key="gid", delimiter='\t')
+    print("Annotating trees")
+    for tree_file in listdir_nohidden(in_treedir):
+        tree_path = in_treedir + tree_file 
+        new_tree_path = out_treedir + tree_file + "_annotated.tree"
+        try: 
+            tree = Tree(tree_path)
+            if protein_ids:
+                new_tree = annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy")
+            else:
+                new_tree = annotate_tree_tax_info(tree, tax_info_dict,key_name="taxonomy")
+            tree.write(format=2, outfile=new_tree_path)
+        except:
+            print ("Error", tree_path, new_tree_path)
+    return 0
 
-annotate_trees_nina(in_treedir, out_treedir, prok_info_path, euk_info_path)
+
+# elife_info_path="/Users/vl18625/work/euk/markers_euks/S3_700ArcBac_species_list.csv"
+
+# prok_info_path="/Users/vl18625/work/euk/markers_euks/nina_markers/nina_ids_taxonomies.tsv"
+# euk_info_path="/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_set_prot_info.tsv"
+
+in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/final_ae_sets/trees/"
+out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/final_ae_sets/annotated_trees/"
+
+tax_info_path = "/Users/vl18625/work/euk/markers_euks/nina_markers/final_ae_sets/taxa_annotations.tsv"
+annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True)
 

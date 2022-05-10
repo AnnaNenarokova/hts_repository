@@ -1,5 +1,5 @@
 #!/bin/bash
-final_dir="/Users/vl18625/work/euk/markers_euks/nina_markers/final_ae_sets/faa/"
+final_dir="/Users/vl18625/work/euk/markers_euks/nina_markers/final_ae_sets/only_euks/"
 indir="/Users/vl18625/work/euk/markers_euks/nina_markers/mono_euk_sets/"
 cd $indir
 

@@ -11,7 +11,7 @@
 ## --cpu_bind=v,threads
 
 
-outdir="/scratch/nenarokova/euk/markers/nina_markers/final_ae_sets/"
+outdir="/scratch/nenarokova/euk/markers/nina_markers/ae_sets_only_euks/"
 
 fasta_dir=$outdir"faa/"
 msa_dir=$outdir"msa/"
