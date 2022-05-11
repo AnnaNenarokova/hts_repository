@@ -257,8 +257,8 @@ def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=
 # prok_info_path="/Users/vl18625/work/euk/markers_euks/nina_markers/nina_ids_taxonomies.tsv"
 # euk_info_path="/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_set_prot_info.tsv"
 
-in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/final_ae_sets/trees/"
-out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/final_ae_sets/annotated_trees/"
+in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/final_ae_sets/only_euks_files/trees/"
+out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/final_ae_sets/only_euks_files/annotated_trees/"
 
 tax_info_path = "/Users/vl18625/work/euk/markers_euks/nina_markers/final_ae_sets/taxa_annotations.tsv"
 annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True)
