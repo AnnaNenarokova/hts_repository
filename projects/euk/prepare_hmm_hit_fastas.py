@@ -33,7 +33,33 @@ def parse_hmmreport(hmm_report_path, columns_str=False):
 				results.append(result_dict)
 	return results
 
-def prepare_hmm_dict(hmm_report_dir, hmm_ext, proteome_ext, n_best, max_evalue):
+def prepare_hmm_dict(hmm_report_dir, hmm_ext, proteome_ext, n_best, max_evalue, monobranch=False):
+	hmm_dict = {}
+	for hmm_report in listdir_nohidden(hmm_report_dir):
+		hmm_report_name_split = hmm_report.split(proteome_ext)
+		proteome_file = hmm_report_name_split[0] + proteome_ext
+		hmm_file = hmm_report_name_split[1].split(hmm_ext)[0]
+		if monobranch:
+			hmm_file_split = hmm_file.split("_")
+			cog_file = hmm_file_split[0] + ("_") + hmm_file_split[1] + ".faa"
+		else:
+			cog_file = hmm_file
+		if proteome_file not in hmm_dict:
+			hmm_dict[proteome_file] = {}
+
+		if cog_file not in hmm_dict[proteome_file].keys():
+			hmm_dict[proteome_file][cog_file] = {}
+		hmm_report_path = hmm_report_dir + hmm_report
+		hmm_results = parse_hmmreport(hmm_report_path)
+		hmm_results = list(filter(lambda result: (result["evalue"] <= max_evalue), hmm_results))
+		if len(hmm_results) > n_best:
+			hmm_results = sorted(hmm_results, key=lambda result: result["evalue"])
+			hmm_results = hmm_results[:n_best]
+		for hmm_result in hmm_results:
+			hmm_dict[proteome_file][cog_file][hmm_result["sseqid"]] = ""
+	return hmm_dict
+
+def prepare_hmm_dict_old(hmm_report_dir, hmm_ext, proteome_ext, n_best, max_evalue):
 	hmm_dict = {}
 	for hmm_report in listdir_nohidden(hmm_report_dir):
 		hmm_report_name_split = hmm_report.split(proteome_ext)
@@ -52,7 +78,7 @@ def prepare_hmm_dict(hmm_report_dir, hmm_ext, proteome_ext, n_best, max_evalue):
 			hmm_dict[proteome_file][cog_file][hmm_result["sseqid"]] = ""
 	return hmm_dict
 
-def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, hmm_ext=".hmm", proteome_ext=".fasta", n_best=10, max_evalue=0.00001):
+def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, hmm_ext=".hmm", proteome_ext=".fasta", n_best=1, max_evalue=0.00001):
 	print("Parcing hmm_reports")
 	hmm_dict = prepare_hmm_dict(hmm_report_dir, n_best=n_best, max_evalue=max_evalue)
 	print("Parcing proteomes sequences")
@@ -79,10 +105,10 @@ def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, hmm_ext=".
 		SeqIO.write(out_records, outpath, "fasta")
 	return 0
 
-def prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir, keep_list_path=False, hmm_ext=".hmm", proteome_ext=".fasta", n_best=10, max_evalue=0.00001):
+def prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir, monobranch=False, keep_list_path=False, hmm_ext=".hmm", proteome_ext=".fasta", n_best=1, max_evalue=0.00001):
 	if keep_list_path: keep_list = read_list(keep_list_path)
 	print("Parcing hmm_reports")
-	hmm_dict = prepare_hmm_dict(hmm_report_dir, hmm_ext, proteome_ext, n_best, max_evalue)
+	hmm_dict = prepare_hmm_dict(hmm_report_dir, hmm_ext, proteome_ext, n_best, max_evalue, monobranch=monobranch)
 	print("Parcing proteome sequences")
 	proteome_set = set()
 	for proteome in listdir_nohidden(proteome_dir):
@@ -98,22 +124,31 @@ def prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir, 
 						hmm_dict[proteome][cog_file][sseqid] = record
 	print("Writing down sequences")
 	for cog_file in listdir_nohidden(cog_dir):
+		out_set = set()
 		out_records = []
 		cog_path = cog_dir + cog_file
 		outpath = result_dir + cog_file
 		for record in SeqIO.parse(cog_path, "fasta"):
-			out_records.append(record)
+			seqid = record.id
+			if seqid not in out_set:
+				out_records.append(record)
+				out_set.update(seqid)
 		for proteome in proteome_set:
 			if cog_file in hmm_dict[proteome]:
 				proteome_cog_dict = hmm_dict[proteome][cog_file]
 				for sseqid in proteome_cog_dict:
-					out_records.append(proteome_cog_dict[sseqid])
+					record = proteome_cog_dict[sseqid]
+					seqid = record.id
+					if seqid not in out_set:
+						out_records.append(record)
+						out_set.update(seqid)
 		SeqIO.write(out_records, outpath, "fasta")
 	return 0
 
+
 hmm_report_dir = "/user/work/vl18625/euk/nina_markers/anna_set_results/hmm_results/"
 proteome_dir = "/user/work/vl18625/euk/eukprot/anna_eukprot3_proteome_dataset/"
-cog_dir = "/user/work/vl18625/euk/nina_markers/all_markers/faa/"
-result_dir = "/user/work/vl18625/euk/nina_markers/anna_set_results/faa/"
+cog_dir = "/user/work/vl18625/euk/nina_markers/faa/"
+result_dir = "/user/work/vl18625/euk/nina_markers/anna_set_results/faa1/"
 
 prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir)

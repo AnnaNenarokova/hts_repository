@@ -2,6 +2,7 @@
 from ete3 import Tree
 import sys
 from os import listdir
+import shutil
 
 def parse_tags(tag_path, delimeter="\t"):
     tag_dict = {}
@@ -89,7 +90,7 @@ def analyse_tree(tree_path, tag_dict, bootstrap_threshold=70.0):
         result = False
     return result, diplo_ids
 
-def analyse_trees(treedir_path, tag_path, outdir, bootstrap_threshold=70.0):
+def analyse_trees(treedir_path, tag_path, outdir, outdir_trees, bootstrap_threshold=70.0):
     tag_dict = parse_tags(tag_path, delimeter="\t")
     hgt_result_path = outdir + "hgt_result.tsv"
     hgt_dict = {}
@@ -103,6 +104,8 @@ def analyse_trees(treedir_path, tag_path, outdir, bootstrap_threshold=70.0):
                 hgt_result.write(current_dpapi_id + "\t" + str(is_hgt) + "\n")
                 if is_hgt:
                     in_dict = False
+                    outpath = outdir_trees + tree_name
+                    shutil.copyfile(tree_path, outpath)
                     for dpapi_id in hgt_dict:
                         if current_dpapi_id in hgt_dict[dpapi_id]:
                             in_dict = True
@@ -139,9 +142,10 @@ def analyse_hgt_dict(hgt_dict, outdir):
             hgt_group_result.write(dpapi_id + "\t" + str(group_result) + "\n")
     return 0
 
-treedir_path="/Users/annanenarokova/work/dpapi_local/results_16_08/trees/"
-tag_path="/Users/annanenarokova/work/dpapi_local/results_16_08/all_tags.tsv"
-outdir="/Users/annanenarokova/work/dpapi_local/results_16_08/"
-hgt_dict = analyse_trees(treedir_path, tag_path, outdir)
+treedir_path="/Users/vl18625/work/diplo/trees/"
+tag_path="/Users/vl18625/work/diplo/all_tags.tsv"
+outdir="/Users/vl18625/work/diplo/results_hgt/"
+outdir_trees="/Users/vl18625/work/diplo/trees_hgt/"
+hgt_dict = analyse_trees(treedir_path, tag_path, outdir, outdir_trees)
 analyse_hgt_dict(hgt_dict, outdir)
 

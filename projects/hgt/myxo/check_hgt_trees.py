@@ -44,7 +44,18 @@ def get_lineages_bulk(seqids):
         lineages[name] = lineage
     return lineages
 
-def get_tags_leaves_old(tree, tax_names):
+def get_tags_leaves_smol(tree, tax_names):
+    smol_regex = "^g\d+\.t1"
+    leaf_tags = {}
+    for leaf in tree.iter_leaves():
+        seqid = leaf.name
+        if re.match(smol_regex, seqid):
+            leaf_tags[seqid] = "smol"
+        else:
+            leaf_tags[seqid] = "other"
+    return leaf_tags
+    
+def get_tags_leaves_myxo_old(tree, tax_names):
     leaf_tags = {}
     smol_regex = "^g\d+\.t1"
     for leaf in tree.iter_leaves():
@@ -113,9 +124,10 @@ def get_group_node(target_leaf, leaf_tags, group_tag):
             node = node.up
         else: 
             return node
-    return node
+    else:
+        return node
 
-def write_hgt_tree(tree, outpath):
+def write_lineage_tree(tree, outpath):
     smol_regex = "^g\d+\.t1"
     ncbi_seqids = []
 
@@ -144,22 +156,23 @@ def analyse_tree(tree_path, hgt_tax_name, bootstrap_threshold=70.0, group_name=F
 
     leaf_tags = get_tags_leaves(tree, tax_names)
     target_leaf = None
+
     for leaf in tree.iter_leaves():
         if leaf_tags[leaf.name] == "smol":
             if not target_leaf:
                 target_leaf = leaf
             else:
                 print ("More than one smol leaf!\n" + tree_path + "\n")
+
     if not target_leaf:
         print ("No smol leaf!\n" + tree_path + "\n")
+
     farthest_node = target_leaf.get_farthest_node(topology_only=True)[0]
+
     if farthest_node.up == tree:
         result = False
     else:
         tree.set_outgroup(farthest_node.up)
-
-    edited_tree_path = tree_path + "_edited.tree"
-    tree.write(outfile=edited_tree_path)
 
     if group_name:
         group_node = get_group_node(target_leaf, leaf_tags, group_name)
@@ -168,13 +181,16 @@ def analyse_tree(tree_path, hgt_tax_name, bootstrap_threshold=70.0, group_name=F
         result = check_hgt(target_leaf, leaf_tags, hgt_tax_name)
 
     if result:
-        outpath = tree_path + "_hr_formated.tree"
-        write_hgt_tree(tree, outpath)
+        outpath = tree_path + "_lin_hgt.tree"
+    else:
+        outpath = tree_path + "_lin_no.tree"
+    write_lineage_tree(tree, outpath)
+    
     return result
 
 bootstrap_threshold = 70.0
 
-treedir_path="/Users/annanenarokova/Google Drive/projects/myxozoans/hgt/hgt_candidates_old/vertebrates/contrees/"
+treedir_path="/Users/vl18625/work/myxo_local/contrees/"
 hgt_tax_name = "Vertebrata"
 
 #treedir_path="/Users/annanenarokova/Google Drive/projects/myxozoans/hgt/hgt_candidates_old/fungi/contrees/"
@@ -183,9 +199,10 @@ hgt_tax_name = "Vertebrata"
 i = 0
 for tree_name in listdir(treedir_path):
     tree_path = treedir_path + tree_name
+    print (tree_name)
     is_hgt = analyse_tree(tree_path, hgt_tax_name, bootstrap_threshold=bootstrap_threshold)
     i += 1
     if i%10 == 0:
         print (i)
     if is_hgt:
-        print ("hgt", tree_name)
+        print ("hgt")
