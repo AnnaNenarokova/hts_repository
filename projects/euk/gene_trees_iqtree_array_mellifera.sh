@@ -10,7 +10,7 @@
 ##SBATCH --nodes=1
 ## --cpu_bind=v,threads
 
-trimmed_msa_dir=""
+trimmed_msa_dir="/scratch/nenarokova/euk/markers/nina_markers/ae_sets_only_euks/linsi_bmge_trimal_75/"
 
 cd $trimmed_msa_dir
 
