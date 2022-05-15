@@ -10,4 +10,4 @@
 
 fasta="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/nina_markers/ae_set_70_concat/filtered_euks/ae_70_filtered_euk_concat.fasta"
 
-iqtree2 -s fasta -m LG+PMSF+G -B 1000 -nt 20 
+iqtree2 -s $fasta -m LG+PMSF+G -B 1000 -nt 20 
