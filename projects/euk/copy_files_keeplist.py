@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import shutil
 import os
+from Bio import SeqIO
 
 def listdir_nohidden(path):
 	for f in os.listdir(path):
@@ -24,6 +25,7 @@ def copy_files(ids_path, indir, outdir):
 			outpath = outdir + file_name
 			shutil.copyfile(file_path, outpath)
 	return 0
+
 
 ids_path = "/Users/anna/work/euk_local/eukprot/new_eukprot3_proteomes_list.txt"
 indir = "/Users/anna/work/euk_local/eukprot/eukprot3/proteins/"
