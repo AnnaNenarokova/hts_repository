@@ -8,5 +8,5 @@
 #SBATCH --cpus-per-task=40
 #SBATCH --mem=250G
 
-fasta="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/nina_markers/ae_set_70_concat/filtered_euks_LG_C60_F_G/ae_70_filtered_euk_concat.fasta"
+fasta="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae_set_70_concat/filtered_euks_LG_C60_F_G/ae_70_filtered_euk_concat.fasta"
 iqtree2 -s $fasta -m LG+C60+F+G -B 1000 -nt 40 
