@@ -3,7 +3,7 @@
 #SBATCH --output=/scratch/nenarokova/code/slurm_out/final_ae_gene_trees_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
-#SBATCH --array=1-70
+#SBATCH --array=1-117
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=6GB
@@ -11,7 +11,7 @@
 ## --cpu_bind=v,threads
 
 
-outdir="/scratch/nenarokova/euk/markers/nina_markers/ae_sets_only_euks/"
+outdir="/scratch/nenarokova/euk/markers/be_mono_results/alpha/"
 
 fasta_dir=$outdir"faa/"
 msa_dir=$outdir"msa/"
