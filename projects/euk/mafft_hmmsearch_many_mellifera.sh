@@ -37,7 +37,7 @@ cd $subject_dir
 for subject in *.fasta
 do
 	subject_path=$subject_dir$subject
-	result=$hmm_results_dir$fasta$subject".txt"
+	result=$hmm_results_dir$subject$fasta".txt"
 	echo $result
 	hmmsearch -E $e_threshold --tblout $result $hmm_file $subject_path
 done
