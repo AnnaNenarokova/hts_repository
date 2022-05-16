@@ -257,8 +257,13 @@ def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=
 # prok_info_path="/Users/vl18625/work/euk/markers_euks/nina_markers/nina_ids_taxonomies.tsv"
 # euk_info_path="/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_set_prot_info.tsv"
 
+<<<<<<< HEAD
 in_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/monoset1/msa1_LGG/treefiles/"
 out_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/monoset1/msa1_LGG/treefiles_annotated/"
+=======
+in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/final_ae_sets/ae_set_70_concat/filtered_trees/"
+out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/final_ae_sets/ae_set_70_concat/filtered_trees/"
+>>>>>>> d5979c554a7274dc4523d98e1fdc986ce79537fc
 
 tax_info_path = "/Users/anna/work/euk_local/taxa_annotations.tsv"
 annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True)
