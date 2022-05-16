@@ -222,12 +222,12 @@ def annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy"):
             delimiter = "-"
         genome_id = old_name.split(delimiter)[0]
         if genome_id in tax_info_dict.keys():
-            new_name =  tax_info_dict[genome_id][key_name]
+            new_name =  tax_info_dict[genome_id][key_name] + " " + old_name
         else:
-            print(id, genome_id, "was not found in the dict!")
+            print(genome_id, "was not found in the dict!")
             new_name = old_name
         if new_name in used_names:
-            print (id, "is duplicated!")
+            print (genome_id, "is duplicated!")
         leaf.name = new_name
         used_names.append(new_name)
     return tree
@@ -257,9 +257,9 @@ def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=
 # prok_info_path="/Users/vl18625/work/euk/markers_euks/nina_markers/nina_ids_taxonomies.tsv"
 # euk_info_path="/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_set_prot_info.tsv"
 
-in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/final_ae_sets/only_euks_files/trees/"
-out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/final_ae_sets/only_euks_files/annotated_trees/"
+in_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/monoset1/msa1_LGG/treefiles/"
+out_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/monoset1/msa1_LGG/treefiles_annotated/"
 
-tax_info_path = "/Users/vl18625/work/euk/markers_euks/nina_markers/final_ae_sets/taxa_annotations.tsv"
+tax_info_path = "/Users/anna/work/euk_local/taxa_annotations.tsv"
 annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True)
 
