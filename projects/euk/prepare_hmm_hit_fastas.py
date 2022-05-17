@@ -105,14 +105,14 @@ def prepare_fastas(hmm_report_dir, proteome_dir, cog_dir, result_dir, hmm_ext=".
 		SeqIO.write(out_records, outpath, "fasta")
 	return 0
 
-def prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir, monobranch=False, keep_list_path=False, hmm_ext=".hmm", proteome_ext=".fasta", n_best=1, max_evalue=0.00001):
+def prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir, monobranch=False, keep_list_path=False, hmm_ext=".txt", proteome_ext=".fasta", n_best=1, max_evalue=0.00001):
 	if keep_list_path: keep_list = read_list(keep_list_path)
 	print("Parcing hmm_reports")
 	hmm_dict = prepare_hmm_dict(hmm_report_dir, hmm_ext, proteome_ext, n_best, max_evalue, monobranch=monobranch)
 	print("Parcing proteome sequences")
 	proteome_set = set()
 	for proteome in listdir_nohidden(proteome_dir):
-		proteome_id = proteome.split("_")[0]
+		proteome_id = proteome.split("-")[0]
 		if not keep_list_path or (proteome_id in keep_list):
 			proteome_set.add(proteome)
 			proteome_dict = hmm_dict[proteome]
@@ -146,9 +146,9 @@ def prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir, 
 	return 0
 
 
-hmm_report_dir = "/scratch/nenarokova/euk/markers/be_mono_results/alpha/hmm_results/"
+hmm_report_dir = "/scratch/nenarokova/euk/markers/be_mono_results/cyano/hmm_results/"
 proteome_dir = "/scratch/nenarokova/euk/proteomes/anna_set_16_05_22/"
 cog_dir = "/scratch/nenarokova/euk/markers/bacteria/BacEuk_markers_faa/"
-result_dir = "/scratch/nenarokova/euk/markers/be_mono_results/alpha/faa/"
+result_dir = "/scratch/nenarokova/euk/markers/be_mono_results/cyano/faa/"
 
 prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir)
