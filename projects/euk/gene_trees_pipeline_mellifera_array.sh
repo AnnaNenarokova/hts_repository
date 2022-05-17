@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=final_ae_gene_trees
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/be_alpha_gene_treesp_%A_%a.out
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/be_cyano_gene_trees_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
 #SBATCH --array=1-115
@@ -11,7 +11,7 @@
 ## --cpu_bind=v,threads
 
 
-outdir="/scratch/nenarokova/euk/markers/be_mono_results/alpha/"
+outdir="/scratch/nenarokova/euk/markers/be_mono_results/cyano/"
 
 fasta_dir=$outdir"faa/"
 msa_dir=$outdir"msa/"
