@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=final_ae_gene_trees
+#SBATCH --job-name=cyano_gene_trees
 #SBATCH --output=/scratch/nenarokova/code/slurm_out/be_cyano_gene_trees_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
