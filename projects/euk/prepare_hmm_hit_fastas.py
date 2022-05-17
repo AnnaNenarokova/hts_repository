@@ -146,9 +146,9 @@ def prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir, 
 	return 0
 
 
-hmm_report_dir = "/scratch/nenarokova/euk/markers/be_mono_results/alpha/hmm_results/"
+hmm_report_dir = "/scratch/nenarokova/euk/markers/be_mono_results/cyano/hmm_results/"
 proteome_dir = "/scratch/nenarokova/euk/proteomes/anna_set_16_05_22/"
 cog_dir = "/scratch/nenarokova/euk/markers/bacteria/BacEuk_markers_faa/"
-result_dir = "/scratch/nenarokova/euk/markers/be_mono_results/alpha/faa/"
+result_dir = "/scratch/nenarokova/euk/markers/be_mono_results/cyano/faa/"
 
 prepare_fastas_keep_list(hmm_report_dir, proteome_dir, cog_dir, result_dir)

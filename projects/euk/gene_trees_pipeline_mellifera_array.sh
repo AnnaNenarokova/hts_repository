@@ -11,7 +11,7 @@
 ## --cpu_bind=v,threads
 
 
-outdir="/scratch/nenarokova/euk/markers/be_mono_results/alpha/"
+outdir="/scratch/nenarokova/euk/markers/be_mono_results/cyano/"
 
 fasta_dir=$outdir"faa/"
 msa_dir=$outdir"msa/"
