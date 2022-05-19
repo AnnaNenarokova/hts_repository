@@ -9,7 +9,7 @@ def listdir_nohidden(path):
 			yield f
 
 def get_tags_leaves_eukprot(tree):
-	euk_regex = "^EP\d+_P\d+"
+	euk_regex = "^EP\d+-P\d+"
 	leaf_tags = {}
 	for leaf in tree.iter_leaves():
 		seqid = leaf.name
@@ -81,7 +81,6 @@ def filter_mono_trees(treedir, outdir, group_tag):
 		filter_mono_tree(tree_path, outpath, group_tag=group_tag)
 	return outdir
 
-treedir = "/Users/vl18625/work/euk/markers_euks/nina_markers/singlehit_results/euk_largest_branches/treefiles/"
-outdir = "/Users/vl18625/work/euk/markers_euks/nina_markers/singlehit_results/euk_largest_branches/euk_mono2_seqids/"
-
+treedir = "/Users/vl18625/work/euk/markers_euks/nina_markers/be_mono_results/alpha/treefiles/"
+outdir = "/Users/vl18625/work/euk/markers_euks/nina_markers/be_mono_results/alpha/euk_mono_branch/"
 filter_mono_trees(treedir, outdir, group_tag="euk")
