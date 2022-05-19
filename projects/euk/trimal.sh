@@ -1,8 +1,8 @@
 #!/bin/bash
 trimal="/Users/vl18625/work/tools/trimAl/source/trimal"
 
-al_dir="/Users/vl18625/work/euk/markers_euks/nina_markers/final_ae_sets/linsi_bmge_filtered_species/"
-cleaned_dir="/Users/vl18625/work/euk/markers_euks/nina_markers/final_ae_sets/linsi_bmge_filtered_species_trimal_85/"
+al_dir="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/final_ae_sets/final_ae_all_filtered/linsi_bmge/"
+cleaned_dir="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/final_ae_sets/final_ae_all_filtered/linsi_bmge_trimal_85/"
 mkdir $cleaned_dir
 cd $al_dir
 
