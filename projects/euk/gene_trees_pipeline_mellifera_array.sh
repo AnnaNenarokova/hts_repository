@@ -11,7 +11,7 @@
 ## --cpu_bind=v,threads
 
 
-workdir="/scratch/nenarokova/euk/markers/archaea/final_ae_all_filtered/faa/"
+workdir="/scratch/nenarokova/euk/markers/archaea/final_ae_all_filtered/"
 
 fasta_dir=$workdir"faa/"
 
