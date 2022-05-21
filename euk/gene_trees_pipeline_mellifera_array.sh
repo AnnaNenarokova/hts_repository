@@ -11,7 +11,7 @@
 ## --cpu_bind=v,threads
 
 
-outdir="/scratch/nenarokova/euk/markers/be_mono_results/cyano/"
+outdir="/scratch/nenarokova/euk/markers/be_mono_results/alpha/"
 
 fasta_dir=$outdir"faa/"
 msa_dir=$outdir"msa/"
@@ -39,4 +39,4 @@ BMGE -i $msa -t "AA" -m BLOSUM30 -of $trimmed_msa
 
 cd $trimmed_linsi_dir
 
-iqtree2 -s $fasta -m LG+G -B 1000 -nt 1 
+iqtree2 -s $fasta -m LG+G -B 1000 -nt 1 -redo
