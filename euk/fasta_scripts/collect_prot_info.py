@@ -2,6 +2,11 @@
 from Bio import SeqIO
 from os import listdir
 
+def listdir_nohidden(path):
+    for f in listdir(path):
+        if not f.startswith('.'):
+            yield f
+
 def read_list(list_path):
     result_list = []
     with open (list_path) as list_file:
@@ -13,11 +18,6 @@ def rename_seq_eukprot3(old_name):
     old_name_split = old_name.split("_")
     new_name = old_name_split[0] + "_" + old_name_split[-1]
     return new_name
-
-def listdir_nohidden(path):
-    for f in listdir(path):
-        if not f.startswith('.'):
-            yield f
 
 def prepare_euk_info_eukprot3(fasta_folder, keep_list_path, outpath, delimiter="\t"):
     keep_list = read_list(keep_list_path)

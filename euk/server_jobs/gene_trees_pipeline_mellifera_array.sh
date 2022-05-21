@@ -3,14 +3,14 @@
 #SBATCH --output=/scratch/nenarokova/code/slurm_out/ae_gene_trees_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
-#SBATCH --array=1-70
+#SBATCH --array=1-68
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem-per-cpu=6GB
+#SBATCH --mem-per-cpu=5GB
 ##SBATCH --nodes=1
 ## --cpu_bind=v,threads
 
-workdir="/scratch/nenarokova/euk/markers/archaea/final_ae_all_filtered/"
+workdir="/scratch/nenarokova/euk/markers/ae/final_68ae_all_filtered/"
 
 fasta_dir=$workdir"faa/"
 
