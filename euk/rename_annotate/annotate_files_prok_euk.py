@@ -213,7 +213,7 @@ def annotate_tree_tax_info(tree, tax_info_dict,key_name="taxonomy"):
 
 def annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy"):
     used_names = []
-    euk_regex = "^EP\d+_P\d+"
+    euk_regex = "^EP\d+-P\d+"
     for leaf in tree.iter_leaves():
         old_name = leaf.name
         if re.match(euk_regex, old_name):
@@ -252,10 +252,10 @@ def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=
     return 0
 
 
-in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/be_mono_results/cyano/treefiles/"
-out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/be_mono_results/cyano/treefiles_annotated/"
+in_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/archaea/65_markers_filtered_LG_C60_PMSF/annotated/"
+out_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/archaea/65_markers_filtered_LG_C60_PMSF/annotated/"
 
 
-tax_info_path = "/Users/vl18625/work/euk/markers_euks/nina_markers/taxa_annotations.tsv"
-annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True)
+tax_info_path = "/Users/anna/work/euk_local/taxa_annotations.tsv"
+annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=False)
 

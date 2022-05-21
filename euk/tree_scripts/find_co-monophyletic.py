@@ -36,12 +36,3 @@ def get_group_node(target_leaf, leaf_tags, group_tag):
 		else: 
 			return node
 	else: return node
-
-def get_largest_group_node(tree, leaf_tags, group_tag):
-	largest_group_node = []
-	for leaf in tree.iter_leaves():
-		if (leaf_tags[leaf.name] == group_tag) and (leaf not in largest_group_node):
-			group_node = get_group_node(leaf, leaf_tags, group_tag=group_tag)
-			if len(group_node) > len(largest_group_node):
-				largest_group_node = group_node
-	return largest_group_node
