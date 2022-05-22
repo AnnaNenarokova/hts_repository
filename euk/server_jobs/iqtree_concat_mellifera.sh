@@ -6,7 +6,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=40
-#SBATCH --mem=250G
+#SBATCH --mem=100G
 
-fasta="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae_set_70_concat/filtered_euks_LG_C60_F_G/ae_70_filtered_euk_concat.fasta"
-iqtree2 -s $fasta -m LG+C60+F+G -B 1000 -nt 40 
+fasta="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/ae_set_concat/68_all_filtered/final_68ae_all_filtered_concat.fasta"
+iqtree2 -s $fasta -m LG+G -B 1000 -nt 40
