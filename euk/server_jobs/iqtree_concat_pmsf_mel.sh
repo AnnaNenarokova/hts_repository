@@ -8,6 +8,6 @@
 #SBATCH --cpus-per-task=40
 #SBATCH --mem=100G
 
-msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/ae_set_concat/68_final/68_all_filtered_trimal85_c60_pmsf/final_68ae_all_filtered_trimal85_concat.fasta"
-tree="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/ae_set_concat/68_final/68_all_filtered_trimal85_LG_G/final_68ae_all_filtered_trimal85_concat.fasta.treefile"
+msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/ae_set_concat/68_final/68_all_filtered_c60_pmsf/final_68ae_all_filtered_concat.fasta"
+tree="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/ae_set_concat/68_final/68_all_filtered_lgg/final_68ae_all_filtered_concat.fasta.treefile"
 iqtree2 -s $msa -m LG+C60+F+G -ft $tree -b 1000 -nt 40
