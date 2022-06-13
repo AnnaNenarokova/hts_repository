@@ -252,8 +252,8 @@ def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=
     return 0
 
 
-in_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/archaea/65_markers_filtered_LG_C60_PMSF/annotated/"
-out_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/archaea/65_markers_filtered_LG_C60_PMSF/annotated/"
+in_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/archaea/trees/"
+out_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/archaea/trees/"
 
 
 tax_info_path = "/Users/anna/work/euk_local/taxa_annotations.tsv"
