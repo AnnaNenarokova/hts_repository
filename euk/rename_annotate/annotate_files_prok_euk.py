@@ -211,15 +211,11 @@ def annotate_tree_tax_info(tree, tax_info_dict,key_name="taxonomy"):
         used_names.append(new_name)
     return tree
 
-def annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy"):
+def annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", delimiter="-"):
     used_names = []
     euk_regex = "^EP\d+-P\d+"
     for leaf in tree.iter_leaves():
         old_name = leaf.name
-        if re.match(euk_regex, old_name):
-            delimiter = "_"
-        else:
-            delimiter = "-"
         genome_id = old_name.split(delimiter)[0]
         if genome_id in tax_info_dict.keys():
             new_name =  tax_info_dict[genome_id][key_name] + " " + old_name
@@ -243,7 +239,7 @@ def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=
         try: 
             tree = Tree(tree_path)
             if protein_ids:
-                new_tree = annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy")
+                new_tree = annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", delimiter="-")
             else:
                 new_tree = annotate_tree_tax_info(tree, tax_info_dict,key_name="taxonomy")
             tree.write(format=2, outfile=new_tree_path)
@@ -252,10 +248,7 @@ def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=
     return 0
 
 
-in_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/archaea/trees/"
-out_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/archaea/trees/"
+in_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/cyano/treefiles/"
+out_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/cyano/treefiles_annotated/"
 
-
-tax_info_path = "/Users/anna/work/euk_local/taxa_annotations.tsv"
-annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=False)
-
+annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True)
