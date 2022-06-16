@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=ae_gene_trees
+#SBATCH --job-name=be_gene_trees
 #SBATCH --output=/scratch/nenarokova/code/slurm_out/be_alpha_gene_trees_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
@@ -10,7 +10,7 @@
 ##SBATCH --nodes=1
 ## --cpu_bind=v,threads
 
-workdir="/scratch/nenarokova/euk/markers/be/alpha/be_alpha_40"
+workdir="/scratch/nenarokova/euk/markers/be/alpha/be_alpha_40/"
 
 fasta_dir=$workdir"faa/"
 
