@@ -12,4 +12,4 @@ trimmed_rv=$trimdir$name'_adapter_trimmed_2.fq.gz'
 
 adapters='/home/software/bbmap/resources/adapters.fa'
 
-$bbduk in1=$fw in2=$rv out1=$trimmed_fw out2=$trimmed_rv ref=$adapters usejni=t ktrim=r k=22 mink=11 hdist=2 tpe t=$threads #only adapter trimming
+$bbduk in1=$fw in2=$rv out1=$trimmed_fw out2=$trimmed_rv ref=$adapters usejni=t ktrim=r k=22 mink=5 hdist=2 tpe t=$threads #only adapter trimming
