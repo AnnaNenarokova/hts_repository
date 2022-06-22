@@ -25,6 +25,6 @@ def replace_species_delimeter_dir(indir, outdir):
 		replace_species_delimeter(infasta, outfasta)
 	return 0
 
-indir="/Users/anna/work/euk_local/eukprot/anna_eukprot3_set/"
-outdir="/Users/anna/work/euk_local/eukprot/anna_set_16_05_22/"
+indir="/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_proteome_dataset_old/"
+outdir="/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_proteome_dataset/"
 replace_species_delimeter_dir(indir, outdir)
