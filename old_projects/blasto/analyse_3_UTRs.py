@@ -40,14 +40,17 @@ def count_codon_all_frames(records, seq_len=0, codon="TAA"):
 	codon_tuple = (codon_count_frame0, codon_count_frame1, codon_count_frame2)
 	return codon_tuple
 
-def prepare_statistics(records):
-	codons = ["AAA", "TTT", "TAA", "TAG", "TGA"]
+def prepare_statistics_old(records):
+	codons = ['AAA','AAC','AAG','AAT','ACA','ACC','ACG','ACT','AGA','AGC','AGG','AGT','ATA','ATC','ATG','ATT','CAA','CAC','CAG','CAT','CCA','CCC','CCG','CCT','CGA','CGC','CGG','CGT','CTA','CTC','CTG','CTT','GAA','GAC','GAG','GAT','GCA','GCC','GCG','GCT','GGA','GGC','GGG','GGT','GTA','GTC','GTG','GTT','TAA','TAC','TAG','TAT','TCA','TCC','TCG','TCT','TGA','TGC','TGG','TGT','TTA','TTC','TTG','TTT']
 	seq_lens = [3, 6, 9, 12, 15, 0]
 	for seq_len in seq_lens:
 		for codon in codons:
 			codon_tuple = count_codon_all_frames(records, seq_len=seq_len, codon=codon)
 			print ("codon", codon, "first", seq_len, "nt of 3'UTRs", codon_tuple)
 
+def prepare_statistics(records):
+	triplets = ['AAA','AAC','AAG','AAT','ACA','ACC','ACG','ACT','AGA','AGC','AGG','AGT','ATA','ATC','ATG','ATT','CAA','CAC','CAG','CAT','CCA','CCC','CCG','CCT','CGA','CGC','CGG','CGT','CTA','CTC','CTG','CTT','GAA','GAC','GAG','GAT','GCA','GCC','GCG','GCT','GGA','GGC','GGG','GGT','GTA','GTC','GTG','GTT','TAA','TAC','TAG','TAT','TCA','TCC','TCG','TCT','TGA','TGC','TGG','TGT','TTA','TTC','TTG','TTT']
+	
 infasta_path = "/Users/anna/work/blasto_local/tr_UTRs_with_polyas.fasta"
 outfasta_path = "/Users/anna/work/blasto_local/extracted_3UTRs.fasta"
 
