@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import os
 from Bio import SeqIO
+import statistics
 
 def parse_3UTRs(infasta_path, outfasta_path, id_delimiter="-"):
 	records_3UTRs = []
@@ -48,12 +49,51 @@ def prepare_statistics_old(records):
 			codon_tuple = count_codon_all_frames(records, seq_len=seq_len, codon=codon)
 			print ("codon", codon, "first", seq_len, "nt of 3'UTRs", codon_tuple)
 
-def prepare_statistics(records):
-	triplets = ['AAA','AAC','AAG','AAT','ACA','ACC','ACG','ACT','AGA','AGC','AGG','AGT','ATA','ATC','ATG','ATT','CAA','CAC','CAG','CAT','CCA','CCC','CCG','CCT','CGA','CGC','CGG','CGT','CTA','CTC','CTG','CTT','GAA','GAC','GAG','GAT','GCA','GCC','GCG','GCT','GGA','GGC','GGG','GGT','GTA','GTC','GTG','GTT','TAA','TAC','TAG','TAT','TCA','TCC','TCG','TCT','TGA','TGC','TGG','TGT','TTA','TTC','TTG','TTT']
-	for record in 
-infasta_path = "/Users/anna/work/blasto_local/tr_UTRs_with_polyas.fasta"
-outfasta_path = "/Users/anna/work/blasto_local/extracted_3UTRs.fasta"
+def prepare_len_statistics(fasta_path):
+	len_statistics = {}
+	lengths = []
+	for record in SeqIO.parse(fasta_path, "fasta"):
+		length = len(record)
+		lengths.append(length)
+		if length in len_statistics.keys():
+			len_statistics[length] += 1
+		else:
+			len_statistics[length] = 1
+	max_len = max(lengths)
+	print("median length", statistics.median(lengths))
+	print("average length", statistics.mean(lengths))
+	return max_len
 
-records_3UTRs = parse_3UTRs(infasta_path, outfasta_path, id_delimiter="-")
+def prepare_empty_codon_dict(max_len):
+	codon_dict = {}
+	codons = ['AAA','AAC','AAG','AAT','ACA','ACC','ACG','ACT','AGA','AGC','AGG','AGT','ATA','ATC','ATG','ATT','CAA','CAC','CAG','CAT','CCA','CCC','CCG','CCT','CGA','CGC','CGG','CGT','CTA','CTC','CTG','CTT','GAA','GAC','GAG','GAT','GCA','GCC','GCG','GCT','GGA','GGC','GGG','GGT','GTA','GTC','GTG','GTT','TAA','TAC','TAG','TAT','TCA','TCC','TCG','TCT','TGA','TGC','TGG','TGT','TTA','TTC','TTG','TTT']
+	for codon in codons:
+		codon_dict[codon] = {}
+		for codon_n in range(0, max_len//3 + 1):
+			codon_dict[codon][codon_n] = {}
+			for frame in [0, 1, 2]:
+				codon_dict[codon][codon_n][frame] = 0
+	return codon_dict
 
-prepare_statistics(records_3UTRs)
+def add_codon_statistics_record(record, codon_dict):
+	seq = record.seq
+	seq_len = len(seq)
+	for frame in [0,1,2]:
+		codon_n = 0
+		for i in range(frame,seq_len,3):
+			codon_n += 1
+			triplet = seq[i:i+3]
+			if len(triplet) == 3:
+				codon_dict[triplet][codon_n][frame] += 1
+	return codon_dict
+
+def get_all_codon_statistics(fasta_path):
+	max_len = prepare_len_statistics(fasta_path)
+	codon_dict = prepare_empty_codon_dict(max_len)
+	for record in SeqIO.parse(fasta_path, "fasta"):
+		codon_dict = add_codon_statistics_record(record, codon_dict)
+	return codon_dict
+
+fasta_path = "/Users/anna/work/blasto_local/extracted_3UTRs.fasta"
+print ("Preparing codon statistics")
+codon_dict = get_all_codon_statistics(fasta_path)
