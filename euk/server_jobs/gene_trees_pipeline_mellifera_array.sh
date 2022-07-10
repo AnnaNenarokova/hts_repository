@@ -3,7 +3,7 @@
 #SBATCH --output=/scratch/nenarokova/code/slurm_out/abe_5_markers_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
-#SBATCH --array=1-5
+#SBATCH --array=1-28
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=5GB
