@@ -248,7 +248,7 @@ def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=
     return 0
 
 
-in_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/cyano/treefiles/"
-out_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/cyano/treefiles_annotated/"
-
-annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True)
+in_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/alpha/be/concat_trees/"
+out_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/alpha/be/concat_trees/"
+tax_info_path="/Users/anna/work/euk_local/taxa_annotations.tsv"
+annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=False)

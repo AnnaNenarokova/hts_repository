@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH --job-name=be_gene_trees
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/be_alpha_gene_trees_%A_%a.out
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/abe_5_markers_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
-#SBATCH --array=1-40
+#SBATCH --array=1-5
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=5GB
