@@ -19,7 +19,7 @@ cd $msa_dir
 name=$(ls *.faa | sed -n ${SLURM_ARRAY_TASK_ID}p)
 
 echo $name
-msa=$msa_dir$fasta
+msa=$msa_dir$name
 tree=$lgg_dir$name".treefile"
 
 iqtree2 -s $msa -m LG+C20+F+G -ft $tree -B 1000 -nt 1
