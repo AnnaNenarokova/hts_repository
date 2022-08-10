@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=pmsf_be_sgt
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/pmsf_be_sgt_%A_%a.out
+#SBATCH --job-name=pmsf_ae_sgt
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/pmsf_ae_sgt_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
 #SBATCH --array=1-115
@@ -10,7 +10,7 @@
 ##SBATCH --nodes=1
 ## --cpu_bind=v,threads
 
-workdir="/scratch/nenarokova/euk/markers/be/alpha/initial/"
+workdir="/scratch/nenarokova/euk/markers/ae/final_68ae_all_filtered/"
 
 msa_dir=$workdir"linsi_bmge/"
 lgg_dir=$workdir"iqtree_lgg/"
