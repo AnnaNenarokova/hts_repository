@@ -146,7 +146,7 @@ def convert_to_df(codon_dict, max_position=100):
 def make_facet_grid_graph(codon_df, outpath):
 	sns.set_theme(style="ticks")
 	palette = sns.color_palette("hls", 3)
-	grid = sns.FacetGrid(codon_df, col_wrap=8, col="codon", hue="frame", palette=palette)
+	grid = sns.FacetGrid(codon_df, col_wrap=4, col="codon", hue="frame", palette=palette)
 	grid.map(sns.lineplot, "nt_position","count")
 	plt.savefig(outpath, dpi=300)
 	return 0
