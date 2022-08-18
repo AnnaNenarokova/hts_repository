@@ -2,6 +2,10 @@
 import os
 from Bio import SeqIO
 import statistics
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+from matplotlib.backends.backend_pdf import PdfPages
 
 def parse_3UTRs(infasta_path, outfasta_path, id_delimiter="-"):
 	records_3UTRs = []
@@ -78,9 +82,10 @@ def prepare_empty_codon_dict(max_len):
 def add_codon_statistics_record(record, codon_dict):
 	seq = record.seq
 	seq_len = len(seq)
+	length = seq_len
 	for frame in [0,1,2]:
 		codon_n = 0
-		for i in range(frame,seq_len,3):
+		for i in range(frame,length,3):
 			codon_n += 1
 			triplet = seq[i:i+3]
 			if len(triplet) == 3:
@@ -94,6 +99,67 @@ def get_all_codon_statistics(fasta_path):
 		codon_dict = add_codon_statistics_record(record, codon_dict)
 	return codon_dict
 
-fasta_path = "/Users/anna/work/blasto_local/extracted_3UTRs.fasta"
+def make_graph(codon_dataframe, codon, outdir):
+	outpath = outdir + codon + ".png"
+	palette = sns.color_palette("hls", 3)
+	myplot = sns.lineplot(data=codon_dataframe,palette=palette, dashes=None, linewidth=1)
+	plt.xlabel("Position, nt")
+	plt.ylabel("Codon count")
+	graph_title = f"Summary distribution of {codon} codon in 3'UTR"
+	plt.title(graph_title)
+	plt.savefig(outpath, dpi=300)
+	plt.close()
+	return 0
+
+
+def make_graphs(codon_dict, outdir, upto_nts=300):
+	for codon in codon_dict:
+		codon_data = codon_dict[codon]
+		codon_data_nt_postitions = {}
+		for triplet_position in codon_data:
+			nt_position = triplet_position * 3
+			codon_data_nt_postitions[nt_position] =  codon_data[triplet_position]
+		codon_dataframe = pd.DataFrame.from_dict(codon_data_nt_postitions, orient='index')
+		codon_dataframe = codon_dataframe.truncate(after=upto_nts)
+		make_graph(codon_dataframe, codon, outdir)
+	return 0
+
+def convert_to_df(codon_dict, max_position=100):
+	df_dict = {}
+	i = 0
+	for codon in codon_dict:
+		codon_data = codon_dict[codon]
+		for position in codon_data:
+			if position <= max_position:
+				position_data = codon_data[position]
+				for frame in position_data:
+					current_dict = {}
+					current_dict["codon"] = codon
+					current_dict["frame"] = frame
+					current_dict["nt_position"] = position * 3
+					current_dict["count"] = position_data[frame]
+					df_dict[i] = current_dict
+					i+=1
+	codon_df = pd.DataFrame.from_dict(df_dict, orient='index')
+	return codon_df
+
+def make_facet_grid_graph(codon_df, outpath):
+	sns.set_theme(style="ticks")
+	palette = sns.color_palette("hls", 3)
+	grid = sns.FacetGrid(codon_df, col_wrap=8, col="codon", hue="frame", palette=palette)
+	grid.map(sns.lineplot, "nt_position","count")
+	plt.savefig(outpath, dpi=300)
+	return 0
+
+fasta_path = "/Users/vl18625/work/blasto_local/3_UTR/extracted_3UTRs.fasta"
+outdir = "/Users/vl18625/work/blasto_local/3_UTR/codon_usage_3UTRs_figures/"
+outpath = "/Users/vl18625/work/blasto_local/3_UTR/codon_usage_facegrid.png"
 print ("Preparing codon statistics")
 codon_dict = get_all_codon_statistics(fasta_path)
+
+print("Making data frame")
+
+codon_df = convert_to_df(codon_dict)
+
+make_facet_grid_graph(codon_df, outpath)
+
