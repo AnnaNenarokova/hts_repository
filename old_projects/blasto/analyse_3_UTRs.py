@@ -112,7 +112,7 @@ def make_graph(codon_dataframe, codon, outdir):
 	return 0
 
 
-def make_graphs(codon_dict, outdir, upto_nts=300):
+def make_graphs(codon_dict, outdir, upto_nts=60):
 	for codon in codon_dict:
 		codon_data = codon_dict[codon]
 		codon_data_nt_postitions = {}
@@ -121,33 +121,39 @@ def make_graphs(codon_dict, outdir, upto_nts=300):
 			codon_data_nt_postitions[nt_position] =  codon_data[triplet_position]
 		codon_dataframe = pd.DataFrame.from_dict(codon_data_nt_postitions, orient='index')
 		codon_dataframe = codon_dataframe.truncate(after=upto_nts)
+		print (codon)
 		make_graph(codon_dataframe, codon, outdir)
 	return 0
 
-def convert_to_df(codon_dict, max_position=100):
+def convert_to_df(codon_dict, max_triplets=10):
+	print("making data frame")
 	df_dict = {}
 	i = 0
 	for codon in codon_dict:
 		codon_data = codon_dict[codon]
 		for position in codon_data:
-			if position <= max_position:
+			if position <= max_triplets:
 				position_data = codon_data[position]
 				for frame in position_data:
 					current_dict = {}
 					current_dict["codon"] = codon
 					current_dict["frame"] = frame
-					current_dict["nt_position"] = position * 3
+					current_dict["position, triplets"] = position
 					current_dict["count"] = position_data[frame]
 					df_dict[i] = current_dict
 					i+=1
 	codon_df = pd.DataFrame.from_dict(df_dict, orient='index')
 	return codon_df
 
-def make_facet_grid_graph(codon_df, outpath):
+def make_facet_grid_graph(codon_df, outpath, max_x=30):
+	print("making facet grid graph")
 	sns.set_theme(style="ticks")
 	palette = sns.color_palette("hls", 3)
-	grid = sns.FacetGrid(codon_df, col_wrap=4, col="codon", hue="frame", palette=palette)
-	grid.map(sns.lineplot, "nt_position","count")
+	grid = sns.FacetGrid(codon_df, col_wrap=4, col="codon", hue="frame", palette=palette, sharex=False, legend_out=False)
+	x_step = int(max_x / 5)
+	grid.set(xticks=range(0, max_x+1, x_step))
+	grid.map(sns.lineplot, "position, triplets","count")
+	grid.add_legend()
 	plt.savefig(outpath, dpi=300)
 	return 0
 
@@ -157,9 +163,8 @@ outpath = "/Users/vl18625/work/blasto_local/3_UTR/codon_usage_facegrid.png"
 print ("Preparing codon statistics")
 codon_dict = get_all_codon_statistics(fasta_path)
 
-print("Making data frame")
-
-codon_df = convert_to_df(codon_dict)
-
-make_facet_grid_graph(codon_df, outpath)
+max_triplets = 100
+codon_df = convert_to_df(codon_dict,max_triplets=max_triplets)
+# make_graphs(codon_dict, outdir, upto_nts=30)
+make_facet_grid_graph(codon_df, outpath, max_x=max_triplets)
 
