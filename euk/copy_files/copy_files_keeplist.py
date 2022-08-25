@@ -26,7 +26,7 @@ def copy_files(ids_list, indir, outdir, delimiter="."):
 
 
 
-ids_list = ["COG0022","COG0037","COG0050","COG0055","COG0056","COG0064","COG0074","COG0087","COG0088","COG0091","COG0206","COG0292","COG0354","COG0355","COG0356","COG0377","COG0443","COG0445","COG0459","COG0479","COG0486","COG0508","COG0532","COG0533","COG0567","COG0576","COG0843","COG1007","COG1008","COG1104","COG1220","COG1485","COG1622","COG1845","COG1894","COG1905","COG2857","COG3175","COG3346","COG5405"]
-indir = "/Users/vl18625/work/euk/markers_euks/nina_markers/be/be_mono_results/alpha/euk_alpha_fastas/"
-outdir = "/Users/vl18625/work/euk/markers_euks/nina_markers/be/be_mono_results/alpha/be_alpha_40/"
+ids_list = ["COG0074","COG0459","COG2857","COG0567","COG1894","COG1485","COG0443","COG0087","COG0022","COG0479","COG2609","COG1612","COG3175","COG0355","COG0277","COG1220","COG0114","COG0532","COG0216","COG0292","COG0100","COG0091","COG0445","COG0016","COG0377","COG0064","COG0090","COG0224","COG0143","COG1217","COG0030","COG0576","COG4799","COG3346","COG0508","COG0050","COG0055","COG0636","COG1562","COG0843","COG1104","COG1622","COG2009","COG0197","COG0103","COG1290","COG0635","COG0354","COG1905","COG0356","COG0740","COG0088","COG0056","COG1845","COG0304","COG0820","COG1008","COG0713","COG1034"]
+indir = "/Users/vl18625/work/euk/markers_euks/nina_markers/be/be_c20/after_filtering/linsi_bmge/"
+outdir = "/Users/vl18625/work/euk/markers_euks/nina_markers/be/be_c20/after_filtering/for_be_concat/"
 copy_files(ids_list, indir, outdir)

@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=concat_be_alpha_tree
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/concat_ae_tree_%A.out
+#SBATCH --job-name=concat_BE_filtered_tree
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/concat_be_filtered_tree_%A.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
 #SBATCH --nodes=1
@@ -8,5 +8,5 @@
 #SBATCH --cpus-per-task=20
 #SBATCH --mem=10G
 
-fasta="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/65_ae_markers_euk_filtered_23_08_22/euk_65_markers_all_filtered_concat.fasta"
-iqtree2 -s $fasta -m LG+G -B 1000 -nt 20
+fasta="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/be/alpha/concat/be_c20_filtered_58_markers_concat.fasta"
+iqtree2 -s $fasta -m LG+G -B 1000 -nt 40
