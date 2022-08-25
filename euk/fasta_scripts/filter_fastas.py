@@ -49,9 +49,9 @@ euk_keeplist=["EP00002","EP00003","EP00004","EP01087","EP00006","EP01091","EP010
 
 # filter_fastas_keep_sp(euk_keeplist, indir, outdir, species_id_delimiter="-", euk=True)
 
-exclude_list =["EP00480", "EP01006"]
+exclude_list =["EP00480", "EP01006"] # remove Ploetia (misidentified) and Reticulomyxa (long branched) 
 
-indir="/Users/anna/work/euk_local/nina_markers/singlehit_results/archaea/ae_all_filtered/linsi_bmge_euk_filtered1/"
-outdir="/Users/anna/work/euk_local/nina_markers/singlehit_results/archaea/ae_all_filtered/linsi_bmge_euk_filtered/"
+indir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/euk_c20_monobranch_sets_fastas/"
+outdir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/euk_c20_monobranch_sets_filtered_fastas/"
 
-filter_fastas_exclude_sp(exclude_list, indir, outdir, species_id_delimiter="_")
+filter_fastas_exclude_sp(exclude_list, indir, outdir, species_id_delimiter="-")
