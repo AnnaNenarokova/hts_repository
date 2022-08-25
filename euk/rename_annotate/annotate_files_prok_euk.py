@@ -211,12 +211,16 @@ def annotate_tree_tax_info(tree, tax_info_dict,key_name="taxonomy"):
         used_names.append(new_name)
     return tree
 
-def annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", delimiter="-"):
+def annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", delimiter="-", euk_delimiter=False):
     used_names = []
-    euk_regex = "^EP\d+-P\d+"
-    for leaf in tree.iter_leaves():
+    euk_regex = "^EP\d+_P\d+"
+    for leaf in tree.iter_leaves(): 
         old_name = leaf.name
-        genome_id = old_name.split(delimiter)[0]
+        if euk_delimiter and re.match(euk_regex, old_name):
+            current_delimiter = euk_delimiter
+        else:
+            current_delimiter = delimiter
+        genome_id = old_name.split(current_delimiter)[0]
         if genome_id in tax_info_dict.keys():
             new_name =  tax_info_dict[genome_id][key_name] + " " + old_name
         else:
@@ -229,7 +233,7 @@ def annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", del
     return tree
 
 
-def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=False):
+def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=False, euk_delimiter=False):
     print("Reading taxonomy info")
     tax_info_dict = csv_to_dict(tax_info_path, main_key="gid", delimiter='\t')
     print("Annotating trees")
@@ -239,7 +243,7 @@ def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=
         try: 
             tree = Tree(tree_path)
             if protein_ids:
-                new_tree = annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", delimiter="-")
+                new_tree = annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", delimiter="-", euk_delimiter=euk_delimiter)
             else:
                 new_tree = annotate_tree_tax_info(tree, tax_info_dict,key_name="taxonomy")
             tree.write(format=2, outfile=new_tree_path)
@@ -247,8 +251,11 @@ def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=
             print ("Error", tree_path, new_tree_path)
     return 0
 
-
-in_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/alpha/be/concat_trees/"
-out_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/alpha/be/concat_trees/"
+in_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/archaea/ae_all_filtered/c20_trees/"
+out_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/archaea/ae_all_filtered/c20_trees_annotated/"
 tax_info_path="/Users/anna/work/euk_local/taxa_annotations.tsv"
+# annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True, euk_delimiter="_")
+
+in_treedir="/Users/anna/work/euk_local/nina_markers/concatenated_trees/"
+out_treedir="/Users/anna/work/euk_local/nina_markers/concatenated_trees/"
 annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=False)
