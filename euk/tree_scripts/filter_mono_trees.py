@@ -81,6 +81,6 @@ def filter_mono_trees(treedir, outdir, group_tag):
 		filter_mono_tree(tree_path, outpath, group_tag=group_tag)
 	return outdir
 
-treedir = "/Users/vl18625/work/euk/markers_euks/nina_markers/be_mono_results/alpha/treefiles/"
-outdir = "/Users/vl18625/work/euk/markers_euks/nina_markers/be_mono_results/alpha/euk_mono_branch/"
+treedir = "/Users/vl18625/work/euk/markers_euks/nina_markers/be/c20_trees/"
+outdir = "/Users/vl18625/work/euk/markers_euks/nina_markers/be/euk_c20_alpha_monobranch/"
 filter_mono_trees(treedir, outdir, group_tag="euk")
