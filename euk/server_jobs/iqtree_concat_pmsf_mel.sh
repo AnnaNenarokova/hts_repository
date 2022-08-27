@@ -10,4 +10,4 @@
 
 msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/65_ae_markers_euk_filtered_23_08_22/c60_lg_f_g_pmsf/euk_65_markers_all_filtered_concat.fasta"
 tree="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/65_ae_markers_euk_filtered_23_08_22/lgg/euk_65_markers_all_filtered_concat.fasta.treefile"
-iqtree2 -s $msa -m LG+C60+F+G -ft $tree -b 1000 -nt 40
+iqtree2 -s $msa -m LG+C60+F+G -ft $tree -b 1000 -nt 80
