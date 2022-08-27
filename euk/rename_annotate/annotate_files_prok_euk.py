@@ -258,4 +258,9 @@ tax_info_path="/Users/anna/work/euk_local/taxa_annotations.tsv"
 
 in_treedir="/Users/anna/work/euk_local/nina_markers/concatenated_trees/"
 out_treedir="/Users/anna/work/euk_local/nina_markers/concatenated_trees/"
+
+in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/be_c20/concat/"
+out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/be_c20/concat/"
+tax_info_path="/Users/vl18625/work/euk/protein_sets/taxa_annotations.tsv"
+
 annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=False)
