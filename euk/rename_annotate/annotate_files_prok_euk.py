@@ -251,9 +251,10 @@ def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=
             print ("Error", tree_path, new_tree_path)
     return 0
 
-in_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/archaea/ae_all_filtered/c20_trees/"
-out_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/archaea/ae_all_filtered/c20_trees_annotated/"
-tax_info_path="/Users/anna/work/euk_local/taxa_annotations.tsv"
+in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/65_new_markers/tree/"
+out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/65_new_markers/tree/"
+# tax_info_path="/Users/anna/work/euk_local/taxa_annotations.tsv"
+tax_info_path="/Users/vl18625/work/euk/protein_sets/taxa_annotations.tsv"
 # annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True, euk_delimiter="_")
 
 in_treedir="/Users/anna/work/euk_local/nina_markers/concatenated_trees/"
