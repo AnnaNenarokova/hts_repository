@@ -1,12 +1,12 @@
 #!/bin/bash
 #SBATCH --job-name=concat_AE_c60_tree
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/concat_AE_tree_testing_%A.out
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/AE_models_test_concat_%A.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=48
-#SBATCH --mem=250G
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=10G
 
 msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/65_ae_markers_euk_filtered_23_08_22/c60_lg_f_g_pmsf/euk_65_markers_all_filtered_concat.fasta"
 
