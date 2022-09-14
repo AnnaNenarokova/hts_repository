@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=concat_AE_c60_tree
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/concat_AE_tree_lgg_c60_pmsf_%A.out
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/c60_lgg_pmsf_AE_concat_tree_%A.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
 #SBATCH --nodes=1
