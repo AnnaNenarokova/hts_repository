@@ -211,9 +211,9 @@ def prepare_euk_marker_dict(ABC_hmm_dict, arcog_to_cog):
 						euk_marker_dict[marker_id] = {}
 						euk_marker_dict[marker_id][species] = [prot_id]
 					elif species not in euk_marker_dict[marker_id]:
-						euk_marker_dict[marker_id][species] = [prot_id]
+						euk_marker_dict[marker_id][species] = {prot_id{}
 					elif prot_id not in euk_marker_dict[marker_id][species]:
-						euk_marker_dict[marker_id][species].append(prot_id)
+						euk_marker_dict[marker_id][species][prot_id] = 
 					else:
 						pass
 	return euk_marker_dict
