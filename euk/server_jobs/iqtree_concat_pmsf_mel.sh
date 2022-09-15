@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=c60_lgg_AE_pmsf
+#SBATCH --job-name=c60_lgg_AUTO_AE_pmsf
 #SBATCH --output=/scratch/nenarokova/code/slurm_out/c60_lgg_AUTO_pmsf_AE_concat_tree_%A.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
