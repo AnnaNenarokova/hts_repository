@@ -261,7 +261,6 @@ include_markers_list = ["COG0016","COG0049","COG0051","COG0052","COG0064","COG00
 
 outdir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/ABE_26_markers_fastas/"
 
-
 arcog_to_cog = csv_to_dict_simple(arcog_cog_path)
 
 ABC_hmm_dict = prepare_ABC_hmm_dict(a_dir, b_dir, c_dir)
