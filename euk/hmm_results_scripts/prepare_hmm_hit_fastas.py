@@ -191,38 +191,76 @@ def write_euk_stats(a_dir, b_dir, c_dir, outpath):
 	write_dict_of_dicts(euk_stats, outpath, key_name="species")
 	return outpath
 
-def prepare_euk_marker_dict(ABC_hmm_dict, arcog_to_cog):
-	euk_marker_dict = {}
+def prepare_best_ABC_hmm_dict(ABC_hmm_dict):
+	best_ABC_hmm_dict = {}
 	for species in ABC_hmm_dict:
+		best_ABC_hmm_dict[species] = {}
 		species_dict = ABC_hmm_dict[species]
 		for prot_id in species_dict:
+			best_bitscore = 0
+			best_hit = None
+			best_source = None
+			best_ABC_hmm_dict[species][prot_id] = {}
 			prot_dict = species_dict[prot_id]
 			for source in prot_dict:
 				for hit in prot_dict[source]:
-					qseqid = hit['qseqid']
 					bitscore = hit['bitscore']
+					if bitscore > best_bitscore:
+						best_bitscore = bitscore
+						best_hit = hit
+						best_source = source
+			best_ABC_hmm_dict[species][prot_id]['best_hit'] = best_hit
+			best_ABC_hmm_dict[species][prot_id]['source'] = best_source
+	return best_ABC_hmm_dict
 
-					if qseqid in arcog_to_cog:
-						marker_id = arcog_to_cog[qseqid]
-					else:
-						marker_id = qseqid
-
-					if marker_id not in euk_marker_dict:
-						euk_marker_dict[marker_id] = {}
-						euk_marker_dict[marker_id][species] = [prot_id]
-					elif species not in euk_marker_dict[marker_id]:
-						euk_marker_dict[marker_id][species] = {prot_id{}
-					elif prot_id not in euk_marker_dict[marker_id][species]:
-						euk_marker_dict[marker_id][species][prot_id] = 
-					else:
-						pass
+def prepare_euk_marker_dict(best_ABC_hmm_dict, arcog_to_cog):
+	euk_marker_dict = {}
+	for species in best_ABC_hmm_dict:
+		species_dict = best_ABC_hmm_dict[species]
+		for prot_id in species_dict:
+			prot_dict = species_dict[prot_id]
+			hit = prot_dict['best_hit']
+			source = prot_dict['source']
+			qseqid = hit['qseqid']
+			if qseqid in arcog_to_cog:
+				marker_id = arcog_to_cog[qseqid]
+			else:
+				marker_id = qseqid
+			if marker_id not in euk_marker_dict:
+				euk_marker_dict[marker_id] = {}
+				euk_marker_dict[marker_id][species] = {'alpha':[],'archaea':[],'cyano':[]}
+			elif species not in euk_marker_dict[marker_id]:
+				euk_marker_dict[marker_id][species] = {'alpha':[],'archaea':[],'cyano':[]}
+			euk_marker_dict[marker_id][species][source].append(hit)
 	return euk_marker_dict
 
-def prepare_fastas_ABE(euk_marker_dict,exclude_euk_list,include_markers_list,proteomes_dir,AB_markers_dir, outdir, proteome_ext=".fasta"):
+def prepare_best_euk_marker_dict(euk_marker_dict):
+	best_euk_marker_dict= {}
+	for cog in euk_marker_dict:
+		best_euk_marker_dict[cog] = {}
+		for species in euk_marker_dict[cog]:
+			best_euk_marker_dict[cog][species] = {'alpha': None,'archaea': None,'cyano': None}
+			for source in euk_marker_dict[cog][species]:
+				best_bitscore = 0
+				best_hit = None
+				for hit in euk_marker_dict[cog][species][source]:
+					if hit['bitscore'] > best_bitscore:
+						best_hit = hit
+				best_euk_marker_dict[cog][species][source] = best_hit
+	return best_euk_marker_dict
+
+def prepare_euk_seq_dict(euk_marker_dict):
+	return euk_seq_dict
+def prepare_fastas_ABE(euk_marker_dict,exclude_euk_list,proteomes_dir,AB_markers_dir, outdir, include_markers_list=None, proteome_ext=".fasta"):
 	euk_seq_dict = {}
 	prot_dict = {}
 	print ("Analysing euk_marker_dict")
-	for marker_id in include_markers_list:
+	if include_markers_list:
+		markers = include_markers_list
+	else:
+		markers = euk_marker_dict
+
+	for marker_id in markers:
 		for species in euk_marker_dict[marker_id]:
 			if species not in exclude_euk_list:
 				if species not in euk_seq_dict:
@@ -265,6 +303,11 @@ arcog_to_cog = csv_to_dict_simple(arcog_cog_path)
 
 ABC_hmm_dict = prepare_ABC_hmm_dict(a_dir, b_dir, c_dir)
 
-euk_marker_dict = prepare_euk_marker_dict(ABC_hmm_dict, arcog_to_cog)
+print("preparing best_ABC_hmm_dict")
+best_ABC_hmm_dict = prepare_best_ABC_hmm_dict(ABC_hmm_dict)
 
-euk_seq_dict = prepare_fastas_ABE(euk_marker_dict,exclude_euk_list,include_markers_list,proteomes_dir,AB_markers_dir, outdir, proteome_ext=".fasta")
+print("preparing euk_marker_dict")
+euk_marker_dict = prepare_euk_marker_dict(best_ABC_hmm_dict, arcog_to_cog)
+
+print("preparing best_euk_marker_dict")
+best_euk_marker_dict = prepare_best_euk_marker_dict(euk_marker_dict)
