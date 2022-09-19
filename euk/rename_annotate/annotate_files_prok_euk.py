@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!python3
 from ete3 import Tree
 from Bio import SeqIO
 import sys

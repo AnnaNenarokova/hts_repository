@@ -249,8 +249,24 @@ def prepare_best_euk_marker_dict(euk_marker_dict):
 				best_euk_marker_dict[cog][species][source] = best_hit
 	return best_euk_marker_dict
 
-def prepare_euk_seq_dict(euk_marker_dict):
+def prepare_euk_seq_dict(best_euk_marker_dict):
+	used_seqs = []
+	euk_seq_dict = {}
+	for cog in best_euk_marker_dict:
+		euk_seq_dict[cog] = {}
+		for species in best_euk_marker_dict[cog]:
+			euk_seq_dict[cog][species] = []
+			for source in best_euk_marker_dict[cog][species]:
+				hit = best_euk_marker_dict[cog][species][source]
+				if hit:
+					sseqid = hit['sseqid']
+					if sseqid not in used_seqs:
+						used_seqs.append(sseqid)
+						euk_seq_dict[cog][species].append(sseqid)
+					else:
+						print(f"ERROR! {sseqid} is duplicated")
 	return euk_seq_dict
+
 def prepare_fastas_ABE(euk_marker_dict,exclude_euk_list,proteomes_dir,AB_markers_dir, outdir, include_markers_list=None, proteome_ext=".fasta"):
 	euk_seq_dict = {}
 	prot_dict = {}
@@ -311,3 +327,5 @@ euk_marker_dict = prepare_euk_marker_dict(best_ABC_hmm_dict, arcog_to_cog)
 
 print("preparing best_euk_marker_dict")
 best_euk_marker_dict = prepare_best_euk_marker_dict(euk_marker_dict)
+
+euk_seq_dict = prepare_euk_seq_dict(best_euk_marker_dict)
