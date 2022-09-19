@@ -211,7 +211,7 @@ def annotate_tree_tax_info(tree, tax_info_dict,key_name="taxonomy"):
         used_names.append(new_name)
     return tree
 
-def annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", delimiter="-", euk_delimiter=False):
+def annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", delimiter="-", euk_delimiter=False, source_euk_delimiter=False):
     used_names = []
     euk_regex = "^EP\d+_P\d+"
     for leaf in tree.iter_leaves(): 
@@ -221,6 +221,8 @@ def annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", del
         else:
             current_delimiter = delimiter
         genome_id = old_name.split(current_delimiter)[0]
+        if source_euk_delimiter:
+            genome_id = genome_id.split[source_euk_delimiter][1]
         if genome_id in tax_info_dict.keys():
             new_name =  tax_info_dict[genome_id][key_name] + " " + old_name
         else:
@@ -233,7 +235,7 @@ def annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", del
     return tree
 
 
-def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=False, euk_delimiter=False):
+def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=False, euk_delimiter=False, source_euk_delimiter=False):
     print("Reading taxonomy info")
     tax_info_dict = csv_to_dict(tax_info_path, main_key="gid", delimiter='\t')
     print("Annotating trees")
@@ -243,7 +245,7 @@ def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=
         try: 
             tree = Tree(tree_path)
             if protein_ids:
-                new_tree = annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", delimiter="-", euk_delimiter=euk_delimiter)
+                new_tree = annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", delimiter="-", euk_delimiter=euk_delimiter,source_euk_delimiter=source_euk_delimiter)
             else:
                 new_tree = annotate_tree_tax_info(tree, tax_info_dict,key_name="taxonomy")
             tree.write(format=2, outfile=new_tree_path)
@@ -255,7 +257,7 @@ tax_info_path="/Users/vl18625/work/euk/protein_sets/taxa_annotations.tsv"
 
 in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/old_data/trees/"
 out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/old_data/trees_annotated/"
-annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True, euk_delimiter="_")
+annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True, euk_delimiter="_", source_euk_delimiter="_")
 
 in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/65_new_markers/tree/"
 out_treedir=in_treedir
