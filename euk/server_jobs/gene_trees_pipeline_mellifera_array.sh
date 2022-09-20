@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=be_gene_trees
+#SBATCH --job-name=26_abe_gene_trees
 #SBATCH --output=/scratch/nenarokova/code/slurm_out/26_ABE_gene_trees_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
