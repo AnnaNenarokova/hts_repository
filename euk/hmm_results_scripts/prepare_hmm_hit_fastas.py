@@ -310,12 +310,30 @@ def prepare_euk_seq_dict(seqid_dict,exclude_euk_list,proteomes_dir,include_marke
 				euk_seq_dict[marker_id][species][prot_id] = record
 	return euk_seq_dict
 
+def prepare_markers_seq_dict(euk_seq_dict,AB_markers_dir,cog_ext=".faa"):
+	markers_seq_dict = {}
+	for marker_id in euk_seq_dict:
+		markers_seq_dict[marker_id] = []
+		AB_path = AB_markers_dir + marker_id + cog_ext
+		for record in SeqIO.parse(AB_path, "fasta"):
+			markers_seq_dict[marker_id].append(record)
+		for species in euk_seq_dict[marker_id]:
+			for prot_id in euk_seq_dict[marker_id][species]:
+				markers_seq_dict[marker_id].append(euk_seq_dict[marker_id][species][prot_id])
+	return markers_seq_dict
+
+def write_fastas(markers_seq_dict, outdir,marker_ext=".faa"):
+	for marker_id in markers_seq_dict:
+		records = []
+		outpath = 
+
+	return outdir
 workdir = "/Users/vl18625/work/euk/markers_euks/hmm_results/"
 a_dir = workdir + "ae_hmm_results/"
 b_dir = workdir + "alpha_hmm_results/"
 c_dir = workdir + "cyano_hmm_results/"
 
-AB_markers_dir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/AB_manually_filtered_Nina/"
+AB_markers_dir="/Users/vl18625/work/euk/protein_sets/AB_manually_filtered_Nina/"
 
 proteomes_dir="/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_proteome_dataset/"
 
@@ -343,4 +361,6 @@ seqid_dict = prepare_seqid_dict(best_euk_marker_dict)
 
 seqid_dict = filter_fonticula(seqid_dict)
 
-euk_seq_dict = prepare_euk_seq_dict(seqid_dict,exclude_euk_list,proteomes_dir,include_markers_list=None, proteome_ext=".fasta")
+euk_seq_dict = prepare_euk_seq_dict(seqid_dict,exclude_euk_list,proteomes_dir,include_markers_list=include_markers_list, proteome_ext=".fasta")
+
+markers_seq_dict = write_fastas(euk_seq_dict,AB_markers_dir,outdir,cog_ext=".faa")
