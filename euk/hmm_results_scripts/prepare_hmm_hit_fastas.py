@@ -249,37 +249,37 @@ def prepare_best_euk_marker_dict(euk_marker_dict):
 				best_euk_marker_dict[cog][species][source] = best_hit
 	return best_euk_marker_dict
 
-def prepare_euk_seqid_dict(best_euk_marker_dict):
+def prepare_seqid_dict(best_euk_marker_dict):
 	used_seqs = []
-	euk_seqid_dict = {}
+	seqid_dict = {}
 	for cog in best_euk_marker_dict:
-		euk_seqid_dict[cog] = {}
+		seqid_dict[cog] = {}
 		for species in best_euk_marker_dict[cog]:
-			euk_seqid_dict[cog][species] = []
+			seqid_dict[cog][species] = []
 			for source in best_euk_marker_dict[cog][species]:
 				hit = best_euk_marker_dict[cog][species][source]
 				if hit:
 					sseqid = hit['sseqid']
 					if sseqid not in used_seqs:
 						used_seqs.append(sseqid)
-						euk_seqid_dict[cog][species].append(sseqid)
+						seqid_dict[cog][species].append(sseqid)
 					else:
 						print(f"ERROR! {sseqid} is duplicated")
-	return euk_seqid_dict
+	return seqid_dict
 
-def filter_fonticula(euk_seqid_dict):
-	for cog in euk_seqid_dict:
+def filter_fonticula(seqid_dict):
+	for cog in seqid_dict:
 		new_prot_list = []
 		fonticula_id = "EP00159_Fonticula_alba"
-		if fonticula_id in euk_seqid_dict[cog].keys():
-			for prot_id in euk_seqid_dict[cog]["EP00159_Fonticula_alba"]:
+		if fonticula_id in seqid_dict[cog].keys():
+			for prot_id in seqid_dict[cog]["EP00159_Fonticula_alba"]:
 				prot_id_splitted = prot_id.split("-")
 				new_prot_id = prot_id_splitted[0] + "-" + prot_id_splitted[-1]
 				new_prot_list.append(new_prot_id)
-			euk_seqid_dict[cog]["EP00159_Fonticula_alba"] = new_prot_list
-	return euk_seqid_dict
+			seqid_dict[cog]["EP00159_Fonticula_alba"] = new_prot_list
+	return seqid_dict
 
-def prepare_euk_seq_dict(euk_seqid_dict,exclude_euk_list,proteomes_dir,include_markers_list=None, proteome_ext=".fasta"):
+def prepare_euk_seq_dict(seqid_dict,exclude_euk_list,proteomes_dir,include_markers_list=None, proteome_ext=".fasta"):
 	print ("Analysing euk_marker_dict")
 	if include_markers_list:
 		markers = include_markers_list
@@ -290,16 +290,15 @@ def prepare_euk_seq_dict(euk_seqid_dict,exclude_euk_list,proteomes_dir,include_m
 	species_dict = {}
 	for marker_id in markers:
 		euk_seq_dict[marker_id] = {}
-		for species in euk_seqid_dict[marker_id]:
+		for species in seqid_dict[marker_id]:
 			if species not in exclude_euk_list:
 				if species not in euk_seq_dict[marker_id]:
 					euk_seq_dict[marker_id][species] = {}
 				if species not in species_dict:
 					species_dict[species] = {}
-			for prot_id in euk_seqid_dict[marker_id][species]:
-				euk_seq_dict[marker_id][species][prot_id] = ""
-				species_dict[species][prot_id] = marker_id
-
+				for prot_id in seqid_dict[marker_id][species]:
+					euk_seq_dict[marker_id][species][prot_id] = ""
+					species_dict[species][prot_id] = marker_id
 	print ("Collecting euk fasta seqs")
 	for species in species_dict:
 		print (species)
@@ -308,7 +307,7 @@ def prepare_euk_seq_dict(euk_seqid_dict,exclude_euk_list,proteomes_dir,include_m
 			prot_id = record.id 
 			if prot_id in species_dict[species]:
 				marker_id = species_dict[species][prot_id]
-				euk_seqid_dict[species][marker_id][prot_id] = record
+				euk_seq_dict[marker_id][species][prot_id] = record
 	return euk_seq_dict
 
 workdir = "/Users/vl18625/work/euk/markers_euks/hmm_results/"
@@ -340,8 +339,8 @@ euk_marker_dict = prepare_euk_marker_dict(best_ABC_hmm_dict, arcog_to_cog)
 print("preparing best_euk_marker_dict")
 best_euk_marker_dict = prepare_best_euk_marker_dict(euk_marker_dict)
 
-euk_seqid_dict = prepare_euk_seqid_dict(best_euk_marker_dict)
+seqid_dict = prepare_seqid_dict(best_euk_marker_dict)
 
-euk_seqid_dict = filter_fonticula(euk_seqid_dict)
+seqid_dict = filter_fonticula(seqid_dict)
 
-euk_seq_dict = prepare_euk_seq_dict(euk_seqid_dict,exclude_euk_list,proteomes_dir,include_markers_list=None, proteome_ext=".fasta")
+euk_seq_dict = prepare_euk_seq_dict(seqid_dict,exclude_euk_list,proteomes_dir,include_markers_list=None, proteome_ext=".fasta")
