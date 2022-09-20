@@ -325,42 +325,51 @@ def prepare_markers_seq_dict(euk_seq_dict,AB_markers_dir,cog_ext=".faa"):
 def write_fastas(markers_seq_dict, outdir,marker_ext=".faa"):
 	for marker_id in markers_seq_dict:
 		records = []
-		outpath = 
-
+		outfasta = outdir + marker_id + marker_ext
+		for record in markers_seq_dict[marker_id]:
+			records.append(record)
+		SeqIO.write(records, outfasta, "fasta")
 	return outdir
-workdir = "/Users/vl18625/work/euk/markers_euks/hmm_results/"
-a_dir = workdir + "ae_hmm_results/"
-b_dir = workdir + "alpha_hmm_results/"
-c_dir = workdir + "cyano_hmm_results/"
 
-AB_markers_dir="/Users/vl18625/work/euk/protein_sets/AB_manually_filtered_Nina/"
+def prepare_ABE_fastas():
+	workdir = "/Users/vl18625/work/euk/markers_euks/hmm_results/"
+	a_dir = workdir + "ae_hmm_results/"
+	b_dir = workdir + "alpha_hmm_results/"
+	c_dir = workdir + "cyano_hmm_results/"
 
-proteomes_dir="/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_proteome_dataset/"
+	AB_markers_dir="/Users/vl18625/work/euk/protein_sets/AB_manually_filtered_Nina/"
 
-exclude_euk_list = ["EP01146_Carpediemonas_membranifera","EP00033_Pygsuia_biforma","EP00727_Mastigamoeba_balamuthi","EP00480_Reticulomyxa_filosa","EP00157_Rozella_allomycis","EP00771_Trimastix_marina"]
-outpath = "/Users/vl18625/work/euk/markers_euks/hmm_results/euk_stats.csv"
-arcog_cog_path = "/Users/vl18625/work/euk/markers_euks/nina_markers/arCOG_COG.csv"
-include_markers_list = ["COG0016","COG0049","COG0051","COG0052","COG0064","COG0081","COG0085","COG0086","COG0087","COG0088","COG0090","COG0091","COG0092","COG0093","COG0094","COG0096","COG0098","COG0099","COG0100","COG0103","COG0201","COG0202","COG0532","COG0533","COG0541","COG0552"]
+	proteomes_dir="/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_proteome_dataset/"
 
-outdir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/ABE_26_markers_fastas/"
+	exclude_euk_list = ["EP01146_Carpediemonas_membranifera","EP00033_Pygsuia_biforma","EP00727_Mastigamoeba_balamuthi","EP00480_Reticulomyxa_filosa","EP00157_Rozella_allomycis","EP00771_Trimastix_marina"]
+	outpath = "/Users/vl18625/work/euk/markers_euks/hmm_results/euk_stats.csv"
+	arcog_cog_path = "/Users/vl18625/work/euk/markers_euks/nina_markers/arCOG_COG.csv"
+	include_markers_list = ["COG0016","COG0049","COG0051","COG0052","COG0064","COG0081","COG0085","COG0086","COG0087","COG0088","COG0090","COG0091","COG0092","COG0093","COG0094","COG0096","COG0098","COG0099","COG0100","COG0103","COG0201","COG0202","COG0532","COG0533","COG0541","COG0552"]
 
-arcog_to_cog = csv_to_dict_simple(arcog_cog_path)
+	outdir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/ABE_26_markers_fastas/"
 
-ABC_hmm_dict = prepare_ABC_hmm_dict(a_dir, b_dir, c_dir)
+	arcog_to_cog = csv_to_dict_simple(arcog_cog_path)
 
-print("preparing best_ABC_hmm_dict")
-best_ABC_hmm_dict = prepare_best_ABC_hmm_dict(ABC_hmm_dict)
+	ABC_hmm_dict = prepare_ABC_hmm_dict(a_dir, b_dir, c_dir)
 
-print("preparing euk_marker_dict")
-euk_marker_dict = prepare_euk_marker_dict(best_ABC_hmm_dict, arcog_to_cog)
+	print("preparing best_ABC_hmm_dict")
+	best_ABC_hmm_dict = prepare_best_ABC_hmm_dict(ABC_hmm_dict)
 
-print("preparing best_euk_marker_dict")
-best_euk_marker_dict = prepare_best_euk_marker_dict(euk_marker_dict)
+	print("preparing euk_marker_dict")
+	euk_marker_dict = prepare_euk_marker_dict(best_ABC_hmm_dict, arcog_to_cog)
 
-seqid_dict = prepare_seqid_dict(best_euk_marker_dict)
+	print("preparing best_euk_marker_dict")
+	best_euk_marker_dict = prepare_best_euk_marker_dict(euk_marker_dict)
 
-seqid_dict = filter_fonticula(seqid_dict)
+	seqid_dict = prepare_seqid_dict(best_euk_marker_dict)
 
-euk_seq_dict = prepare_euk_seq_dict(seqid_dict,exclude_euk_list,proteomes_dir,include_markers_list=include_markers_list, proteome_ext=".fasta")
+	seqid_dict = filter_fonticula(seqid_dict)
 
-markers_seq_dict = write_fastas(euk_seq_dict,AB_markers_dir,outdir,cog_ext=".faa")
+	euk_seq_dict = prepare_euk_seq_dict(seqid_dict,exclude_euk_list,proteomes_dir,include_markers_list=include_markers_list, proteome_ext=".fasta")
+
+	markers_seq_dict = prepare_markers_seq_dict(euk_seq_dict,AB_markers_dir,cog_ext=".faa")
+
+	outdir = write_fastas(markers_seq_dict, outdir,marker_ext=".faa")
+return outdir
+
+prepare_ABE_fastas()
