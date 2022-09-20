@@ -370,6 +370,6 @@ def prepare_ABE_fastas():
 	markers_seq_dict = prepare_markers_seq_dict(euk_seq_dict,AB_markers_dir,cog_ext=".faa")
 
 	outdir = write_fastas(markers_seq_dict, outdir,marker_ext=".faa")
-return outdir
+	return outdir
 
 prepare_ABE_fastas()
