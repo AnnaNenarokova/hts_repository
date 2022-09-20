@@ -1,4 +1,4 @@
-#!python3
+#!python
 from ete3 import Tree
 from Bio import SeqIO
 import sys
@@ -248,16 +248,16 @@ def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=
                 new_tree = annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", delimiter="-", euk_delimiter=euk_delimiter,source_euk_delimiter=source_euk_delimiter)
             else:
                 new_tree = annotate_tree_tax_info(tree, tax_info_dict,key_name="taxonomy")
-            tree.write(format=2, outfile=new_tree_path)
+            new_tree.write(format=2, outfile=new_tree_path)
         except:
             print ("Error", tree_path, new_tree_path)
     return 0
 
 tax_info_path="/Users/vl18625/work/euk/protein_sets/taxa_annotations.tsv"
 
-in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/old_data/trees/"
-out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/old_data/trees_annotated/"
-annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True, euk_delimiter="_", source_euk_delimiter="_")
+in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/65_new_markers/single_gene_trees/trees/"
+out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/65_new_markers/single_gene_trees/trees_annotated/"
+annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True, euk_delimiter="_")
 
 in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/65_new_markers/tree/"
 out_treedir=in_treedir

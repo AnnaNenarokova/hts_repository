@@ -162,11 +162,11 @@ def prepare_ABC_hmm_dict(a_dir, b_dir, c_dir):
 	hmm_dict = parse_euk_hmm_dict(c_dir, source_name, hmm_dict)
 	return hmm_dict
 
-def find_best_hit_ABC(protid_dict):
+def find_best_hit_ABC(prot_id_dict):
 	best_bitscore = 0
 	best_source_name = None
-	for source_name in protid_dict:
-		for hit in protid_dict[source_name]:
+	for source_name in prot_id_dict:
+		for hit in prot_id_dict[source_name]:
 			hit_bitscore =  hit['bitscore']
 			if hit_bitscore > best_bitscore:
 				best_bitscore = hit_bitscore
@@ -249,54 +249,66 @@ def prepare_best_euk_marker_dict(euk_marker_dict):
 				best_euk_marker_dict[cog][species][source] = best_hit
 	return best_euk_marker_dict
 
-def prepare_euk_seq_dict(best_euk_marker_dict):
+def prepare_euk_seqid_dict(best_euk_marker_dict):
 	used_seqs = []
-	euk_seq_dict = {}
+	euk_seqid_dict = {}
 	for cog in best_euk_marker_dict:
-		euk_seq_dict[cog] = {}
+		euk_seqid_dict[cog] = {}
 		for species in best_euk_marker_dict[cog]:
-			euk_seq_dict[cog][species] = []
+			euk_seqid_dict[cog][species] = []
 			for source in best_euk_marker_dict[cog][species]:
 				hit = best_euk_marker_dict[cog][species][source]
 				if hit:
 					sseqid = hit['sseqid']
 					if sseqid not in used_seqs:
 						used_seqs.append(sseqid)
-						euk_seq_dict[cog][species].append(sseqid)
+						euk_seqid_dict[cog][species].append(sseqid)
 					else:
 						print(f"ERROR! {sseqid} is duplicated")
-	return euk_seq_dict
+	return euk_seqid_dict
 
-def prepare_fastas_ABE(euk_marker_dict,exclude_euk_list,proteomes_dir,AB_markers_dir, outdir, include_markers_list=None, proteome_ext=".fasta"):
-	euk_seq_dict = {}
-	prot_dict = {}
+def filter_fonticula(euk_seqid_dict):
+	for cog in euk_seqid_dict:
+		new_prot_list = []
+		fonticula_id = "EP00159_Fonticula_alba"
+		if fonticula_id in euk_seqid_dict[cog].keys():
+			for prot_id in euk_seqid_dict[cog]["EP00159_Fonticula_alba"]:
+				prot_id_splitted = prot_id.split("-")
+				new_prot_id = prot_id_splitted[0] + "-" + prot_id_splitted[-1]
+				new_prot_list.append(new_prot_id)
+			euk_seqid_dict[cog]["EP00159_Fonticula_alba"] = new_prot_list
+	return euk_seqid_dict
+
+def prepare_euk_seq_dict(euk_seqid_dict,exclude_euk_list,proteomes_dir,include_markers_list=None, proteome_ext=".fasta"):
 	print ("Analysing euk_marker_dict")
 	if include_markers_list:
 		markers = include_markers_list
 	else:
 		markers = euk_marker_dict
-
+	
+	euk_seq_dict = {}
+	species_dict = {}
 	for marker_id in markers:
-		for species in euk_marker_dict[marker_id]:
+		euk_seq_dict[marker_id] = {}
+		for species in euk_seqid_dict[marker_id]:
 			if species not in exclude_euk_list:
-				if species not in euk_seq_dict:
-					euk_seq_dict[species] = {marker_id:{}}
-				elif marker_id not in euk_seq_dict[species]:
-					euk_seq_dict[species][marker_id] = {}
-				if species not in prot_dict:
-					prot_dict[species] = euk_marker_dict[marker_id][species]
-				else:
-					prot_dict[species].extend(euk_marker_dict[marker_id][species])
-				for prot_id in euk_marker_dict[marker_id][species]:
-					euk_seq_dict[species][marker_id][prot_id] = None
+				if species not in euk_seq_dict[marker_id]:
+					euk_seq_dict[marker_id][species] = {}
+				if species not in species_dict:
+					species_dict[species] = {}
+			for prot_id in euk_seqid_dict[marker_id][species]:
+				euk_seq_dict[marker_id][species][prot_id] = ""
+				species_dict[species][prot_id] = marker_id
+
 	print ("Collecting euk fasta seqs")
-	for species in prot_dict:
+	for species in species_dict:
 		print (species)
 		proteome_path = proteomes_dir + species + proteome_ext
 		for record in SeqIO.parse(proteome_path, "fasta"):
 			prot_id = record.id 
-			if prot_id in prot_dict[species]:
-				euk_seq_dict[species][marker_id][prot_id] = record
+			if prot_id in species_dict[species]:
+				marker_id = species_dict[species][prot_id]
+				euk_seqid_dict[species][marker_id][prot_id] = record
 	return euk_seq_dict
 
 workdir = "/Users/vl18625/work/euk/markers_euks/hmm_results/"
@@ -328,4 +340,8 @@ euk_marker_dict = prepare_euk_marker_dict(best_ABC_hmm_dict, arcog_to_cog)
 print("preparing best_euk_marker_dict")
 best_euk_marker_dict = prepare_best_euk_marker_dict(euk_marker_dict)
 
-euk_seq_dict = prepare_euk_seq_dict(best_euk_marker_dict)
+euk_seqid_dict = prepare_euk_seqid_dict(best_euk_marker_dict)
+
+euk_seqid_dict = filter_fonticula(euk_seqid_dict)
+
+euk_seq_dict = prepare_euk_seq_dict(euk_seqid_dict,exclude_euk_list,proteomes_dir,include_markers_list=None, proteome_ext=".fasta")
