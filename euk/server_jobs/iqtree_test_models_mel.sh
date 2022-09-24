@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=concat_AE_c60_tree
+#SBATCH --job-name=model_test_AE_c60_tree
 #SBATCH --output=/scratch/nenarokova/code/slurm_out/AE_models_test_concat_%A.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
