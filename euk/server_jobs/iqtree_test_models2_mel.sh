@@ -12,5 +12,5 @@ msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/65_ae_markers_euk_filt
 
 models="LG+C60,LG+C60+G,LG+C60+R,LG+C60+F,LG+C60+G+R,LG+C60+G+F,LG+C60+R+F,LG+C60+G+R+F,LG+PMSF+G"
 
-iqtree2 -s $msa  -T 8 -m MF -mset $models --score-diff all -mem 250G
+iqtree2 -s $msa  -T 8 -m MF -mset $models --score-diff all -mem 200G
 
