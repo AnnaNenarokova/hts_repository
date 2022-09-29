@@ -3,18 +3,14 @@
 #SBATCH --output=/scratch/nenarokova/code/slurm_out/26_ABE_gene_trees_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
-#SBATCH --array=1-26
+#SBATCH --array=1-28
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=5GB
 ##SBATCH --nodes=1
 ## --cpu_bind=v,threads
 
-<<<<<<< HEAD
 workdir="/scratch/nenarokova/euk/markers/be/alpha/28_markers_29_09_22/"
-=======
-workdir="/scratch/nenarokova/euk/markers/abe/26_markers/"
->>>>>>> 83c3850da30e76c2bdfaee6052b6bf9b2723a1c5
 
 fasta_dir=$workdir"faa/"
 
