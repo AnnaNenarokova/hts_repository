@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!python
 from ete3 import Tree
 from Bio import SeqIO
 import sys
@@ -211,7 +211,7 @@ def annotate_tree_tax_info(tree, tax_info_dict,key_name="taxonomy"):
         used_names.append(new_name)
     return tree
 
-def annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", delimiter="-", euk_delimiter=False):
+def annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", delimiter="-", euk_delimiter=False, source_euk_delimiter=False):
     used_names = []
     euk_regex = "^EP\d+_P\d+"
     for leaf in tree.iter_leaves(): 
@@ -221,6 +221,8 @@ def annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", del
         else:
             current_delimiter = delimiter
         genome_id = old_name.split(current_delimiter)[0]
+        if source_euk_delimiter:
+            genome_id = genome_id.split[source_euk_delimiter][1]
         if genome_id in tax_info_dict.keys():
             new_name =  tax_info_dict[genome_id][key_name] + " " + old_name
         else:
@@ -233,7 +235,7 @@ def annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", del
     return tree
 
 
-def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=False, euk_delimiter=False):
+def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=False, euk_delimiter=False, source_euk_delimiter=False):
     print("Reading taxonomy info")
     tax_info_dict = csv_to_dict(tax_info_path, main_key="gid", delimiter='\t')
     print("Annotating trees")
@@ -243,19 +245,27 @@ def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=
         try: 
             tree = Tree(tree_path)
             if protein_ids:
-                new_tree = annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", delimiter="-", euk_delimiter=euk_delimiter)
+                new_tree = annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", delimiter="-", euk_delimiter=euk_delimiter,source_euk_delimiter=source_euk_delimiter)
             else:
                 new_tree = annotate_tree_tax_info(tree, tax_info_dict,key_name="taxonomy")
-            tree.write(format=2, outfile=new_tree_path)
+            new_tree.write(format=2, outfile=new_tree_path)
         except:
             print ("Error", tree_path, new_tree_path)
     return 0
 
-in_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/archaea/ae_all_filtered/c20_trees/"
-out_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/archaea/ae_all_filtered/c20_trees_annotated/"
-tax_info_path="/Users/anna/work/euk_local/taxa_annotations.tsv"
-# annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True, euk_delimiter="_")
+tax_info_path="/Users/vl18625/work/euk/protein_sets/taxa_annotations.tsv"
 
+in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/65_new_markers/single_gene_trees/trees/"
+out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/65_new_markers/single_gene_trees/trees_annotated/"
+annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True, euk_delimiter="_")
+
+in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/65_new_markers/tree/"
+out_treedir=in_treedir
+
+<<<<<<< HEAD
 in_treedir="/Users/anna/work/euk_local/nina_markers/ABE/26_markers/trees/lgg_c20_pmsf/trees/"
 out_treedir="/Users/anna/work/euk_local/nina_markers/ABE/26_markers/trees/lgg_c20_pmsf/trees_annotated/"
 annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True)
+=======
+# annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=False)
+>>>>>>> 83c3850da30e76c2bdfaee6052b6bf9b2723a1c5

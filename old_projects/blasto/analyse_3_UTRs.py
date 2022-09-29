@@ -99,30 +99,43 @@ def get_all_codon_statistics(fasta_path):
 		codon_dict = add_codon_statistics_record(record, codon_dict)
 	return codon_dict
 
-def make_graph(codon_dataframe, codon, outdir):
+def make_graph(codon_dataframe, codon, outdir, x_label):
 	outpath = outdir + codon + ".png"
 	palette = sns.color_palette("hls", 3)
 	myplot = sns.lineplot(data=codon_dataframe,palette=palette, dashes=None, linewidth=1)
-	plt.xlabel("Position, nt")
+	plt.xlabel(x_label)
 	plt.ylabel("Codon count")
-	graph_title = f"Summary distribution of {codon} codon in 3'UTR"
-	plt.title(graph_title)
+	# graph_title = f"Summary distribution of {codon} codon in 3'UTRs"
+	# plt.title(graph_title)
+	plt.legend(labels=["frame 1","frame 2","frame 3"])
 	plt.savefig(outpath, dpi=300)
 	plt.close()
 	return 0
 
 
-def make_graphs(codon_dict, outdir, upto_nts=60):
+def make_graphs(codon_dict, outdir, upto_nts=None, upto_triplets=None):
 	for codon in codon_dict:
 		codon_data = codon_dict[codon]
-		codon_data_nt_postitions = {}
-		for triplet_position in codon_data:
-			nt_position = triplet_position * 3
-			codon_data_nt_postitions[nt_position] =  codon_data[triplet_position]
-		codon_dataframe = pd.DataFrame.from_dict(codon_data_nt_postitions, orient='index')
-		codon_dataframe = codon_dataframe.truncate(after=upto_nts)
+		if upto_nts:
+			codon_data_nt_postitions = {}
+			for triplet_position in codon_data:
+				nt_position = triplet_position * 3
+				codon_data_nt_postitions[nt_position] =  codon_data[triplet_position]
+			codon_dataframe = pd.DataFrame.from_dict(codon_data_nt_postitions, orient='index')
+			codon_dataframe = codon_dataframe.truncate(after=upto_nts)
+			x_label = ("Position, nt")
+		elif upto_triplets:
+			for triplet_position in codon_data:
+				for frame in (2,1,0):
+					codon_data[triplet_position][frame+1] = codon_data[triplet_position].pop(frame)
+			codon_dataframe = pd.DataFrame.from_dict(codon_data, orient='index')
+			codon_dataframe = codon_dataframe.truncate(after=upto_triplets)
+			x_label = ("Position, triplets")
+		else:
+			print ("No x unit defined!")
+			return 0
 		print (codon)
-		make_graph(codon_dataframe, codon, outdir)
+		make_graph(codon_dataframe, codon, outdir, x_label)
 	return 0
 
 def convert_to_df(codon_dict, max_triplets=10):
@@ -137,7 +150,7 @@ def convert_to_df(codon_dict, max_triplets=10):
 				for frame in position_data:
 					current_dict = {}
 					current_dict["codon"] = codon
-					current_dict["frame"] = frame
+					current_dict["frame"] = frame + 1
 					current_dict["position, triplets"] = position
 					current_dict["count"] = position_data[frame]
 					df_dict[i] = current_dict
@@ -164,7 +177,7 @@ print ("Preparing codon statistics")
 codon_dict = get_all_codon_statistics(fasta_path)
 
 max_triplets = 100
-codon_df = convert_to_df(codon_dict,max_triplets=max_triplets)
-# make_graphs(codon_dict, outdir, upto_nts=30)
-make_facet_grid_graph(codon_df, outpath, max_x=max_triplets)
+make_graphs(codon_dict, outdir, upto_triplets=max_triplets)
+# codon_df = convert_to_df(codon_dict,max_triplets=max_triplets)
+# make_facet_grid_graph(codon_df, outpath, max_x=max_triplets)
 
