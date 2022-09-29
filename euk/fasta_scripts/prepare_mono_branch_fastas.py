@@ -51,14 +51,8 @@ def prepare_fastas(seqid_folder, fasta_folder, out_folder):
 		SeqIO.write(out_records, outpath, "fasta")
 	return out_folder
 
-<<<<<<< HEAD
-seqid_folder = "/Users/anna/work/euk_local/nina_markers/singlehit_results/alpha/be/euk_alpha_ids/"
+seqid_folder = "/Users/anna/work/euk_local/nina_markers/singlehit_results/cyano/29_09_22/euk_cyano_ids/"
 fasta_folder = "/Users/anna/work/euk_local/eukprot/anna_current_set/"
-out_folder = "/Users/anna/work/euk_local/nina_markers/singlehit_results/alpha/be/euk_alpha_fastas/"
-=======
-seqid_folder = "/Users/vl18625/work/euk/markers_euks/nina_markers/be/euk_c20_alpha_in_out_sets/"
-fasta_folder = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_proteome_dataset/"
-out_folder = "/Users/vl18625/work/euk/markers_euks/nina_markers/be/euk_c20_monobranch_sets_fastas/"
->>>>>>> 83c3850da30e76c2bdfaee6052b6bf9b2723a1c5
+out_folder = "/Users/anna/work/euk_local/nina_markers/singlehit_results/cyano/29_09_22/euk_cyano_fastas/"
 
 prepare_fastas(seqid_folder, fasta_folder, out_folder)
