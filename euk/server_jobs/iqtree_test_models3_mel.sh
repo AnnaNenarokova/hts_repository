@@ -9,7 +9,7 @@
 #SBATCH --mem=250G
 
 msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/65_ae_markers_euk_filtered_23_08_22/model_testing/model_testing_4/euk_65_markers_all_filtered_concat.fasta"
-models="LG+R+F,LG+R,LG+G+F,LG+C60,LG+C60+G,LG+C60+F,LG+C60+G+F"
+models="LG+C60+R2,LG+C60+R2+F,LG+C60+R3,LG+C60+R3+F,LG+C60+G4,LG+C60+G4+F,LG+C60+G6,LG+C60+G6+F,LG+C60+G8,LG+C60+G8+F"
 
 iqtree2 -s $msa  -T 8 -m MF -mset $models --score-diff all -mem 250G
 
