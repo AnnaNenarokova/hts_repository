@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-import os
 from Bio import SeqIO
+from os import listdir
 
 def listdir_nohidden(path):
 	for f in listdir(path):
@@ -25,6 +25,6 @@ def replace_species_delimeter_dir(indir, outdir):
 		replace_species_delimeter(infasta, outfasta)
 	return 0
 
-indir="/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_proteome_dataset_old/"
-outdir="/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_proteome_dataset/"
+indir="/Users/anna/work/euk_local/eukprot/font/"
+outdir="/Users/anna/work/euk_local/eukprot/font_renamed/"
 replace_species_delimeter_dir(indir, outdir)

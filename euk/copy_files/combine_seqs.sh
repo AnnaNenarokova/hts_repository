@@ -8,8 +8,8 @@ do
 	cat $f >> $outfile
 done
 
-indir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/be_mono_results/alpha/euk_only_fastas/"
-outdir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/be_mono_results/alpha/be_alpha_28/"
+indir="/Users/anna/work/euk_local/nina_markers/fasta_markers/bacteria_manually_cleaned/"
+outdir="/Users/anna/work/euk_local/nina_markers/singlehit_results/alpha/be/28_markers_29_09_22/be_alpha_fastas/"
 for f in *.faa
 do
  echo $f

@@ -256,6 +256,6 @@ out_treedir="/Users/anna/work/euk_local/nina_markers/singlehit_results/archaea/a
 tax_info_path="/Users/anna/work/euk_local/taxa_annotations.tsv"
 # annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True, euk_delimiter="_")
 
-in_treedir="/Users/anna/work/euk_local/nina_markers/concatenated_trees/"
-out_treedir="/Users/anna/work/euk_local/nina_markers/concatenated_trees/"
-annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=False)
+in_treedir="/Users/anna/work/euk_local/nina_markers/ABE/26_markers/trees/lgg_c20_pmsf/trees/"
+out_treedir="/Users/anna/work/euk_local/nina_markers/ABE/26_markers/trees/lgg_c20_pmsf/trees_annotated/"
+annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True)
