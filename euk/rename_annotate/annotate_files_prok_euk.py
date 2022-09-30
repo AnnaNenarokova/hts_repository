@@ -262,4 +262,10 @@ annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True
 in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/65_new_markers/tree/"
 out_treedir=in_treedir
 
+<<<<<<< HEAD
+in_treedir="/Users/anna/work/euk_local/nina_markers/ABE/26_markers/trees/lgg_c20_pmsf/trees/"
+out_treedir="/Users/anna/work/euk_local/nina_markers/ABE/26_markers/trees/lgg_c20_pmsf/trees_annotated/"
+annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True)
+=======
 # annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=False)
+>>>>>>> 83c3850da30e76c2bdfaee6052b6bf9b2723a1c5
