@@ -1,0 +1,147 @@
+EP00697-P000001	EP00697_P000001 EP00697_Spironema_sp_BW2_P000001 gnl|Spiro4|0_TR1_c0_g1_i1.p1 gnl|Spiro4|0_TR1_c0_g1~~gnl|Spiro4|0_TR1_c0_g1_i1.p1  ORF type:5prime_partial len:314 (-),score=81.06 gnl|Spiro4|0_TR1_c0_g1_i1:126-1067(-)
+EP00513-P000001	EP00513_P000001 EP00513_Hondaea_fermentalgiana_P000001 GBG16049.1 TolA protein, putative, partial [Hondaea fermentalgiana]
+EP00003-P000001	EP00003_P000001 EP00003_Mantamonas_plastica_P000001 TRINITY_DN0_c0_g1_i1.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p1  ORF type:internal len:277 (+),score=91.83 TRINITY_DN0_c0_g1_i1:1-828(+)
+EP01114-P000001	EP01114_P000001 EP01114_Cavostelium_apophysatum_P000001 TRINITY_DN10001_c0_g1_i1.p1 TRINITY_DN10001_c0_g1~~TRINITY_DN10001_c0_g1_i1.p1  ORF type:complete len:291 (-),score=64.78 TRINITY_DN10001_c0_g1_i1:72-944(-)
+EP01084-P000001	EP01084_P000001 EP01084_Bolivina_argentea_P000001 1_1
+EP00123-P000001	EP00123_P000001 EP00123_Amoebidium_parasiticum_P000001 comp10002_c1_seq1|m.4875 comp10002_c1_seq1|g.4875  ORF comp10002_c1_seq1|g.4875 comp10002_c1_seq1|m.4875 type:internal len:131 (-) comp10002_c1_seq1:1-390(-)
+EP00298-P000001	EP00298_P000001 EP00298_Acanthocystis_sp_HF-20_P000001 c0_g1_i1.p1 GENE.c0_g1_i1~~c0_g1_i1.p1  ORF type:3prime_partial len:321 (+),score=136.75 c0_g1_i1:69-1028(+)
+EP01080-P000001	EP01080_P000001 EP01080_Neovahlkampfia_damariscottae_P000001 gene1-4252_t
+EP00117-P000001	EP00117_P000001 EP00117_Sycon_ciliatum_P000001 scpid102761| scgid4355|
+EP00150-P000001	EP00150_P000001 EP00150_Ustilago_maydis_P000001 XP_011385989.1 hypothetical protein UMAG_00001 [Ustilago maydis 521]
+EP00002-P000001	EP00002_P000001 EP00002_Diphylleia_rotans_P000001 TRINITY_DN0_c0_g1_i1.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p1  ORF type:complete len:124 (+),score=13.10 TRINITY_DN0_c0_g1_i1:256-627(+)
+EP00738-P000001	EP00738_P000001 EP00738_Chloropicon_primus_P000001 QDZ17483.1 hypothetical protein A3770_01p00010 [Chloropicon primus]
+EP00503-P000001	EP00503_P000001 EP00503_Blastocystis_sp_subtype4-isolateWR1_P000001 XP_014524595.1 protein disulfide-isomerase [Blastocystis sp. subtype 4]
+EP00795-P000001	EP00795_P000001 EP00795_Rhopilema_esculentum_P000001 gene1-9597_t
+EP00162-P000001	EP00162_P000001 EP00162_Nutomonas_longa_P000001 comp0_c0_seq1|m.1 comp0_c0_seq1|g.1  ORF comp0_c0_seq1|g.1 comp0_c0_seq1|m.1 type:internal len:139 (-) comp0_c0_seq1:2-415(-)
+EP00797-P000001	EP00797_P000001 EP00797_Seminavis_robusta_P000001 Sro1000_g229710.1 conserved hypothetical protein (2491) ;mRNA; r:19326-26798
+EP00046-P000001	EP00046_P000001 EP00046_Monosiga_brevicollis_P000001 NP_696964.1 NADH dehydrogenase subunit 4L (mitochondrion) [Monosiga brevicollis ATCC 50154]
+EP01127-P000001	EP01127_P000001 EP01127_Copromyxa_protea_P000001 TRINITY_DN0_c0_g1_i1.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p1  ORF type:complete len:673 (-),score=149.02 TRINITY_DN0_c0_g1_i1:52-2070(-)
+EP01027-P000001	EP01027_P000001 EP01027_Heterolobosea_sp_BB2_P000001 GEZU01000001.1.p1 GENE.GEZU01000001.1~~GEZU01000001.1.p1  ORF type:internal len:299 (+),score=82.79 GEZU01000001.1:1-894(+)
+EP00656-P000001	EP00656_P000001 EP00656_Telonema_subtile_P000001 TRINITY_DN0_c109_g1_i1.p1 TRINITY_DN0_c109_g1~~TRINITY_DN0_c109_g1_i1.p1  ORF type:internal len:165 (-),score=30.99 TRINITY_DN0_c109_g1_i1:2-493(-)
+EP01109-P000001	EP01109_P000001 EP01109_Acytostelium_subglobosum_P000001 XP_012747542.1 hypothetical protein SAMD00019534_126850, partial [Acytostelium subglobosum LB1]
+EP01029-P000001	EP01029_P000001 EP01029_Cantina_marsupialis_P000001 TRINITY_DN0_c0_g1_i1.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p1  ORF type:3prime_partial len:383 (-),score=48.77 TRINITY_DN0_c0_g1_i1:3-1148(-)
+EP00110-P000001	EP00110_P000001 EP00110_Nematostella_vectensis_P000001 XP_001617402.1 hypothetical protein NEMVEDRAFT_v1g157624, partial [Nematostella vectensis]
+EP00106-P000001	EP00106_P000001 EP00106_Octopus_bimaculoides_P000001 XP_014767443.1 PREDICTED: uncharacterized protein LOC106884525 [Octopus bimaculoides]
+EP00113-P000001	EP00113_P000001 EP00113_Trichoplax_adhaerens_P000001 XP_002107588.1 predicted protein [Trichoplax adhaerens]
+EP00104-P000001	EP00104_P000001 EP00104_Lingula_anatina_P000001 XP_013378551.1 uncharacterized protein LOC106173761 isoform X2 [Lingula anatina]
+EP00480-P000001	EP00480_P000001 EP00480_Reticulomyxa_filosa_P000001 ETN97098.1 hypothetical protein RFI_40433, partial [Reticulomyxa filosa]
+EP00109-P000001	EP00109_P000001 EP00109_Schistosoma_mansoni_P000001 NP_066205.3 cytochrome c oxidase subunit I, partial (mitochondrion) [Schistosoma mansoni]
+EP00314-P000001	EP00314_P000001 EP00314_Emiliania_huxleyi_P000001 XP_005756062.1 hypothetical protein EMIHUDRAFT_259881 [Emiliania huxleyi CCMP1516]
+EP00761-P000001	EP00761_P000001 EP00761_Pharyngomonas_kirbyi_P000001 gb|GECH01000001.1|.p1 GENE.gb|GECH01000001.1|~~gb|GECH01000001.1|.p1  ORF type:5prime_partial len:299 (+),score=109.45 gb|GECH01000001.1|:1-897(+)
+EP01028-P000001	EP01028_P000001 EP01028_Stygiella_incarcerata_P000001 TRINITY_DN0_c0_g1_i1.p2 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p2  ORF type:3prime_partial len:233 (+),score=-66.77 TRINITY_DN0_c0_g1_i1:1578-2273(+)
+EP00031-P000001	EP00031_P000001 EP00031_Thecamonas_trahens_P000001 XP_013752571.1 hypothetical protein AMSG_11582, partial [Thecamonas trahens ATCC 50062]
+EP00454-P000001	EP00454_P000001 EP00454_Perkinsus_marinus_P000001 XP_002764364.1 conserved hypothetical protein [Perkinsus marinus ATCC 50983]
+EP00813-P000001	EP00813_P000001 EP00813_Pythium_oligandrum_P000001 TMW54920.1 hypothetical protein Poli38472_014940, partial [Pythium oligandrum]
+EP00006-P000001	EP00006_P000001 EP00006_Acanthamoeba_castellanii_P000001 ELR23872 pep supercontig:Acastellanii.strNEFF_v1:scf7180000084608:1:90:-1 gene:ACA1_074390 transcript:ELR23872 gene_biotype:protein_coding transcript_biotype:protein_coding description:hypothetical protein
+EP00112-P000001	EP00112_P000001 EP00112_Aurelia_sp_Birch-Aquarium-sp1_P000001 Seg1.1 transcript_id=Seg1.1|GoldUCD|mRNA.D3Y31 product="putative Werner syndrome ATP-dependent helicase 1" protein_id=Seg1.1|GoldUCD|D3Y31 partial=true
+EP00727-P000001	EP00727_P000001 EP00727_Mastigamoeba_balamuthi_P000001 m51a1_g1 putative eukaryotic translation initiation factor 3 subunit c (926) ;mRNA; r:2375-5735
+EP00924-P000001	EP00924_P000001 EP00924_Labyrinthula_sp_SR-Ha-C_P000001 maker-scaffold_101-snap-gene-0.3-mRNA-1 protein AED:0.17 eAED:0.19 QI:0|0|0|1|0.5|0.33|3|0|1862
+EP00530-P000001	EP00530_P000001 EP00530_Phaeodactylum_tricornutum_P000001 XP_002176126.1 predicted protein [Phaeodactylum tricornutum CCAP 1055/1]
+EP00625-P000001	EP00625_P000001 EP00625_Aureococcus_anophagefferens_P000001 XP_009032083.1 hypothetical protein AURANDRAFT_375, partial [Aureococcus anophagefferens]
+EP00157-P000001	EP00157_P000001 EP00157_Rozella_allomycis_P000001 EPZ30742.1 hypothetical protein O9G_006129, partial [Rozella allomycis CSF55]
+EP00771-P000001	EP00771_P000001 EP00771_Trimastix_marina_P000001 gnl|Trimastix_PCT|0.p2 GENE.gnl|Trimastix_PCT|0~~gnl|Trimastix_PCT|0.p2  ORF type:5prime_partial len:198 (-),score=61.48 gnl|Trimastix_PCT|0:65-658(-)
+EP00300-P000001	EP00300_P000001 EP00300_Choanocystis_sp_HF-7_P000001 c0_g1_i1.p1 GENE.c0_g1_i1~~c0_g1_i1.p1  ORF type:5prime_partial len:329 (+),score=48.84 c0_g1_i1:2-988(+)
+EP00026-P000001	EP00026_P000001 EP00026_Physarum_polycephalum_P000001 Phypoly_transcript_00001.p1 GENE.Phypoly_transcript_00001~~Phypoly_transcript_00001.p1  ORF type:5prime_partial len:6434 (+),score=1456.78 Phypoly_transcript_00001:1-19302(+)
+EP00611-P000001	EP00611_P000001 EP00611_Tribonema_gayanum_P000001 TRINITY_DN0_c0_g1_i2.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i2.p1  ORF type:internal len:164 (-),score=0.59 TRINITY_DN0_c0_g1_i2:2-490(-)
+EP00206-P000001	EP00206_P000001 EP00206_Coccomyxa_subellipsoidea_P000001 XP_005642550.1 putative pleiotropic drug resistance protein 3 [Coccomyxa subellipsoidea C-169]
+EP00792-P000001	EP00792_P000001 EP00792_Barthelona_sp_PAP020_P000001 TRINITY_DN0_c0_g1_i1.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p1  ORF type:5prime_partial len:75 (+),score=18.71 TRINITY_DN0_c0_g1_i1:1-225(+)
+EP00176-P000001	EP00176_P000001 EP00176_Chondrus_crispus_P000001 XP_005709833.1 unnamed protein product [Chondrus crispus]
+EP00210-P000001	EP00210_P000001 EP00210_Caulerpa_lentillifera_P000001 g1.t1
+EP00865-P000001	EP00865_P000001 EP00865_Coemansia_reversa_P000001 PIA12459.1 hypothetical protein COEREDRAFT_84100, partial [Coemansia reversa NRRL 1564]
+EP00903-P000001	EP00903_P000001 EP00903_Cladosiphon_okamuranus_P000001 g1.t1
+EP00333-P000001	EP00333_P000001 EP00333_Tetrahymena_thermophila_P000001 XP_001006957.1 hypothetical protein TTHERM_00197760 [Tetrahymena thermophila SB210]
+EP00260-P000001	EP00260_P000001 EP00260_Arabidopsis_thaliana_P000001 NP_001030613.1 hypothetical protein 1 [Arabidopsis thaliana]
+EP01094-P000001	EP01094_P000001 EP01094_Clydonella_sp_ATCC50884_P000001 TRINITY_DN0_c0_g1_i1.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p1  ORF type:complete len:661 (-),score=362.44 TRINITY_DN0_c0_g1_i1:64-2046(-)
+EP01138-P000001	EP01138_P000001 EP01138_Halocafeteria_seosinensis_P000001 gb|GECG01000001.1|.p1 GENE.gb|GECG01000001.1|~~gb|GECG01000001.1|.p1  ORF type:complete len:1113 (+),score=104.82 gb|GECG01000001.1|:1-3339(+)
+EP00129-P000001	EP00129_P000001 EP00129_Allomyces_macrogynus_P000001 KNE54003.1 hypothetical protein AMAG_17601 [Allomyces macrogynus ATCC 38327]
+EP00159-P000001	EP00159_P000001 EP00159_Fonticula_alba_P000001 XP_009492117.1 CAMK/CAMKL/MARK protein kinase [Fonticula alba]
+EP00023-P000001	EP00023_P000001 EP00023_Dictyostelium_discoideum_P000001 NP_046743.1 Rep-like (plasmid) [Dictyostelium discoideum]
+EP01087-P000001	EP01087_P000001 EP01087_Luapelamoeba_hula_P000001 TRINITY_DN0_c0_g2_i1.p5 TRINITY_DN0_c0_g2~~TRINITY_DN0_c0_g2_i1.p5  ORF type:5prime_partial len:1164 (-),score=438.20 TRINITY_DN0_c0_g2_i1:16-3507(-)
+EP00473-P000001	EP00473_P000001 EP00473_Plasmodiophora_brassicae_P000001 CEP02412 pep supercontig:pbe3.h15:scaffold_64:648:1721:1 gene:PBRA_008996 transcript:CEP02412 gene_biotype:protein_coding transcript_biotype:protein_coding description:hypothetical protein
+EP00770-P000001	EP00770_P000001 EP00770_Monocercomonoides_exilis_P000001 MONOS_1.1-p1 | transcript=MONOS_1.1 | gene=MONOS_1 | organism=Monocercomonoides_exilis_PA203 | gene_product=unspecified product | transcript_product=unspecified product | location=Mono_scaffold00001:5945-8323(-) | protein_length=792 | sequence_SO=supercontig | SO=protein_coding | is_pseudo=false
+EP00671-P000001	EP00671_P000001 EP00671_Bodo_saltans_P000001 CUE55164.1 membrane-associated protein, putative [Bodo saltans]
+EP00379-P000001	EP00379_P000001 EP00379_Toxoplasma_gondii_P000001 NP_044545.1 ribosomal protein S4 (apicoplast) [Toxoplasma gondii RH]
+EP00058-P000001	EP00058_P000001 EP00058_Branchiostoma_floridae_P000001 XP_002585489.1 hypothetical protein BRAFLDRAFT_111961 [Branchiostoma floridae]
+EP00279-P000001	EP00279_P000001 EP00279_Guillardia_theta_P000001 XP_005817720.1 hypothetical protein GUITHDRAFT_54247, partial [Guillardia theta CCMP2712]
+EP01134-P000001	EP01134_P000001 EP01134_Creolimax_fragrantissima_P000001 CFRG0001T1
+EP00698-P000001	EP00698_P000001 EP00698_Gefionella_okellyi_P000001 TRINITY_DN0_c0_g1_i1.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p1  ORF type:internal len:577 (+),score=48.74 TRINITY_DN0_c0_g1_i1:1-1728(+)
+EP00248-P000001	EP00248_P000001 EP00248_Marchantia_polymorpha_P000001 PTQ26021.1 hypothetical protein MARPO_YB0001 [Marchantia polymorpha]
+EP01130-P000001	EP01130_P000001 EP01130_Rhizamoeba_saxonica_P000001 TRINITY_DN0_c0_g1_i1.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p1  ORF type:complete len:296 (-),score=71.16 TRINITY_DN0_c0_g1_i1:44-931(-)
+EP00931-P000001	EP00931_P000001 EP00931_Biecheleriopsis_adriatica_P000001 TRINITY_DN0_c0_g1_i1.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p1  ORF type:complete len:450 (-),score=107.69 TRINITY_DN0_c0_g1_i1:116-1465(-)
+EP00202-P000001	EP00202_P000001 EP00202_Volvox_carteri_P000001 XP_002945607.1 hypothetical protein VOLCADRAFT_115562, partial [Volvox carteri f. nagariensis]
+EP00033-P000001	EP00033_P000001 EP00033_Pygsuia_biforma_P000001 GCRY01000001.1.p1 GENE.GCRY01000001.1~~GCRY01000001.1.p1  ORF type:5prime_partial len:424 (+),score=59.78 GCRY01000001.1:1-1272(+)
+EP00455-P000001	EP00455_P000001 EP00455_Lapot_gusevi_P000001 TRINITY_DN0_c0_g1_i1.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p1  ORF type:complete len:213 (-),score=68.37 TRINITY_DN0_c0_g1_i1:269-907(-)
+EP00645-P000001	EP00645_P000001 EP00645_Phytophthora_infestans_P000001 XP_002894699.1 secreted RxLR effector peptide protein, putative [Phytophthora infestans T30-4]
+EP00696-P000001	EP00696_P000001 EP00696_Hemimastix_kukwesjijk_P000001 gnl|Hemi2|1000_TR355_c0_g20_i1.p2 gnl|Hemi2|1000_TR355_c0_g20~~gnl|Hemi2|1000_TR355_c0_g20_i1.p2  ORF type:complete len:115 (+),score=42.68 gnl|Hemi2|1000_TR355_c0_g20_i1:43-387(+)
+EP00654-P000001	EP00654_P000001 EP00654_Saprolegnia_diclina_P000001 XP_008603684.1 hypothetical protein SDRG_00001, partial [Saprolegnia diclina VS20]
+EP00120-P000001	EP00120_P000001 EP00120_Capsaspora_owczarzaki_P000001 XP_004339898.1 propionyl-CoA carboxylase subunit alpha [Capsaspora owczarzaki ATCC 30864]
+EP01091-P000001	EP01091_P000001 EP01091_Cochliopodium_minus_P000001 TRINITY_DN0_c0_g1_i1.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p1  ORF type:internal len:441 (-),score=80.68 TRINITY_DN0_c0_g1_i1:1-1320(-)
+EP00750-P000001	EP00750_P000001 EP00750_Incisomonas_marina_P000001 INCI1.1.p1 GENE.INCI1.1~~INCI1.1.p1  ORF type:internal len:121 (-),score=25.73 INCI1.1:1-360(-)
+EP00397-P000001	EP00397_P000001 EP00397_Hematodinium_sp_SG-2012_P000001 GEMP01000001.1.p1 GENE.GEMP01000001.1~~GEMP01000001.1.p1  ORF type:complete len:8772 (+),score=1332.10 GEMP01000001.1:147-26462(+)
+EP01125-P000001	EP01125_P000001 EP01125_Pyxidicula_operculata_P000001 TRINITY_DN0_c0_g1_i1.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p1  ORF type:complete len:2125 (+),score=737.82 TRINITY_DN0_c0_g1_i1:50-6424(+)
+EP00681-P000001	EP00681_P000001 EP00681_Trypanosoma_brucei_P000001 XP_011771247.1 hypothetical protein, conserved [Trypanosoma brucei gambiense DAL972]
+EP00810-P000001	EP00810_P000001 EP00810_Oxytricha_trifallax_P000001 KEJ83183 pep supercontig:Oxytricha_MIC_v2.0:ctg7180000067019:19735:20127:1 gene:OXYTRIMIC_363 transcript:KEJ83183 gene_biotype:protein_coding transcript_biotype:protein_coding description:hypothetical protein
+EP00119-P000001	EP00119_P000001 EP00119_Amphimedon_queenslandica_P000001 NP_001266196.1 uncharacterized protein LOC100631603 [Amphimedon queenslandica]
+EP00927-P000001	EP00927_P000001 EP00927_Polykrikos_kofoidii_P000001 TRINITY_DN0_c0_g1_i1.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p1  ORF type:5prime_partial len:633 (+),score=158.72 TRINITY_DN0_c0_g1_i1:3-1901(+)
+EP00457-P000001	EP00457_P000001 EP00457_Paulinella_chromatophora_P000001 gb|GEZN01000001.1|.p1 GENE.gb|GEZN01000001.1|~~gb|GEZN01000001.1|.p1  ORF type:3prime_partial len:7080 (-),score=1276.62 gb|GEZN01000001.1|:1-18072(-)
+EP00466-P000001	EP00466_P000001 EP00466_Bigelowiella_natans_P000001 jgi|Bigna1|125293|aug1.1_g1
+EP00742-P000001	EP00742_P000001 EP00742_Colponemidia_sp_Colp-10_P000001 GILJ01000001.1.p1 GENE.GILJ01000001.1~~GILJ01000001.1.p1  ORF type:5prime_partial len:655 (+),score=110.04 GILJ01000001.1:2-1966(+)
+EP00081-P000001	EP00081_P000001 EP00081_Caenorhabditis_elegans_P000001 NP_001020953.1 Phosphatidylinositol 3-kinase catalytic subunit type 3 [Caenorhabditis elegans]
+EP00857-P000001	EP00857_P000001 EP00857_Cystobasidium_minutum_P000001 jgi|Rhomi1|186780|estExt_fgenesh1_pg.C_1_t10001
+EP00131-P000001	EP00131_P000001 EP00131_Spizellomyces_punctatus_P000001 XP_016603825.1 hypothetical protein SPPG_08801 [Spizellomyces punctatus DAOM BR117]
+EP00736-P000001	EP00736_P000001 EP00736_Rhodelphis_marinus_P000001 Rmarinus@m.13439
+EP00067-P000001	EP00067_P000001 EP00067_Danio_rerio_P000001 NP_001001398.2 fibroblast growth factor 6 [Danio rerio]
+EP00057-P000001	EP00057_P000001 EP00057_Strongylocentrotus_purpuratus_P000001 NP_001001474.1 guanine nucleotide-binding protein G(s) alpha subunit [Strongylocentrotus purpuratus]
+EP00348-P000001	EP00348_P000001 EP00348_Stylonychia_lemnae_P000001 CDW71062.1 UNKNOWN [Stylonychia lemnae]
+EP00667-P000001	EP00667_P000001 EP00667_Euglena_gracilis_P000001 EG_transcript_1
+EP00134-P000001	EP00134_P000001 EP00134_Neurospora_crassa_P000001 XP_001727958.1 carotenoid oxygenase 2 [Neurospora crassa OR74A]
+EP01117-P000001	EP01117_P000001 EP01117_Protostelium_nocturnum_P000001 TRINITY_DN0_c0_g1_i1.p2 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p2  ORF type:5prime_partial len:170 (+),score=36.85 TRINITY_DN0_c0_g1_i1:2-511(+)
+EP00158-P000001	EP00158_P000001 EP00158_Paraphelidium_tribonemae_P000001 Partr_v1_DN10022_c0_g2_i1_m38271 putative Adds a myristoyl group to the N-terminal glycine residue of certain cellular proteins (By similarity)
+EP00229-P000001	EP00229_P000001 EP00229_Micromonas_commoda_P000001 XP_002499374.1 depolymerase [Micromonas commoda]
+EP00762-P000001	EP00762_P000001 EP00762_Andalucia_godoyi_P000001 ANDGO_02304.mRNA.1 hypothetical protein
+EP00802-P000001	EP00802_P000001 EP00802_Teleaulax_amphioxeia_P000001 Tamp_00001.p1 GENE.Tamp_00001~~Tamp_00001.p1  ORF type:complete len:14069 (+),score=1958.18 Tamp_00001:2323-42207(+)
+EP00127-P000001	EP00127_P000001 EP00127_Corallochytrium_limacisporum_P000001 Clim_evm1s1 gene=Clim_evmTU1s1
+EP01062-P000001	EP01062_P000001 EP01062_Namystynia_karyoxenos_P000001 TRINITY_DN0_c0_g1_i1.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p1  ORF type:complete len:1645 (+),score=794.27 TRINITY_DN0_c0_g1_i1:72-4937(+)
+EP00167-P000001	EP00167_P000001 EP00167_Galdieria_sulphuraria_P000001 XP_005674712.1 ATPase, AAA family, partial [Galdieria sulphuraria]
+EP00900-P000001	EP00900_P000001 EP00900_Chrysochromulina_parva_P000001 jgi|Chrpa1|10000|Chrysochromulina_OHIO_Genome00006057-RA
+EP00895-P000001	EP00895_P000001 EP00895_Klebsormidium_nitens_P000001 GAQ77554.1 hypothetical protein KFL_000010030 [Klebsormidium nitens]
+EP01083-P000001	EP01083_P000001 EP01083_Nonionella_stella_P000001 1_1
+EP00115-P000001	EP00115_P000001 EP00115_Mnemiopsis_leidyi_P000001 ML00011a-PA pep supercontig:MneLei_Aug2011:ML0001:3797:5023:1 gene:ML00011a transcript:ML00011a-RA gene_biotype:protein_coding transcript_biotype:protein_coding
+EP00749-P000001	EP00749_P000001 EP00749_Cafeteria_burkhardae_P000001 KAA0145427.1 NADH-ubiquinone oxidoreductase chain 4 (mitochondrion) [Cafeteria roenbergensis]
+EP00083-P000001	EP00083_P000001 EP00083_Stegodyphus_mimosarum_P000001 KFM56500.1 putative cation-transporting ATPase 13A3, partial [Stegodyphus mimosarum]
+EP01006-P000001	EP01006_P000001 EP01006_Ploeotia_vitrea_P000001 TRINITY_DN0_c0_g1_i1.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p1  ORF type:complete len:433 (-),score=31.41 TRINITY_DN0_c0_g1_i1:31-1329(-)
+EP00390-P000001	EP00390_P000001 EP00390_Vitrella_brassicaformis_P000001 CEL91577.1 unnamed protein product, partial [Vitrella brassicaformis CCMP3155]
+EP00852-P000001	EP00852_P000001 EP00852_Chlamydomonas_schloesseri_P000001 KAG2421960.1 hypothetical protein HYH02_015571, partial [Chlamydomonas schloesseri]
+EP00080-P000001	EP00080_P000001 EP00080_Pristionchus_pacificus_P000001 PDM60021.1 hypothetical protein PRIPAC_49516, partial [Pristionchus pacificus]
+EP00029-P000001	EP00029_P000001 EP00029_Vermamoeba_vermiformis_P000001 TRINITY_DN0_c0_g1_i1.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p1  ORF type:complete len:241 (-),score=94.10 TRINITY_DN0_c0_g1_i1:522-1217(-)
+EP00169-P000001	EP00169_P000001 EP00169_Porphyra_umbilicalis_P000001 ASN78661.1 photochlorophyllide reductase subunit L (chloroplast) [Porphyra umbilicalis]
+EP01113-P000001	EP01113_P000001 EP01113_Clastostelium_recurvatum_P000001 TRINITY_DN0_c0_g1_i1.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p1  ORF type:complete len:445 (-),score=152.65 TRINITY_DN0_c0_g1_i1:68-1372(-)
+EP00098-P000001	EP00098_P000001 EP00098_Tribolium_castaneum_P000001 NP_001034280.2 dorsocross [Tribolium castaneum]
+EP00759-P000001	EP00759_P000001 EP00759_Apiculatamorpha_spiralis_P000001 PhF_6_TR10000|c0_g1_i1|m.15220
+EP00145-P000001	EP00145_P000001 EP00145_Schizosaccharomyces_pombe_P000001 NP_001018179.1 putative hydroxymethylbilane synthase [Schizosaccharomyces pombe]
+EP00820-P000001	EP00820_P000001 EP00820_Chromera_velia_P000001 Cvel_145.t1-p1 | transcript=Cvel_145.t1 | gene=Cvel_145 | organism=Chromera_velia_CCMP2878 | gene_product=hypothetical protein | transcript_product=hypothetical protein | location=Cvel_scaffold10:720-1220(+) | protein_length=167 | sequence_SO=supercontig | SO=protein_coding | is_pseudo=false
+EP00271-P000001	EP00271_P000001 EP00271_Cylindrocystis_brebissonii_P000001 TRINITY_DN0_c0_g1_i1.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p1  ORF type:complete len:746 (-),score=170.01 TRINITY_DN0_c0_g1_i1:285-2522(-)
+EP01147-P000001	EP01147_P000001 EP01147_Barroeca_monosierra_P000001 gene1-3399_t
+EP00004-P000001	EP00004_P000001 EP00004_Rigifila_ramosa_P000001 TRINITY_DN0_c1_g1_i4.p1 TRINITY_DN0_c1_g1~~TRINITY_DN0_c1_g1_i4.p1  ORF type:internal len:131 (+),score=33.15 TRINITY_DN0_c1_g1_i4:1-390(+)
+EP00794-P000001	EP00794_P000001 EP00794_Sanderia_malayensis_P000001 gene1-12805_t
+EP00705-P000001	EP00705_P000001 EP00705_Trichomonas_vaginalis_P000001 XP_001276801.1 hypothetical protein, partial [Trichomonas vaginalis G3]
+EP00163-P000001	EP00163_P000001 EP00163_Fabomonas_tropica_P000001 TRINITY_DN0_c0_g1_i1.p1 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p1  ORF type:complete len:134 (-),score=5.10 TRINITY_DN0_c0_g1_i1:524-925(-)
+EP01082-P000001	EP01082_P000001 EP01082_Thalassiosira_pseudonana_P000001 g244.t1 g244   contig1:599831-602620(-)
+EP00247-P000001	EP00247_P000001 EP00247_Physcomitrium_patens_P000001 NP_904164.1 ribosomal protein S12 (chloroplast) [Physcomitrella patens]
+EP01135-P000001	EP01135_P000001 EP01135_Chromosphaera_perkinsii_P000001 Nk52_evm1s1 gene=Nk52_evmTU1s1
+EP00686-P000001	EP00686_P000001 EP00686_Naegleria_gruberi_P000001 XP_002667930.1 predicted protein, partial [Naegleria gruberi strain NEG-M]
+EP00609-P000001	EP00609_P000001 EP00609_Ectocarpus_siliculosus_P000001 CBJ25445.1 conserved unknown protein [Ectocarpus siliculosus]
+EP00808-P000001	EP00808_P000001 EP00808_Paulinella_micropora_P000001 g79171.t1
+EP00039-P000001	EP00039_P000001 EP00039_Didymoeca_costata_P000001 m.43726 g.43726  ORF g.43726 m.43726 type:internal len:141 (+) comp10000_c0_seq1:3-428(+)
+EP00164-P000001	EP00164_P000001 EP00164_Ancoracysta_twista_P000001 GFYU01000002.1.p1 GENE.GFYU01000002.1~~GFYU01000002.1.p1  ORF type:complete len:718 (-),score=358.65 GFYU01000002.1:145-2256(-)
+EP00741-P000001	EP00741_P000001 EP00741_Cyanophora_paradoxa_P000001 tig00000017_g1.t1
+EP00107-P000001	EP00107_P000001 EP00107_Lottia_gigantea_P000001 LotgiP146704 pep supercontig:Lotgi1:LOTGIsca_1001:7724:10084:1 gene:LotgiG146704 transcript:LotgiT146704 gene_biotype:protein_coding transcript_biotype:protein_coding
+EP00103-P000001	EP00103_P000001 EP00103_Capitella_teleta_P000001 ELT86964.1 hypothetical protein CAPTEDRAFT_204949, partial [Capitella teleta]
+EP00072-P000001	EP00072_P000001 EP00072_Mus_musculus_P000001 NP_001001130.1 zinc finger protein 85 [Mus musculus]
+EP00753-P000001	EP00753_P000001 EP00753_Platysulcus_tardus_P000001 PLAT1.1.p2 GENE.PLAT1.1~~PLAT1.1.p2  ORF type:internal len:125 (-),score=33.66 PLAT1.1:1-372(-)
+EP00059-P000001	EP00059_P000001 EP00059_Ciona_intestinalis_P000001 NP_001007565.1 hyaluronan-mediated motility receptor [Ciona intestinalis]
+EP01146-P000001	EP01146_P000001 EP01146_Carpediemonas_membranifera_P000001 KAG9389427.1 Chromosome partition protein Smc [Carpediemonas membranifera]
+EP00269-P000001	EP00269_P000001 EP00269_Selaginella_moellendorffii_P000001 XP_002960048.2 protein CHROMATIN REMODELING 19 [Selaginella moellendorffii]
+EP01086-P000001	EP01086_P000001 EP01086_Lenisia_limosa_P000001 TRINITY_DN10000_c0_g1_i1.p1 TRINITY_DN10000_c0_g1~~TRINITY_DN10000_c0_g1_i1.p1  ORF type:5prime_partial len:127 (-),score=0.29 TRINITY_DN10000_c0_g1_i1:672-1052(-)
+EP01104-P000001	EP01104_P000001 EP01104_Vermistella_antarctica_P000001 TRINITY_DN0_c0_g1_i1.p2 TRINITY_DN0_c0_g1~~TRINITY_DN0_c0_g1_i1.p2  ORF type:complete len:366 (+),score=-99.04 TRINITY_DN0_c0_g1_i1:666-1763(+)
+EP00185-P000001	EP00185_P000001 EP00185_Porphyridium_purpureum_P000001 POR8274..scf208_2
