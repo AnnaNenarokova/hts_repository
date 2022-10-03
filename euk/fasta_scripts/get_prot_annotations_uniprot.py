@@ -11,7 +11,7 @@ def shorten_annotation(description, protid_delimiter="-"):
 	split_description = description.split(" ")
 	prot_id = split_description[0]
 	prot_id = prot_id.replace("_",protid_delimiter)
-	id = split_description[1]
+	id = split_description[2]
 	split_id = id.split("_")
 	species = " ".join(split_id[1:-1])
 
