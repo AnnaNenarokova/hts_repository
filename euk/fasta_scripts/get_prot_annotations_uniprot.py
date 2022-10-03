@@ -46,10 +46,7 @@ def read_prot_annotations(fasta_path):
 def get_prot_annotations(fasta_dir):
 	protid_dict = {}
 	for fasta_file in listdir_nohidden(fasta_dir):
-		print (fasta_file)
+		# print (fasta_file)
 		fasta_path = fasta_dir + fasta_file
 		protid_dict.update(read_prot_annotations(fasta_path))
 	return protid_dict
-
-fasta_dir = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_proteome_dataset/"
-protid_dict = get_prot_annotations(fasta_dir)

@@ -8,6 +8,7 @@ sys.path.insert(0, "/Users/vl18625/work/code/ngs/")
 import re
 
 from py_scripts.helpers.parse_csv import *
+from euk.fasta_scripts.get_prot_annotations_uniprot import *
 
 def read_list(list_path):
     result_list = []
@@ -253,19 +254,51 @@ def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=
             print ("Error", tree_path, new_tree_path)
     return 0
 
-tax_info_path="/Users/vl18625/work/euk/protein_sets/taxa_annotations.tsv"
+def annotate_gene_tree(tree, tax_info_dict, annotation_dict, euk_delimiter="_"):
+    euk_regex = "^EP\d+_P\d+"
+    delimiter = "-"
+    for leaf in tree.iter_leaves(): 
+        old_name = leaf.name
+        if re.match(euk_regex, old_name):
+            current_delimiter = euk_delimiter
+            prot_id = delimiter.join(old_name.split(current_delimiter))
+            if prot_id in annotation_dict.keys():
+                annotation = annotation_dict[prot_id]
+            else:
+                print(prot_id, "was not found in the annotation dict!")
+                annotation = ""
+        else:
+            current_delimiter = delimiter
+            annotation = ""
 
+        genome_id = old_name.split(current_delimiter)[0]
+        if genome_id in tax_info_dict.keys():
+            taxonomy =  tax_info_dict[genome_id]["taxonomy"]
+        else:
+            print(genome_id, "was not found in the taxonomy dict!")
+            taxonomy = old_name
+        new_name = taxonomy + " " + annotation
+        leaf.name = new_name
+    return tree
+
+def annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path):
+    print("Reading taxonomy info")
+    tax_info_dict = csv_to_dict(tax_info_path, main_key="gid", delimiter='\t')
+    print("Reading annotations")
+    annotation_dict = get_prot_annotations(prot_dir)
+    print("Annotating trees")
+    for tree_file in listdir_nohidden(in_treedir):
+        tree_path = in_treedir + tree_file 
+        new_tree_path = out_treedir + tree_file + "_annotated.tree"
+        tree = Tree(tree_path)
+        new_tree = annotate_gene_tree(tree, tax_info_dict, annotation_dict)
+        new_tree.write(format=2, outfile=new_tree_path)
+    return out_treedir
+
+tax_info_path="/Users/vl18625/work/euk/protein_sets/taxa_annotations.tsv"
+prot_dir = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_proteome_dataset/"
 in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/65_new_markers/single_gene_trees/trees/"
 out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/65_new_markers/single_gene_trees/trees_annotated/"
-annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True, euk_delimiter="_")
 
-in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/65_new_markers/tree/"
-out_treedir=in_treedir
-
-<<<<<<< HEAD
-in_treedir="/Users/anna/work/euk_local/nina_markers/ABE/26_markers/trees/lgg_c20_pmsf/trees/"
-out_treedir="/Users/anna/work/euk_local/nina_markers/ABE/26_markers/trees/lgg_c20_pmsf/trees_annotated/"
-annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True)
-=======
-# annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=False)
->>>>>>> 83c3850da30e76c2bdfaee6052b6bf9b2723a1c5
+# annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True, euk_delimiter="_")
+annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path)
