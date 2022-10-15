@@ -1,6 +1,6 @@
 #!/bin/bash
 
-outdir="/Users/anna/work/euk_local/nina_markers/ABE/5_markers/faa/euk_all/"
+outdir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/abc_dataset/abc_euks_fasta/"
 for f in *.faa
 do
 	echo $f
@@ -8,8 +8,8 @@ do
 	cat $f >> $outfile
 done
 
-indir="/Users/anna/work/euk_local/nina_markers/fasta_markers/bacteria_manually_cleaned/"
-outdir="/Users/anna/work/euk_local/nina_markers/singlehit_results/cyano/29_09_22/CE_fastas/"
+indir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/seqs/nina_all_seqs/"
+outdir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/seqs/abc_dataset/abc_euks_fasta/"
 
 for f in *.faa
 do

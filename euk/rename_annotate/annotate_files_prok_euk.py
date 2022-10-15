@@ -255,7 +255,7 @@ def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=
     return 0
 
 def annotate_gene_tree(tree, tax_info_dict, annotation_dict, euk_delimiter="_"):
-    euk_regex = "^EP\d+_P\d+"
+    euk_regex = "^EP\d+" + euk_delimiter + "P\d+"
     delimiter = "-"
     for leaf in tree.iter_leaves(): 
         old_name = leaf.name
@@ -281,24 +281,25 @@ def annotate_gene_tree(tree, tax_info_dict, annotation_dict, euk_delimiter="_"):
         leaf.name = new_name
     return tree
 
-def annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path):
+def annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path, euk_delimiter="_"):
     print("Reading taxonomy info")
     tax_info_dict = csv_to_dict(tax_info_path, main_key="gid", delimiter='\t')
     print("Reading annotations")
     annotation_dict = get_prot_annotations(prot_dir)
     print("Annotating trees")
     for tree_file in listdir_nohidden(in_treedir):
+        print (tree_file)
         tree_path = in_treedir + tree_file 
         new_tree_path = out_treedir + tree_file + "_annotated.tree"
         tree = Tree(tree_path)
-        new_tree = annotate_gene_tree(tree, tax_info_dict, annotation_dict)
+        new_tree = annotate_gene_tree(tree, tax_info_dict, annotation_dict, euk_delimiter=euk_delimiter)
         new_tree.write(format=2, outfile=new_tree_path)
     return out_treedir
 
 tax_info_path="/Users/vl18625/work/euk/protein_sets/taxa_annotations.tsv"
 prot_dir = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_proteome_dataset/"
-in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/65_new_markers/single_gene_trees/trees/"
-out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/65_new_markers/single_gene_trees/trees_annotated/"
+in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/cyano/initial/trees/"
+out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/cyano/initial/trees_annotated/"
 
 # annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=True, euk_delimiter="_")
-annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path)
+annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path, euk_delimiter="-")

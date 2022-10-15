@@ -1,16 +1,16 @@
 #!/bin/bash
-#SBATCH --job-name=21_ce_gene_trees
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/21_CE_gene_trees_%A_%a.out
+#SBATCH --job-name=49_abce_gene_trees
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/49_abce_gene_trees_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
-#SBATCH --array=1-21
+#SBATCH --array=1-49
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=5GB
 ##SBATCH --nodes=1
 ## --cpu_bind=v,threads
 
-workdir="/scratch/nenarokova/euk/markers/be/cyano/21_markers_29_09_22/"
+workdir="/scratch/nenarokova/euk/markers/abe/abce_set/"
 
 fasta_dir=$workdir"faa/"
 
