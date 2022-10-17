@@ -10,7 +10,7 @@
 ##SBATCH --nodes=1
 ## --cpu_bind=v,threads
 
-workdir="/scratch/nenarokova/euk/markers/abe/abce_set/"
+workdir="/scratch/nenarokova/euk/markers/abe/abce_dedup_set"
 
 fasta_dir=$workdir"faa/"
 
