@@ -51,8 +51,39 @@ def prepare_fastas(seqid_folder, fasta_folder, out_folder):
 		SeqIO.write(out_records, outpath, "fasta")
 	return out_folder
 
-seqid_folder = "/Users/vl18625/work/euk/markers_euks/nina_markers/abe/26_markers/abc_dataset/abc_euks_ids/"
-fasta_folder = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_proteome_dataset/"
-out_folder = "/Users/vl18625/work/euk/markers_euks/nina_markers/abe/26_markers/abc_dataset/abc_euks_fasta/"
+def parse_seqid_files_abce(seqid_folder):
+	seqid_dict = {}
+	seqids_set = set()
+	for seqid_file in listdir_nohidden(seqid_folder):
+		name = seqid_file.split(".")[0]
+		cog,origin = name.split("_")
+		seqid_list_path = seqid_folder + seqid_file
+		seqid_list = read_list(seqid_list_path)
+		if cog not in seqid_dict:
+			seqid_dict[cog] = {}
+		seqid_dict[cog][origin] = seqid_list
+		seqids_set.update(seqid_list)
+	return seqid_dict, seqids_set
 
-prepare_fastas(seqid_folder, fasta_folder, out_folder)
+def prepare_fastas_abce(seqid_folder, fasta_folder, out_folder):
+	print ("Parcing seqid files")
+	seqid_dict, seqids_set = parse_seqid_files_abce(seqid_folder)
+	print ("Parcing fastas")
+	seq_dict = prepare_seq_dict(fasta_folder, seqids_set)
+	print ("Writing results")
+	for cog in seqid_dict:
+		outpath = out_folder + cog + ".faa"
+		out_records = []
+		for origin in seqid_dict[cog]:
+			for seqid in seqid_dict[cog][origin]:
+				record = seq_dict[seqid]
+				old_id = record.id
+				record.id = origin + "_" + old_id
+				out_records.append(record)
+		SeqIO.write(out_records, outpath, "fasta")
+
+seqid_folder = "/Users/vl18625/work/euk/markers_euks/nina_markers/abe/seqs/abc_dataset/abc_euk_ids/final_euk_ids/"
+fasta_folder = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_proteome_dataset/"
+out_folder = "/Users/vl18625/work/euk/markers_euks/nina_markers/abe/seqs/abc_dataset/abce_fastas/"
+
+prepare_fastas_abce(seqid_folder, fasta_folder, out_folder)

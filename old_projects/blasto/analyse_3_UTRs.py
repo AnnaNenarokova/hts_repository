@@ -1,11 +1,14 @@
 #!/usr/bin/python3
 import os
+import sys
 from Bio import SeqIO
 import statistics
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 from matplotlib.backends.backend_pdf import PdfPages
+sys.path.insert(0, "/Users/vl18625/work/code/ngs/")
+from py_scripts.helpers.parse_csv import *
 
 def parse_3UTRs(infasta_path, outfasta_path, id_delimiter="-"):
 	records_3UTRs = []
@@ -170,6 +173,14 @@ def make_facet_grid_graph(codon_df, outpath, max_x=30):
 	plt.savefig(outpath, dpi=300)
 	return 0
 
+def write_csvs(codon_dict, outdir):
+	for codon in codon_dict:
+		print (codon)
+		outpath = outdir + codon + ".csv"
+		key_name = "keyname"
+		write_dict_of_dicts(dict_of_dicts, outpath, key_name, fieldnames=False)
+	return 0
+
 fasta_path = "/Users/vl18625/work/blasto_local/3_UTR/extracted_3UTRs.fasta"
 outdir = "/Users/vl18625/work/blasto_local/3_UTR/codon_usage_3UTRs_figures/"
 outpath = "/Users/vl18625/work/blasto_local/3_UTR/codon_usage_facegrid.png"
@@ -177,7 +188,9 @@ print ("Preparing codon statistics")
 codon_dict = get_all_codon_statistics(fasta_path)
 
 max_triplets = 100
-make_graphs(codon_dict, outdir, upto_triplets=max_triplets)
+# make_graphs(codon_dict, outdir, upto_triplets=max_triplets)
 # codon_df = convert_to_df(codon_dict,max_triplets=max_triplets)
 # make_facet_grid_graph(codon_df, outpath, max_x=max_triplets)
+
+outdir="/Users/vl18625/work/blasto_local/3_UTR/codon_usage_64_codons_csvs/"
 

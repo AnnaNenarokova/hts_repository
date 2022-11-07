@@ -11,6 +11,6 @@ def cut_seqs(infasta,outfasta,upto=100):
 
 
 infasta = "/Users/vl18625/work/blasto_local/3_UTR/extracted_3UTRs.fasta"
-outfasta = "/Users/vl18625/work/blasto_local/3_UTR/extracted_3UTRs_first_30nt.fasta"
+outfasta = "/Users/vl18625/work/blasto_local/3_UTR/extracted_3UTRs_first_40nt.fasta"
 
-cut_seqs(infasta,outfasta,upto=100)
+cut_seqs(infasta,outfasta,upto=40)

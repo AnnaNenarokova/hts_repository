@@ -1,16 +1,16 @@
 #!/bin/bash
-#SBATCH --job-name=49_abce_gene_trees
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/49_abce_gene_trees_%A_%a.out
+#SBATCH --job-name=94_abce_final_gene_trees
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/94_abce_final_gene_trees_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
-#SBATCH --array=1-49
+#SBATCH --array=1-94
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=5GB
 ##SBATCH --nodes=1
 ## --cpu_bind=v,threads
 
-workdir="/scratch/nenarokova/euk/markers/abe/abce_dedup_set/"
+workdir="/scratch/nenarokova/euk/markers/abe/abce_final_dataset/"
 
 fasta_dir=$workdir"faa/"
 
