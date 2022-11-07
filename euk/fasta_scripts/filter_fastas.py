@@ -19,6 +19,22 @@ def filter_fastas_exclude_sp(exclude_list, indir, outdir, species_id_delimiter="
 		SeqIO.write(out_records, outfile, "fasta")
 	return 0
 
+def filter_fastas_exclude_sp_new(exclude_list, indir, outdir):
+	for file_name in listdir_nohidden(indir):
+		infile = indir + file_name
+		out_records = []
+		for record in SeqIO.parse(infile, "fasta"):
+			species_id = record.id.split("-")[0]
+			try:
+				species_id = species_id.split("_")[1]
+			except:
+				pass
+			if species_id not in exclude_list:
+				out_records.append(record)
+		outfile = outdir + file_name
+		SeqIO.write(out_records, outfile, "fasta")
+	return 0
+
 def filter_fasta_keep_sp(keep_list, infasta, outfasta, species_id_delimiter="-", euk=False):
 	out_records = []
 	euk_regex = "^EP\d+-P\d+"
@@ -51,7 +67,7 @@ euk_keeplist=["EP00002","EP00003","EP00004","EP01087","EP00006","EP01091","EP010
 
 exclude_list =["EP00480", "EP01006"] # remove Ploetia (misidentified) and Reticulomyxa (long branched) 
 
-indir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/euk_c20_monobranch_sets_fastas/"
-outdir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/euk_c20_monobranch_sets_filtered_fastas/"
+indir = "/Users/vl18625/work/euk/markers_euks/nina_markers/abe/seqs/abc_dataset/final_abce_fastas_reti/"
+outdir = "/Users/vl18625/work/euk/markers_euks/nina_markers/abe/seqs/abc_dataset/final_abce_fastas/"
 
-filter_fastas_exclude_sp(exclude_list, indir, outdir, species_id_delimiter="-")
+filter_fastas_exclude_sp_new(exclude_list, indir, outdir)
