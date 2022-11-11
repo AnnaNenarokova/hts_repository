@@ -10,7 +10,7 @@
 ##SBATCH --nodes=1
 ## --cpu_bind=v,threads
 
-workdir="/scratch/nenarokova/euk/markers/abe/abce_94_markers_only_euks/final_abce_only_euks_fastas/"
+workdir="/scratch/nenarokova/euk/markers/abe/abce_94_markers_only_euks/"
 
 fasta_dir=$workdir"faa/"
 
