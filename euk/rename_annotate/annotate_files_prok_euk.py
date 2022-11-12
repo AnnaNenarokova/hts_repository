@@ -196,13 +196,20 @@ def annotate_trees_nina(in_treedir, out_treedir, prok_info_path, euk_info_path):
             print ("Error", tree_path, new_tree_path)
     return 0
 
-def annotate_tree_tax_info(tree, tax_info_dict,key_name="taxonomy"):
+def annotate_tree_tax_info(tree, tax_info_dict,key_name="taxonomy",abce=False):
+    euk_regex = "\w+_EP\d+"
     used_names = []
+
     for leaf in tree.iter_leaves():
         old_name = leaf.name
-        genome_id = old_name
+        if abce and re.match(euk_regex, old_name):
+            genome_id = old_name.split("_")[1]
+            new_id = old_name
+        else:
+            genome_id = old_name
+            new_id = genome_id
         if genome_id in tax_info_dict.keys():
-            new_name = genome_id + "_" + tax_info_dict[genome_id][key_name]
+            new_name = new_id + "_" + tax_info_dict[genome_id][key_name]
         else:
             print(id, genome_id, "was not found in the dict!")
             new_name = old_name
@@ -236,7 +243,7 @@ def annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", del
     return tree
 
 
-def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=False, euk_delimiter=False, source_euk_delimiter=False):
+def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=False, euk_delimiter=False, source_euk_delimiter=False, abce=False):
     print("Reading taxonomy info")
     tax_info_dict = csv_to_dict(tax_info_path, main_key="gid", delimiter='\t')
     print("Annotating trees")
@@ -248,7 +255,7 @@ def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=
             if protein_ids:
                 new_tree = annotate_tree_tax_info_prot_ids(tree, tax_info_dict,key_name="taxonomy", delimiter="-", euk_delimiter=euk_delimiter,source_euk_delimiter=source_euk_delimiter)
             else:
-                new_tree = annotate_tree_tax_info(tree, tax_info_dict,key_name="taxonomy")
+                new_tree = annotate_tree_tax_info(tree, tax_info_dict,key_name="taxonomy", abce=abce)
             new_tree.write(format=2, outfile=new_tree_path)
         except:
             print ("Error", tree_path, new_tree_path)
@@ -329,6 +336,8 @@ prot_dir = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_prot
 in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/final/trees/"
 out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/final/trees_annotated/"
 
-annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path, abce=True, euk_delimiter="_")
+# annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path, abce=True, euk_delimiter="_")
 
-
+in_treedir="/Users/vl18625/work/euk/concat_trees/trees/"
+out_treedir="/Users/vl18625/work/euk/concat_trees/trees_annotated/"
+annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, abce=True, protein_ids=False, euk_delimiter=False, source_euk_delimiter=False)
