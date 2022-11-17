@@ -1,16 +1,16 @@
 #!/bin/bash
-#SBATCH --job-name=94_abce_only_euk_gene_trees
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/94_abce_only_euk_gene_trees_%A_%a.out
+#SBATCH --job-name=euks_132_split_markers_gene_trees
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/euks_132_split_markers_gene_trees_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
-#SBATCH --array=1-94
+#SBATCH --array=1-132
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=5GB
 ##SBATCH --nodes=1
 ## --cpu_bind=v,threads
 
-workdir="/scratch/nenarokova/euk/markers/abe/abce_94_markers_only_euks/"
+workdir="/scratch/nenarokova/euk/markers/abe/only_euks/euks_132_split_markers/"
 
 fasta_dir=$workdir"faa/"
 
