@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=abce_c20_lgg_pmsf
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/abce_c20_lgg_pmsf_tree_%A.out
+#SBATCH --job-name=euks_132_markers_concat_c60_lgg_pmsf
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/euks_132_markers_concat_c60_lgg_pmsf_%A.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
 #SBATCH --nodes=1
@@ -8,6 +8,6 @@
 #SBATCH --cpus-per-task=20
 #SBATCH --mem=250G
 
-msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/abe/abce_94_markers_concat/c20_pmsf/abce_94_markers_concat.fasta"
-tree="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/abe/abce_94_markers_concat/lgg/abce_94_markers_concat.fasta.treefile"
-iqtree2 -s $msa -m LG+C20+G -ft $tree -B 1000 -nt 20
+msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/abe/only_euks/euks_132_markers_concat/c60_lgg_pmsf/only_euks_132_markers_concat.fasta"
+tree="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/abe/only_euks/euks_132_markers_concat/lgg/lgg.treefile"
+iqtree2 -s $msa -m LG+C60+G -ft $tree -B 1000 -nt 20

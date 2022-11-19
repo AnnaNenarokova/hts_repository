@@ -1,6 +1,6 @@
 #!/bin/bash
 
-outdir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/seqs/abc_dataset/abce_fastas/"
+outdir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/alpha/brett_data/Set1/"
 for f in *.faa
 do
 	echo $f
@@ -8,8 +8,8 @@ do
 	cat $f >> $outfile
 done
 
-indir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/seqs/nina_all_seqs/"
-outdir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/seqs/abc_dataset/abce_fastas/"
+indir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/alpha/brett_data/Set1/"
+outdir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/alpha/brett_data/v3_D4993_C5/"
 
 cd $outdir
 for f in *.faa
