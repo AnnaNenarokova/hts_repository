@@ -248,6 +248,7 @@ def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=
     tax_info_dict = csv_to_dict(tax_info_path, main_key="gid", delimiter='\t')
     print("Annotating trees")
     for tree_file in listdir_nohidden(in_treedir):
+        print (tree_file)
         tree_path = in_treedir + tree_file 
         new_tree_path = out_treedir + tree_file + "_annotated.tree"
         try: 
