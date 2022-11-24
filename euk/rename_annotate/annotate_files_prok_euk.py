@@ -2,11 +2,10 @@
 from ete3 import Tree
 from Bio import SeqIO
 import sys
+import re
 sys.path.insert(0, "/Users/anna/work/code/ngs/")
 sys.path.insert(0, "/user/home/vl18625/code/ngs")
 sys.path.insert(0, "/Users/vl18625/work/code/ngs/")
-import re
-
 from py_scripts.helpers.parse_csv import *
 from euk.fasta_scripts.get_prot_annotations_uniprot import *
 

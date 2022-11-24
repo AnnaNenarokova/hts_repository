@@ -1,6 +1,8 @@
 #!/bin/bash
 
-infile="/Users/anna/work/blasto_local/tRNA/aragorn_out/aragorn_standalone_out/all_tryp_tRNA_trimal_90_Bnonstop.fasta"
-outfile="/Users/anna/work/blasto_local/tRNA/aragorn_out/aragorn_standalone_out/all_tryp_tRNA_trimal_90_Bnonstop.fasta_aligned.fasta "
+input_path=""
+output_path=""
 
-mafft --ep 0 --genafpair --maxiterate 1000 $infile > $outfile
+mafft-linsi $input_path > $output_path # we use mafft-linsi to do a slow, accurate alignment
+
+# mafft --auto $input_path > $output_path # we use mafft --auto to do a quick, dirty alignment
