@@ -40,7 +40,7 @@ def add_header(blast_csv_path, custom_outfmt):
 custom_outfmt = 'qseqid qlen sseqid slen length evalue pident bitscore mismatch gaps qstart qend sstart send'
 
 query_paths= [
-    "/Users/vl18625/work/blasto_local/p57_mito_contig.fasta"
+    "/Users/vl18625/work/blasto_local/genes_with_introns.fasta"
     ]
 
 subj_paths = [
