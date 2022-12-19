@@ -1,16 +1,16 @@
 #!/bin/bash
-#SBATCH --job-name=euks_132_split_markers_gene_trees
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/euks_132_split_markers_gene_trees_%A_%a.out
+#SBATCH --job-name=BE_16_markers_brett
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/BE_16_markers_brett_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
-#SBATCH --array=1-132
+#SBATCH --array=1-16
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=5GB
 ##SBATCH --nodes=1
 ## --cpu_bind=v,threads
 
-workdir="/scratch/nenarokova/euk/markers/abe/only_euks/euks_132_split_markers/"
+workdir="/scratch/nenarokova/euk/markers/be/alpha/brett_16markers/"
 
 fasta_dir=$workdir"faa/"
 

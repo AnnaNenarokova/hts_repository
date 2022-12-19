@@ -8,8 +8,8 @@ do
 	cat $f >> $outfile
 done
 
-indir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/alpha/brett_data/Set1/"
-outdir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/alpha/brett_data/v3_D4993_C5/"
+indir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/alpha/brett_data/v3_D4993_C5/"
+outdir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/alpha/brett_data/16_markers_brett/"
 
 cd $outdir
 for f in *.faa
