@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=euks_132_markers_concat_lgg_tree
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/euks_132_markers_concat_lgg_tree_%A.out
+#SBATCH --job-name=16_markers_brett_concat
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/16_markers_brett_concat_lgg_tree_%A.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
 #SBATCH --nodes=1
@@ -8,5 +8,5 @@
 #SBATCH --cpus-per-task=48
 #SBATCH --mem=30G
 
-fasta="/scratch/nenarokova/euk/markers/abe/only_euks/euks_132_markers_concat/lgg/"
+fasta="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/be/alpha/brett_16markers/concat_16_markers/16_markers_brett_concat.fasta"
 iqtree2 -s $fasta -m LG+G -B 1000 -T AUTO --threads-max 48
