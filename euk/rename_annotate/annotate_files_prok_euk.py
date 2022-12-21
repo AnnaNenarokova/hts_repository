@@ -331,13 +331,9 @@ def annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path, euk_de
         new_tree.write(format=2, outfile=new_tree_path)
     return out_treedir
 
-tax_info_path="/Users/vl18625/work/euk/protein_sets/taxa_annotations.tsv"
+tax_info_path="/Users/vl18625/work/euk/protein_sets/taxa_annotations_new.tsv"
 prot_dir = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_proteome_dataset/"
-in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/final/trees/"
-out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/final/trees_annotated/"
+in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/alpha/brett_data/16_markers/trees/"
+out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/alpha/brett_data/16_markers/trees_annotated/"
 
-# annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path, abce=True, euk_delimiter="_")
-
-in_treedir="/Users/vl18625/work/euk/concat_trees/trees/"
-out_treedir="/Users/vl18625/work/euk/concat_trees/trees_annotated/"
-annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, abce=True, protein_ids=False, euk_delimiter=False, source_euk_delimiter=False)
+annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, abce=False, protein_ids=True, euk_delimiter=False, source_euk_delimiter=False)
