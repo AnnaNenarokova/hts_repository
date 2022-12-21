@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=model_test_brett_16_markers_c60
-#SBATCH --output=model_test_brett_16_markers_c60_%A.out
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/model_test_brett_16_markers_c60_%A.out
 #SBATCH --partition=high
 #SBATCH --time=99-12:00:00
 #SBATCH --nodes=1
