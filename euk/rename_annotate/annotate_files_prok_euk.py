@@ -333,7 +333,7 @@ def annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path, euk_de
 
 tax_info_path="/Users/vl18625/work/euk/protein_sets/taxa_annotations_new.tsv"
 prot_dir = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_proteome_dataset/"
-in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/alpha/brett_data/16_markers/trees/"
-out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/be/alpha/brett_data/16_markers/trees_annotated/"
+in_treedir="/Users/vl18625/work/euk/concat_trees/trees/"
+out_treedir="/Users/vl18625/work/euk/concat_trees/annotated_trees/"
 
-annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, abce=False, protein_ids=True, euk_delimiter=False, source_euk_delimiter=False)
+annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, abce=False, protein_ids=False, euk_delimiter=False, source_euk_delimiter=False)
