@@ -6,7 +6,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=20
-#SBATCH --mem=85G
+#SBATCH --mem=112G
 
 msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/only_asgard/34_ae_asgard_concat/c60_pmsf/34_ae_asgard_only_concat.faa"
 tree="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/only_asgard/34_ae_asgard_concat/lgg/34_ae_asgard_only_concat.faa.treefile"
