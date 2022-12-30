@@ -16,6 +16,21 @@ def read_list(list_path):
             result_list.append(line.rstrip())
     return result_list
 
+def get_msa_len_dict(fasta_path):
+    msa_len_dict = {}
+    for record in SeqIO.parse(fasta_path, "fasta"):
+        alignment_no_gaps = record.seq.replace("-","")
+        alignment_len = len(alignment_no_gaps)
+        msa_len_dict[record.id] = alignment_len
+
+    max_length = max(msa_len_dict.values())
+    msa_percent_dict = {}
+    for seqid, al_len in msa_len_dict.items():
+        msa_percent = 100*al_len/float(max_length)
+        msa_percent = '{:.2f}%'.format(msa_percent)
+        msa_percent_dict[seqid] = msa_percent
+    return msa_percent_dict
+
 def prepare_euk_info_uniprot(fasta_folder):
     annotation_dict = {}
     for filename in listdir_nohidden(fasta_folder):
@@ -331,9 +346,49 @@ def annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path, euk_de
         new_tree.write(format=2, outfile=new_tree_path)
     return out_treedir
 
+def write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=False,alignment_path=False):
+    print("Reading taxonomy info")
+    tax_info_dict = csv_to_dict(tax_info_path, main_key="gid", delimiter='\t')
+    euk_regex = "\w+_EP\d+"
+    used_names = []
+    if alignment_path:
+        msa_len_dict = get_msa_len_dict(fasta_path)
+
+    tree = Tree(in_tree_path)
+    for leaf in tree.iter_leaves():
+        old_name = leaf.name
+        if abce and re.match(euk_regex, old_name):
+            genome_id = old_name.split("_")[1]
+            new_id = old_name
+        else:
+            genome_id = old_name
+            new_id = genome_id
+        if genome_id in tax_info_dict.keys():
+            new_name = new_id + "_" + tax_info_dict[genome_id][key_name]
+        else:
+            print(id, genome_id, "was not found in the dict!")
+            new_name = old_name
+        if new_name in used_names:
+            print (id, "is duplicated!")
+        if alignment_path:
+            if genome_id in msa_len_dict.keys():
+                new_name = new_name + " " + msa_len_dict[genome_id]
+            else:
+                print("Error!{genome_id} not found in msa_len_dict")
+        leaf.name = new_name
+        used_names.append(new_name)
+    tree.write(format=2, outfile=out_tree_path)
+    return out_tree_path
+
 tax_info_path="/Users/vl18625/work/euk/protein_sets/taxa_annotations_new.tsv"
 prot_dir = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_proteome_dataset/"
 in_treedir="/Users/vl18625/work/euk/concat_trees/other_trees/trees/"
 out_treedir="/Users/vl18625/work/euk/concat_trees/other_trees/trees_annotated/"
 
-annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, abce=False, protein_ids=False, euk_delimiter="-", source_euk_delimiter=False)
+# annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, abce=False, protein_ids=False, euk_delimiter="-", source_euk_delimiter=False)
+
+tax_info_path="/Users/vl18625/work/euk/protein_sets/taxa_annotations_new.tsv"
+in_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/trees/only_euks_132_markers_concat_c60_pmsf_lgg.fasta.treefile"
+out_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/annotated_trees/only_euks_132_markers_concat_c60_pmsf_lgg_annotated.tree"
+alignment_path="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/only_euks/euks_split_markers/only_euks_132_markers_concat.fasta"
+write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=False,alignment_path=alignment_path)
