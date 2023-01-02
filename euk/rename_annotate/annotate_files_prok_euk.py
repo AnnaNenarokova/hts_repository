@@ -349,12 +349,16 @@ def annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path, euk_de
 def write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=False,alignment_path=False):
     print("Reading taxonomy info")
     tax_info_dict = csv_to_dict(tax_info_path, main_key="gid", delimiter='\t')
-    euk_regex = "\w+_EP\d+"
+    if abce:
+        euk_regex = "\w+_EP\d+"
+    else:
+        euk_regex = "EP\d+"
     used_names = []
     if alignment_path:
-        msa_len_dict = get_msa_len_dict(fasta_path)
-
+        print ("Getting alignment info")
+        msa_len_dict = get_msa_len_dict(alignment_path)
     tree = Tree(in_tree_path)
+    print ("Annotating tree")
     for leaf in tree.iter_leaves():
         old_name = leaf.name
         if abce and re.match(euk_regex, old_name):
@@ -368,14 +372,14 @@ def write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxon
         else:
             print(id, genome_id, "was not found in the dict!")
             new_name = old_name
+        if alignment_path:
+            if old_name in msa_len_dict.keys():
+                new_name = new_name + " " + msa_len_dict[old_name]
+            else:
+                print(f"Error! {genome_id} was not found in msa_len_dict")
+        leaf.name = new_name
         if new_name in used_names:
             print (id, "is duplicated!")
-        if alignment_path:
-            if genome_id in msa_len_dict.keys():
-                new_name = new_name + " " + msa_len_dict[genome_id]
-            else:
-                print("Error!{genome_id} not found in msa_len_dict")
-        leaf.name = new_name
         used_names.append(new_name)
     tree.write(format=2, outfile=out_tree_path)
     return out_tree_path
@@ -388,7 +392,7 @@ out_treedir="/Users/vl18625/work/euk/concat_trees/other_trees/trees_annotated/"
 # annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, abce=False, protein_ids=False, euk_delimiter="-", source_euk_delimiter=False)
 
 tax_info_path="/Users/vl18625/work/euk/protein_sets/taxa_annotations_new.tsv"
-in_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/trees/only_euks_132_markers_concat_c60_pmsf_lgg.fasta.treefile"
-out_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/annotated_trees/only_euks_132_markers_concat_c60_pmsf_lgg_annotated.tree"
-alignment_path="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/only_euks/euks_split_markers/only_euks_132_markers_concat.fasta"
-write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=False,alignment_path=alignment_path)
+in_tree_path="/Users/vl18625/work/euk/concat_trees/abce/trees/abce_94_markers_concat.fasta.treefile"
+out_tree_path="/Users/vl18625/work/euk/concat_trees/abce/annotated_trees/abce_94_markers_c20_pmsf_lgg.tree"
+alignment_path="/Users/vl18625/work/euk/concat_trees/abce/alignments/abce_94_markers_concat.fasta"
+write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=True,alignment_path=alignment_path)
