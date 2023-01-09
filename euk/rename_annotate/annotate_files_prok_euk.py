@@ -391,8 +391,12 @@ out_treedir="/Users/vl18625/work/euk/concat_trees/other_trees/trees_annotated/"
 
 # annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, abce=False, protein_ids=False, euk_delimiter="-", source_euk_delimiter=False)
 
-tax_info_path="/Users/vl18625/work/euk/protein_sets/taxa_annotations_new.tsv"
 in_tree_path="/Users/vl18625/work/euk/concat_trees/abce/trees/abce_94_markers_concat.fasta.treefile"
 out_tree_path="/Users/vl18625/work/euk/concat_trees/abce/annotated_trees/abce_94_markers_c20_pmsf_lgg.tree"
 alignment_path="/Users/vl18625/work/euk/concat_trees/abce/alignments/abce_94_markers_concat.fasta"
-write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=True,alignment_path=alignment_path)
+# write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=True,alignment_path=alignment_path)
+
+in_tree_path="/Users/vl18625/work/euk/concat_trees/abce/trees/only_euks_132_markers_concat.fasta.treefile"
+out_tree_path="/Users/vl18625/work/euk/concat_trees/abce/annotated_trees/only_euks_132_markers_c60.tree"
+alignment_path="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/only_euks/euks_split_markers/only_euks_132_markers_concat.fasta"
+write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=False,alignment_path=alignment_path)
