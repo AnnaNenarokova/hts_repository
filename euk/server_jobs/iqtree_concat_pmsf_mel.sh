@@ -6,7 +6,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=20
-#SBATCH --mem=100G
+#SBATCH --mem=150G
 
 msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/only_non_asgard/c60_lgg_pmsf/34_ae_non_asgard_concat.fasta"
 tree="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/only_non_asgard/lgg/34_ae_non_asgard_concat.fasta.treefile"
