@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=recoded_abce_94_markers
+#SBATCH --job-name=recoded_abce_94_markers_gtr_g
 #SBATCH --output=/scratch/nenarokova/code/slurm_out/recoded_abce_94_markers_gtr_g_%A.out
 #SBATCH --partition=high
 #SBATCH --time=99-12:00:00
