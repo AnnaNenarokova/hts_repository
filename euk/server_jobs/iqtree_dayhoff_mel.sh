@@ -10,4 +10,4 @@
 
 msa=""
 
-iqtree2 -s $fasta -m GTR+G -B 1000 -T AUTO --threads-max 20
+iqtree2 -s $fasta -m GTR+G -B 1000 -T AUTO --threads-max 48
