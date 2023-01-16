@@ -75,8 +75,10 @@ bacteria=[""]
 # filter_fastas_keep_sp(euk_keeplist, indir, outdir, species_id_delimiter="-", euk=True)
 
 exclude_list =["EP00480", "EP01006"] # remove Ploetia (misidentified) and Reticulomyxa (long branched) 
-exclude_abce_list = ["alpha_EP00003","alpha_EP00033","alpha_EP00162","alpha_EP00163","alpha_EP00503","alpha_EP00727","alpha_EP00792","alpha_EP00903","alpha_EP01028","alpha_EP01029","cyano_EP00039","cyano_EP00164","cyano_EP00185","cyano_EP00279","cyano_EP00298","cyano_EP00314","cyano_EP00333","cyano_EP00379","cyano_EP00390","cyano_EP00466","cyano_EP00530","cyano_EP00609","cyano_EP00611","cyano_EP00625","cyano_EP00742","cyano_EP00802","cyano_EP00820","cyano_EP00900","cyano_EP00903","cyano_EP00927","cyano_EP00931","cyano_EP01082","cyano_EP01083","cyano_EP01084","GCA_011041895.1","GCA_015521395.1","Idunnarchaeote_GBS17","Idunnarchaeote_GBS24"]
+exclude_abce_iduhns_list = ["alpha_EP00003","alpha_EP00033","alpha_EP00162","alpha_EP00163","alpha_EP00503","alpha_EP00727","alpha_EP00792","alpha_EP00903","alpha_EP01028","alpha_EP01029","cyano_EP00039","cyano_EP00164","cyano_EP00185","cyano_EP00279","cyano_EP00298","cyano_EP00314","cyano_EP00333","cyano_EP00379","cyano_EP00390","cyano_EP00466","cyano_EP00530","cyano_EP00609","cyano_EP00611","cyano_EP00625","cyano_EP00742","cyano_EP00802","cyano_EP00820","cyano_EP00900","cyano_EP00903","cyano_EP00927","cyano_EP00931","cyano_EP01082","cyano_EP01083","cyano_EP01084","GCA_011041895.1","GCA_015521395.1","Idunnarchaeote_GBS17","Idunnarchaeote_GBS24"]
+
+exclude_abce_list = ["alpha_EP00003","alpha_EP00033","alpha_EP00162","alpha_EP00163","alpha_EP00503","alpha_EP00727","alpha_EP00792","alpha_EP00903","alpha_EP01028","alpha_EP01029","cyano_EP00039","cyano_EP00164","cyano_EP00185","cyano_EP00279","cyano_EP00298","cyano_EP00314","cyano_EP00333","cyano_EP00379","cyano_EP00390","cyano_EP00466","cyano_EP00530","cyano_EP00609","cyano_EP00611","cyano_EP00625","cyano_EP00742","cyano_EP00802","cyano_EP00820","cyano_EP00900","cyano_EP00903","cyano_EP00927","cyano_EP00931","cyano_EP01082","cyano_EP01083","cyano_EP01084"]
 
 infasta_path="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/final/abce_94_markers_concat.fasta"
-outfasta_path="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/final/abce_94_markers_no_kor_filtered.fasta"
+outfasta_path="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/final/abce_94_markers_filtered.fasta"
 filter_fastas_exclude_sp_simple(exclude_abce_list, infasta_path, outfasta_path)
