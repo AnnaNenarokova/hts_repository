@@ -5,9 +5,9 @@
 #SBATCH --time=99-12:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=10
-#SBATCH --mem=12G
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=3G
 
 msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/abe/abce_94_markers_concat/recoded_msa/dayhoff4/gtr_g/abce_94_markers_16_01_dayhoff4_recoded.fasta"
 
-iqtree2 -s $msa -m GTR+G -B 1000 -T 10
+iqtree2 -s $msa -m GTR+G -B 1000 -T 4
