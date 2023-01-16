@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from os import listdir
 from Bio import SeqIO
+from Bio.Seq import Seq
 
 def listdir_nohidden(path):
     for f in listdir(path):
