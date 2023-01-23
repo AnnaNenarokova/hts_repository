@@ -6,7 +6,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=4
-#SBATCH --mem=3G
+#SBATCH --mem=10G
 
 msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/abe/abce_94_markers_concat/recoded_msa/dayhoff4/gtr_g/abce_94_markers_16_01_dayhoff4_recoded.fasta"
 
