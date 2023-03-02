@@ -391,13 +391,13 @@ out_treedir="/Users/vl18625/work/euk/concat_trees/other_trees/trees_annotated/"
 
 # annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, abce=False, protein_ids=False, euk_delimiter="-", source_euk_delimiter=False)
 
-in_tree_path="/Users/vl18625/work/euk/concat_trees/abce/trees/abce_94_markers_no_kor_filtered.fasta.treefile"
-out_tree_path="/Users/vl18625/work/euk/concat_trees/abce/annotated_trees/abce_94_markers_no_kor_c20_pmsf_lgg.tree"
-alignment_path="/Users/vl18625/work/euk/concat_trees/abce/alignments/abce_94_markers_concat.fasta"
+in_tree_path="/Users/vl18625/work/euk/concat_trees/abce/trees/abce_94_markers_16_01_dayhoff4_recoded.fasta.treefile"
+out_tree_path="/Users/vl18625/work/euk/concat_trees/abce/annotated_trees/abce_94_markers_16_01_dayhoff4_recoded.tree"
+alignment_path="/Users/vl18625/work/euk/concat_trees/abce/alignments/abce_94_markers_16_01_dayhoff4_recoded.fasta"
 # write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=True,alignment_path=alignment_path)
 
-in_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/trees/34_ae_non_asgard_concat.fasta.treefile"
-out_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/trees_annotated/34_ae_non_asgard_c60_pmsf.fasta.treefile"
-alignment_path="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/non_asgard_only/34_ae_non_asgard_concat.fasta"
+in_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/trees/only_euks_132_markers_concat_c60_lgg_no_pmsf.fasta.treefile"
+out_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/trees_annotated/only_euks_132_markers_concat_c60_lgg_no_pmsf.tree"
+alignment_path="/Users/vl18625/work/euk/concat_trees/alignments/only_euks_132_markers_concat.fasta"
 write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=False,alignment_path=alignment_path)
 

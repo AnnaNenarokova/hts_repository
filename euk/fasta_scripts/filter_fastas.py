@@ -2,6 +2,7 @@
 from os import listdir
 from Bio import SeqIO
 from Bio.Seq import Seq
+import re
 
 def listdir_nohidden(path):
     for f in listdir(path):
@@ -36,7 +37,7 @@ def filter_fastas_exclude_sp_new(exclude_list, indir, outdir):
 		SeqIO.write(out_records, outfile, "fasta")
 	return 0
 
-def filter_fasta_keep_sp(keep_list, infasta, outfasta, species_id_delimiter="-", euk=False):
+def filter_fasta_keep_sp(keep_list, infasta, outfasta, species_id_delimiter="-"):
 	out_records = []
 	euk_regex = "^EP\d+-P\d+"
 	for record in SeqIO.parse(infasta, "fasta"):
@@ -53,11 +54,29 @@ def filter_fasta_keep_sp(keep_list, infasta, outfasta, species_id_delimiter="-",
 	SeqIO.write(out_records, outfasta, "fasta")
 	return 0
 
-def filter_fastas_keep_sp(keep_list, indir, outdir, species_id_delimiter="-", euk=False):
+def filter_abce_keep_sp(keep_list, infasta, outfasta):
+	out_records = []
+	euk_regex = "\w+_EP\d+-P\d+"
+	for record in SeqIO.parse(infasta, "fasta"):
+		seq_id = record.id.split("-")[0]
+		if re.match(euk_regex, record.id):
+			species_id = seq_id.split("_")[1]
+		else:
+			species_id = seq_id
+		if species_id in keep_list:
+			out_records.append(record)
+	SeqIO.write(out_records, outfasta, "fasta")
+	return 0
+
+def filter_fastas_keep_sp(keep_list, indir, outdir, species_id_delimiter="-", euk=False, abce=False):
 	for fasta in listdir_nohidden(indir):
+		print(fasta)
 		infasta = indir + fasta
 		outfasta = outdir + fasta
-		filter_fasta_keep_sp(keep_list, infasta, outfasta, species_id_delimiter=species_id_delimiter,euk=euk)
+		if abce:
+			filter_abce_keep_sp(keep_list, infasta, outfasta)
+		else:
+			filter_fasta_keep_sp(keep_list, infasta, outfasta, species_id_delimiter=species_id_delimiter,euk=euk)
 	return 0 
 
 def filter_fastas_exclude_sp_simple(exclude_list, infasta_path, outfasta_path):
@@ -82,4 +101,9 @@ exclude_abce_list = ["alpha_EP00003","alpha_EP00033","alpha_EP00162","alpha_EP00
 
 infasta_path="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/final/abce_94_markers_concat.fasta"
 outfasta_path="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/final/abce_94_markers_filtered.fasta"
-filter_fastas_exclude_sp_simple(exclude_abce_list, infasta_path, outfasta_path)
+# filter_fastas_exclude_sp_simple(exclude_abce_list, infasta_path, outfasta_path)
+
+keeplist_100_species =["GCA_001940725.1","GCA_016839295.1","GCA_001940645.1","GCA_016840025.1","Idunnarchaeote_GBS24","GCA_008000775.1","GCA_011365055.1","GCA_001940665.1","GCA_000025285.1","GCA_000022205.1","GCA_000017625.1","GCA_000970205.1","GCA_002813695.1","GCA_002214585.1","GCA_001399795.1","GCA_000019605.1","GCA_000270325.1","GCA_000018465.1","GCA_000017945.1","GCA_000007225.1","GCA_016777175.1","GCA_000025665.1","GCA_000308215.1","GCA_000178955.2","GCA_000025265.1","GCA_900142435.1","GCA_000427095.1","GCA_000020525.1","GCA_015775515.1","GCA_000284335.1","GCA_001886815.1","GCA_000242915.2","GCA_000008725.1","GCA_004208415.1","GCA_000146065.1","GCA_001870225.1","GCA_000010985.1","GCA_003366055.1","GCA_000014965.1","GCA_003135135.1","GCA_000512235.1","GCA_000474745.1","GCA_001278705.1","GCA_003019675.1","GCA_000695095.2","GCA_002839855.1","GCA_009840435.1","GCA_000091165.1","GCA_000739535.1","GCA_002305895.1","GCA_000341545.2","GCA_004102945.1","GCA_008065095.1","GCA_006738645.1","GCA_000144605.1","GCA_002722055.1","GCA_000427665.1","GCA_002937855.1","GCA_000742475.1","GCA_004210305.1","GCA_000012345.1","GCA_000166935.1","GCA_002787635.1","GCA_009784235.1","GCA_000186705.2","GCA_002937495.1","GCA_900103345.1","GCA_000419525.1","GCA_000014865.1","GCA_002109495.1","GCA_002795805.1","GCA_000143985.1","GCA_003290465.1","GCA_009936215.1","GCA_001017655.1","EP00002","EP00004","EP00023","EP00031","EP00072","EP00145","EP00162","EP00164","EP00167","EP00176","EP00229","EP00247","EP00279","EP00300","EP00348","EP00379","EP00457","EP00473","EP00656","EP00696","EP00698","EP00741","EP00742","EP00749","EP00762","EP00797","EP00900","EP01080","EP01127","EP01138"]
+indir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/seqs/abc_dataset/final_abce_fastas/"
+outdir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/seqs/abc_dataset/100species_abce_fastas/"
+filter_fastas_keep_sp(keeplist_100_species, indir, outdir, species_id_delimiter="-", euk=False, abce=True)
