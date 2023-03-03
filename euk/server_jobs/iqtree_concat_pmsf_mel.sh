@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=ae_non_asgard_c60_pmsf
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/ae_non_asgard_c60_pmsf_%A.out
+#SBATCH --job-name=pmsf_abe_100sp
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/pmsf_abe_100sp_%A.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
 #SBATCH --nodes=1
@@ -8,6 +8,6 @@
 #SBATCH --cpus-per-task=20
 #SBATCH --mem=150G
 
-msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/only_non_asgard/c60_lgg_pmsf/34_ae_non_asgard_concat.fasta"
-tree="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/only_non_asgard/lgg/34_ae_non_asgard_concat.fasta.treefile"
+msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/abe/abce_94m_104_species_concat/c60_lgg_pmsf/104species_94markers_abce.fasta"
+tree="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/abe/abce_94m_104_species_concat/lgg/104species_94markers_abce.fasta.treefile"
 iqtree2 -s $msa -m LG+C60+G -ft $tree -B 1000 -nt 20
