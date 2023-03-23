@@ -391,9 +391,9 @@ out_treedir="/Users/vl18625/work/euk/concat_trees/other_trees/trees_annotated/"
 
 # annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, abce=False, protein_ids=False, euk_delimiter="-", source_euk_delimiter=False)
 
-in_tree_path="/Users/vl18625/work/euk/concat_trees/abce/trees/abce_94_markers_filtered_16_01_с60_no_pmsf.fasta.treefile"
-out_tree_path="/Users/vl18625/work/euk/concat_trees/abce/annotated_trees/abce_94_markers_filtered_16_01_с60_no_pmsf.fasta.treefile"
-alignment_path="/Users/vl18625/work/euk/concat_trees/alignments/abce_94_markers_concat.fasta"
+in_tree_path="/Users/vl18625/work/euk/concat_trees/abce/trees/104species_94markers_abce.fasta.treefile"
+out_tree_path="/Users/vl18625/work/euk/concat_trees/abce/annotated_trees/104species_94markers_abce.fasta.treefile"
+alignment_path="/Users/vl18625/work/euk/concat_trees/alignments/104_species_abce_concat.fasta"
 write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=True,alignment_path=alignment_path)
 
 in_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/trees/only_euks_132_markers_concat_c60_lgg_no_pmsf.fasta.treefile"
