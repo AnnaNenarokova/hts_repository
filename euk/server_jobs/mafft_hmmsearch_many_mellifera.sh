@@ -1,9 +1,9 @@
 #!/bin/bash
-#SBATCH --job-name=hmm_arcogs
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/hmmsearch/arcogs_%A_%a.out
+#SBATCH --job-name=hmm_alpha
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/hmmsearch/alpha_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
-#SBATCH --array=1-85
+#SBATCH --array=1-119
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=1GB
@@ -13,12 +13,13 @@
 hmmbuild="/mnt/alvarium2pool/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmbuild"
 hmmsearch="/mnt/alvarium2pool/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmsearch"
 
-fasta_dir="/scratch/nenarokova/euk/markers/archaea/faa/"
-msa_dir="/scratch/nenarokova/euk/markers/archaea/linsi/"
-hmm_dir="/scratch/nenarokova/euk/markers/archaea/hmm/"
+workdir="/scratch/nenarokova/euk/markers/bacteria/alphaproteo_markers/"
+fasta_dir=$workdir"faa/"
+msa_dir=$workdir"linsi/"
+hmm_dir=$workdir"hmm/"
 
 subject_dir="/scratch/nenarokova/euk/proteomes/anna_eukprot3_set_v2_21_03_23/"
-hmm_results_dir="/scratch/nenarokova/euk/markers/hmm_results/arcogs/"
+hmm_results_dir="/scratch/nenarokova/euk/markers/hmm_results/alpha/"
 
 cd $fasta_dir
 fasta=$(ls *.faa | sed -n ${SLURM_ARRAY_TASK_ID}p)
