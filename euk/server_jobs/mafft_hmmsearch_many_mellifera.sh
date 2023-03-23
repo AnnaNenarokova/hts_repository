@@ -14,7 +14,7 @@ hmmbuild="/mnt/alvarium2pool/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmbuild"
 hmmsearch="/mnt/alvarium2pool/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmsearch"
 
 fasta_dir="/scratch/nenarokova/euk/markers/archaea/faa/"
-msa_dir="/scratch/nenarokova/euk/markers/archaea/faa/linsi/"
+msa_dir="/scratch/nenarokova/euk/markers/archaea/linsi/"
 hmm_dir="/scratch/nenarokova/euk/markers/archaea/hmm/"
 
 subject_dir="/scratch/nenarokova/euk/proteomes/anna_eukprot3_set_v2_21_03_23/"
