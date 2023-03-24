@@ -18,7 +18,7 @@ msa_dir="/scratch/nenarokova/euk/markers/bacteria/alphaproteo_markers/msa/"
 hmm_dir="/scratch/nenarokova/euk/markers/archaea/hmm/"
 
 subject_dir="/scratch/nenarokova/euk/proteomes/anna_eukprot3_set_v2_21_03_23/"
-hmm_results_dir="/scratch/nenarokova/euk/markers/hmm_results/arcogs/"
+hmm_results_dir="/scratch/nenarokova/euk/markers/hmm_results/cyano/"
 
 cd $fasta_dir
 fasta=$(ls *.faa | sed -n ${SLURM_ARRAY_TASK_ID}p)
