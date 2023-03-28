@@ -6,8 +6,8 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --time=14-00:00:00
 #SBATCH --mem=50G
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/prepare_hmm_fastas_%A_%a.out
 
-
-cd /Users/vl18625/work/code/ngs/euk/hmm_results_scripts/
+cd /scratch/nenarokova/code/ngs/euk/hmm_results_scripts
 
 python3 prepare_hmm_hit_fastas.py
