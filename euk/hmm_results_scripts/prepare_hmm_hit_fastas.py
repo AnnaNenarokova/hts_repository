@@ -36,7 +36,7 @@ def parse_hmmreport(hmm_report_path, columns_str=False):
 				results.append(result_dict)
 	return results
 
-def prepare_hmm_dict(hmm_report_dir, hmm_ext=".txt", proteome_ext=".fasta", max_evalue=0.00001, n_best=1, monobranch=False):
+def prepare_hmm_dict(hmm_report_dir, hmm_ext=".txt", proteome_ext=".fasta", max_evalue=0.0000001, n_best=100, monobranch=False):
 	hmm_dict = {}
 	for hmm_report in listdir_nohidden(hmm_report_dir):
 		hmm_report_name_split = hmm_report.split(proteome_ext)
@@ -49,7 +49,6 @@ def prepare_hmm_dict(hmm_report_dir, hmm_ext=".txt", proteome_ext=".fasta", max_
 			cog_file = hmm_file
 		if proteome_file not in hmm_dict:
 			hmm_dict[proteome_file] = {}
-
 		if cog_file not in hmm_dict[proteome_file].keys():
 			hmm_dict[proteome_file][cog_file] = {}
 		hmm_report_path = hmm_report_dir + hmm_report
@@ -62,7 +61,7 @@ def prepare_hmm_dict(hmm_report_dir, hmm_ext=".txt", proteome_ext=".fasta", max_
 			hmm_dict[proteome_file][cog_file][hmm_result["sseqid"]] = ""
 	return hmm_dict
 
-def prepare_fastas(hmm_report_dir, proteomes_dir, cog_dir, result_dir, hmm_ext=".hmm", proteome_ext=".fasta", n_best=1, max_evalue=0.00001):
+def prepare_fastas(hmm_report_dir, proteomes_dir, cog_dir, result_dir, hmm_ext=".hmm", proteome_ext=".fasta", n_best=100, max_evalue=0.0000001):
 	print("Parcing hmm_reports")
 	hmm_dict = prepare_hmm_dict(hmm_report_dir, n_best=n_best, max_evalue=max_evalue)
 	print("Parcing proteomes sequences")
@@ -76,7 +75,7 @@ def prepare_fastas(hmm_report_dir, proteomes_dir, cog_dir, result_dir, hmm_ext="
 					hmm_dict[proteome][cog][sseqid] = record
 	print("Writing down sequences")
 	for cog_file in listdir_nohidden(cog_dir):
-		cog = cog_file.split(".faa")[0]
+		cog = cog_file
 		out_records = []
 		cog_path = cog_dir + cog_file
 		outpath = result_dir + cog_file
@@ -372,4 +371,8 @@ def prepare_ABE_fastas():
 	outdir = write_fastas(markers_seq_dict, outdir,marker_ext=".faa")
 	return outdir
 
-prepare_ABE_fastas()
+hmm_report_dir = "/scratch/nenarokova/euk/markers/hmm_results/alpha/"
+cog_dir = "/scratch/nenarokova/euk/markers/bacteria/alphaproteo_markers/faa/"
+proteomes_dir = "/scratch/nenarokova/euk/proteomes/anna_eukprot3_set_v2_21_03_23/"
+result_dir = "/scratch/nenarokova/euk/markers/be/many_hits/alpha/faa/"
+prepare_fastas(hmm_report_dir, proteomes_dir, cog_dir, result_dir)

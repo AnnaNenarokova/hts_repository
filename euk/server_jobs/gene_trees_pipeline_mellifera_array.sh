@@ -1,17 +1,16 @@
 #!/bin/bash
-#SBATCH --job-name=abce_104sp_94m
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/abce_104sp_94m%A_%a.out
+#SBATCH --job-name=ae_new_sgts
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/ae_new_sgts%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
-#SBATCH --array=1-94
+#SBATCH --array=1-85
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem-per-cpu=5GB
+#SBATCH --mem-per-cpu=10GB
 ##SBATCH --nodes=1
 ## --cpu_bind=v,threads
 
-workdir="/scratch/nenarokova/euk/markers/abe/abce_94m_104_species/"
-
+workdir="/scratch/nenarokova/euk/markers/ae/many_hits/"
 fasta_dir=$workdir"faa/"
 
 linsi_dir=$workdir"linsi/"
