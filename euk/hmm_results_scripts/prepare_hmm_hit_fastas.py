@@ -3,7 +3,7 @@ import re
 import os
 from Bio import SeqIO
 import sys
-sys.path.insert(0, "/Users/vl18625/work/code/ngs/")
+sys.path.insert(0, "/Users/vl18625/work/code/ngs/", "/scratch/nenarokova/code/ngs")
 from py_scripts.helpers.parse_csv import *
 
 def listdir_nohidden(path):
