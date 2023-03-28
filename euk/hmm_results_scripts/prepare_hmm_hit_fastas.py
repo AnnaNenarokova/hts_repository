@@ -83,7 +83,10 @@ def prepare_fastas(hmm_report_dir, proteomes_dir, cog_dir, result_dir, hmm_ext="
 		for record in SeqIO.parse(cog_path, "fasta"):
 			out_records.append(record)
 		for proteome in hmm_dict:
-			proteome_cog_dict = hmm_dict[proteome][cog]
+			if cog in hmm_dict[proteome].keys():
+				proteome_cog_dict = hmm_dict[proteome][cog]
+			else:
+				print (cog + " not in hmm_dict[" + proteome + "]")
 			for sseqid in proteome_cog_dict:
 				out_records.append(proteome_cog_dict[sseqid])
 		SeqIO.write(out_records, outpath, "fasta")
