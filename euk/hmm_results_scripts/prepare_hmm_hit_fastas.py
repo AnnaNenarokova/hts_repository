@@ -375,8 +375,8 @@ def prepare_ABE_fastas():
 	outdir = write_fastas(markers_seq_dict, outdir,marker_ext=".faa")
 	return outdir
 
-hmm_report_dir = "/scratch/nenarokova/euk/markers/hmm_results/alpha/"
-cog_dir = "/scratch/nenarokova/euk/markers/bacteria/alphaproteo_markers/faa/"
-proteomes_dir = "/scratch/nenarokova/euk/proteomes/anna_eukprot3_set_v2_21_03_23/"
-result_dir = "/scratch/nenarokova/euk/markers/be/many_hits/alpha/faa/"
+hmm_report_dir = "/Users/vl18625/work/euk/markers_euks/new_hmm_results/alpha_hmm_hits/"
+cog_dir = "/Users/vl18625/work/euk/markers_euks/new_hmm_results/alpha_cogs/"
+proteomes_dir = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_set_v2_21_03_23/"
+result_dir = "/Users/vl18625/work/euk/markers_euks/new_hmm_results/alpha_result_faa/"
 prepare_fastas(hmm_report_dir, proteomes_dir, cog_dir, result_dir)
