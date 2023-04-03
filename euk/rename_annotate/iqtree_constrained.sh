@@ -11,4 +11,4 @@
 msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/one_hit/final_68ae_filtered_concat/constraint_heimdall_lgg/68_final_ae.fasta"
 constraint_tree="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/one_hit/final_68ae_filtered_concat/constraint_heimdall_lgg/ae_constrained_heimdall_euk.tree"
 
-iqtree -s $msa -m LG+G -g $constraint_tree -T 10
+iqtree2 -s $msa -m LG+G -g $constraint_tree -T 10
