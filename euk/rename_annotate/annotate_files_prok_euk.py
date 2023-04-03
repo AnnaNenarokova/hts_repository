@@ -394,10 +394,10 @@ out_treedir="/Users/vl18625/work/euk/concat_trees/other_trees/trees_annotated/"
 in_tree_path="/Users/vl18625/work/euk/concat_trees/abce/trees/104species_94markers_abce.fasta.treefile"
 out_tree_path="/Users/vl18625/work/euk/concat_trees/abce/annotated_trees/104species_94markers_abce.fasta.treefile"
 alignment_path="/Users/vl18625/work/euk/concat_trees/alignments/104_species_abce_concat.fasta"
-write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=True,alignment_path=alignment_path)
+# write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=True,alignment_path=alignment_path)
 
-in_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/trees/only_euks_132_markers_concat_c60_lgg_no_pmsf.fasta.treefile"
-out_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/trees_annotated/only_euks_132_markers_concat_c60_lgg_no_pmsf.tree"
-alignment_path="/Users/vl18625/work/euk/concat_trees/alignments/only_euks_132_markers_concat.fasta"
-# write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=False,alignment_path=alignment_path)
+in_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/trees/68_final_ae_с60.treefile"
+out_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/annotated_trees/68_final_ae_с60.treefile"
+alignment_path="/Users/vl18625/work/euk/concat_trees/alignments/68_final_ae.fasta"
+write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=False,alignment_path=alignment_path)
 
