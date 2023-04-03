@@ -5,7 +5,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=10
-#SBATCH --mem=50G
+#SBATCH --mem=10G
 
 msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/one_hit/final_68ae_filtered_concat/constraint_heimdall_lgg/68_final_ae.fasta"
 constraint_tree="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/one_hit/final_68ae_filtered_concat/constraint_heimdall_lgg/ae_constrained_heimdall_euk.tree"
