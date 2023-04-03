@@ -1,3 +1,4 @@
+#!/bin/bash
 #SBATCH --job-name=ae_constrained_lgg
 #SBATCH --output=/scratch/nenarokova/code/slurm_out/ae_constrained_lgg_%A.out
 #SBATCH --partition=high
