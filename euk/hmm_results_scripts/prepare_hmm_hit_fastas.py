@@ -63,9 +63,9 @@ def prepare_hmm_dict(hmm_report_dir, hmm_ext=".txt", proteome_ext=".fasta", max_
 	return hmm_dict
 
 def prepare_fastas(hmm_report_dir, proteomes_dir, cog_dir, result_dir, hmm_ext=".hmm", proteome_ext=".fasta", n_best=100, max_evalue=0.0000001):
-	print("Parcing hmm_reports")
+	print("Parsing hmm_reports")
 	hmm_dict = prepare_hmm_dict(hmm_report_dir, n_best=n_best, max_evalue=max_evalue)
-	print("Parcing proteomes sequences")
+	print("Parsing proteomes sequences")
 	for proteome in listdir_nohidden(proteomes_dir):
 		proteome_dict = hmm_dict[proteome]
 		proteome_path = proteomes_dir + proteome
@@ -94,9 +94,9 @@ def prepare_fastas(hmm_report_dir, proteomes_dir, cog_dir, result_dir, hmm_ext="
 
 def prepare_fastas_keep_list(hmm_report_dir, proteomes_dir, cog_dir, result_dir, monobranch=False, keep_list_path=False, hmm_ext=".txt", proteome_ext=".fasta", n_best=1, max_evalue=0.00001):
 	if keep_list_path: keep_list = read_list(keep_list_path)
-	print("Parcing hmm_reports")
+	print("parsing hmm_reports")
 	hmm_dict = prepare_hmm_dict(hmm_report_dir, hmm_ext, proteome_ext, n_best, max_evalue, monobranch=monobranch)
-	print("Parcing proteome sequences")
+	print("parsing proteome sequences")
 	proteome_set = set()
 	for proteome in listdir_nohidden(proteomes_dir):
 		proteome_id = proteome.split("-")[0]
@@ -154,13 +154,13 @@ def parse_euk_hmm_dict(hmm_report_dir, source_name, hmm_dict, hmm_ext=".txt", pr
 
 def prepare_ABC_hmm_dict(a_dir, b_dir, c_dir):
 	hmm_dict = {}
-	print ("Parcing A")
+	print ("parsing A")
 	source_name="archaea"
 	hmm_dict = parse_euk_hmm_dict(a_dir, source_name, hmm_dict)
-	print ("Parcing B")
+	print ("parsing B")
 	source_name="alpha"
 	hmm_dict = parse_euk_hmm_dict(b_dir, source_name, hmm_dict)
-	print ("Parcing C")
+	print ("parsing C")
 	source_name="cyano"
 	hmm_dict = parse_euk_hmm_dict(c_dir, source_name, hmm_dict)
 	return hmm_dict
@@ -270,49 +270,6 @@ def prepare_seqid_dict(best_euk_marker_dict):
 						print(f"ERROR! {sseqid} is duplicated")
 	return seqid_dict
 
-def filter_fonticula(seqid_dict):
-	for cog in seqid_dict:
-		new_prot_list = []
-		fonticula_id = "EP00159_Fonticula_alba"
-		if fonticula_id in seqid_dict[cog].keys():
-			for prot_id in seqid_dict[cog]["EP00159_Fonticula_alba"]:
-				prot_id_splitted = prot_id.split("-")
-				new_prot_id = prot_id_splitted[0] + "-" + prot_id_splitted[-1]
-				new_prot_list.append(new_prot_id)
-			seqid_dict[cog]["EP00159_Fonticula_alba"] = new_prot_list
-	return seqid_dict
-
-def prepare_euk_seq_dict(seqid_dict,exclude_euk_list,proteomes_dir,include_markers_list=None, proteome_ext=".fasta"):
-	print ("Analysing euk_marker_dict")
-	if include_markers_list:
-		markers = include_markers_list
-	else:
-		markers = euk_marker_dict
-	
-	euk_seq_dict = {}
-	species_dict = {}
-	for marker_id in markers:
-		euk_seq_dict[marker_id] = {}
-		for species in seqid_dict[marker_id]:
-			if species not in exclude_euk_list:
-				if species not in euk_seq_dict[marker_id]:
-					euk_seq_dict[marker_id][species] = {}
-				if species not in species_dict:
-					species_dict[species] = {}
-				for prot_id in seqid_dict[marker_id][species]:
-					euk_seq_dict[marker_id][species][prot_id] = ""
-					species_dict[species][prot_id] = marker_id
-	print ("Collecting euk fasta seqs")
-	for species in species_dict:
-		print (species)
-		proteome_path = proteomes_dir + species + proteome_ext
-		for record in SeqIO.parse(proteome_path, "fasta"):
-			prot_id = record.id 
-			if prot_id in species_dict[species]:
-				marker_id = species_dict[species][prot_id]
-				euk_seq_dict[marker_id][species][prot_id] = record
-	return euk_seq_dict
-
 def prepare_markers_seq_dict(euk_seq_dict,AB_markers_dir,cog_ext=".faa"):
 	markers_seq_dict = {}
 	for marker_id in euk_seq_dict:
@@ -334,7 +291,7 @@ def write_fastas(markers_seq_dict, outdir,marker_ext=".faa"):
 		SeqIO.write(records, outfasta, "fasta")
 	return outdir
 
-def prepare_ABE_fastas():
+def prepare_ABE_fastas_one_hit():
 	workdir = "/Users/vl18625/work/euk/markers_euks/hmm_results/"
 	a_dir = workdir + "ae_hmm_results/"
 	b_dir = workdir + "alpha_hmm_results/"
@@ -375,8 +332,99 @@ def prepare_ABE_fastas():
 	outdir = write_fastas(markers_seq_dict, outdir,marker_ext=".faa")
 	return outdir
 
+def make_euk_seqid_dict_many_hits(euk_marker_dict):
+	seqid_dict = {}
+	for cog in euk_marker_dict:
+		seqid_dict[cog] = {}
+		for species in euk_marker_dict[cog]:
+			if species not in seqid_dict[cog]:
+				seqid_dict[cog][species] = []
+			for source in euk_marker_dict[cog][species]:
+				for hit in euk_marker_dict[cog][species][source]:
+					seqid = hit['sseqid']
+					if seqid not in seqid_dict[cog][species]:
+						seqid_dict[cog][species].append(seqid)
+	return seqid_dict
+
+def prepare_euk_seq_dict(seqid_dict,proteomes_dir,exclude_euk_list=[],proteome_ext=".fasta"):
+	print ("Analysing euk_marker_dict")
+	euk_seq_dict = {}
+	species_dict = {}
+	for marker_id in seqid_dict:
+		euk_seq_dict[marker_id] = {}
+		for species in seqid_dict[marker_id]:
+			if species not in exclude_euk_list:
+				if species not in euk_seq_dict[marker_id]:
+					euk_seq_dict[marker_id][species] = {}
+				if species not in species_dict:
+					species_dict[species] = {}
+				for prot_id in seqid_dict[marker_id][species]:
+					euk_seq_dict[marker_id][species][prot_id] = ""
+					species_dict[species][prot_id] = marker_id
+	print ("Collecting euk fasta seqs")
+	for species in species_dict:
+		print (species)
+		proteome_path = proteomes_dir + species + proteome_ext
+		for record in SeqIO.parse(proteome_path, "fasta"):
+			prot_id = record.id 
+			if prot_id in species_dict[species]:
+				marker_id = species_dict[species][prot_id]
+				euk_seq_dict[marker_id][species][prot_id] = record
+	return euk_seq_dict
+
+def prepare_full_seq_dict_ABE(euk_seq_dict, cog_dir, cog_ext=".faa"):
+	euk_regex = "\w+_EP\d+-P\d+"
+	markers_seq_dict = {}
+	cog_files = os.listdir(cog_dir)
+	for cog in euk_seq_dict:
+		cog_file = cog + cog_ext
+		if cog_file in cog_files:
+			markers_seq_dict[cog] = []
+			cog_path = cog_dir + cog + cog_ext
+			for record in SeqIO.parse(cog_path, "fasta"):
+				if not re.match(euk_regex, record.id):
+					markers_seq_dict[cog].append(record)
+			for species in euk_seq_dict[cog]:
+				for seqid in euk_seq_dict[cog][species]:
+					record = euk_seq_dict[cog][species][seqid]
+					markers_seq_dict[cog].append(record)
+		else:
+			print (cog_file + " not in cog_dir")
+	return markers_seq_dict
+
+def prepare_ABE_fastas_many_hits():
+	outdir="/Users/vl18625/work/euk/markers_euks/new_hmm_results/abe/abe_94_results_many_hits/"
+	arcog_cog_path = "/Users/vl18625/work/euk/markers_euks/nina_markers/arCOG_COG.csv"
+	proteomes_dir = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_set_v2_21_03_23/"
+	ABE_markers_dir="/Users/vl18625/work/euk/markers_euks/new_hmm_results/abe/abe_94_cogs/"
+	workdir = "/Users/vl18625/work/euk/markers_euks/new_hmm_results/"
+	cog_dir = "/Users/vl18625/work/euk/markers_euks/new_hmm_results/cogs/"
+	a_dir = workdir + "archaea_hmm_hits/"
+	b_dir = workdir + "alpha_hmm_hits/"
+	c_dir = workdir + "cyano_hmm_hits/"
+	print ("Parsing arcog_cog")
+	arcog_to_cog = csv_to_dict_simple(arcog_cog_path)
+	print ("Parsing ABC hmm results")
+	ABC_hmm_dict = prepare_ABC_hmm_dict(a_dir, b_dir, c_dir)
+	print("Preparing best_ABC_hmm_dict")
+	best_ABC_hmm_dict = prepare_best_ABC_hmm_dict(ABC_hmm_dict)
+	print("Preparing euk_marker_dict")
+	euk_marker_dict = prepare_euk_marker_dict(best_ABC_hmm_dict, arcog_to_cog)
+	print("Preparing euk_seqid_dict")
+	euk_seqid_dict = make_euk_seqid_dict_many_hits(euk_marker_dict)
+	print("Preparing euk_seq_dict")
+	euk_seq_dict = prepare_euk_seq_dict(euk_seqid_dict,proteomes_dir)
+	print("Preparing markers_seq_dict")
+	markers_seq_dict = prepare_full_seq_dict_ABE(euk_seq_dict, cog_dir)
+	print("Writing results")
+	outdir = write_fastas(markers_seq_dict,outdir, marker_ext=".faa")
+	return outdir
+
 hmm_report_dir = "/Users/vl18625/work/euk/markers_euks/new_hmm_results/alpha_hmm_hits/"
 cog_dir = "/Users/vl18625/work/euk/markers_euks/new_hmm_results/alpha_cogs/"
 proteomes_dir = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_set_v2_21_03_23/"
 result_dir = "/Users/vl18625/work/euk/markers_euks/new_hmm_results/alpha_result_faa/"
-prepare_fastas(hmm_report_dir, proteomes_dir, cog_dir, result_dir)
+# prepare_fastas(hmm_report_dir, proteomes_dir, cog_dir, result_dir)
+
+
+
