@@ -393,15 +393,14 @@ def prepare_full_seq_dict_ABE(euk_seq_dict, cog_dir, cog_ext=".faa"):
 	return markers_seq_dict
 
 def prepare_ABE_fastas_many_hits():
-	outdir="/Users/vl18625/work/euk/markers_euks/new_hmm_results/abe/abe_94_results_many_hits/"
-	arcog_cog_path = "/Users/vl18625/work/euk/markers_euks/nina_markers/arCOG_COG.csv"
-	proteomes_dir = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_set_v2_21_03_23/"
-	ABE_markers_dir="/Users/vl18625/work/euk/markers_euks/new_hmm_results/abe/abe_94_cogs/"
+	outdir="/Users/vl18625/work/euk/markers_euks/new_hmm_results/merged_arcogs_result/"
 	workdir = "/Users/vl18625/work/euk/markers_euks/new_hmm_results/"
-	cog_dir = "/Users/vl18625/work/euk/markers_euks/new_hmm_results/cogs/"
+	cog_dir = "/Users/vl18625/work/euk/markers_euks/new_hmm_results/merged_arcogs/"
 	a_dir = workdir + "archaea_hmm_hits/"
 	b_dir = workdir + "alpha_hmm_hits/"
 	c_dir = workdir + "cyano_hmm_hits/"
+	arcog_cog_path = "/Users/vl18625/work/euk/markers_euks/nina_markers/arCOG_COG.csv"
+	proteomes_dir = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_set_v2_21_03_23/"
 	print ("Parsing arcog_cog")
 	arcog_to_cog = csv_to_dict_simple(arcog_cog_path)
 	print ("Parsing ABC hmm results")
@@ -420,11 +419,6 @@ def prepare_ABE_fastas_many_hits():
 	outdir = write_fastas(markers_seq_dict,outdir, marker_ext=".faa")
 	return outdir
 
-hmm_report_dir = "/Users/vl18625/work/euk/markers_euks/new_hmm_results/alpha_hmm_hits/"
-cog_dir = "/Users/vl18625/work/euk/markers_euks/new_hmm_results/alpha_cogs/"
-proteomes_dir = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_set_v2_21_03_23/"
-result_dir = "/Users/vl18625/work/euk/markers_euks/new_hmm_results/alpha_result_faa/"
-# prepare_fastas(hmm_report_dir, proteomes_dir, cog_dir, result_dir)
-
+prepare_ABE_fastas_many_hits()
 
 
