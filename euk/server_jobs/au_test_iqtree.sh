@@ -10,4 +10,4 @@
 
 msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/one_hit/final_68ae_filtered_concat/au_test_constraint_heimdall_lgg/68_final_ae.fasta"
 trees_file="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/one_hit/final_68ae_filtered_concat/au_test_constraint_heimdall_lgg/68_final_ae.trees"
-iqtree -s $msa -m LG+G -z $trees_file -T 10 -n 0 -zb 1000 -au
+iqtree2 -s $msa -m LG+G -z $trees_file -T 10 -n 0 -zb 1000 -au
