@@ -2,7 +2,7 @@
 #SBATCH --job-name=merged_arcogs_SGTs
 #SBATCH --output=/scratch/nenarokova/code/slurm_out/merged_arcogs_SGTs%A_%a.out
 #SBATCH --partition=high
-#SBATCH --time=7-12:00:00
+#SBATCH --time=99-99:00:00
 #SBATCH --array=1-2
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1

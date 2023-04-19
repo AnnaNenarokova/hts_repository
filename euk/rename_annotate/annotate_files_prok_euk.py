@@ -399,5 +399,7 @@ alignment_path="/Users/vl18625/work/euk/concat_trees/alignments/104_species_abce
 in_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/trees/68_final_ae_heimdall_constraint.tree"
 out_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/annotated_trees/68_final_ae_heimdall_constraint.tree"
 alignment_path="/Users/vl18625/work/euk/concat_trees/alignments/68_final_ae.fasta"
-write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=False,alignment_path=alignment_path)
+# write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=False,alignment_path=alignment_path)
 
+in_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/trees/COG0085.faa.treefile"
+out_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/annotated_trees/COG0085.faa.tree"
