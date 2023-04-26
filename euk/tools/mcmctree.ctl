@@ -1,5 +1,5 @@
 seed = -1
-seqfile = short_names_2cyanos.fasta
+seqfile = short_names_2cyanos_aln.phy
 treefile = short_names_tree_2cyanos_calibrated.phy
 mcmcfile = mcmc.txt
 outfile = out.txt
