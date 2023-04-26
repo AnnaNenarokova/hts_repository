@@ -15,7 +15,7 @@ model = 2       * models for AAs or codon-translated AAs:
                 *     6:FromCodon, 8:REVaa_0, 9:REVaa(nr=189)
 alpha = 0.5     * alpha for gamma rates at sites
 ncatG = 5       * No. categories in discrete gamma
-aaRatefile = /Users/vl18625/work/tools/paml4.9i/dat/lg.dat   * Path to the file with the LG matrix
+aaRatefile = /scratch/nenarokova/tools/paml4.9i/dat/lg.dat   * Path to the file with the LG matrix
 
 cleandata = 0    * remove sites with ambiguity data (1:yes, 0:no)?
 
@@ -28,5 +28,3 @@ print = 1       * 0: no mcmc sample; 1: everything except branch rates 2: everyt
 burnin = 100000
 sampfreq = 1000 
 nsample = 20000
-
-method = 1
