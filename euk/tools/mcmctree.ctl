@@ -1,8 +1,8 @@
 seed = -1
-seqfile = /scratch/nenarokova/euk/toyset_benoit/mcmctree_phylip/short_names_2cyanos.fasta
-treefile = /mnt/alvarium2pool/scratch/nenarokova/euk/toyset_benoit/mcmctree_phylip/short_names_tree_2cyanos_calibrated.phy
-mcmcfile = /scratch/nenarokova/euk/toyset_benoit/mcmctree_phylip/mcmc.txt
-outfile = /scratch/nenarokova/euk/toyset_benoit/mcmctree_phylip/out.txt
+seqfile = short_names_2cyanos.fasta
+treefile = short_names_tree_2cyanos_calibrated.phy
+mcmcfile = mcmc.txt
+outfile = out.txt
 
 ndata = 1
 seqtype = 2    * 0: nucleotides; 1:codons; 2:AAs
