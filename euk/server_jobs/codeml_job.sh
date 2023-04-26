@@ -13,4 +13,6 @@ control_file="/mnt/alvarium2pool/scratch/nenarokova/euk/toyset_benoit/mcmctree_m
 bin_path="/scratch/nenarokova/tools/paml4.9i/src/"
 PATH=$PATH:$bin_path
 
+cd $workdir
+
 codeml $control_file
