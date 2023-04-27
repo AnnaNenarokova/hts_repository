@@ -19,6 +19,6 @@ def prepare_euk_info(fasta_folder):
             annotation_dict[prot_id]= annotation
     return annotation_dict
 
-fasta_folder="/Users/anna/work/euk_local/uniprot_proteomes/original_fastas/"
+fasta_folder="/Users/anna/work/euk_local/eukprot_proteomes/original_fastas/"
 
 annotation_dict = prepare_euk_info(fasta_folder)

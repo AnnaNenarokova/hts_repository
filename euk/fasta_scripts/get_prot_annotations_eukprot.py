@@ -7,11 +7,12 @@ def listdir_nohidden(path):
 		if not f.startswith('.'):
 			yield f
 
-def shorten_annotation(description, protid_delimiter="-"):
+def shorten_annotation(record, protid_delimiter="-"):
+	description = record.description
 	split_description = description.split(" ")
 	prot_id = split_description[0]
 	prot_id = prot_id.replace("_",protid_delimiter)
-	id = split_description[2]
+	id = record.id
 	split_id = id.split("_")
 	species = " ".join(split_id[1:-1])
 
@@ -39,7 +40,7 @@ def read_prot_annotations(fasta_path):
 	i = 0
 	for record in SeqIO.parse(fasta_path, "fasta"):
 		description = record.description
-		short_annotation = shorten_annotation(description)
+		short_annotation = shorten_annotation(record)
 		protid_dict[record.id] = short_annotation
 	return protid_dict
 

@@ -7,7 +7,7 @@ sys.path.insert(0, "/Users/anna/work/code/ngs/")
 sys.path.insert(0, "/user/home/vl18625/code/ngs")
 sys.path.insert(0, "/Users/vl18625/work/code/ngs/")
 from py_scripts.helpers.parse_csv import *
-from euk.fasta_scripts.get_prot_annotations_uniprot import *
+from euk.fasta_scripts.get_prot_annotations_eukprot import *
 
 def read_list(list_path):
     result_list = []
@@ -31,7 +31,7 @@ def get_msa_len_dict(fasta_path):
         msa_percent_dict[seqid] = msa_percent
     return msa_percent_dict
 
-def prepare_euk_info_uniprot(fasta_folder):
+def prepare_euk_info_eukprot(fasta_folder):
     annotation_dict = {}
     for filename in listdir_nohidden(fasta_folder):
         print (filename)
@@ -201,7 +201,7 @@ def annotate_trees_nina(in_treedir, out_treedir, prok_info_path, euk_info_path):
     for tree_file in listdir_nohidden(in_treedir):
         print (tree_file)
         tree_path = in_treedir + tree_file 
-        new_tree_path = out_treedir + tree_file + ".tree"
+        new_tree_path = out_treedir + tree_fiåçle + ".tree"
         try: 
             tree = Tree(tree_path)
             new_tree = annotate_tree_nina(tree, prok_info_dict, euk_info_dict)
@@ -277,13 +277,14 @@ def annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, protein_ids=
     return 0
 
 def annotate_gene_tree(tree, tax_info_dict, annotation_dict, euk_delimiter="_"):
-    euk_regex = "^EP\d+" + euk_delimiter + "P\d+"
+    euk_regex = "^EP\d+" + euk_delimiter + "\S+"
     delimiter = "-"
     for leaf in tree.iter_leaves(): 
         old_name = leaf.name
         if re.match(euk_regex, old_name):
             current_delimiter = euk_delimiter
-            prot_id = delimiter.join(old_name.split(current_delimiter))
+            # prot_id = delimiter.join(old_name.split(current_delimiter))
+            prot_id = old_name
             if prot_id in annotation_dict.keys():
                 annotation = annotation_dict[prot_id]
             else:
@@ -385,11 +386,13 @@ def write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxon
     return out_tree_path
 
 tax_info_path="/Users/vl18625/work/euk/protein_sets/taxa_annotations_new.tsv"
-prot_dir = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_proteome_dataset/"
-in_treedir="/Users/vl18625/work/euk/concat_trees/other_trees/trees/"
-out_treedir="/Users/vl18625/work/euk/concat_trees/other_trees/trees_annotated/"
+prot_dir = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_set_v2_21_03_23/"
+in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/many_hits/treefiles/"
+out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/many_hits/treefiles_annotated/"
 
-# annotate_trees_tax_info(in_treedir, out_treedir, tax_info_path, abce=False, protein_ids=False, euk_delimiter="-", source_euk_delimiter=False)
+annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path, euk_delimiter="_", abce=False)
+
+
 
 in_tree_path="/Users/vl18625/work/euk/concat_trees/abce/trees/104species_94markers_abce.fasta.treefile"
 out_tree_path="/Users/vl18625/work/euk/concat_trees/abce/annotated_trees/104species_94markers_abce.fasta.treefile"

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cog_hmm_dir="/Users/anna/work/euk_local/ed/ed_markers/hmm_filtered/"
-prot_dir="/Users/anna/work/euk_local/uniprot_proteomes/renamed_fastas/"
+prot_dir="/Users/anna/work/euk_local/eukprot_proteomes/renamed_fastas/"
 out_dir="/Users/anna/work/euk_local/ed/ed_markers/hmm_results_filt/"
 
 cd $prot_dir

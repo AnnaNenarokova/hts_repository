@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cog_dir="/Users/anna/work/euk_local/ed_markers_untrimmed/"
-prot_dir="/Users/anna/work/euk_local/uniprot_proteomes/"
+prot_dir="/Users/anna/work/euk_local/eukprot_proteomes/"
 out_dir="/Users/anna/work/euk_local/hmm_results_ed_cogs/"
 
 cd $prot_dir
