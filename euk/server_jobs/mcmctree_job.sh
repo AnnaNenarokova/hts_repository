@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=mcmctree2
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/mcmctree2_%A.out
+#SBATCH --job-name=mcmctree
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/mcmctree_%A.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
 #SBATCH --nodes=1

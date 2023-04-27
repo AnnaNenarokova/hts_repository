@@ -1,6 +1,6 @@
 seed = -1
-seqfile = short_names_2cyanos_aln.phy
-treefile = short_names_tree_2cyanos_calibrated.phy
+seqfile = aln_2cyanos.phy
+treefile = tree_2cyanos_calibrated.phy
 mcmcfile = mcmc.txt
 outfile = out.txt
 
@@ -15,7 +15,7 @@ model = 2       * models for AAs or codon-translated AAs:
                 *     6:FromCodon, 8:REVaa_0, 9:REVaa(nr=189)
 alpha = 0.5     * alpha for gamma rates at sites
 ncatG = 5       * No. categories in discrete gamma
-aaRatefile = /scratch/nenarokova/tools/paml4.9i/dat/lg.dat   * Path to the file with the LG matrix
+aaRatefile = /mnt/alvarium2pool/scratch/nenarokova/tools/paml4.9i/dat/lg.dat   * Path to the file with the LG matrix
 
 cleandata = 0    * remove sites with ambiguity data (1:yes, 0:no)?
 
