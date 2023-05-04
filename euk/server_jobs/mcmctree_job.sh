@@ -8,7 +8,7 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=50G
 
-workdir="/scratch/nenarokova/euk/toyset_benoit/mcmctree_phylip_method1/"
+workdir="/scratch/nenarokova/euk/toyset_benoit/mcmctree_phylip_method1/mcmctree/"
 
 control_file=$workdir"mcmctree.ctl"
 bin_path="/scratch/nenarokova/tools/paml4.9i/src/"
