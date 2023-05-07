@@ -10,7 +10,7 @@
 ##SBATCH --nodes=1
 ## --cpu_bind=v,threads
 
-workdir="/scratch/nenarokova/euk/toyset_benoit/mcmctree/chain"${SLURM_ARRAY_TASK_ID}"/"
+workdir="/scratch/nenarokova/euk/toyset_benoit/mcmctree_long/chain"${SLURM_ARRAY_TASK_ID}"/"
 
 echo $workdir
 
