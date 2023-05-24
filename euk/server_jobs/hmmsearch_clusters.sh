@@ -21,6 +21,6 @@ cd $subject_dir
 subject=$(ls *.faa | sed -n ${SLURM_ARRAY_TASK_ID}p)
 
 subject_path=$subject_dir$subject
-result=$hmm_results_dir$subject$fasta".txt"
+result=$hmm_results_dir$subject".txt"
 echo $result
-hmmsearch -E $e_threshold --tblout $result $hmm_file $subject_path
+$hmmsearch -E $e_threshold --tblout $result $hmm_file $subject_path
