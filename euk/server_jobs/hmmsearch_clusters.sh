@@ -18,7 +18,7 @@ hmm_results_dir="/scratch/nenarokova/euk/markers/hmm_results/euk_hmm_clusters_ni
 subject_dir="/scratch/nenarokova/euk/proteomes/anna_eukprot3_set_v2_21_03_23/"
 
 cd $subject_dir
-subject=$(ls *.faa | sed -n ${SLURM_ARRAY_TASK_ID}p)
+subject=$(ls *.fasta | sed -n ${SLURM_ARRAY_TASK_ID}p)
 
 subject_path=$subject_dir$subject
 result=$hmm_results_dir$subject".txt"
