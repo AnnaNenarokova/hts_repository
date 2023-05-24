@@ -13,7 +13,7 @@
 
 e_threshold="0.00001"
 hmmsearch="/mnt/alvarium2pool/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmsearch"
-hmmfile="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/hmm_results/euk_hmm_clusters_nina/Euk_broccoli_clusters_v1.hmm"
+hmm_file="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/hmm_results/euk_hmm_clusters_nina/Euk_broccoli_clusters_v1.hmm"
 hmm_results_dir="/scratch/nenarokova/euk/markers/hmm_results/euk_hmm_clusters_nina/hmm_results/"
 subject_dir="/scratch/nenarokova/euk/proteomes/anna_eukprot3_set_v2_21_03_23/"
 
@@ -22,7 +22,9 @@ subject=$(ls *.fasta | sed -n ${SLURM_ARRAY_TASK_ID}p)
 
 subject_path=$subject_dir$subject
 result=$hmm_results_dir$subject".txt"
+
 echo $result
 echo $hmm_file
 echo $subject_path
+
 $hmmsearch -E $e_threshold --tblout $result $hmm_file $subject_path
