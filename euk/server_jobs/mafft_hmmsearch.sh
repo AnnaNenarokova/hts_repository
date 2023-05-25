@@ -3,17 +3,17 @@
 #SBATCH --output=/scratch/nenarokova/code/slurm_out/hmmsearch_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
-#SBATCH --array=1-11
+#SBATCH --array=1-17
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem-per-cpu=10GB
+#SBATCH --mem-per-cpu=5GB
 ##SBATCH --nodes=1
 ## --cpu_bind=v,threads
 
 hmmbuild="/mnt/alvarium2pool/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmbuild"
 hmmsearch="/mnt/alvarium2pool/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmsearch"
 
-workdir="/scratch/nenarokova/euk/hmm_results/meiosis/meiotic_genes_eggnog/"
+workdir="/scratch/nenarokova/euk/hmm_results/meiosis/kogs/"
 fasta_dir=$workdir"faa/"
 msa_dir=$workdir"msa/"
 hmm_dir=$workdir"hmm/"
