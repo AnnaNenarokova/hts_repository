@@ -18,7 +18,7 @@ hmm_results_dir="/scratch/nenarokova/euk/hmm_results/eukprot3_v3_21_06_23_abc/ar
 
 cd $hmm_dir
 hmm_file=$(ls *.hmm | sed -n ${SLURM_ARRAY_TASK_ID}p)
-
+hmm_path=$hmm_dir$hmm_file
 echo $hmm_file
 
 e_threshold="0.0000001"
@@ -29,5 +29,5 @@ do
 	subject_path=$subject_dir$subject
 	result=$hmm_results_dir$subject$fasta".txt"
 	echo $result
-	$hmmsearch -E $e_threshold --tblout $result $hmm_file $subject_path
+	$hmmsearch -E $e_threshold --tblout $result $hmm_path $subject_path
 done
