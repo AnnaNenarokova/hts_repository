@@ -17,13 +17,10 @@ hmm_dir="/scratch/nenarokova/euk/markers/archaea/hmm/"
 subject_dir="/scratch/nenarokova/euk/proteomes/anna_eukprot3_v3_21_06_23/"
 hmm_results_dir="/scratch/nenarokova/euk/hmm_results/eukprot3_v3_21_06_23_abc/archaea/"
 
-cd $fasta_dir
-fasta=$(ls *.faa | sed -n ${SLURM_ARRAY_TASK_ID}p)
+cd $hmm_dir
+hmm_file=$(ls *.hmm | sed -n ${SLURM_ARRAY_TASK_ID}p)
 
-echo $fasta
-
-msa=$msa_dir$fasta
-hmm_file=$hmm_dir$fasta".hmm"
+echo $hmm_file
 
 e_threshold="0.0000001"
 
