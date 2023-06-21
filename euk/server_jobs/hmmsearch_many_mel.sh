@@ -12,10 +12,10 @@
 
 hmmsearch="/mnt/alvarium2pool/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmsearch"
 
-hmm_dir="/scratch/nenarokova/euk/markers/archaea/hmm/"
+hmm_dir="/scratch/nenarokova/euk/markers/common_results/mono_euk_sets/set3/hmm/"
 
-subject_dir="/scratch/nenarokova/euk/proteomes/anna_eukprot3_v3_21_06_23/"
-hmm_results_dir="/scratch/nenarokova/euk/hmm_results/eukprot3_v3_21_06_23_abc/archaea/"
+subject_dir=""
+hmm_results_dir="/scratch/nenarokova/euk/markers/ae/one_hit/hmmresults_monoeuks_10_06/"
 
 cd $fasta_dir
 fasta=$(ls *.faa | sed -n ${SLURM_ARRAY_TASK_ID}p)
@@ -33,5 +33,5 @@ do
 	subject_path=$subject_dir$subject
 	result=$hmm_results_dir$subject$fasta".txt"
 	echo $result
-	$hmmsearch -E $e_threshold --tblout $result $hmm_file $subject_path
+	hmmsearch -E $e_threshold --tblout $result $hmm_file $subject_path
 done
