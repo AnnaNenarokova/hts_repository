@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=hmmsearch
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/hmmsearch_%A_%a.out
+#SBATCH --job-name=hmm_arch
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/hmm_arch_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
 #SBATCH --array=1-85
