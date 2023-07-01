@@ -1,9 +1,9 @@
 #!/bin/bash
-#SBATCH --job-name=archaea_hmm
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/archaea_hmm_%A_%a.out
+#SBATCH --job-name=alpha_hmm
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/alpha_hmm_%A_%a.out
 #SBATCH --partition=med
 #SBATCH --time=7-12:00:00
-#SBATCH --array=1-85
+#SBATCH --array=1-114
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=1GB
@@ -12,9 +12,9 @@
 
 hmmsearch="/mnt/alvarium2pool/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmsearch"
 
-hmm_dir="/scratch/nenarokova/euk/markers/archaea/hmm/"
 subject_dir="/scratch/nenarokova/euk/proteomes/anna_eukprot3_v2_21_06_23/"
-hmm_results_dir="/scratch/nenarokova/euk/hmm_results/eukprot3_v3_21_06_23_abc/archaea/"
+hmm_dir="/scratch/nenarokova/euk/markers/bacteria/alphaproteo_markers/hmm/"
+hmm_results_dir="/scratch/nenarokova/euk/hmm_results/eukprot3_v3_21_06_23_abc/alpha/"
 
 cd $hmm_dir
 hmm_file=$(ls *.hmm | sed -n ${SLURM_ARRAY_TASK_ID}p)
