@@ -62,7 +62,7 @@ def prepare_hmm_dict(hmm_report_dir, hmm_ext=".txt", proteome_ext=".fasta", max_
 			hmm_dict[proteome_file][cog_file][hmm_result["sseqid"]] = ""
 	return hmm_dict
 
-def prepare_fastas(hmm_report_dir, proteomes_dir, cog_dir, result_dir, hmm_ext=".hmm", proteome_ext=".fasta", n_best=100, max_evalue=0.0000001):
+def prepare_fastas(hmm_report_dir, proteomes_dir, cog_dir, result_dir, hmm_ext=".hmm", proteome_ext=".fasta", n_best=1, max_evalue=0.0000001):
 	print("Parsing hmm_reports")
 	hmm_dict = prepare_hmm_dict(hmm_report_dir, n_best=n_best, max_evalue=max_evalue)
 	print("Parsing proteomes sequences")
@@ -291,7 +291,7 @@ def write_fastas(markers_seq_dict, outdir,marker_ext=".faa"):
 		SeqIO.write(records, outfasta, "fasta")
 	return outdir
 
-def prepare_ABE_fastas_one_hit():
+def prepare_ABE_fastas_one_hit_old():
 	workdir = "/Users/vl18625/work/euk/markers_euks/hmm_results/"
 	a_dir = workdir + "ae_hmm_results/"
 	b_dir = workdir + "alpha_hmm_results/"
@@ -419,6 +419,10 @@ def prepare_ABE_fastas_many_hits():
 	outdir = write_fastas(markers_seq_dict,outdir, marker_ext=".faa")
 	return outdir
 
-prepare_ABE_fastas_many_hits()
 
+hmm_report_dir = "/scratch/nenarokova/euk/hmm_results/eukprot3_v3_21_06_23_abc/archaea/"
+proteomes_dir = "/scratch/nenarokova/euk/proteomes/anna_eukprot3_v2_21_06_23/"
+cog_dir = "/scratch/nenarokova/euk/markers/archaea/faa/"
+result_dir = "/scratch/nenarokova/euk/markers/ae/one_hit/01_07_23/faa/"
+prepare_fastas(hmm_report_dir, proteomes_dir, cog_dir, result_dir, hmm_ext=".hmm", proteome_ext=".fasta", n_best=1, max_evalue=0.0000001)
 
