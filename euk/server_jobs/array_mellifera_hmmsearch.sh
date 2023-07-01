@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=alpha_hmm
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/alpha_hmm_%A_%a.out
+#SBATCH --job-name=cyano_hmm
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/cyano_hmm_%A_%a.out
 #SBATCH --partition=med
 #SBATCH --time=7-12:00:00
 #SBATCH --array=1-102
