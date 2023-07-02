@@ -42,13 +42,14 @@ def prepare_hmm_dict(hmm_report_dir, hmm_ext=".txt", proteome_ext=".fasta", max_
 	for hmm_report in listdir_nohidden(hmm_report_dir):
 		hmm_report_name_split = hmm_report.split(proteome_ext)
 		proteome_file = hmm_report_name_split[0] + proteome_ext
+		print (proteome_file)
 		hmm_file = hmm_report_name_split[1].split(hmm_ext)[0]
 		if monobranch:
 			hmm_file_split = hmm_file.split("_")
 			cog_file = hmm_file_split[0] + ("_") + hmm_file_split[1] + ".faa"
 		else:
 			cog_file = hmm_file + ".faa"
-
+		print (cog_file)
 		if proteome_file not in hmm_dict:
 			hmm_dict[proteome_file] = {}
 		if cog_file not in hmm_dict[proteome_file].keys():
@@ -65,7 +66,7 @@ def prepare_hmm_dict(hmm_report_dir, hmm_ext=".txt", proteome_ext=".fasta", max_
 
 def prepare_fastas(hmm_report_dir, proteomes_dir, cog_dir, result_dir, hmm_ext=".hmm", proteome_ext=".fasta", n_best=1, max_evalue=0.0000001):
 	print("Parsing hmm_reports")
-	hmm_dict = prepare_hmm_dict(hmm_report_dir, n_best=n_best, max_evalue=max_evalue)
+	hmm_dict = prepare_hmm_dict(hmm_report_dir, n_best=n_best, max_evalue=max_evalue, hmm_ext=hmm_ext)
 	print("Parsing proteomes sequences")
 	for proteome in listdir_nohidden(proteomes_dir):
 		proteome_dict = hmm_dict[proteome]
