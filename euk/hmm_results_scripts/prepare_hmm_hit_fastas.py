@@ -47,7 +47,8 @@ def prepare_hmm_dict(hmm_report_dir, hmm_ext=".txt", proteome_ext=".fasta", max_
 			hmm_file_split = hmm_file.split("_")
 			cog_file = hmm_file_split[0] + ("_") + hmm_file_split[1] + ".faa"
 		else:
-			cog_file = hmm_file
+			cog_file = hmm_file + ".faa"
+
 		if proteome_file not in hmm_dict:
 			hmm_dict[proteome_file] = {}
 		if cog_file not in hmm_dict[proteome_file].keys():
