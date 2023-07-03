@@ -1,12 +1,12 @@
 #!/bin/bash
-#SBATCH --job-name=BE_fastas
+#SBATCH --job-name=CE_fastas
 #SBATCH --partition=high
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=1
 #SBATCH --time=14-00:00:00
 #SBATCH --mem=50G
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/BE_fastas_%A_%a.out
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/CE_fastas_%A_%a.out
 
 cd /scratch/nenarokova/code/ngs/euk/hmm_results_scripts/
 

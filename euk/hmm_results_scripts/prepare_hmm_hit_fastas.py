@@ -422,9 +422,9 @@ def prepare_ABE_fastas_many_hits():
 	return outdir
 
 
-hmm_report_dir = "/scratch/nenarokova/euk/hmm_results/eukprot3_v2_21_06_23_abc/alpha/"
+hmm_report_dir = "/scratch/nenarokova/euk/hmm_results/eukprot3_v2_21_06_23_abc/cyano/"
 proteomes_dir = "/scratch/nenarokova/euk/proteomes/anna_eukprot3_v2_21_06_23/"
-cog_dir = "/scratch/nenarokova/euk/markers/bacteria/alphaproteo_markers/faa/"
+cog_dir = "/scratch/nenarokova/euk/markers/bacteria/cyano_markers/faa/"
 result_dir = "/scratch/nenarokova/euk/markers/be/one_hit/01_07_23/cyano/faa/"
 prepare_fastas(hmm_report_dir, proteomes_dir, cog_dir, result_dir, hmm_ext=".hmm", proteome_ext=".fasta", n_best=1, max_evalue=0.0000001)
 
