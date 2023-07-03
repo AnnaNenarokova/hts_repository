@@ -8,6 +8,6 @@
 #SBATCH --mem=50G
 #SBATCH --output=/scratch/nenarokova/code/slurm_out/AE_fastas_%A_%a.out
 
-cd /scratch/nenarokova/code/ngs/euk/hmm_results_scripts
+cd /scratch/nenarokova/code/ngs/euk/hmm_results_scripts/
 
 python3 prepare_hmm_hit_fastas.py
