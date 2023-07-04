@@ -389,10 +389,7 @@ tax_info_path="/Users/vl18625/work/euk/protein_sets/taxa_annotations_new.tsv"
 prot_dir = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_set_v2_21_03_23/"
 in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/many_hits/treefiles/"
 out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/abe/many_hits/treefiles_annotated/"
-
-annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path, euk_delimiter="_", abce=False)
-
-
+# annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path, euk_delimiter="_", abce=False)
 
 in_tree_path="/Users/vl18625/work/euk/concat_trees/abce/trees/104species_94markers_abce.fasta.treefile"
 out_tree_path="/Users/vl18625/work/euk/concat_trees/abce/annotated_trees/104species_94markers_abce.fasta.treefile"
@@ -404,5 +401,7 @@ out_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/annotated_trees/
 alignment_path="/Users/vl18625/work/euk/concat_trees/alignments/68_final_ae.fasta"
 # write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=False,alignment_path=alignment_path)
 
-in_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/trees/COG0085.faa.treefile"
-out_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/annotated_trees/COG0085.faa.tree"
+
+in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/merged_arCOGs/treefiles/"
+out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/merged_arCOGs/annotated_treefiles/"
+annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path, euk_delimiter="_", abce=False)
