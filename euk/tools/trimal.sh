@@ -1,8 +1,8 @@
 #!/bin/bash
 trimal="/Users/vl18625/work/tools/trimAl/source/trimal"
 
-al_dir="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/final_ae_sets/final_68ae_all_filtered/linsi_bmge/"
-cleaned_dir="/Users/vl18625/work/euk/markers_euks/nina_markers/ae/final_ae_sets/final_68ae_all_filtered/linsi_bmge_trimal85/"
+al_dir="/Users/vl18625/work/euk/markers_euks/nina_markers/merged_arCOGs/linsi_bmge/"
+cleaned_dir="/Users/vl18625/work/euk/markers_euks/nina_markers/merged_arCOGs/linsi_bmge_trimal_85/"
 
 mkdir $cleaned_dir
 cd $al_dir
