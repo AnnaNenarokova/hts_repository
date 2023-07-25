@@ -22,7 +22,7 @@ hmm_result_dir=$workdir"hmm_results/"
 subject_path="/mnt/alvarium2pool/scratch/nenarokova/euk/hmm_results/meiosis/loki_os.faa"
 
 cd $fasta_dir
-fasta=$(ls *.faa | sed -n ${SLURM_ARRAY_TASK_ID}p)
+fasta=$(ls *.fasta | sed -n ${SLURM_ARRAY_TASK_ID}p)
 
 echo $fasta
 
