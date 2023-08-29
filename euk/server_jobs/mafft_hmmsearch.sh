@@ -3,7 +3,7 @@
 #SBATCH --output=/scratch/nenarokova/code/slurm_out/hmmsearch_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
-#SBATCH --array=1-3
+#SBATCH --array=1-1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=5GB
@@ -13,7 +13,7 @@
 hmmbuild="/mnt/alvarium2pool/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmbuild"
 hmmsearch="/mnt/alvarium2pool/scratch/nenarokova/tools/hmmer-3.3.2/bin/hmmsearch"
 
-workdir="/scratch/nenarokova/euk/hmm_results/meiosis/fsx1/"
+workdir="/scratch/nenarokova/euk/hmm_results/meiosis/snare/"
 fasta_dir=$workdir"faa/"
 msa_dir=$workdir"msa/"
 hmm_dir=$workdir"hmm/"
