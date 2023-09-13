@@ -9,5 +9,5 @@
 #SBATCH --mem=150G
 
 msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/abe/one_hit/old_data/only_euks/110euks_132markers_concat/110euks_132markers_concat.fasta"
-tree="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/abe/one_hit/old_data/only_euks/110euks_132markers_concat/110euks_manual.tree"
+tree="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/abe/one_hit/old_data/only_euks/110euks_132markers_concat/110euks_manual_ids.tree"
 iqtree2 -s $msa -te $tree -m C60+LG+G -T AUTO --threads-max 20
