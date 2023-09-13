@@ -396,12 +396,12 @@ out_tree_path="/Users/vl18625/work/euk/concat_trees/abce/annotated_trees/104spec
 alignment_path="/Users/vl18625/work/euk/concat_trees/alignments/104_species_abce_concat.fasta"
 # write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=True,alignment_path=alignment_path)
 
-in_tree_path="/Users/vl18625/work/euk/concat_trees/abAE/trees/lgg_87_markers_ABaE.treefile"
-out_tree_path="/Users/vl18625/work/euk/concat_trees/abAE/annotated_trees/lgg_87_markers_ABaE.treefile"
+in_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/manual_euk_trees/117euks_132markers_concat.fasta.treefile"
+out_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/manual_euk_trees/117euks_132markers_concat_annotated.tree"
 
-# write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=False)
+write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=False)
 
 
 in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/01_07_23/cyano/best_model_treefiles/"
 out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/01_07_23/cyano/best_model_treefiles_annotated/"
-annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path, euk_delimiter="_", abce=False)
+# annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path, euk_delimiter="_", abce=False)
