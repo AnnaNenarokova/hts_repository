@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=ae_sgts_new
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/ab_sgts_new_%A_%a.out
+#SBATCH --job-name=ab_no_idunn_sgts_new
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/ab_no_idunn_sgts_new_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=99-99:00:00
 #SBATCH --array=1-94
