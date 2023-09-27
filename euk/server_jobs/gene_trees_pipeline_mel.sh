@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=ab_no_idunn_sgts_new
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/ab_no_idunn_sgts_new_%A_%a.out
+#SBATCH --job-name=ab_idunn_sgts_new
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/ab_idunn_sgts_new_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=99-99:00:00
 #SBATCH --array=1-94
@@ -10,7 +10,7 @@
 ##SBATCH --nodes=1
 ## --cpu_bind=v,threads
 
-workdir="/scratch/nenarokova/euk/markers/ab/ab_94markers/no_idunn/"
+workdir="/scratch/nenarokova/euk/markers/ab/ab_94markers/with_idunn/"
 fasta_dir=$workdir"faa/"
 
 linsi_dir=$workdir"linsi/"
