@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-import random
 import ete3
 
 def make_random_subset(species_list, subset_size):
