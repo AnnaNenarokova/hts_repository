@@ -18,13 +18,13 @@ def rename_fasta(infasta_path, outfasta_path, delimiter="_"):
 	SeqIO.write(out_records, outfasta_path, "fasta")
 	return outfasta_path
 
-def rename_fastas(indir, outdir):
+def rename_fastas(indir, outdir, delimiter="_"):
 	for fasta_file in listdir_nohidden(indir):
 		infasta_path = indir + fasta_file
 		outfasta_path = outdir + fasta_file
-		rename_fasta(infasta_path, outfasta_path)
+		rename_fasta(infasta_path, outfasta_path, delimiter=delimiter)
 	return outdir
 
-indir="/Users/vl18625/work/haicai/input_alignments/"
-outdir="/Users/vl18625/work/haicai/alignments/"
-rename_fastas(indir, outdir)
+indir="/Users/vl18625/work/euk/markers_euks/nina_markers/old_data/abe/94_markers/linsi_bmge/"
+outdir="/Users/vl18625/work/euk/markers_euks/nina_markers/old_data/abe/94_markers/renamed_linsi_bmge/"
+rename_fastas(indir, outdir, delimiter="-")
