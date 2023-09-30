@@ -19,7 +19,7 @@ Skills
 -----
 
 * Proficient in operating Unix-based workstations and HPC clusters
-* Programming: scripting (Bash, Python, R), creating and managing pipelines; code review and modification (C, C++, JavaScript etc.)
+* Programming: scripting (Bash, Python), creating and managing pipelines; code review and modification (R, C, C++, JavaScript etc.)
 * Preparing of raw short and long NGS reads: debarcoding, trimming, merging, filtering etc.
 * Genome (metagenome) and transcriptome (metatranscriptome) assembly, filtering, decontamination
 * Read mapping and polymorphism analysis
@@ -37,7 +37,8 @@ Academic career
 2021/9-present
 :        **Postdoctoral researcher**; University of Bristol, United Kingdom
     
-    * On the Moore-Simons Project "Resolving the prokaryote-to-eukaryote transition using new phylogenomic models of endosymbiosis"
+    * Involved in the Moore–Simons Project on the Origin of the Eukaryotic Cell "Resolving the prokaryote-to-eukaryote transition using new phylogenomic models of endosymbiosis".
+    Advisors - Dr. Tom Williams <tom.a.williams@bristol.ac.uk>, Prof. Philip Donoghue <Phil.Donoghue@bristol.ac.uk>
 
 2020/3 - 2021/9
 :       **Postdoctoral researcher**; University of South Bohemia, České Budějovice, Czech Republic
@@ -59,7 +60,6 @@ Professional Experience
 
 2021/9-present
 :       **Postdoctoral researcher**; University of Bristol, United Kingdom
-
         **Advisors: Drs. Tom Williams, Davide Pisani and Philip Donoghue**
         * Working on identifying the prokaryotic origins of eukaryotic genes
         * Working on the molecular clock analyses for the tree of life
@@ -90,9 +90,9 @@ Professional Experience
 :       **Ph.D. Researcher**; Institute of Parasitology, České Budějovice, Czech Republic
         **Advisor: Dr. Julius Lukeš**
         * [Discovered](https://www.nature.com/articles/s41586-022-05584-2) the effect of Trp-tRNA mutations that was experimentally proven in trypanosomatids and yeast
-        * Assembled and analyzed the genome of *Blastocrithidia nonstop*
-        * Designed[an algorithm for structural genome annotation with ambiguous stop codons](https://zenodo.org/record/7116082) and supervised the software developement
-        * Coordinated the work of experimental biologists and bioinformaticians 
+        * [Assembled and analyzed](https://static-content.springer.com/esm/art%3A10.1038%2Fs41586-022-05584-2/MediaObjects/41586_2022_5584_MOESM1_ESM.pdf) the genome of *Blastocrithidia nonstop*, [proposed](https://static-content.springer.com/esm/art%3A10.1038%2Fs41586-022-05584-2/MediaObjects/41586_2022_5584_MOESM1_ESM.pdf) an evolutionary scenario explaining its unique features
+        * Designed [an algorithm for structural genome annotation with ambiguous stop codons](https://zenodo.org/record/7116082) and supervised the software developement
+        * Coordinated the work of experimental biologists and bioinformaticians
         * [Discovered](https://mbio.asm.org/content/10/4/e01541-19.abstract) the correlation between the presence of the C-NHEJ DNA repair pathway in different groups of eukaryotes and their genome features
         * Participated in [the analysis](https://journals.plos.org/plospathogens/article?id=10.1371/journal.ppat.1006679) of the mitochondrial proteome of *T. brucei*
         * Assembled and annotated [the genome](https://journals.asm.org/doi/full/10.1128/mbio.01606-21) of trypanosomatid *Novymonas esmeraldas* and its [bacterial endosymbiont](https://www.frontiersin.org/articles/10.3389/fmicb.2017.01940/full) *Ca.* Pandoraea novymonadis
@@ -121,7 +121,7 @@ Publications
 
 * Donoghue P.C.J., Kay C., Spang A., Szöllősi G., **Nenarokova A.**, Moody E.R.R., Pisani D., Williams T.A. *Curr Biol.* 2023 Sep 11;33(17):R919-R929. Defining eukaryotes to dissect eukaryogenesis. [doi.org:10.1016/j.cub.2023.07.048](https://doi.org/10.1016/j.cub.2023.07.048)
 * Valach M., Moreira S., Petitjean C., Benz A., Butenko A., Flegontova O., **Nenarokova A.**, Prokopchuk G., Batstone T., Lapébie P., Lemogo L., Sarrasin M., Stretenowich P., Tripathi P., Yazaki E., Nara T., Henrissat B.,Lang B.F., Gray M.W., Williams T.A., Lukeš J., Burger G. Recent expansion of metabolic versatility in *Diplonema papillatum*, the model species of a highly speciose group of marine eukaryotes. *BMC Biol.* 2023 May 4;21(1):99. [doi.org:10.1186/s12915-023-01563-9](https://doi.org/10.1186/s12915-023-01563-9)
-Kachale A., Pavlíková Z., **Nenarokova A.** (**shared first co-authorship**), Roithová A., Durante I.M., Miletínová P., Záhonová K., Nenarokov S., Votýpka J., Horáková E., Ross R.L., Yurchenko V., Beznosková P., Paris Z., Valášek L.S., Lukeš J. Short tRNA anticodon stem and mutant eRF1 allow stop codon reassignment. *Nature* 2023 Jan;613(7945):751-758. [doi.org:10.1038/s41586-022-05584-2](https://doi.org/10.1038/s41586-022-05584-2) **Journal cover**
+* Kachale A., Pavlíková Z., **Nenarokova A.** (**shared first co-authorship**), Roithová A., Durante I.M., Miletínová P., Záhonová K., Nenarokov S., Votýpka J., Horáková E., Ross R.L., Yurchenko V., Beznosková P., Paris Z., Valášek L.S., Lukeš J. Short tRNA anticodon stem and mutant eRF1 allow stop codon reassignment. *Nature* 2023 Jan;613(7945):751-758. [doi.org:10.1038/s41586-022-05584-2](https://doi.org/10.1038/s41586-022-05584-2) **Journal cover**
 * Paris Z., Svobodová M., Kachale A., Horáková E., **Nenarokova A.**, Lukeš J., 2021. A mitochondrial cytidine deaminase is responsible for C to U editing of tRNAᵀʳᵖ to decode the UGA codon in *Trypanosoma brucei*. *RNA Biol.* 2021 Oct 15;18(sup1):278-286. [doi.org:10.1080/15476286.2021.1940445](https://doi.org/10.1080/15476286.2021.1940445).
 * Zakharova A., Saura A., Butenko A., Podešvová L., Warmusová S., Kostygov A.Y., **Nenarokova A.**, Lukeš J., Opperdoes F.R., Yurchenko V., 2021. A New Model Trypanosomatid, *Novymonas esmeraldas*: Genomic Perception of Its “*Candidatus* Pandoraea novymonadis” Endosymbiont. *mBio* 2021 Aug 31;12(4):e0160621 [doi.org:10.1128/mbio.01606-21](https://journals.asm.org/doi/full/10.1128/mbio.01606-21)
 * Hammond M.J., **Nenarokova A.**, Butenko A., Zoltner M., Lacová Dobáková E., Field M.C., Lukeš J., 2020. A uniquely complex mitochondrial proteome from *Euglena gracilis*. *Mol Biol Evol.* 2020 Aug 1;37(8):2173-2191.[doi:10.1093/molbev/msaa061](https://academic.oup.com/mbe/advance-article/doi/10.1093/molbev/msaa061/5803078).
@@ -138,7 +138,7 @@ Awards and Scholarships
 ------
 
 * University of South Bohemia travel grant for scientific stay, 2019
-* Holz-Conner award, 2018
+* Holz-Conner award of International Society of Protistologists, 2018
 * University of South Bohemia Academic Excellence Scholarship, 2016-2020
 * Moscow State University Academic Excellence Scholarship, 2009-2015
 * Moscow Government’s Award for Talented Students, 2008
@@ -160,7 +160,7 @@ Conferences
 * **Nenarokova A.**, Dombrowski N., Morel B., Mahendrarajah T., Schrempf D., Szánthó L., Donoghue P.C.J., Pisani D., Szöllősi G.J., Spang A., Williams T.A. Resolving the prokaryote-to-eukaryote transition using new phylogenomic models of endosymbiosis. // Microbiology Society Annual Conference, Birmingham, United Kingdom, 2023. Poster
 * **Nenarokova A.**, Dombrowski N., Morel B., Szánthó L., Donoghue P.C.J., Pisani D., Szöllősi G.J., Spang A., Williams T.A. A roadmap to resolve the prokaryote-to-eukaryote transition. // Progress and Development in Phylogenetic Methods, Oslo, Norway, 2023. Oral presentation
 * **Nenarokova A.**, Dombrowski N., Morel B., Szánthó L., Donoghue P.C.J., Pisani D., Szöllősi G.J., Spang A., Williams T.A. Resolving eukaryogenesis using phylogenetics. // UK Archaea Workshop, London, United Kingdom, 2023. Oral presentation
-* **Nenarokova A.**, **Dombrowski N.**, Szánthó L., Donoghue P.C.J., Pisani D., Szöllősi G.J., Spang A., Williams T.A. A roadmap to resolve the prokaryote-to-eukaryote transition. // Moore-Simons Project on the Origin of the Eukaryotic Cell Annual Meeting, 2022. Online presentation
+* **Nenarokova A.**, Dombrowski N., Szánthó L., Donoghue P.C.J., Pisani D., Szöllősi G.J., Spang A., Williams T.A. A roadmap to resolve the prokaryote-to-eukaryote transition. // Moore-Simons Project on the Origin of the Eukaryotic Cell Annual Meeting, 2022. Online presentation
 * **Nenarokova A.**, Záhonová K., Nenarokov S., Paris Z., Yurchenko V., Lukeš J. *Blastocrithidia*, the trypanosomatid with all three stop codons reassigned. // Joint meeting of the Phycological Society of America and the International Society of Protistologists, Vancouver, Canada, 2018. Oral presentation
 * **Nenarokova A.**, Záhonová K., Nenarokov S., Yurchenko V., Lukeš J. Genomics of *Blastocrithidia*, the trypanosomatid with all three stop codons reassigned. // XXII Meeting of the International Society for Evolutionary Protistology, Droushia, Cyprus, 2018. Oral presentation
 * **Nenarokova A.**, Záhonová K., Nenarokov S., Paris Z., Boudová M.,  Skalický T., Yurchenko V., Lukeš J. *Blastocrithidia*, a trypanosomatid with all three stop codons reassigned. // EMBO meeting, Sant Feliu de Guixols, Spain, 2017. Poster. **Best Poster Award**
@@ -191,7 +191,7 @@ Attended Workshops and Courses
 Teaching
 -----
 
-* Volunteering as an online tutor for Ukrainian high school students in biology and English language; 2022-present
+* [Volunteering as an online tutor for Ukrainian high school students](https://tutoringwithoutborders.org/) in biology and English language; 2022-present
 * Organizer and lecturer of the “Introduction to programming for biologists” seminar at the Institute of Parasitology, Biology Centre CAS; 2020-2021
 * Teaching assistant to the “Introduction to Bioinformatics” course at the University of South Bohemia; 2018.
 * Bioinformatics mentoring for biologists; 2017-present
@@ -207,8 +207,25 @@ Outreach
 Languages
 -----
 
-* **Russian** native
-* **English** full proficiency, C1 IELTS certification
-* **Czech** conversational, reading professional literature (A2)
-* **French** - basic comprehension
-* **German** - basic comprehension
+* **Russian** - native
+* **English** - full proficiency, C1 IELTS certification
+* **Czech** - conversational, reading professional literature (A2)
+* **French** - basic
+* **German** - basic
+
+References
+-----
+
+1. [Dr. Tom Williams](https://scholar.google.com/citations?user=HP3j4g0AAAAJ&hl=en)
+
+* Position: [Associate Professor in Molecular Evolution](https://research-information.bris.ac.uk/en/persons/tom-williams)
+* Institution: School of Biological Sciences, University of Bristol
+* Email: <tom.a.williams@bristol.ac.uk>
+* Relationship: Current supervisor
+
+2. [Prof. Philip Donoghue](https://scholar.google.com/citations?user=VdQriAIAAAAJ&hl=en)
+
+Position: [Professor of Palaeobiology](https://www.bristol.ac.uk/people/person/Philip-Donoghue-4fd2d6ef-3986-4566-97e4-7ae7db296525/)
+Institution: School of Earth Sciences, University of Bristol
+Email: <Phil.Donoghue@bristol.ac.uk>
+Relationship: Current supervisor
