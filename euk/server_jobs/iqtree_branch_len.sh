@@ -8,6 +8,6 @@
 #SBATCH --cpus-per-task=20
 #SBATCH --mem=250G
 
-msa="/scratch/nenarokova/euk/markers/abe/one_hit/old_data/abce_94_markers_concat/only_length/aebe/c60/abce_94_markers_concat.fasta"
+msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/abe/one_hit/old_data/abce_94_markers_concat/only_length/aebe/c60/aebe_110_euks_94_markers_concat_filtered.fasta"
 tree="/scratch/nenarokova/euk/markers/abe/one_hit/old_data/abce_94_markers_concat/only_length/aebe/c60/aebe_manual_sorted_ids_only.phy"
 iqtree2 -s $msa -te $tree -m C60+LG+G -T AUTO --threads-max 20
