@@ -396,10 +396,10 @@ out_tree_path="/Users/vl18625/work/euk/concat_trees/abce/annotated_trees/104spec
 alignment_path="/Users/vl18625/work/euk/concat_trees/alignments/104_species_abce_concat.fasta"
 # write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=True,alignment_path=alignment_path)
 
-in_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/manual_euk_trees/117euks_132markers_concat.fasta.treefile"
-out_tree_path="/Users/vl18625/work/euk/concat_trees/other_trees/manual_euk_trees/117euks_132markers_concat_annotated.tree"
+in_tree_path="/Users/vl18625/work/euk/trees/reference_manual_trees/euk_reference.tree"
+out_tree_path="/Users/vl18625/work/euk/trees/reference_manual_trees/euk_reference_annotated.tree"
 
-write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=False)
+write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=True)
 
 
 in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/01_07_23/cyano/best_model_treefiles/"
