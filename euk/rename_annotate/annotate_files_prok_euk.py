@@ -396,8 +396,8 @@ out_tree_path="/Users/vl18625/work/euk/concat_trees/abce/annotated_trees/104spec
 alignment_path="/Users/vl18625/work/euk/concat_trees/alignments/104_species_abce_concat.fasta"
 # write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=True,alignment_path=alignment_path)
 
-in_tree_path="/Users/vl18625/work/euk/trees/reference_manual_trees/euk_reference.tree"
-out_tree_path="/Users/vl18625/work/euk/trees/reference_manual_trees/euk_reference_annotated.tree"
+in_tree_path="/Users/vl18625/work/euk/trees/concat_trees/other_trees/trees/euk_132_good_tree_udance.maxqs.nwk"
+out_tree_path="/Users/vl18625/work/euk/trees/concat_trees/other_trees/annotated_trees/euk_132_good_tree_udance_maxqs_annotated.tree"
 
 write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=True)
 
