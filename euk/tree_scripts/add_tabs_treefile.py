@@ -39,8 +39,8 @@ def format_tree_file(input_file_path, output_file_path):
         print(f"An error occurred: {str(e)}")
 
 # Input and output file paths
-input_file_path = "/Users/vl18625/work/euk/trees/test/aebe_manual_sorted.tree"
-output_file_path = "/Users/vl18625/work/euk/trees/test/aebe_manual_sorted_tab_formatted.tree"
+input_file_path = "/Users/vl18625/work/euk/trees/reference_manual_trees/euk_reference_annotated.tree"
+output_file_path = "/Users/vl18625/work/euk/trees/reference_manual_trees/euk_reference_annotated_tab_formatted.tree"
 
 # Call the function to format the tree and write it to the output file
 format_tree_file(input_file_path, output_file_path)
