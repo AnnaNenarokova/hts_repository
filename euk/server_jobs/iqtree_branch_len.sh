@@ -9,5 +9,5 @@
 #SBATCH --mem=250G
 
 msa="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/abe/one_hit/old_data/abce_94_markers_concat/only_length/aebe/c60/aebe_110_euks_94_markers_concat_filtered.fasta"
-tree="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/abe/one_hit/old_data/abce_94_markers_concat/only_length/aebe/c60/aebe_manual_ids_only.phy"
-iqtree2 -s $msa -te $tree -m C20+LG+G -T AUTO --threads-max 20
+tree="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/abe/one_hit/old_data/abce_94_markers_concat/only_length/aebe/lgg4f_14_11/aebe_manual_only_ids.phy"
+iqtree2 -s $msa -te $tree -m LG+F+G4 -T AUTO --threads-max 20
