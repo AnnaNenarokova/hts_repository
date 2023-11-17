@@ -3,14 +3,14 @@
 #SBATCH --output=/scratch/nenarokova/code/slurm_out/archaea_sgt_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=99-99:00:00
-#SBATCH --array=1-94
+#SBATCH --array=1-85
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=10GB
 ##SBATCH --nodes=1
 ## --cpu_bind=v,threads
 
-workdir=""
+workdir="/scratch/nenarokova/euk/markers/archaea/"
 fasta_dir=$workdir"faa/"
 
 linsi_dir=$workdir"linsi/"
