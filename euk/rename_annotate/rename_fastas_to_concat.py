@@ -31,6 +31,6 @@ def rename_fastas_to_concat(indir, outdir):
 		rename_fasta_to_concat(infasta, outfasta)
 	return outdir
 
-indir="/Users/vl18625/work/euk/markers_euks/nina_markers/old_data/abe/94_markers/linsi_bmge/"
-outdir="/Users/vl18625/work/euk/markers_euks/nina_markers/old_data/abe/94_markers/renamed_linsi_bmge/"
+indir="/scratch/nenarokova/euk/markers/archaea/linsi_bmge/"
+outdir="/scratch/nenarokova/euk/markers/archaea/linsi_bmge_renamed/"
 rename_fastas_to_concat(indir, outdir)
