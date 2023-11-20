@@ -15,6 +15,7 @@ workdir="/scratch/nenarokova/euk/markers/archaea/"
 msa_dir=$workdir"linsi_bmge/"
 tree_dir=$workdir"model_test/"
 
+cd $msa_dir
 name=$(ls *.faa | sed -n ${SLURM_ARRAY_TASK_ID}p)
 
 echo $name
