@@ -8,5 +8,5 @@
 #SBATCH --cpus-per-task=20
 #SBATCH --mem=250G
 
-fasta="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/archaea/concat/lgg_c50/archaea_85_markers_concat.fasta"
-iqtree2 -s $fasta -m LG+C60+G -B 1000 --threads-max 20 -T AUTO
+fasta="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/archaea/concat/lgg_c60/archaea_85_markers_concat.fasta"
+iqtree2 -s $fasta -m LG+C50+G -B 1000 --threads-max 20 -T AUTO
