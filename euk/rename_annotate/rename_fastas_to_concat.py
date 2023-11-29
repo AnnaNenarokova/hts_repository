@@ -9,7 +9,9 @@ def listdir_nohidden(path):
 			yield f
 
 def rename_fasta_to_concat(infasta, outfasta):
-	euk_regex = "^EP\d+_P\d+"
+	# euk_regex = "^EP\d+_P\d+"
+	euk_regex = "^EP\d+\S+_P\d"
+
 	out_records = []
 	for record in SeqIO.parse(infasta, "fasta"):
 		old_id = record.id
