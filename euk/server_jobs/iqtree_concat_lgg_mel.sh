@@ -5,7 +5,7 @@
 #SBATCH --time=7-12:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=20
+#SBATCH --cpus-per-task=10
 #SBATCH --mem=10G
 
 fasta="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/be/one_hit/01_07_23/cyano/concat/lgg/CE_102_markers_concat.fasta"
