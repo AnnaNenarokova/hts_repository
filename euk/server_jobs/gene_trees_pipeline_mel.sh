@@ -10,12 +10,12 @@
 ##SBATCH --nodes=1
 ## --cpu_bind=v,threads
 
-workdir="/scratch/nenarokova/euk/markers/bacteria/all_bacteria_markers/"
+workdir="/scratch/nenarokova/euk/markers/be/one_hit/01_07_23/ce_filtered/"
 fasta_dir=$workdir"faa/"
 
 linsi_dir=$workdir"linsi/"
 trimmed_linsi_dir=$workdir"linsi_bmge/"
-tree_dir=$workdir"treefiles_lgg/"
+lgg_dir=$workdir"treefiles_lgg/"
 
 cd $fasta_dir
 
@@ -25,12 +25,12 @@ echo $fasta
 
 msa=$linsi_dir$fasta
 trimmed_msa=$trimmed_linsi_dir$fasta
-copy_trimmed_msa=$tree_dir$fasta
+copy_trimmed_msa=$lgg_dir$fasta
 
 linsi --anysymbol $fasta > $msa
 BMGE -i $msa -t "AA" -m BLOSUM30 -of $trimmed_msa
 
 cp $trimmed_msa $copy_trimmed_msa
-cd $tree_dir
+cd $lgg_dir
 
 iqtree2 -s $fasta -m LG+G -B 1000 -nt 1 -redo
