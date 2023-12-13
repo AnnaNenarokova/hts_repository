@@ -391,9 +391,9 @@ in_treedir="/Users/vl18625/work/euk/trees/gene_trees/cyano/best_model_treefiles/
 out_treedir="/Users/vl18625/work/euk/trees/gene_trees/cyano/best_model_treefiles_annotated/"
 # annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path, euk_delimiter="_", abce=False)
 
-in_tree_path="/Users/vl18625/work/euk/trees/concat_trees/ce_filtered/lgg/CE_81_markers_concat.fasta.treefile"
-out_tree_path="/Users/vl18625/work/euk/trees/concat_trees/ce_filtered/lgg/CE_81_markers_concat_annotated.treefile"
-alignment_path="/Users/vl18625/work/euk/trees/concat_trees/ce_filtered/lgg/CE_81_markers_concat.fasta"
+in_tree_path="/Users/vl18625/work/euk/trees/concat_trees/ce_filtered/CE_81_markers_concat_lgg.fasta.treefile"
+out_tree_path="/Users/vl18625/work/euk/trees/concat_trees/ce_filtered/CE_81_markers_concat_annotated.treefile"
+alignment_path="/Users/vl18625/work/euk/trees/concat_trees/ce_filtered/CE_81_markers_concat.fasta"
 write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=False,alignment_path=alignment_path)
 
 

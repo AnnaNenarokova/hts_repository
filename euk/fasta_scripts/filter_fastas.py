@@ -44,7 +44,7 @@ def filter_fastas_exclude_sp_new(exclude_list, indir, outdir):
 		SeqIO.write(out_records, outfile, "fasta")
 	return 0
 
-def filter_fasta_keep_sp(keep_list, infasta, outfasta, species_id_delimiter="-", euk=False):
+def filter_fasta_keep_sp_old(keep_list, infasta, outfasta, species_id_delimiter="-", euk=False):
 	out_records = []
 	euk_regex = "^EP\d+-P\d+"
 	for record in SeqIO.parse(infasta, "fasta"):
@@ -61,7 +61,7 @@ def filter_fasta_keep_sp(keep_list, infasta, outfasta, species_id_delimiter="-",
 	SeqIO.write(out_records, outfasta, "fasta")
 	return 0
 
-def filter_abce_keep_sp(keep_list, infasta, outfasta):
+def filter_fasta_keep_sp(keep_list, infasta, outfasta, species_id_delimiter="-", euk=False):
 	out_records = []
 	# euk_regex = "\w+_EP\d+-P\d+"
 	euk_regex = "EP\d+_\S+_P\d+"
