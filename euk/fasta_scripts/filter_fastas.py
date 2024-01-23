@@ -103,7 +103,7 @@ def filter_fastas_keep_sp_read_list(list_dir, indir, outdir, list_ext=".txt", eu
 			filter_fasta_keep_seqs(keep_list, infasta, outfasta, euk=euk)
 	return 0 
 
-def filter_fastas_exclude_sp_simple(exclude_list, infasta_path, outfasta_path):
+def filter_fasta_exclude_sp_simple(exclude_list, infasta_path, outfasta_path):
 	out_records = []
 	for record in SeqIO.parse(infasta_path, "fasta"):
 		species_id = record.id
@@ -111,6 +111,16 @@ def filter_fastas_exclude_sp_simple(exclude_list, infasta_path, outfasta_path):
 			out_records.append(record)
 	SeqIO.write(out_records, outfasta_path, "fasta")
 	return outfasta_path
+
+def filter_fasta_keep_seq_simple(keep_list, infasta_path, outfasta_path):
+	out_records = []
+	for record in SeqIO.parse(infasta_path, "fasta"):
+		seq_id = record.id
+		if seq_id in keep_list:
+			out_records.append(record)
+	SeqIO.write(out_records, outfasta_path, "fasta")
+	return outfasta_path
+
 
 def filter_fasta_keep_seqs(keep_list, infasta_path, outfasta_path, euk=False):
 	out_records = []
@@ -148,13 +158,25 @@ def remove_euks_fastas(indir, outdir):
 		remove_euks_fasta(infasta_path, outfasta_path)
 	return outdir
 
+def filter_fasta_keep_seq_simple(keep_list, infasta_path, outfasta_path):
+	out_records = []
+	for record in SeqIO.parse(infasta_path, "fasta"):
+		seq_id = record.id
+		if seq_id in keep_list:
+			out_records.append(record)
+	SeqIO.write(out_records, outfasta_path, "fasta")
+	return outfasta_path
 
-keep_list = ["EP00900","EP00279","EP00314","EP01084","EP00390","EP00609","EP01082","EP00820","EP00185","EP00802","EP00466","EP00741","EP00667","EP00931","EP00611","EP00852","EP00210","EP00206","EP00738","EP00202","EP00457","EP00797","EP00271","EP00269","EP00167","EP00248","EP00229","EP00176","GCA_003503675.1","EP00260","EP00895","EP00247","GCA_000155555.1","GCA_003149375.1","GCA_000010065.1","GCA_000484535.1","GCA_001870225.1","GCA_000019485.1","GCA_000015645.1","GCA_000195975.1","GCA_000464785.1","GCA_000018105.1","GCA_000013225.1","GCA_000317065.1","GCA_000353285.1","GCA_002075285.3","GCA_000346485.2","GCA_000204075.1"]
-indir = "/Users/vl18625/work/euk/markers_euks/nina_markers/01_07_23/cyano/ce_filtered1_faa/"
-outdir = "/Users/vl18625/work/euk/markers_euks/nina_markers/01_07_23/cyano/ce_filtered_2_faa/"
-filter_fastas_keep_sp(keep_list, indir, outdir, species_id_delimiter="-", euk=True, abce=False)
+# keep_list = ["EP00900","EP00279","EP00314","EP01084","EP00390","EP00609","EP01082","EP00820","EP00185","EP00802","EP00466","EP00741","EP00667","EP00931","EP00611","EP00852","EP00210","EP00206","EP00738","EP00202","EP00457","EP00797","EP00271","EP00269","EP00167","EP00248","EP00229","EP00176","GCA_003503675.1","EP00260","EP00895","EP00247","GCA_000155555.1","GCA_003149375.1","GCA_000010065.1","GCA_000484535.1","GCA_001870225.1","GCA_000019485.1","GCA_000015645.1","GCA_000195975.1","GCA_000464785.1","GCA_000018105.1","GCA_000013225.1","GCA_000317065.1","GCA_000353285.1","GCA_002075285.3","GCA_000346485.2","GCA_000204075.1"]
+# indir = "/Users/vl18625/work/euk/markers_euks/nina_markers/01_07_23/cyano/ce_filtered1_faa/"
+# outdir = "/Users/vl18625/work/euk/markers_euks/nina_markers/01_07_23/cyano/ce_filtered_2_faa/"
+# filter_fastas_keep_sp(keep_list, indir, outdir, species_id_delimiter="-", euk=True, abce=False)
 
-list_dir="/Users/vl18625/work/euk/markers_euks/nina_markers/01_07_23/cyano/euk_mono_cyano/"
-indir="/Users/vl18625/work/euk/markers_euks/nina_markers/01_07_23/cyano/ce_unfiltered_faa/"
-outdir="/Users/vl18625/work/euk/markers_euks/nina_markers/01_07_23/cyano/ce_filtered_faa/"
+# list_dir="/Users/vl18625/work/euk/markers_euks/nina_markers/01_07_23/cyano/euk_mono_cyano/"
+# indir="/Users/vl18625/work/euk/markers_euks/nina_markers/01_07_23/cyano/ce_unfiltered_faa/"
+# outdir="/Users/vl18625/work/euk/markers_euks/nina_markers/01_07_23/cyano/ce_filtered_faa/"
 # filter_fastas_keep_sp_read_list(list_dir, indir, outdir, list_ext=".txt", euk=True)
+
+infasta_path="/Users/vl18625/work/euk/molecular_clock/aebece_23_01/abce_94_markers_concat.fasta"
+outfasta_path="/Users/vl18625/work/euk/molecular_clock/aebece_23_01/abce_94_markers_concat_filtered.fasta"
+filter_fasta_keep_seq_simple(keep_list, infasta_path, outfasta_path)
