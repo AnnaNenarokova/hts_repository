@@ -7,6 +7,6 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=10
 #SBATCH --mem=15G
-msa="/scratch/nenarokova/euk/molecular_clock_datasets/aebece_1211_tips/lgg4f_23_01_24/abce_94_markers_concat_filtered.fasta"
-tree="/scratch/nenarokova/euk/molecular_clock_datasets/aebece_1211_tips/lgg4f_23_01_24/ABAEBECE_manual_only_ids_no_tabs_23_01_24.nwk"
+msa="/mnt/alvarium2pool/scratch/nenarokova/euk/molecular_clock_datasets/aebece_1211_tips/lgg4f_29_01_24/abce_94_markers_concat_filtered.fasta"
+tree="/mnt/alvarium2pool/scratch/nenarokova/euk/molecular_clock_datasets/aebece_1211_tips/lgg4f_29_01_24/ABAEBECE_manual_only_ids_no_tabs_29_01_24.nwk.phy"
 iqtree2 -s $msa -te $tree -m LG+F+G4 -T AUTO --threads-max 10

@@ -9,4 +9,4 @@
 #SBATCH --mem=100G
 
 fasta="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/be/one_hit/01_07_23/ce_filtered/concat/c60_lgg/CE_81_markers_concat.fasta"
-iqtree2 -s $fasta -m LG+C60+G -B 1000 --threads-max 10 -T AUTO
+iqtree2 -s $fasta -m LG+C60+G -mwopt -B 1000 --threads-max 10 -T AUTO
