@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=aebece_lengths
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/aebece_lengths_%A.out
+#SBATCH --job-name=alt_cyano_lengths
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/alt_cyano_lengths_%A.out
 #SBATCH --partition=high
 #SBATCH --time=7-12:00:00
 #SBATCH --nodes=1
