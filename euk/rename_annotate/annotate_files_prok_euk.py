@@ -392,10 +392,10 @@ prot_dir = "/Users/vl18625/work/euk/protein_sets/anna_dataset/anna_eukprot3_set_
 # out_treedir="/Users/vl18625/work/euk/trees/gene_trees/cyano/best_model_treefiles_annotated/"
 # annotate_gene_trees(in_treedir, out_treedir, prot_dir, tax_info_path, euk_delimiter="_", abce=False)
 
-in_tree_path="/Users/vl18625/work/euk/trees/concat_trees/ce/c60_lgg/CE_81_markers_concat.fasta.treefile"
-out_tree_path="/Users/vl18625/work/euk/trees/concat_trees/ce/c60_lgg/CE_81_markers_annotated.tree"
-alignment_path="/Users/vl18625/work/euk/trees/concat_trees/ce/c60_lgg/CE_81_markers_concat.fasta"
-write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=False)
+in_tree_path="/Users/vl18625/work/euk/trees/reference_manual_trees/29_01_24/ABAEBECE_manual_only_ids_no_tabs_29_01_24.nwk.phy"
+out_tree_path="/Users/vl18625/work/euk/trees/reference_manual_trees/29_01_24/ABAEBECE_frankenstein_annotated.nwk.tree"
+
+write_tree_tax_info(in_tree_path,out_tree_path,tax_info_path,key_name="taxonomy",abce=True)
 
 # in_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/01_07_23/cyano/best_model_treefiles/"
 # out_treedir="/Users/vl18625/work/euk/markers_euks/nina_markers/01_07_23/cyano/best_model_treefiles_annotated/"
