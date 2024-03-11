@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=ce_filtered_sgt
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/ce_filt_sgt_%A_%a.out
+#SBATCH --job-name=ae_81_markers
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/ae_81_markers_%A_%a.out
 #SBATCH --partition=high
 #SBATCH --time=99-99:00:00
 #SBATCH --array=1-81
@@ -10,7 +10,7 @@
 ##SBATCH --nodes=1
 ## --cpu_bind=v,threads
 
-workdir="/scratch/nenarokova/euk/markers/be/one_hit/01_07_23/ce_filtered/"
+workdir="/scratch/nenarokova/euk/markers/ae/one_hit/ae_81_markers_11_03_24"
 fasta_dir=$workdir"faa/"
 
 linsi_dir=$workdir"linsi/"
