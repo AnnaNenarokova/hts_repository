@@ -10,7 +10,7 @@
 ##SBATCH --nodes=1
 ## --cpu_bind=v,threads
 
-workdir="/scratch/nenarokova/euk/markers/ae/one_hit/ae_no_meta_81_markers_11_03_24/faa/"
+workdir="/scratch/nenarokova/euk/markers/ae/one_hit/ae_no_meta_81_markers_11_03_24/"
 fasta_dir=$workdir"faa/"
 
 linsi_dir=$workdir"linsi/"
