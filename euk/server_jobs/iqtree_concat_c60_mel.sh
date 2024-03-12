@@ -1,12 +1,12 @@
 #!/bin/bash
-#SBATCH --job-name=CE_c60
-#SBATCH --output=/scratch/nenarokova/code/slurm_out/CE_c60_%A.out
+#SBATCH --job-name=ae_c60_lggf
+#SBATCH --output=/scratch/nenarokova/code/slurm_out/ae_c60_lggf_%A.out
 #SBATCH --partition=high
 #SBATCH --time=99-99:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=10
-#SBATCH --mem=100G
+#SBATCH --mem=700G
 
-fasta="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/be/one_hit/01_07_23/ce_filtered/concat/c60_lgg/CE_81_markers_concat.fasta"
-iqtree2 -s $fasta -m LG+C60+G -mwopt -B 1000 --threads-max 10 -T AUTO
+fasta="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/one_hit/ae_81_markers_11_03_24_all/ae_81_markers_11_03_24/concat/c60_lggf/ae_81_markers.fasta"
+iqtree2 -s $fasta -m LG+C60+G+F -mwopt -B 1000 --threads-max 10 -T AUTO
