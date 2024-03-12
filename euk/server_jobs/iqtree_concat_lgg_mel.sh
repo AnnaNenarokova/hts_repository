@@ -6,7 +6,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=10
-#SBATCH --mem=20G
+#SBATCH --mem=5G
 
 fasta="/mnt/alvarium2pool/scratch/nenarokova/euk/markers/ae/one_hit/ae_81_markers_11_03_24_all/ae_no_meta_81_markers_11_03_24/concat/lgg/ae_81_markers_no_meta.fasta"
 iqtree2 -s $fasta -m LG+G -B 1000 -T AUTO --threads-max 10
